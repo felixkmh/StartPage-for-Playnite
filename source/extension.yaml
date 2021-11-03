@@ -2,6 +2,6 @@
 Name: Start Page
 Author: felixkmh
 Version: 0.1.0
-Module: LandingPagePlugin.dll
+Module: StartPagePlugin.dll
 Type: GenericPlugin
 Icon: icon.png
