@@ -1,0 +1,34 @@
+﻿<UserControl x:Class="LandingPage.LandingPageSettingsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:LandingPage"
+             mc:Ignorable="d"
+             d:DesignHeight="400" d:DesignWidth="600">
+    <ScrollViewer Padding="10">
+        <Grid>
+            <StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="{DynamicResource LOC_SPG_StartupItem}" Margin="3" VerticalAlignment="Center"/>
+                    <ComboBox Margin="3" VerticalAlignment="Center" 
+                              ItemsSource="{Binding Settings.StartPageOptions}" 
+                              SelectedItem="{Binding Settings.StartPage}"
+                              MinWidth="150"></ComboBox>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <CheckBox IsChecked="{Binding Settings.ShowClock}" VerticalAlignment="Center" Margin="3"/>
+                    <TextBlock Text="{DynamicResource LOC_SPG_ShowClock}" Margin="3" VerticalAlignment="Center"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <CheckBox IsChecked="{Binding Settings.ShowRecentGames}" VerticalAlignment="Center" Margin="3"/>
+                    <TextBlock Text="{DynamicResource LOC_SPG_ShowRecentlyPlayed}" Margin="3" VerticalAlignment="Center"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <CheckBox IsChecked="{Binding Settings.ShowAddedGames}" VerticalAlignment="Center" Margin="3"/>
+                    <TextBlock Text="{DynamicResource LOC_SPG_ShowRecentlyAdded}" Margin="3" VerticalAlignment="Center"/>
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+    </ScrollViewer>
+</UserControl>
