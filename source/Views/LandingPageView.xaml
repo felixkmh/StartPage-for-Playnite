@@ -252,12 +252,19 @@
         </Style>
     </UserControl.Resources>
     <Grid>
-        <Image Stretch="UniformToFill" Source="{Binding BackgroundImagePath.Object, Converter={StaticResource ImageStringToImageConverterCached}}"
-               Opacity="0.5">
-            <Image.Effect>
-                <BlurEffect Radius="200" KernelType="Gaussian" RenderingBias="Quality"/>
-            </Image.Effect>
-        </Image>
+        <Grid>
+            <Grid.CacheMode>
+                <BitmapCache EnableClearType="False" 
+                         RenderAtScale="0.1" 
+                         SnapsToDevicePixels="False" />
+            </Grid.CacheMode>
+            <Image Stretch="UniformToFill" Source="{Binding BackgroundImagePath.Object, Converter={StaticResource ImageStringToImageConverterCached}}"
+                   Opacity="0.5">
+                <Image.Effect>
+                    <BlurEffect Radius="100" KernelType="Gaussian" RenderingBias="Performance"/>
+                </Image.Effect>
+            </Image>
+        </Grid>
         <ScrollViewer HorizontalScrollBarVisibility="Disabled"
                   VerticalScrollBarVisibility="Disabled" Padding="0,40,0,5" Background="{x:Null}">
             <Grid>
