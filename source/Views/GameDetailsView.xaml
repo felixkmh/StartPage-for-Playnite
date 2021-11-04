@@ -33,7 +33,7 @@
                 </Grid.ColumnDefinitions>
                 <TextBlock Text="{DynamicResource LOCFeaturesLabel}"/>
                 <TextBlock Grid.Column="2" Text="{Binding Game.Features, Converter={StaticResource ListToStringConverter}, ConverterParameter=', '}"
-                       TextWrapping="Wrap"/>
+                       TextWrapping="Wrap" TextTrimming="WordEllipsis" MaxHeight="110"/>
             </Grid>
             <Grid Margin="0,0,0,5">
                 <Grid.ColumnDefinitions>
