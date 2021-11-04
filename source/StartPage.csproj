@@ -55,7 +55,7 @@
     <Compile Include="Extensions\DateTimeExtensions.cs" />
     <Compile Include="Extensions\IEnumerableExtensions.cs" />
     <Compile Include="Extensions\ObservableCollectionExtensions.cs" />
-    <Compile Include="LandingPage.cs" />
+    <Compile Include="LandingPageExtension.cs" />
     <Compile Include="LandingPageSettings.cs" />
     <Compile Include="LandingPageSettingsView.xaml.cs">
       <DependentUpon>LandingPageSettingsView.xaml</DependentUpon>

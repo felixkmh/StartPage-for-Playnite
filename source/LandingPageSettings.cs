@@ -46,7 +46,7 @@ namespace LandingPage
 
     public class LandingPageSettingsViewModel : ObservableObject, ISettings
     {
-        private readonly LandingPage plugin;
+        private readonly LandingPageExtension plugin;
         private LandingPageSettings editingClone { get; set; }
 
         private LandingPageSettings settings;
@@ -60,7 +60,7 @@ namespace LandingPage
             }
         }
 
-        public LandingPageSettingsViewModel(LandingPage plugin)
+        public LandingPageSettingsViewModel(LandingPageExtension plugin)
         {
             // Injecting your plugin instance is required for Save/Load method because Playnite saves data to a location based on what plugin requested the operation.
             this.plugin = plugin;

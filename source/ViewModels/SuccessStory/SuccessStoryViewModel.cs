@@ -11,6 +11,9 @@ using Playnite.SDK.Models;
 using System.Collections.ObjectModel;
 using LandingPage.Models;
 using LandingPage.Extensions;
+using System.Windows;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 
 namespace LandingPage.ViewModels.SuccessStory
 {
@@ -30,10 +33,22 @@ namespace LandingPage.ViewModels.SuccessStory
             }
         }
 
-        public struct GameAchievement
+        public class GameAchievement : INotifyPropertyChanged
         {
-            public GameModel Game { get; set; }
-            public Achivement Achievement { get; set; }
+            public GameModel game;
+            public GameModel Game { get => game; set { if (value != game) { game = value; OnPropertyChanged(); } } }
+            public Achivement achievement;
+            public Achivement Achievement { get => achievement; set { if (value != achievement) { achievement = value; OnPropertyChanged(); } } }
+            public Achievements source;
+            public Achievements Source { get => source; set { if (value != source) { source = value; OnPropertyChanged(); } } }
+
+
+            public event PropertyChangedEventHandler PropertyChanged;
+
+            private void OnPropertyChanged([CallerMemberName] string propertyName = "")
+            {
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            }
         }
 
         public SuccessStoryViewModel(string achievementsPath, IPlayniteAPI playniteAPI)
@@ -49,13 +64,41 @@ namespace LandingPage.ViewModels.SuccessStory
 
         public void UpdateLatestAchievements()
         {
-            var latest = achievements.Values
-                .SelectMany(v => v.Items)
-                .Where(a => (!a.DateUnlocked?.Equals(default(DateTime))) ?? false)
-                .OrderByDescending(a => a.DateUnlocked ?? default)
-                .Take(10)
-                .Select(a => new GameAchievement { Game = null, Achievement = a});
-            latestAchievements.Update(latest);
+            var latest = achievements
+                .SelectMany(pair => pair.Value.Items
+                    .OrderByDescending(a => a.DateUnlocked ?? default)
+                    .Take(6)
+                    .Select(a => new { Game = playniteAPI.Database.Games.Get(pair.Value.Id), Achievement = a, Source = pair.Value }))
+                .Where(a => (!a.Achievement.DateUnlocked?.Equals(default(DateTime))) ?? false)
+                .OrderByDescending(a => a.Achievement.DateUnlocked ?? default)
+                .Take(6);
+            Application.Current.Dispatcher.Invoke(() => 
+            {
+                int i = 0;
+                foreach (var achievement in latest)
+                {
+                    if (latestAchievements.Count > i)
+                    {
+                        latestAchievements[i].Game.Game = achievement.Game;
+                        latestAchievements[i].Achievement = achievement.Achievement;
+                        latestAchievements[i].Source = achievement.Source;
+                    }
+                    else
+                    {
+                        latestAchievements.Add(new GameAchievement
+                        {
+                            Game = new GameModel(achievement.Game),
+                            Achievement = achievement.Achievement,
+                            Source = achievement.Source
+                        });
+                    }
+                    ++i;
+                }
+                for (int j = latestAchievements.Count - 1; j >= i; --j)
+                {
+                    latestAchievements.RemoveAt(j);
+                }
+            });
         }
 
         public void ParseAllAchievements()

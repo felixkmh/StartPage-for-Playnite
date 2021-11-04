@@ -22,9 +22,9 @@
                             </VisualBrush.Visual>
                         </VisualBrush>
                     </Grid.OpacityMask>
-                    <Image Source="{Binding Game.CoverImage, Converter={StaticResource ImageStringToImageConverterCached}, FallbackValue={StaticResource DefaultGameCover}}" Stretch="UniformToFill" 
+                    <Image Source="{Binding Game.CoverImage, Converter={StaticResource ImageStringToImageConverter}, FallbackValue={StaticResource DefaultGameCover}}" Stretch="UniformToFill" 
                                            HorizontalAlignment="Center" VerticalAlignment="Center"
-                                           RenderOptions.BitmapScalingMode="Fant"/>
+                                           RenderOptions.BitmapScalingMode="HighQuality"/>
                     <TextBlock Text="{Binding Game.Name}" Style="{StaticResource BaseTextBlockStyle}" VerticalAlignment="Bottom" TextWrapping="Wrap" TextAlignment="Center" Padding="4" Background="#7F000000"/>
                     <Viewbox x:Name="Buttons" Visibility="Hidden">
                         <StackPanel Orientation="Horizontal" Margin="5">
@@ -42,11 +42,9 @@
                     <Grid>
                         <Border Background="{StaticResource GridItemBackgroundBrush}"
                                                 CornerRadius="7"/>
-                        <Border CornerRadius="7" Opacity="0.3">
-                            <Border.Background>
-                                <ImageBrush ImageSource="{Binding Game.BackgroundImage, Converter={StaticResource ImageStringToImageConverterCached}}"
-                                                            Stretch="UniformToFill"/>
-                            </Border.Background>
+                        <Border CornerRadius="7" Opacity="0.3" x:Name="PopupBackground">
+                            <!--<Image Source="{Binding Game.BackgroundImage, Converter={StaticResource ImageStringToImageConverter}}"
+                                                                Stretch="UniformToFill"/>-->
                             <Border.OpacityMask>
                                 <LinearGradientBrush StartPoint="1,0" EndPoint="0,1">
                                     <LinearGradientBrush.GradientStops>
@@ -64,18 +62,24 @@
                 <Trigger Property="IsMouseOver" Value="True" SourceName="ImageGrid">
                     <Setter Property="IsOpen" Value="True" TargetName="Description"/>
                     <Setter Property="Visibility" Value="Visible" TargetName="Buttons"/>
+                    <Setter Property="Background" TargetName="PopupBackground">
+                        <Setter.Value>
+                            <ImageBrush ImageSource="{Binding Game.BackgroundImage, Converter={StaticResource ImageStringToImageConverter}}"
+                                                            Stretch="UniformToFill"/>
+                        </Setter.Value>
+                    </Setter>
                 </Trigger>
                 <DataTrigger Binding="{Binding Game.IsInstalled}" Value="{StaticResource False}">
                     <Setter Property="Text" Value="" TargetName="PlayIcon"/>
                 </DataTrigger>
             </DataTemplate.Triggers>
         </DataTemplate>
-        <CollectionViewSource x:Key="RecentlyAddedSource" Source="{Binding RecentlyAddedGames2}">
+        <CollectionViewSource x:Key="RecentlyAddedSource" Source="{Binding RecentlyAddedGames}">
             <CollectionViewSource.GroupDescriptions>
                 <PropertyGroupDescription PropertyName="Game.Added" Converter="{StaticResource DateTimeToLastPlayedConverter}"/>
             </CollectionViewSource.GroupDescriptions>
         </CollectionViewSource>
-        <CollectionViewSource x:Key="RecentlyPlayedSource" Source="{Binding RecentlyPlayedGames2}">
+        <CollectionViewSource x:Key="RecentlyPlayedSource" Source="{Binding RecentlyPlayedGames}">
             <CollectionViewSource.GroupDescriptions>
                 <PropertyGroupDescription PropertyName="Game.LastActivity" Converter="{StaticResource DateTimeToLastPlayedConverter}"/>
             </CollectionViewSource.GroupDescriptions>
@@ -267,9 +271,9 @@
                         <Grid Margin="0" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.IsSharedSizeScope="True" Grid.Column="1"
                               Visibility="{Binding Settings.Settings.ShowClock, Converter={StaticResource BooleanToVisibilityConverter}}">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto" SharedSizeGroup="Digits"/>
+                                <ColumnDefinition Width="*" SharedSizeGroup="Digits"/>
                                 <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition Width="Auto" SharedSizeGroup="Digits"/>
+                                <ColumnDefinition Width="*" SharedSizeGroup="Digits"/>
                             </Grid.ColumnDefinitions>
                             <TextBlock Text="{Binding Clock.Time, StringFormat=HH}" FontSize="80" Grid.Column="0" TextAlignment="Right"/>
                             <TextBlock Text=":" FontSize="80" Grid.Column="1" TextAlignment="Center"/>
@@ -285,6 +289,7 @@
                              SelectionMode="Single" ScrollViewer.CanContentScroll="True"
                              ItemContainerStyle="{DynamicResource GameGroupItem}"
                              DockPanel.Dock="Left" BorderThickness="0"
+                             VerticalAlignment="Top"
                              Background="Transparent"
                              MaxWidth="1544">
                                 <ListBox.ItemsPanel>
@@ -295,7 +300,9 @@
                             </ListBox>
                         </DockPanel>
                         <DockPanel Grid.Column="2" UseLayoutRounding="True" SnapsToDevicePixels="True">
-                            <local:RecentAchievementsView DataContext="{Binding SuccessStory}" DockPanel.Dock="Right"/>
+                            <ScrollViewer HorizontalScrollBarVisibility="Disabled">
+                                <local:RecentAchievementsView DataContext="{Binding SuccessStory}" DockPanel.Dock="Right" MaxWidth="300"/>
+                            </ScrollViewer>
                         </DockPanel>
                     </Grid>
                     <Border Height="12" DockPanel.Dock="Bottom" BorderThickness="0" Background="Transparent"/>
@@ -341,7 +348,7 @@
                             </ListBox.GroupStyle>
                             <ListBox.ItemsPanel>
                                 <ItemsPanelTemplate>
-                                    <StackPanel Orientation="Horizontal"/>
+                                    <VirtualizingStackPanel Orientation="Horizontal"/>
                                 </ItemsPanelTemplate>
                             </ListBox.ItemsPanel>
                         </ListBox>
@@ -354,18 +361,17 @@
                                 <RotateTransform Angle="-90" />
                             </Label.LayoutTransform>
                         </Label>
-                        <ListBox
-                             SelectionMode="Single" 
-                             ItemContainerStyle="{StaticResource GameListItem}"
-                             DockPanel.Dock="Left" BorderThickness="0"
-                             Background="Transparent"
-                             MaxWidth="1544"
-                             ItemsSource="{Binding Source={StaticResource RecentlyPlayedSource}}"
-                             VirtualizingPanel.IsVirtualizingWhenGrouping="True"
-                             VirtualizingPanel.IsVirtualizing="True"
-                             VirtualizingPanel.ScrollUnit="Pixel"
-                             ScrollViewer.CanContentScroll="True"
-                             ItemTemplate="{StaticResource GameCoverDataTemplate}">
+                        <ListBox SelectionMode="Single" 
+                                 ItemContainerStyle="{StaticResource GameListItem}"
+                                 DockPanel.Dock="Left" BorderThickness="0"
+                                 Background="Transparent"
+                                 MaxWidth="1544"
+                                 ItemsSource="{Binding Source={StaticResource RecentlyPlayedSource}}"
+                                 VirtualizingPanel.IsVirtualizingWhenGrouping="True"
+                                 VirtualizingPanel.IsVirtualizing="True"
+                                 VirtualizingPanel.ScrollUnit="Pixel"
+                                 ScrollViewer.CanContentScroll="True"
+                                 ItemTemplate="{StaticResource GameCoverDataTemplate}">
                             <ListBox.GroupStyle>
                                 <GroupStyle>
                                     <GroupStyle.Panel>
@@ -390,24 +396,10 @@
                             </ListBox.GroupStyle>
                             <ListBox.ItemsPanel>
                                 <ItemsPanelTemplate>
-                                    <StackPanel Orientation="Horizontal"/>
+                                    <VirtualizingStackPanel Orientation="Horizontal"/>
                                 </ItemsPanelTemplate>
                             </ListBox.ItemsPanel>
                         </ListBox>
-                        <!--<ListBox ItemsSource="{Binding RecentlyPlayedGames}" ItemTemplate="{DynamicResource GameDataTemplate}"
-                             SelectionMode="Single" 
-                             ItemContainerStyle="{DynamicResource GameGroupItem}"
-                             DockPanel.Dock="Left"
-                             BorderThickness="0"
-                             MaxWidth="1544"
-                             Background="Transparent"
-                             VirtualizingPanel.ScrollUnit="Pixel">
-                            <ListBox.ItemsPanel>
-                                <ItemsPanelTemplate>
-                                    <VirtualizingStackPanel VirtualizingPanel.IsVirtualizing="True" VirtualizingPanel.VirtualizationMode="Recycling" Orientation="Horizontal"/>
-                                </ItemsPanelTemplate>
-                            </ListBox.ItemsPanel>
-                        </ListBox>-->
                     </DockPanel>
                 </DockPanel>
             </Grid>

@@ -17,17 +17,11 @@ namespace LandingPage.ViewModels
 {
     public class LandingPageViewModel
     {
-        internal ObservableCollection<GameGroup> recentlyPlayedGames = new ObservableCollection<GameGroup>();
-        public ObservableCollection<GameGroup> RecentlyPlayedGames => recentlyPlayedGames;
+        internal ObservableCollection<GameModel> recentlyPlayedGames = new ObservableCollection<GameModel>();
+        public ObservableCollection<GameModel> RecentlyPlayedGames => recentlyPlayedGames;
 
-        internal ObservableCollection<GameModel> recentlyPlayedGames2 = new ObservableCollection<GameModel>();
-        public ObservableCollection<GameModel> RecentlyPlayedGames2 => recentlyPlayedGames2;
-
-        internal ObservableCollection<GameGroup> recentlyAddedGames = new ObservableCollection<GameGroup>();
-        public ObservableCollection<GameGroup> RecentlyAddedGames => recentlyAddedGames;
-
-        internal ObservableCollection<GameModel> recentlyAddedGames2 = new ObservableCollection<GameModel>();
-        public ObservableCollection<GameModel> RecentlyAddedGames2 => recentlyAddedGames2;
+        internal ObservableCollection<GameModel> recentlyAddedGames = new ObservableCollection<GameModel>();
+        public ObservableCollection<GameModel> RecentlyAddedGames => recentlyAddedGames;
 
         internal ObservableObject<string> backgroundImagePath = new ObservableObject<string>();
         public ObservableObject<string> BackgroundImagePath => backgroundImagePath;
@@ -45,10 +39,10 @@ namespace LandingPage.ViewModels
         public SuccessStory.SuccessStoryViewModel SuccessStory => successStory;
 
         internal IPlayniteAPI playniteAPI;
-        internal LandingPage plugin;
+        internal LandingPageExtension plugin;
 
         public ICommand OpenSettingsCommand => new RelayCommand(() => plugin.OpenSettingsView());
-        public LandingPageViewModel(IPlayniteAPI playniteAPI, LandingPage landingPage,
+        public LandingPageViewModel(IPlayniteAPI playniteAPI, LandingPageExtension landingPage,
                                     LandingPageSettingsViewModel settings,
                                     SuccessStory.SuccessStoryViewModel successStory)
         {
@@ -85,11 +79,7 @@ namespace LandingPage.ViewModels
             if (playniteAPI.Database.Games.MaxElement(g => g.Playtime).Value is Game game)
             {
                 var group = new GameGroup();
-                group.Games.Add(new GameModel(game)
-                {
-                    OpenCommand = new RelayCommand(() => { playniteAPI.MainView.SwitchToLibraryView(); playniteAPI.MainView.SelectGame(game.Id); }),
-                    StartCommand = new RelayCommand(() => { playniteAPI.StartGame(game.Id); })
-                });
+                group.Games.Add(new GameModel(game));
                 group.Label = ResourceProvider.GetString("LOC_SPG_MostPlayedGame");
                 groups.Add(group);
             }
@@ -106,11 +96,7 @@ namespace LandingPage.ViewModels
             if (playniteAPI.Database.Games.MaxElement(dateComparer) is Game newestGame)
             {
                 var group = new GameGroup();
-                group.Games.Add(new GameModel(newestGame)
-                {
-                    OpenCommand = new RelayCommand(() => { playniteAPI.MainView.SwitchToLibraryView(); playniteAPI.MainView.SelectGame(newestGame.Id); }),
-                    StartCommand = new RelayCommand(() => { playniteAPI.StartGame(newestGame.Id); })
-                });
+                group.Games.Add(new GameModel(newestGame));
                 group.Label = ResourceProvider.GetString("LOC_SPG_LatestReleaseGame");
                 groups.Add(group);
             }
@@ -123,8 +109,8 @@ namespace LandingPage.ViewModels
 
         private void UpdateBackgroundImagePath()
         {
-            var path = recentlyPlayedGames.SelectMany(group => group.Games)
-                .Concat(recentlyAddedGames.SelectMany(group => group.Games))
+            var path = recentlyPlayedGames
+                .Concat(recentlyAddedGames)
                 .FirstOrDefault(g => !string.IsNullOrEmpty(g.Game.BackgroundImage))?.Game.BackgroundImage;
             if (path is string)
             {
@@ -140,25 +126,27 @@ namespace LandingPage.ViewModels
             var games = playniteAPI.Database.Games
                 .Where(g => !g.Hidden)
                 .OrderByDescending(g => g.LastActivity);
-            //var displayedGames = Math.Min(Math.Max(10, games.Count(g => g.LastActivity?.CompareTo(DateTime.Today.AddDays(-7)) > 0)), 20);
-            //var groups = games.Take(displayedGames).GroupBy(g => g.LastActivity.ToGroupName())
-            //    .Select(group =>
-            //    {
-            //        var gameGroup = new GameGroup() { Label = group.Key };
-            //        foreach (var game in group)
-            //        {
-            //            gameGroup.Games.Add(new GameModel(game)
-            //            {
-            //                OpenCommand = new RelayCommand(() => { playniteAPI.MainView.SwitchToLibraryView(); playniteAPI.MainView.SelectGame(game.Id); }),
-            //                StartCommand = new RelayCommand(() => { playniteAPI.StartGame(game.Id); })
-            //            });
-            //        }
-            //        return gameGroup;
-            //    });
+
             Application.Current.Dispatcher.Invoke(() =>
             {
-                // recentlyPlayedGames.Update(groups);
-                recentlyPlayedGames2.Update(games.Take(10).Select(g => new GameModel(g)));
+                var displayedGames = Math.Min(Math.Max(10, games.Count(g => g.LastActivity?.CompareTo(DateTime.Today.AddDays(-7)) > 0)), 20);
+                int i = 0;
+                foreach (var game in games.Take(displayedGames))
+                {
+                    if (recentlyPlayedGames.Count > i)
+                    {
+                        recentlyPlayedGames[i].Game = game;
+                    }
+                    else
+                    {
+                        recentlyPlayedGames.Add(new GameModel(game));
+                    }
+                    ++i;
+                }
+                for (int j = recentlyPlayedGames.Count - 1; j >= i; --j)
+                {
+                    recentlyPlayedGames.RemoveAt(j);
+                }
             });
         }
 
@@ -168,25 +156,26 @@ namespace LandingPage.ViewModels
                 .Where(g => !g.Hidden)
                 .OrderByDescending(g => g.Added);
             
-            //var displayedGames = Math.Min(Math.Max(10, games.Count(g => g.Added?.CompareTo(DateTime.Today.AddDays(-7)) > 0)), 10);
-            //var groups = games.Take(displayedGames).GroupBy(g => g.Added.ToGroupName())
-            //    .Select(group =>
-            //    {
-            //        var gameGroup = new GameGroup() { Label = group.Key };
-            //        foreach (var game in group)
-            //        {
-            //            gameGroup.Games.Add(new GameModel(game)
-            //            {
-            //                OpenCommand = new RelayCommand(() => { playniteAPI.MainView.SwitchToLibraryView(); playniteAPI.MainView.SelectGame(game.Id); }),
-            //                StartCommand = new RelayCommand(() => { playniteAPI.StartGame(game.Id); })
-            //            });
-            //        }
-            //        return gameGroup;
-            //    });
             Application.Current.Dispatcher.Invoke(() =>
             {
-                // recentlyAddedGames.Update(groups);
-                recentlyAddedGames2.Update(games.Take(10).Select(g => new GameModel(g)));
+                var displayedGames = Math.Min(Math.Max(10, games.Count(g => g.Added?.CompareTo(DateTime.Today.AddDays(-7)) > 0)), 20);
+                int i = 0;
+                foreach (var game in games.Take(displayedGames))
+                {
+                    if (recentlyAddedGames.Count > i)
+                    {
+                        recentlyAddedGames[i].Game = game;
+                    }
+                    else
+                    {
+                        recentlyAddedGames.Add(new GameModel(game));
+                    }
+                    ++i;
+                }
+                for (int j = recentlyAddedGames.Count - 1; j >= i; --j)
+                {
+                    recentlyAddedGames.RemoveAt(j);
+                }
             });
         }
 

@@ -8,12 +8,89 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
              d:DataContext="{d:DesignInstance IsDesignTimeCreatable=False, Type=m:SuccessStoryViewModel}">
+    <UserControl.Resources>
+        <CollectionViewSource x:Key="LatestAchievementsSource" Source="{Binding LatestAchievements}">
+            <CollectionViewSource.GroupDescriptions>
+                <PropertyGroupDescription PropertyName="Game.Game.Name"/>
+            </CollectionViewSource.GroupDescriptions>
+        </CollectionViewSource>
+    </UserControl.Resources>
     <Grid>
-        <ListBox ItemsSource="{Binding LatestAchievements, IsAsync=True}">
+        <ListBox ItemsSource="{Binding Source={StaticResource LatestAchievementsSource}}" SelectedIndex="-1" SelectionMode="Single"
+                 Background="Transparent" BorderBrush="Transparent"
+                 ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+            <ListBox.GroupStyle>
+                <GroupStyle>
+                    <GroupStyle.ContainerStyle>
+                        <Style TargetType="GroupItem" BasedOn="{StaticResource {x:Type GroupItem}}">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="GroupItem">
+
+                                        <StackPanel>
+                                            <Button Click="Button_Click">
+                                                <Button.Style>
+                                                    <Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
+                                                        <Setter Property="Cursor" Value="Hand"/>
+                                                        <Setter Property="Template">
+                                                            <Setter.Value>
+                                                                <ControlTemplate TargetType="Button">
+                                                                    <ContentPresenter/>
+                                                                </ControlTemplate>
+                                                            </Setter.Value>
+                                                        </Setter>
+                                                    </Style>
+                                                </Button.Style>
+                                                <TextBlock Text="{Binding Name}"/>
+                                            </Button>
+                                            <ProgressBar Height="2" Margin="0,3,0,1" HorizontalAlignment="Stretch"
+                                                            Width="Auto" 
+                                                            Minimum="0" Maximum="100" Value="{Binding Items[0].Source.Progression}"/>
+                                            <ItemsPresenter Margin="5"/>
+                                        </StackPanel>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </GroupStyle.ContainerStyle>
+                    <GroupStyle.Panel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Vertical"/>
+                        </ItemsPanelTemplate>
+                    </GroupStyle.Panel>
+                </GroupStyle>
+            </ListBox.GroupStyle>
+            <ListBox.ItemContainerStyle>
+                <Style TargetType="ListBoxItem">
+                    <Setter Property="Foreground" Value="{DynamicResource TextBrush}"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="ListBoxItem">
+                                <ContentPresenter Margin="1"/>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </ListBox.ItemContainerStyle>
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel Orientation="Vertical"/>
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <StackPanel Orientation="Horizontal">
-                        <Border Width="32" Height="32" Margin="0,0,10,0" CornerRadius="5">
+                    <Grid Background="Transparent">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.ToolTip>
+                            <StackPanel>
+                                <TextBlock Text="{Binding Achievement.DateUnlocked, Converter={StaticResource DateTimeToLastPlayedConverter}}" Margin="0,0,0,5"/>
+                                <TextBlock Text="{Binding Achievement.Description}"/>
+                            </StackPanel>
+                        </Grid.ToolTip>
+                        <Border Width="35" Height="35" Margin="0,0,10,0" CornerRadius="5" Grid.Column="0">
                             <!--<Border.Background>
                                 <ImageBrush Stretch="UniformToFill">
                                     <ImageBrush.ImageSource>
@@ -21,10 +98,17 @@
                                     </ImageBrush.ImageSource>
                                 </ImageBrush>
                             </Border.Background>-->
+                            <Image Stretch="UniformToFill" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <Image.Source>
+                                    <BitmapImage UriSource="{Binding Achievement.UriUnlocked}" CreateOptions="IgnoreColorProfile" CacheOption="None"/>
+                                </Image.Source>
+                            </Image>
                         </Border>
-                        <TextBlock Text="{Binding Game.Game.Name, TargetNullValue='Game Name'}" VerticalAlignment="Center"/>
-                        <TextBlock Text="{Binding Achievement.Name}" VerticalAlignment="Center"/>
-                    </StackPanel>
+                        <!--<TextBlock Text="{Binding Game.Game.Name, TargetNullValue='Game Name'}" VerticalAlignment="Center"
+                                   Margin="0,0,10,0"/>-->
+                        <TextBlock Text="{Binding Achievement.Name}" VerticalAlignment="Center" TextTrimming="CharacterEllipsis"
+                                   Grid.Column="1"/>
+                    </Grid>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>

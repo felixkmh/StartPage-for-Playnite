@@ -20,11 +20,13 @@ using System.IO;
 
 namespace LandingPage
 {
-    public class LandingPage : GenericPlugin
+    public class LandingPageExtension : GenericPlugin
     {
 #pragma warning disable IDE0052 // Ungelesene private Member entfernen
         private static readonly ILogger logger = LogManager.GetLogger();
 #pragma warning restore IDE0052 // Ungelesene private Member entfernen
+
+        public static LandingPageExtension Instance { get; private set; } = null;
 
         private LandingPageSettingsViewModel SettingsViewModel { get; set; }
         private LandingPageSettings Settings => SettingsViewModel.Settings;
@@ -66,8 +68,9 @@ namespace LandingPage
             }
         }
 
-        public LandingPage(IPlayniteAPI api) : base(api)
+        public LandingPageExtension(IPlayniteAPI api) : base(api)
         {
+            Instance = this;
             SettingsViewModel = new LandingPageSettingsViewModel(this);
             Properties = new GenericPluginProperties
             {
