@@ -3,6 +3,7 @@
 
     <sys:String x:Key="LOC_SPG_MostPlayedGame">Most Played</sys:String>
     <sys:String x:Key="LOC_SPG_LatestReleaseGame">Latest Release</sys:String>
+    <sys:String x:Key="LOC_SPG_RecentAchievements">Recent Achievements</sys:String>
 
     <!-- Settings -->
     <sys:String x:Key="LOC_SPG_ShowClock">Show Clock</sys:String>

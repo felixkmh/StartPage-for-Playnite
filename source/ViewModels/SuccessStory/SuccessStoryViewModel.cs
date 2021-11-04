@@ -67,7 +67,7 @@ namespace LandingPage.ViewModels.SuccessStory
             var latest = achievements
                 .SelectMany(pair => pair.Value.Items
                     .OrderByDescending(a => a.DateUnlocked ?? default)
-                    .Take(6)
+                    .Take(2)
                     .Select(a => new { Game = playniteAPI.Database.Games.Get(pair.Value.Id), Achievement = a, Source = pair.Value }))
                 .Where(a => (!a.Achievement.DateUnlocked?.Equals(default(DateTime))) ?? false)
                 .OrderByDescending(a => a.Achievement.DateUnlocked ?? default)

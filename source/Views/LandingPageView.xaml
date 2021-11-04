@@ -64,7 +64,7 @@
                     <Setter Property="Visibility" Value="Visible" TargetName="Buttons"/>
                     <Setter Property="Background" TargetName="PopupBackground">
                         <Setter.Value>
-                            <ImageBrush ImageSource="{Binding Game.BackgroundImage, Converter={StaticResource ImageStringToImageConverter}}"
+                            <ImageBrush ImageSource="{Binding Game.BackgroundImage, Converter={StaticResource ImageStringToImageConverter}, FallbackValue={StaticResource DefaultGameCover}}"
                                                             Stretch="UniformToFill"/>
                         </Setter.Value>
                     </Setter>
@@ -299,11 +299,16 @@
                                 </ListBox.ItemsPanel>
                             </ListBox>
                         </DockPanel>
-                        <DockPanel Grid.Column="2" UseLayoutRounding="True" SnapsToDevicePixels="True">
+                        <StackPanel Grid.Column="2" UseLayoutRounding="True" SnapsToDevicePixels="True" Orientation="Horizontal">
+                            <Label Content="{DynamicResource LOC_SPG_RecentAchievements}" DockPanel.Dock="Left" Margin="10,10,5,10">
+                                <Label.LayoutTransform>
+                                    <RotateTransform Angle="-90" />
+                                </Label.LayoutTransform>
+                            </Label>
                             <ScrollViewer HorizontalScrollBarVisibility="Disabled">
-                                <local:RecentAchievementsView DataContext="{Binding SuccessStory}" DockPanel.Dock="Right" MaxWidth="300"/>
+                                <local:RecentAchievementsView DataContext="{Binding SuccessStory}" MaxWidth="300"/>
                             </ScrollViewer>
-                        </DockPanel>
+                        </StackPanel>
                     </Grid>
                     <Border Height="12" DockPanel.Dock="Bottom" BorderThickness="0" Background="Transparent"/>
                     <DockPanel DockPanel.Dock="Bottom" UseLayoutRounding="True" SnapsToDevicePixels="True"
