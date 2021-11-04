@@ -105,13 +105,16 @@ namespace LandingPage.ViewModels.SuccessStory
         {
             if (Directory.Exists(achievementsPath))
             {
-                achievements = Directory.GetFiles(achievementsPath)
-                    .AsParallel()
-                    .Where(path => Guid.TryParse(Path.GetFileNameWithoutExtension(path), out var id) && playniteAPI.Database.Games.Get(id) is Game)
+                var files = Directory.GetFiles(achievementsPath);
+                var validFiles = files
+                    //.AsParallel()
+                    .Where(path => Guid.TryParse(Path.GetFileNameWithoutExtension(path), out var id) && playniteAPI.Database.Games.Get(id) is Game);
+                var deserializedFiles = validFiles
                     .Select(path => DeserializeAchievementsFile(path))
-                    .OfType<Achievements>()
-                    .Where(ac => ac.HaveAchivements)
-                    .ToDictionary(ac => ac.Id);
+                    .OfType<Achievements>();
+                var withAchievements = deserializedFiles
+                    .Where(ac => (ac.Items?.Count() ?? 0) > 0);
+                achievements = withAchievements.ToDictionary(ac => ac.Id);
             }
         }
 
