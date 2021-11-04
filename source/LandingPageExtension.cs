@@ -136,7 +136,7 @@ namespace LandingPage
                             {
                                 element.Command.Execute(element);
                             }
-                        }), System.Windows.Threading.DispatcherPriority.Normal);
+                        }), System.Windows.Threading.DispatcherPriority.DataBind);
                     }
                 }
             }
