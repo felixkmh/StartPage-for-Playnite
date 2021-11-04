@@ -71,5 +71,28 @@ namespace LandingPage.Views
                 game.OpenCommand?.Execute(null);
             }
         }
+
+        private void UserControl_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            //var maxHeight = 195.0;
+            //var height = (double)Resources["CoverHeight"];
+            //var width = (double)Resources["CoverWidth"];
+            //var ratio = 140.0 / 195.0;
+
+            //var currentHeight = Helper.UiHelper.FindVisualChildren<ScrollContentPresenter>(RecentlyAddedListBox).FirstOrDefault().ActualHeight;
+            //currentHeight = Math.Min(Helper.UiHelper.FindVisualChildren<ScrollContentPresenter>(RecentlyPlayedListBox).FirstOrDefault().ActualHeight, currentHeight);
+
+            //if (currentHeight < height)
+            //{
+            //    var newHeight = RecentlyAddedListBox.ActualHeight;
+            //    Resources["CoverHeight"] = newHeight;
+            //    Resources["CoverWidth"] = ratio * newHeight;
+            //} else if (currentHeight < maxHeight)
+            //{
+            //    var newHeight = maxHeight;
+            //    Resources["CoverHeight"] = newHeight;
+            //    Resources["CoverWidth"] = ratio * newHeight;
+            //}
+        }
     }
 }
