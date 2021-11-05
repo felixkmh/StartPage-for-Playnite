@@ -10,5 +10,8 @@
     <sys:String x:Key="LOC_SPG_ShowRecentlyPlayed">Show Recently Played Games</sys:String>
     <sys:String x:Key="LOC_SPG_ShowRecentlyAdded">Show Recently Added Games</sys:String>
     <sys:String x:Key="LOC_SPG_StartupItem">SidebarItem activated on Launch</sys:String>
+    <sys:String x:Key="LOC_SPG_MaxRecentAchievements">Maximun number of recent Achievements</sys:String>
+    <sys:String x:Key="LOC_SPG_MaxRecentAchievementsPerGame">Maximun number of recent Achievements per Game</sys:String>
+    <sys:String x:Key="LOC_SPG_ShowTitelOnCover">Show Title on Game Cover</sys:String>
 
 </ResourceDictionary>
