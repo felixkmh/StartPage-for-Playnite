@@ -16,7 +16,7 @@ using System.Windows.Automation.Provider;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.IO;
-
+using System.Runtime.CompilerServices;
 
 namespace LandingPage
 {
@@ -28,8 +28,8 @@ namespace LandingPage
 
         public static LandingPageExtension Instance { get; private set; } = null;
 
-        private LandingPageSettingsViewModel SettingsViewModel { get; set; }
-        private LandingPageSettings Settings => SettingsViewModel.Settings;
+        internal LandingPageSettingsViewModel SettingsViewModel { get; set; }
+        internal LandingPageSettings Settings => SettingsViewModel.Settings;
 
         public override Guid Id { get; } = Guid.Parse("a6a3dcf6-9bfe-426c-afb0-9f49409ae0c5");
 
@@ -42,6 +42,7 @@ namespace LandingPage
                 if (view == null)
                 {
                     view = new LandingPageView(ViewModel);
+                    view.Resources.Add("SettingsModel", SettingsViewModel);
                 }
                 return view;
             }
@@ -58,7 +59,7 @@ namespace LandingPage
                     var path = Directory.GetDirectories(PlayniteApi.Paths.ExtensionsDataPath, "SuccessStory", SearchOption.AllDirectories).FirstOrDefault();
                     if (!string.IsNullOrEmpty(path))
                     {
-                        successStory = new ViewModels.SuccessStory.SuccessStoryViewModel(path, PlayniteApi);
+                        successStory = new ViewModels.SuccessStory.SuccessStoryViewModel(path, PlayniteApi, SettingsViewModel);
                         successStory.ParseAllAchievements();
                     }
                     viewModel = new LandingPageViewModel(PlayniteApi, this, SettingsViewModel, successStory);
@@ -139,13 +140,6 @@ namespace LandingPage
                         }), System.Windows.Threading.DispatcherPriority.DataBind);
                     }
                 }
-            }
-
-            var path = Directory.GetDirectories(PlayniteApi.Paths.ExtensionsDataPath, "SuccessStory", SearchOption.AllDirectories).FirstOrDefault();
-            if (!string.IsNullOrEmpty(path))
-            {
-                var successStory = new ViewModels.SuccessStory.SuccessStoryViewModel(path, PlayniteApi);
-                successStory.ParseAllAchievements();
             }
         }
 

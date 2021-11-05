@@ -12,6 +12,9 @@ namespace LandingPage
 {
     public class LandingPageSettings : ObservableObject
     {
+        // workaround to get this module to be loaded by Playnite
+        private Gu.Wpf.NumericInput.DoubleBox _ = new Gu.Wpf.NumericInput.DoubleBox();
+
         private string startPage = ResourceProvider.GetString("LOCLibrary");
         public string StartPage { get => startPage; set => SetValue(ref startPage, value); }
 
@@ -23,6 +26,15 @@ namespace LandingPage
 
         private bool showAddedGames = true;
         public bool ShowAddedGames { get => showAddedGames; set => SetValue(ref showAddedGames, value); }
+
+        private bool showTitleOnCover = true;
+        public bool ShowTitleOnCover { get => showTitleOnCover; set => SetValue(ref showTitleOnCover, value); }
+
+        private int maxNumberRecentAchievements = 6;
+        public int MaxNumberRecentAchievements { get => maxNumberRecentAchievements; set => SetValue(ref maxNumberRecentAchievements, value); }
+
+        private int maxNumberRecentAchievementsPerGame = 3;
+        public int MaxNumberRecentAchievementsPerGame { get => maxNumberRecentAchievementsPerGame; set => SetValue(ref maxNumberRecentAchievementsPerGame, value); }
 
         // Playnite serializes settings object to a JSON object and saves it as text file.
         // If you want to exclude some property from being saved then use `JsonDontSerialize` ignore attribute.

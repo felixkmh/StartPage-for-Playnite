@@ -30,7 +30,7 @@ namespace LandingPage
 
                 double? scrollWidth = null;
 
-                if (itemsControl.ItemContainerGenerator.ContainerFromIndex(5) is FrameworkElement container)
+                if (itemsControl.ItemContainerGenerator.ContainerFromIndex(0) is FrameworkElement container)
                 {
                     scrollWidth = container.DesiredSize.Width;
                 }

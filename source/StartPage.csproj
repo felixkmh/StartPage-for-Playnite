@@ -31,6 +31,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Gu.Wpf.NumericInput, Version=0.5.5.0, Culture=neutral, PublicKeyToken=e6e2e1b32408e0fd, processorArchitecture=MSIL">
+      <HintPath>packages\Gu.Wpf.NumericInput.0.5.5\lib\net45\Gu.Wpf.NumericInput.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -52,8 +55,11 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Coverters\ActualHeightToWidthConverter.cs" />
-    <Compile Include="Coverters\ElementToScaledRectConverter.cs" />
+    <Compile Include="Converters\AchievementsToProgressConverter.cs" />
+    <Compile Include="Converters\ActualHeightToWidthConverter.cs" />
+    <Compile Include="Converters\BoolToGridLengthConverter.cs" />
+    <Compile Include="Converters\DatabaseIdToUriConverter.cs" />
+    <Compile Include="Converters\ElementToScaledRectConverter.cs" />
     <Compile Include="Extensions\DateTimeExtensions.cs" />
     <Compile Include="Extensions\IEnumerableExtensions.cs" />
     <Compile Include="Extensions\ObservableCollectionExtensions.cs" />
@@ -62,6 +68,7 @@
     <Compile Include="LandingPageSettingsView.xaml.cs">
       <DependentUpon>LandingPageSettingsView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Markup\LandingPageSettings.cs" />
     <Compile Include="Models\Clock.cs" />
     <Compile Include="Models\GameGroup.cs" />
     <Compile Include="Models\GameModel.cs" />

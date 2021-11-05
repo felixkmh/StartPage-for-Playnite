@@ -3,9 +3,11 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:numeric="http://gu.se/NumericInput"
              xmlns:local="clr-namespace:LandingPage"
              mc:Ignorable="d"
-             d:DesignHeight="400" d:DesignWidth="600">
+             d:DesignHeight="400" d:DesignWidth="600"
+             d:DataContext="{d:DesignInstance IsDesignTimeCreatable=False, Type=local:LandingPageSettings}">
     <ScrollViewer Padding="10">
         <Grid>
             <StackPanel>
@@ -27,6 +29,32 @@
                 <StackPanel Orientation="Horizontal">
                     <CheckBox IsChecked="{Binding Settings.ShowAddedGames}" VerticalAlignment="Center" Margin="3"/>
                     <TextBlock Text="{DynamicResource LOC_SPG_ShowRecentlyAdded}" Margin="3" VerticalAlignment="Center"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <CheckBox IsChecked="{Binding Settings.ShowTitleOnCover}" VerticalAlignment="Center" Margin="3"/>
+                    <TextBlock Text="{DynamicResource LOC_SPG_ShowTitelOnCover}" Margin="3" VerticalAlignment="Center"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="{DynamicResource LOC_SPG_MaxRecentAchievements}" VerticalAlignment="Center"/>
+                    <numeric:IntBox Value="{Binding Settings.MaxNumberRecentAchievements, UpdateSourceTrigger=PropertyChanged}" 
+                                    MinValue="0"
+                                    MaxValue="20"
+                                    MinWidth="30"
+                                    ValidationTrigger="PropertyChanged"
+                                    Style="{StaticResource {x:Type TextBox}}"
+                                    TextAlignment="Center">
+                    </numeric:IntBox>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="{DynamicResource LOC_SPG_MaxRecentAchievementsPerGame}" VerticalAlignment="Center"/>
+                    <numeric:IntBox Value="{Binding Settings.MaxNumberRecentAchievementsPerGame, UpdateSourceTrigger=PropertyChanged}" 
+                                    MinValue="0"
+                                    MaxValue="20"
+                                    MinWidth="30"
+                                    ValidationTrigger="PropertyChanged"
+                                    Style="{StaticResource {x:Type TextBox}}"
+                                    TextAlignment="Center">
+                    </numeric:IntBox>
                 </StackPanel>
             </StackPanel>
         </Grid>

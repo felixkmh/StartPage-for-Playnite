@@ -7,8 +7,9 @@
              xmlns:lpvm="clr-namespace:LandingPage.ViewModels"
              xmlns:lpm="clr-namespace:LandingPage.Models"
              xmlns:lp="clr-namespace:LandingPage"
-             xmlns:conv="clr-namespace:LandingPage.Coverters"
+             xmlns:conv="clr-namespace:LandingPage.Converters"
              xmlns:system="clr-namespace:System;assembly=mscorlib"
+             xmlns:mu="clr-namespace:LandingPage.Markup"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
              d:DataContext="{d:DesignInstance IsDesignTimeCreatable=False, Type=lpvm:LandingPageViewModel}"
@@ -16,12 +17,14 @@
     <UserControl.Resources>
         <Style x:Key="VirtualizedStackPanelStyle" TargetType="{x:Type VirtualizingStackPanel}">
             <Setter Property="UseLayoutRounding" Value="False"/>
-            <Setter Property="VirtualizingPanel.VirtualizationMode" Value="Standard"/>
+            <Setter Property="VirtualizingPanel.VirtualizationMode" Value="Recycling"/>
+            <Setter Property="SnapsToDevicePixels" Value="False"/>
         </Style>
         <system:Double x:Key="CoverHeight">195</system:Double>
         <system:Double x:Key="CoverWidth">140</system:Double>
         <conv:ActualHeightToWidthConverter x:Key="ActualHeightToWidthConverter"/>
         <conv:ElementToScaledRectConverter x:Key="ElementToScaledRectConverter"/>
+        <conv:BoolToGridLengthConverter x:Key="BoolToGridLengthConverter"/>
         <DataTemplate x:Key="GameCoverDataTemplate" DataType="{x:Type lpm:GameModel}">
             <StackPanel Orientation="Horizontal">
                 <Grid ClipToBounds="True" MaxWidth="{StaticResource CoverWidth}" MaxHeight="{StaticResource CoverHeight}" x:Name="ImageGrid">
@@ -47,7 +50,14 @@
                     <Image Source="{Binding Game.CoverImage, Converter={StaticResource ImageStringToImageConverter}, FallbackValue={StaticResource DefaultGameCover}}" Stretch="UniformToFill" 
                                             HorizontalAlignment="Center" VerticalAlignment="Center"
                                             RenderOptions.BitmapScalingMode="HighQuality"/>
-                    <TextBlock Text="{Binding Game.Name}" Style="{StaticResource BaseTextBlockStyle}" VerticalAlignment="Bottom" TextWrapping="Wrap" TextAlignment="Center" Padding="4" Background="#7F000000"/>
+                    <TextBlock Text="{Binding Game.Name}" 
+                               Style="{StaticResource BaseTextBlockStyle}" 
+                               VerticalAlignment="Bottom" 
+                               TextWrapping="Wrap" 
+                               TextAlignment="Center" 
+                               Padding="4" 
+                               Background="#7F000000"
+                               Visibility="{mu:LandingPageSettings Settings.ShowTitleOnCover}"/>
                     <Viewbox x:Name="Buttons" Visibility="Hidden">
                         <StackPanel Orientation="Horizontal" Margin="5">
                             <Button Background="{x:Null}" Padding="4" x:Name="PlayButton" Click="PlayButton_Click">
@@ -144,7 +154,8 @@
         <DataTemplate x:Key="GameDataTemplate" DataType="{x:Type lpm:GameGroup}">
             <GroupBox Header="{Binding Label}" Style="{DynamicResource GameGroupBox}">
                 <ListBox ItemsSource="{Binding Games}" ItemContainerStyle="{DynamicResource GameListItem}"
-                         BorderThickness="0" Background="Transparent" Padding="0">
+                         BorderThickness="0" Background="Transparent" Padding="0"
+                         ItemTemplate="{DynamicResource GameCoverDataTemplate}">
                     <ListBox.ItemsPanel>
                         <ItemsPanelTemplate>
                             <StackPanel Orientation="Horizontal" Margin="0"/>
@@ -162,68 +173,6 @@
                             </Setter>
                         </Style>
                     </ListBox.Resources>
-                    <ListBox.ItemTemplate>
-                        <DataTemplate>
-                            <StackPanel Orientation="Horizontal">
-                                <Grid ClipToBounds="True" Width="140" Height="195" x:Name="ImageGrid">
-                                    <Grid.OpacityMask>
-                                        <VisualBrush Stretch="None" AutoLayoutContent="True">
-                                            <VisualBrush.Visual>
-                                                <Border Background="Black" CornerRadius="10" x:Name="Mask"
-                                                        Width="{Binding ElementName=ImageGrid, Path=ActualWidth}"
-                                                        Height="{Binding ElementName=ImageGrid, Path=ActualHeight}"/>
-                                            </VisualBrush.Visual>
-                                        </VisualBrush>
-                                    </Grid.OpacityMask>
-                                    <Image Source="{Binding Game.CoverImage, Converter={StaticResource ImageStringToImageConverterCached}, FallbackValue={StaticResource DefaultGameCover}}" Stretch="UniformToFill" 
-                                           HorizontalAlignment="Center" VerticalAlignment="Center"
-                                           RenderOptions.BitmapScalingMode="Fant"/>
-                                    <TextBlock Text="{Binding Game.Name}" Style="{StaticResource BaseTextBlockStyle}" VerticalAlignment="Bottom" TextWrapping="Wrap" TextAlignment="Center" Padding="4" Background="#7F000000"/>
-                                    <Viewbox x:Name="Buttons" Visibility="Hidden">
-                                        <StackPanel Orientation="Horizontal" Margin="5">
-                                            <Button Background="{x:Null}" Padding="4" x:Name="PlayButton" Click="PlayButton_Click">
-                                                <TextBlock Text="" FontFamily="{DynamicResource FontIcoFont}" x:Name="PlayIcon"/>
-                                            </Button>
-                                            <Button Background="{x:Null}"  Padding="4" x:Name="InfoButton" Click="InfoButton_Click">
-                                                <TextBlock Text="" FontFamily="{DynamicResource FontIcoFont}"/>
-                                            </Button>
-                                        </StackPanel>
-                                    </Viewbox>
-                                </Grid>
-                                <Popup Height="204.75" Width="462" x:Name="Description" IsOpen="False" Placement="Right" PlacementTarget="{Binding ElementName=ImageGrid}" 
-                                       ClipToBounds="True" PopupAnimation="Fade" PlacementRectangle="-7,-4.875,154,207.1875">
-                                    <Grid>
-                                        <Border Background="{DynamicResource GridItemBackgroundBrush}"
-                                                CornerRadius="7"/>
-                                        <Border CornerRadius="7" Opacity="0.3">
-                                            <Border.Background>
-                                                <ImageBrush ImageSource="{Binding Game.BackgroundImage, Converter={StaticResource ImageStringToImageConverterCached}}"
-                                                            Stretch="UniformToFill"/>
-                                            </Border.Background>
-                                            <Border.OpacityMask>
-                                                <LinearGradientBrush StartPoint="1,0" EndPoint="0,1">
-                                                    <LinearGradientBrush.GradientStops>
-                                                        <GradientStop Color="Transparent"/>
-                                                        <GradientStop Color="Black" Offset="1"/>
-                                                    </LinearGradientBrush.GradientStops>
-                                                </LinearGradientBrush>
-                                            </Border.OpacityMask>
-                                        </Border>
-                                        <local:GameDetailsView Margin="10,5"/>
-                                    </Grid>
-                                </Popup>
-                            </StackPanel>
-                            <DataTemplate.Triggers>
-                                <Trigger Property="IsMouseOver" Value="True" SourceName="ImageGrid">
-                                    <Setter Property="IsOpen" Value="True" TargetName="Description"/>
-                                    <Setter Property="Visibility" Value="Visible" TargetName="Buttons"/>
-                                </Trigger>
-                                <DataTrigger Binding="{Binding Game.IsInstalled}" Value="{StaticResource False}">
-                                    <Setter Property="Text" Value="" TargetName="PlayIcon"/>
-                                </DataTrigger>
-                            </DataTemplate.Triggers>
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
                 </ListBox>
             </GroupBox>
         </DataTemplate>
@@ -302,8 +251,13 @@
         <ScrollViewer HorizontalScrollBarVisibility="Disabled"
                   VerticalScrollBarVisibility="Disabled" Padding="0,40,0,5" Background="{x:Null}">
             <Grid>
-                <DockPanel LastChildFill="False" HorizontalAlignment="Center">
-                    <Grid DockPanel.Dock="Top" Grid.IsSharedSizeScope="True">
+                <Grid HorizontalAlignment="Center">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="10"/>
+                        <RowDefinition Height="1.2*"/>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0" Grid.IsSharedSizeScope="True" VerticalAlignment="Top">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto" SharedSizeGroup="LeftRight"/>
                             <ColumnDefinition Width="*"/>
@@ -340,22 +294,22 @@
                                 </ListBox.ItemsPanel>
                             </ListBox>
                         </DockPanel>
-                        <StackPanel Grid.Column="2" UseLayoutRounding="True" SnapsToDevicePixels="True" Orientation="Horizontal">
+                        <StackPanel Grid.Column="2" Orientation="Horizontal"
+                                    ScrollViewer.VerticalScrollBarVisibility="Disabled"
+                                    ClipToBounds="False">
                             <Label Content="{DynamicResource LOC_SPG_RecentAchievements}" DockPanel.Dock="Left" Margin="10,10,5,10">
                                 <Label.LayoutTransform>
                                     <RotateTransform Angle="-90" />
                                 </Label.LayoutTransform>
                             </Label>
-                            <ScrollViewer HorizontalScrollBarVisibility="Disabled">
-                                <local:RecentAchievementsView DataContext="{Binding SuccessStory}" MaxWidth="300"/>
-                            </ScrollViewer>
+                                <local:RecentAchievementsView DataContext="{Binding SuccessStory}" MaxWidth="300" ClipToBounds="False"/>
                         </StackPanel>
                     </Grid>
-                    <Border Height="12" DockPanel.Dock="Bottom" BorderThickness="0" Background="Transparent"/>
-                    <Grid DockPanel.Dock="Bottom">
+
+                    <Grid Grid.Row="2" VerticalAlignment="Bottom">
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="{Binding IsVisible, ElementName=RecentlyPlayedListBox, Converter={StaticResource BoolToGridLengthConverter}}"/>
+                            <RowDefinition Height="{Binding IsVisible, ElementName=RecentlyAddedListBox, Converter={StaticResource BoolToGridLengthConverter}}"/>
                         </Grid.RowDefinitions>
                         <DockPanel Grid.Row="1" UseLayoutRounding="True" SnapsToDevicePixels="True"
                             Visibility="{Binding Settings.Settings.ShowAddedGames, Converter={StaticResource BooleanToVisibilityConverter}}">
@@ -364,20 +318,17 @@
                                     <RotateTransform Angle="-90" />
                                 </Label.LayoutTransform>
                             </Label>
-                            <ListBox    x:Name="RecentlyAddedListBox"
+                            <ListBox x:Name="RecentlyAddedListBox"
                                     SelectionMode="Single" 
-                                    ItemContainerStyle="{StaticResource GameListItem}"
+                                    ItemContainerStyle="{DynamicResource GameListItem}"
                                     DockPanel.Dock="Left" BorderThickness="0"
                                     Background="Transparent"
                                     MaxWidth="1544"
                                     ItemsSource="{Binding Source={StaticResource RecentlyAddedSource}}"
-                                    VirtualizingPanel.IsVirtualizingWhenGrouping="True"
-                                    VirtualizingPanel.IsVirtualizing="True"
-                                    VirtualizingPanel.ScrollUnit="Pixel"
-                                    ScrollViewer.CanContentScroll="True"
                                     ItemTemplate="{DynamicResource GameCoverDataTemplate}"
                                     ScrollViewer.VerticalScrollBarVisibility="Disabled"
                                     ScrollViewer.HorizontalScrollBarVisibility="Visible"
+                                    ScrollViewer.PanningMode="HorizontalOnly"
                                     lp:ScrollViewerHelper.UseHorizontalScrolling="True">
                                 <ListBox.GroupStyle>
                                     <GroupStyle>
@@ -403,7 +354,7 @@
                                 </ListBox.GroupStyle>
                                 <ListBox.ItemsPanel>
                                     <ItemsPanelTemplate>
-                                        <StackPanel Orientation="Horizontal" UseLayoutRounding="False"/>
+                                        <VirtualizingStackPanel Orientation="Horizontal" Style="{StaticResource VirtualizedStackPanelStyle}"/>
                                     </ItemsPanelTemplate>
                                 </ListBox.ItemsPanel>
                             </ListBox>
@@ -417,15 +368,11 @@
                             </Label>
                             <ListBox x:Name="RecentlyPlayedListBox"
                                     SelectionMode="Single" 
-                                    ItemContainerStyle="{StaticResource GameListItem}"
+                                    ItemContainerStyle="{DynamicResource GameListItem}"
                                     DockPanel.Dock="Left" BorderThickness="0"
                                     Background="Transparent"
                                     MaxWidth="1544"
                                     ItemsSource="{Binding Source={StaticResource RecentlyPlayedSource}}"
-                                    VirtualizingPanel.IsVirtualizingWhenGrouping="True"
-                                    VirtualizingPanel.IsVirtualizing="True"
-                                    VirtualizingPanel.ScrollUnit="Pixel"
-                                    ScrollViewer.CanContentScroll="True"
                                     ItemTemplate="{DynamicResource GameCoverDataTemplate}"
                                     ScrollViewer.VerticalScrollBarVisibility="Disabled"
                                     ScrollViewer.HorizontalScrollBarVisibility="Visible"
@@ -454,13 +401,13 @@
                                 </ListBox.GroupStyle>
                                 <ListBox.ItemsPanel>
                                     <ItemsPanelTemplate>
-                                        <StackPanel Orientation="Horizontal" UseLayoutRounding="False"/>
+                                        <VirtualizingStackPanel Orientation="Horizontal" Style="{StaticResource VirtualizedStackPanelStyle}"/>
                                     </ItemsPanelTemplate>
                                 </ListBox.ItemsPanel>
                             </ListBox>
                         </DockPanel>
                     </Grid>
-                </DockPanel>
+                </Grid>
             </Grid>
         </ScrollViewer>
         <Button HorizontalAlignment="Right" VerticalAlignment="Top" Margin="20,40" Command="{Binding OpenSettingsCommand}">

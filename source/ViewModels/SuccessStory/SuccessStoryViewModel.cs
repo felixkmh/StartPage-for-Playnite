@@ -24,6 +24,10 @@ namespace LandingPage.ViewModels.SuccessStory
         internal Dictionary<Guid, Achievements> achievements = new Dictionary<Guid, Achievements>();
         public Dictionary<Guid, Achievements> Achievements => achievements;
 
+        internal LandingPageSettingsViewModel landingPageSettingsViewModel;
+
+        internal FileSystemWatcher achievementWatcher;
+
         internal ObservableCollection<GameAchievement> latestAchievements = new ObservableCollection<GameAchievement>();
         public ObservableCollection<GameAchievement> LatestAchievements
         {
@@ -35,13 +39,12 @@ namespace LandingPage.ViewModels.SuccessStory
 
         public class GameAchievement : INotifyPropertyChanged
         {
-            public GameModel game;
+            internal GameModel game;
             public GameModel Game { get => game; set { if (value != game) { game = value; OnPropertyChanged(); } } }
-            public Achivement achievement;
+            internal Achivement achievement;
             public Achivement Achievement { get => achievement; set { if (value != achievement) { achievement = value; OnPropertyChanged(); } } }
-            public Achievements source;
+            internal Achievements source;
             public Achievements Source { get => source; set { if (value != source) { source = value; OnPropertyChanged(); } } }
-
 
             public event PropertyChangedEventHandler PropertyChanged;
 
@@ -51,27 +54,91 @@ namespace LandingPage.ViewModels.SuccessStory
             }
         }
 
-        public SuccessStoryViewModel(string achievementsPath, IPlayniteAPI playniteAPI)
+        public SuccessStoryViewModel(string achievementsPath, IPlayniteAPI playniteAPI, LandingPageSettingsViewModel landingPageSettings)
         {
             this.achievementsPath = achievementsPath;
             this.playniteAPI = playniteAPI;
+            achievementWatcher = new FileSystemWatcher(achievementsPath, "*.json");
+            achievementWatcher.NotifyFilter = NotifyFilters.LastWrite;
+            achievementWatcher.Created += AchievementWatcher_Created;
+            achievementWatcher.Deleted += AchievementWatcher_Deleted;
+            achievementWatcher.Changed += AchievementWatcher_Changed;
+            achievementWatcher.EnableRaisingEvents = true;
+            this.landingPageSettingsViewModel = landingPageSettings;
+            landingPageSettings.PropertyChanged += LandingPageSettings_PropertyChanged;
+            landingPageSettings.Settings.PropertyChanged += Settings_PropertyChanged;
+        }
+
+        private void Settings_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if ((e.PropertyName == nameof(LandingPageSettings.MaxNumberRecentAchievements)
+                || e.PropertyName == nameof(LandingPageSettings.MaxNumberRecentAchievementsPerGame))
+                && sender is LandingPageSettings settings)
+            {
+                UpdateLatestAchievements(settings.MaxNumberRecentAchievements, settings.MaxNumberRecentAchievementsPerGame);
+            }
+        }
+
+        private void LandingPageSettings_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == "Settings" && sender is LandingPageSettingsViewModel settingsViewModel)
+            {
+                UpdateLatestAchievements(settingsViewModel.Settings.MaxNumberRecentAchievements, settingsViewModel.Settings.MaxNumberRecentAchievementsPerGame);
+                settingsViewModel.Settings.PropertyChanged += Settings_PropertyChanged;
+            }
+        }
+
+        private void AchievementWatcher_Changed(object sender, FileSystemEventArgs e)
+        {
+            var idString = Path.GetFileNameWithoutExtension(e.Name);
+            if (Guid.TryParse(idString, out var id))
+            {
+                if (ParseAchievements(id))
+                {
+                    UpdateLatestAchievements(landingPageSettingsViewModel.Settings.MaxNumberRecentAchievements, landingPageSettingsViewModel.Settings.MaxNumberRecentAchievementsPerGame);
+                }
+            }
+        }
+
+        private void AchievementWatcher_Deleted(object sender, FileSystemEventArgs e)
+        {
+            var idString = Path.GetFileNameWithoutExtension(e.Name);
+            if (Guid.TryParse(idString, out var id))
+            {
+                if (achievements.Remove(id))
+                {
+                    UpdateLatestAchievements(landingPageSettingsViewModel.Settings.MaxNumberRecentAchievements, landingPageSettingsViewModel.Settings.MaxNumberRecentAchievementsPerGame);
+                }
+            }
+        }
+
+        private void AchievementWatcher_Created(object sender, FileSystemEventArgs e)
+        {
+            var idString = Path.GetFileNameWithoutExtension(e.Name);
+            if (Guid.TryParse(idString, out var id))
+            {
+                if (ParseAchievements(id))
+                {
+                    UpdateLatestAchievements(landingPageSettingsViewModel.Settings.MaxNumberRecentAchievements, landingPageSettingsViewModel.Settings.MaxNumberRecentAchievementsPerGame);
+                }
+            }
         }
 
         public void Update()
         {
-            UpdateLatestAchievements();
+            UpdateLatestAchievements(landingPageSettingsViewModel.Settings.MaxNumberRecentAchievements, landingPageSettingsViewModel.Settings.MaxNumberRecentAchievementsPerGame);
         }
 
-        public void UpdateLatestAchievements()
+        public void UpdateLatestAchievements(int achievementsOverall = 6, int achievementsPerGame = 3)
         {
             var latest = achievements
                 .SelectMany(pair => pair.Value.Items
                     .OrderByDescending(a => a.DateUnlocked ?? default)
-                    .Take(6)
+                    .Take(achievementsPerGame)
                     .Select(a => new { Game = playniteAPI.Database.Games.Get(pair.Value.Id), Achievement = a, Source = pair.Value }))
                 .Where(a => (!a.Achievement.DateUnlocked?.Equals(default(DateTime))) ?? false)
                 .OrderByDescending(a => a.Achievement.DateUnlocked ?? default)
-                .Take(6);
+                .Take(achievementsOverall);
             Application.Current.Dispatcher.Invoke(() => 
             {
                 int i = 0;
@@ -107,7 +174,7 @@ namespace LandingPage.ViewModels.SuccessStory
             {
                 var files = Directory.GetFiles(achievementsPath);
                 var validFiles = files
-                    //.AsParallel()
+                    .AsParallel()
                     .Where(path => Guid.TryParse(Path.GetFileNameWithoutExtension(path), out var id) && playniteAPI.Database.Games.Get(id) is Game);
                 var deserializedFiles = validFiles
                     .Select(path => DeserializeAchievementsFile(path))
@@ -128,10 +195,11 @@ namespace LandingPage.ViewModels.SuccessStory
                     try
                     {
                         var gameAchievements = DeserializeAchievementsFile(path);
-                        if (gameAchievements.HaveAchivements)
+                        if (gameAchievements is Achievements && gameAchievements.Items.Any(a => (!a.DateUnlocked?.Equals(default(DateTime))) ?? false))
                         {
                             achievements[gameId] = gameAchievements;
                             return true;
+                            
                         }
                     }
                     catch (Exception) {}
