@@ -108,12 +108,12 @@
                 </DataTrigger>
             </DataTemplate.Triggers>
         </DataTemplate>
-        <CollectionViewSource x:Key="RecentlyAddedSource" Source="{Binding RecentlyAddedGames}">
+        <CollectionViewSource x:Key="RecentlyAddedSource" Source="{Binding RecentlyAddedGames}" IsLiveGroupingRequested="True">
             <CollectionViewSource.GroupDescriptions>
                 <PropertyGroupDescription PropertyName="Game.Added" Converter="{StaticResource DateTimeToLastPlayedConverter}"/>
             </CollectionViewSource.GroupDescriptions>
         </CollectionViewSource>
-        <CollectionViewSource x:Key="RecentlyPlayedSource" Source="{Binding RecentlyPlayedGames}">
+        <CollectionViewSource x:Key="RecentlyPlayedSource" Source="{Binding RecentlyPlayedGames}" IsLiveGroupingRequested="True">
             <CollectionViewSource.GroupDescriptions>
                 <PropertyGroupDescription PropertyName="Game.LastActivity" Converter="{StaticResource DateTimeToLastPlayedConverter}"/>
             </CollectionViewSource.GroupDescriptions>
