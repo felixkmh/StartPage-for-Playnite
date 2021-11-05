@@ -6,6 +6,7 @@
              xmlns:local="clr-namespace:LandingPage.Views"
              xmlns:lpvm="clr-namespace:LandingPage.ViewModels"
              xmlns:lpm="clr-namespace:LandingPage.Models"
+             xmlns:lp="clr-namespace:LandingPage"
              xmlns:conv="clr-namespace:LandingPage.Coverters"
              xmlns:system="clr-namespace:System;assembly=mscorlib"
              mc:Ignorable="d" 
@@ -13,6 +14,10 @@
              d:DataContext="{d:DesignInstance IsDesignTimeCreatable=False, Type=lpvm:LandingPageViewModel}"
              SizeChanged="UserControl_SizeChanged">
     <UserControl.Resources>
+        <Style x:Key="VirtualizedStackPanelStyle" TargetType="{x:Type VirtualizingStackPanel}">
+            <Setter Property="UseLayoutRounding" Value="False"/>
+            <Setter Property="VirtualizingPanel.VirtualizationMode" Value="Recycling"/>
+        </Style>
         <system:Double x:Key="CoverHeight">195</system:Double>
         <system:Double x:Key="CoverWidth">140</system:Double>
         <conv:ActualHeightToWidthConverter x:Key="ActualHeightToWidthConverter"/>
@@ -347,114 +352,114 @@
                         </StackPanel>
                     </Grid>
                     <Border Height="12" DockPanel.Dock="Bottom" BorderThickness="0" Background="Transparent"/>
-                    <!--<Viewbox StretchDirection="DownOnly" VerticalAlignment="Bottom" x:Name="BottomViewbox">-->
-                        <Grid DockPanel.Dock="Bottom">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="*"/>
-                                <RowDefinition Height="*"/>
-                            </Grid.RowDefinitions>
-                            <DockPanel Grid.Row="1" UseLayoutRounding="True" SnapsToDevicePixels="True"
-                                Visibility="{Binding Settings.Settings.ShowAddedGames, Converter={StaticResource BooleanToVisibilityConverter}}">
-                                <Label Content="{DynamicResource LOCAddedLabel}" DockPanel.Dock="Left" Margin="10,10,5,30">
-                                    <Label.LayoutTransform>
-                                        <RotateTransform Angle="-90" />
-                                    </Label.LayoutTransform>
-                                </Label>
-                                <ListBox    x:Name="RecentlyAddedListBox"
-                                        SelectionMode="Single" 
-                                        ItemContainerStyle="{StaticResource GameListItem}"
-                                        DockPanel.Dock="Left" BorderThickness="0"
-                                        Background="Transparent"
-                                        MaxWidth="1544"
-                                        ItemsSource="{Binding Source={StaticResource RecentlyAddedSource}}"
-                                        VirtualizingPanel.IsVirtualizingWhenGrouping="True"
-                                        VirtualizingPanel.IsVirtualizing="True"
-                                        VirtualizingPanel.ScrollUnit="Pixel"
-                                        ScrollViewer.CanContentScroll="True"
-                                        ItemTemplate="{DynamicResource GameCoverDataTemplate}"
-                                        ScrollViewer.VerticalScrollBarVisibility="Disabled"
-                                        ScrollViewer.HorizontalScrollBarVisibility="Visible">
-                                    <ListBox.GroupStyle>
-                                        <GroupStyle>
-                                            <GroupStyle.Panel>
-                                                <ItemsPanelTemplate>
-                                                    <VirtualizingStackPanel Orientation="Horizontal"/>
-                                                </ItemsPanelTemplate>
-                                            </GroupStyle.Panel>
-                                            <GroupStyle.ContainerStyle>
-                                                <Style TargetType="GroupItem">
-                                                    <Setter Property="Template">
-                                                        <Setter.Value>
-                                                            <ControlTemplate>
-                                                                <GroupBox Style="{StaticResource GameGroupBox}" Header="{Binding Name}">
-                                                                    <ItemsPresenter/>
-                                                                </GroupBox>
-                                                            </ControlTemplate>
-                                                        </Setter.Value>
-                                                    </Setter>
-                                                </Style>
-                                            </GroupStyle.ContainerStyle>
-                                        </GroupStyle>
-                                    </ListBox.GroupStyle>
-                                    <ListBox.ItemsPanel>
-                                        <ItemsPanelTemplate>
-                                            <VirtualizingStackPanel Orientation="Horizontal"/>
-                                        </ItemsPanelTemplate>
-                                    </ListBox.ItemsPanel>
-                                </ListBox>
-                            </DockPanel>
-                            <DockPanel Grid.Row="0" UseLayoutRounding="True" SnapsToDevicePixels="True"
-                                Visibility="{Binding Settings.Settings.ShowRecentGames, Converter={StaticResource BooleanToVisibilityConverter}}">
-                                <Label Content="{DynamicResource LOCQuickFilterRecentlyPlayed}" DockPanel.Dock="Left" Margin="10,10,5,30">
-                                    <Label.LayoutTransform>
-                                        <RotateTransform Angle="-90" />
-                                    </Label.LayoutTransform>
-                                </Label>
-                                <ListBox x:Name="RecentlyPlayedListBox"
-                                     SelectionMode="Single" 
-                                     ItemContainerStyle="{StaticResource GameListItem}"
-                                     DockPanel.Dock="Left" BorderThickness="0"
-                                     Background="Transparent"
-                                     MaxWidth="1544"
-                                     ItemsSource="{Binding Source={StaticResource RecentlyPlayedSource}}"
-                                     VirtualizingPanel.IsVirtualizingWhenGrouping="True"
-                                     VirtualizingPanel.IsVirtualizing="True"
-                                     VirtualizingPanel.ScrollUnit="Pixel"
-                                     ScrollViewer.CanContentScroll="True"
-                                     ItemTemplate="{DynamicResource GameCoverDataTemplate}"
-                                     ScrollViewer.VerticalScrollBarVisibility="Disabled"
-                                     ScrollViewer.HorizontalScrollBarVisibility="Visible">
-                                    <ListBox.GroupStyle>
-                                        <GroupStyle>
-                                            <GroupStyle.Panel>
-                                                <ItemsPanelTemplate>
-                                                    <VirtualizingStackPanel Orientation="Horizontal"/>
-                                                </ItemsPanelTemplate>
-                                            </GroupStyle.Panel>
-                                            <GroupStyle.ContainerStyle>
-                                                <Style TargetType="GroupItem">
-                                                    <Setter Property="Template">
-                                                        <Setter.Value>
-                                                            <ControlTemplate>
-                                                                <GroupBox Style="{StaticResource GameGroupBox}" Header="{Binding Name}">
-                                                                    <ItemsPresenter/>
-                                                                </GroupBox>
-                                                            </ControlTemplate>
-                                                        </Setter.Value>
-                                                    </Setter>
-                                                </Style>
-                                            </GroupStyle.ContainerStyle>
-                                        </GroupStyle>
-                                    </ListBox.GroupStyle>
-                                    <ListBox.ItemsPanel>
-                                        <ItemsPanelTemplate>
-                                            <VirtualizingStackPanel Orientation="Horizontal"/>
-                                        </ItemsPanelTemplate>
-                                    </ListBox.ItemsPanel>
-                                </ListBox>
-                            </DockPanel>
-                        </Grid>
-                    <!--</Viewbox>-->
+                    <Grid DockPanel.Dock="Bottom">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <DockPanel Grid.Row="1" UseLayoutRounding="True" SnapsToDevicePixels="True"
+                            Visibility="{Binding Settings.Settings.ShowAddedGames, Converter={StaticResource BooleanToVisibilityConverter}}">
+                            <Label Content="{DynamicResource LOCAddedLabel}" DockPanel.Dock="Left" Margin="10,10,5,30">
+                                <Label.LayoutTransform>
+                                    <RotateTransform Angle="-90" />
+                                </Label.LayoutTransform>
+                            </Label>
+                            <ListBox    x:Name="RecentlyAddedListBox"
+                                    SelectionMode="Single" 
+                                    ItemContainerStyle="{StaticResource GameListItem}"
+                                    DockPanel.Dock="Left" BorderThickness="0"
+                                    Background="Transparent"
+                                    MaxWidth="1544"
+                                    ItemsSource="{Binding Source={StaticResource RecentlyAddedSource}}"
+                                    VirtualizingPanel.IsVirtualizingWhenGrouping="True"
+                                    VirtualizingPanel.IsVirtualizing="True"
+                                    VirtualizingPanel.ScrollUnit="Pixel"
+                                    ScrollViewer.CanContentScroll="True"
+                                    ItemTemplate="{DynamicResource GameCoverDataTemplate}"
+                                    ScrollViewer.VerticalScrollBarVisibility="Disabled"
+                                    ScrollViewer.HorizontalScrollBarVisibility="Visible"
+                                    lp:ScrollViewerHelper.UseHorizontalScrolling="True">
+                                <ListBox.GroupStyle>
+                                    <GroupStyle>
+                                        <GroupStyle.Panel>
+                                            <ItemsPanelTemplate>
+                                                <VirtualizingStackPanel Orientation="Horizontal" Style="{StaticResource VirtualizedStackPanelStyle}"/>
+                                            </ItemsPanelTemplate>
+                                        </GroupStyle.Panel>
+                                        <GroupStyle.ContainerStyle>
+                                            <Style TargetType="GroupItem">
+                                                <Setter Property="Template">
+                                                    <Setter.Value>
+                                                        <ControlTemplate>
+                                                            <GroupBox Style="{StaticResource GameGroupBox}" Header="{Binding Name}">
+                                                                <ItemsPresenter/>
+                                                            </GroupBox>
+                                                        </ControlTemplate>
+                                                    </Setter.Value>
+                                                </Setter>
+                                            </Style>
+                                        </GroupStyle.ContainerStyle>
+                                    </GroupStyle>
+                                </ListBox.GroupStyle>
+                                <ListBox.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <VirtualizingStackPanel Orientation="Horizontal" Style="{StaticResource VirtualizedStackPanelStyle}"/>
+                                    </ItemsPanelTemplate>
+                                </ListBox.ItemsPanel>
+                            </ListBox>
+                        </DockPanel>
+                        <DockPanel Grid.Row="0" UseLayoutRounding="True" SnapsToDevicePixels="True"
+                            Visibility="{Binding Settings.Settings.ShowRecentGames, Converter={StaticResource BooleanToVisibilityConverter}}">
+                            <Label Content="{DynamicResource LOCQuickFilterRecentlyPlayed}" DockPanel.Dock="Left" Margin="10,10,5,30">
+                                <Label.LayoutTransform>
+                                    <RotateTransform Angle="-90" />
+                                </Label.LayoutTransform>
+                            </Label>
+                            <ListBox x:Name="RecentlyPlayedListBox"
+                                    SelectionMode="Single" 
+                                    ItemContainerStyle="{StaticResource GameListItem}"
+                                    DockPanel.Dock="Left" BorderThickness="0"
+                                    Background="Transparent"
+                                    MaxWidth="1544"
+                                    ItemsSource="{Binding Source={StaticResource RecentlyPlayedSource}}"
+                                    VirtualizingPanel.IsVirtualizingWhenGrouping="True"
+                                    VirtualizingPanel.IsVirtualizing="True"
+                                    VirtualizingPanel.ScrollUnit="Pixel"
+                                    ScrollViewer.CanContentScroll="True"
+                                    ItemTemplate="{DynamicResource GameCoverDataTemplate}"
+                                    ScrollViewer.VerticalScrollBarVisibility="Disabled"
+                                    ScrollViewer.HorizontalScrollBarVisibility="Visible"
+                                    lp:ScrollViewerHelper.UseHorizontalScrolling="True">
+                                <ListBox.GroupStyle>
+                                    <GroupStyle>
+                                        <GroupStyle.Panel>
+                                            <ItemsPanelTemplate>
+                                                <VirtualizingStackPanel Orientation="Horizontal" Style="{StaticResource VirtualizedStackPanelStyle}"/>
+                                            </ItemsPanelTemplate>
+                                        </GroupStyle.Panel>
+                                        <GroupStyle.ContainerStyle>
+                                            <Style TargetType="GroupItem">
+                                                <Setter Property="Template">
+                                                    <Setter.Value>
+                                                        <ControlTemplate>
+                                                            <GroupBox Style="{StaticResource GameGroupBox}" Header="{Binding Name}">
+                                                                <ItemsPresenter/>
+                                                            </GroupBox>
+                                                        </ControlTemplate>
+                                                    </Setter.Value>
+                                                </Setter>
+                                            </Style>
+                                        </GroupStyle.ContainerStyle>
+                                    </GroupStyle>
+                                </ListBox.GroupStyle>
+                                <ListBox.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <VirtualizingStackPanel Orientation="Horizontal" Style="{StaticResource VirtualizedStackPanelStyle}"/>
+                                    </ItemsPanelTemplate>
+                                </ListBox.ItemsPanel>
+                            </ListBox>
+                        </DockPanel>
+                    </Grid>
                 </DockPanel>
             </Grid>
         </ScrollViewer>
