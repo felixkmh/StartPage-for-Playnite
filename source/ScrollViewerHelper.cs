@@ -10,6 +10,7 @@ using Helper;
 
 namespace LandingPage
 {
+    // based on https://stackoverflow.com/a/26143987
     public static class ScrollViewerHelper
     {
         public static readonly DependencyProperty UseHorizontalScrollingProperty = DependencyProperty.RegisterAttached(
