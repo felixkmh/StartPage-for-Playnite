@@ -106,12 +106,14 @@
                 <Trigger Property="IsMouseOver" Value="True" SourceName="ImageGrid">
                     <Setter Property="IsOpen" Value="True" TargetName="Description"/>
                     <Setter Property="Visibility" Value="Visible" TargetName="Buttons"/>
-                    <Setter Property="Background" TargetName="PopupBackground">
+                    <!--<Setter Property="Background" TargetName="PopupBackground">
                         <Setter.Value>
-                            <ImageBrush ImageSource="{Binding Game.BackgroundImage, Converter={StaticResource ImageStringToImageConverter}, FallbackValue={StaticResource DefaultGameCover}}"
+                            <ImageBrush ImageSource="{Binding Game.BackgroundImage, Converter={StaticResource ImageStringToImageConverter}, 
+                                                                                    FallbackValue={StaticResource DefaultGameCover},
+                                                                                    TargetNullValue={StaticResource DefaultGameCover}}"
                                                             Stretch="UniformToFill"/>
                         </Setter.Value>
-                    </Setter>
+                    </Setter>-->
                 </Trigger>
                 <DataTrigger Binding="{Binding Game.IsInstalled}" Value="{StaticResource False}">
                     <Setter Property="Text" Value="" TargetName="PlayIcon"/>

@@ -80,9 +80,6 @@
     <Compile Include="UiHelper.cs" />
     <Compile Include="ViewModels\LandingPageViewModel.cs" />
     <Compile Include="ViewModels\SuccessStory\SuccessStoryViewModel.cs" />
-    <Compile Include="Views\GameCoverView.xaml.cs">
-      <DependentUpon>GameCoverView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\GameDetailsView.xaml.cs">
       <DependentUpon>GameDetailsView.xaml</DependentUpon>
     </Compile>
@@ -109,10 +106,6 @@
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </AdditionalFiles>
-    <Page Include="Views\GameCoverView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Views\GameDetailsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
