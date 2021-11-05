@@ -16,7 +16,7 @@
     <UserControl.Resources>
         <Style x:Key="VirtualizedStackPanelStyle" TargetType="{x:Type VirtualizingStackPanel}">
             <Setter Property="UseLayoutRounding" Value="False"/>
-            <Setter Property="VirtualizingPanel.VirtualizationMode" Value="Recycling"/>
+            <Setter Property="VirtualizingPanel.VirtualizationMode" Value="Standard"/>
         </Style>
         <system:Double x:Key="CoverHeight">195</system:Double>
         <system:Double x:Key="CoverWidth">140</system:Double>
@@ -403,7 +403,7 @@
                                 </ListBox.GroupStyle>
                                 <ListBox.ItemsPanel>
                                     <ItemsPanelTemplate>
-                                        <VirtualizingStackPanel Orientation="Horizontal" Style="{StaticResource VirtualizedStackPanelStyle}"/>
+                                        <StackPanel Orientation="Horizontal" UseLayoutRounding="False"/>
                                     </ItemsPanelTemplate>
                                 </ListBox.ItemsPanel>
                             </ListBox>
@@ -454,7 +454,7 @@
                                 </ListBox.GroupStyle>
                                 <ListBox.ItemsPanel>
                                     <ItemsPanelTemplate>
-                                        <VirtualizingStackPanel Orientation="Horizontal" Style="{StaticResource VirtualizedStackPanelStyle}"/>
+                                        <StackPanel Orientation="Horizontal"/>
                                     </ItemsPanelTemplate>
                                 </ListBox.ItemsPanel>
                             </ListBox>
