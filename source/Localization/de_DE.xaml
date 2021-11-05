@@ -4,7 +4,7 @@
     <sys:String x:Key="LOC_SPG_MostPlayedGame">Meistgespielt</sys:String>
     <sys:String x:Key="LOC_SPG_LatestReleaseGame">Neu Veröffentlicht</sys:String>
     <sys:String x:Key="LOC_SPG_RecentAchievements">Aktuelle Erfolge</sys:String>
-    <sys:String x:Key="LOC_SPG_RecentlyAddedGames">Kürzlich hinzugefügt</sys:String>
+    <sys:String x:Key="LOC_SPG_RecentlyAddedGames">Zuletzt hinzugefügt</sys:String>
 
     <!-- Settings -->
     <sys:String x:Key="LOC_SPG_ShowClock">Uhr anzeigen</sys:String>
