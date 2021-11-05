@@ -69,6 +69,7 @@
     <Compile Include="Models\ObservableObject.cs" />
     <Compile Include="Models\SuccessStory\Achievements.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ScrollViewerHelper.cs" />
     <Compile Include="UiHelper.cs" />
     <Compile Include="ViewModels\LandingPageViewModel.cs" />
     <Compile Include="ViewModels\SuccessStory\SuccessStoryViewModel.cs" />

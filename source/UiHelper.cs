@@ -10,13 +10,13 @@ namespace Helper
 {
     public static class UiHelper
     {
-        public static IEnumerable<FrameworkElement> FindVisualChildren(DependencyObject parent, string name = null)
+        public static IEnumerable<FrameworkElement> FindVisualChildren(this DependencyObject parent, string name = null)
         {
-            Stack<DependencyObject> stack = new Stack<DependencyObject>();
-            stack.Push(parent);
-            while (stack.Count > 0)
+            var queue = new Queue<DependencyObject>();
+            queue.Enqueue(parent);
+            while (queue.Count > 0)
             {
-                var current = stack.Pop();
+                var current = queue.Dequeue();
                 var count = VisualTreeHelper.GetChildrenCount(current);
                 for (int i = 0; i < count; i++)
                 {
@@ -28,12 +28,12 @@ namespace Helper
                             yield return element;
                         }
                     }
-                    stack.Push(child);
+                    queue.Enqueue(child);
                 }
             }
         }
 
-        public static IEnumerable<SearchType> FindVisualChildren<SearchType>(DependencyObject parent, string name = null)
+        public static IEnumerable<SearchType> FindVisualChildren<SearchType>(this DependencyObject parent, string name = null)
             where SearchType : FrameworkElement
         {
             return FindVisualChildren(parent, name).OfType<SearchType>();
