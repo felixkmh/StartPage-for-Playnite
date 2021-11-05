@@ -315,7 +315,7 @@
                         </Grid.RowDefinitions>
                         <DockPanel Grid.Row="1" UseLayoutRounding="True" SnapsToDevicePixels="True"
                             Visibility="{Binding Settings.Settings.ShowAddedGames, Converter={StaticResource BooleanToVisibilityConverter}}">
-                            <Label Content="{DynamicResource LOCAddedLabel}" DockPanel.Dock="Left" Margin="10,10,5,30">
+                            <Label Content="{DynamicResource LOC_SPG_RecentlyAddedGames}" DockPanel.Dock="Left" Margin="10,10,5,30">
                                 <Label.LayoutTransform>
                                     <RotateTransform Angle="-90" />
                                 </Label.LayoutTransform>
