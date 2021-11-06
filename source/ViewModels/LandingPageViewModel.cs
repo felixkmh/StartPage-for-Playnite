@@ -15,7 +15,7 @@ using LandingPage.Extensions;
 
 namespace LandingPage.ViewModels
 {
-    public class LandingPageViewModel
+    public class LandingPageViewModel : ObservableObject
     {
         internal ObservableCollection<GameModel> recentlyPlayedGames = new ObservableCollection<GameModel>();
         public ObservableCollection<GameModel> RecentlyPlayedGames => recentlyPlayedGames;
@@ -103,7 +103,17 @@ namespace LandingPage.ViewModels
 
             Application.Current.Dispatcher.Invoke(() =>
             {
-                specialGames.Update(groups);
+                if (specialGames.Count == 0)
+                {
+                    specialGames.Update(groups);
+                } else
+                {
+                    foreach(var group in specialGames)
+                    {
+                        var currentGroup = groups.FirstOrDefault(g => g.Label == group.Label);
+                        group.Games.FirstOrDefault().Game = currentGroup.Games.FirstOrDefault().Game;
+                    }
+                }
             });
         }
 
@@ -121,35 +131,40 @@ namespace LandingPage.ViewModels
             }
         }
 
+        GameModel dummy = new GameModel(new Game());
+
         internal void UpdateRecentlyPlayedGames()
         {
             var games = playniteAPI.Database.Games
                 .Where(g => !g.Hidden)
                 .OrderByDescending(g => g.LastActivity);
-
+            var collection = recentlyPlayedGames;
             Application.Current.Dispatcher.Invoke(() =>
             {
-                var dummy = new GameModel(new Game());
                 var displayedGames = Math.Min(Math.Max(10, games.Count(g => g.LastActivity?.CompareTo(DateTime.Today.AddDays(-7)) > 0)), 20);
                 int i = 0;
-                foreach (var game in games.Take(displayedGames))
+                IEnumerable<Game> gameSelection = games.Take(displayedGames);
+                foreach (var game in gameSelection)
                 {
-                    if (recentlyPlayedGames.Count > i)
+                    if (collection.FirstOrDefault(item => item.Game.Id == game.Id) is GameModel model)
                     {
-                        var temp = recentlyPlayedGames[i];
-                        recentlyPlayedGames[i] = dummy;
-                        temp.Game = game;
-                        recentlyPlayedGames[i] = temp;
+                        model.Game = game;
+                    }
+                    else if (collection.FirstOrDefault(item => gameSelection.All(s => s.Id != item.Game.Id)) is GameModel unusedModel)
+                    {
+                        unusedModel.Game = game;
                     }
                     else
                     {
-                        recentlyPlayedGames.Add(new GameModel(game));
+                        collection.Add(new GameModel(game));
                     }
-                    ++i;
                 }
-                for (int j = recentlyPlayedGames.Count - 1; j >= i; --j)
+                for (int j = collection.Count - 1; j >= 0; --j)
                 {
-                    recentlyPlayedGames.RemoveAt(j);
+                    if (gameSelection.All(g => g.Id == collection[i].Game.Id))
+                    {
+                        collection.RemoveAt(i);
+                    }
                 }
             });
         }
@@ -159,30 +174,31 @@ namespace LandingPage.ViewModels
             var games = playniteAPI.Database.Games
                 .Where(g => !g.Hidden)
                 .OrderByDescending(g => g.Added);
-            
+            var collection = recentlyAddedGames;
             Application.Current.Dispatcher.Invoke(() =>
             {
-                var dummy = new GameModel(new Game());
                 var displayedGames = Math.Min(Math.Max(10, games.Count(g => g.Added?.CompareTo(DateTime.Today.AddDays(-7)) > 0)), 20);
                 int i = 0;
-                foreach (var game in games.Take(displayedGames))
+                IEnumerable<Game> gameSelection = games.Take(displayedGames);
+                foreach (var game in gameSelection)
                 {
-                    if (recentlyAddedGames.Count > i)
+                    if (collection.FirstOrDefault(item => item.Game.Id == game.Id) is GameModel model)
                     {
-                        var temp = recentlyAddedGames[i];
-                        recentlyAddedGames[i] = dummy;
-                        temp.Game = game;
-                        recentlyAddedGames[i] = temp;
-                    }
-                    else
+                        model.Game = game;
+                    } else if (collection.FirstOrDefault(item => gameSelection.All(s => s.Id != item.Game.Id)) is GameModel unusedModel)
                     {
-                        recentlyAddedGames.Add(new GameModel(game));
+                        unusedModel.Game = game;
+                    } else
+                    {
+                        collection.Add(new GameModel(game));
                     }
-                    ++i;
                 }
-                for (int j = recentlyAddedGames.Count - 1; j >= i; --j)
+                for (int j = collection.Count - 1; j >= 0; --j)
                 {
-                    recentlyAddedGames.RemoveAt(j);
+                    if (gameSelection.All(g => g.Id == collection[i].Game.Id))
+                    {
+                        collection.RemoveAt(i);
+                    }
                 }
             });
         }

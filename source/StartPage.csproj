@@ -55,6 +55,9 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\GroupListBox.xaml.cs">
+      <DependentUpon>GroupListBox.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Converters\AchievementsToProgressConverter.cs" />
     <Compile Include="Converters\ActualHeightToWidthConverter.cs" />
     <Compile Include="Converters\BoolToGridLengthConverter.cs" />
@@ -80,6 +83,9 @@
     <Compile Include="UiHelper.cs" />
     <Compile Include="ViewModels\LandingPageViewModel.cs" />
     <Compile Include="ViewModels\SuccessStory\SuccessStoryViewModel.cs" />
+    <Compile Include="Views\GameCover.xaml.cs">
+      <DependentUpon>GameCover.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\GameDetailsView.xaml.cs">
       <DependentUpon>GameDetailsView.xaml</DependentUpon>
     </Compile>
@@ -102,7 +108,15 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Controls\GroupListBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="LandingPageSettingsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\GameCover.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

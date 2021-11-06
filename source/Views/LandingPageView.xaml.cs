@@ -31,7 +31,31 @@ namespace LandingPage.Views
         public LandingPageView(LandingPageViewModel model)
         {
             DataContext = model;
+            model.PropertyChanged += Model_PropertyChanged;
             InitializeComponent();
+        }
+
+        private void Model_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == nameof(LandingPageViewModel.RecentlyAddedGames))
+            {
+                if(RecentlyAddedListBox.ItemsSource is ListCollectionView collectionView)
+                {
+                    //var sort = collectionView.SortDescriptions.FirstOrDefault();
+                    //collectionView.SortDescriptions.Clear();
+                    //collectionView.SortDescriptions.Add(sort);
+                }
+            }
+
+            if (e.PropertyName == nameof(LandingPageViewModel.RecentlyPlayedGames))
+            {
+                if (RecentlyPlayedListBox.ItemsSource is ListCollectionView collectionView)
+                {
+                    //var sort = collectionView.SortDescriptions.FirstOrDefault();
+                    //collectionView.SortDescriptions.Clear();
+                    //collectionView.SortDescriptions.Add(sort);
+                }
+            }
         }
 
         private void ListBoxItem_MouseUp(object sender, MouseButtonEventArgs e)
