@@ -21,6 +21,9 @@ namespace LandingPage
         private bool showClock = true;
         public bool ShowClock { get => showClock; set => SetValue(ref showClock, value); }
 
+        private bool showDetails = true;
+        public bool ShowDetails { get => showDetails; set => SetValue(ref showDetails, value); }
+
         private bool showRecentGames = true;
         public bool ShowRecentGames { get => showRecentGames; set => SetValue(ref showRecentGames, value); }
 

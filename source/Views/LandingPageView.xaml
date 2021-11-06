@@ -68,6 +68,7 @@
                             </Button>
                         </StackPanel>
                     </Viewbox>
+                    <ContentControl x:Name="Proxy" Visibility="{mu:LandingPageSettings Settings.ShowDetails}" Width="0" Height="0"/>
                 </Grid>
                 <Popup Height="204.75" Width="462" x:Name="Description" IsOpen="False" Placement="Right" PlacementTarget="{Binding ElementName=ImageGrid}" 
                                        ClipToBounds="True" PopupAnimation="Fade">
@@ -84,10 +85,13 @@
                         </MultiBinding>
                     </Popup.PlacementRectangle>
                     <Grid IsHitTestVisible="False">
+                        <Border Background="#303030" CornerRadius="7"/>
                         <Border Background="{StaticResource GridItemBackgroundBrush}"
                                                 CornerRadius="7"/>
                         <Border CornerRadius="7" Opacity="0.3" x:Name="PopupBackground">
-                            <!--<Image Source="{Binding Game.BackgroundImage, Converter={StaticResource ImageStringToImageConverter}}"
+                            <!--<Image Source="{Binding Game.BackgroundImage, Converter={StaticResource ImageStringToImageConverter}, 
+                                                                                    FallbackValue={StaticResource DefaultGameCover},
+                                                                                    TargetNullValue={StaticResource DefaultGameCover}}"
                                                                 Stretch="UniformToFill"/>-->
                             <Border.OpacityMask>
                                 <LinearGradientBrush StartPoint="1,0" EndPoint="0,1">
@@ -103,17 +107,25 @@
                 </Popup>
             </StackPanel>
             <DataTemplate.Triggers>
-                <Trigger Property="IsMouseOver" Value="True" SourceName="ImageGrid">
-                    <Setter Property="IsOpen" Value="True" TargetName="Description"/>
-                    <Setter Property="Visibility" Value="Visible" TargetName="Buttons"/>
-                    <!--<Setter Property="Background" TargetName="PopupBackground">
-                        <Setter.Value>
-                            <ImageBrush ImageSource="{Binding Game.BackgroundImage, Converter={StaticResource ImageStringToImageConverter}, 
+                <MultiTrigger>
+                    <MultiTrigger.Conditions>
+                        <Condition Property="IsMouseOver" Value="True"/>
+                        <Condition Property="IsVisible" Value="True" SourceName="Proxy"/>
+                    </MultiTrigger.Conditions>
+                    <MultiTrigger.Setters>
+                        <Setter Property="IsOpen" Value="True" TargetName="Description"/>
+                        <Setter Property="Background" TargetName="PopupBackground">
+                            <Setter.Value>
+                                <ImageBrush ImageSource="{Binding Game.BackgroundImage, Converter={StaticResource ImageStringToImageConverter}, 
                                                                                     FallbackValue={StaticResource DefaultGameCover},
                                                                                     TargetNullValue={StaticResource DefaultGameCover}}"
                                                             Stretch="UniformToFill"/>
-                        </Setter.Value>
-                    </Setter>-->
+                            </Setter.Value>
+                        </Setter>
+                    </MultiTrigger.Setters>
+                </MultiTrigger>
+                <Trigger Property="IsMouseOver" Value="True" SourceName="ImageGrid">
+                    <Setter Property="Visibility" Value="Visible" TargetName="Buttons"/>
                 </Trigger>
                 <DataTrigger Binding="{Binding Game.IsInstalled}" Value="{StaticResource False}">
                     <Setter Property="Text" Value="" TargetName="PlayIcon"/>

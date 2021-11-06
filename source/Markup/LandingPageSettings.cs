@@ -51,8 +51,8 @@ namespace LandingPage.Markup
 
             if (targetType == typeof(Visibility))
             {
-                binding.Converter = Application.Current.Resources["BooleanToVisibilityConverter"] as IValueConverter;
-            }
+                binding.Converter = Application.Current.Resources["BooleanToHiddenConverter"] as IValueConverter;
+            } 
 
             return binding;
         }
