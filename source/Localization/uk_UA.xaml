@@ -9,6 +9,7 @@
     <!-- Settings -->
     <sys:String x:Key="LOC_SPG_ShowClock">Show Clock</sys:String>
     <sys:String x:Key="LOC_SPG_ShowRecentlyPlayed">Show Recently Played Games</sys:String>
+    <sys:String x:Key="LOC_SPG_ShowRecentAchievements">Show recent Achievements using SuccessStory</sys:String>
     <sys:String x:Key="LOC_SPG_ShowRecentlyAdded">Show Recently Added Games</sys:String>
     <sys:String x:Key="LOC_SPG_StartupItem">SidebarItem activated on Launch</sys:String>
     <sys:String x:Key="LOC_SPG_MaxRecentAchievements">Maximun number of recent Achievements</sys:String>
