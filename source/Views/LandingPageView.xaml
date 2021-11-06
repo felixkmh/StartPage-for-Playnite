@@ -60,10 +60,10 @@
                                Visibility="{mu:LandingPageSettings Settings.ShowTitleOnCover}"/>
                     <Viewbox x:Name="Buttons" Visibility="Hidden">
                         <StackPanel Orientation="Horizontal" Margin="5">
-                            <Button Background="{x:Null}" Padding="4" x:Name="PlayButton" Click="PlayButton_Click">
+                            <Button Background="{x:Null}" Padding="4" x:Name="PlayButton" Click="PlayButton_Click" BorderThickness="0">
                                 <TextBlock Text="" FontFamily="{StaticResource FontIcoFont}" x:Name="PlayIcon"/>
                             </Button>
-                            <Button Background="{x:Null}"  Padding="4" x:Name="InfoButton" Click="InfoButton_Click">
+                            <Button Background="{x:Null}"  Padding="4" x:Name="InfoButton" Click="InfoButton_Click" BorderThickness="0">
                                 <TextBlock Text="" FontFamily="{StaticResource FontIcoFont}"/>
                             </Button>
                         </StackPanel>
