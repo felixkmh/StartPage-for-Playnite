@@ -14,5 +14,5 @@
     <sys:String x:Key="LOC_SPG_MaxRecentAchievements">Maximale Anzahl neuer Erfolge</sys:String>
     <sys:String x:Key="LOC_SPG_MaxRecentAchievementsPerGame">Maximale Anzahl neuer Erfolge pro Spiel</sys:String>
     <sys:String x:Key="LOC_SPG_ShowTitelOnCover">Titel auf dem Spielcover anzeigen</sys:String>
-
+    <sys:String x:Key="LOC_SPG_ShowGameDetails">Spieldetails anzeigen</sys:String>
 </ResourceDictionary>
