@@ -1,0 +1,17 @@
+AddonId: felixkmh_StartPage_Plugin
+Type: Generic
+Name: StartPage
+Author: felixkmh
+ShortDescription: Start page with recently played games, achievements and more.
+InstallerManifestUrl: https://raw.githubusercontent.com/felixkmh/StartPage-for-Playnite/master/InstallerManifest/felixkmh_StartPage_Plugin.yaml
+SourceUrl: QuickSearch-for-Playnite
+Description: '' 
+Tags: ["start page","launch","home","achievements"]
+Links:
+    GitHub: https://github.com/felixkmh/StartPage-for-Playnite
+    Playnite Forum: https://playnite.link/forum/thread-930-post-6631.html
+    Translate: https://crowdin.com/project/startpage-for-playnite
+IconUrl: https://raw.githubusercontent.com/felixkmh/StartPage-for-Playnite/master/source/icon.png
+Screenshots:
+    - Thumbnail: https://i.imgur.com/fRg25Nj.png
+      Image: https://i.imgur.com/fRg25Njm.png
