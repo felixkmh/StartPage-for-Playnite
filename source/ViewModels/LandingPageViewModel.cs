@@ -129,13 +129,17 @@ namespace LandingPage.ViewModels
 
             Application.Current.Dispatcher.Invoke(() =>
             {
+                var dummy = new GameModel(new Game());
                 var displayedGames = Math.Min(Math.Max(10, games.Count(g => g.LastActivity?.CompareTo(DateTime.Today.AddDays(-7)) > 0)), 20);
                 int i = 0;
                 foreach (var game in games.Take(displayedGames))
                 {
                     if (recentlyPlayedGames.Count > i)
                     {
-                        recentlyPlayedGames[i].Game = game;
+                        var temp = recentlyPlayedGames[i];
+                        recentlyPlayedGames[i] = dummy;
+                        temp.Game = game;
+                        recentlyPlayedGames[i] = temp;
                     }
                     else
                     {
@@ -158,13 +162,17 @@ namespace LandingPage.ViewModels
             
             Application.Current.Dispatcher.Invoke(() =>
             {
+                var dummy = new GameModel(new Game());
                 var displayedGames = Math.Min(Math.Max(10, games.Count(g => g.Added?.CompareTo(DateTime.Today.AddDays(-7)) > 0)), 20);
                 int i = 0;
                 foreach (var game in games.Take(displayedGames))
                 {
                     if (recentlyAddedGames.Count > i)
                     {
-                        recentlyAddedGames[i].Game = game;
+                        var temp = recentlyAddedGames[i];
+                        recentlyAddedGames[i] = dummy;
+                        temp.Game = game;
+                        recentlyAddedGames[i] = temp;
                     }
                     else
                     {

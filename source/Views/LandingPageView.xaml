@@ -133,21 +133,15 @@
                 </DataTrigger>
             </DataTemplate.Triggers>
         </DataTemplate>
-        <CollectionViewSource x:Key="RecentlyAddedSource" Source="{Binding RecentlyAddedGames}" IsLiveGroupingRequested="True" IsLiveSortingRequested="True">
+        <CollectionViewSource x:Key="RecentlyAddedSource" Source="{Binding RecentlyAddedGames}" IsLiveGroupingRequested="True">
             <CollectionViewSource.GroupDescriptions>
                 <PropertyGroupDescription PropertyName="Game.Added" Converter="{StaticResource DateTimeToLastPlayedConverter}"/>
             </CollectionViewSource.GroupDescriptions>
-            <CollectionViewSource.SortDescriptions>
-                <scm:SortDescription PropertyName="Game.Added" Direction="Descending"/>
-            </CollectionViewSource.SortDescriptions>
         </CollectionViewSource>
-        <CollectionViewSource x:Key="RecentlyPlayedSource" Source="{Binding RecentlyPlayedGames}" IsLiveGroupingRequested="True" IsLiveSortingRequested="True">
+        <CollectionViewSource x:Key="RecentlyPlayedSource" Source="{Binding RecentlyPlayedGames}" IsLiveGroupingRequested="True">
             <CollectionViewSource.GroupDescriptions>
                 <PropertyGroupDescription PropertyName="Game.LastActivity" Converter="{StaticResource DateTimeToLastPlayedConverter}"/>
             </CollectionViewSource.GroupDescriptions>
-            <CollectionViewSource.SortDescriptions>
-                <scm:SortDescription PropertyName="Game.Added" Direction="Descending"/>
-            </CollectionViewSource.SortDescriptions>
         </CollectionViewSource>
         <Style x:Key="GameGroupBox" TargetType="{x:Type GroupBox}" BasedOn="{StaticResource {x:Type GroupBox}}">
             <Setter Property="Padding" Value="0" />
@@ -346,17 +340,17 @@
                                     DockPanel.Dock="Left" BorderThickness="0"
                                     Background="Transparent"
                                     MaxWidth="1544"
+                                    ScrollViewer.CanContentScroll="False"
                                     ItemsSource="{Binding Source={StaticResource RecentlyAddedSource}}"
                                     ItemTemplate="{DynamicResource GameCoverDataTemplate}"
                                     ScrollViewer.VerticalScrollBarVisibility="Disabled"
                                     ScrollViewer.HorizontalScrollBarVisibility="Visible"
-                                    ScrollViewer.PanningMode="HorizontalOnly"
                                     lp:ScrollViewerHelper.UseHorizontalScrolling="True">
                                 <ListBox.GroupStyle>
                                     <GroupStyle>
                                         <GroupStyle.Panel>
                                             <ItemsPanelTemplate>
-                                                <VirtualizingStackPanel Orientation="Horizontal" Style="{StaticResource VirtualizedStackPanelStyle}"/>
+                                                <StackPanel Orientation="Horizontal"/>
                                             </ItemsPanelTemplate>
                                         </GroupStyle.Panel>
                                         <GroupStyle.ContainerStyle>
@@ -376,7 +370,7 @@
                                 </ListBox.GroupStyle>
                                 <ListBox.ItemsPanel>
                                     <ItemsPanelTemplate>
-                                        <VirtualizingStackPanel Orientation="Horizontal" Style="{StaticResource VirtualizedStackPanelStyle}"/>
+                                        <StackPanel Orientation="Horizontal"/>
                                     </ItemsPanelTemplate>
                                 </ListBox.ItemsPanel>
                             </ListBox>
@@ -394,6 +388,7 @@
                                     DockPanel.Dock="Left" BorderThickness="0"
                                     Background="Transparent"
                                     MaxWidth="1544"
+                                    ScrollViewer.CanContentScroll="False"
                                     ItemsSource="{Binding Source={StaticResource RecentlyPlayedSource}}"
                                     ItemTemplate="{DynamicResource GameCoverDataTemplate}"
                                     ScrollViewer.VerticalScrollBarVisibility="Disabled"
@@ -403,7 +398,7 @@
                                     <GroupStyle>
                                         <GroupStyle.Panel>
                                             <ItemsPanelTemplate>
-                                                <VirtualizingStackPanel Orientation="Horizontal" Style="{StaticResource VirtualizedStackPanelStyle}"/>
+                                                <StackPanel Orientation="Horizontal"/>
                                             </ItemsPanelTemplate>
                                         </GroupStyle.Panel>
                                         <GroupStyle.ContainerStyle>
@@ -423,7 +418,7 @@
                                 </ListBox.GroupStyle>
                                 <ListBox.ItemsPanel>
                                     <ItemsPanelTemplate>
-                                        <VirtualizingStackPanel Orientation="Horizontal" Style="{StaticResource VirtualizedStackPanelStyle}"/>
+                                        <StackPanel Orientation="Horizontal"/>
                                     </ItemsPanelTemplate>
                                 </ListBox.ItemsPanel>
                             </ListBox>
