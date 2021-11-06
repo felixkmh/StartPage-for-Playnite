@@ -119,8 +119,8 @@ namespace LandingPage.ViewModels
 
         private void UpdateBackgroundImagePath()
         {
-            var path = recentlyPlayedGames
-                .Concat(recentlyAddedGames)
+            var path = recentlyPlayedGames.OrderByDescending(g => g.Game.LastActivity)
+                .Concat(recentlyAddedGames.OrderByDescending(g => g.Game.Added))
                 .FirstOrDefault(g => !string.IsNullOrEmpty(g.Game.BackgroundImage))?.Game.BackgroundImage;
             if (path is string)
             {
