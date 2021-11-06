@@ -39,6 +39,10 @@
                     <TextBlock Text="{DynamicResource LOC_SPG_ShowGameDetails}" Margin="3" VerticalAlignment="Center"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
+                    <CheckBox IsChecked="{Binding Settings.ShowRecentAchievements}" VerticalAlignment="Center" Margin="3"/>
+                    <TextBlock Text="{DynamicResource LOC_SPG_ShowRecentAchievements}" Margin="3" VerticalAlignment="Center"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
                     <TextBlock Text="{DynamicResource LOC_SPG_MaxRecentAchievements}" VerticalAlignment="Center"/>
                     <numeric:IntBox Value="{Binding Settings.MaxNumberRecentAchievements, UpdateSourceTrigger=PropertyChanged}" 
                                     MinValue="0"

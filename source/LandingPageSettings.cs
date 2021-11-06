@@ -24,6 +24,9 @@ namespace LandingPage
         private bool showDetails = true;
         public bool ShowDetails { get => showDetails; set => SetValue(ref showDetails, value); }
 
+        private bool showRecentAchievements = true;
+        public bool ShowRecentAchievements { get => showRecentAchievements; set => SetValue(ref showRecentAchievements, value); }
+
         private bool showRecentGames = true;
         public bool ShowRecentGames { get => showRecentGames; set => SetValue(ref showRecentGames, value); }
 
