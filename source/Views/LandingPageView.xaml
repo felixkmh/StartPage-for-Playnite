@@ -10,6 +10,7 @@
              xmlns:conv="clr-namespace:LandingPage.Converters"
              xmlns:system="clr-namespace:System;assembly=mscorlib"
              xmlns:mu="clr-namespace:LandingPage.Markup"
+             xmlns:scm="clr-namespace:System.ComponentModel;assembly=WindowsBase"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
              d:DataContext="{d:DesignInstance IsDesignTimeCreatable=False, Type=lpvm:LandingPageViewModel}"
@@ -132,15 +133,21 @@
                 </DataTrigger>
             </DataTemplate.Triggers>
         </DataTemplate>
-        <CollectionViewSource x:Key="RecentlyAddedSource" Source="{Binding RecentlyAddedGames}" IsLiveGroupingRequested="True">
+        <CollectionViewSource x:Key="RecentlyAddedSource" Source="{Binding RecentlyAddedGames}" IsLiveGroupingRequested="True" IsLiveSortingRequested="True">
             <CollectionViewSource.GroupDescriptions>
                 <PropertyGroupDescription PropertyName="Game.Added" Converter="{StaticResource DateTimeToLastPlayedConverter}"/>
             </CollectionViewSource.GroupDescriptions>
+            <CollectionViewSource.SortDescriptions>
+                <scm:SortDescription PropertyName="Game.Added" Direction="Descending"/>
+            </CollectionViewSource.SortDescriptions>
         </CollectionViewSource>
-        <CollectionViewSource x:Key="RecentlyPlayedSource" Source="{Binding RecentlyPlayedGames}" IsLiveGroupingRequested="True">
+        <CollectionViewSource x:Key="RecentlyPlayedSource" Source="{Binding RecentlyPlayedGames}" IsLiveGroupingRequested="True" IsLiveSortingRequested="True">
             <CollectionViewSource.GroupDescriptions>
                 <PropertyGroupDescription PropertyName="Game.LastActivity" Converter="{StaticResource DateTimeToLastPlayedConverter}"/>
             </CollectionViewSource.GroupDescriptions>
+            <CollectionViewSource.SortDescriptions>
+                <scm:SortDescription PropertyName="Game.Added" Direction="Descending"/>
+            </CollectionViewSource.SortDescriptions>
         </CollectionViewSource>
         <Style x:Key="GameGroupBox" TargetType="{x:Type GroupBox}" BasedOn="{StaticResource {x:Type GroupBox}}">
             <Setter Property="Padding" Value="0" />
