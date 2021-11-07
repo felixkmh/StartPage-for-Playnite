@@ -5,11 +5,12 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:LandingPage.Views"
              xmlns:m="clr-namespace:LandingPage.ViewModels.SuccessStory"
-             xmlns:conv="clr-namespace:LandingPage.Converters"
+             xmlns:conv="clr-namespace:LandingPage.Converters" xmlns:system="clr-namespace:System;assembly=System"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
              d:DataContext="{d:DesignInstance IsDesignTimeCreatable=False, Type=m:SuccessStoryViewModel}">
     <UserControl.Resources>
+        <system:Uri x:Key="DefaultAchievementUri">pack://application:,,,/StartPagePlugin;component/star.png</system:Uri>
         <CollectionViewSource x:Key="LatestAchievementsSource" Source="{Binding LatestAchievements}" IsLiveGroupingRequested="True">
             <CollectionViewSource.GroupDescriptions>
                 <PropertyGroupDescription PropertyName="Game.Game.Name"/>
@@ -157,7 +158,7 @@
                             </Border.OpacityMask>
                                 <Image Stretch="UniformToFill" HorizontalAlignment="Center" VerticalAlignment="Center">
                                     <Image.Source>
-                                        <BitmapImage UriSource="{Binding Achievement.UriUnlocked}" 
+                                        <BitmapImage UriSource="{Binding Achievement.UriUnlocked, FallbackValue={StaticResource DefaultAchievementUri}}" 
                                                      CreateOptions="IgnoreColorProfile" 
                                                      CacheOption="OnLoad"
                                                      DecodePixelHeight="70"/>

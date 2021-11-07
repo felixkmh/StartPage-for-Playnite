@@ -51,6 +51,6 @@ namespace LandingPage.Models.SuccessStory
         public string Category { get => category; set { category = value; OnPropertyChanged(); } }
         public string ParentCategory { get => parentCategory; set { parentCategory = value; OnPropertyChanged(); } }
         [Newtonsoft.Json.JsonIgnore]
-        public Uri UriUnlocked => new Uri(UrlUnlocked);
+        public Uri UriUnlocked => string.IsNullOrEmpty(UrlUnlocked) ? null : new Uri(UrlUnlocked);
     }
 }

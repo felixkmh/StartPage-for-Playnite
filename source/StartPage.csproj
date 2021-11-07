@@ -106,6 +106,7 @@
     <Content Include="Localization/*.xaml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Resource Include="star.png" />
   </ItemGroup>
   <ItemGroup>
     <Page Include="Controls\GroupListBox.xaml">
