@@ -136,7 +136,7 @@ namespace LandingPage.ViewModels.SuccessStory
                     .OrderByDescending(a => a.DateUnlocked ?? default)
                     .Take(achievementsPerGame)
                     .Select(a => new { Game = playniteAPI.Database.Games.Get(pair.Value.Id), Achievement = a, Source = pair.Value }))
-                .Where(a => (!a.Achievement.DateUnlocked?.Equals(default(DateTime))) ?? false)
+                .Where(a => (!a.Achievement.DateUnlocked?.Equals(default)) ?? false)
                 .OrderByDescending(a => a.Achievement.DateUnlocked ?? default)
                 .Take(achievementsOverall);
             Application.Current.Dispatcher.Invoke(() => 
@@ -195,7 +195,7 @@ namespace LandingPage.ViewModels.SuccessStory
                     try
                     {
                         var gameAchievements = DeserializeAchievementsFile(path);
-                        if (gameAchievements is Achievements && gameAchievements.Items.Any(a => (!a.DateUnlocked?.Equals(default(DateTime))) ?? false))
+                        if (gameAchievements is Achievements && gameAchievements.Items.Any(a => (!a.DateUnlocked?.Equals(default)) ?? false))
                         {
                             achievements[gameId] = gameAchievements;
                             return true;

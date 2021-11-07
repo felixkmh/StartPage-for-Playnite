@@ -139,6 +139,7 @@ namespace LandingPage.ViewModels
                 .Where(g => !g.Hidden)
                 .OrderByDescending(g => g.LastActivity);
             var collection = recentlyPlayedGames;
+            var changed = false;
             Application.Current.Dispatcher.Invoke(() =>
             {
                 var displayedGames = Math.Min(Math.Max(10, games.Count(g => g.LastActivity?.CompareTo(DateTime.Today.AddDays(-7)) > 0)), 20);
@@ -148,11 +149,17 @@ namespace LandingPage.ViewModels
                 {
                     if (collection.FirstOrDefault(item => item.Game.Id == game.Id) is GameModel model)
                     {
+                        if (model.Game.LastActivity != game.LastActivity)
+                        {
+                            changed = true;
+                        }
                         model.Game = game;
                     }
                     else if (collection.FirstOrDefault(item => gameSelection.All(s => s.Id != item.Game.Id)) is GameModel unusedModel)
                     {
+                        collection.Remove(unusedModel);
                         unusedModel.Game = game;
+                        collection.Add(unusedModel);
                     }
                     else
                     {
@@ -161,10 +168,14 @@ namespace LandingPage.ViewModels
                 }
                 for (int j = collection.Count - 1; j >= 0; --j)
                 {
-                    if (gameSelection.All(g => g.Id == collection[i].Game.Id))
+                    if (gameSelection.All(g => g.Id != collection[j].Game.Id))
                     {
-                        collection.RemoveAt(i);
+                        collection.RemoveAt(j);
                     }
+                }
+                if (changed && collection.Count > 1)
+                {
+                    collection.Move(0, 1);
                 }
             });
         }
@@ -175,6 +186,7 @@ namespace LandingPage.ViewModels
                 .Where(g => !g.Hidden)
                 .OrderByDescending(g => g.Added);
             var collection = recentlyAddedGames;
+            var changed = false;
             Application.Current.Dispatcher.Invoke(() =>
             {
                 var displayedGames = Math.Min(Math.Max(10, games.Count(g => g.Added?.CompareTo(DateTime.Today.AddDays(-7)) > 0)), 20);
@@ -184,10 +196,16 @@ namespace LandingPage.ViewModels
                 {
                     if (collection.FirstOrDefault(item => item.Game.Id == game.Id) is GameModel model)
                     {
+                        if (model.Game.Added != game.Added)
+                        {
+                            changed = true;
+                        }
                         model.Game = game;
                     } else if (collection.FirstOrDefault(item => gameSelection.All(s => s.Id != item.Game.Id)) is GameModel unusedModel)
                     {
+                        collection.Remove(unusedModel);
                         unusedModel.Game = game;
+                        collection.Add(unusedModel);
                     } else
                     {
                         collection.Add(new GameModel(game));
@@ -195,10 +213,14 @@ namespace LandingPage.ViewModels
                 }
                 for (int j = collection.Count - 1; j >= 0; --j)
                 {
-                    if (gameSelection.All(g => g.Id == collection[i].Game.Id))
+                    if (gameSelection.All(g => g.Id != collection[j].Game.Id))
                     {
-                        collection.RemoveAt(i);
+                        collection.RemoveAt(j);
                     }
+                }
+                if (changed && collection.Count > 1)
+                {
+                    collection.Move(0, 1);
                 }
             });
         }

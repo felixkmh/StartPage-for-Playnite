@@ -41,9 +41,12 @@ namespace LandingPage.Views
             {
                 if(RecentlyAddedListBox.ItemsSource is ListCollectionView collectionView)
                 {
-                    //var sort = collectionView.SortDescriptions.FirstOrDefault();
-                    //collectionView.SortDescriptions.Clear();
-                    //collectionView.SortDescriptions.Add(sort);
+                    //if (collectionView.NeedsRefresh)
+                    //{
+                    //    var sort = collectionView.SortDescriptions.FirstOrDefault();
+                    //    collectionView.SortDescriptions.Clear();
+                    //    collectionView.SortDescriptions.Add(sort);
+                    //}
                 }
             }
 
@@ -51,9 +54,12 @@ namespace LandingPage.Views
             {
                 if (RecentlyPlayedListBox.ItemsSource is ListCollectionView collectionView)
                 {
-                    //var sort = collectionView.SortDescriptions.FirstOrDefault();
-                    //collectionView.SortDescriptions.Clear();
-                    //collectionView.SortDescriptions.Add(sort);
+                    //if (collectionView.NeedsRefresh)
+                    //{
+                    //    var sort = collectionView.SortDescriptions.FirstOrDefault();
+                    //    collectionView.SortDescriptions.Clear();
+                    //    collectionView.SortDescriptions.Add(sort);
+                    //}
                 }
             }
         }

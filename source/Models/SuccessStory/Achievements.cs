@@ -6,31 +6,50 @@ using System.Threading.Tasks;
 
 namespace LandingPage.Models.SuccessStory
 {
-    public class Achievements
+    public class Achievements : ObservableObject
     {
-        public List<Achivement> Items { get; set; } = new List<Achivement>();
-        public bool HaveAchivements { get; set; }
-        public int Total { get; set; }
-        public int Unlocked { get; set; }
-        public int Locked { get; set; }
-        public int Progression { get; set; }
-        public Guid Id { get; set; }
-        public string Name { get; set; }
+        private List<Achivement> items = new List<Achivement>();
+        private bool haveAchivements;
+        private int total;
+        private int unlocked;
+        private int locked;
+        private int progression;
+        private Guid id;
+        private string name;
+
+        public List<Achivement> Items { get => items; set { items = value; OnPropertyChanged(); } }
+        public bool HaveAchivements { get => haveAchivements; set { haveAchivements = value; OnPropertyChanged(); } }
+        public int Total { get => total; set { total = value; OnPropertyChanged(); } }
+        public int Unlocked { get => unlocked; set { unlocked = value; OnPropertyChanged(); } }
+        public int Locked { get => locked; set { locked = value; OnPropertyChanged(); } }
+        public int Progression { get => progression; set { progression = value; OnPropertyChanged(); } }
+        public Guid Id { get => id; set { id = value; OnPropertyChanged(); } }
+        public string Name { get => name; set { name = value; OnPropertyChanged(); } }
     }
 
-    public class Achivement
+    public class Achivement : ObservableObject
     {
-        public string Name { get; set; }
-        public string ApiName { get; set; } = string.Empty;
-        public string Description { get; set; }
-        public string UrlUnlocked { get; set; }
-        public string UrlLocked { get; set; }
-        public DateTime? DateUnlocked { get; set; }
-        public bool IsHidden { get; set; } = false;
-        public float Percent { get; set; } = 100;
-        public string Category { get; set; } = string.Empty;
-        public string ParentCategory { get; set; } = string.Empty;
+        private string name;
+        private string apiName = string.Empty;
+        private string description;
+        private string urlUnlocked;
+        private string urlLocked;
+        private DateTime? dateUnlocked;
+        private bool isHidden = false;
+        private float percent = 100;
+        private string category = string.Empty;
+        private string parentCategory = string.Empty;
 
+        public string Name { get => name; set { name = value; OnPropertyChanged(); } }
+        public string ApiName { get => apiName; set { apiName = value; OnPropertyChanged(); } }
+        public string Description { get => description; set { description = value; OnPropertyChanged(); } }
+        public string UrlUnlocked { get => urlUnlocked; set { urlUnlocked = value; OnPropertyChanged(); } }
+        public string UrlLocked { get => urlLocked; set { urlLocked = value; OnPropertyChanged(); } }
+        public DateTime? DateUnlocked { get => dateUnlocked; set { dateUnlocked = value; OnPropertyChanged(); } }
+        public bool IsHidden { get => isHidden; set { isHidden = value; OnPropertyChanged(); } }
+        public float Percent { get => percent; set { percent = value; OnPropertyChanged(); } }
+        public string Category { get => category; set { category = value; OnPropertyChanged(); } }
+        public string ParentCategory { get => parentCategory; set { parentCategory = value; OnPropertyChanged(); } }
         [Newtonsoft.Json.JsonIgnore]
         public Uri UriUnlocked => new Uri(UrlUnlocked);
     }

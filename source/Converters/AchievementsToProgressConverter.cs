@@ -16,7 +16,7 @@ namespace LandingPage.Converters
             if (value is Achievements a)
             {
                 var n_achievements = a.Items?.Count ?? 1;
-                var n_unlocked = a.Items?.Count(achievementa => (!achievementa.DateUnlocked?.Equals(default(DateTime))) ?? false) ?? 0;
+                var n_unlocked = a.Items?.Count(achievementa => (!achievementa.DateUnlocked?.Equals(default)) ?? false) ?? 0;
                 return n_unlocked / (double)Math.Max(1, n_achievements);
             }
             return 0;
