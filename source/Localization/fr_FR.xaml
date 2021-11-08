@@ -11,9 +11,9 @@
     <sys:String x:Key="LOC_SPG_ShowRecentlyPlayed">Afficher les jeux récemment joués</sys:String>
     <sys:String x:Key="LOC_SPG_ShowRecentAchievements">Afficher les derniers succès (Requiert SucessStory)</sys:String>
     <sys:String x:Key="LOC_SPG_ShowRecentlyAdded">Afficher les jeux récemment ajoutés</sys:String>
-    <sys:String x:Key="LOC_SPG_StartupItem">SidebarItem activated on Launch</sys:String>
-    <sys:String x:Key="LOC_SPG_MaxRecentAchievements">Maximun number of recent Achievements</sys:String>
-    <sys:String x:Key="LOC_SPG_MaxRecentAchievementsPerGame">Maximun number of recent Achievements per Game</sys:String>
-    <sys:String x:Key="LOC_SPG_ShowTitelOnCover">Show Title on Game Cover</sys:String>
-    <sys:String x:Key="LOC_SPG_ShowGameDetails">Show Game Details</sys:String>
+    <sys:String x:Key="LOC_SPG_StartupItem">Onglet à afficher au démarrage :</sys:String>
+    <sys:String x:Key="LOC_SPG_MaxRecentAchievements">Nombre maximum de succès affichés :</sys:String>
+    <sys:String x:Key="LOC_SPG_MaxRecentAchievementsPerGame">Nombre maximum de succès affichés par jeu :</sys:String>
+    <sys:String x:Key="LOC_SPG_ShowTitelOnCover">Afficher le nom des jeux sur leur couverture</sys:String>
+    <sys:String x:Key="LOC_SPG_ShowGameDetails">Afficher les propriétés des jeux</sys:String>
 </ResourceDictionary>
