@@ -333,17 +333,20 @@
                                 </ListBox.ItemsPanel>
                             </ListBox>
                         </DockPanel>
-                        <StackPanel Grid.Column="2" Orientation="Horizontal"
-                                    ScrollViewer.VerticalScrollBarVisibility="Disabled"
-                                    ClipToBounds="False"
-                                    Visibility="{Binding Settings.Settings.ShowRecentAchievements, Converter={StaticResource BooleanToHiddenConverter}}">
-                            <Label Content="{DynamicResource LOC_SPG_RecentAchievements}" DockPanel.Dock="Left" Margin="10,10,5,10">
-                                <Label.LayoutTransform>
-                                    <RotateTransform Angle="-90" />
-                                </Label.LayoutTransform>
-                            </Label>
+                        <Grid Visibility="{Binding SuccessStory.LatestAchievements, Converter={StaticResource ICollectionNullOrEmptyToVisibilityConverter}}"
+                              Grid.Column="2">
+                            <StackPanel Orientation="Horizontal"
+                                        ScrollViewer.VerticalScrollBarVisibility="Disabled"
+                                        ClipToBounds="False"
+                                        Visibility="{Binding Settings.Settings.ShowRecentAchievements, Converter={StaticResource BooleanToHiddenConverter}}">
+                                <Label Content="{DynamicResource LOC_SPG_RecentAchievements}" DockPanel.Dock="Left" Margin="10,10,5,10">
+                                    <Label.LayoutTransform>
+                                        <RotateTransform Angle="-90" />
+                                    </Label.LayoutTransform>
+                                </Label>
                                 <local:RecentAchievementsView DataContext="{Binding SuccessStory}" MaxWidth="300" ClipToBounds="False"/>
-                        </StackPanel>
+                            </StackPanel>
+                        </Grid>
                     </Grid>
 
                     <Grid Grid.Row="2" VerticalAlignment="Bottom">

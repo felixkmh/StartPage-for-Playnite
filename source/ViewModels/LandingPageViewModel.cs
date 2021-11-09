@@ -70,7 +70,7 @@ namespace LandingPage.ViewModels
             UpdateRecentlyAddedGames();
             UpdateBackgroundImagePath();
             UpdateMostPlayedGame();
-            successStory?.Update();
+            successStory.Update();
         }
 
         private void UpdateMostPlayedGame()

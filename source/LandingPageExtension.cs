@@ -61,6 +61,9 @@ namespace LandingPage
                     {
                         successStory = new ViewModels.SuccessStory.SuccessStoryViewModel(path, PlayniteApi, SettingsViewModel);
                         successStory.ParseAllAchievements();
+                    } else
+                    {
+                        successStory = new ViewModels.SuccessStory.SuccessStoryViewModel(null, PlayniteApi, SettingsViewModel);
                     }
                     viewModel = new LandingPageViewModel(PlayniteApi, this, SettingsViewModel, successStory);
                 }

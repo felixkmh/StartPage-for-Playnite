@@ -170,18 +170,24 @@ namespace LandingPage.ViewModels.SuccessStory
 
         public void ParseAllAchievements()
         {
-            if (Directory.Exists(achievementsPath))
+            if (achievementsPath != null)
             {
-                var files = Directory.GetFiles(achievementsPath);
-                var validFiles = files
-                    .AsParallel()
-                    .Where(path => Guid.TryParse(Path.GetFileNameWithoutExtension(path), out var id) && playniteAPI.Database.Games.Get(id) is Game);
-                var deserializedFiles = validFiles
-                    .Select(path => DeserializeAchievementsFile(path))
-                    .OfType<Achievements>();
-                var withAchievements = deserializedFiles
-                    .Where(ac => (ac.Items?.Count() ?? 0) > 0);
-                achievements = withAchievements.ToDictionary(ac => ac.Id);
+                if (achievementsPath != null)
+                {
+                    if (Directory.Exists(achievementsPath))
+                    {
+                        var files = Directory.GetFiles(achievementsPath);
+                        var validFiles = files
+                            .AsParallel()
+                            .Where(path => Guid.TryParse(Path.GetFileNameWithoutExtension(path), out var id) && playniteAPI.Database.Games.Get(id) is Game);
+                        var deserializedFiles = validFiles
+                            .Select(path => DeserializeAchievementsFile(path))
+                            .OfType<Achievements>();
+                        var withAchievements = deserializedFiles
+                            .Where(ac => (ac.Items?.Count() ?? 0) > 0);
+                        achievements = withAchievements.ToDictionary(ac => ac.Id);
+                    }
+                }
             }
         }
 
@@ -189,21 +195,24 @@ namespace LandingPage.ViewModels.SuccessStory
         {
             if (playniteAPI.Database.Games.Get(gameId) is Game)
             {
-                var path = Directory.GetFiles(achievementsPath, gameId.ToString().ToLower() + ".json").FirstOrDefault();
-                if (!string.IsNullOrEmpty(path))
+                if (achievementsPath != null)
                 {
-                    try
+                    var path = Directory.GetFiles(achievementsPath, gameId.ToString().ToLower() + ".json").FirstOrDefault();
+                    if (!string.IsNullOrEmpty(path))
                     {
-                        var gameAchievements = DeserializeAchievementsFile(path);
-                        if (gameAchievements is Achievements && gameAchievements.Items.Any(a => (!a.DateUnlocked?.Equals(default)) ?? false))
+                        try
                         {
-                            achievements[gameId] = gameAchievements;
-                            return true;
+                            var gameAchievements = DeserializeAchievementsFile(path);
+                            if (gameAchievements is Achievements && gameAchievements.Items.Any(a => (!a.DateUnlocked?.Equals(default)) ?? false))
+                            {
+                                achievements[gameId] = gameAchievements;
+                                return true;
                             
+                            }
                         }
-                    }
-                    catch (Exception) {}
+                        catch (Exception) {}
 
+                    }
                 }
             }
             return false;
