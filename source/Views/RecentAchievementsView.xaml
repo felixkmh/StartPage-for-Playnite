@@ -12,13 +12,13 @@
              d:DataContext="{d:DesignInstance IsDesignTimeCreatable=False, Type=m:SuccessStoryViewModel}">
     <UserControl.Resources>
         <system:Uri x:Key="DefaultAchievementUri">pack://application:,,,/StartPagePlugin;component/star.png</system:Uri>
-        <CollectionViewSource x:Key="LatestAchievementsSource" Source="{Binding LatestAchievements}" IsLiveGroupingRequested="True">
+        <CollectionViewSource x:Key="LatestAchievementsSource" Source="{Binding LatestAchievements}" IsLiveGroupingRequested="True" IsLiveSortingRequested="True">
             <CollectionViewSource.GroupDescriptions>
                 <PropertyGroupDescription PropertyName="Game.Game.Name"/>
             </CollectionViewSource.GroupDescriptions>
-            <!--<CollectionViewSource.SortDescriptions>
+            <CollectionViewSource.SortDescriptions>
                 <scm:SortDescription PropertyName="Achievement.DateUnlocked" Direction="Descending"/>
-            </CollectionViewSource.SortDescriptions>-->
+            </CollectionViewSource.SortDescriptions>
         </CollectionViewSource>
         <conv:AchievementsToProgressConverter x:Key="AchievementsToProgressConverter"/>
     </UserControl.Resources>
