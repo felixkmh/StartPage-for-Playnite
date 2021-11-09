@@ -45,7 +45,7 @@ namespace LandingPage.Models.SuccessStory
         public string Description { get => description; set { description = value; OnPropertyChanged(); } }
         public string UrlUnlocked { get => urlUnlocked; set { urlUnlocked = value; OnPropertyChanged(); } }
         public string UrlLocked { get => urlLocked; set { urlLocked = value; OnPropertyChanged(); } }
-        public DateTime? DateUnlocked { get => dateUnlocked; set { dateUnlocked = value; OnPropertyChanged(); } }
+        public DateTime? DateUnlocked { get => dateUnlocked ?? DateTime.MinValue; set { dateUnlocked = value; OnPropertyChanged(); } }
         public bool IsHidden { get => isHidden; set { isHidden = value; OnPropertyChanged(); } }
         public float Percent { get => percent; set { percent = value; OnPropertyChanged(); } }
         public string Category { get => category; set { category = value; OnPropertyChanged(); } }

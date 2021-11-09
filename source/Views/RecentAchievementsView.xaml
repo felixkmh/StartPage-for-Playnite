@@ -6,15 +6,19 @@
              xmlns:local="clr-namespace:LandingPage.Views"
              xmlns:m="clr-namespace:LandingPage.ViewModels.SuccessStory"
              xmlns:conv="clr-namespace:LandingPage.Converters" xmlns:system="clr-namespace:System;assembly=System"
+             xmlns:scm="clr-namespace:System.ComponentModel;assembly=WindowsBase"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
              d:DataContext="{d:DesignInstance IsDesignTimeCreatable=False, Type=m:SuccessStoryViewModel}">
     <UserControl.Resources>
         <system:Uri x:Key="DefaultAchievementUri">pack://application:,,,/StartPagePlugin;component/star.png</system:Uri>
-        <CollectionViewSource x:Key="LatestAchievementsSource" Source="{Binding LatestAchievements}" IsLiveGroupingRequested="True">
+        <CollectionViewSource x:Key="LatestAchievementsSource" Source="{Binding LatestAchievements}" IsLiveGroupingRequested="True" IsLiveSortingRequested="True">
             <CollectionViewSource.GroupDescriptions>
                 <PropertyGroupDescription PropertyName="Game.Game.Name"/>
             </CollectionViewSource.GroupDescriptions>
+            <CollectionViewSource.SortDescriptions>
+                <scm:SortDescription PropertyName="Achievement.DateUnlocked" Direction="Descending"/>
+            </CollectionViewSource.SortDescriptions>
         </CollectionViewSource>
         <conv:AchievementsToProgressConverter x:Key="AchievementsToProgressConverter"/>
     </UserControl.Resources>
@@ -28,9 +32,7 @@
                  VirtualizingPanel.IsVirtualizingWhenGrouping="True"
                  VirtualizingPanel.IsVirtualizing="True"
                  VirtualizingPanel.ScrollUnit="Pixel"
-                 VirtualizingPanel.CacheLengthUnit="Item"
-                 VirtualizingPanel.CacheLength="5"
-                 VirtualizingPanel.VirtualizationMode="Recycling"
+                 VirtualizingPanel.VirtualizationMode="Standard"
                  UseLayoutRounding="False"
                  ClipToBounds="False">
             <ListBox.GroupStyle>
@@ -68,7 +70,7 @@
                                                                                 From="0"
                                                                                 To="{Binding Items[0].Source, Converter={StaticResource AchievementsToProgressConverter}, Mode=OneWay}">
                                                                 <DoubleAnimation.EasingFunction>
-                                                                    <ElasticEase EasingMode="EaseOut"/>
+                                                                    <BounceEase EasingMode="EaseOut"/>
                                                                 </DoubleAnimation.EasingFunction>
                                                             </DoubleAnimation>
                                                         </Storyboard>
