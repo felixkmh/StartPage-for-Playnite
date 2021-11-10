@@ -65,7 +65,7 @@
                             </VisualBrush.Visual>
                         </VisualBrush>
                     </Grid.OpacityMask>
-                    <Image Source="{Binding Game.CoverImage, Converter={StaticResource ImageStringToImageConverter}, FallbackValue={StaticResource DefaultGameCover}}" Stretch="UniformToFill" 
+                    <Image Source="{Binding Game.CoverImage, Converter={StaticResource ImageStringToImageConverterCached}, FallbackValue={StaticResource DefaultGameCover}}" Stretch="UniformToFill" 
                                             HorizontalAlignment="Center" VerticalAlignment="Center"
                                             RenderOptions.BitmapScalingMode="HighQuality"/>
                     <TextBlock Text="{Binding Game.Name}" 
