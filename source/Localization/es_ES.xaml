@@ -12,8 +12,8 @@
     <sys:String x:Key="LOC_SPG_ShowRecentAchievements">Mostrar logros recientes usando SuccessStory</sys:String>
     <sys:String x:Key="LOC_SPG_ShowRecentlyAdded">Mostrar juegos añadidos recientemente</sys:String>
     <sys:String x:Key="LOC_SPG_StartupItem">Objecto de barra lateral activado al iniciar</sys:String>
-    <sys:String x:Key="LOC_SPG_MaxRecentAchievements">Número máximo de logros recientes</sys:String>
-    <sys:String x:Key="LOC_SPG_MaxRecentAchievementsPerGame">Número máximo de logros recientes por juego</sys:String>
+    <sys:String x:Key="LOC_SPG_MaxRecentAchievements">Maximum number of recent Achievements</sys:String>
+    <sys:String x:Key="LOC_SPG_MaxRecentAchievementsPerGame">Maximum number of recent Achievements per Game</sys:String>
     <sys:String x:Key="LOC_SPG_ShowTitelOnCover">Mostrar título en la portada de juegos</sys:String>
     <sys:String x:Key="LOC_SPG_ShowGameDetails">Mostrar detalles del juego</sys:String>
 </ResourceDictionary>
