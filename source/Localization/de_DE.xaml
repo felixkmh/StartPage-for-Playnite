@@ -13,7 +13,7 @@
     <sys:String x:Key="LOC_SPG_ShowRecentlyAdded">Kürzlich hinzugefügte Spiele anzeigen</sys:String>
     <sys:String x:Key="LOC_SPG_StartupItem">Beim Start aktiviertes SidebarItem</sys:String>
     <sys:String x:Key="LOC_SPG_MaxRecentAchievements">Maximale Anzahl neuer Erfolge</sys:String>
-    <sys:String x:Key="LOC_SPG_MaxRecentAchievementsPerGame">Maximale Anzahl neuer Erfolge pro Spiel</sys:String>
+    <sys:String x:Key="LOC_SPG_MaxRecentAchievementsPerGame">Maximum number of recent Achievements per Game</sys:String>
     <sys:String x:Key="LOC_SPG_ShowTitelOnCover">Titel auf dem Spielcover anzeigen</sys:String>
     <sys:String x:Key="LOC_SPG_ShowGameDetails">Spieldetails anzeigen</sys:String>
 </ResourceDictionary>
