@@ -128,37 +128,84 @@ namespace LandingPage.ViewModels.SuccessStory
                 .SelectMany(pair => pair.Value.Items
                     .OrderByDescending(a => a.DateUnlocked ?? default)
                     .Take(achievementsPerGame)
-                    .Select(a => new { Game = playniteAPI.Database.Games.Get(pair.Value.Id), Achievement = a, Source = pair.Value }))
+                    .Select(a => new { Game = playniteAPI.Database.Games.Get(pair.Value.Id), Achievement = a, Source = pair.Value })
+                    .Where(a => a.Game is Game))
                 .Where(a => (!a.Achievement.DateUnlocked?.Equals(default)) ?? false)
                 .OrderByDescending(a => a.Achievement.DateUnlocked ?? default)
                 .Take(achievementsOverall);
-            Application.Current.Dispatcher.Invoke(() => 
+            var collection = latestAchievements;
+            var changed = false;
+            Application.Current.Dispatcher.Invoke(() =>
             {
-                int i = 0;
-                foreach (var achievement in latest)
+                foreach (var achi in latest)
                 {
-                    if (latestAchievements.Count > i)
+                    if (collection.FirstOrDefault(item => item.Game.Game?.Id == achi.Game?.Id && item.Achievement.Name == achi.Achievement.Name) is GameAchievement model)
                     {
-                        latestAchievements[i].Game.Game = achievement.Game;
-                        latestAchievements[i].Achievement = achievement.Achievement;
-                        latestAchievements[i].Source = achievement.Source;
+                        if (model.Achievement.DateUnlocked != achi.Achievement.DateUnlocked)
+                        {
+                            changed = true;
+                        }
+                    }
+                    else if (collection.FirstOrDefault(item => !latest.Any(s => s.Achievement.Name == item.Achievement.Name && s.Game?.Id == item.Game.Game?.Id)) is GameAchievement unusedModel)
+                    {
+                        changed = true;
+                        collection.Remove(unusedModel);
+                        unusedModel.Game.Game = achi.Game;
+                        unusedModel.Achievement = achi.Achievement;
+                        unusedModel.Source = achi.Source;
+                        collection.Add(unusedModel);
                     }
                     else
                     {
-                        latestAchievements.Add(new GameAchievement
+                        changed = true;
+                        collection.Add(new GameAchievement
                         {
-                            Game = new GameModel(achievement.Game),
-                            Achievement = achievement.Achievement,
-                            Source = achievement.Source
+                            Game = new GameModel(achi.Game),
+                            Achievement = achi.Achievement,
+                            Source = achi.Source
                         });
                     }
-                    ++i;
                 }
-                for (int j = latestAchievements.Count - 1; j >= i; --j)
+                for (int j = collection.Count - 1; j >= 0; --j)
                 {
-                    latestAchievements.RemoveAt(j);
+                    if (!collection.Any(g => g.Achievement.Name == collection[j].Achievement.Name && g.Game.Game?.Id == collection[j].Game.Game?.Id))
+                    {
+                        changed = true;
+                        collection.RemoveAt(j);
+                    }
+                }
+                if (changed && collection.Count > 1)
+                {
+                    collection.Move(0, collection.Count - 1);
                 }
             });
+            //Application.Current.Dispatcher.Invoke(() => 
+            //{
+            //    int i = 0;
+            //    foreach (var achievement in latest)
+            //    {
+            //        if (latestAchievements.Count > i)
+            //        {
+            //            latestAchievements[i].Game.Game = achievement.Game;
+            //            latestAchievements[i].Achievement = achievement.Achievement;
+            //            latestAchievements[i].Source = achievement.Source;
+            //        }
+            //        else
+            //        {
+            //            latestAchievements.Add(new GameAchievement
+            //            {
+            //                Game = new GameModel(achievement.Game),
+            //                Achievement = achievement.Achievement,
+            //                Source = achievement.Source
+            //            });
+            //        }
+            //        ++i;
+            //    }
+            //    for (int j = latestAchievements.Count - 1; j >= i; --j)
+            //    {
+            //        latestAchievements.RemoveAt(j);
+            //    }
+            //});
         }
 
         public void ParseAllAchievements()

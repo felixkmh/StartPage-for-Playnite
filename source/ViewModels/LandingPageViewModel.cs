@@ -143,11 +143,11 @@ namespace LandingPage.ViewModels
             Application.Current.Dispatcher.Invoke(() =>
             {
                 var displayedGames = Math.Min(Math.Max(10, games.Count(g => g.LastActivity?.CompareTo(DateTime.Today.AddDays(-7)) > 0)), 20);
-                int i = 0;
+                
                 IEnumerable<Game> gameSelection = games.Take(displayedGames);
                 foreach (var game in gameSelection)
                 {
-                    if (collection.FirstOrDefault(item => item.Game.Id == game.Id) is GameModel model)
+                    if (collection.FirstOrDefault(item => item.Game?.Id == game.Id) is GameModel model)
                     {
                         if (model.Game.LastActivity != game.LastActivity)
                         {
@@ -155,27 +155,30 @@ namespace LandingPage.ViewModels
                         }
                         model.Game = game;
                     }
-                    else if (collection.FirstOrDefault(item => gameSelection.All(s => s.Id != item.Game.Id)) is GameModel unusedModel)
+                    else if (collection.FirstOrDefault(item => gameSelection.All(s => s.Id != item.Game?.Id)) is GameModel unusedModel)
                     {
+                        changed = true;
                         collection.Remove(unusedModel);
                         unusedModel.Game = game;
                         collection.Add(unusedModel);
                     }
                     else
                     {
+                        changed = true;
                         collection.Add(new GameModel(game));
                     }
                 }
                 for (int j = collection.Count - 1; j >= 0; --j)
                 {
-                    if (gameSelection.All(g => g.Id != collection[j].Game.Id))
+                    if (gameSelection.All(g => g.Id != collection[j].Game?.Id))
                     {
+                        changed = true;
                         collection.RemoveAt(j);
                     }
                 }
                 if (changed && collection.Count > 1)
                 {
-                    collection.Move(0, 1);
+                    collection.Move(0, collection.Count - 1);
                 }
             });
         }
@@ -190,37 +193,40 @@ namespace LandingPage.ViewModels
             Application.Current.Dispatcher.Invoke(() =>
             {
                 var displayedGames = Math.Min(Math.Max(10, games.Count(g => g.Added?.CompareTo(DateTime.Today.AddDays(-7)) > 0)), 20);
-                int i = 0;
+                
                 IEnumerable<Game> gameSelection = games.Take(displayedGames);
                 foreach (var game in gameSelection)
                 {
-                    if (collection.FirstOrDefault(item => item.Game.Id == game.Id) is GameModel model)
+                    if (collection.FirstOrDefault(item => item.Game?.Id == game.Id) is GameModel model)
                     {
                         if (model.Game.Added != game.Added)
                         {
                             changed = true;
                         }
                         model.Game = game;
-                    } else if (collection.FirstOrDefault(item => gameSelection.All(s => s.Id != item.Game.Id)) is GameModel unusedModel)
+                    } else if (collection.FirstOrDefault(item => gameSelection.All(s => s.Id != item.Game?.Id)) is GameModel unusedModel)
                     {
+                        changed = true;
                         collection.Remove(unusedModel);
                         unusedModel.Game = game;
                         collection.Add(unusedModel);
                     } else
                     {
+                        changed = true;
                         collection.Add(new GameModel(game));
                     }
                 }
                 for (int j = collection.Count - 1; j >= 0; --j)
                 {
-                    if (gameSelection.All(g => g.Id != collection[j].Game.Id))
+                    if (gameSelection.All(g => g.Id != collection[j].Game?.Id))
                     {
+                        changed = true;
                         collection.RemoveAt(j);
                     }
                 }
                 if (changed && collection.Count > 1)
                 {
-                    collection.Move(0, 1);
+                    collection.Move(0, collection.Count - 1);
                 }
             });
         }

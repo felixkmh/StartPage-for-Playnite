@@ -158,6 +158,9 @@
             <CollectionViewSource.SortDescriptions>
                 <scm:SortDescription PropertyName="Game.Added" Direction="Descending"/>
             </CollectionViewSource.SortDescriptions>
+            <CollectionViewSource.LiveSortingProperties>
+                <system:String>Game.Added</system:String>
+            </CollectionViewSource.LiveSortingProperties>
         </CollectionViewSource>
         <CollectionViewSource x:Key="RecentlyPlayedSource" Source="{Binding RecentlyPlayedGames}" IsLiveGroupingRequested="True" IsLiveSortingRequested="True">
             <CollectionViewSource.GroupDescriptions>
@@ -166,6 +169,9 @@
             <CollectionViewSource.SortDescriptions>
                 <scm:SortDescription PropertyName="Game.LastActivity" Direction="Descending"/>
             </CollectionViewSource.SortDescriptions>
+            <CollectionViewSource.LiveSortingProperties>
+                <system:String>Game.LastActivity</system:String>
+            </CollectionViewSource.LiveSortingProperties>
         </CollectionViewSource>
         <Style x:Key="GameGroupBox" TargetType="{x:Type GroupBox}" BasedOn="{StaticResource {x:Type GroupBox}}">
             <Setter Property="Padding" Value="0" />

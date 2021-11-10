@@ -7,6 +7,7 @@
              xmlns:m="clr-namespace:LandingPage.ViewModels.SuccessStory"
              xmlns:conv="clr-namespace:LandingPage.Converters" xmlns:system="clr-namespace:System;assembly=System"
              xmlns:scm="clr-namespace:System.ComponentModel;assembly=WindowsBase"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
              d:DataContext="{d:DesignInstance IsDesignTimeCreatable=False, Type=m:SuccessStoryViewModel}">
@@ -19,6 +20,9 @@
             <CollectionViewSource.SortDescriptions>
                 <scm:SortDescription PropertyName="Achievement.DateUnlocked" Direction="Descending"/>
             </CollectionViewSource.SortDescriptions>
+            <CollectionViewSource.LiveSortingProperties>
+                <sys:String>Achievement.DateUnlocked</sys:String>
+            </CollectionViewSource.LiveSortingProperties>
         </CollectionViewSource>
         <conv:AchievementsToProgressConverter x:Key="AchievementsToProgressConverter"/>
     </UserControl.Resources>
@@ -32,7 +36,7 @@
                  VirtualizingPanel.IsVirtualizingWhenGrouping="True"
                  VirtualizingPanel.IsVirtualizing="True"
                  VirtualizingPanel.ScrollUnit="Pixel"
-                 ScrollViewer.CanContentScroll="False"
+                 ScrollViewer.CanContentScroll="True"
                  VirtualizingPanel.VirtualizationMode="Standard"
                  UseLayoutRounding="False"
                  ClipToBounds="False">
