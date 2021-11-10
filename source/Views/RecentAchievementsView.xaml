@@ -32,6 +32,7 @@
                  VirtualizingPanel.IsVirtualizingWhenGrouping="True"
                  VirtualizingPanel.IsVirtualizing="True"
                  VirtualizingPanel.ScrollUnit="Pixel"
+                 ScrollViewer.CanContentScroll="False"
                  VirtualizingPanel.VirtualizationMode="Standard"
                  UseLayoutRounding="False"
                  ClipToBounds="False">

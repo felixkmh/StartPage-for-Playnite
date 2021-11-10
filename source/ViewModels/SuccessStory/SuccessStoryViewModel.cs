@@ -37,7 +37,7 @@ namespace LandingPage.ViewModels.SuccessStory
             }
         }
 
-        public class GameAchievement : INotifyPropertyChanged
+        public class GameAchievement : ObservableObject
         {
             internal GameModel game;
             public GameModel Game { get => game; set { if (value != game) { game = value; OnPropertyChanged(); } } }
@@ -45,13 +45,6 @@ namespace LandingPage.ViewModels.SuccessStory
             public Achivement Achievement { get => achievement; set { if (value != achievement) { achievement = value; OnPropertyChanged(); } } }
             internal Achievements source;
             public Achievements Source { get => source; set { if (value != source) { source = value; OnPropertyChanged(); } } }
-
-            public event PropertyChangedEventHandler PropertyChanged;
-
-            private void OnPropertyChanged([CallerMemberName] string propertyName = "")
-            {
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-            }
         }
 
         public SuccessStoryViewModel(string achievementsPath, IPlayniteAPI playniteAPI, LandingPageSettingsViewModel landingPageSettings)

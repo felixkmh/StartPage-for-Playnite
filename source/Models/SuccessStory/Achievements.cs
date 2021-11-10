@@ -43,7 +43,7 @@ namespace LandingPage.Models.SuccessStory
         public string Name { get => name; set { name = value; OnPropertyChanged(); } }
         public string ApiName { get => apiName; set { apiName = value; OnPropertyChanged(); } }
         public string Description { get => description; set { description = value; OnPropertyChanged(); } }
-        public string UrlUnlocked { get => urlUnlocked; set { urlUnlocked = value; OnPropertyChanged(); } }
+        public string UrlUnlocked { get => urlUnlocked; set { urlUnlocked = value; OnPropertyChanged(); OnPropertyChanged(nameof(UriUnlocked)); } }
         public string UrlLocked { get => urlLocked; set { urlLocked = value; OnPropertyChanged(); } }
         public DateTime? DateUnlocked { get => dateUnlocked ?? DateTime.MinValue; set { dateUnlocked = value; OnPropertyChanged(); } }
         public bool IsHidden { get => isHidden; set { isHidden = value; OnPropertyChanged(); } }
