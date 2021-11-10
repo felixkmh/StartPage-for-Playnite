@@ -1,19 +1,19 @@
 ﻿<?xml version="1.0"?>
 <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:sys="clr-namespace:System;assembly=mscorlib">
 
-    <sys:String x:Key="LOC_SPG_MostPlayedGame">Most Played</sys:String>
-    <sys:String x:Key="LOC_SPG_LatestReleaseGame">Latest Release</sys:String>
-    <sys:String x:Key="LOC_SPG_RecentAchievements">Recent Achievements</sys:String>
-    <sys:String x:Key="LOC_SPG_RecentlyAddedGames">Recently Added</sys:String>
+    <sys:String x:Key="LOC_SPG_MostPlayedGame">Più Giocati</sys:String>
+    <sys:String x:Key="LOC_SPG_LatestReleaseGame">Ultima Versione</sys:String>
+    <sys:String x:Key="LOC_SPG_RecentAchievements">Achievement Recenti</sys:String>
+    <sys:String x:Key="LOC_SPG_RecentlyAddedGames">Aggiunti di Recente</sys:String>
 
     <!-- Settings -->
-    <sys:String x:Key="LOC_SPG_ShowClock">Show Clock</sys:String>
-    <sys:String x:Key="LOC_SPG_ShowRecentlyPlayed">Show Recently Played Games</sys:String>
-    <sys:String x:Key="LOC_SPG_ShowRecentAchievements">Show recent Achievements using SuccessStory</sys:String>
-    <sys:String x:Key="LOC_SPG_ShowRecentlyAdded">Show Recently Added Games</sys:String>
-    <sys:String x:Key="LOC_SPG_StartupItem">SidebarItem activated on Launch</sys:String>
-    <sys:String x:Key="LOC_SPG_MaxRecentAchievements">Maximum number of recent Achievements</sys:String>
-    <sys:String x:Key="LOC_SPG_MaxRecentAchievementsPerGame">Maximum number of recent Achievements per Game</sys:String>
-    <sys:String x:Key="LOC_SPG_ShowTitelOnCover">Show Title on Game Cover</sys:String>
-    <sys:String x:Key="LOC_SPG_ShowGameDetails">Show Game Details</sys:String>
+    <sys:String x:Key="LOC_SPG_ShowClock">Mostra Orologio</sys:String>
+    <sys:String x:Key="LOC_SPG_ShowRecentlyPlayed">Giochi avviati di recente</sys:String>
+    <sys:String x:Key="LOC_SPG_ShowRecentAchievements">Mostra gli Achievement recenti usando SuccessStory</sys:String>
+    <sys:String x:Key="LOC_SPG_ShowRecentlyAdded">Mostra Giochi Aggiunti Recentemente</sys:String>
+    <sys:String x:Key="LOC_SPG_StartupItem">Elemento della barra laterale mostrato all'avvio</sys:String>
+    <sys:String x:Key="LOC_SPG_MaxRecentAchievements">Numero massimo di Achievement recenti</sys:String>
+    <sys:String x:Key="LOC_SPG_MaxRecentAchievementsPerGame">Numero massimo di Achievement recenti per Gioco</sys:String>
+    <sys:String x:Key="LOC_SPG_ShowTitelOnCover">Mostra titolo sulla copertina del gioco</sys:String>
+    <sys:String x:Key="LOC_SPG_ShowGameDetails">Mostra Dettagli del gioco</sys:String>
 </ResourceDictionary>
