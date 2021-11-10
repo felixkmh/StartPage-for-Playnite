@@ -12,8 +12,8 @@
     <sys:String x:Key="LOC_SPG_ShowRecentAchievements">Pokaż ostatnie osiągnięcia za pomocą SuccessStory</sys:String>
     <sys:String x:Key="LOC_SPG_ShowRecentlyAdded">Pokaż ostatnio dodane gry</sys:String>
     <sys:String x:Key="LOC_SPG_StartupItem">Pozycja z paska bocznego przy starcie</sys:String>
-    <sys:String x:Key="LOC_SPG_MaxRecentAchievements">Maximum number of recent Achievements</sys:String>
-    <sys:String x:Key="LOC_SPG_MaxRecentAchievementsPerGame">Maximum number of recent Achievements per Game</sys:String>
+    <sys:String x:Key="LOC_SPG_MaxRecentAchievements">Maksymalna liczba ostatnich osiągnięć</sys:String>
+    <sys:String x:Key="LOC_SPG_MaxRecentAchievementsPerGame">Maksymalna liczba ostatnich osiągnięć na grę</sys:String>
     <sys:String x:Key="LOC_SPG_ShowTitelOnCover">Pokaż tytuł na okładce gry</sys:String>
     <sys:String x:Key="LOC_SPG_ShowGameDetails">Pokaż szczegóły gry</sys:String>
 </ResourceDictionary>
