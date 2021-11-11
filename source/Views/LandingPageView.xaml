@@ -65,7 +65,7 @@
                             </VisualBrush.Visual>
                         </VisualBrush>
                     </Grid.OpacityMask>
-                    <Image Source="{Binding Game.CoverImage, Converter={StaticResource ImageStringToImageConverterCached}, FallbackValue={StaticResource DefaultGameCover}}" Stretch="UniformToFill" 
+                    <Image Source="{Binding Game.CoverImage, Converter={StaticResource ImageStringToImageConverter}, FallbackValue={StaticResource DefaultGameCover}}" Stretch="UniformToFill" 
                                             HorizontalAlignment="Center" VerticalAlignment="Center"
                                             RenderOptions.BitmapScalingMode="HighQuality"/>
                     <TextBlock Text="{Binding Game.Name}" 
@@ -286,7 +286,7 @@
                          RenderAtScale="0.1" 
                          SnapsToDevicePixels="False" />
             </Grid.CacheMode>
-            <Image Stretch="UniformToFill" Source="{Binding BackgroundImagePath.Object, Converter={StaticResource ImageStringToImageConverterCached}}"
+            <Image Stretch="UniformToFill" Source="{Binding BackgroundImagePath.Object, Converter={StaticResource ImageStringToImageConverter}}"
                    Opacity="0.5">
                 <Image.Effect>
                     <BlurEffect Radius="100" KernelType="Gaussian" RenderingBias="Performance"/>
