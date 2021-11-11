@@ -350,7 +350,7 @@
                                         <RotateTransform Angle="-90" />
                                     </Label.LayoutTransform>
                                 </Label>
-                                <local:RecentAchievementsView DataContext="{Binding SuccessStory}" MaxWidth="300" ClipToBounds="False"/>
+                                <local:RecentAchievementsView DataContext="{Binding SuccessStory}" Width="300" ClipToBounds="False"/>
                             </StackPanel>
                         </Grid>
                     </Grid>
