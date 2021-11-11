@@ -14,15 +14,15 @@
     <UserControl.Resources>
         <system:Uri x:Key="DefaultAchievementUri">pack://application:,,,/StartPagePlugin;component/star.png</system:Uri>
         <CollectionViewSource x:Key="LatestAchievementsSource" Source="{Binding LatestAchievements}" IsLiveGroupingRequested="True" IsLiveSortingRequested="True">
-            <CollectionViewSource.GroupDescriptions>
-                <PropertyGroupDescription PropertyName="Game.Game.Name"/>
-            </CollectionViewSource.GroupDescriptions>
             <CollectionViewSource.SortDescriptions>
                 <scm:SortDescription PropertyName="Achievement.DateUnlocked" Direction="Descending"/>
             </CollectionViewSource.SortDescriptions>
             <CollectionViewSource.LiveSortingProperties>
                 <sys:String>Achievement.DateUnlocked</sys:String>
             </CollectionViewSource.LiveSortingProperties>
+            <CollectionViewSource.GroupDescriptions>
+                <PropertyGroupDescription PropertyName="Game.Game.Name"/>
+            </CollectionViewSource.GroupDescriptions>
         </CollectionViewSource>
         <conv:AchievementsToProgressConverter x:Key="AchievementsToProgressConverter"/>
     </UserControl.Resources>
