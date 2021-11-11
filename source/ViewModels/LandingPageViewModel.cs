@@ -178,7 +178,7 @@ namespace LandingPage.ViewModels
                 }
                 if (changed && collection.Count > 1)
                 {
-                    collection.Move(0, collection.Count - 1);
+                    collection.Move(collection.Count - 1, 0);
                 }
             });
         }
@@ -226,7 +226,7 @@ namespace LandingPage.ViewModels
                 }
                 if (changed && collection.Count > 1)
                 {
-                    collection.Move(0, collection.Count - 1);
+                    collection.Move(collection.Count - 1, 0);
                 }
             });
         }

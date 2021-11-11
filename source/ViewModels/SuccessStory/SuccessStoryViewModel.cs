@@ -176,7 +176,7 @@ namespace LandingPage.ViewModels.SuccessStory
                 }
                 if (changed && collection.Count > 1)
                 {
-                    collection.Move(0, collection.Count - 1);
+                    collection.Move(collection.Count - 1, 0);
                 }
             });
             //Application.Current.Dispatcher.Invoke(() => 
