@@ -16,4 +16,7 @@
     <sys:String x:Key="LOC_SPG_MaxRecentAchievementsPerGame">Nombre maximum de succès affichés par jeu :</sys:String>
     <sys:String x:Key="LOC_SPG_ShowTitelOnCover">Afficher le nom des jeux sur leur couverture</sys:String>
     <sys:String x:Key="LOC_SPG_ShowGameDetails">Afficher les propriétés des jeux</sys:String>
+    <sys:String x:Key="LOC_SPG_EnableNotifications">Enable Notifications</sys:String>
+    <sys:String x:Key="LOC_SPG_MinimizeNotification">Minimize Notifications on Launch</sys:String>
+    <sys:String x:Key="LOC_SPG_ShowNotificationButtons">Show &quot;Discard&quot; and &quot;Minimize&quot; Buttons</sys:String>
 </ResourceDictionary>
