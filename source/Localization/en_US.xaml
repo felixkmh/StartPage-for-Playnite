@@ -18,5 +18,5 @@
     <sys:String x:Key="LOC_SPG_ShowGameDetails">Show Game Details</sys:String>
     <sys:String x:Key="LOC_SPG_EnableNotifications">Enable Notifications</sys:String>
     <sys:String x:Key="LOC_SPG_MinimizeNotification">Minimize Notifications on Launch</sys:String>
-    <sys:String x:Key="LOC_SPG_ShowNotificationButtons">Show Discard and Minimize Buttons</sys:String>
+    <sys:String x:Key="LOC_SPG_ShowNotificationButtons">Show "Discard" and "Minimize" Buttons</sys:String>
 </ResourceDictionary>
