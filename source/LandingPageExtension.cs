@@ -145,24 +145,24 @@ namespace LandingPage
                 }
             }
 
-            Task.Run(() =>
-            {
-                var rng = new Random();
-                for (var i = 0; i < 10; ++i)
-                {
-                    int n = i + 1;
-                    Thread.Sleep(rng.Next(10000));
-                    if (rng.NextDouble() < 0.5)
-                    {
-                        PlayniteApi.Notifications.Add(new NotificationMessage($"{i}_test", $"Longer Notification #{n} with activation action that activates on click!!", 
-                            NotificationType.Info, 
-                            () => PlayniteApi.Dialogs.ShowMessage($"You clicked on Notifaction #{n}")));
-                    } else
-                    {
-                        PlayniteApi.Notifications.Add(new NotificationMessage($"{i}_test", $"Notification #{n}!!", NotificationType.Info));
-                    }
-                }
-            });
+            //Task.Run(() =>
+            //{
+            //    var rng = new Random();
+            //    for (var i = 0; i < 10; ++i)
+            //    {
+            //        int n = i + 1;
+            //        Thread.Sleep(rng.Next(10000));
+            //        if (rng.NextDouble() < 0.5)
+            //        {
+            //            PlayniteApi.Notifications.Add(new NotificationMessage($"{i}_test", $"Longer Notification #{n} with activation action that activates on click!!", 
+            //                NotificationType.Info, 
+            //                () => PlayniteApi.Dialogs.ShowMessage($"You clicked on Notifaction #{n}")));
+            //        } else
+            //        {
+            //            PlayniteApi.Notifications.Add(new NotificationMessage($"{i}_test", $"Notification #{n}!!", NotificationType.Info));
+            //        }
+            //    }
+            //});
         }
 
         public override void OnApplicationStopped(OnApplicationStoppedEventArgs args)
