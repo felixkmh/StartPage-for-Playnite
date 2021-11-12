@@ -17,11 +17,12 @@
             <CollectionViewSource.SortDescriptions>
                 <scm:SortDescription PropertyName="Achievement.DateUnlocked" Direction="Descending"/>
             </CollectionViewSource.SortDescriptions>
-            <CollectionViewSource.LiveSortingProperties>
-                <sys:String>Achievement.DateUnlocked</sys:String>
-            </CollectionViewSource.LiveSortingProperties>
             <CollectionViewSource.GroupDescriptions>
-                <PropertyGroupDescription PropertyName="Game.Game.Name"/>
+                <PropertyGroupDescription PropertyName="Source">
+                    <PropertyGroupDescription.SortDescriptions>
+                        <scm:SortDescription PropertyName="Name.LastUnlocked" Direction="Descending"/>
+                    </PropertyGroupDescription.SortDescriptions>
+                </PropertyGroupDescription>
             </CollectionViewSource.GroupDescriptions>
         </CollectionViewSource>
         <conv:AchievementsToProgressConverter x:Key="AchievementsToProgressConverter"/>
@@ -117,7 +118,7 @@
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Border CornerRadius="3" RenderTransformOrigin="0.5,0.5" ClipToBounds="False"
-                            RenderOptions.BitmapScalingMode="HighQuality">
+                        RenderOptions.BitmapScalingMode="HighQuality">
                         <Border.RenderTransform>
                             <TransformGroup>
                                 <TranslateTransform/>
@@ -126,7 +127,7 @@
                         </Border.RenderTransform>
                         <Border.Background>
                             <LinearGradientBrush    x:Name="ItemBackgroundBrush"
-                                                    StartPoint="0,0" EndPoint="1,0" Opacity="0.15">
+                                                StartPoint="0,0" EndPoint="1,0" Opacity="0.15">
                                 <LinearGradientBrush.GradientStops>
                                     <GradientStop Color="White"/>
                                     <GradientStop Color="Transparent" Offset="1"/>
@@ -138,51 +139,82 @@
                                 <ColumnDefinition Width="Auto"/>
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
-                            <Grid.ToolTip>
-                                <StackPanel>
-                                    <StackPanel Orientation="Horizontal">
-                                        <TextBlock Text="{Binding Achievement.DateUnlocked, Converter={StaticResource DateTimeToLastPlayedConverter}}" Margin="0,0,0,5"/>
-                                        <TextBlock Text=" - " Margin="0,0,0,5"/>
-                                        <TextBlock Text="{Binding Achievement.DateUnlocked, StringFormat=HH:mm}" Margin="0,0,0,5"/>
-                                    </StackPanel>
-                                    <TextBlock Text="{Binding Achievement.Description}"/>
+                            <!--<Grid.ToolTip>
+                            <StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Binding Achievement.DateUnlocked, Converter={StaticResource DateTimeToLastPlayedConverter}}" Margin="0,0,0,5"/>
+                                    <TextBlock Text=" - " Margin="0,0,0,5"/>
+                                    <TextBlock Text="{Binding Achievement.DateUnlocked, StringFormat=HH:mm}" Margin="0,0,0,5"/>
                                 </StackPanel>
-                            </Grid.ToolTip>
+                                <TextBlock Text="{Binding Achievement.Description}"/>
+                            </StackPanel>
+                        </Grid.ToolTip>-->
                             <Border Width="35" Height="35" Margin="0,0,10,0" CornerRadius="5" Grid.Column="0">
-                                <!--<Border.Background>
-                            <ImageBrush Stretch="UniformToFill">
-                                <ImageBrush.ImageSource>
-                                    <BitmapImage UriSource="{Binding Achievement.UriUnlocked}" CreateOptions="IgnoreColorProfile"/>
-                                </ImageBrush.ImageSource>
-                            </ImageBrush>
-                        </Border.Background>-->
-                            <Border.OpacityMask>
-                                <VisualBrush>
-                                    <VisualBrush.Visual>
-                                        <Border CornerRadius="5" Background="Black" Width="35" Height="35"/>
-                                    </VisualBrush.Visual>
-                                </VisualBrush>
-                            </Border.OpacityMask>
+                                <Border.OpacityMask>
+                                    <VisualBrush>
+                                        <VisualBrush.Visual>
+                                            <Border CornerRadius="5" Background="Black" Width="35" Height="35"/>
+                                        </VisualBrush.Visual>
+                                    </VisualBrush>
+                                </Border.OpacityMask>
                                 <Image Stretch="UniformToFill" HorizontalAlignment="Center" VerticalAlignment="Center">
                                     <Image.Source>
                                         <BitmapImage UriSource="{Binding Achievement.UriUnlocked, FallbackValue={StaticResource DefaultAchievementUri}}" 
-                                                     CreateOptions="IgnoreColorProfile" 
-                                                     CacheOption="OnLoad"
-                                                     DecodePixelHeight="70"/>
+                                                    CreateOptions="IgnoreColorProfile" 
+                                                    CacheOption="OnLoad"
+                                                    DecodePixelHeight="70"/>
                                     </Image.Source>
                                 </Image>
                             </Border>
                             <!--<TextBlock Text="{Binding Game.Game.Name, TargetNullValue='Game Name'}" VerticalAlignment="Center"
-                                Margin="0,0,10,0"/>-->
-                            <StackPanel Grid.Column="1" VerticalAlignment="Center">
-                                <TextBlock Text="{Binding Achievement.Name}" VerticalAlignment="Center" TextTrimming="CharacterEllipsis"
-                                    />
-                                <TextBlock Text="{Binding Achievement.Description}" VerticalAlignment="Center" TextTrimming="CharacterEllipsis"
-                                    FontSize="{DynamicResource FontSizeSmall}" Opacity="0.6"/>
+                            Margin="0,0,10,0"/>-->
+                            <StackPanel x:Name="AchievementTexts" Grid.Column="1" VerticalAlignment="Center" MaxHeight="35">
+                                <TextBlock Text="{Binding Achievement.Name}" VerticalAlignment="Center" TextTrimming="CharacterEllipsis" TextWrapping="NoWrap"
+                                />
+                                <TextBlock x:Name="Description" Text="{Binding Achievement.Description}" VerticalAlignment="Center" TextTrimming="CharacterEllipsis" 
+                                FontSize="{DynamicResource FontSizeSmall}" Opacity="0.6"/>
                             </StackPanel>
+                            <ToggleButton x:Name="Toggle" IsChecked="False" Grid.ColumnSpan="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                                          Padding="0" Margin="0">
+                                <ToggleButton.Template>
+                                    <ControlTemplate TargetType="ToggleButton">
+                                        <Border Background="Transparent"/>
+                                    </ControlTemplate>
+                                </ToggleButton.Template>
+                            </ToggleButton>
                         </Grid>
                     </Border>
                     <DataTemplate.Triggers>
+                        <Trigger SourceName="Toggle" Property="IsChecked" Value="True">
+                            <Trigger.EnterActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation Duration="0:0:0.30" From="35" To="61"
+                                                         Storyboard.TargetName="AchievementTexts"
+                                                         Storyboard.TargetProperty="MaxHeight"/>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Description" Storyboard.TargetProperty="TextWrapping">
+                                            <ObjectAnimationUsingKeyFrames.KeyFrames>
+                                                <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="{x:Static TextWrapping.Wrap}"/>
+                                            </ObjectAnimationUsingKeyFrames.KeyFrames>
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.EnterActions>
+                            <Trigger.ExitActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation Duration="0:0:0.30" From="61" To="35"
+                                                         Storyboard.TargetName="AchievementTexts"
+                                                         Storyboard.TargetProperty="MaxHeight"/>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Description" Storyboard.TargetProperty="TextWrapping">
+                                            <ObjectAnimationUsingKeyFrames.KeyFrames>
+                                                <DiscreteObjectKeyFrame KeyTime="0:0:0.30" Value="{x:Static TextWrapping.NoWrap}"/>
+                                            </ObjectAnimationUsingKeyFrames.KeyFrames>
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.ExitActions>
+                        </Trigger>
                         <Trigger Property="IsMouseOver" Value="True">
                             <Trigger.EnterActions>
                                 <BeginStoryboard>

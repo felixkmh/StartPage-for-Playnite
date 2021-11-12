@@ -25,6 +25,13 @@ namespace LandingPage.Models.SuccessStory
         public int Progression { get => progression; set { progression = value; OnPropertyChanged(); } }
         public Guid Id { get => id; set { id = value; OnPropertyChanged(); } }
         public string Name { get => name; set { name = value; OnPropertyChanged(); } }
+
+        public DateTime LastUnlocked => items.OrderByDescending(i => i.DateUnlocked).Select(i => i.DateUnlocked).FirstOrDefault() ?? default;
+
+        public override string ToString()
+        {
+            return Name;
+        }
     }
 
     public class Achivement : ObservableObject

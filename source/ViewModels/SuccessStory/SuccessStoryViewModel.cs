@@ -134,7 +134,6 @@ namespace LandingPage.ViewModels.SuccessStory
                 .OrderByDescending(a => a.Achievement.DateUnlocked ?? default)
                 .Take(achievementsOverall);
             var collection = latestAchievements;
-            var changed = false;
             Application.Current.Dispatcher.Invoke(() =>
             {
                 foreach (var achi in latest)
@@ -143,12 +142,15 @@ namespace LandingPage.ViewModels.SuccessStory
                     {
                         if (model.Achievement.DateUnlocked != achi.Achievement.DateUnlocked)
                         {
-                            changed = true;
+                            collection.Remove(model);
+                            model.Game.Game = achi.Game;
+                            model.Achievement = achi.Achievement;
+                            model.Source = achi.Source;
+                            collection.Add(model);
                         }
                     }
                     else if (collection.FirstOrDefault(item => !latest.Any(s => s.Achievement.Name == item.Achievement.Name && s.Game?.Id == item.Game.Game?.Id)) is GameAchievement unusedModel)
                     {
-                        changed = true;
                         collection.Remove(unusedModel);
                         unusedModel.Game.Game = achi.Game;
                         unusedModel.Achievement = achi.Achievement;
@@ -157,7 +159,6 @@ namespace LandingPage.ViewModels.SuccessStory
                     }
                     else
                     {
-                        changed = true;
                         collection.Add(new GameAchievement
                         {
                             Game = new GameModel(achi.Game),
@@ -168,15 +169,10 @@ namespace LandingPage.ViewModels.SuccessStory
                 }
                 for (int j = collection.Count - 1; j >= 0; --j)
                 {
-                    if (!collection.Any(g => g.Achievement.Name == collection[j].Achievement.Name && g.Game.Game?.Id == collection[j].Game.Game?.Id))
+                    if (!latest.Any(g => g.Achievement.Name == collection[j].Achievement.Name && g.Game?.Id == collection[j].Game.Game?.Id))
                     {
-                        changed = true;
                         collection.RemoveAt(j);
                     }
-                }
-                if (changed && collection.Count > 1)
-                {
-                    collection.Move(collection.Count - 1, 0);
                 }
             });
             //Application.Current.Dispatcher.Invoke(() => 

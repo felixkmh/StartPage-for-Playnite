@@ -12,9 +12,11 @@ using LandingPage.Models;
 using System.Windows.Data;
 using System.Windows;
 using LandingPage.Extensions;
+using System.Collections;
 
 namespace LandingPage.ViewModels
 {
+
     public class LandingPageViewModel : ObservableObject
     {
         internal ObservableCollection<GameModel> recentlyPlayedGames = new ObservableCollection<GameModel>();
@@ -38,8 +40,10 @@ namespace LandingPage.ViewModels
         internal SuccessStory.SuccessStoryViewModel successStory;
         public SuccessStory.SuccessStoryViewModel SuccessStory => successStory;
 
+
         internal IPlayniteAPI playniteAPI;
         internal LandingPageExtension plugin;
+
 
         public ICommand OpenSettingsCommand => new RelayCommand(() => plugin.OpenSettingsView());
         public LandingPageViewModel(IPlayniteAPI playniteAPI, LandingPageExtension landingPage,
@@ -122,6 +126,10 @@ namespace LandingPage.ViewModels
             var path = recentlyPlayedGames.OrderByDescending(g => g.Game.LastActivity)
                 .Concat(recentlyAddedGames.OrderByDescending(g => g.Game.Added))
                 .FirstOrDefault(g => !string.IsNullOrEmpty(g.Game.BackgroundImage))?.Game.BackgroundImage;
+            if (string.IsNullOrEmpty(path))
+            {
+
+            }
             if (path is string)
             {
                 Application.Current.Dispatcher.Invoke(() => 

@@ -16,6 +16,7 @@
              d:DataContext="{d:DesignInstance IsDesignTimeCreatable=False, Type=lpvm:LandingPageViewModel}"
              SizeChanged="UserControl_SizeChanged">
     <UserControl.Resources>
+        <BitmapImage x:Key="InnerGlowBitmap" CreateOptions="IgnoreColorProfile" UriSource="pack://application:,,,/StartPagePlugin;component/innerglow.png" CacheOption="OnLoad"/>
         <Style x:Key="VirtualizedStackPanelStyle" TargetType="{x:Type VirtualizingStackPanel}">
             <Setter Property="UseLayoutRounding" Value="False"/>
             <Setter Property="SnapsToDevicePixels" Value="False"/>
@@ -68,6 +69,8 @@
                     <Image Source="{Binding Game.CoverImage, Converter={StaticResource ImageStringToImageConverter}, FallbackValue={StaticResource DefaultGameCover}}" Stretch="UniformToFill" 
                                             HorizontalAlignment="Center" VerticalAlignment="Center"
                                             RenderOptions.BitmapScalingMode="HighQuality"/>
+                    <Image Source="{StaticResource InnerGlowBitmap}" Stretch="Fill" x:Name="GlowImage"
+                                            RenderOptions.BitmapScalingMode="Fant" Opacity="0.0"/>
                     <TextBlock Text="{Binding Game.Name}" 
                                Style="{StaticResource BaseTextBlockStyle}" 
                                VerticalAlignment="Bottom" 
@@ -91,7 +94,6 @@
                 <Popup Height="204.75" Width="462" x:Name="Description" IsOpen="False" Placement="Right" PlacementTarget="{Binding ElementName=ImageGrid}" 
                                        ClipToBounds="True" PopupAnimation="Fade">
                     <Popup.PlacementRectangle>
-                        <!--<Rect>-7,-4.875,154,207.1875</Rect>-->
                         <MultiBinding Converter="{StaticResource ElementToScaledRectConverter}">
                             <MultiBinding.ConverterParameter>
                                 <system:Double>1.05</system:Double>
@@ -107,10 +109,6 @@
                         <Border Background="{StaticResource GridItemBackgroundBrush}"
                                                 CornerRadius="7"/>
                         <Border CornerRadius="7" Opacity="0.3" x:Name="PopupBackground">
-                            <!--<Image Source="{Binding Game.BackgroundImage, Converter={StaticResource ImageStringToImageConverter}, 
-                                                                                    FallbackValue={StaticResource DefaultGameCover},
-                                                                                    TargetNullValue={StaticResource DefaultGameCover}}"
-                                                                Stretch="UniformToFill"/>-->
                             <Border.OpacityMask>
                                 <LinearGradientBrush StartPoint="1,0" EndPoint="0,1">
                                     <LinearGradientBrush.GradientStops>
@@ -145,6 +143,46 @@
                 <Trigger Property="IsMouseOver" Value="True" SourceName="ImageGrid">
                     <Setter Property="Visibility" Value="Visible" TargetName="Buttons"/>
                 </Trigger>
+                <DataTrigger Binding="{Binding Game.IsLaunching}" Value="True">
+                    <Setter Property="Visibility" TargetName="GlowImage" Value="Visible"/>
+                    <DataTrigger.EnterActions>
+                        <BeginStoryboard x:Name="Flashing">
+                            <Storyboard RepeatBehavior="Forever">
+                                <DoubleAnimation Duration="0:0:1" To="0.5" From="0" AutoReverse="True"
+                                                 Storyboard.TargetName="GlowImage" Storyboard.TargetProperty="Opacity"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </DataTrigger.EnterActions>
+                </DataTrigger>
+                <MultiDataTrigger>
+                    <MultiDataTrigger.Conditions>
+                        <Condition Binding="{Binding Game.IsRunning}" Value="True"/>
+                        <!--<Condition Binding="{Binding ElementName=ImageGrid, Path=IsMouseOver}" Value="True"/>-->
+                    </MultiDataTrigger.Conditions>
+                    <MultiDataTrigger.Setters>
+                        <Setter Property="Visibility" TargetName="GlowImage" Value="Visible"/>
+                        <Setter Property="Opacity" TargetName="GlowImage" Value="0.5"/>
+                    </MultiDataTrigger.Setters>
+                    <MultiDataTrigger.EnterActions>
+                        <StopStoryboard BeginStoryboardName="Flashing"/>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation Duration="0:0:0.5" To="0.5"
+                                                 Storyboard.TargetName="GlowImage"
+                                                 Storyboard.TargetProperty="Opacity"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </MultiDataTrigger.EnterActions>
+                    <MultiDataTrigger.ExitActions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation Duration="0:0:0.5" To="0"
+                                                 Storyboard.TargetName="GlowImage"
+                                                 Storyboard.TargetProperty="Opacity"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </MultiDataTrigger.ExitActions>
+                </MultiDataTrigger>
                 <DataTrigger Binding="{Binding Game.IsInstalled}" Value="{StaticResource False}">
                     <Setter Property="Text" Value="" TargetName="PlayIcon"/>
                 </DataTrigger>
@@ -152,25 +190,26 @@
         </DataTemplate>
         <CollectionViewSource x:Key="RecentlyAddedSource" Source="{Binding RecentlyAddedGames}" IsLiveGroupingRequested="True" IsLiveSortingRequested="True">
             <CollectionViewSource.SortDescriptions>
-                <scm:SortDescription PropertyName="Game.Added" Direction="Descending"/>
+                <scm:SortDescription PropertyName="Game.Added.Date" Direction="Descending"/>
             </CollectionViewSource.SortDescriptions>
-            <CollectionViewSource.LiveSortingProperties>
-                <system:String>Game.Added</system:String>
-            </CollectionViewSource.LiveSortingProperties>
             <CollectionViewSource.GroupDescriptions>
-                <PropertyGroupDescription PropertyName="Game.Added" Converter="{StaticResource DateTimeToLastPlayedConverter}">
+                <PropertyGroupDescription PropertyName="Game.Added.Date">
+                    <PropertyGroupDescription.SortDescriptions>
+                        <scm:SortDescription PropertyName="Name" Direction="Descending"/>
+                    </PropertyGroupDescription.SortDescriptions>
                 </PropertyGroupDescription>
             </CollectionViewSource.GroupDescriptions>
         </CollectionViewSource>
         <CollectionViewSource x:Key="RecentlyPlayedSource" Source="{Binding RecentlyPlayedGames}" IsLiveGroupingRequested="True" IsLiveSortingRequested="True">
             <CollectionViewSource.SortDescriptions>
-                <scm:SortDescription PropertyName="Game.LastActivity" Direction="Descending"/>
+                <scm:SortDescription PropertyName="Game.LastActivity.Date" Direction="Descending"/>
             </CollectionViewSource.SortDescriptions>
-            <CollectionViewSource.LiveSortingProperties>
-                <system:String>Game.LastActivity</system:String>
-            </CollectionViewSource.LiveSortingProperties>
             <CollectionViewSource.GroupDescriptions>
-                <PropertyGroupDescription PropertyName="Game.LastActivity" Converter="{StaticResource DateTimeToLastPlayedConverter}"/>
+                <PropertyGroupDescription PropertyName="Game.LastActivity.Date">
+                    <PropertyGroupDescription.SortDescriptions>
+                        <scm:SortDescription PropertyName="Name" Direction="Descending"/>
+                    </PropertyGroupDescription.SortDescriptions>
+                </PropertyGroupDescription>
             </CollectionViewSource.GroupDescriptions>
         </CollectionViewSource>
         <Style x:Key="GameGroupBox" TargetType="{x:Type GroupBox}" BasedOn="{StaticResource {x:Type GroupBox}}">
@@ -386,7 +425,7 @@
                                                 <Setter Property="Template">
                                                     <Setter.Value>
                                                         <ControlTemplate>
-                                                            <GroupBox Style="{StaticResource GameGroupBox}" Header="{Binding Name}">
+                                                            <GroupBox Style="{StaticResource GameGroupBox}" Header="{Binding Name, Converter={StaticResource DateTimeToLastPlayedConverter}}">
                                                                 <ItemsPresenter/>
                                                             </GroupBox>
                                                         </ControlTemplate>
@@ -429,7 +468,7 @@
                                                 <Setter Property="Template">
                                                     <Setter.Value>
                                                         <ControlTemplate>
-                                                            <GroupBox Style="{StaticResource GameGroupBox}" Header="{Binding Name}">
+                                                            <GroupBox Style="{StaticResource GameGroupBox}" Header="{Binding Name, Converter={StaticResource DateTimeToLastPlayedConverter}}">
                                                                 <ItemsPresenter/>
                                                             </GroupBox>
                                                         </ControlTemplate>
