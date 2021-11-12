@@ -42,6 +42,12 @@ namespace LandingPage
         private int maxNumberRecentAchievementsPerGame = 3;
         public int MaxNumberRecentAchievementsPerGame { get => maxNumberRecentAchievementsPerGame; set => SetValue(ref maxNumberRecentAchievementsPerGame, value); }
 
+        private bool enableNotifications = true;
+        public bool EnableNotifications { get => enableNotifications; set => SetValue(ref enableNotifications, value); }
+
+        private bool minimizeNotificationsOnLaunch = false;
+        public bool MinimizeNotificationsOnLaunch { get => minimizeNotificationsOnLaunch; set => SetValue(ref minimizeNotificationsOnLaunch, value); }
+
         // Playnite serializes settings object to a JSON object and saves it as text file.
         // If you want to exclude some property from being saved then use `JsonDontSerialize` ignore attribute.
         [DontSerialize]

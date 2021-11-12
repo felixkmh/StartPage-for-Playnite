@@ -16,4 +16,6 @@
     <sys:String x:Key="LOC_SPG_MaxRecentAchievementsPerGame">Maximum number of recent Achievements per Game</sys:String>
     <sys:String x:Key="LOC_SPG_ShowTitelOnCover">Show Title on Game Cover</sys:String>
     <sys:String x:Key="LOC_SPG_ShowGameDetails">Show Game Details</sys:String>
+    <sys:String x:Key="LOC_SPG_EnableNotifications">Enable Notifications</sys:String>
+    <sys:String x:Key="LOC_SPG_MinimizeNotification">Minimize Notifications on Launch</sys:String>
 </ResourceDictionary>

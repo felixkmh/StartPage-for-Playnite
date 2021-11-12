@@ -11,6 +11,7 @@
              xmlns:system="clr-namespace:System;assembly=mscorlib"
              xmlns:mu="clr-namespace:LandingPage.Markup"
              xmlns:scm="clr-namespace:System.ComponentModel;assembly=WindowsBase"
+             xmlns:pn="clr-namespace:Playnite.SDK;assembly=Playnite.SDK"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
              d:DataContext="{d:DesignInstance IsDesignTimeCreatable=False, Type=lpvm:LandingPageViewModel}"
@@ -42,6 +43,8 @@
         <system:Double x:Key="CoverWidth">140</system:Double>
         <conv:ActualHeightToWidthConverter x:Key="ActualHeightToWidthConverter"/>
         <conv:ElementToScaledRectConverter x:Key="ElementToScaledRectConverter"/>
+        <conv:VisibilityInverter x:Key="VisibilityInverter"/>
+        <conv:IEnumerableNullOrEmptyToVisibilityConverter x:Key="IEnumerableNullOrEmptyToVisibilityConverter"/>
         <conv:BoolToGridLengthConverter x:Key="BoolToGridLengthConverter"/>
         <DataTemplate x:Key="GameCoverDataTemplate" DataType="{x:Type lpm:GameModel}">
             <StackPanel Orientation="Horizontal">
@@ -354,9 +357,9 @@
                                 <ColumnDefinition Width="Auto"/>
                                 <ColumnDefinition Width="*" SharedSizeGroup="Digits"/>
                             </Grid.ColumnDefinitions>
-                            <TextBlock Text="{Binding Clock.Time, StringFormat=HH}" FontSize="80" Grid.Column="0" TextAlignment="Right"/>
-                            <TextBlock Text=":" FontSize="80" Grid.Column="1" TextAlignment="Center"/>
-                            <TextBlock Text="{Binding Clock.Time, StringFormat=mm}" FontSize="80" Grid.Column="2" TextAlignment="Left"/>
+                            <TextBlock Text="{Binding Clock.Time, StringFormat=HH}" FontSize="120" Grid.Column="0" TextAlignment="Right"/>
+                            <TextBlock Text=":" FontSize="120" Grid.Column="1" TextAlignment="Center"/>
+                            <TextBlock Text="{Binding Clock.Time, StringFormat=mm}" FontSize="120" Grid.Column="2" TextAlignment="Left"/>
                         </Grid>
                         <DockPanel Grid.Column="0" UseLayoutRounding="True" SnapsToDevicePixels="True">
                             <Label Content=" " DockPanel.Dock="Left" Margin="10,10,5,10">
@@ -492,5 +495,169 @@
         <Button HorizontalAlignment="Right" VerticalAlignment="Top" Margin="20,40" Command="{Binding OpenSettingsCommand}">
             <TextBlock Text="" FontFamily="{DynamicResource FontIcoFont}"/>
         </Button>
+        <Grid HorizontalAlignment="Center" VerticalAlignment="Top" x:Name="NotificationGrid"
+              Width="360" Margin="0" Visibility="{Binding Settings.Settings.EnableNotifications, Converter={StaticResource BooleanToVisibilityConverter}}">
+            <Border Padding="0" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,25,0,0"
+                    Visibility="{Binding ElementName=NotificationsBorder, Path=Tag, Converter={StaticResource VisibilityInverter}}">
+                <Button Visibility="{Binding Notifications, Converter={StaticResource IEnumerableNullOrEmptyToVisibilityConverter}}"
+                        ClickMode="Release" Click="ToggleNotifications_Click">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{DynamicResource LOCNotifications}"/>
+                        <Border Background="{DynamicResource GlyphBrush}" CornerRadius="9" Margin="5,0,0,0" MinWidth="18">
+                            <TextBlock Text="{Binding Notifications.Count}" Padding="3,1" 
+                                       HorizontalAlignment="Center" VerticalAlignment="Center"
+                                       TextAlignment="Center"/>
+                        </Border>
+                    </StackPanel>
+                </Button>
+            </Border>
+            <Border x:Name="NotificationsBorder" 
+                CornerRadius="0,0,5,5">
+                <Border.Background>
+                    <SolidColorBrush Color="{DynamicResource PopupBackgroundColor}" Opacity="0.5"/>
+                </Border.Background>
+                <Border.Style>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="Tag" Value="{x:Static Visibility.Collapsed}"/>
+                        <Setter Property="RenderTransform">
+                            <Setter.Value>
+                                <TranslateTransform Y="-550" x:Name="NotifactionRenderTransform"/>
+                            </Setter.Value>
+                        </Setter>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Settings.Settings.MinimizeNotificationsOnLaunch}" Value="{StaticResource False}">
+                                <Setter Property="Tag" Value="{Binding Notifications, Converter={StaticResource IEnumerableNullOrEmptyToVisibilityConverter}}"/>
+                            </DataTrigger>
+                            <Trigger Property="Tag" Value="{x:Static Visibility.Visible}">
+                                <Trigger.EnterActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation
+                                                To="-50"
+                                                Storyboard.TargetProperty="RenderTransform.Y">
+                                                <DoubleAnimation.EasingFunction>
+                                                    <ElasticEase Springiness="12" Oscillations="2" EasingMode="EaseOut"/>
+                                                </DoubleAnimation.EasingFunction>
+                                            </DoubleAnimation>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </Trigger.EnterActions>
+                                <Trigger.ExitActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation Duration="0:0:0.25"
+                                                To="-600"
+                                                Storyboard.TargetProperty="RenderTransform.Y">
+                                            </DoubleAnimation>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </Trigger.ExitActions>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Border.Style>
+                <StackPanel x:Name="NotificationPanel" 
+                        Margin="5,75,5,5">
+                    <ItemsControl ItemsSource="{Binding Notifications}"
+                              VirtualizingPanel.ScrollUnit="Pixel"
+                              VirtualizingPanel.IsVirtualizing="True"
+                              VirtualizingPanel.VirtualizationMode="Recycling"
+                              MaxHeight="300">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <VirtualizingStackPanel/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.Template>
+                            <ControlTemplate TargetType="ItemsControl">
+                                <Border BorderThickness="{TemplateBinding BorderThickness}"
+                                    BorderBrush="{TemplateBinding BorderBrush}"
+                                    Background="{TemplateBinding Background}">
+                                    <ScrollViewer x:Name="ScrollViewer"
+                                              CanContentScroll="True" 
+                                              Padding="{TemplateBinding Padding}"
+                                              Focusable="False"
+                                              HorizontalScrollBarVisibility="Disabled"
+                                              VerticalScrollBarVisibility="Auto"
+                                              >
+                                        <ItemsPresenter/>
+                                    </ScrollViewer>
+                                </Border>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="ComputedVerticalScrollBarVisibility" SourceName="ScrollViewer"
+                                         Value="Visible">
+                                        <Setter Property="Margin" Value="0,0,-16,0" TargetName="ScrollViewer"/>
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </ItemsControl.Template>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate DataType="{x:Type pn:NotificationMessage}">
+                                <Grid Margin="0,2">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Border CornerRadius="5" Opacity="0.15"
+                                            Grid.ColumnSpan="2" IsHitTestVisible="False"
+                                            x:Name="ItemBackground">
+                                        <Border.Background>
+                                            <LinearGradientBrush StartPoint="0,0.5">
+                                                <LinearGradientBrush.GradientStops>
+                                                    <GradientStop Color="White"/>
+                                                    <GradientStop Color="Transparent" Offset="1"/>
+                                                </LinearGradientBrush.GradientStops>
+                                            </LinearGradientBrush>
+                                        </Border.Background>
+                                    </Border>
+                                    <Button Grid.Column="0" Command="{Binding ActivateCommand}" CommandParameter="{Binding .}" x:Name="NotificationActivationButton">
+                                        <Button.Template>
+                                            <ControlTemplate TargetType="Button">
+                                                <ContentPresenter/>
+                                            </ControlTemplate>
+                                        </Button.Template>
+                                        <StackPanel VerticalAlignment="Center">
+                                            <TextBlock Text="{Binding Text}"  VerticalAlignment="Center"
+                                                        TextWrapping="Wrap"
+                                                        Padding="4"
+                                                        Foreground="{DynamicResource TextBrush}"/>
+                                        </StackPanel>
+                                    </Button>
+                                    <Button Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ItemsControl}, Path=DataContext.DeleteNotificationCommand}" 
+                                            CommandParameter="{Binding .}"
+                                            Grid.Column="1" BorderThickness="0" Background="Transparent" Visibility="Hidden"
+                                            x:Name="HideButton">
+                                        <TextBlock Text="" FontFamily="{StaticResource FontIcoFont}"/>
+                                    </Button>
+                                </Grid>
+                                <DataTemplate.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Opacity" Value="0.25" TargetName="ItemBackground"/>
+                                        <Setter Property="Visibility" Value="Visible" TargetName="HideButton"/>
+                                    </Trigger>
+                                    <DataTrigger Binding="{Binding ActivationAction}" Value="{x:Null}">
+                                        <Setter Property="Cursor" TargetName="NotificationActivationButton" Value="Arrow"/>
+                                    </DataTrigger>
+                                </DataTemplate.Triggers>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                    <Grid Margin="0,2,0,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="3"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Button Command="{Binding ClearNotificationsCommand}" Grid.Column="0"
+                                ClickMode="Release">
+                            <TextBlock Text="{DynamicResource LOCDismissAll}" FontSize="{DynamicResource FontSizeSmall}"/>
+                        </Button>
+                        <Button Grid.Column="2" ClickMode="Release" Click="ToggleNotifications_Click">
+                            <TextBlock Text="{DynamicResource LOCMinimize}" FontSize="{DynamicResource FontSizeSmall}"/>
+                        </Button>
+                    </Grid>
+                </StackPanel>
+            </Border>
+        </Grid>
     </Grid>
 </UserControl>

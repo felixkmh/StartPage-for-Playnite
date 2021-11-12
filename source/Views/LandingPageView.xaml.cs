@@ -31,7 +31,7 @@ namespace LandingPage.Views
         public LandingPageView(LandingPageViewModel model)
         {
             DataContext = model;
-            model.PropertyChanged += Model_PropertyChanged;
+            // model.PropertyChanged += Model_PropertyChanged;
             InitializeComponent();
         }
 
@@ -123,6 +123,20 @@ namespace LandingPage.Views
             //    Resources["CoverHeight"] = newHeight;
             //    Resources["CoverWidth"] = ratio * newHeight;
             //}
+        }
+
+        private void ToggleNotifications_Click(object sender, RoutedEventArgs e)
+        {
+            if (NotificationsBorder.Tag is Visibility vis)
+            {
+                if (vis == Visibility.Visible)
+                {
+                    NotificationsBorder.Tag = Visibility.Collapsed;
+                } else
+                {
+                    NotificationsBorder.SetBinding(TagProperty, new Binding("Notifications") { Converter = (IValueConverter)Resources["IEnumerableNullOrEmptyToVisibilityConverter"], Mode = BindingMode.OneWay });
+                }
+            }
         }
     }
 }

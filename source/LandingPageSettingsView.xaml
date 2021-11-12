@@ -43,6 +43,14 @@
                     <TextBlock Text="{DynamicResource LOC_SPG_ShowRecentAchievements}" Margin="3" VerticalAlignment="Center"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
+                    <CheckBox IsChecked="{Binding Settings.EnableNotifications}" VerticalAlignment="Center" Margin="3"/>
+                    <TextBlock Text="{DynamicResource LOC_SPG_EnableNotifications}" Margin="3" VerticalAlignment="Center"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" IsEnabled="{Binding Settings.EnableNotifications, Mode=OneWay}" Margin="25,0,0,0">
+                    <CheckBox IsChecked="{Binding Settings.MinimizeNotificationsOnLaunch}" VerticalAlignment="Center" Margin="3"/>
+                    <TextBlock Text="{DynamicResource LOC_SPG_MinimizeNotification}" Margin="3" VerticalAlignment="Center"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
                     <TextBlock Text="{DynamicResource LOC_SPG_MaxRecentAchievements}" VerticalAlignment="Center"/>
                     <numeric:IntBox Value="{Binding Settings.MaxNumberRecentAchievements, UpdateSourceTrigger=PropertyChanged}" 
                                     MinValue="0"

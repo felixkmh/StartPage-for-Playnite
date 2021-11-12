@@ -31,6 +31,15 @@ namespace LandingPage.ViewModels
         internal ObservableCollection<GameGroup> specialGames = new ObservableCollection<GameGroup>();
         public ObservableCollection<GameGroup> SpecialGames => specialGames;
 
+        internal ObservableCollection<NotificationMessage> notifications;
+        public ObservableCollection<NotificationMessage> Notifications => notifications;
+
+        internal ICommand deleteNotificationCommand;
+        public ICommand DeleteNotificationCommand => deleteNotificationCommand;
+
+        internal ICommand clearNotificationsCommand;
+        public ICommand ClearNotificationsCommand => clearNotificationsCommand;
+
         internal LandingPageSettingsViewModel settings;
         public LandingPageSettingsViewModel Settings => settings;
 
@@ -54,6 +63,10 @@ namespace LandingPage.ViewModels
             this.plugin = landingPage;
             this.settings = settings;
             this.successStory = successStory;
+            notifications = playniteAPI.Notifications.Messages;
+            notifications.CollectionChanged += (sender, args) => OnPropertyChanged(nameof(Notifications));
+            deleteNotificationCommand = new RelayCommand<NotificationMessage>(sender => playniteAPI.Notifications.Remove(sender.Id));
+            clearNotificationsCommand = new RelayCommand(() => playniteAPI.Notifications.RemoveAll());
         }
 
         public void Subscribe()
