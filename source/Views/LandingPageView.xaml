@@ -193,7 +193,7 @@
         </DataTemplate>
         <CollectionViewSource x:Key="RecentlyAddedSource" Source="{Binding RecentlyAddedGames}" IsLiveGroupingRequested="True" IsLiveSortingRequested="True">
             <CollectionViewSource.SortDescriptions>
-                <scm:SortDescription PropertyName="Game.Added.Date" Direction="Descending"/>
+                <scm:SortDescription PropertyName="Game.Added" Direction="Descending"/>
             </CollectionViewSource.SortDescriptions>
             <CollectionViewSource.GroupDescriptions>
                 <PropertyGroupDescription PropertyName="Game.Added.Date">
@@ -205,7 +205,7 @@
         </CollectionViewSource>
         <CollectionViewSource x:Key="RecentlyPlayedSource" Source="{Binding RecentlyPlayedGames}" IsLiveGroupingRequested="True" IsLiveSortingRequested="True">
             <CollectionViewSource.SortDescriptions>
-                <scm:SortDescription PropertyName="Game.LastActivity.Date" Direction="Descending"/>
+                <scm:SortDescription PropertyName="Game.LastActivity" Direction="Descending"/>
             </CollectionViewSource.SortDescriptions>
             <CollectionViewSource.GroupDescriptions>
                 <PropertyGroupDescription PropertyName="Game.LastActivity.Date">
@@ -596,13 +596,13 @@
                         </ItemsControl.Template>
                         <ItemsControl.ItemTemplate>
                             <DataTemplate DataType="{x:Type pn:NotificationMessage}">
-                                <Grid Margin="0,2">
+                                <Grid Margin="0,2" Background="Transparent">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="*"/>
                                         <ColumnDefinition Width="Auto"/>
                                     </Grid.ColumnDefinitions>
                                     <Border CornerRadius="5" Opacity="0.15"
-                                            Grid.ColumnSpan="2" IsHitTestVisible="False"
+                                            Grid.ColumnSpan="2"
                                             x:Name="ItemBackground">
                                         <Border.Background>
                                             <LinearGradientBrush StartPoint="0,0.5">
