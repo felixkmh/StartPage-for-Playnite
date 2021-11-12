@@ -446,7 +446,7 @@
                             </ListBox>
                         </DockPanel>
                         <DockPanel Grid.Row="0" UseLayoutRounding="True" SnapsToDevicePixels="True"
-                            Visibility="{Binding Settings.Settings.ShowRecentGames, Converter={StaticResource BooleanToVisibilityConverter}}">
+                            Visibility="{Binding Settings.Settings.ShowRecentGames, Converter={StaticResource BooleanToVisibilityConverter}, Mode=OneWay}">
                             <Label Content="{DynamicResource LOCQuickFilterRecentlyPlayed}" DockPanel.Dock="Left" Margin="10,10,5,30">
                                 <Label.LayoutTransform>
                                     <RotateTransform Angle="-90" />
@@ -525,7 +525,7 @@
                             </Setter.Value>
                         </Setter>
                         <Style.Triggers>
-                            <DataTrigger Binding="{Binding Settings.Settings.MinimizeNotificationsOnLaunch}" Value="{StaticResource False}">
+                            <DataTrigger Binding="{Binding Settings.Settings.MinimizeNotificationsOnLaunch, Mode=OneWay}" Value="{StaticResource False}">
                                 <Setter Property="Tag" Value="{Binding Notifications, Converter={StaticResource IEnumerableNullOrEmptyToVisibilityConverter}}"/>
                             </DataTrigger>
                             <Trigger Property="Tag" Value="{x:Static Visibility.Visible}">
@@ -557,7 +557,10 @@
                     </Style>
                 </Border.Style>
                 <StackPanel x:Name="NotificationPanel" 
-                        Margin="5,75,5,5">
+                        Margin="5,50,5,5">
+                    <TextBlock HorizontalAlignment="Center" VerticalAlignment="Bottom"
+                               Text="{DynamicResource LOCNotifications}"
+                               Margin="0,6,0,4"/>
                     <ItemsControl ItemsSource="{Binding Notifications}"
                               VirtualizingPanel.ScrollUnit="Pixel"
                               VirtualizingPanel.IsVirtualizing="True"
@@ -625,7 +628,7 @@
                                     </Button>
                                     <Button Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ItemsControl}, Path=DataContext.DeleteNotificationCommand}" 
                                             CommandParameter="{Binding .}"
-                                            Grid.Column="1" BorderThickness="0" Background="Transparent" Visibility="Hidden"
+                                            Grid.Column="1" BorderThickness="0" Background="Transparent" Visibility="Collapsed"
                                             x:Name="HideButton">
                                         <TextBlock Text="" FontFamily="{StaticResource FontIcoFont}"/>
                                     </Button>
@@ -642,7 +645,7 @@
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>
-                    <Grid Margin="0,2,0,0">
+                    <Grid Margin="0,2,0,0" Visibility="{Binding Settings.Settings.ShowNotificationButtons, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="3"/>
