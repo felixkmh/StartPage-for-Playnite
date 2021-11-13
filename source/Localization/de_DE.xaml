@@ -11,9 +11,15 @@
     <sys:String x:Key="LOC_SPG_ShowRecentlyPlayed">Zuletzt gespielte Spiele anzeigen</sys:String>
     <sys:String x:Key="LOC_SPG_ShowRecentAchievements">Aktuelle Erfolge mit SuccessStory anzeigen</sys:String>
     <sys:String x:Key="LOC_SPG_ShowRecentlyAdded">Kürzlich hinzugefügte Spiele anzeigen</sys:String>
-    <sys:String x:Key="LOC_SPG_StartupItem">Beim Start aktiviertes SidebarItem</sys:String>
+    <sys:String x:Key="LOC_SPG_StartupItem">(Nicht unterstützt) Beim Start aktiviertes SidebarItem</sys:String>
     <sys:String x:Key="LOC_SPG_MaxRecentAchievements">Maximale Anzahl neuer Erfolge</sys:String>
     <sys:String x:Key="LOC_SPG_MaxRecentAchievementsPerGame">Maximale Anzahl neuer Erfolge pro Spiel</sys:String>
     <sys:String x:Key="LOC_SPG_ShowTitelOnCover">Titel auf dem Spielcover anzeigen</sys:String>
     <sys:String x:Key="LOC_SPG_ShowGameDetails">Spieldetails anzeigen</sys:String>
+    <sys:String x:Key="LOC_SPG_EnableNotifications">Benachrichtigungen aktivieren</sys:String>
+    <sys:String x:Key="LOC_SPG_MinimizeNotification">Benachrichtigungen beim Start minimieren</sys:String>
+    <sys:String x:Key="LOC_SPG_ShowNotificationButtons">Buttons &quot;Verwerfen&quot; und &quot;Minimieren&quot; anzeigen</sys:String>
+    <sys:String x:Key="LOC_SPG_KeepInMemory">StartPage im Speicher behalten, wenn zu einer anderen Ansicht gewechselt wird</sys:String>
+    <sys:String x:Key="LOC_SPG_MoveIconToTop">(Nicht unterstützt) StartPage-Element beim Start an den oberen Rand der Seitenleiste verschieben</sys:String>
+    <sys:String x:Key="LOC_SPG_UnsupportedToolTip">Die Verwendung dieser Funktion erfolgt auf eigene Gefahr. Sie wird nicht offiziell von der PlayniteAPI unterstützt und kann daher zu unerwartetem Verhalten führen.</sys:String>
 </ResourceDictionary>

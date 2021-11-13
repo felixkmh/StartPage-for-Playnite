@@ -11,9 +11,15 @@
     <sys:String x:Key="LOC_SPG_ShowRecentlyPlayed">Giochi avviati di recente</sys:String>
     <sys:String x:Key="LOC_SPG_ShowRecentAchievements">Mostra gli Achievement recenti usando SuccessStory</sys:String>
     <sys:String x:Key="LOC_SPG_ShowRecentlyAdded">Mostra Giochi Aggiunti Recentemente</sys:String>
-    <sys:String x:Key="LOC_SPG_StartupItem">Elemento della barra laterale mostrato all'avvio</sys:String>
+    <sys:String x:Key="LOC_SPG_StartupItem">(Unsupported) SidebarItem activated on Launch</sys:String>
     <sys:String x:Key="LOC_SPG_MaxRecentAchievements">Numero massimo di Achievement recenti</sys:String>
     <sys:String x:Key="LOC_SPG_MaxRecentAchievementsPerGame">Numero massimo di Achievement recenti per Gioco</sys:String>
     <sys:String x:Key="LOC_SPG_ShowTitelOnCover">Mostra titolo sulla copertina del gioco</sys:String>
     <sys:String x:Key="LOC_SPG_ShowGameDetails">Mostra Dettagli del gioco</sys:String>
+    <sys:String x:Key="LOC_SPG_EnableNotifications">Enable Notifications</sys:String>
+    <sys:String x:Key="LOC_SPG_MinimizeNotification">Minimize Notifications on Launch</sys:String>
+    <sys:String x:Key="LOC_SPG_ShowNotificationButtons">Show &quot;Discard&quot; and &quot;Minimize&quot; Buttons</sys:String>
+    <sys:String x:Key="LOC_SPG_KeepInMemory">Keep StartPage in Memory when switching to another View</sys:String>
+    <sys:String x:Key="LOC_SPG_MoveIconToTop">(Unsupported) Move StartPage Item to Top of SideBar on Launch</sys:String>
+    <sys:String x:Key="LOC_SPG_UnsupportedToolTip">Use this feature at your own risk. It is not officially supported by the PlayniteAPI and can thus lead to unexpected behaviour.</sys:String>
 </ResourceDictionary>
