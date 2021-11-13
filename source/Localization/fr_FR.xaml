@@ -12,7 +12,7 @@
     <sys:String x:Key="LOC_SPG_ShowRecentlyPlayed">Afficher les jeux récemment joués</sys:String>
     <sys:String x:Key="LOC_SPG_ShowRecentAchievements">Afficher les derniers succès (Requiert SucessStory)</sys:String>
     <sys:String x:Key="LOC_SPG_ShowRecentlyAdded">Afficher les jeux récemment ajoutés</sys:String>
-    <sys:String x:Key="LOC_SPG_StartupItem">(Unsupported) SidebarItem activated on Launch</sys:String>
+    <sys:String x:Key="LOC_SPG_StartupItem">(Non pris en charge) Onglet affiché au démarrage :</sys:String>
     <sys:String x:Key="LOC_SPG_MaxRecentAchievements">Nombre maximum de succès affichés :</sys:String>
     <sys:String x:Key="LOC_SPG_MaxRecentAchievementsPerGame">Nombre maximum de succès affichés par jeu :</sys:String>
     <sys:String x:Key="LOC_SPG_ShowTitelOnCover">Afficher le nom des jeux sur leur couverture</sys:String>
@@ -20,7 +20,7 @@
     <sys:String x:Key="LOC_SPG_EnableNotifications">Afficher les notifications</sys:String>
     <sys:String x:Key="LOC_SPG_MinimizeNotification">Réduire les notifications au lancement</sys:String>
     <sys:String x:Key="LOC_SPG_ShowNotificationButtons">Afficher les boutons &quot;ignorer&quot; et &quot;réduire&quot;</sys:String>
-    <sys:String x:Key="LOC_SPG_KeepInMemory">Keep StartPage in Memory when switching to another View</sys:String>
-    <sys:String x:Key="LOC_SPG_MoveIconToTop">(Unsupported) Move StartPage Item to Top of SideBar on Launch</sys:String>
-    <sys:String x:Key="LOC_SPG_UnsupportedToolTip">Use this feature at your own risk. It is not officially supported by the PlayniteAPI and can thus lead to unexpected behaviour.</sys:String>
+    <sys:String x:Key="LOC_SPG_KeepInMemory">Conserver Starpage en mémoire lorsqu'un autre onglet est affiché</sys:String>
+    <sys:String x:Key="LOC_SPG_MoveIconToTop">(Non pris en charge) Déplacer Starpage en haut de la barre latérale au démarrage</sys:String>
+    <sys:String x:Key="LOC_SPG_UnsupportedToolTip">Cette fonctionnalité n'est pas supportée par l'API de Playnite et peut causer des erreurs.</sys:String>
 </ResourceDictionary>
