@@ -215,6 +215,18 @@
                 </PropertyGroupDescription>
             </CollectionViewSource.GroupDescriptions>
         </CollectionViewSource>
+        <CollectionViewSource x:Key="FavoritesSource" Source="{Binding FavoriteGames}" IsLiveGroupingRequested="True" IsLiveSortingRequested="True">
+            <CollectionViewSource.SortDescriptions>
+                <scm:SortDescription PropertyName="Game.LastActivity" Direction="Descending"/>
+            </CollectionViewSource.SortDescriptions>
+            <CollectionViewSource.GroupDescriptions>
+                <PropertyGroupDescription PropertyName="Game.LastActivity.Date">
+                    <PropertyGroupDescription.SortDescriptions>
+                        <scm:SortDescription PropertyName="Name" Direction="Descending"/>
+                    </PropertyGroupDescription.SortDescriptions>
+                </PropertyGroupDescription>
+            </CollectionViewSource.GroupDescriptions>
+        </CollectionViewSource>
         <Style x:Key="GameGroupBox" TargetType="{x:Type GroupBox}" BasedOn="{StaticResource {x:Type GroupBox}}">
             <Setter Property="Padding" Value="0" />
             <Setter Property="Margin" Value="0"/>
@@ -415,10 +427,11 @@
 
                     <Grid Grid.Row="2" VerticalAlignment="Bottom">
                         <Grid.RowDefinitions>
+                            <RowDefinition Height="{Binding IsVisible, ElementName=FavoritesListBox, Converter={StaticResource BoolToGridLengthConverter}}"/>
                             <RowDefinition Height="{Binding IsVisible, ElementName=RecentlyPlayedListBox, Converter={StaticResource BoolToGridLengthConverter}}"/>
                             <RowDefinition Height="{Binding IsVisible, ElementName=RecentlyAddedListBox, Converter={StaticResource BoolToGridLengthConverter}}"/>
                         </Grid.RowDefinitions>
-                        <DockPanel Grid.Row="1" UseLayoutRounding="True" SnapsToDevicePixels="True"
+                        <DockPanel Grid.Row="2" UseLayoutRounding="True" SnapsToDevicePixels="True"
                             Visibility="{Binding Settings.Settings.ShowAddedGames, Converter={StaticResource BooleanToVisibilityConverter}}">
                             <Label Content="{DynamicResource LOC_SPG_RecentlyAddedGames}" DockPanel.Dock="Left" Margin="10,10,5,30">
                                 <Label.LayoutTransform>
@@ -430,7 +443,52 @@
                                      DockPanel.Dock="Left"
                                      ItemsSource="{Binding Source={StaticResource RecentlyAddedSource}}"
                                      ItemContainerStyle="{StaticResource GameListItem}"
-                                     ItemTemplate="{StaticResource GameCoverDataTemplate}">
+                                     ItemTemplate="{StaticResource GameCoverDataTemplate}"
+                                     SizeChanged="ListBox_SizeChanged">
+                                <ListBox.GroupStyle>
+                                    <GroupStyle>
+                                        <GroupStyle.Panel>
+                                            <ItemsPanelTemplate>
+                                                <VirtualizingStackPanel Orientation="Horizontal" 
+                                                                        Style="{DynamicResource VirtualizedStackPanelStyle}"/>
+                                            </ItemsPanelTemplate>
+                                        </GroupStyle.Panel>
+                                        <GroupStyle.ContainerStyle>
+                                            <Style TargetType="GroupItem">
+                                                <Setter Property="Template">
+                                                    <Setter.Value>
+                                                        <ControlTemplate>
+                                                            <GroupBox Style="{StaticResource GameGroupBox}" Header="{Binding Name, Converter={StaticResource DateTimeToLastPlayedConverter}}">
+                                                                <ItemsPresenter/>
+                                                            </GroupBox>
+                                                        </ControlTemplate>
+                                                    </Setter.Value>
+                                                </Setter>
+                                            </Style>
+                                        </GroupStyle.ContainerStyle>
+                                    </GroupStyle>
+                                </ListBox.GroupStyle>
+                                <ListBox.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <StackPanel Orientation="Horizontal"/>
+                                    </ItemsPanelTemplate>
+                                </ListBox.ItemsPanel>
+                            </ListBox>
+                        </DockPanel>
+                        <DockPanel Grid.Row="1" UseLayoutRounding="True" SnapsToDevicePixels="True"
+                            Visibility="{Binding Settings.Settings.ShowRecentGames, Converter={StaticResource BooleanToVisibilityConverter}, Mode=OneWay}">
+                            <Label Content="{DynamicResource LOCQuickFilterRecentlyPlayed}" DockPanel.Dock="Left" Margin="10,10,5,30">
+                                <Label.LayoutTransform>
+                                    <RotateTransform Angle="-90" />
+                                </Label.LayoutTransform>
+                            </Label>
+                            <ListBox x:Name="RecentlyPlayedListBox" 
+                                         Style="{DynamicResource GameGroupListStyle}"
+                                         DockPanel.Dock="Left" 
+                                         ItemsSource="{Binding Source={StaticResource RecentlyPlayedSource}}"
+                                         ItemContainerStyle="{StaticResource GameListItem}"
+                                         ItemTemplate="{StaticResource GameCoverDataTemplate}"
+                                         SizeChanged="ListBox_SizeChanged">
                                 <ListBox.GroupStyle>
                                     <GroupStyle>
                                         <GroupStyle.Panel>
@@ -462,18 +520,19 @@
                             </ListBox>
                         </DockPanel>
                         <DockPanel Grid.Row="0" UseLayoutRounding="True" SnapsToDevicePixels="True"
-                            Visibility="{Binding Settings.Settings.ShowRecentGames, Converter={StaticResource BooleanToVisibilityConverter}, Mode=OneWay}">
-                            <Label Content="{DynamicResource LOCQuickFilterRecentlyPlayed}" DockPanel.Dock="Left" Margin="10,10,5,30">
+                            Visibility="{Binding Settings.Settings.ShowFavoriteGames, Converter={StaticResource BooleanToVisibilityConverter}, Mode=OneWay}">
+                            <Label Content="{DynamicResource LOCQuickFilterFavorites}" DockPanel.Dock="Left" Margin="10,10,5,30">
                                 <Label.LayoutTransform>
                                     <RotateTransform Angle="-90" />
                                 </Label.LayoutTransform>
                             </Label>
-                            <ListBox x:Name="RecentlyPlayedListBox" 
+                            <ListBox x:Name="FavoritesListBox" 
                                          Style="{DynamicResource GameGroupListStyle}"
                                          DockPanel.Dock="Left" 
-                                         ItemsSource="{Binding Source={StaticResource RecentlyPlayedSource}}"
+                                         ItemsSource="{Binding Source={StaticResource FavoritesSource}}"
                                          ItemContainerStyle="{StaticResource GameListItem}"
-                                         ItemTemplate="{StaticResource GameCoverDataTemplate}">
+                                         ItemTemplate="{StaticResource GameCoverDataTemplate}"
+                                         SizeChanged="ListBox_SizeChanged">
                                 <ListBox.GroupStyle>
                                     <GroupStyle>
                                         <GroupStyle.Panel>

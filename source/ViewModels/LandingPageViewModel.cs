@@ -25,6 +25,9 @@ namespace LandingPage.ViewModels
         internal ObservableCollection<GameModel> recentlyAddedGames = new ObservableCollection<GameModel>();
         public ObservableCollection<GameModel> RecentlyAddedGames => recentlyAddedGames;
 
+        internal ObservableCollection<GameModel> favoriteGames = new ObservableCollection<GameModel>();
+        public ObservableCollection<GameModel> FavoriteGames => favoriteGames;
+
         internal ObservableObject<string> backgroundImagePath = new ObservableObject<string>();
         public ObservableObject<string> BackgroundImagePath => backgroundImagePath;
 
@@ -85,6 +88,7 @@ namespace LandingPage.ViewModels
         {
             UpdateRecentlyPlayedGames();
             UpdateRecentlyAddedGames();
+            UpdateFavorites();
             UpdateBackgroundImagePath();
             UpdateMostPlayedGame();
             successStory.Update();
@@ -232,6 +236,56 @@ namespace LandingPage.ViewModels
                         unusedModel.Game = game;
                         collection.Add(unusedModel);
                     } else
+                    {
+                        changed = true;
+                        collection.Add(new GameModel(game));
+                    }
+                }
+                for (int j = collection.Count - 1; j >= 0; --j)
+                {
+                    if (gameSelection.All(g => g.Id != collection[j].Game?.Id))
+                    {
+                        changed = true;
+                        collection.RemoveAt(j);
+                    }
+                }
+                if (changed && collection.Count > 1)
+                {
+                    collection.Move(collection.Count - 1, 0);
+                }
+            });
+        }
+
+        internal void UpdateFavorites()
+        {
+            var games = playniteAPI.Database.Games
+                .Where(g => !g.Hidden && g.Favorite)
+                .OrderByDescending(g => g.LastActivity);
+            var collection = favoriteGames;
+            var changed = false;
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                var displayedGames = 20;
+
+                IEnumerable<Game> gameSelection = games.Take(displayedGames);
+                foreach (var game in gameSelection)
+                {
+                    if (collection.FirstOrDefault(item => item.Game?.Id == game.Id) is GameModel model)
+                    {
+                        if (model.Game.LastActivity != game.LastActivity)
+                        {
+                            changed = true;
+                        }
+                        model.Game = game;
+                    }
+                    else if (collection.FirstOrDefault(item => gameSelection.All(s => s.Id != item.Game?.Id)) is GameModel unusedModel)
+                    {
+                        changed = true;
+                        collection.Remove(unusedModel);
+                        unusedModel.Game = game;
+                        collection.Add(unusedModel);
+                    }
+                    else
                     {
                         changed = true;
                         collection.Add(new GameModel(game));

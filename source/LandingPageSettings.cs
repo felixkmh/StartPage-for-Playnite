@@ -44,6 +44,9 @@ namespace LandingPage
         private bool showAddedGames = true;
         public bool ShowAddedGames { get => showAddedGames; set => SetValue(ref showAddedGames, value); }
 
+        private bool showFavoriteGames = false;
+        public bool ShowFavoriteGames { get => showFavoriteGames; set => SetValue(ref showFavoriteGames, value); }
+
         private bool showTitleOnCover = true;
         public bool ShowTitleOnCover { get => showTitleOnCover; set => SetValue(ref showTitleOnCover, value); }
 

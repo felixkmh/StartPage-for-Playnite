@@ -38,6 +38,10 @@
                     <TextBlock Text="{DynamicResource LOC_SPG_ShowRecentlyAdded}" Margin="3" VerticalAlignment="Center"/>
                 </DockPanel>
                 <DockPanel>
+                    <CheckBox IsChecked="{Binding Settings.ShowFavoriteGames}" VerticalAlignment="Center" Margin="3"/>
+                    <TextBlock Text="{DynamicResource LOC_SPG_ShowFavoriteGames}" Margin="3" VerticalAlignment="Center"/>
+                </DockPanel>
+                <DockPanel>
                     <CheckBox IsChecked="{Binding Settings.ShowTitleOnCover}" VerticalAlignment="Center" Margin="3"/>
                     <TextBlock Text="{DynamicResource LOC_SPG_ShowTitelOnCover}" Margin="3" VerticalAlignment="Center"/>
                 </DockPanel>
