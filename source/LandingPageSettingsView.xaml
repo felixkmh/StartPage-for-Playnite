@@ -39,7 +39,7 @@
                 </DockPanel>
                 <DockPanel>
                     <CheckBox IsChecked="{Binding Settings.ShowFavoriteGames}" VerticalAlignment="Center" Margin="3"/>
-                    <TextBlock Text="{DynamicResource LOC_SPG_ShowFavoriteGames}" Margin="3" VerticalAlignment="Center"/>
+                    <TextBlock Text="{DynamicResource LOC_SPG_ShowFavorites}" Margin="3" VerticalAlignment="Center"/>
                 </DockPanel>
                 <DockPanel>
                     <CheckBox IsChecked="{Binding Settings.ShowTitleOnCover}" VerticalAlignment="Center" Margin="3"/>
