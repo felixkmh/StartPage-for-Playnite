@@ -1,5 +1,13 @@
 AddonId: felixkmh_StartPage_Plugin
 Packages:  
+  - Version: 1.3.0
+    RequiredApiVersion: 6.1.0
+    ReleaseDate: 2021-11-13
+    PackageUrl: https://github.com/felixkmh/StartPage-for-Playnite/releases/download/v1.3.0/felixkmh_StartPage_Plugin_1_3_0.pext
+    Changelog:
+      - added option to show favorite games
+      - added grid splitter so that the ratio of the upper and lower part can be changed by the user
+      - added option to move StartPage item to the top of the sidebar
   - Version: 1.2.1
     RequiredApiVersion: 6.1.0
     ReleaseDate: 2021-11-12
