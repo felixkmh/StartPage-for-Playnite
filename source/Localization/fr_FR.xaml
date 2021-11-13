@@ -19,4 +19,5 @@
     <sys:String x:Key="LOC_SPG_EnableNotifications">Afficher les notifications</sys:String>
     <sys:String x:Key="LOC_SPG_MinimizeNotification">Réduire les notifications au lancement</sys:String>
     <sys:String x:Key="LOC_SPG_ShowNotificationButtons">Afficher les boutons &quot;ignorer&quot; et &quot;réduire&quot;</sys:String>
+    <sys:String x:Key="LOC_SPG_KeepInMemory">Keep StartPage in Memory when switching to another View</sys:String>
 </ResourceDictionary>
