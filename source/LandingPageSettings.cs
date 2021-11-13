@@ -68,6 +68,9 @@ namespace LandingPage
         private LayoutProperties layoutSettings = new LayoutProperties();
         public LayoutProperties LayoutSettings { get => layoutSettings; set => SetValue(ref layoutSettings, value); }
 
+        private bool moveToTopOfList = false;
+        public bool MoveToTopOfList { get => moveToTopOfList; set => SetValue(ref moveToTopOfList, value); }
+
         // Playnite serializes settings object to a JSON object and saves it as text file.
         // If you want to exclude some property from being saved then use `JsonDontSerialize` ignore attribute.
         [DontSerialize]

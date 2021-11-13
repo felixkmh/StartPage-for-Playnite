@@ -11,7 +11,7 @@
     <ScrollViewer Padding="10">
         <Grid>
             <StackPanel>
-                <StackPanel Orientation="Horizontal">
+                <StackPanel Orientation="Horizontal" ToolTip="{DynamicResource LOC_SPG_UnsupportedToolTip}">
                     <TextBlock Text="{DynamicResource LOC_SPG_StartupItem}" Margin="3" VerticalAlignment="Center"/>
                     <ComboBox Margin="3" VerticalAlignment="Center" 
                               ItemsSource="{Binding Settings.StartPageOptions}" 
@@ -58,6 +58,10 @@
                     <CheckBox IsChecked="{Binding Settings.KeepInMemory}" VerticalAlignment="Center" Margin="3"/>
                     <TextBlock Text="{DynamicResource LOC_SPG_KeepInMemory}" Margin="3" VerticalAlignment="Center"/>
                 </StackPanel>-->
+                <StackPanel Orientation="Horizontal" ToolTip="{DynamicResource LOC_SPG_UnsupportedToolTip}">
+                    <CheckBox IsChecked="{Binding Settings.MoveToTopOfList}" VerticalAlignment="Center" Margin="3"/>
+                    <TextBlock Text="{DynamicResource LOC_SPG_MoveIconToTop}" Margin="3" VerticalAlignment="Center"/>
+                </StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Text="{DynamicResource LOC_SPG_MaxRecentAchievements}" VerticalAlignment="Center"/>
                     <numeric:IntBox Value="{Binding Settings.MaxNumberRecentAchievements, UpdateSourceTrigger=PropertyChanged}" 
