@@ -19,4 +19,5 @@
     <sys:String x:Key="LOC_SPG_EnableNotifications">Benachrichtigungen aktivieren</sys:String>
     <sys:String x:Key="LOC_SPG_MinimizeNotification">Benachrichtigungen beim Start minimieren</sys:String>
     <sys:String x:Key="LOC_SPG_ShowNotificationButtons">Buttons &quot;Verwerfen&quot; und &quot;Minimieren&quot; anzeigen</sys:String>
+    <sys:String x:Key="LOC_SPG_KeepInMemory">Keep StartPage in Memory when switching to another View</sys:String>
 </ResourceDictionary>
