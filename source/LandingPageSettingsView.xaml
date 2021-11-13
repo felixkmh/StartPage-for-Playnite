@@ -54,6 +54,10 @@
                     <CheckBox IsChecked="{Binding Settings.ShowNotificationButtons}" VerticalAlignment="Center" Margin="3"/>
                     <TextBlock Text="{DynamicResource LOC_SPG_ShowNotificationButtons}" Margin="3" VerticalAlignment="Center"/>
                 </StackPanel>
+                <!--<StackPanel Orientation="Horizontal">
+                    <CheckBox IsChecked="{Binding Settings.KeepInMemory}" VerticalAlignment="Center" Margin="3"/>
+                    <TextBlock Text="{DynamicResource LOC_SPG_KeepInMemory}" Margin="3" VerticalAlignment="Center"/>
+                </StackPanel>-->
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Text="{DynamicResource LOC_SPG_MaxRecentAchievements}" VerticalAlignment="Center"/>
                     <numeric:IntBox Value="{Binding Settings.MaxNumberRecentAchievements, UpdateSourceTrigger=PropertyChanged}" 

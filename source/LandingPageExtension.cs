@@ -90,15 +90,34 @@ namespace LandingPage
                 Type = SiderbarItemType.View,
                 Title = "Start Page",
                 Visible = true,
-                Opened = () => { ViewModel.Subscribe(); return View; },
-                Closed = () => { viewModel.Unsubscribe(); GC.Collect(); },
+                Opened = ViewOpened,
+                Closed = ViewClosed,
                 Icon = new TextBlock { Text = "", FontFamily = ResourceProvider.GetResource<FontFamily>("FontIcoFont") }
             });
 
             return items;
         }
 
-        
+        private Control ViewOpened()
+        {
+            ViewModel.Subscribe();
+            return View;
+        }
+
+        private void ViewClosed()
+        {
+            viewModel?.Unsubscribe();
+            if (!Settings.KeepInMemory)
+            {
+                view.DataContext = null;
+                view = null;
+                viewModel.successStory = null;
+                viewModel.clock = null;
+                viewModel = null;
+                GC.Collect();
+            }
+            GC.Collect();
+        }
 
         public override void OnGameInstalled(OnGameInstalledEventArgs args)
         {
@@ -168,6 +187,7 @@ namespace LandingPage
         public override void OnApplicationStopped(OnApplicationStoppedEventArgs args)
         {
             // Add code to be executed when Playnite is shutting down.
+            SavePluginSettings(SettingsViewModel.Settings);
         }
 
         public override void OnLibraryUpdated(OnLibraryUpdatedEventArgs args)

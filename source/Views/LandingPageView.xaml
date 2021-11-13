@@ -242,7 +242,9 @@
             <GroupBox Header="{Binding Label}" Style="{DynamicResource GameGroupBox}">
                 <ListBox ItemsSource="{Binding Games}" ItemContainerStyle="{DynamicResource GameListItem}"
                          BorderThickness="0" Background="Transparent" Padding="0"
-                         ItemTemplate="{DynamicResource GameCoverDataTemplate}">
+                         ItemTemplate="{DynamicResource GameCoverDataTemplate}"
+                         ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                         ScrollViewer.VerticalScrollBarVisibility="Disabled">
                     <ListBox.ItemsPanel>
                         <ItemsPanelTemplate>
                             <StackPanel Orientation="Horizontal" Margin="0"/>
@@ -340,10 +342,24 @@
             <Grid>
                 <Grid HorizontalAlignment="Center">
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="{Binding Settings.Settings.LayoutSettings.UpperRowHeight, Mode=TwoWay}"/>
                         <RowDefinition Height="10"/>
-                        <RowDefinition Height="1.2*"/>
+                        <RowDefinition Height="{Binding Settings.Settings.LayoutSettings.LowerRowHeight, Mode=TwoWay}"/>
                     </Grid.RowDefinitions>
+                    <GridSplitter Grid.Row="1" HorizontalAlignment="Stretch" 
+                                  VerticalAlignment="Center" Height="3" 
+                                  Opacity="0.2">
+                        <GridSplitter.Style>
+                            <Style TargetType="GridSplitter">
+                                <Setter Property="Background" Value="Transparent"/>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="White"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </GridSplitter.Style>
+                    </GridSplitter>
                     <Grid Grid.Row="0" Grid.IsSharedSizeScope="True" VerticalAlignment="Top">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto" SharedSizeGroup="LeftRight"/>

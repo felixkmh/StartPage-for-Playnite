@@ -1,4 +1,5 @@
-﻿using Playnite.SDK;
+﻿using Newtonsoft.Json;
+using Playnite.SDK;
 using Playnite.SDK.Data;
 using System;
 using System.Collections.Generic;
@@ -10,6 +11,16 @@ using System.Windows.Controls;
 
 namespace LandingPage
 {
+    [Serializable]
+    public class LayoutProperties : ObservableObject
+    {
+        internal GridLength upperRowHeight = new GridLength(1.0, GridUnitType.Star);
+        public GridLength UpperRowHeight { get => upperRowHeight; set => SetValue(ref upperRowHeight, value); }
+
+        internal GridLength lowerRowHeight = new GridLength(1.2, GridUnitType.Star);
+        public GridLength LowerRowHeight { get => lowerRowHeight; set => SetValue(ref lowerRowHeight, value); }
+    }
+
     public class LandingPageSettings : ObservableObject
     {
         // workaround to get this module to be loaded by Playnite
@@ -50,6 +61,12 @@ namespace LandingPage
 
         private bool showNotificationButtons = true;
         public bool ShowNotificationButtons { get => showNotificationButtons; set => SetValue(ref showNotificationButtons, value); }
+
+        private bool keepInMemory = true;
+        public bool KeepInMemory { get => keepInMemory; set => SetValue(ref keepInMemory, value); }
+
+        private LayoutProperties layoutSettings = new LayoutProperties();
+        public LayoutProperties LayoutSettings { get => layoutSettings; set => SetValue(ref layoutSettings, value); }
 
         // Playnite serializes settings object to a JSON object and saves it as text file.
         // If you want to exclude some property from being saved then use `JsonDontSerialize` ignore attribute.
