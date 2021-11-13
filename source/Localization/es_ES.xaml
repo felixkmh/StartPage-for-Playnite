@@ -5,8 +5,9 @@
     <sys:String x:Key="LOC_SPG_LatestReleaseGame">Último lanzamiento</sys:String>
     <sys:String x:Key="LOC_SPG_RecentAchievements">Logros recientes</sys:String>
     <sys:String x:Key="LOC_SPG_RecentlyAddedGames">Añadidos recientemente</sys:String>
-
+    
     <!-- Settings -->
+    <sys:String x:Key="LOC_SPG_ShowFavoriteGames">Show Favorite Games</sys:String>
     <sys:String x:Key="LOC_SPG_ShowClock">Mostrar reloj</sys:String>
     <sys:String x:Key="LOC_SPG_ShowRecentlyPlayed">Mostrar juegos jugados recientemente</sys:String>
     <sys:String x:Key="LOC_SPG_ShowRecentAchievements">Mostrar logros recientes usando SuccessStory</sys:String>
