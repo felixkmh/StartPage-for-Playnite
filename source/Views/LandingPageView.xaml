@@ -347,8 +347,8 @@
                         <RowDefinition Height="{Binding Settings.Settings.LayoutSettings.LowerRowHeight, Mode=TwoWay}"/>
                     </Grid.RowDefinitions>
                     <GridSplitter Grid.Row="1" HorizontalAlignment="Stretch" 
-                                  VerticalAlignment="Center" Height="3" 
-                                  Opacity="0.2">
+                                  VerticalAlignment="Center" Height="4" 
+                                  Opacity="0.2" BorderThickness="0">
                         <GridSplitter.Style>
                             <Style TargetType="GridSplitter">
                                 <Setter Property="Background" Value="Transparent"/>
