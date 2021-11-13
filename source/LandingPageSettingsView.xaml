@@ -4,65 +4,75 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:numeric="http://gu.se/NumericInput"
-             xmlns:local="clr-namespace:LandingPage"
+             xmlns:local="clr-namespace:LandingPage" xmlns:system="clr-namespace:System;assembly=mscorlib"
              mc:Ignorable="d"
              d:DesignHeight="400" d:DesignWidth="600"
-             d:DataContext="{d:DesignInstance IsDesignTimeCreatable=False, Type=local:LandingPageSettings}">
-    <ScrollViewer Padding="10">
+             d:DataContext="{d:DesignInstance IsDesignTimeCreatable=False, Type=local:LandingPageSettings}"
+             MaxWidth="{Binding RelativeSource={RelativeSource AncestorType=Panel, Mode=FindAncestor}, Path=ActualWidth, FallbackValue={x:Static system:Double.PositiveInfinity}}"
+             MaxHeight="{Binding RelativeSource={RelativeSource AncestorType=Panel, Mode=FindAncestor}, Path=ActualHeight, FallbackValue={x:Static system:Double.PositiveInfinity}}"
+             >
+    <ScrollViewer Padding="10"
+                  HorizontalScrollBarVisibility="Disabled">
         <Grid>
             <StackPanel>
-                <StackPanel Orientation="Horizontal" ToolTip="{DynamicResource LOC_SPG_UnsupportedToolTip}">
+                <DockPanel LastChildFill="False">
+                    <DockPanel.ToolTip>
+                        <TextBlock Text="{DynamicResource LOC_SPG_UnsupportedToolTip}" TextWrapping="Wrap" MaxWidth="550"/>
+                    </DockPanel.ToolTip>
                     <TextBlock Text="{DynamicResource LOC_SPG_StartupItem}" Margin="3" VerticalAlignment="Center"/>
                     <ComboBox Margin="3" VerticalAlignment="Center" 
                               ItemsSource="{Binding Settings.StartPageOptions}" 
                               SelectedItem="{Binding Settings.StartPage}"
                               MinWidth="150"></ComboBox>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal">
+                </DockPanel>
+                <DockPanel>
                     <CheckBox IsChecked="{Binding Settings.ShowClock}" VerticalAlignment="Center" Margin="3"/>
                     <TextBlock Text="{DynamicResource LOC_SPG_ShowClock}" Margin="3" VerticalAlignment="Center"/>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal">
+                </DockPanel>
+                <DockPanel>
                     <CheckBox IsChecked="{Binding Settings.ShowRecentGames}" VerticalAlignment="Center" Margin="3"/>
                     <TextBlock Text="{DynamicResource LOC_SPG_ShowRecentlyPlayed}" Margin="3" VerticalAlignment="Center"/>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal">
+                </DockPanel>
+                <DockPanel>
                     <CheckBox IsChecked="{Binding Settings.ShowAddedGames}" VerticalAlignment="Center" Margin="3"/>
                     <TextBlock Text="{DynamicResource LOC_SPG_ShowRecentlyAdded}" Margin="3" VerticalAlignment="Center"/>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal">
+                </DockPanel>
+                <DockPanel>
                     <CheckBox IsChecked="{Binding Settings.ShowTitleOnCover}" VerticalAlignment="Center" Margin="3"/>
                     <TextBlock Text="{DynamicResource LOC_SPG_ShowTitelOnCover}" Margin="3" VerticalAlignment="Center"/>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal">
+                </DockPanel>
+                <DockPanel>
                     <CheckBox IsChecked="{Binding Settings.ShowDetails}" VerticalAlignment="Center" Margin="3"/>
                     <TextBlock Text="{DynamicResource LOC_SPG_ShowGameDetails}" Margin="3" VerticalAlignment="Center"/>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal">
+                </DockPanel>
+                <DockPanel>
                     <CheckBox IsChecked="{Binding Settings.ShowRecentAchievements}" VerticalAlignment="Center" Margin="3"/>
                     <TextBlock Text="{DynamicResource LOC_SPG_ShowRecentAchievements}" Margin="3" VerticalAlignment="Center"/>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal">
+                </DockPanel>
+                <DockPanel>
                     <CheckBox IsChecked="{Binding Settings.EnableNotifications}" VerticalAlignment="Center" Margin="3"/>
                     <TextBlock Text="{DynamicResource LOC_SPG_EnableNotifications}" Margin="3" VerticalAlignment="Center"/>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal" IsEnabled="{Binding Settings.EnableNotifications, Mode=OneWay}" Margin="25,0,0,0">
+                </DockPanel>
+                <DockPanel IsEnabled="{Binding Settings.EnableNotifications, Mode=OneWay}" Margin="25,0,0,0">
                     <CheckBox IsChecked="{Binding Settings.MinimizeNotificationsOnLaunch}" VerticalAlignment="Center" Margin="3"/>
                     <TextBlock Text="{DynamicResource LOC_SPG_MinimizeNotification}" Margin="3" VerticalAlignment="Center"/>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal" IsEnabled="{Binding Settings.EnableNotifications, Mode=OneWay}" Margin="25,0,0,0">
+                </DockPanel>
+                <DockPanel IsEnabled="{Binding Settings.EnableNotifications, Mode=OneWay}" Margin="25,0,0,0">
                     <CheckBox IsChecked="{Binding Settings.ShowNotificationButtons}" VerticalAlignment="Center" Margin="3"/>
                     <TextBlock Text="{DynamicResource LOC_SPG_ShowNotificationButtons}" Margin="3" VerticalAlignment="Center"/>
-                </StackPanel>
+                </DockPanel>
                 <!--<StackPanel Orientation="Horizontal">
                     <CheckBox IsChecked="{Binding Settings.KeepInMemory}" VerticalAlignment="Center" Margin="3"/>
                     <TextBlock Text="{DynamicResource LOC_SPG_KeepInMemory}" Margin="3" VerticalAlignment="Center"/>
                 </StackPanel>-->
-                <StackPanel Orientation="Horizontal" ToolTip="{DynamicResource LOC_SPG_UnsupportedToolTip}">
+                <DockPanel>
+                    <DockPanel.ToolTip>
+                        <TextBlock Text="{DynamicResource LOC_SPG_UnsupportedToolTip}" TextWrapping="Wrap" MaxWidth="550"/>
+                    </DockPanel.ToolTip>
                     <CheckBox IsChecked="{Binding Settings.MoveToTopOfList}" VerticalAlignment="Center" Margin="3"/>
-                    <TextBlock Text="{DynamicResource LOC_SPG_MoveIconToTop}" Margin="3" VerticalAlignment="Center"/>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="{DynamicResource LOC_SPG_MoveIconToTop}" Margin="3" VerticalAlignment="Center" TextWrapping="Wrap"/>
+                </DockPanel>
+                <DockPanel LastChildFill="False">
                     <TextBlock Text="{DynamicResource LOC_SPG_MaxRecentAchievements}" VerticalAlignment="Center"/>
                     <numeric:IntBox Value="{Binding Settings.MaxNumberRecentAchievements, UpdateSourceTrigger=PropertyChanged}" 
                                     MinValue="0"
@@ -72,8 +82,8 @@
                                     Style="{StaticResource {x:Type TextBox}}"
                                     TextAlignment="Center">
                     </numeric:IntBox>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal">
+                </DockPanel>
+                <DockPanel LastChildFill="False">
                     <TextBlock Text="{DynamicResource LOC_SPG_MaxRecentAchievementsPerGame}" VerticalAlignment="Center"/>
                     <numeric:IntBox Value="{Binding Settings.MaxNumberRecentAchievementsPerGame, UpdateSourceTrigger=PropertyChanged}" 
                                     MinValue="0"
@@ -83,7 +93,7 @@
                                     Style="{StaticResource {x:Type TextBox}}"
                                     TextAlignment="Center">
                     </numeric:IntBox>
-                </StackPanel>
+                </DockPanel>
             </StackPanel>
         </Grid>
     </ScrollViewer>
