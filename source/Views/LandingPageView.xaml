@@ -403,7 +403,7 @@
                                         ScrollViewer.VerticalScrollBarVisibility="Disabled"
                                         ClipToBounds="False"
                                         Visibility="{Binding Settings.Settings.ShowRecentAchievements, Converter={StaticResource BooleanToHiddenConverter}}">
-                                <Label Content="{DynamicResource LOC_SPG_RecentAchievements}" DockPanel.Dock="Left" Margin="10,10,5,10">
+                                <Label Content="{DynamicResource LOC_SPG_RecentAchievements}" DockPanel.Dock="Left" Margin="10,10,5,2">
                                     <Label.LayoutTransform>
                                         <RotateTransform Angle="-90" />
                                     </Label.LayoutTransform>
