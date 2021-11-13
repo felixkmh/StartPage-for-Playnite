@@ -7,7 +7,7 @@
     <sys:String x:Key="LOC_SPG_RecentlyAddedGames">Ajouté récemment</sys:String>
     
     <!-- Settings -->
-    <sys:String x:Key="LOC_SPG_ShowFavoriteGames">Show Favorite Games</sys:String>
+    <sys:String x:Key="LOC_SPG_ShowFavorites">Show Favorite Games</sys:String>
     <sys:String x:Key="LOC_SPG_ShowClock">Afficher l'horloge</sys:String>
     <sys:String x:Key="LOC_SPG_ShowRecentlyPlayed">Afficher les jeux récemment joués</sys:String>
     <sys:String x:Key="LOC_SPG_ShowRecentAchievements">Afficher les derniers succès (Requiert SucessStory)</sys:String>
