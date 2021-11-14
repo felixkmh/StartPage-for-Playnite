@@ -51,12 +51,15 @@ namespace LandingPage.ViewModels.SuccessStory
         {
             this.achievementsPath = achievementsPath;
             this.playniteAPI = playniteAPI;
-            achievementWatcher = new FileSystemWatcher(achievementsPath, "*.json");
-            achievementWatcher.NotifyFilter = NotifyFilters.LastWrite;
-            achievementWatcher.Created += AchievementWatcher_Created;
-            achievementWatcher.Deleted += AchievementWatcher_Deleted;
-            achievementWatcher.Changed += AchievementWatcher_Changed;
-            achievementWatcher.EnableRaisingEvents = true;
+            if (achievementsPath is string && Directory.Exists(achievementsPath))
+            {
+                achievementWatcher = new FileSystemWatcher(achievementsPath, "*.json");
+                achievementWatcher.NotifyFilter = NotifyFilters.LastWrite;
+                achievementWatcher.Created += AchievementWatcher_Created;
+                achievementWatcher.Deleted += AchievementWatcher_Deleted;
+                achievementWatcher.Changed += AchievementWatcher_Changed;
+                achievementWatcher.EnableRaisingEvents = true;
+            }
             this.landingPageSettingsViewModel = landingPageSettings;
             landingPageSettings.PropertyChanged += LandingPageSettings_PropertyChanged;
             landingPageSettings.Settings.PropertyChanged += Settings_PropertyChanged;
