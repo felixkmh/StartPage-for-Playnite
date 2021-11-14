@@ -185,7 +185,7 @@
                             </ComboBox>
                         </DockPanel>
                         <DockPanel LastChildFill="False">
-                            <TextBlock Text="Background Image Path:" VerticalAlignment="Center"/>
+                            <TextBlock Text="{DynamicResource LOC_SPG_BackgroundImagePath}" VerticalAlignment="Center"/>
                             <TextBox IsReadOnly="True" 
                              Text="{Binding Settings.BackgroundImageUri.LocalPath, FallbackValue='  ---  ', Mode=OneWay}" 
                              VerticalAlignment="Center"
