@@ -32,8 +32,25 @@ namespace LandingPage.Views
         public LandingPageView(LandingPageViewModel model)
         {
             DataContext = model;
+            model.Clock.DayChanged += Clock_DayChanged;
             // model.PropertyChanged += Model_PropertyChanged;
             InitializeComponent();
+        }
+
+        private void Clock_DayChanged(object sender, EventArgs e)
+        {
+            if (RecentlyAddedListBox.ItemsSource is ListCollectionView collectionView)
+            {
+                collectionView.Refresh();
+            }
+            if (RecentlyPlayedListBox.ItemsSource is ListCollectionView collectionView2)
+            {
+                collectionView2.Refresh();
+            }
+            if (FavoritesListBox.ItemsSource is ListCollectionView collectionView3)
+            {
+                collectionView3.Refresh();
+            }
         }
 
         private void Model_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)

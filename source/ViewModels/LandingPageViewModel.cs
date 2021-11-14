@@ -72,6 +72,12 @@ namespace LandingPage.ViewModels
             clearNotificationsCommand = new RelayCommand(() => playniteAPI.Notifications.RemoveAll());
             Settings.Settings.PropertyChanged += Settings_PropertyChanged;
             Settings.PropertyChanged += Settings_PropertyChanged1;
+            clock.DayChanged += Clock_DayChanged;
+        }
+
+        private void Clock_DayChanged(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
         }
 
         private void Settings_PropertyChanged1(object sender, PropertyChangedEventArgs e)

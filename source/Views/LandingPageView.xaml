@@ -407,9 +407,14 @@
                                 <ColumnDefinition Width="Auto"/>
                                 <ColumnDefinition Width="*" SharedSizeGroup="Digits"/>
                             </Grid.ColumnDefinitions>
-                            <TextBlock Text="{Binding Clock.Time, StringFormat=HH}" FontSize="120" Grid.Column="0" TextAlignment="Right"/>
-                            <TextBlock Text=":" FontSize="120" Grid.Column="1" TextAlignment="Center"/>
-                            <TextBlock Text="{Binding Clock.Time, StringFormat=mm}" FontSize="120" Grid.Column="2" TextAlignment="Left"/>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <TextBlock Text="{Binding Clock.Time, StringFormat=HH}" FontSize="120" Grid.Column="0" TextAlignment="Right" LineStackingStrategy="BlockLineHeight" BaselineOffset="20" LineHeight="120" Padding="0"/>
+                            <TextBlock Text=":" FontSize="120" Grid.Column="1" TextAlignment="Center" LineStackingStrategy="BlockLineHeight" LineHeight="120" Padding="0"/>
+                            <TextBlock Text="{Binding Clock.Time, StringFormat=mm}" FontSize="120" Grid.Column="2" TextAlignment="Left" LineStackingStrategy="BlockLineHeight" LineHeight="120" Padding="0"/>
+                            <TextBlock Grid.Row="1" Grid.ColumnSpan="3" Text="{Binding Clock.DateString}" LineStackingStrategy="BlockLineHeight" FontSize="16" HorizontalAlignment="Center" Padding="0" LineHeight="16"/>
                         </Grid>
                         <DockPanel Grid.Column="0" UseLayoutRounding="True" SnapsToDevicePixels="True">
                             <Label Content=" " DockPanel.Dock="Left" Margin="10,10,5,10">

@@ -24,15 +24,29 @@ namespace LandingPage.Models
                     var currentTime = DateTime.Now;
                     if (currentTime != Time)
                     {
+                        if (currentTime.DayOfYear != Time.DayOfYear)
+                        {
+                            OnDayChanged(EventArgs.Empty);
+                        }
                         Time = currentTime;
                         OnPropertyChanged(nameof(Time));
+                        OnPropertyChanged(nameof(DateString));
                     }
                 },
                 Application.Current.Dispatcher
             );
         }
 
+        public event EventHandler DayChanged;
+
+        protected virtual void OnDayChanged(EventArgs e)
+        {
+            DayChanged?.Invoke(this, e);
+        }
+
         public DateTime Time { get; set; } = DateTime.Now;
+
+        public string DateString => Time.ToLongDateString();
 
         public event PropertyChangedEventHandler PropertyChanged;
 
