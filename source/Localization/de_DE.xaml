@@ -5,7 +5,17 @@
     <sys:String x:Key="LOC_SPG_LatestReleaseGame">Neu Veröffentlicht</sys:String>
     <sys:String x:Key="LOC_SPG_RecentAchievements">Aktuelle Erfolge</sys:String>
     <sys:String x:Key="LOC_SPG_RecentlyAddedGames">Zuletzt hinzugefügt</sys:String>
+
+    <!--Settings Tabs-->
+    <sys:String x:Key="LOC_SPG_CommonTab">Common</sys:String>
+    <sys:String x:Key="LOC_SPG_BackgroundTab">Background</sys:String>
     
+    <!--BackgroundImageSource Enum-->
+    <sys:String x:Key="LOC_SPG_BackgroundImageSourceLastPlayed">Last Played</sys:String>
+    <sys:String x:Key="LOC_SPG_BackgroundImageSourceLastAdded">Last Added</sys:String>
+    <sys:String x:Key="LOC_SPG_BackgroundImageSourceMostPlayed">Most Played</sys:String>
+    <sys:String x:Key="LOC_SPG_BackgroundImageSourceRandom">Random</sys:String>
+
     <!-- Settings -->
     <sys:String x:Key="LOC_SPG_ShowFavorites">Favoriten anzeigen</sys:String>
     <sys:String x:Key="LOC_SPG_ShowClock">Uhr anzeigen</sys:String>
@@ -13,8 +23,8 @@
     <sys:String x:Key="LOC_SPG_ShowRecentAchievements">Aktuelle Erfolge mit SuccessStory anzeigen</sys:String>
     <sys:String x:Key="LOC_SPG_ShowRecentlyAdded">Kürzlich hinzugefügte Spiele anzeigen</sys:String>
     <sys:String x:Key="LOC_SPG_StartupItem">(Nicht unterstützt) Beim Start aktiviertes SidebarItem</sys:String>
-    <sys:String x:Key="LOC_SPG_MaxRecentAchievements">Maximale Anzahl neuer Erfolge</sys:String>
-    <sys:String x:Key="LOC_SPG_MaxRecentAchievementsPerGame">Maximale Anzahl neuer Erfolge pro Spiel</sys:String>
+    <sys:String x:Key="LOC_SPG_MaxRecentAchievements">Maximum number of recent Achievements:</sys:String>
+    <sys:String x:Key="LOC_SPG_MaxRecentAchievementsPerGame">Maximum number of recent Achievements per Game:</sys:String>
     <sys:String x:Key="LOC_SPG_ShowTitelOnCover">Titel auf dem Spielcover anzeigen</sys:String>
     <sys:String x:Key="LOC_SPG_ShowGameDetails">Spieldetails anzeigen</sys:String>
     <sys:String x:Key="LOC_SPG_EnableNotifications">Benachrichtigungen aktivieren</sys:String>
@@ -22,5 +32,9 @@
     <sys:String x:Key="LOC_SPG_ShowNotificationButtons">Buttons &quot;Verwerfen&quot; und &quot;Minimieren&quot; anzeigen</sys:String>
     <sys:String x:Key="LOC_SPG_KeepInMemory">StartPage im Speicher behalten, wenn zu einer anderen Ansicht gewechselt wird</sys:String>
     <sys:String x:Key="LOC_SPG_MoveIconToTop">(Nicht unterstützt) StartPage-Element beim Start an den oberen Rand der Seitenleiste verschieben</sys:String>
+    <sys:String x:Key="LOC_SPG_BlurAmount">Blur Radius:</sys:String>
+    <sys:String x:Key="LOC_SPG_BackgroundScale">Background Render Scale:</sys:String>
+    <sys:String x:Key="LOC_SPG_OverlayOpacity">Overlay Opacity:</sys:String>
+    <sys:String x:Key="LOC_SPG_BackgroundImageSource">Game Background Image Selection:</sys:String>
     <sys:String x:Key="LOC_SPG_UnsupportedToolTip">Die Verwendung dieser Funktion erfolgt auf eigene Gefahr. Sie wird nicht offiziell von der PlayniteAPI unterstützt und kann daher zu unerwartetem Verhalten führen.</sys:String>
 </ResourceDictionary>
