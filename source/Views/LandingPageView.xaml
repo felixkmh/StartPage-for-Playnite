@@ -57,7 +57,6 @@
         <conv:BoolToGridLengthConverter x:Key="BoolToGridLengthConverter"/>
         <DataTemplate x:Key="GameCoverDataTemplate" DataType="{x:Type lpm:GameModel}">
             <StackPanel Orientation="Horizontal">
-                <local:GameCover/>
                 <Grid ClipToBounds="True" MaxWidth="{StaticResource CoverWidth}" MaxHeight="{StaticResource CoverHeight}" x:Name="ImageGrid">
                     <Grid.Width>
                         <Binding RelativeSource="{RelativeSource Mode=Self}" 
@@ -700,15 +699,15 @@
                             <DataTemplate DataType="{x:Type pn:NotificationMessage}">
                                 <Grid Margin="0,2" Background="Transparent">
                                     <Border CornerRadius="5" Opacity="0.15"
-                                            x:Name="ItemBackground">
-                                        <Border.Background>
+                                            x:Name="ItemBackground" Background="White">
+                                        <Border.OpacityMask>
                                             <LinearGradientBrush StartPoint="0,0.5">
                                                 <LinearGradientBrush.GradientStops>
                                                     <GradientStop Color="White"/>
                                                     <GradientStop Color="Transparent" Offset="1"/>
                                                 </LinearGradientBrush.GradientStops>
                                             </LinearGradientBrush>
-                                        </Border.Background>
+                                        </Border.OpacityMask>
                                     </Border>
                                     <Button Command="{Binding ActivateCommand}" CommandParameter="{Binding .}" x:Name="NotificationActivationButton">
                                         <Button.Template>
@@ -725,14 +724,18 @@
                                     </Button>
                                     <Button Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ItemsControl}, Path=DataContext.DeleteNotificationCommand}" 
                                             CommandParameter="{Binding .}"
-                                            BorderThickness="0" Background="Transparent" Visibility="Collapsed" HorizontalAlignment="Right"
+                                            BorderThickness="0" Background="Transparent" Visibility="Hidden" HorizontalAlignment="Right"
                                             x:Name="HideButton">
                                         <TextBlock Text="" FontFamily="{StaticResource FontIcoFont}"/>
                                     </Button>
                                 </Grid>
                                 <DataTemplate.Triggers>
+                                    <DataTrigger Binding="{Binding Type}" Value="{x:Static pn:NotificationType.Error}">
+                                        <Setter Property="Background" Value="{DynamicResource WarningBrush}" TargetName="ItemBackground"/>
+                                        <Setter Property="Opacity" Value="0.5" TargetName="ItemBackground"/>
+                                    </DataTrigger>
                                     <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter Property="Opacity" Value="0.25" TargetName="ItemBackground"/>
+                                        <Setter Property="Opacity" Value="0.27" TargetName="ItemBackground"/>
                                         <Setter Property="Visibility" Value="Visible" TargetName="HideButton"/>
                                         <Setter Property="OpacityMask" TargetName="NotificationActivationButton">
                                             <Setter.Value>
