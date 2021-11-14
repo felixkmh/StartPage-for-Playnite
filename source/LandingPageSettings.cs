@@ -3,14 +3,28 @@ using Playnite.SDK;
 using Playnite.SDK.Data;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace LandingPage
 {
+    public enum BackgroundImageSource
+    {
+        [Description("LOC_SPG_BackgroundImageSourceLastPlayed")]
+        LastPlayed,
+        [Description("LOC_SPG_BackgroundImageSourceLastAdded")]
+        LastAdded,
+        [Description("LOC_SPG_BackgroundImageSourceMostPlayed")]
+        MostPlayed,
+        [Description("LOC_SPG_BackgroundImageSourceRandom")]
+        Random
+    }
+
     [Serializable]
     public class LayoutProperties : ObservableObject
     {
@@ -68,11 +82,26 @@ namespace LandingPage
         private bool keepInMemory = true;
         public bool KeepInMemory { get => keepInMemory; set => SetValue(ref keepInMemory, value); }
 
+        private double blurAmount = 200;
+        public double BlurAmount { get => blurAmount; set => SetValue(ref blurAmount, value); }
+
+        private double overlayOpacity = 0.75;
+        public double OverlayOpacity { get => overlayOpacity; set => SetValue(ref overlayOpacity, value); }
+
+        private double renderScale = 0.05;
+        public double RenderScale { get => renderScale; set => SetValue(ref renderScale, value); }
+
         private LayoutProperties layoutSettings = new LayoutProperties();
         public LayoutProperties LayoutSettings { get => layoutSettings; set => SetValue(ref layoutSettings, value); }
 
         private bool moveToTopOfList = false;
         public bool MoveToTopOfList { get => moveToTopOfList; set => SetValue(ref moveToTopOfList, value); }
+
+        private Uri backgroundImageUri = null;
+        public Uri BackgroundImageUri { get => backgroundImageUri; set => SetValue(ref backgroundImageUri, value); }
+
+        private BackgroundImageSource backgroundImageSource = BackgroundImageSource.LastPlayed;
+        public BackgroundImageSource BackgroundImageSource { get => backgroundImageSource; set => SetValue(ref backgroundImageSource, value); }
 
         // Playnite serializes settings object to a JSON object and saves it as text file.
         // If you want to exclude some property from being saved then use `JsonDontSerialize` ignore attribute.
@@ -110,6 +139,10 @@ namespace LandingPage
             }
         }
 
+        public ICommand SelectImagePathCommand { get; private set; }
+
+        public ICommand ClearImagePathCommand { get; private set; }
+
         public LandingPageSettingsViewModel(LandingPageExtension plugin)
         {
             // Injecting your plugin instance is required for Save/Load method because Playnite saves data to a location based on what plugin requested the operation.
@@ -127,6 +160,25 @@ namespace LandingPage
             {
                 Settings = new LandingPageSettings();
             }
+
+            SelectImagePathCommand = new RelayCommand(() =>
+            {
+                if (plugin.PlayniteApi.Dialogs.SelectImagefile() is string path)
+                {
+                    if (System.IO.File.Exists(path))
+                    {
+                        if (Uri.TryCreate(path, UriKind.RelativeOrAbsolute, out var uri))
+                        {
+                            Settings.BackgroundImageUri = uri;
+                        }
+                    }
+                }
+            });
+
+            ClearImagePathCommand = new RelayCommand(() =>
+            {
+                Settings.BackgroundImageUri = null;
+            });
         }
 
         public void BeginEdit()

@@ -28,8 +28,8 @@ namespace LandingPage.ViewModels
         internal ObservableCollection<GameModel> favoriteGames = new ObservableCollection<GameModel>();
         public ObservableCollection<GameModel> FavoriteGames => favoriteGames;
 
-        internal ObservableObject<string> backgroundImagePath = new ObservableObject<string>();
-        public ObservableObject<string> BackgroundImagePath => backgroundImagePath;
+        internal Uri backgroundImagePath = null;
+        public Uri BackgroundImagePath { get => backgroundImagePath; set { SetValue(ref backgroundImagePath, value); } }
 
         internal ObservableCollection<GameGroup> specialGames = new ObservableCollection<GameGroup>();
         public ObservableCollection<GameGroup> SpecialGames => specialGames;
@@ -70,6 +70,29 @@ namespace LandingPage.ViewModels
             notifications.CollectionChanged += (sender, args) => OnPropertyChanged(nameof(Notifications));
             deleteNotificationCommand = new RelayCommand<NotificationMessage>(sender => playniteAPI.Notifications.Remove(sender.Id));
             clearNotificationsCommand = new RelayCommand(() => playniteAPI.Notifications.RemoveAll());
+            Settings.Settings.PropertyChanged += Settings_PropertyChanged;
+            Settings.PropertyChanged += Settings_PropertyChanged1;
+        }
+
+        private void Settings_PropertyChanged1(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == nameof(LandingPageSettingsViewModel.Settings))
+            {
+                UpdateBackgroundImagePath();
+                Settings.Settings.PropertyChanged += Settings_PropertyChanged;
+            }
+        }
+
+        private void Settings_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == nameof(LandingPageSettings.BackgroundImageUri))
+            {
+                UpdateBackgroundImagePath();
+            }
+            if (e.PropertyName == nameof(LandingPageSettings.BackgroundImageSource))
+            {
+                UpdateBackgroundImagePath();
+            }
         }
 
         public void Subscribe()
@@ -140,18 +163,89 @@ namespace LandingPage.ViewModels
 
         private void UpdateBackgroundImagePath()
         {
-            var path = recentlyPlayedGames.OrderByDescending(g => g.Game.LastActivity)
-                .Concat(recentlyAddedGames.OrderByDescending(g => g.Game.Added))
-                .FirstOrDefault(g => !string.IsNullOrEmpty(g.Game.BackgroundImage))?.Game.BackgroundImage;
-            if (string.IsNullOrEmpty(path))
+            Uri path = null;
+            if (Settings.Settings.BackgroundImageUri is Uri)
             {
-
+                path = Settings.Settings.BackgroundImageUri;
             }
-            if (path is string)
+            if (path == null)
             {
-                Application.Current.Dispatcher.Invoke(() => 
+                switch (Settings.Settings.BackgroundImageSource)
                 {
-                    BackgroundImagePath.Object = path;
+                    case BackgroundImageSource.LastPlayed:
+                        {
+                            var databasePath = recentlyPlayedGames.OrderByDescending(g => g.Game.LastActivity)
+                                                 .FirstOrDefault(g => !string.IsNullOrEmpty(g.Game.BackgroundImage))?.Game.BackgroundImage;
+                            var fullPath = playniteAPI.Database.GetFullFilePath(databasePath);
+                            if (Uri.TryCreate(fullPath, UriKind.RelativeOrAbsolute, out var uri))
+                            {
+                                path = uri;
+                            }
+                            break;
+                        }
+                    case BackgroundImageSource.LastAdded:
+                        {
+                            var databasePath = recentlyAddedGames.OrderByDescending(g => g.Game.Added)
+                                                 .FirstOrDefault(g => !string.IsNullOrEmpty(g.Game.BackgroundImage))?.Game.BackgroundImage;
+                            var fullPath = playniteAPI.Database.GetFullFilePath(databasePath);
+                            if (Uri.TryCreate(fullPath, UriKind.RelativeOrAbsolute, out var uri))
+                            {
+                                path = uri;
+                            }
+                            break;
+                        }
+                    case BackgroundImageSource.MostPlayed:
+                        {
+                            var mostPlayed = playniteAPI.Database.Games.MaxElement(game => game.Playtime);
+                            if (mostPlayed.Value is Game)
+                            {
+                                var databasePath = mostPlayed.Value.BackgroundImage;
+                                if (!string.IsNullOrEmpty(databasePath))
+                                {
+                                    var fullPath = playniteAPI.Database.GetFullFilePath(databasePath);
+                                    if (Uri.TryCreate(fullPath, UriKind.RelativeOrAbsolute, out var uri))
+                                    {
+                                        path = uri;
+                                    }
+                                }
+                            }
+                            break;
+                        }
+                    case BackgroundImageSource.Random:
+                        {
+                            var rng = new Random();
+                            var candidates = playniteAPI.Database.Games
+                                .Where(game => !string.IsNullOrEmpty(game.BackgroundImage));
+                            var randomGame = candidates.ElementAtOrDefault(rng.Next(candidates.Count()));
+                            if (randomGame is Game)
+                            {
+                                var databasePath = randomGame.BackgroundImage;
+                                var fullPath = playniteAPI.Database.GetFullFilePath(databasePath);
+                                if (Uri.TryCreate(fullPath, UriKind.RelativeOrAbsolute, out var uri))
+                                {
+                                    path = uri;
+                                }
+                            }
+                            break;
+                        }
+                }
+            }
+            //if (path == null)
+            //{
+            //    var databasePath = recentlyPlayedGames.OrderByDescending(g => g.Game.LastActivity)
+            //        .Concat(recentlyAddedGames.OrderByDescending(g => g.Game.Added))
+            //        .FirstOrDefault(g => !string.IsNullOrEmpty(g.Game.BackgroundImage))?.Game.BackgroundImage;
+            //    var fullPath = playniteAPI.Database.GetFullFilePath(databasePath);
+            //    if (Uri.TryCreate(fullPath, UriKind.RelativeOrAbsolute, out var uri))
+            //    {
+            //        path = uri;
+            //    }
+            //}
+            if (path is Uri && path != BackgroundImagePath)
+            {
+                Application.Current.Dispatcher.Invoke(() =>
+                {
+                    BackgroundImagePath = path;
                 });
             }
         }

@@ -105,7 +105,11 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="transparent_noise.png" />
+    <Resource Include="white_noise.png" />
+    <Resource Include="noise.png" />
     <Resource Include="innerglow.png" />
+    <Resource Include="dark_noise.png" />
     <Content Include="Localization/*.xaml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

@@ -18,6 +18,15 @@
              SizeChanged="UserControl_SizeChanged">
     <UserControl.Resources>
         <BitmapImage x:Key="InnerGlowBitmap" CreateOptions="IgnoreColorProfile" UriSource="pack://application:,,,/StartPagePlugin;component/innerglow.png" CacheOption="OnLoad"/>
+        <ImageBrush x:Key="NoiseBrush" ImageSource="pack://application:,,,/StartPagePlugin;component/noise.png" TileMode="Tile" Viewport="0,0,100,100" ViewportUnits="Absolute"
+                    Opacity="1"/>
+        <ImageBrush x:Key="DarkNoiseBrush" ImageSource="pack://application:,,,/StartPagePlugin;component/dark_noise.png" TileMode="Tile" Viewport="0,0,100,100" ViewportUnits="Absolute"
+                    Opacity="1"/>
+        <ImageBrush x:Key="WhiteNoiseBrush" ImageSource="pack://application:,,,/StartPagePlugin;component/white_noise.png" TileMode="Tile" Viewport="0,0,100,100" ViewportUnits="Absolute"
+                    Opacity="0.5"/>
+        <BitmapImage x:Key="TransparentNoiseImage" CreateOptions="IgnoreColorProfile" UriSource="pack://application:,,,/StartPagePlugin;component/transparent_noise.png" CacheOption="OnLoad"/>
+        <ImageBrush x:Key="TransparentNoiseBrush" ImageSource="{StaticResource TransparentNoiseImage}" TileMode="Tile" Viewport="0,0,100,100" ViewportUnits="Absolute"  
+                    Opacity="0.03" RenderOptions.BitmapScalingMode="LowQuality"/>
         <Style x:Key="VirtualizedStackPanelStyle" TargetType="{x:Type VirtualizingStackPanel}">
             <Setter Property="UseLayoutRounding" Value="False"/>
             <Setter Property="SnapsToDevicePixels" Value="False"/>
@@ -156,6 +165,9 @@
                             </Storyboard>
                         </BeginStoryboard>
                     </DataTrigger.EnterActions>
+                    <DataTrigger.ExitActions>
+                        <RemoveStoryboard BeginStoryboardName="Flashing"/>
+                    </DataTrigger.ExitActions>
                 </DataTrigger>
                 <MultiDataTrigger>
                     <MultiDataTrigger.Conditions>
@@ -167,7 +179,6 @@
                         <Setter Property="Opacity" TargetName="GlowImage" Value="0.5"/>
                     </MultiDataTrigger.Setters>
                     <MultiDataTrigger.EnterActions>
-                        <StopStoryboard BeginStoryboardName="Flashing"/>
                         <BeginStoryboard>
                             <Storyboard>
                                 <DoubleAnimation Duration="0:0:0.5" To="0.5"
@@ -339,16 +350,27 @@
         <Grid>
             <Grid.CacheMode>
                 <BitmapCache EnableClearType="False" 
-                         RenderAtScale="0.1" 
+                         RenderAtScale="{Binding Settings.Settings.RenderScale}" 
                          SnapsToDevicePixels="False" />
             </Grid.CacheMode>
-            <Image Stretch="UniformToFill" Source="{Binding BackgroundImagePath.Object, Converter={StaticResource ImageStringToImageConverter}}"
-                   Opacity="0.5">
+            <Image Stretch="UniformToFill" Source="{Binding BackgroundImagePath, TargetNullValue={x:Null}, FallbackValue={x:Null}}"
+                   Opacity="1">
                 <Image.Effect>
-                    <BlurEffect Radius="100" KernelType="Gaussian" RenderingBias="Performance"/>
+                    <BlurEffect Radius="{Binding Settings.Settings.BlurAmount}" KernelType="Gaussian" RenderingBias="Performance"/>
                 </Image.Effect>
             </Image>
         </Grid>
+        <Border Background="{StaticResource TransparentNoiseBrush}" Opacity="{Binding Settings.Settings.OverlayOpacity}"/>
+        <Border Background="{StaticResource DarkNoiseBrush}" Opacity="{Binding Settings.Settings.OverlayOpacity}">
+            <Border.OpacityMask>
+                <LinearGradientBrush StartPoint="0,1" EndPoint="0,0">
+                    <LinearGradientBrush.GradientStops>
+                        <GradientStop Color="#FFFFFFFF" Offset="0.2"/>
+                        <GradientStop Color="#5FFFFFFF" Offset="0.8"/>
+                    </LinearGradientBrush.GradientStops>
+                </LinearGradientBrush>
+            </Border.OpacityMask>
+        </Border>
         <ScrollViewer HorizontalScrollBarVisibility="Disabled"
                   VerticalScrollBarVisibility="Disabled" Padding="0,40,0,5" Background="{x:Null}">
             <Grid>
@@ -672,12 +694,7 @@
                         <ItemsControl.ItemTemplate>
                             <DataTemplate DataType="{x:Type pn:NotificationMessage}">
                                 <Grid Margin="0,2" Background="Transparent">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="Auto"/>
-                                    </Grid.ColumnDefinitions>
                                     <Border CornerRadius="5" Opacity="0.15"
-                                            Grid.ColumnSpan="2"
                                             x:Name="ItemBackground">
                                         <Border.Background>
                                             <LinearGradientBrush StartPoint="0,0.5">
@@ -688,7 +705,7 @@
                                             </LinearGradientBrush>
                                         </Border.Background>
                                     </Border>
-                                    <Button Grid.Column="0" Command="{Binding ActivateCommand}" CommandParameter="{Binding .}" x:Name="NotificationActivationButton">
+                                    <Button Command="{Binding ActivateCommand}" CommandParameter="{Binding .}" x:Name="NotificationActivationButton">
                                         <Button.Template>
                                             <ControlTemplate TargetType="Button">
                                                 <ContentPresenter/>
@@ -703,7 +720,7 @@
                                     </Button>
                                     <Button Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ItemsControl}, Path=DataContext.DeleteNotificationCommand}" 
                                             CommandParameter="{Binding .}"
-                                            Grid.Column="1" BorderThickness="0" Background="Transparent" Visibility="Collapsed"
+                                            BorderThickness="0" Background="Transparent" Visibility="Collapsed" HorizontalAlignment="Right"
                                             x:Name="HideButton">
                                         <TextBlock Text="" FontFamily="{StaticResource FontIcoFont}"/>
                                     </Button>
@@ -712,6 +729,16 @@
                                     <Trigger Property="IsMouseOver" Value="True">
                                         <Setter Property="Opacity" Value="0.25" TargetName="ItemBackground"/>
                                         <Setter Property="Visibility" Value="Visible" TargetName="HideButton"/>
+                                        <Setter Property="OpacityMask" TargetName="NotificationActivationButton">
+                                            <Setter.Value>
+                                                <LinearGradientBrush StartPoint="0,0.5" EndPoint="1,0.5">
+                                                    <LinearGradientBrush.GradientStops>
+                                                        <GradientStop Color="White" Offset="0.9"/>
+                                                        <GradientStop Color="#15FFFFFF" Offset="1"/>
+                                                    </LinearGradientBrush.GradientStops>
+                                                </LinearGradientBrush>
+                                            </Setter.Value>
+                                        </Setter>
                                     </Trigger>
                                     <DataTrigger Binding="{Binding ActivationAction}" Value="{x:Null}">
                                         <Setter Property="Cursor" TargetName="NotificationActivationButton" Value="Arrow"/>

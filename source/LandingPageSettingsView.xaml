@@ -7,98 +7,197 @@
              xmlns:local="clr-namespace:LandingPage" xmlns:system="clr-namespace:System;assembly=mscorlib"
              mc:Ignorable="d"
              d:DesignHeight="400" d:DesignWidth="600"
-             d:DataContext="{d:DesignInstance IsDesignTimeCreatable=False, Type=local:LandingPageSettings}"
+             d:DataContext="{d:DesignInstance IsDesignTimeCreatable=False, Type=local:LandingPageSettingsViewModel}"
              MaxWidth="{Binding RelativeSource={RelativeSource AncestorType=Panel, Mode=FindAncestor}, Path=ActualWidth, FallbackValue={x:Static system:Double.PositiveInfinity}}"
              MaxHeight="{Binding RelativeSource={RelativeSource AncestorType=Panel, Mode=FindAncestor}, Path=ActualHeight, FallbackValue={x:Static system:Double.PositiveInfinity}}"
              >
-    <ScrollViewer Padding="10"
+    <TabControl>
+        <TabItem Header="{DynamicResource LOC_SPG_CommonTab}">
+            <ScrollViewer Padding="10"
                   HorizontalScrollBarVisibility="Disabled">
-        <Grid>
-            <StackPanel>
-                <DockPanel LastChildFill="False">
-                    <DockPanel.ToolTip>
-                        <TextBlock Text="{DynamicResource LOC_SPG_UnsupportedToolTip}" TextWrapping="Wrap" MaxWidth="550"/>
-                    </DockPanel.ToolTip>
-                    <TextBlock Text="{DynamicResource LOC_SPG_StartupItem}" Margin="3" VerticalAlignment="Center"/>
-                    <ComboBox Margin="3" VerticalAlignment="Center" 
+                <Grid>
+                    <StackPanel>
+                        <DockPanel LastChildFill="False">
+                            <DockPanel.ToolTip>
+                                <TextBlock Text="{DynamicResource LOC_SPG_UnsupportedToolTip}" TextWrapping="Wrap" MaxWidth="550"/>
+                            </DockPanel.ToolTip>
+                            <TextBlock Text="{DynamicResource LOC_SPG_StartupItem}" Margin="3" VerticalAlignment="Center"/>
+                            <ComboBox Margin="3" VerticalAlignment="Center" 
                               ItemsSource="{Binding Settings.StartPageOptions}" 
                               SelectedItem="{Binding Settings.StartPage}"
                               MinWidth="150"></ComboBox>
-                </DockPanel>
-                <DockPanel>
-                    <CheckBox IsChecked="{Binding Settings.ShowClock}" VerticalAlignment="Center" Margin="3"/>
-                    <TextBlock Text="{DynamicResource LOC_SPG_ShowClock}" Margin="3" VerticalAlignment="Center"/>
-                </DockPanel>
-                <DockPanel>
-                    <CheckBox IsChecked="{Binding Settings.ShowRecentGames}" VerticalAlignment="Center" Margin="3"/>
-                    <TextBlock Text="{DynamicResource LOC_SPG_ShowRecentlyPlayed}" Margin="3" VerticalAlignment="Center"/>
-                </DockPanel>
-                <DockPanel>
-                    <CheckBox IsChecked="{Binding Settings.ShowAddedGames}" VerticalAlignment="Center" Margin="3"/>
-                    <TextBlock Text="{DynamicResource LOC_SPG_ShowRecentlyAdded}" Margin="3" VerticalAlignment="Center"/>
-                </DockPanel>
-                <DockPanel>
-                    <CheckBox IsChecked="{Binding Settings.ShowFavoriteGames}" VerticalAlignment="Center" Margin="3"/>
-                    <TextBlock Text="{DynamicResource LOC_SPG_ShowFavorites}" Margin="3" VerticalAlignment="Center"/>
-                </DockPanel>
-                <DockPanel>
-                    <CheckBox IsChecked="{Binding Settings.ShowTitleOnCover}" VerticalAlignment="Center" Margin="3"/>
-                    <TextBlock Text="{DynamicResource LOC_SPG_ShowTitelOnCover}" Margin="3" VerticalAlignment="Center"/>
-                </DockPanel>
-                <DockPanel>
-                    <CheckBox IsChecked="{Binding Settings.ShowDetails}" VerticalAlignment="Center" Margin="3"/>
-                    <TextBlock Text="{DynamicResource LOC_SPG_ShowGameDetails}" Margin="3" VerticalAlignment="Center"/>
-                </DockPanel>
-                <DockPanel>
-                    <CheckBox IsChecked="{Binding Settings.ShowRecentAchievements}" VerticalAlignment="Center" Margin="3"/>
-                    <TextBlock Text="{DynamicResource LOC_SPG_ShowRecentAchievements}" Margin="3" VerticalAlignment="Center"/>
-                </DockPanel>
-                <DockPanel>
-                    <CheckBox IsChecked="{Binding Settings.EnableNotifications}" VerticalAlignment="Center" Margin="3"/>
-                    <TextBlock Text="{DynamicResource LOC_SPG_EnableNotifications}" Margin="3" VerticalAlignment="Center"/>
-                </DockPanel>
-                <DockPanel IsEnabled="{Binding Settings.EnableNotifications, Mode=OneWay}" Margin="25,0,0,0">
-                    <CheckBox IsChecked="{Binding Settings.MinimizeNotificationsOnLaunch}" VerticalAlignment="Center" Margin="3"/>
-                    <TextBlock Text="{DynamicResource LOC_SPG_MinimizeNotification}" Margin="3" VerticalAlignment="Center"/>
-                </DockPanel>
-                <DockPanel IsEnabled="{Binding Settings.EnableNotifications, Mode=OneWay}" Margin="25,0,0,0">
-                    <CheckBox IsChecked="{Binding Settings.ShowNotificationButtons}" VerticalAlignment="Center" Margin="3"/>
-                    <TextBlock Text="{DynamicResource LOC_SPG_ShowNotificationButtons}" Margin="3" VerticalAlignment="Center"/>
-                </DockPanel>
-                <!--<StackPanel Orientation="Horizontal">
+                        </DockPanel>
+                        <DockPanel>
+                            <CheckBox IsChecked="{Binding Settings.ShowClock}" VerticalAlignment="Center" Margin="3"/>
+                            <TextBlock Text="{DynamicResource LOC_SPG_ShowClock}" Margin="3" VerticalAlignment="Center"/>
+                        </DockPanel>
+                        <DockPanel>
+                            <CheckBox IsChecked="{Binding Settings.ShowRecentGames}" VerticalAlignment="Center" Margin="3"/>
+                            <TextBlock Text="{DynamicResource LOC_SPG_ShowRecentlyPlayed}" Margin="3" VerticalAlignment="Center"/>
+                        </DockPanel>
+                        <DockPanel>
+                            <CheckBox IsChecked="{Binding Settings.ShowAddedGames}" VerticalAlignment="Center" Margin="3"/>
+                            <TextBlock Text="{DynamicResource LOC_SPG_ShowRecentlyAdded}" Margin="3" VerticalAlignment="Center"/>
+                        </DockPanel>
+                        <DockPanel>
+                            <CheckBox IsChecked="{Binding Settings.ShowFavoriteGames}" VerticalAlignment="Center" Margin="3"/>
+                            <TextBlock Text="{DynamicResource LOC_SPG_ShowFavorites}" Margin="3" VerticalAlignment="Center"/>
+                        </DockPanel>
+                        <DockPanel>
+                            <CheckBox IsChecked="{Binding Settings.ShowTitleOnCover}" VerticalAlignment="Center" Margin="3"/>
+                            <TextBlock Text="{DynamicResource LOC_SPG_ShowTitelOnCover}" Margin="3" VerticalAlignment="Center"/>
+                        </DockPanel>
+                        <DockPanel>
+                            <CheckBox IsChecked="{Binding Settings.ShowDetails}" VerticalAlignment="Center" Margin="3"/>
+                            <TextBlock Text="{DynamicResource LOC_SPG_ShowGameDetails}" Margin="3" VerticalAlignment="Center"/>
+                        </DockPanel>
+                        <DockPanel>
+                            <CheckBox IsChecked="{Binding Settings.ShowRecentAchievements}" VerticalAlignment="Center" Margin="3"/>
+                            <TextBlock Text="{DynamicResource LOC_SPG_ShowRecentAchievements}" Margin="3" VerticalAlignment="Center"/>
+                        </DockPanel>
+                        <DockPanel>
+                            <CheckBox IsChecked="{Binding Settings.EnableNotifications}" VerticalAlignment="Center" Margin="3"/>
+                            <TextBlock Text="{DynamicResource LOC_SPG_EnableNotifications}" Margin="3" VerticalAlignment="Center"/>
+                        </DockPanel>
+                        <DockPanel IsEnabled="{Binding Settings.EnableNotifications, Mode=OneWay}" Margin="25,0,0,0">
+                            <CheckBox IsChecked="{Binding Settings.MinimizeNotificationsOnLaunch}" VerticalAlignment="Center" Margin="3"/>
+                            <TextBlock Text="{DynamicResource LOC_SPG_MinimizeNotification}" Margin="3" VerticalAlignment="Center"/>
+                        </DockPanel>
+                        <DockPanel IsEnabled="{Binding Settings.EnableNotifications, Mode=OneWay}" Margin="25,0,0,0">
+                            <CheckBox IsChecked="{Binding Settings.ShowNotificationButtons}" VerticalAlignment="Center" Margin="3"/>
+                            <TextBlock Text="{DynamicResource LOC_SPG_ShowNotificationButtons}" Margin="3" VerticalAlignment="Center"/>
+                        </DockPanel>
+                        <!--<StackPanel Orientation="Horizontal">
                     <CheckBox IsChecked="{Binding Settings.KeepInMemory}" VerticalAlignment="Center" Margin="3"/>
                     <TextBlock Text="{DynamicResource LOC_SPG_KeepInMemory}" Margin="3" VerticalAlignment="Center"/>
                 </StackPanel>-->
-                <DockPanel>
-                    <DockPanel.ToolTip>
-                        <TextBlock Text="{DynamicResource LOC_SPG_UnsupportedToolTip}" TextWrapping="Wrap" MaxWidth="550"/>
-                    </DockPanel.ToolTip>
-                    <CheckBox IsChecked="{Binding Settings.MoveToTopOfList}" VerticalAlignment="Center" Margin="3"/>
-                    <TextBlock Text="{DynamicResource LOC_SPG_MoveIconToTop}" Margin="3" VerticalAlignment="Center" TextWrapping="Wrap"/>
-                </DockPanel>
-                <DockPanel LastChildFill="False">
-                    <TextBlock Text="{DynamicResource LOC_SPG_MaxRecentAchievements}" VerticalAlignment="Center"/>
-                    <numeric:IntBox Value="{Binding Settings.MaxNumberRecentAchievements, UpdateSourceTrigger=PropertyChanged}" 
+                        <DockPanel>
+                            <DockPanel.ToolTip>
+                                <TextBlock Text="{DynamicResource LOC_SPG_UnsupportedToolTip}" TextWrapping="Wrap" MaxWidth="550"/>
+                            </DockPanel.ToolTip>
+                            <CheckBox IsChecked="{Binding Settings.MoveToTopOfList}" VerticalAlignment="Center" Margin="3"/>
+                            <TextBlock Text="{DynamicResource LOC_SPG_MoveIconToTop}" Margin="3" VerticalAlignment="Center" TextWrapping="Wrap"/>
+                        </DockPanel>
+                        <DockPanel LastChildFill="False">
+                            <TextBlock Text="{DynamicResource LOC_SPG_MaxRecentAchievements}" VerticalAlignment="Center"/>
+                            <numeric:IntBox Value="{Binding Settings.MaxNumberRecentAchievements, UpdateSourceTrigger=PropertyChanged}" 
                                     MinValue="0"
                                     MaxValue="20"
                                     MinWidth="30"
                                     ValidationTrigger="PropertyChanged"
                                     Style="{StaticResource {x:Type TextBox}}"
                                     TextAlignment="Center">
-                    </numeric:IntBox>
-                </DockPanel>
-                <DockPanel LastChildFill="False">
-                    <TextBlock Text="{DynamicResource LOC_SPG_MaxRecentAchievementsPerGame}" VerticalAlignment="Center"/>
-                    <numeric:IntBox Value="{Binding Settings.MaxNumberRecentAchievementsPerGame, UpdateSourceTrigger=PropertyChanged}" 
+                            </numeric:IntBox>
+                        </DockPanel>
+                        <DockPanel LastChildFill="False">
+                            <TextBlock Text="{DynamicResource LOC_SPG_MaxRecentAchievementsPerGame}" VerticalAlignment="Center"/>
+                            <numeric:IntBox Value="{Binding Settings.MaxNumberRecentAchievementsPerGame, UpdateSourceTrigger=PropertyChanged}" 
                                     MinValue="0"
                                     MaxValue="20"
                                     MinWidth="30"
                                     ValidationTrigger="PropertyChanged"
                                     Style="{StaticResource {x:Type TextBox}}"
                                     TextAlignment="Center">
-                    </numeric:IntBox>
-                </DockPanel>
-            </StackPanel>
-        </Grid>
-    </ScrollViewer>
+                            </numeric:IntBox>
+                        </DockPanel>
+                    </StackPanel>
+                </Grid>
+            </ScrollViewer>
+        </TabItem>
+        <TabItem Header="{DynamicResource LOC_SPG_BackgroundTab}">
+            <ScrollViewer Padding="10"
+                  HorizontalScrollBarVisibility="Disabled">
+                <Grid>
+                    <StackPanel Grid.IsSharedSizeScope="True">
+                        <DockPanel LastChildFill="False">
+                            <Grid VerticalAlignment="Center">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition SharedSizeGroup="Descriptions"/>
+                                    <ColumnDefinition SharedSizeGroup="Controls"/>
+                                    <ColumnDefinition SharedSizeGroup="Value"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Column="0" Text="{DynamicResource LOC_SPG_BlurAmount}" VerticalAlignment="Center"/>
+                                <Slider Grid.Column="1" Margin="10,0" VerticalAlignment="Center" Value="{Binding Settings.BlurAmount}" Minimum="0" Maximum="500" Width="180" IsSnapToTickEnabled="True" TickFrequency="1"/>
+                                <numeric:DoubleBox Grid.Column="2" Value="{Binding Settings.BlurAmount, UpdateSourceTrigger=PropertyChanged}" 
+                                        MinValue="0"
+                                        MaxValue="1000"
+                                        MinWidth="30"
+                                        ValidationTrigger="PropertyChanged"
+                                        Style="{StaticResource {x:Type TextBox}}"
+                                        TextAlignment="Center">
+                                </numeric:DoubleBox>
+                            </Grid>
+                        </DockPanel>
+                        <DockPanel LastChildFill="False">
+                            <Grid VerticalAlignment="Center">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition SharedSizeGroup="Descriptions"/>
+                                    <ColumnDefinition SharedSizeGroup="Controls"/>
+                                    <ColumnDefinition SharedSizeGroup="Value"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Column="0" Text="{DynamicResource LOC_SPG_BackgroundScale}" VerticalAlignment="Center"/>
+                                <Slider Grid.Column="1" Margin="10,0" VerticalAlignment="Center" Value="{Binding Settings.RenderScale}" Minimum="0.01" Maximum="1" Width="180" IsSnapToTickEnabled="True" TickFrequency="0.01"/>
+                                <numeric:DoubleBox Grid.Column="2" Value="{Binding Settings.RenderScale, UpdateSourceTrigger=PropertyChanged}" 
+                                        MinValue="0.01"
+                                        MaxValue="1"
+                                        MinWidth="30"
+                                        ValidationTrigger="PropertyChanged"
+                                        Style="{StaticResource {x:Type TextBox}}"
+                                        TextAlignment="Center">
+                                </numeric:DoubleBox>
+                            </Grid>
+                        </DockPanel>
+                        <DockPanel LastChildFill="False">
+                            <Grid VerticalAlignment="Center">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition SharedSizeGroup="Descriptions"/>
+                                    <ColumnDefinition SharedSizeGroup="Controls"/>
+                                    <ColumnDefinition SharedSizeGroup="Value"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Column="0" Text="{DynamicResource LOC_SPG_OverlayOpacity}" VerticalAlignment="Center"/>
+                                <Slider Grid.Column="1" Margin="10,0" VerticalAlignment="Center" Value="{Binding Settings.OverlayOpacity}" Minimum="0" Maximum="1" Width="180" IsSnapToTickEnabled="True" TickFrequency="0.01"/>
+                                <numeric:DoubleBox Grid.Column="2" Value="{Binding Settings.OverlayOpacity, UpdateSourceTrigger=PropertyChanged}" 
+                                        MinValue="0"
+                                        MaxValue="1"
+                                        MinWidth="30"
+                                        ValidationTrigger="PropertyChanged"
+                                        Style="{StaticResource {x:Type TextBox}}"
+                                        TextAlignment="Center">
+                                </numeric:DoubleBox>
+                            </Grid>
+                        </DockPanel>
+                        <DockPanel LastChildFill="False">
+                            <TextBlock Text="{DynamicResource LOC_SPG_BackgroundImageSource}" VerticalAlignment="Center"/>
+                            <ComboBox SelectedValue="{Binding Settings.BackgroundImageSource}" Margin="5,0" MinWidth="120">
+                                <ComboBox.ItemsSource>
+                                    <x:Array Type="{x:Type system:Enum}">
+                                        <local:BackgroundImageSource>LastPlayed</local:BackgroundImageSource>
+                                        <local:BackgroundImageSource>LastAdded</local:BackgroundImageSource>
+                                        <local:BackgroundImageSource>MostPlayed</local:BackgroundImageSource>
+                                        <local:BackgroundImageSource>Random</local:BackgroundImageSource>
+                                    </x:Array>
+                                </ComboBox.ItemsSource>
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate DataType="{x:Type local:BackgroundImageSource}">
+                                        <TextBlock Text="{Binding Converter={StaticResource ObjectToStringConverter}}"/>
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>
+                        </DockPanel>
+                        <DockPanel LastChildFill="False">
+                            <TextBlock Text="Background Image Path:" VerticalAlignment="Center"/>
+                            <TextBox IsReadOnly="True" 
+                             Text="{Binding Settings.BackgroundImageUri.LocalPath, FallbackValue='  ---  ', Mode=OneWay}" 
+                             VerticalAlignment="Center"
+                             MaxWidth="400"
+                             Margin="5,0"/>
+                            <Button Margin="2,0" VerticalAlignment="Center" Command="{Binding SelectImagePathCommand}">Select</Button>
+                            <Button Margin="2,0" VerticalAlignment="Center" Command="{Binding ClearImagePathCommand}">Clear</Button>
+                        </DockPanel>
+                    </StackPanel>
+                </Grid>
+            </ScrollViewer>
+        </TabItem>
+        
+    </TabControl>
 </UserControl>
