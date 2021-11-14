@@ -7,14 +7,14 @@
     <sys:String x:Key="LOC_SPG_RecentlyAddedGames">Ajouté récemment</sys:String>
 
     <!--Settings Tabs-->
-    <sys:String x:Key="LOC_SPG_CommonTab">Common</sys:String>
-    <sys:String x:Key="LOC_SPG_BackgroundTab">Background</sys:String>
+    <sys:String x:Key="LOC_SPG_CommonTab">Général</sys:String>
+    <sys:String x:Key="LOC_SPG_BackgroundTab">Image de fond</sys:String>
     
     <!--BackgroundImageSource Enum-->
-    <sys:String x:Key="LOC_SPG_BackgroundImageSourceLastPlayed">Last Played</sys:String>
-    <sys:String x:Key="LOC_SPG_BackgroundImageSourceLastAdded">Last Added</sys:String>
-    <sys:String x:Key="LOC_SPG_BackgroundImageSourceMostPlayed">Most Played</sys:String>
-    <sys:String x:Key="LOC_SPG_BackgroundImageSourceRandom">Random</sys:String>
+    <sys:String x:Key="LOC_SPG_BackgroundImageSourceLastPlayed">Dernier lancement</sys:String>
+    <sys:String x:Key="LOC_SPG_BackgroundImageSourceLastAdded">Dernier ajout</sys:String>
+    <sys:String x:Key="LOC_SPG_BackgroundImageSourceMostPlayed">Le plus joué</sys:String>
+    <sys:String x:Key="LOC_SPG_BackgroundImageSourceRandom">Aléatoire</sys:String>
 
     <!-- Settings -->
     <sys:String x:Key="LOC_SPG_ShowFavorites">Afficher les jeux favoris</sys:String>
@@ -23,8 +23,8 @@
     <sys:String x:Key="LOC_SPG_ShowRecentAchievements">Afficher les derniers succès (Requiert SucessStory)</sys:String>
     <sys:String x:Key="LOC_SPG_ShowRecentlyAdded">Afficher les jeux récemment ajoutés</sys:String>
     <sys:String x:Key="LOC_SPG_StartupItem">(Non pris en charge) Onglet affiché au démarrage :</sys:String>
-    <sys:String x:Key="LOC_SPG_MaxRecentAchievements">Maximum number of recent Achievements:</sys:String>
-    <sys:String x:Key="LOC_SPG_MaxRecentAchievementsPerGame">Maximum number of recent Achievements per Game:</sys:String>
+    <sys:String x:Key="LOC_SPG_MaxRecentAchievements">Nombre maximum de succès récents affichés :</sys:String>
+    <sys:String x:Key="LOC_SPG_MaxRecentAchievementsPerGame">Nombre maximum de succès récents affichés par jeu :</sys:String>
     <sys:String x:Key="LOC_SPG_ShowTitelOnCover">Afficher le nom des jeux sur leur couverture</sys:String>
     <sys:String x:Key="LOC_SPG_ShowGameDetails">Afficher les propriétés des jeux</sys:String>
     <sys:String x:Key="LOC_SPG_EnableNotifications">Afficher les notifications</sys:String>
@@ -32,12 +32,12 @@
     <sys:String x:Key="LOC_SPG_ShowNotificationButtons">Afficher les boutons &quot;ignorer&quot; et &quot;réduire&quot;</sys:String>
     <sys:String x:Key="LOC_SPG_KeepInMemory">Conserver Starpage en mémoire lorsqu'un autre onglet est affiché</sys:String>
     <sys:String x:Key="LOC_SPG_MoveIconToTop">(Non pris en charge) Déplacer Starpage en haut de la barre latérale au démarrage</sys:String>
-    <sys:String x:Key="LOC_SPG_BlurAmount">Blur Radius:</sys:String>
-    <sys:String x:Key="LOC_SPG_EffectiveBlur">Effective Blur Radius:</sys:String>
-    <sys:String x:Key="LOC_SPG_EffectiveBlurToolTip">The effective blur radius is given by (Blur Radius) / (Background Render Scale). A low render scale paired with a low blur radius may lead to undesired results. Decreasing the render scale can yield better performance and can create a stronger blur effect.</sys:String>
-    <sys:String x:Key="LOC_SPG_BackgroundScale">Background Render Scale:</sys:String>
-    <sys:String x:Key="LOC_SPG_OverlayOpacity">Overlay Opacity:</sys:String>
-    <sys:String x:Key="LOC_SPG_BackgroundImageSource">Game Background Image Selection:</sys:String>
-    <sys:String x:Key="LOC_SPG_BackgroundImagePath">Background Image Path:</sys:String>
+    <sys:String x:Key="LOC_SPG_BlurAmount">Intensité du flou :</sys:String>
+    <sys:String x:Key="LOC_SPG_EffectiveBlur">Intensité effective du flou :</sys:String>
+    <sys:String x:Key="LOC_SPG_EffectiveBlurToolTip">L'intensité effective du flou est déterminée par les paramètres (intensité du flou) / (Échelle de rendu de l'image de fond). Une échelle de résolution basse combinée à une faible intensité du flou peut créer des anomalies visuelles. Réduire l'échelle de résolution peut améliorer les performances et, selon les paramètres, créer un effet de flou plus prononcé.</sys:String>
+    <sys:String x:Key="LOC_SPG_BackgroundScale">Échelle de rendu de l'image de fond :</sys:String>
+    <sys:String x:Key="LOC_SPG_OverlayOpacity">Opacité de la fenêtre flottante :</sys:String>
+    <sys:String x:Key="LOC_SPG_BackgroundImageSource">Sélection de l'image de fond de jeu :</sys:String>
+    <sys:String x:Key="LOC_SPG_BackgroundImagePath">Chemin du dossier de l'image de fond :</sys:String>
     <sys:String x:Key="LOC_SPG_UnsupportedToolTip">Cette fonctionnalité n'est pas supportée par l'API de Playnite et peut causer des erreurs.</sys:String>
 </ResourceDictionary>
