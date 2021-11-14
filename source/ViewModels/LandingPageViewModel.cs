@@ -77,7 +77,7 @@ namespace LandingPage.ViewModels
 
         private void Clock_DayChanged(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            
         }
 
         private void Settings_PropertyChanged1(object sender, PropertyChangedEventArgs e)
