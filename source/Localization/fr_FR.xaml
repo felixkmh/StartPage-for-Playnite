@@ -19,7 +19,7 @@
     <!-- Settings -->
     <sys:String x:Key="LOC_SPG_ShowFavorites">Afficher les jeux favoris</sys:String>
     <sys:String x:Key="LOC_SPG_ShowClock">Afficher l'horloge</sys:String>
-    <sys:String x:Key="LOC_SPG_ShowRecentlyPlayed">Afficher les jeux récemment joués</sys:String>
+    <sys:String x:Key="LOC_SPG_ShowRecentlyPlayed">Afficher les jeux lancés récemment</sys:String>
     <sys:String x:Key="LOC_SPG_ShowRecentAchievements">Afficher les derniers succès (Requiert SucessStory)</sys:String>
     <sys:String x:Key="LOC_SPG_ShowRecentlyAdded">Afficher les jeux récemment ajoutés</sys:String>
     <sys:String x:Key="LOC_SPG_StartupItem">(Non pris en charge) Onglet affiché au démarrage :</sys:String>
@@ -32,12 +32,12 @@
     <sys:String x:Key="LOC_SPG_ShowNotificationButtons">Afficher les boutons &quot;ignorer&quot; et &quot;réduire&quot;</sys:String>
     <sys:String x:Key="LOC_SPG_KeepInMemory">Conserver Starpage en mémoire lorsqu'un autre onglet est affiché</sys:String>
     <sys:String x:Key="LOC_SPG_MoveIconToTop">(Non pris en charge) Déplacer Starpage en haut de la barre latérale au démarrage</sys:String>
-    <sys:String x:Key="LOC_SPG_BlurAmount">Intensité du flou :</sys:String>
-    <sys:String x:Key="LOC_SPG_EffectiveBlur">Intensité effective du flou :</sys:String>
+    <sys:String x:Key="LOC_SPG_BlurAmount">Valeur de floutage par défaut :</sys:String>
+    <sys:String x:Key="LOC_SPG_EffectiveBlur">Intensité du flou :</sys:String>
     <sys:String x:Key="LOC_SPG_EffectiveBlurToolTip">L'intensité effective du flou est déterminée par les paramètres (intensité du flou) / (Échelle de rendu de l'image de fond). Une échelle de résolution basse combinée à une faible intensité du flou peut créer des anomalies visuelles. Réduire l'échelle de résolution peut améliorer les performances et, selon les paramètres, créer un effet de flou plus prononcé.</sys:String>
     <sys:String x:Key="LOC_SPG_BackgroundScale">Échelle de rendu de l'image de fond :</sys:String>
-    <sys:String x:Key="LOC_SPG_OverlayOpacity">Opacité de la fenêtre flottante :</sys:String>
+    <sys:String x:Key="LOC_SPG_OverlayOpacity">Opacité du filtre :</sys:String>
     <sys:String x:Key="LOC_SPG_BackgroundImageSource">Sélection de l'image de fond de jeu :</sys:String>
-    <sys:String x:Key="LOC_SPG_BackgroundImagePath">Chemin du dossier de l'image de fond :</sys:String>
-    <sys:String x:Key="LOC_SPG_UnsupportedToolTip">Cette fonctionnalité n'est pas supportée par l'API de Playnite et peut causer des erreurs.</sys:String>
+    <sys:String x:Key="LOC_SPG_BackgroundImagePath">Répertoire de l'image de fond :</sys:String>
+    <sys:String x:Key="LOC_SPG_UnsupportedToolTip">Cette fonctionnalité n'est pas supportée par l'API de Playnite et pourrait provoquer des erreurs.</sys:String>
 </ResourceDictionary>
