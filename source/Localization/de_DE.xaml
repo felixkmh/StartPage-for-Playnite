@@ -33,6 +33,8 @@
     <sys:String x:Key="LOC_SPG_KeepInMemory">StartPage im Speicher behalten, wenn zu einer anderen Ansicht gewechselt wird</sys:String>
     <sys:String x:Key="LOC_SPG_MoveIconToTop">(Nicht unterstützt) StartPage-Element beim Start an den oberen Rand der Seitenleiste verschieben</sys:String>
     <sys:String x:Key="LOC_SPG_BlurAmount">Unschärferadius:</sys:String>
+    <sys:String x:Key="LOC_SPG_EffectiveBlur">Effective Blur Radius:</sys:String>
+    <sys:String x:Key="LOC_SPG_EffectiveBlurToolTip">The effective blur radius is given by (Blur Radius) / (Background Render Scale). A low render scale paired with a low blur radius may lead to undesired results. Decreasing the render scale can yield better performance and can create a stronger blur effect.</sys:String>
     <sys:String x:Key="LOC_SPG_BackgroundScale">Hintergrund-Rendering-Skalierung:</sys:String>
     <sys:String x:Key="LOC_SPG_OverlayOpacity">Überlagerungsdeckkraft:</sys:String>
     <sys:String x:Key="LOC_SPG_BackgroundImageSource">Auswahl des Spiel-Hintergrundbildes:</sys:String>
