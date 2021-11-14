@@ -191,8 +191,8 @@
                              VerticalAlignment="Center"
                              MaxWidth="400"
                              Margin="5,0"/>
-                            <Button Margin="2,0" VerticalAlignment="Center" Command="{Binding SelectImagePathCommand}">Select</Button>
-                            <Button Margin="2,0" VerticalAlignment="Center" Command="{Binding ClearImagePathCommand}">Clear</Button>
+                            <Button Margin="2,0" VerticalAlignment="Center" Command="{Binding SelectImagePathCommand}" Content="{DynamicResource LOCSelectImageTitle}"/>
+                            <Button Margin="2,0" VerticalAlignment="Center" Command="{Binding ClearImagePathCommand}" Content="{DynamicResource LOCClearLabel}"/>
                         </DockPanel>
                     </StackPanel>
                 </Grid>
