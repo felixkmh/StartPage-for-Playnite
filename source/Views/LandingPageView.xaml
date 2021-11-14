@@ -65,7 +65,7 @@
                                  Converter="{StaticResource ActualHeightToWidthConverter}" 
                                  Mode="OneWay">
                             <Binding.ConverterParameter>
-                                <system:Double>0.71794871794871794871794871794872</system:Double>
+                                <system:Double>0.71794</system:Double>
                             </Binding.ConverterParameter>
                         </Binding>
                     </Grid.Width>
@@ -597,7 +597,7 @@
         <Button HorizontalAlignment="Right" VerticalAlignment="Top" Margin="20,40" Command="{Binding OpenSettingsCommand}">
             <TextBlock Text="" FontFamily="{DynamicResource FontIcoFont}"/>
         </Button>
-        <Grid HorizontalAlignment="Center" VerticalAlignment="Top" x:Name="NotificationGrid"
+        <Grid HorizontalAlignment="Center" VerticalAlignment="Top" x:Name="NotificationGrid" ClipToBounds="True"
               Width="360" Margin="0" Visibility="{Binding Settings.Settings.EnableNotifications, Converter={StaticResource BooleanToVisibilityConverter}}">
             <Border Padding="0" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,25,0,0"
                     Visibility="{Binding ElementName=NotificationsBorder, Path=Tag, Converter={StaticResource VisibilityInverter}}">
