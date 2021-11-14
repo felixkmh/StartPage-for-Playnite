@@ -109,44 +109,63 @@
                   HorizontalScrollBarVisibility="Disabled">
                 <Grid>
                     <StackPanel Grid.IsSharedSizeScope="True">
-                        <DockPanel LastChildFill="False">
-                            <Grid VerticalAlignment="Center">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition SharedSizeGroup="Descriptions"/>
-                                    <ColumnDefinition SharedSizeGroup="Controls"/>
-                                    <ColumnDefinition SharedSizeGroup="Value"/>
-                                </Grid.ColumnDefinitions>
-                                <TextBlock Grid.Column="0" Text="{DynamicResource LOC_SPG_BlurAmount}" VerticalAlignment="Center"/>
-                                <Slider Grid.Column="1" Margin="10,0" VerticalAlignment="Center" Value="{Binding Settings.BlurAmount}" Minimum="0" Maximum="500" Width="180" IsSnapToTickEnabled="True" TickFrequency="1"/>
-                                <numeric:DoubleBox Grid.Column="2" Value="{Binding Settings.BlurAmount, UpdateSourceTrigger=PropertyChanged}" 
-                                        MinValue="0"
-                                        MaxValue="1000"
-                                        MinWidth="30"
-                                        ValidationTrigger="PropertyChanged"
-                                        Style="{StaticResource {x:Type TextBox}}"
-                                        TextAlignment="Center">
-                                </numeric:DoubleBox>
-                            </Grid>
-                        </DockPanel>
-                        <DockPanel LastChildFill="False">
-                            <Grid VerticalAlignment="Center">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition SharedSizeGroup="Descriptions"/>
-                                    <ColumnDefinition SharedSizeGroup="Controls"/>
-                                    <ColumnDefinition SharedSizeGroup="Value"/>
-                                </Grid.ColumnDefinitions>
-                                <TextBlock Grid.Column="0" Text="{DynamicResource LOC_SPG_BackgroundScale}" VerticalAlignment="Center"/>
-                                <Slider Grid.Column="1" Margin="10,0" VerticalAlignment="Center" Value="{Binding Settings.RenderScale}" Minimum="0.01" Maximum="1" Width="180" IsSnapToTickEnabled="True" TickFrequency="0.01"/>
-                                <numeric:DoubleBox Grid.Column="2" Value="{Binding Settings.RenderScale, UpdateSourceTrigger=PropertyChanged}" 
-                                        MinValue="0.01"
-                                        MaxValue="1"
-                                        MinWidth="30"
-                                        ValidationTrigger="PropertyChanged"
-                                        Style="{StaticResource {x:Type TextBox}}"
-                                        TextAlignment="Center">
-                                </numeric:DoubleBox>
-                            </Grid>
-                        </DockPanel>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <DockPanel LastChildFill="False" Grid.Column="0" Grid.Row="0">
+                                <Grid VerticalAlignment="Center">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition SharedSizeGroup="Descriptions"/>
+                                        <ColumnDefinition SharedSizeGroup="Controls"/>
+                                        <ColumnDefinition SharedSizeGroup="Value"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Grid.Column="0" Text="{DynamicResource LOC_SPG_BlurAmount}" VerticalAlignment="Center"/>
+                                    <Slider Grid.Column="1" Margin="10,0" VerticalAlignment="Center" Value="{Binding Settings.BlurAmount}" Minimum="0" Maximum="100" Width="180" IsSnapToTickEnabled="True" TickFrequency="1"/>
+                                    <numeric:DoubleBox Grid.Column="2" Value="{Binding Settings.BlurAmount, UpdateSourceTrigger=PropertyChanged}" 
+                                            MinValue="0"
+                                            MaxValue="100"
+                                            MinWidth="30"
+                                            ValidationTrigger="PropertyChanged"
+                                            Style="{StaticResource {x:Type TextBox}}"
+                                            TextAlignment="Center">
+                                    </numeric:DoubleBox>
+                                </Grid>
+                            </DockPanel>
+                            <DockPanel LastChildFill="False" Grid.Column="0" Grid.Row="1">
+                                <Grid VerticalAlignment="Center">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition SharedSizeGroup="Descriptions"/>
+                                        <ColumnDefinition SharedSizeGroup="Controls"/>
+                                        <ColumnDefinition SharedSizeGroup="Value"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Grid.Column="0" Text="{DynamicResource LOC_SPG_BackgroundScale}" VerticalAlignment="Center"/>
+                                    <Slider Grid.Column="1" Margin="10,0" VerticalAlignment="Center" Value="{Binding Settings.RenderScale}" Minimum="0.01" Maximum="1" Width="180" IsSnapToTickEnabled="True" TickFrequency="0.01"/>
+                                    <numeric:DoubleBox Grid.Column="2" Value="{Binding Settings.RenderScale, UpdateSourceTrigger=PropertyChanged}" 
+                                            MinValue="0.01"
+                                            MaxValue="1"
+                                            MinWidth="30"
+                                            ValidationTrigger="PropertyChanged"
+                                            Style="{StaticResource {x:Type TextBox}}"
+                                            TextAlignment="Center">
+                                    </numeric:DoubleBox>
+                                </Grid>
+                            </DockPanel>
+                            <DockPanel LastChildFill="False" Grid.Column="1" Grid.RowSpan="2" Margin="5,0">
+                                <DockPanel.ToolTip>
+                                    <TextBlock Text="{DynamicResource LOC_SPG_EffectiveBlurToolTip}" TextWrapping="Wrap" MaxWidth="550"/>
+                                </DockPanel.ToolTip>
+                                <DockPanel VerticalAlignment="Center">
+                                    <TextBlock Grid.Column="0" Text="{DynamicResource LOC_SPG_EffectiveBlur}" VerticalAlignment="Center"/>
+                                    <TextBox IsReadOnly="True" Text="{Binding Settings.BlurAmountScaled, Mode=OneWay}" Margin="5,0"/>
+                                </DockPanel>
+                            </DockPanel>
+                        </Grid>
                         <DockPanel LastChildFill="False">
                             <Grid VerticalAlignment="Center">
                                 <Grid.ColumnDefinitions>

@@ -356,7 +356,7 @@
             <Image Stretch="UniformToFill" Source="{Binding BackgroundImagePath, TargetNullValue={x:Null}, FallbackValue={x:Null}}"
                    Opacity="1" HorizontalAlignment="Center" VerticalAlignment="Center">
                 <Image.Effect>
-                    <BlurEffect Radius="{Binding Settings.Settings.BlurAmount}" KernelType="Gaussian" RenderingBias="Performance"/>
+                    <BlurEffect Radius="{Binding Settings.Settings.BlurAmountScaled}" KernelType="Gaussian" RenderingBias="Performance"/>
                 </Image.Effect>
             </Image>
         </Grid>

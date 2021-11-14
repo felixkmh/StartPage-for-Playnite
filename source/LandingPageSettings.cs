@@ -82,14 +82,17 @@ namespace LandingPage
         private bool keepInMemory = true;
         public bool KeepInMemory { get => keepInMemory; set => SetValue(ref keepInMemory, value); }
 
-        private double blurAmount = 200;
-        public double BlurAmount { get => blurAmount; set => SetValue(ref blurAmount, value); }
+        private double blurAmount = 20;
+        public double BlurAmount { get => blurAmount; set { SetValue(ref blurAmount, value); OnPropertyChanged(nameof(BlurAmountScaled)); } }
 
-        private double overlayOpacity = 0.75;
+        [DontSerialize]
+        public double BlurAmountScaled { get => Math.Round(blurAmount / renderScale); }
+
+        private double overlayOpacity = 0.1;
         public double OverlayOpacity { get => overlayOpacity; set => SetValue(ref overlayOpacity, value); }
 
         private double renderScale = 0.05;
-        public double RenderScale { get => renderScale; set => SetValue(ref renderScale, value); }
+        public double RenderScale { get => renderScale; set { SetValue(ref renderScale, value); OnPropertyChanged(nameof(BlurAmountScaled)); } }
 
         private LayoutProperties layoutSettings = new LayoutProperties();
         public LayoutProperties LayoutSettings { get => layoutSettings; set => SetValue(ref layoutSettings, value); }
