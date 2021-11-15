@@ -37,7 +37,7 @@
     <sys:String x:Key="LOC_SPG_EffectiveBlurToolTip">L'intensité effective du flou est déterminée par les paramètres (intensité du flou) / (Échelle de rendu de l'image de fond). Une échelle de résolution basse combinée à une faible intensité du flou peut créer des anomalies visuelles. Réduire l'échelle de résolution peut améliorer les performances et, selon les paramètres, créer un effet de flou plus prononcé.</sys:String>
     <sys:String x:Key="LOC_SPG_BackgroundScale">Échelle de rendu de l'image de fond :</sys:String>
     <sys:String x:Key="LOC_SPG_OverlayOpacity">Opacité du filtre :</sys:String>
-    <sys:String x:Key="LOC_SPG_BackgroundImageSource">Sélection de l'image de fond de jeu :</sys:String>
+    <sys:String x:Key="LOC_SPG_BackgroundImageSource">Méthode de sélection de l'image de fond :</sys:String>
     <sys:String x:Key="LOC_SPG_BackgroundImagePath">Répertoire de l'image de fond :</sys:String>
     <sys:String x:Key="LOC_SPG_UnsupportedToolTip">Cette fonctionnalité n'est pas supportée par l'API de Playnite et pourrait provoquer des erreurs.</sys:String>
 </ResourceDictionary>
