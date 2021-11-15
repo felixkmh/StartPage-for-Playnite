@@ -22,14 +22,14 @@
                                 <TextBlock Text="{DynamicResource LOC_SPG_UnsupportedToolTip}" TextWrapping="Wrap" MaxWidth="550"/>
                             </DockPanel.ToolTip>
                             <CheckBox IsChecked="{Binding Settings.EnableStartupOverride}" VerticalAlignment="Center" Margin="3"/>
-                            <TextBlock Text="{DynamicResource LOC_SPG_StartupItem}" Margin="3" VerticalAlignment="Center" IsEnabled="{Binding Settings.EnableStartupOverride, Mode=OneWay}"/>
+                            <TextBlock Text="{DynamicResource LOC_SPG_StartupItem}" Margin="3" VerticalAlignment="Center"/>
                             <ComboBox Margin="3" VerticalAlignment="Center" 
                                       IsEnabled="{Binding Settings.EnableStartupOverride, Mode=OneWay}"
                                       ItemsSource="{Binding Settings.StartPageOptions}" 
                                       SelectedItem="{Binding Settings.StartPage}"
                                       MinWidth="150"></ComboBox>
                         </DockPanel>
-                        <DockPanel IsEnabled="{Binding Settings.EnableStartupOverride, Mode=OneWay}">
+                        <DockPanel>
                             <DockPanel.ToolTip>
                                 <TextBlock Text="{DynamicResource LOC_SPG_UnsupportedToolTip}" TextWrapping="Wrap" MaxWidth="550"/>
                             </DockPanel.ToolTip>

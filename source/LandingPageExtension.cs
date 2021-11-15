@@ -146,7 +146,7 @@ namespace LandingPage
 
         public override void OnApplicationStarted(OnApplicationStartedEventArgs args)
         {
-            if (Settings.EnableStartupOverride)
+            if (Settings.EnableStartupOverride || Settings.MoveToTopOfList)
             {
                 var mainWindow = Application.Current.Windows.Cast<Window>().FirstOrDefault(w => w.Name == "WindowMain");
                 if (mainWindow is Window)
@@ -157,22 +157,28 @@ namespace LandingPage
                         {
                             if (Helper.UiHelper.FindVisualChildren(panel).FirstOrDefault(child => child.ToolTip?.ToString() == Settings.StartPage) is Button element)
                             {
-                                var childIndex = panel.Children.Cast<FrameworkElement>().ToList().FindIndex(c => c.ToolTip?.ToString() == "Start Page");
+                                var childIndex = -1;
+                                if (Settings.MoveToTopOfList)
+                                {
+                                    childIndex = panel.Children.Cast<FrameworkElement>().ToList().FindIndex(c => c.ToolTip?.ToString() == "Start Page");
+                                }
                                 panel.Dispatcher.BeginInvoke(new Action(() =>
                                 {
-
-                                    if (childIndex > -1 && Settings.MoveToTopOfList)
+                                    if (childIndex > -1)
                                     {
                                         var child = panel.Children[childIndex];
                                         panel.Children.RemoveAt(childIndex);
                                         panel.Children.Insert(0, child);
                                     }
 
-                                    if (element.Command.CanExecute(element))
+                                    if (Settings.EnableStartupOverride)
                                     {
-                                        element.Command.Execute(element);
+                                        if (element.Command.CanExecute(element))
+                                        {
+                                            element.Command.Execute(element);
+                                        }
                                     }
-                                }), System.Windows.Threading.DispatcherPriority.Render);
+                                }), System.Windows.Threading.DispatcherPriority.DataBind);
                             }
                         }
                     }, System.Windows.Threading.DispatcherPriority.DataBind);
