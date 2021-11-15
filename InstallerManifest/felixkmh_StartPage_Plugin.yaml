@@ -1,5 +1,13 @@
 AddonId: felixkmh_StartPage_Plugin
 Packages:  
+  - Version: 1.4.4
+    RequiredApiVersion: 6.1.0
+    ReleaseDate: 2021-11-15
+    PackageUrl: https://github.com/felixkmh/StartPage-for-Playnite/releases/download/v1.4.4/felixkmh_StartPage_Plugin_1_4_4.pext
+    Changelog:
+      - added option to enable the view switching on launch, disabled by default
+      - rearranged options
+      - updated localization
   - Version: 1.4.3
     RequiredApiVersion: 6.1.0
     ReleaseDate: 2021-11-15
