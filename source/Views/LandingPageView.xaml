@@ -120,6 +120,9 @@
                         <Border Background="{StaticResource GridItemBackgroundBrush}"
                                                 CornerRadius="7"/>
                         <Border CornerRadius="7" Opacity="0.3" x:Name="PopupBackground">
+                            <Border.Background>
+                                <ImageBrush x:Name="PopupImageBrush"/>
+                            </Border.Background>
                             <Border.OpacityMask>
                                 <LinearGradientBrush StartPoint="1,0" EndPoint="0,1">
                                     <LinearGradientBrush.GradientStops>
@@ -709,10 +712,12 @@
                                             </LinearGradientBrush>
                                         </Border.OpacityMask>
                                     </Border>
-                                    <Button Command="{Binding ActivateCommand}" CommandParameter="{Binding .}" x:Name="NotificationActivationButton">
+                                    <Button Command="{Binding ActivateCommand}" CommandParameter="{Binding .}" x:Name="NotificationActivationButton" HorizontalAlignment="Stretch">
                                         <Button.Template>
                                             <ControlTemplate TargetType="Button">
-                                                <ContentPresenter/>
+                                                <Border Background="Transparent" BorderThickness="0">
+                                                    <ContentPresenter/>
+                                                </Border>
                                             </ControlTemplate>
                                         </Button.Template>
                                         <StackPanel VerticalAlignment="Center">
@@ -739,9 +744,9 @@
                                         <Setter Property="Visibility" Value="Visible" TargetName="HideButton"/>
                                         <Setter Property="OpacityMask" TargetName="NotificationActivationButton">
                                             <Setter.Value>
-                                                <LinearGradientBrush StartPoint="0,0.5" EndPoint="1,0.5">
+                                                <LinearGradientBrush StartPoint="0.9,0.5" EndPoint="1,0.5">
                                                     <LinearGradientBrush.GradientStops>
-                                                        <GradientStop Color="White" Offset="0.9"/>
+                                                        <GradientStop Color="White" Offset="0.0"/>
                                                         <GradientStop Color="#15FFFFFF" Offset="1"/>
                                                     </LinearGradientBrush.GradientStops>
                                                 </LinearGradientBrush>

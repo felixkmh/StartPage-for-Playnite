@@ -64,6 +64,8 @@
     <Compile Include="Converters\DatabaseIdToUriConverter.cs" />
     <Compile Include="Converters\ElementToScaledRectConverter.cs" />
     <Compile Include="Converters\IEnumerableNullOrEmptyToVisibilityConverter.cs" />
+    <Compile Include="Converters\NullToHiddenConverter.cs" />
+    <Compile Include="Converters\UriToBitmapImageConverter.cs" />
     <Compile Include="Converters\VisibilityInverter.cs" />
     <Compile Include="Extensions\DateTimeExtensions.cs" />
     <Compile Include="Extensions\IEnumerableExtensions.cs" />

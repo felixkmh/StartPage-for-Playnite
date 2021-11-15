@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:LandingPage.Views"
              xmlns:models="clr-namespace:LandingPage.Models"
+             xmlns:conv="clr-namespace:LandingPage.Converters"
              xmlns:sys="clr-namespace:System;assembly=mscorlib"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
@@ -12,10 +13,26 @@
              ScrollViewer.HorizontalScrollBarVisibility="Disabled">
     <UserControl.Resources>
         <GridLength x:Key="LabelDistance">15</GridLength>
+        <conv:NullToHiddenConverter x:Key="NullToHiddenConverter"/>
+        <conv:UriToBitmapImageConverter x:Key="UriToBitmapImageConverter"/>
     </UserControl.Resources>
     <Grid>
-        <StackPanel Grid.IsSharedSizeScope="True" VerticalAlignment="Center">
-            <!--<TextBlock Text="{Binding Game.Name}" HorizontalAlignment="Center" FontSize="18" Margin="0,0,0,3"/>-->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Image x:Name="LogoImage"
+               Stretch="Uniform" MaxHeight="50" 
+               Grid.Row="0"
+               VerticalAlignment="Center"
+               HorizontalAlignment="Center"
+               RenderOptions.BitmapScalingMode="Fant"
+               Margin="5"
+               Source="{Binding LogoUri, Converter={StaticResource UriToBitmapImageConverter}, ConverterParameter=50}">
+        </Image>
+        <TextBlock Grid.Row="0" Text="{Binding Game.Name}" HorizontalAlignment="Center" TextAlignment="Center" VerticalAlignment="Top" FontSize="18" Margin="0,8,0,5" TextWrapping="Wrap"
+                   Visibility="{Binding LogoUri, Converter={StaticResource NullToHiddenConverter}}"/>
+        <StackPanel Grid.Row="1" Grid.IsSharedSizeScope="True" VerticalAlignment="Center">
             <Grid Margin="0,0,0,5">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" SharedSizeGroup="LabelColumn"/>
@@ -33,7 +50,7 @@
                 </Grid.ColumnDefinitions>
                 <TextBlock Text="{DynamicResource LOCFeaturesLabel}"/>
                 <TextBlock Grid.Column="2" Text="{Binding Game.Features, Converter={StaticResource ListToStringConverter}, ConverterParameter=', '}"
-                       TextWrapping="Wrap" TextTrimming="WordEllipsis" MaxHeight="110"/>
+                       TextWrapping="Wrap" TextTrimming="WordEllipsis" MaxHeight="80"/>
             </Grid>
             <Grid Margin="0,0,0,5">
                 <Grid.ColumnDefinitions>

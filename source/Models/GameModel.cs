@@ -3,6 +3,7 @@ using Playnite.SDK.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -11,7 +12,7 @@ using System.Windows.Input;
 
 namespace LandingPage.Models
 {
-    public class GameModel : INotifyPropertyChanged
+    public class GameModel : ObservableObject
     {
         public GameModel(Game game)
         {
@@ -28,17 +29,27 @@ namespace LandingPage.Models
         }
 
         private Game game = null;
-        public Game Game { get => game; set { if (value != game) { game = value; OnPropertyChanged(); } } }
+        public Game Game { get => game; set { if (value != game) { SetValue(ref game, value); OnPropertyChanged(nameof(LogoUri)); } } }
+
+        public Uri LogoUri
+        {
+            get
+            {
+                var metadataPath = Path.Combine(LandingPageExtension.Instance.PlayniteApi.Paths.ConfigurationPath, "ExtraMetadata", "games", game.Id.ToString());
+                if (Directory.Exists(metadataPath))
+                {
+                    var logoPath = Path.Combine(metadataPath, "Logo.png");
+                    if (File.Exists(logoPath) && Uri.TryCreate(logoPath, UriKind.RelativeOrAbsolute, out var uri))
+                    {
+                        return uri;
+                    }
+                }
+                return null;
+            }
+        }
 
         public ICommand OpenCommand { get; private set; }
 
         public ICommand StartCommand { get; private set; }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        private void OnPropertyChanged([CallerMemberName] string propertyName = "")
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
     }
 }
