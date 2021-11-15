@@ -126,7 +126,7 @@ namespace LandingPage.ViewModels
         private void UpdateMostPlayedGame()
         {
             var groups = new List<GameGroup>();
-            if (playniteAPI.Database.Games.MaxElement(g => g.Playtime).Value is Game game)
+            if (playniteAPI.Database.Games.Where(g => !g.Hidden).MaxElement(g => g.Playtime).Value is Game game)
             {
                 var group = new GameGroup();
                 group.Games.Add(new GameModel(game));
@@ -143,7 +143,7 @@ namespace LandingPage.ViewModels
                 return -a.ReleaseDate.Value.CompareTo(b.ReleaseDate.Value);
             });
 
-            if (playniteAPI.Database.Games.MaxElement(dateComparer) is Game newestGame)
+            if (playniteAPI.Database.Games.Where(g => !g.Hidden).MaxElement(dateComparer) is Game newestGame)
             {
                 var group = new GameGroup();
                 group.Games.Add(new GameModel(newestGame));
