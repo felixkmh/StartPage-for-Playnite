@@ -79,6 +79,9 @@ namespace LandingPage
         private bool showNotificationButtons = true;
         public bool ShowNotificationButtons { get => showNotificationButtons; set => SetValue(ref showNotificationButtons, value); }
 
+        private bool enableStartupOverride = false;
+        public bool EnableStartupOverride { get => enableStartupOverride; set => SetValue(ref enableStartupOverride, value); }
+
         private bool keepInMemory = true;
         public bool KeepInMemory { get => keepInMemory; set => SetValue(ref keepInMemory, value); }
 

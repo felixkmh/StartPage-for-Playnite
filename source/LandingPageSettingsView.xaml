@@ -21,11 +21,20 @@
                             <DockPanel.ToolTip>
                                 <TextBlock Text="{DynamicResource LOC_SPG_UnsupportedToolTip}" TextWrapping="Wrap" MaxWidth="550"/>
                             </DockPanel.ToolTip>
-                            <TextBlock Text="{DynamicResource LOC_SPG_StartupItem}" Margin="3" VerticalAlignment="Center"/>
+                            <CheckBox IsChecked="{Binding Settings.EnableStartupOverride}" VerticalAlignment="Center" Margin="3"/>
+                            <TextBlock Text="{DynamicResource LOC_SPG_StartupItem}" Margin="3" VerticalAlignment="Center" IsEnabled="{Binding Settings.EnableStartupOverride, Mode=OneWay}"/>
                             <ComboBox Margin="3" VerticalAlignment="Center" 
-                              ItemsSource="{Binding Settings.StartPageOptions}" 
-                              SelectedItem="{Binding Settings.StartPage}"
-                              MinWidth="150"></ComboBox>
+                                      IsEnabled="{Binding Settings.EnableStartupOverride, Mode=OneWay}"
+                                      ItemsSource="{Binding Settings.StartPageOptions}" 
+                                      SelectedItem="{Binding Settings.StartPage}"
+                                      MinWidth="150"></ComboBox>
+                        </DockPanel>
+                        <DockPanel IsEnabled="{Binding Settings.EnableStartupOverride, Mode=OneWay}">
+                            <DockPanel.ToolTip>
+                                <TextBlock Text="{DynamicResource LOC_SPG_UnsupportedToolTip}" TextWrapping="Wrap" MaxWidth="550"/>
+                            </DockPanel.ToolTip>
+                            <CheckBox IsChecked="{Binding Settings.MoveToTopOfList}" VerticalAlignment="Center" Margin="3"/>
+                            <TextBlock Text="{DynamicResource LOC_SPG_MoveIconToTop}" Margin="3" VerticalAlignment="Center" TextWrapping="Wrap"/>
                         </DockPanel>
                         <DockPanel>
                             <CheckBox IsChecked="{Binding Settings.ShowClock}" VerticalAlignment="Center" Margin="3"/>
@@ -71,13 +80,6 @@
                     <CheckBox IsChecked="{Binding Settings.KeepInMemory}" VerticalAlignment="Center" Margin="3"/>
                     <TextBlock Text="{DynamicResource LOC_SPG_KeepInMemory}" Margin="3" VerticalAlignment="Center"/>
                 </StackPanel>-->
-                        <DockPanel>
-                            <DockPanel.ToolTip>
-                                <TextBlock Text="{DynamicResource LOC_SPG_UnsupportedToolTip}" TextWrapping="Wrap" MaxWidth="550"/>
-                            </DockPanel.ToolTip>
-                            <CheckBox IsChecked="{Binding Settings.MoveToTopOfList}" VerticalAlignment="Center" Margin="3"/>
-                            <TextBlock Text="{DynamicResource LOC_SPG_MoveIconToTop}" Margin="3" VerticalAlignment="Center" TextWrapping="Wrap"/>
-                        </DockPanel>
                         <DockPanel LastChildFill="False">
                             <TextBlock Text="{DynamicResource LOC_SPG_MaxRecentAchievements}" VerticalAlignment="Center"/>
                             <numeric:IntBox Value="{Binding Settings.MaxNumberRecentAchievements, UpdateSourceTrigger=PropertyChanged}" 

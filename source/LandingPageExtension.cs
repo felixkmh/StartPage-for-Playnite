@@ -146,30 +146,36 @@ namespace LandingPage
 
         public override void OnApplicationStarted(OnApplicationStartedEventArgs args)
         {
-            var mainWindow = Application.Current.Windows.Cast<Window>().FirstOrDefault(w => w.Name == "WindowMain");
-            if (mainWindow is Window)
+            if (Settings.EnableStartupOverride)
             {
-                if (Helper.UiHelper.FindVisualChildren<StackPanel>(mainWindow, "PART_PanelSideBarItems").FirstOrDefault() is StackPanel panel)
+                var mainWindow = Application.Current.Windows.Cast<Window>().FirstOrDefault(w => w.Name == "WindowMain");
+                if (mainWindow is Window)
                 {
-                    if (Helper.UiHelper.FindVisualChildren(panel).FirstOrDefault(child => child.ToolTip?.ToString() == Settings.StartPage) is Button element)
+                    mainWindow.Dispatcher.Invoke(() => 
                     {
-                        var childIndex = panel.Children.Cast<FrameworkElement>().ToList().FindIndex(c => c.ToolTip?.ToString() == "Start Page");
-                        Application.Current.Dispatcher.BeginInvoke(new Action (() =>
+                        if (Helper.UiHelper.FindVisualChildren<StackPanel>(mainWindow, "PART_PanelSideBarItems").FirstOrDefault() is StackPanel panel)
                         {
-
-                            if (childIndex > -1 && Settings.MoveToTopOfList)
+                            if (Helper.UiHelper.FindVisualChildren(panel).FirstOrDefault(child => child.ToolTip?.ToString() == Settings.StartPage) is Button element)
                             {
-                                var child = panel.Children[childIndex];
-                                panel.Children.RemoveAt(childIndex);
-                                panel.Children.Insert(0, child);
-                            }
+                                var childIndex = panel.Children.Cast<FrameworkElement>().ToList().FindIndex(c => c.ToolTip?.ToString() == "Start Page");
+                                panel.Dispatcher.BeginInvoke(new Action(() =>
+                                {
 
-                            if (element.Command.CanExecute(element))
-                            {
-                                element.Command.Execute(element);
+                                    if (childIndex > -1 && Settings.MoveToTopOfList)
+                                    {
+                                        var child = panel.Children[childIndex];
+                                        panel.Children.RemoveAt(childIndex);
+                                        panel.Children.Insert(0, child);
+                                    }
+
+                                    if (element.Command.CanExecute(element))
+                                    {
+                                        element.Command.Execute(element);
+                                    }
+                                }), System.Windows.Threading.DispatcherPriority.Render);
                             }
-                        }), System.Windows.Threading.DispatcherPriority.DataBind);
-                    }
+                        }
+                    }, System.Windows.Threading.DispatcherPriority.DataBind);
                 }
             }
 #if DEBUG
