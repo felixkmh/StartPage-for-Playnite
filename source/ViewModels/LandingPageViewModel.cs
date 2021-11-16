@@ -113,12 +113,12 @@ namespace LandingPage.ViewModels
             playniteAPI.Database.Games.ItemCollectionChanged -= Games_ItemCollectionChanged;
         }
 
-        public void Update()
+        public void Update(bool updateRandomBackground = true)
         {
             UpdateRecentlyPlayedGames();
             UpdateRecentlyAddedGames();
             UpdateFavorites();
-            UpdateBackgroundImagePath();
+            UpdateBackgroundImagePath(updateRandomBackground);
             UpdateMostPlayedGame();
             successStory.Update();
         }
@@ -167,7 +167,7 @@ namespace LandingPage.ViewModels
             });
         }
 
-        private void UpdateBackgroundImagePath()
+        private void UpdateBackgroundImagePath(bool updateRandomBackground = true)
         {
             Uri path = null;
             if (Settings.Settings.BackgroundImageUri is Uri)
@@ -219,18 +219,24 @@ namespace LandingPage.ViewModels
                         }
                     case BackgroundImageSource.Random:
                         {
-                            var rng = new Random();
-                            var candidates = playniteAPI.Database.Games
-                                .Where(game => !string.IsNullOrEmpty(game.BackgroundImage));
-                            var randomGame = candidates.ElementAtOrDefault(rng.Next(candidates.Count()));
-                            if (randomGame is Game)
+                            if (updateRandomBackground)
                             {
-                                var databasePath = randomGame.BackgroundImage;
-                                var fullPath = playniteAPI.Database.GetFullFilePath(databasePath);
-                                if (Uri.TryCreate(fullPath, UriKind.RelativeOrAbsolute, out var uri))
+                                var rng = new Random();
+                                var candidates = playniteAPI.Database.Games
+                                    .Where(game => !string.IsNullOrEmpty(game.BackgroundImage));
+                                var randomGame = candidates.ElementAtOrDefault(rng.Next(candidates.Count()));
+                                if (randomGame is Game)
                                 {
-                                    path = uri;
+                                    var databasePath = randomGame.BackgroundImage;
+                                    var fullPath = playniteAPI.Database.GetFullFilePath(databasePath);
+                                    if (Uri.TryCreate(fullPath, UriKind.RelativeOrAbsolute, out var uri))
+                                    {
+                                        path = uri;
+                                    }
                                 }
+                            } else
+                            {
+                                path = BackgroundImagePath;
                             }
                             break;
                         }
@@ -408,12 +414,12 @@ namespace LandingPage.ViewModels
 
         private void Games_ItemCollectionChanged(object sender, ItemCollectionChangedEventArgs<Game> e)
         {
-            Update();
+            Update(false);
         }
 
         private void Games_ItemUpdated(object sender, ItemUpdatedEventArgs<Game> e)
         {
-            Update();
+            Update(false);
         }
     }
 }
