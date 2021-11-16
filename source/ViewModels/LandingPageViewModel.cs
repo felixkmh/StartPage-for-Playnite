@@ -219,7 +219,7 @@ namespace LandingPage.ViewModels
                         }
                     case BackgroundImageSource.Random:
                         {
-                            if (updateRandomBackground)
+                            if (updateRandomBackground && BackgroundImagePath == null)
                             {
                                 var rng = new Random();
                                 var candidates = playniteAPI.Database.Games
