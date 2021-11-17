@@ -38,8 +38,8 @@
     <sys:String x:Key="LOC_SPG_EffectiveBlurToolTip">有效模糊半径由（模糊半径）/（背景渲染比例）得到。低渲染比例与低模糊半径搭配可能会导致不想要的效果。降低渲染比例可以提高性能，并且可以产生更强的模糊效果。</sys:String>
     <sys:String x:Key="LOC_SPG_BackgroundScale">背景渲染比例：</sys:String>
     <sys:String x:Key="LOC_SPG_OverlayOpacity">覆盖不透明度：</sys:String>
-    <sys:String x:Key="LOC_SPG_NoiseOpacity">Noise Opacity:</sys:String>
-    <sys:String x:Key="LOC_SPG_CoverAspectRatio">Cover Aspect Ratio</sys:String>
+    <sys:String x:Key="LOC_SPG_NoiseOpacity">噪声不透明度：</sys:String>
+    <sys:String x:Key="LOC_SPG_CoverAspectRatio">封面宽高比</sys:String>
     <sys:String x:Key="LOC_SPG_BackgroundImageSource">游戏背景图像选择：</sys:String>
     <sys:String x:Key="LOC_SPG_BackgroundImagePath">背景图像路径：</sys:String>
     <sys:String x:Key="LOC_SPG_SwitchWithLowPrio">切换视图时降低优先级（在Playnite崩溃时自动启用）</sys:String>
