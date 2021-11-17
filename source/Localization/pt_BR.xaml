@@ -15,6 +15,7 @@
     <sys:String x:Key="LOC_SPG_BackgroundImageSourceLastAdded">Adicionado por ultimo</sys:String>
     <sys:String x:Key="LOC_SPG_BackgroundImageSourceMostPlayed">Mais jogados</sys:String>
     <sys:String x:Key="LOC_SPG_BackgroundImageSourceRandom">Aleatório</sys:String>
+    <sys:String x:Key="LOC_SPG_BackgroundImageSourceLastSelected">Last Selected</sys:String>
 
     <!-- Settings -->
     <sys:String x:Key="LOC_SPG_ShowFavorites">Mostrar Jogos Favoritos</sys:String>
@@ -39,5 +40,6 @@
     <sys:String x:Key="LOC_SPG_OverlayOpacity">Opacidade da Sobreposição:</sys:String>
     <sys:String x:Key="LOC_SPG_BackgroundImageSource">Seleção de imagem de fundo do jogo:</sys:String>
     <sys:String x:Key="LOC_SPG_BackgroundImagePath">Local da imagem de fundo:</sys:String>
+    <sys:String x:Key="LOC_SPG_SwitchWithLowPrio">Lower Priority when switching View (automatically enabled upon Playnite crashing)</sys:String>
     <sys:String x:Key="LOC_SPG_UnsupportedToolTip">Use este recurso por sua própria conta e risco. Ela não é oficialmente apoiada pela PlayniteAPI e, portanto, pode levar a comportamentos inesperados.</sys:String>
 </ResourceDictionary>
