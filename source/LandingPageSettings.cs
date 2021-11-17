@@ -96,6 +96,9 @@ namespace LandingPage
         private double coverAspectRatio = 0.71794;
         public double CoverAspectRatio { get => coverAspectRatio; set { SetValue(ref coverAspectRatio, value); } }
 
+        private double maxCoverWidth = 140;
+        public double MaxCoverWidth { get => maxCoverWidth; set { SetValue(ref maxCoverWidth, value); } }
+
         [DontSerialize]
         public double BlurAmountScaled { get => Math.Round(blurAmount / renderScale); }
 

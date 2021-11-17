@@ -65,7 +65,8 @@
         <conv:BoolToGridLengthConverter x:Key="BoolToGridLengthConverter"/>
         <DataTemplate x:Key="GameCoverDataTemplate" DataType="{x:Type lpm:GameModel}">
             <StackPanel Orientation="Horizontal">
-                <Grid ClipToBounds="True" MaxWidth="{StaticResource CoverWidth}" x:Name="ImageGrid">
+                <Grid ClipToBounds="True" 
+                      MaxWidth="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:LandingPageView}, Path=DataContext.Settings.Settings.MaxCoverWidth}" x:Name="ImageGrid">
                     <Grid.Width>
                         <MultiBinding Converter="{StaticResource HeightToWidthMultiConverter}">
                             <MultiBinding.Bindings>
@@ -105,17 +106,19 @@
                     </Grid.OpacityMask>
                     <Image Source="{Binding Game.CoverImage, Converter={StaticResource ImageStringToImageConverter}, FallbackValue={StaticResource DefaultGameCover}}" Stretch="UniformToFill" 
                                             HorizontalAlignment="Center" VerticalAlignment="Center"
-                                            RenderOptions.BitmapScalingMode="HighQuality"/>
+                                            RenderOptions.BitmapScalingMode="HighQuality"
+                           x:Name="CoverImage"/>
                     <Image Source="{StaticResource InnerGlowBitmap}" Stretch="Fill" x:Name="GlowImage"
                                             RenderOptions.BitmapScalingMode="Fant" Opacity="0.0"/>
-                    <TextBlock Text="{Binding Game.Name}" 
+                    <TextBlock x:Name="NameTextBlock"
+                               Text="{Binding Game.Name}" 
                                Style="{StaticResource BaseTextBlockStyle}" 
                                VerticalAlignment="Bottom" 
                                TextWrapping="Wrap" 
                                TextAlignment="Center" 
                                Padding="4" 
                                Background="#7F000000"
-                               Visibility="{mu:LandingPageSettings Settings.ShowTitleOnCover}"/>
+                               Visibility="Hidden"/>
                     <Viewbox x:Name="Buttons" Visibility="Hidden">
                         <StackPanel Orientation="Horizontal" Margin="5">
                             <Button Background="{x:Null}" Padding="4" x:Name="PlayButton" Click="PlayButton_Click" BorderThickness="0">
@@ -163,6 +166,12 @@
                 </Popup>
             </StackPanel>
             <DataTemplate.Triggers>
+                <DataTrigger Binding="{mu:LandingPageSettings Settings.ShowTitleOnCover}" Value="{StaticResource True}">
+                    <Setter Property="Visibility" Value="Visible" TargetName="NameTextBlock"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding ElementName=CoverImage, Path=Source}" Value="{StaticResource DefaultGameCover}">
+                    <Setter Property="Visibility" Value="Visible" TargetName="NameTextBlock"/>
+                </DataTrigger>
                 <MultiTrigger>
                     <MultiTrigger.Conditions>
                         <Condition Property="IsMouseOver" Value="True"/>
@@ -468,7 +477,7 @@
                             </ListBox>
                         </DockPanel>
                         <Grid Visibility="{Binding SuccessStory.LatestAchievements, Converter={StaticResource ICollectionNullOrEmptyToVisibilityConverter}}"
-                              Grid.Column="2">
+                              Grid.Column="2" HorizontalAlignment="Right">
                             <StackPanel Orientation="Horizontal"
                                         ScrollViewer.VerticalScrollBarVisibility="Disabled"
                                         ClipToBounds="False"
@@ -478,7 +487,7 @@
                                         <RotateTransform Angle="-90" />
                                     </Label.LayoutTransform>
                                 </Label>
-                                <local:RecentAchievementsView DataContext="{Binding SuccessStory}" Width="300" ClipToBounds="False"/>
+                                <local:RecentAchievementsView DataContext="{Binding SuccessStory}" Width="320" ClipToBounds="False"/>
                             </StackPanel>
                         </Grid>
                     </Grid>
