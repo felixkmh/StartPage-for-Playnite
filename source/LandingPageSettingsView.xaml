@@ -5,12 +5,16 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:numeric="http://gu.se/NumericInput"
              xmlns:local="clr-namespace:LandingPage" xmlns:system="clr-namespace:System;assembly=mscorlib"
+             xmlns:conv="clr-namespace:LandingPage.Converters"
              mc:Ignorable="d"
              d:DesignHeight="400" d:DesignWidth="600"
              d:DataContext="{d:DesignInstance IsDesignTimeCreatable=False, Type=local:LandingPageSettingsViewModel}"
              MaxWidth="{Binding RelativeSource={RelativeSource AncestorType=Panel, Mode=FindAncestor}, Path=ActualWidth, FallbackValue={x:Static system:Double.PositiveInfinity}}"
              MaxHeight="{Binding RelativeSource={RelativeSource AncestorType=Panel, Mode=FindAncestor}, Path=ActualHeight, FallbackValue={x:Static system:Double.PositiveInfinity}}"
              >
+    <UserControl.Resources>
+        <conv:LogConverter x:Key="LogConverter"/>
+    </UserControl.Resources>
     <TabControl>
         <TabItem Header="{DynamicResource LOC_SPG_CommonTab}">
             <ScrollViewer Padding="10"
@@ -63,6 +67,26 @@
                         <DockPanel>
                             <CheckBox IsChecked="{Binding Settings.ShowDetails}" VerticalAlignment="Center" Margin="3"/>
                             <TextBlock Text="{DynamicResource LOC_SPG_ShowGameDetails}" Margin="3" VerticalAlignment="Center"/>
+                        </DockPanel>
+                        <DockPanel LastChildFill="False" Grid.Column="0" Grid.Row="0">
+                            <Grid VerticalAlignment="Center">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition SharedSizeGroup="Descriptions"/>
+                                    <ColumnDefinition SharedSizeGroup="Controls"/>
+                                    <ColumnDefinition SharedSizeGroup="Value"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Column="0" Text="{DynamicResource LOC_SPG_CoverAspectRatio}" VerticalAlignment="Center"/>
+                                <Slider Grid.Column="1" Margin="10,0" VerticalAlignment="Center" Value="{Binding Settings.CoverAspectRatio, Converter={StaticResource LogConverter}, ConverterParameter=2}" Minimum="-1" Maximum="1" Width="180" IsSnapToTickEnabled="True" TickFrequency="0.05"/>
+                                <numeric:DoubleBox Grid.Column="2" Value="{Binding Settings.CoverAspectRatio, UpdateSourceTrigger=PropertyChanged}" 
+                                            MinValue="0.5"
+                                            MaxValue="2"
+                                            MinWidth="30"
+                                            ValidationTrigger="PropertyChanged"
+                                            Style="{StaticResource {x:Type TextBox}}"
+                                            TextAlignment="Center"
+                                            >
+                                </numeric:DoubleBox>
+                            </Grid>
                         </DockPanel>
                         <DockPanel>
                             <CheckBox IsChecked="{Binding Settings.ShowRecentAchievements}" VerticalAlignment="Center" Margin="3"/>

@@ -93,6 +93,9 @@ namespace LandingPage
         private double blurAmount = 20;
         public double BlurAmount { get => blurAmount; set { SetValue(ref blurAmount, value); OnPropertyChanged(nameof(BlurAmountScaled)); } }
 
+        private double coverAspectRatio = 0.71794;
+        public double CoverAspectRatio { get => coverAspectRatio; set { SetValue(ref coverAspectRatio, value); } }
+
         [DontSerialize]
         public double BlurAmountScaled { get => Math.Round(blurAmount / renderScale); }
 

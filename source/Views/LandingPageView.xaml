@@ -17,6 +17,7 @@
              d:DataContext="{d:DesignInstance IsDesignTimeCreatable=False, Type=lpvm:LandingPageViewModel}"
              SizeChanged="UserControl_SizeChanged">
     <UserControl.Resources>
+        <system:Double x:Key="CoverAspectRatio">1</system:Double>
         <BitmapImage x:Key="InnerGlowBitmap" CreateOptions="IgnoreColorProfile" UriSource="pack://application:,,,/StartPagePlugin;component/innerglow.png" CacheOption="OnLoad"/>
         <ImageBrush x:Key="NoiseBrush" ImageSource="pack://application:,,,/StartPagePlugin;component/noise.png" TileMode="Tile" Viewport="0,0,100,100" ViewportUnits="Absolute"
                     Opacity="1"/>
@@ -51,23 +52,43 @@
         <system:Double x:Key="CoverHeight">195</system:Double>
         <system:Double x:Key="CoverWidth">140</system:Double>
         <conv:ActualHeightToWidthConverter x:Key="ActualHeightToWidthConverter"/>
+        <conv:HeightToWidthMultiConverter x:Key="HeightToWidthMultiConverter"/>
+        <conv:WidthToHeightMultiConverter x:Key="WidthToHeightMultiConverter"/>
         <conv:ElementToScaledRectConverter x:Key="ElementToScaledRectConverter"/>
         <conv:VisibilityInverter x:Key="VisibilityInverter"/>
         <conv:IEnumerableNullOrEmptyToVisibilityConverter x:Key="IEnumerableNullOrEmptyToVisibilityConverter"/>
         <conv:BoolToGridLengthConverter x:Key="BoolToGridLengthConverter"/>
         <DataTemplate x:Key="GameCoverDataTemplate" DataType="{x:Type lpm:GameModel}">
             <StackPanel Orientation="Horizontal">
-                <Grid ClipToBounds="True" MaxWidth="{StaticResource CoverWidth}" MaxHeight="{StaticResource CoverHeight}" x:Name="ImageGrid">
+                <Grid ClipToBounds="True" MaxWidth="{StaticResource CoverWidth}" x:Name="ImageGrid">
                     <Grid.Width>
-                        <Binding RelativeSource="{RelativeSource Mode=Self}" 
-                                 Path="ActualHeight" 
-                                 Converter="{StaticResource ActualHeightToWidthConverter}" 
-                                 Mode="OneWay">
-                            <Binding.ConverterParameter>
-                                <system:Double>0.71794</system:Double>
-                            </Binding.ConverterParameter>
-                        </Binding>
+                        <MultiBinding Converter="{StaticResource HeightToWidthMultiConverter}">
+                            <MultiBinding.Bindings>
+                                <Binding RelativeSource="{RelativeSource Mode=Self}" 
+                                         Path="ActualHeight" 
+                                         Mode="OneWay">
+                                </Binding>
+                                <Binding RelativeSource="{RelativeSource Mode=FindAncestor, AncestorType=local:LandingPageView}" 
+                                         Path="DataContext.Settings.Settings.CoverAspectRatio" 
+                                         Mode="OneWay">
+                                </Binding>
+                            </MultiBinding.Bindings>
+                        </MultiBinding>
                     </Grid.Width>
+                    <Grid.MaxHeight>
+                        <MultiBinding Converter="{StaticResource WidthToHeightMultiConverter}">
+                            <MultiBinding.Bindings>
+                                <Binding RelativeSource="{RelativeSource Mode=Self}" 
+                                         Path="MaxWidth" 
+                                         Mode="OneWay">
+                                </Binding>
+                                <Binding RelativeSource="{RelativeSource Mode=FindAncestor, AncestorType=local:LandingPageView}" 
+                                         Path="DataContext.Settings.Settings.CoverAspectRatio" 
+                                         Mode="OneWay">
+                                </Binding>
+                            </MultiBinding.Bindings>
+                        </MultiBinding>
+                    </Grid.MaxHeight>
                     <Grid.OpacityMask>
                         <VisualBrush Stretch="None" AutoLayoutContent="True">
                             <VisualBrush.Visual>
