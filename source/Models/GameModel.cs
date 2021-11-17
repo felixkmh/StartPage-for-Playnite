@@ -19,12 +19,25 @@ namespace LandingPage.Models
             Game = game;
             OpenCommand = new RelayCommand(() =>
             {
-                LandingPageExtension.Instance.PlayniteApi.MainView.SwitchToLibraryView();
-                LandingPageExtension.Instance.PlayniteApi.MainView.SelectGame(Game.Id);
+                try
+                {
+                    if (game is Game && LandingPageExtension.Instance.PlayniteApi.Database.Games.Get(Game.Id) is Game)
+                    {
+                        LandingPageExtension.Instance.PlayniteApi.MainView.SwitchToLibraryView();
+                        LandingPageExtension.Instance.PlayniteApi.MainView.SelectGame(Game.Id);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    LandingPageExtension.logger.Error(ex, $"Error when switching to library view to select game: {Game.Name} (ID: {Game.Id})");
+                }
             });
             StartCommand = new RelayCommand(() =>
             {
-                LandingPageExtension.Instance.PlayniteApi.StartGame(Game.Id);
+                if (game is Game && LandingPageExtension.Instance.PlayniteApi.Database.Games.Get(Game.Id) is Game)
+                {
+                    LandingPageExtension.Instance.PlayniteApi.StartGame(Game.Id);
+                }
             });
         }
 
