@@ -39,6 +39,7 @@
     <sys:String x:Key="LOC_SPG_BackgroundScale">Escala de Renderização do Plano de Fundo:</sys:String>
     <sys:String x:Key="LOC_SPG_OverlayOpacity">Opacidade da Sobreposição:</sys:String>
     <sys:String x:Key="LOC_SPG_NoiseOpacity">Noise Opacity:</sys:String>
+    <sys:String x:Key="LOC_SPG_CoverAspectRatio">Cover Aspect Ratio</sys:String>
     <sys:String x:Key="LOC_SPG_BackgroundImageSource">Seleção de imagem de fundo do jogo:</sys:String>
     <sys:String x:Key="LOC_SPG_BackgroundImagePath">Local da imagem de fundo:</sys:String>
     <sys:String x:Key="LOC_SPG_SwitchWithLowPrio">Baixa prioridade ao alternar a visualização (automaticamente ativado quando Playnite trava)</sys:String>
