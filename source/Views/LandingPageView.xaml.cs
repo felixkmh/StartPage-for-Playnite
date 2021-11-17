@@ -130,7 +130,7 @@ namespace LandingPage.Views
                       ListBox[] listBoxes = new[] { FavoritesListBox, RecentlyAddedListBox, RecentlyPlayedListBox };
                       foreach (var listBox in sender is ListBox lb ? new[] { lb } : listBoxes)
                       {
-                          var itemCount = listBox.ItemsSource.Cast<object>().Count();
+                          var itemCount = listBox.ItemsSource?.Cast<object>().Count() ?? 0;
                           if (listBox.IsVisible && itemCount > 0)
                           {
                               var desiredWidth = listBox.DesiredSize.Width;
