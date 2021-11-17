@@ -40,6 +40,7 @@
     <sys:String x:Key="LOC_SPG_OverlayOpacity">Deckkraft der Überlagerung:</sys:String>
     <sys:String x:Key="LOC_SPG_NoiseOpacity">Deckkraft des Rauschens:</sys:String>
     <sys:String x:Key="LOC_SPG_CoverAspectRatio">Cover-Seitenverhältnis</sys:String>
+    <sys:String x:Key="LOC_SPG_MaxCoverWidth">Maximum Cover Width</sys:String>
     <sys:String x:Key="LOC_SPG_BackgroundImageSource">Auswahl des Spiel-Hintergrundbildes:</sys:String>
     <sys:String x:Key="LOC_SPG_BackgroundImagePath">Hintergrundbild Pfad:</sys:String>
     <sys:String x:Key="LOC_SPG_SwitchWithLowPrio">Niedrigere Priorität beim Umschalten der Ansicht (wird automatisch beim Absturz von Playnite aktiviert)</sys:String>
