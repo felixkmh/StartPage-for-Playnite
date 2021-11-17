@@ -1,5 +1,15 @@
 AddonId: felixkmh_StartPage_Plugin
 Packages:  
+  - Version: 1.5.0
+    RequiredApiVersion: 6.1.0
+    ReleaseDate: 2021-11-17
+    PackageUrl: https://github.com/felixkmh/StartPage-for-Playnite/releases/download/v1.5.0/felixkmh_StartPage_Plugin_1_5_0.pext
+    Changelog:
+      - added option to control the noise overlay opacity separately from the overlay opacity
+      - added option to use the background image of the last selected game
+      - added option to change the cover aspect ratio
+      - updated localization
+      - fixed crash when some other extension failed to load
   - Version: 1.4.5
     RequiredApiVersion: 6.1.0
     ReleaseDate: 2021-11-16
