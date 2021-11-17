@@ -19,11 +19,14 @@
     <UserControl.Resources>
         <system:Double x:Key="CoverAspectRatio">1</system:Double>
         <BitmapImage x:Key="InnerGlowBitmap" CreateOptions="IgnoreColorProfile" UriSource="pack://application:,,,/StartPagePlugin;component/innerglow.png" CacheOption="OnLoad"/>
-        <ImageBrush x:Key="NoiseBrush" ImageSource="pack://application:,,,/StartPagePlugin;component/noise.png" TileMode="Tile" Viewport="0,0,100,100" ViewportUnits="Absolute"
+        <BitmapImage x:Key="NoiseImage" CreateOptions="IgnoreColorProfile" UriSource="pack://application:,,,/StartPagePlugin;component/noise.png" CacheOption="OnLoad"/>
+        <BitmapImage x:Key="DarkNoiseImage" CreateOptions="IgnoreColorProfile" UriSource="pack://application:,,,/StartPagePlugin;component/dark_noise.png" CacheOption="OnLoad"/>
+        <BitmapImage x:Key="WhiteNoiseImage" CreateOptions="IgnoreColorProfile" UriSource="pack://application:,,,/StartPagePlugin;component/white_noise.png" CacheOption="OnLoad"/>
+        <ImageBrush x:Key="NoiseBrush" ImageSource="{StaticResource NoiseImage}" TileMode="Tile" Viewport="0,0,100,100" ViewportUnits="Absolute"
                     Opacity="1"/>
-        <ImageBrush x:Key="DarkNoiseBrush" ImageSource="pack://application:,,,/StartPagePlugin;component/dark_noise.png" TileMode="Tile" Viewport="0,0,100,100" ViewportUnits="Absolute"
+        <ImageBrush x:Key="DarkNoiseBrush" ImageSource="{StaticResource DarkNoiseImage}" TileMode="Tile" Viewport="0,0,100,100" ViewportUnits="Absolute"
                     Opacity="1"/>
-        <ImageBrush x:Key="WhiteNoiseBrush" ImageSource="pack://application:,,,/StartPagePlugin;component/white_noise.png" TileMode="Tile" Viewport="0,0,100,100" ViewportUnits="Absolute"
+        <ImageBrush x:Key="WhiteNoiseBrush" ImageSource="{StaticResource WhiteNoiseImage}" TileMode="Tile" Viewport="0,0,100,100" ViewportUnits="Absolute"
                     Opacity="0.5"/>
         <BitmapImage x:Key="TransparentNoiseImage" CreateOptions="IgnoreColorProfile" UriSource="pack://application:,,,/StartPagePlugin;component/transparent_noise.png" CacheOption="OnLoad"/>
         <ImageBrush x:Key="TransparentNoiseBrush" ImageSource="{StaticResource TransparentNoiseImage}" TileMode="Tile" Viewport="0,0,100,100" ViewportUnits="Absolute"  
@@ -48,6 +51,7 @@
             <Setter Property="Background" Value="Transparent"/>
             <Setter Property="BorderThickness" Value="0"/>
             <Setter Property="VirtualizingPanel.VirtualizationMode" Value="Standard"/>
+            <Setter Property="Padding" Value="0"/>
         </Style>
         <system:Double x:Key="CoverHeight">195</system:Double>
         <system:Double x:Key="CoverWidth">140</system:Double>
@@ -55,6 +59,7 @@
         <conv:HeightToWidthMultiConverter x:Key="HeightToWidthMultiConverter"/>
         <conv:WidthToHeightMultiConverter x:Key="WidthToHeightMultiConverter"/>
         <conv:ElementToScaledRectConverter x:Key="ElementToScaledRectConverter"/>
+        <conv:UriToBitmapImageConverter x:Key="UriToBitmapImageConverter"/>
         <conv:VisibilityInverter x:Key="VisibilityInverter"/>
         <conv:IEnumerableNullOrEmptyToVisibilityConverter x:Key="IEnumerableNullOrEmptyToVisibilityConverter"/>
         <conv:BoolToGridLengthConverter x:Key="BoolToGridLengthConverter"/>
@@ -376,8 +381,11 @@
                          RenderAtScale="{Binding Settings.Settings.RenderScale}" 
                          SnapsToDevicePixels="False" />
             </Grid.CacheMode>
-            <Image Stretch="UniformToFill" Source="{Binding BackgroundImagePath, TargetNullValue={x:Null}, FallbackValue={x:Null}}"
+            <Image Stretch="UniformToFill" Source="{Binding BackgroundImagePath, Converter={StaticResource UriToBitmapImageConverter}}"
                    Opacity="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <!--<Image.Source>
+                    <BitmapImage CreateOptions="IgnoreColorProfile" CacheOption="None" UriSource="{Binding BackgroundImagePath, TargetNullValue='pack://application:,,,/StartPagePlugin;component/empty.png'}"/>
+                </Image.Source>-->
                 <Image.Effect>
                     <BlurEffect Radius="{Binding Settings.Settings.BlurAmountScaled}" KernelType="Gaussian" RenderingBias="Performance"/>
                 </Image.Effect>
@@ -494,7 +502,7 @@
                                      ItemsSource="{Binding Source={StaticResource RecentlyAddedSource}}"
                                      ItemContainerStyle="{StaticResource GameListItem}"
                                      ItemTemplate="{StaticResource GameCoverDataTemplate}"
-                                     SizeChanged="ListBox_SizeChanged">
+                                     SizeChanged="UserControl_SizeChanged">
                                 <ListBox.GroupStyle>
                                     <GroupStyle>
                                         <GroupStyle.Panel>
@@ -538,7 +546,7 @@
                                          ItemsSource="{Binding Source={StaticResource RecentlyPlayedSource}}"
                                          ItemContainerStyle="{StaticResource GameListItem}"
                                          ItemTemplate="{StaticResource GameCoverDataTemplate}"
-                                         SizeChanged="ListBox_SizeChanged">
+                                         SizeChanged="UserControl_SizeChanged">
                                 <ListBox.GroupStyle>
                                     <GroupStyle>
                                         <GroupStyle.Panel>
@@ -582,7 +590,7 @@
                                          ItemsSource="{Binding Source={StaticResource FavoritesSource}}"
                                          ItemContainerStyle="{StaticResource GameListItem}"
                                          ItemTemplate="{StaticResource GameCoverDataTemplate}"
-                                         SizeChanged="ListBox_SizeChanged">
+                                         SizeChanged="UserControl_SizeChanged">
                                 <ListBox.GroupStyle>
                                     <GroupStyle>
                                         <GroupStyle.Panel>

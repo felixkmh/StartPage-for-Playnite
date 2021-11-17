@@ -20,6 +20,10 @@ namespace LandingPage.Converters
             {
                 uri = imageUri;
             }
+            else if (value is string uriString && Uri.TryCreate(uriString, UriKind.RelativeOrAbsolute, out var imageUri2))
+            {
+                uri = imageUri2;
+            }
 
             if (uri is Uri)
             {
@@ -36,6 +40,7 @@ namespace LandingPage.Converters
                 bmp.Freeze();
                 return bmp;
             }
+            
             return null;
         }
 
