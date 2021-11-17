@@ -629,11 +629,8 @@
                             </Setter.Value>
                         </Setter>
                         <Style.Triggers>
-                            <DataTrigger Binding="{Binding Settings.Settings.MinimizeNotificationsOnLaunch, Mode=OneWay}" Value="{StaticResource False}">
-                                <Setter Property="Tag" Value="{Binding Notifications, Converter={StaticResource IEnumerableNullOrEmptyToVisibilityConverter}}"/>
-                            </DataTrigger>
-                            <Trigger Property="Tag" Value="{x:Static Visibility.Visible}">
-                                <Trigger.EnterActions>
+                            <DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=Self}, Path=Tag, Mode=OneWay}" Value="{x:Static Visibility.Visible}">
+                                <DataTrigger.EnterActions>
                                     <BeginStoryboard>
                                         <Storyboard>
                                             <DoubleAnimation
@@ -645,8 +642,8 @@
                                             </DoubleAnimation>
                                         </Storyboard>
                                     </BeginStoryboard>
-                                </Trigger.EnterActions>
-                                <Trigger.ExitActions>
+                                </DataTrigger.EnterActions>
+                                <DataTrigger.ExitActions>
                                     <BeginStoryboard>
                                         <Storyboard>
                                             <DoubleAnimation Duration="0:0:0.25"
@@ -655,8 +652,11 @@
                                             </DoubleAnimation>
                                         </Storyboard>
                                     </BeginStoryboard>
-                                </Trigger.ExitActions>
-                            </Trigger>
+                                </DataTrigger.ExitActions>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Settings.Settings.MinimizeNotificationsOnLaunch, Mode=OneWay}" Value="{StaticResource False}">
+                                <Setter Property="Tag" Value="{Binding Notifications, Converter={StaticResource IEnumerableNullOrEmptyToVisibilityConverter}}"/>
+                            </DataTrigger>
                         </Style.Triggers>
                     </Style>
                 </Border.Style>

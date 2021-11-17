@@ -29,6 +29,10 @@
                                       SelectedItem="{Binding Settings.StartPage}"
                                       MinWidth="150"></ComboBox>
                         </DockPanel>
+                        <!--<DockPanel IsEnabled="{Binding Settings.EnableStartupOverride, Mode=OneWay}" Margin="25,0,0,0">
+                            <CheckBox IsChecked="{Binding Settings.SwitchWithLowPriority}" VerticalAlignment="Center" Margin="3"/>
+                            <TextBlock Text="{DynamicResource LOC_SPG_SwitchWithLowPrio}" Margin="3" VerticalAlignment="Center"/>
+                        </DockPanel>-->
                         <DockPanel>
                             <DockPanel.ToolTip>
                                 <TextBlock Text="{DynamicResource LOC_SPG_UnsupportedToolTip}" TextWrapping="Wrap" MaxWidth="550"/>
@@ -194,6 +198,7 @@
                                     <x:Array Type="{x:Type system:Enum}">
                                         <local:BackgroundImageSource>LastPlayed</local:BackgroundImageSource>
                                         <local:BackgroundImageSource>LastAdded</local:BackgroundImageSource>
+                                        <local:BackgroundImageSource>LastSelected</local:BackgroundImageSource>
                                         <local:BackgroundImageSource>MostPlayed</local:BackgroundImageSource>
                                         <local:BackgroundImageSource>Random</local:BackgroundImageSource>
                                     </x:Array>

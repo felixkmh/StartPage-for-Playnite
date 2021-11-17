@@ -23,7 +23,7 @@ namespace LandingPage
     public class LandingPageExtension : GenericPlugin
     {
 #pragma warning disable IDE0052 // Ungelesene private Member entfernen
-        private static readonly ILogger logger = LogManager.GetLogger();
+        internal static readonly ILogger logger = LogManager.GetLogger();
 #pragma warning restore IDE0052 // Ungelesene private Member entfernen
 
         public static LandingPageExtension Instance { get; private set; } = null;
@@ -119,6 +119,17 @@ namespace LandingPage
             GC.Collect();
         }
 
+        public override void OnGameSelected(OnGameSelectedEventArgs args)
+        {
+            if (viewModel != null)
+            {
+                if (args.NewValue.FirstOrDefault() is Game last)
+                {
+                    viewModel.LastSelectedGame = last;
+                }
+            }
+        }
+
         public override void OnGameInstalled(OnGameInstalledEventArgs args)
         {
             // Add code to be executed when game is finished installing.
@@ -146,6 +157,9 @@ namespace LandingPage
 
         public override void OnApplicationStarted(OnApplicationStartedEventArgs args)
         {
+            var switchWithLowPrio = false;
+            //Settings.SwitchWithLowPriority = true;
+            //SavePluginSettings(Settings);
             if (Settings.EnableStartupOverride || Settings.MoveToTopOfList)
             {
                 var mainWindow = Application.Current.Windows.Cast<Window>().FirstOrDefault(w => w.Name == "WindowMain");
@@ -162,6 +176,7 @@ namespace LandingPage
                                 {
                                     childIndex = panel.Children.Cast<FrameworkElement>().ToList().FindIndex(c => c.ToolTip?.ToString() == "Start Page");
                                 }
+
                                 panel.Dispatcher.BeginInvoke(new Action(() =>
                                 {
                                     if (childIndex > -1)
@@ -178,10 +193,11 @@ namespace LandingPage
                                             element.Command.Execute(element);
                                         }
                                     }
-                                }), System.Windows.Threading.DispatcherPriority.DataBind);
+                                }), switchWithLowPrio ? System.Windows.Threading.DispatcherPriority.ApplicationIdle : System.Windows.Threading.DispatcherPriority.DataBind);
+
                             }
                         }
-                    }, System.Windows.Threading.DispatcherPriority.DataBind);
+                    }, switchWithLowPrio ? System.Windows.Threading.DispatcherPriority.ApplicationIdle : System.Windows.Threading.DispatcherPriority.DataBind);
                 }
             }
 #if DEBUG
@@ -210,12 +226,13 @@ namespace LandingPage
                 }
             });
 #endif
+            //Settings.SwitchWithLowPriority = switchWithLowPrio;
         }
 
         public override void OnApplicationStopped(OnApplicationStoppedEventArgs args)
         {
             // Add code to be executed when Playnite is shutting down.
-            SavePluginSettings(SettingsViewModel.Settings);
+            SavePluginSettings(Settings);
         }
 
         public override void OnLibraryUpdated(OnLibraryUpdatedEventArgs args)

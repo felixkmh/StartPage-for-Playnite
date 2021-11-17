@@ -22,7 +22,9 @@ namespace LandingPage
         [Description("LOC_SPG_BackgroundImageSourceMostPlayed")]
         MostPlayed,
         [Description("LOC_SPG_BackgroundImageSourceRandom")]
-        Random
+        Random,
+        [Description("LOC_SPG_BackgroundImageSourceLastSelected")]
+        LastSelected
     }
 
     [Serializable]
@@ -81,6 +83,9 @@ namespace LandingPage
 
         private bool enableStartupOverride = false;
         public bool EnableStartupOverride { get => enableStartupOverride; set => SetValue(ref enableStartupOverride, value); }
+
+        public bool switchWithLowPriority = false;
+        public bool SwitchWithLowPriority { get => switchWithLowPriority; set => SetValue(ref switchWithLowPriority, value); }
 
         private bool keepInMemory = true;
         public bool KeepInMemory { get => keepInMemory; set => SetValue(ref keepInMemory, value); }
