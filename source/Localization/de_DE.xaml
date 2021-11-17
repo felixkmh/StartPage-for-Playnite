@@ -37,8 +37,8 @@
     <sys:String x:Key="LOC_SPG_EffectiveBlur">Effektiver Unschärferadius:</sys:String>
     <sys:String x:Key="LOC_SPG_EffectiveBlurToolTip">Der effektive Unschärferadius ergibt sich aus (Unschärferadius) / (Hintergrund-Render-Skalierung). Eine niedrige Render-Skalierung in Verbindung mit einem niedrigen Unschärferadius kann zu unerwünschten Ergebnissen führen. Eine Verringerung der Render-Skalierung kann die Leistung verbessern und einen stärkeren Unschärfe-Effekt erzeugen.</sys:String>
     <sys:String x:Key="LOC_SPG_BackgroundScale">Hintergrund-Render-Skalierung:</sys:String>
-    <sys:String x:Key="LOC_SPG_OverlayOpacity">Überlagerungsdeckkraft:</sys:String>
-    <sys:String x:Key="LOC_SPG_NoiseOpacity">Noise Opacity:</sys:String>
+    <sys:String x:Key="LOC_SPG_OverlayOpacity">Deckkraft der Überlagerung:</sys:String>
+    <sys:String x:Key="LOC_SPG_NoiseOpacity">Deckkraft des Rauschens:</sys:String>
     <sys:String x:Key="LOC_SPG_BackgroundImageSource">Auswahl des Spiel-Hintergrundbildes:</sys:String>
     <sys:String x:Key="LOC_SPG_BackgroundImagePath">Hintergrundbild Pfad:</sys:String>
     <sys:String x:Key="LOC_SPG_SwitchWithLowPrio">Niedrigere Priorität beim Umschalten der Ansicht (wird automatisch beim Absturz von Playnite aktiviert)</sys:String>
