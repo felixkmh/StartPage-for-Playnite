@@ -26,7 +26,7 @@
                     Opacity="0.5"/>
         <BitmapImage x:Key="TransparentNoiseImage" CreateOptions="IgnoreColorProfile" UriSource="pack://application:,,,/StartPagePlugin;component/transparent_noise.png" CacheOption="OnLoad"/>
         <ImageBrush x:Key="TransparentNoiseBrush" ImageSource="{StaticResource TransparentNoiseImage}" TileMode="Tile" Viewport="0,0,100,100" ViewportUnits="Absolute"  
-                    Opacity="0.03" RenderOptions.BitmapScalingMode="LowQuality"/>
+                    Opacity="0.15" RenderOptions.BitmapScalingMode="LowQuality"/>
         <Style x:Key="VirtualizedStackPanelStyle" TargetType="{x:Type VirtualizingStackPanel}">
             <Setter Property="UseLayoutRounding" Value="False"/>
             <Setter Property="SnapsToDevicePixels" Value="False"/>
@@ -362,7 +362,6 @@
                 </Image.Effect>
             </Image>
         </Grid>
-        <Border Background="{StaticResource TransparentNoiseBrush}" Opacity="{Binding Settings.Settings.OverlayOpacity}"/>
         <Border Background="{StaticResource DarkNoiseBrush}" Opacity="{Binding Settings.Settings.OverlayOpacity}">
             <Border.OpacityMask>
                 <LinearGradientBrush StartPoint="0,1" EndPoint="0,0">
@@ -373,6 +372,7 @@
                 </LinearGradientBrush>
             </Border.OpacityMask>
         </Border>
+        <Border Background="{StaticResource TransparentNoiseBrush}" Opacity="{Binding Settings.Settings.NoiseOpacity}"/>
         <ScrollViewer HorizontalScrollBarVisibility="Disabled"
                   VerticalScrollBarVisibility="Disabled" Padding="0,40,0,5" Background="{x:Null}">
             <Grid>

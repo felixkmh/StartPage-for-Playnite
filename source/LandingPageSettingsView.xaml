@@ -192,6 +192,25 @@
                             </Grid>
                         </DockPanel>
                         <DockPanel LastChildFill="False">
+                            <Grid VerticalAlignment="Center">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition SharedSizeGroup="Descriptions"/>
+                                    <ColumnDefinition SharedSizeGroup="Controls"/>
+                                    <ColumnDefinition SharedSizeGroup="Value"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Column="0" Text="{DynamicResource LOC_SPG_NoiseOpacity}" VerticalAlignment="Center"/>
+                                <Slider Grid.Column="1" Margin="10,0" VerticalAlignment="Center" Value="{Binding Settings.NoiseOpacity}" Minimum="0" Maximum="1" Width="180" IsSnapToTickEnabled="True" TickFrequency="0.01"/>
+                                <numeric:DoubleBox Grid.Column="2" Value="{Binding Settings.NoiseOpacity, UpdateSourceTrigger=PropertyChanged}" 
+                                        MinValue="0"
+                                        MaxValue="1"
+                                        MinWidth="30"
+                                        ValidationTrigger="PropertyChanged"
+                                        Style="{StaticResource {x:Type TextBox}}"
+                                        TextAlignment="Center">
+                                </numeric:DoubleBox>
+                            </Grid>
+                        </DockPanel>
+                        <DockPanel LastChildFill="False">
                             <TextBlock Text="{DynamicResource LOC_SPG_BackgroundImageSource}" VerticalAlignment="Center"/>
                             <ComboBox SelectedValue="{Binding Settings.BackgroundImageSource}" Margin="5,0" MinWidth="120">
                                 <ComboBox.ItemsSource>

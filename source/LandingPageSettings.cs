@@ -99,6 +99,9 @@ namespace LandingPage
         private double overlayOpacity = 0.1;
         public double OverlayOpacity { get => overlayOpacity; set => SetValue(ref overlayOpacity, value); }
 
+        private double noiseOpacity = 0.15;
+        public double NoiseOpacity { get => noiseOpacity; set => SetValue(ref noiseOpacity, value); }
+
         private double renderScale = 0.05;
         public double RenderScale { get => renderScale; set { SetValue(ref renderScale, value); OnPropertyChanged(nameof(BlurAmountScaled)); } }
 

@@ -201,30 +201,30 @@ namespace LandingPage
                 }
             }
 #if DEBUG
-            Task.Run(() =>
-            {
-                var rng = new Random();
-                for (var i = 0; i < 10; ++i)
-                {
-                    int n = i + 1;
-                    Thread.Sleep(rng.Next(10000));
-                    NotificationType type = NotificationType.Info;
-                    if (rng.NextDouble() < 0.5)
-                    {
-                        type = NotificationType.Error;
-                    }
-                    if (rng.NextDouble() < 0.5)
-                    {
-                        PlayniteApi.Notifications.Add(new NotificationMessage($"{i}_test", $"Longer Notification #{n} with activation action that activates on click!!",
-                            type,
-                            () => PlayniteApi.Dialogs.ShowMessage($"You clicked on Notifaction #{n}")));
-                    }
-                    else
-                    {
-                        PlayniteApi.Notifications.Add(new NotificationMessage($"{i}_test", $"Notification #{n}!!", type));
-                    }
-                }
-            });
+            //Task.Run(() =>
+            //{
+            //    var rng = new Random();
+            //    for (var i = 0; i < 10; ++i)
+            //    {
+            //        int n = i + 1;
+            //        Thread.Sleep(rng.Next(10000));
+            //        NotificationType type = NotificationType.Info;
+            //        if (rng.NextDouble() < 0.5)
+            //        {
+            //            type = NotificationType.Error;
+            //        }
+            //        if (rng.NextDouble() < 0.5)
+            //        {
+            //            PlayniteApi.Notifications.Add(new NotificationMessage($"{i}_test", $"Longer Notification #{n} with activation action that activates on click!!",
+            //                type,
+            //                () => PlayniteApi.Dialogs.ShowMessage($"You clicked on Notifaction #{n}")));
+            //        }
+            //        else
+            //        {
+            //            PlayniteApi.Notifications.Add(new NotificationMessage($"{i}_test", $"Notification #{n}!!", type));
+            //        }
+            //    }
+            //});
 #endif
             //Settings.SwitchWithLowPriority = switchWithLowPrio;
         }
