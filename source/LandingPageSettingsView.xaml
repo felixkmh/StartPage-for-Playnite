@@ -76,7 +76,7 @@
                                     <ColumnDefinition SharedSizeGroup="Value"/>
                                 </Grid.ColumnDefinitions>
                                 <TextBlock Grid.Column="0" Text="{DynamicResource LOC_SPG_CoverAspectRatio}" VerticalAlignment="Center"/>
-                                <Slider Grid.Column="1" Margin="10,0" VerticalAlignment="Center" Value="{Binding Settings.CoverAspectRatio, Converter={StaticResource LogConverter}, ConverterParameter=2}" Minimum="-1" Maximum="1" Width="200" IsSnapToTickEnabled="True" TickFrequency="0.005" SmallChange="0.005"/>
+                                <Slider Grid.Column="1" Margin="10,0" VerticalAlignment="Center" Value="{Binding Settings.CoverAspectRatio, Converter={StaticResource LogConverter}, ConverterParameter=2}" Minimum="-1" Maximum="1" Width="200" IsSnapToTickEnabled="True" TickFrequency="0.01" SmallChange="0.005"/>
                                 <numeric:DoubleBox Grid.Column="2" Value="{Binding Settings.CoverAspectRatio, UpdateSourceTrigger=PropertyChanged}" 
                                             MinValue="0.5"
                                             MaxValue="2"
