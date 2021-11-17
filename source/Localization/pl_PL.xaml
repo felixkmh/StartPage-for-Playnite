@@ -15,7 +15,7 @@
     <sys:String x:Key="LOC_SPG_BackgroundImageSourceLastAdded">Ostatnio dodane</sys:String>
     <sys:String x:Key="LOC_SPG_BackgroundImageSourceMostPlayed">Najczęściej grane</sys:String>
     <sys:String x:Key="LOC_SPG_BackgroundImageSourceRandom">Losowe</sys:String>
-    <sys:String x:Key="LOC_SPG_BackgroundImageSourceLastSelected">Last Selected</sys:String>
+    <sys:String x:Key="LOC_SPG_BackgroundImageSourceLastSelected">Ostatnio zaznaczone</sys:String>
 
     <!-- Settings -->
     <sys:String x:Key="LOC_SPG_ShowFavorites">Pokaż ulubione gry</sys:String>
