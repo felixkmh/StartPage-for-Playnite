@@ -290,7 +290,7 @@ namespace LandingPage.ViewModels
             var changed = false;
             Application.Current.Dispatcher.Invoke(() =>
             {
-                var displayedGames = Math.Min(Math.Max(10, games.Count(g => g.LastActivity?.CompareTo(DateTime.Today.AddDays(-7)) > 0)), 20);
+                var displayedGames = Math.Min(Math.Max(15, games.Count(g => g.LastActivity?.CompareTo(DateTime.Today.AddDays(-7)) > 0)), 20);
                 
                 IEnumerable<Game> gameSelection = games.Take(displayedGames);
                 foreach (var game in gameSelection)
@@ -340,7 +340,7 @@ namespace LandingPage.ViewModels
             var changed = false;
             Application.Current.Dispatcher.Invoke(() =>
             {
-                var displayedGames = Math.Min(Math.Max(10, games.Count(g => g.Added?.CompareTo(DateTime.Today.AddDays(-7)) > 0)), 20);
+                var displayedGames = Math.Min(Math.Max(15, games.Count(g => g.Added?.CompareTo(DateTime.Today.AddDays(-7)) > 0)), 20);
                 
                 IEnumerable<Game> gameSelection = games.Take(displayedGames);
                 foreach (var game in gameSelection)

@@ -113,6 +113,7 @@
     <Resource Include="noise.png" />
     <Resource Include="innerglow.png" />
     <Resource Include="dark_noise.png" />
+    <Resource Include="empty.png" />
     <Content Include="Localization/*.xaml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

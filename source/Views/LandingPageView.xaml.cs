@@ -122,25 +122,33 @@ namespace LandingPage.Views
 
         private void UserControl_SizeChanged(object sender, SizeChangedEventArgs e)
         {
-            //var maxHeight = 195.0;
-            //var height = (double)Resources["CoverHeight"];
-            //var width = (double)Resources["CoverWidth"];
-            //var ratio = 140.0 / 195.0;
+            if ((e.WidthChanged && sender is UserControl) || (e.HeightChanged && sender is ListBox))
+            {
+                _ = Dispatcher.BeginInvoke(new Action(() =>
+                  {
+                      var newWidth = ActualWidth;
+                      ListBox[] listBoxes = new[] { FavoritesListBox, RecentlyAddedListBox, RecentlyPlayedListBox };
+                      foreach (var listBox in sender is ListBox lb ? new[] { lb } : listBoxes)
+                      {
+                          var itemCount = listBox.ItemsSource.Cast<object>().Count();
+                          if (listBox.IsVisible && itemCount > 0)
+                          {
+                              var desiredWidth = listBox.DesiredSize.Width;
+                              var container = listBox.ItemContainerGenerator.ContainerFromIndex(0) as FrameworkElement;
+                              var itemWidth = container.ActualWidth + container.Margin.Left + container.Margin.Right;
+                              var scrollViewer = Helper.UiHelper.FindVisualChildren<ScrollViewer>(listBox).FirstOrDefault();
+                            // itemWidth = desiredWidth / itemCount;
+                            var availableWidth = newWidth - 120;
+                              var newListWidth = Math.Floor(availableWidth / itemWidth) * itemWidth;
+                              if (listBox.MaxWidth != newListWidth)
+                              {
+                                  listBox.MaxWidth = newListWidth;
+                              }
+                          }
+                      }
+                  }), System.Windows.Threading.DispatcherPriority.Background);
 
-            //var currentHeight = Helper.UiHelper.FindVisualChildren<ScrollContentPresenter>(RecentlyAddedListBox).FirstOrDefault().ActualHeight;
-            //currentHeight = Math.Min(Helper.UiHelper.FindVisualChildren<ScrollContentPresenter>(RecentlyPlayedListBox).FirstOrDefault().ActualHeight, currentHeight);
-
-            //if (currentHeight < height)
-            //{
-            //    var newHeight = RecentlyAddedListBox.ActualHeight;
-            //    Resources["CoverHeight"] = newHeight;
-            //    Resources["CoverWidth"] = ratio * newHeight;
-            //} else if (currentHeight < maxHeight)
-            //{
-            //    var newHeight = maxHeight;
-            //    Resources["CoverHeight"] = newHeight;
-            //    Resources["CoverWidth"] = ratio * newHeight;
-            //}
+            }
         }
 
         private void ToggleNotifications_Click(object sender, RoutedEventArgs e)
