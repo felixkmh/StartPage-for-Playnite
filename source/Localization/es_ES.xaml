@@ -15,7 +15,7 @@
     <sys:String x:Key="LOC_SPG_BackgroundImageSourceLastAdded">Último añadido</sys:String>
     <sys:String x:Key="LOC_SPG_BackgroundImageSourceMostPlayed">Más jugado</sys:String>
     <sys:String x:Key="LOC_SPG_BackgroundImageSourceRandom">Aleatorio</sys:String>
-    <sys:String x:Key="LOC_SPG_BackgroundImageSourceLastSelected">Last Selected</sys:String>
+    <sys:String x:Key="LOC_SPG_BackgroundImageSourceLastSelected">Última selección</sys:String>
 
     <!-- Settings -->
     <sys:String x:Key="LOC_SPG_ShowFavorites">Mostrar juegos favoritos</sys:String>
@@ -38,11 +38,11 @@
     <sys:String x:Key="LOC_SPG_EffectiveBlurToolTip">El radio de desenfoque efectivo viene dado por (Radio de desenfoque) / (Escala de renderizado del fondo). Una escala de renderizado baja combinada con un radio de desenfoque bajo puede conducir a resultados no deseados. Disminuir la escala de renderizado puede producir un mejor rendimiento y puede crear un efecto de desenfoque más fuerte.</sys:String>
     <sys:String x:Key="LOC_SPG_BackgroundScale">Escala de renderizado de fondo:</sys:String>
     <sys:String x:Key="LOC_SPG_OverlayOpacity">Opacidad de la superposición:</sys:String>
-    <sys:String x:Key="LOC_SPG_NoiseOpacity">Noise Opacity:</sys:String>
-    <sys:String x:Key="LOC_SPG_CoverAspectRatio">Cover Aspect Ratio</sys:String>
-    <sys:String x:Key="LOC_SPG_MaxCoverWidth">Maximum Cover Width</sys:String>
+    <sys:String x:Key="LOC_SPG_NoiseOpacity">Opacidad del ruido:</sys:String>
+    <sys:String x:Key="LOC_SPG_CoverAspectRatio">Relación de aspecto de la cubierta</sys:String>
+    <sys:String x:Key="LOC_SPG_MaxCoverWidth">Ancho de portada máximo</sys:String>
     <sys:String x:Key="LOC_SPG_BackgroundImageSource">Selección de la imagen de fondo del juego:</sys:String>
     <sys:String x:Key="LOC_SPG_BackgroundImagePath">Ruta de la imagen de fondo:</sys:String>
-    <sys:String x:Key="LOC_SPG_SwitchWithLowPrio">Lower Priority when switching View (automatically enabled upon Playnite crashing)</sys:String>
+    <sys:String x:Key="LOC_SPG_SwitchWithLowPrio">Bajar prioridad al cambiar la vista (activado automáticamente al bloquearse Playnite)</sys:String>
     <sys:String x:Key="LOC_SPG_UnsupportedToolTip">Use this feature at your own risk. It is not officially supported by the PlayniteAPI and can thus lead to unexpected behaviour.</sys:String>
 </ResourceDictionary>
