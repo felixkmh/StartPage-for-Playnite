@@ -55,6 +55,7 @@
         </Style>
         <system:Double x:Key="CoverHeight">195</system:Double>
         <system:Double x:Key="CoverWidth">140</system:Double>
+        <conv:MultiplyConverter x:Key="MultiplyConverter"/>
         <conv:ActualHeightToWidthConverter x:Key="ActualHeightToWidthConverter"/>
         <conv:HeightToWidthMultiConverter x:Key="HeightToWidthMultiConverter"/>
         <conv:WidthToHeightMultiConverter x:Key="WidthToHeightMultiConverter"/>
@@ -131,8 +132,8 @@
                     </Viewbox>
                     <ContentControl x:Name="Proxy" Visibility="{mu:LandingPageSettings Settings.ShowDetails}" Width="0" Height="0"/>
                 </Grid>
-                <Popup Height="204.75" Width="462" x:Name="Description" IsOpen="False" Placement="Right" PlacementTarget="{Binding ElementName=ImageGrid}" 
-                                       ClipToBounds="True" PopupAnimation="Fade">
+                <Popup MinHeight="204.75" Height="{Binding ElementName=ImageGrid, Path=ActualHeight, Converter={StaticResource MultiplyConverter}, ConverterParameter=1.05}" Width="462" x:Name="Description" IsOpen="False" Placement="Right" PlacementTarget="{Binding ElementName=ImageGrid}" 
+                                       ClipToBounds="True" PopupAnimation="Fade" Closed="Description_Closed">
                     <Popup.PlacementRectangle>
                         <MultiBinding Converter="{StaticResource ElementToScaledRectConverter}">
                             <MultiBinding.ConverterParameter>
@@ -141,26 +142,28 @@
                             <MultiBinding.Bindings>
                                 <Binding ElementName="ImageGrid" Path="ActualWidth"/>
                                 <Binding ElementName="ImageGrid" Path="ActualHeight"/>
+                                <Binding ElementName="Description" Path="Height"/>
                             </MultiBinding.Bindings>
                         </MultiBinding>
                     </Popup.PlacementRectangle>
                     <Grid IsHitTestVisible="False">
-                        <Border Background="#303030" CornerRadius="7"/>
+                        <Grid.OpacityMask>
+                            <VisualBrush Visual="{Binding ElementName=PopupSolidBackground}"/>
+                        </Grid.OpacityMask>
+                        <Border Background="#303030" CornerRadius="7" x:Name="PopupSolidBackground"/>
                         <Border Background="{StaticResource GridItemBackgroundBrush}"
                                                 CornerRadius="7"/>
-                        <Border CornerRadius="7" Opacity="0.3" x:Name="PopupBackground">
-                            <Border.Background>
-                                <ImageBrush x:Name="PopupImageBrush"/>
-                            </Border.Background>
-                            <Border.OpacityMask>
+                        <ContentControl x:Name="PopupImageContentControl"/>
+                        <!--<Image x:Name="PopupBackgroundImage" Opacity="0.3" Source="{x:Null}" Stretch="UniformToFill" RenderOptions.BitmapScalingMode="HighQuality">
+                            <Image.OpacityMask>
                                 <LinearGradientBrush StartPoint="1,0" EndPoint="0,1">
                                     <LinearGradientBrush.GradientStops>
                                         <GradientStop Color="Transparent"/>
                                         <GradientStop Color="Black" Offset="1"/>
                                     </LinearGradientBrush.GradientStops>
                                 </LinearGradientBrush>
-                            </Border.OpacityMask>
-                        </Border>
+                            </Image.OpacityMask>
+                        </Image>-->
                         <local:GameDetailsView Margin="10,5"/>
                     </Grid>
                 </Popup>
@@ -179,16 +182,27 @@
                     </MultiTrigger.Conditions>
                     <MultiTrigger.Setters>
                         <Setter Property="IsOpen" Value="True" TargetName="Description"/>
-                        <Setter Property="Background" TargetName="PopupBackground">
-                            <Setter.Value>
-                                <ImageBrush ImageSource="{Binding Game.BackgroundImage, Converter={StaticResource ImageStringToImageConverter}, 
-                                                                                    FallbackValue={StaticResource DefaultGameCover},
-                                                                                    TargetNullValue={StaticResource DefaultGameCover}}"
-                                                            Stretch="UniformToFill"/>
-                            </Setter.Value>
-                        </Setter>
                     </MultiTrigger.Setters>
                 </MultiTrigger>
+                <Trigger Property="IsOpen" SourceName="Description" Value="True">
+                    <Setter Property="Content" TargetName="PopupImageContentControl">
+                        <Setter.Value>
+                            <Image Opacity="0.3" Source="{Binding Game.BackgroundImage, Converter={StaticResource ImageStringToImageConverter}, 
+                                                                                    FallbackValue={StaticResource DefaultGameCover},
+                                                                                    TargetNullValue={StaticResource DefaultGameCover}}"
+                                   Stretch="UniformToFill" RenderOptions.BitmapScalingMode="HighQuality">
+                                <Image.OpacityMask>
+                                    <LinearGradientBrush StartPoint="1,0" EndPoint="0,1">
+                                        <LinearGradientBrush.GradientStops>
+                                            <GradientStop Color="Transparent"/>
+                                            <GradientStop Color="Black" Offset="1"/>
+                                        </LinearGradientBrush.GradientStops>
+                                    </LinearGradientBrush>
+                                </Image.OpacityMask>
+                            </Image>
+                        </Setter.Value>
+                    </Setter>
+                </Trigger>
                 <Trigger Property="IsMouseOver" Value="True" SourceName="ImageGrid">
                     <Setter Property="Visibility" Value="Visible" TargetName="Buttons"/>
                 </Trigger>

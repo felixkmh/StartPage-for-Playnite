@@ -33,7 +33,6 @@ namespace LandingPage.Views
         {
             DataContext = model;
             model.Clock.DayChanged += Clock_DayChanged;
-            // model.PropertyChanged += Model_PropertyChanged;
             InitializeComponent();
         }
 
@@ -50,35 +49,6 @@ namespace LandingPage.Views
             if (FavoritesListBox.ItemsSource is ListCollectionView collectionView3)
             {
                 collectionView3.Refresh();
-            }
-        }
-
-        private void Model_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
-        {
-            if (e.PropertyName == nameof(LandingPageViewModel.RecentlyAddedGames))
-            {
-                if(RecentlyAddedListBox.ItemsSource is ListCollectionView collectionView)
-                {
-                    //if (collectionView.NeedsRefresh)
-                    //{
-                    //    var sort = collectionView.SortDescriptions.FirstOrDefault();
-                    //    collectionView.SortDescriptions.Clear();
-                    //    collectionView.SortDescriptions.Add(sort);
-                    //}
-                }
-            }
-
-            if (e.PropertyName == nameof(LandingPageViewModel.RecentlyPlayedGames))
-            {
-                if (RecentlyPlayedListBox.ItemsSource is ListCollectionView collectionView)
-                {
-                    //if (collectionView.NeedsRefresh)
-                    //{
-                    //    var sort = collectionView.SortDescriptions.FirstOrDefault();
-                    //    collectionView.SortDescriptions.Clear();
-                    //    collectionView.SortDescriptions.Add(sort);
-                    //}
-                }
             }
         }
 
@@ -122,7 +92,7 @@ namespace LandingPage.Views
 
         private void UserControl_SizeChanged(object sender, SizeChangedEventArgs e)
         {
-            if ((e.WidthChanged && sender is UserControl) || (e.HeightChanged && sender is ListBox))
+            if (e.HeightChanged || e.WidthChanged)
             {
                 _ = Dispatcher.BeginInvoke(new Action(() =>
                   {
@@ -165,32 +135,9 @@ namespace LandingPage.Views
             }
         }
 
-        private void ListBox_SizeChanged(object sender, SizeChangedEventArgs e)
+        private void Description_Closed(object sender, EventArgs e)
         {
-            //if (sender is ListBox lb)
-            //{
-            //    Dispatcher.Invoke(new Action(() =>
-            //    {
-            //        if (e.HeightChanged && lb.ItemsSource.Cast<object>().Any())
-            //        {
-            //            if (lb.ItemContainerGenerator.ContainerFromIndex(0) is FrameworkElement item)
-            //            {
-            //                item.SizeChanged += Item_SizeChanged;
-            //                var maxNumberOfItems = Math.Floor(lb.MaxWidth / item.ActualWidth);
-            //                var newWidth = Math.Min(lb.MaxWidth, maxNumberOfItems * item.ActualWidth);
-            //                lb.Width = newWidth;
-            //            }
-            //        }
-            //    }));
-            //}
+            GC.Collect();
         }
-
-        //private void Item_SizeChanged(object sender, SizeChangedEventArgs e)
-        //{
-        //    if (sender is FrameworkElement item)
-        //    {
-        //        item.SizeChanged -= Item_SizeChanged;
-        //    }
-        //}
     }
 }

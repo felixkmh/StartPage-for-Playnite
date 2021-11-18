@@ -13,12 +13,12 @@ namespace LandingPage.Converters
     {
         public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {
-            if (values[0] is double width && values[1] is double height && parameter is double scale)
+            if (values[0] is double width && values[1] is double height && values[2] is double actualHeight && parameter is double scale)
             {
                 var newWidth = scale * width + 1.5 * 7;
                 var newHeight = scale * height;
                 var x = (width - newWidth) / 2;
-                var y = (height - newHeight) / 2 - (204.75 - newHeight) / 2;
+                var y = (height - newHeight) / 2 - (Math.Max(actualHeight, 204.75) - newHeight) / 2;
                 return new Rect(x, y, newWidth, newHeight);
             }
             return new Rect();
