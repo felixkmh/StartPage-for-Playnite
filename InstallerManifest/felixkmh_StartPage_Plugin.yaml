@@ -1,5 +1,15 @@
 AddonId: felixkmh_StartPage_Plugin
 Packages:  
+  - Version: 1.6.0
+    RequiredApiVersion: 6.1.0
+    ReleaseDate: 2021-11-18
+    PackageUrl: https://github.com/felixkmh/StartPage-for-Playnite/releases/download/v1.6.0/felixkmh_StartPage_Plugin_1_6_0.pext
+    Changelog:
+      - added option to set maximum game cover width
+      - more adaptive layout
+      - always show game title if cover is missing
+      - localization updates
+      - fixed crash related to color profiles
   - Version: 1.5.0
     RequiredApiVersion: 6.1.0
     ReleaseDate: 2021-11-17
