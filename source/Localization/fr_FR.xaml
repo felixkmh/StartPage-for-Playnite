@@ -15,11 +15,11 @@
     <sys:String x:Key="LOC_SPG_BackgroundImageSourceLastAdded">Dernier ajout</sys:String>
     <sys:String x:Key="LOC_SPG_BackgroundImageSourceMostPlayed">Le plus joué</sys:String>
     <sys:String x:Key="LOC_SPG_BackgroundImageSourceRandom">Aléatoire</sys:String>
-    <sys:String x:Key="LOC_SPG_BackgroundImageSourceLastSelected">Last Selected</sys:String>
+    <sys:String x:Key="LOC_SPG_BackgroundImageSourceLastSelected">Dernière sélection</sys:String>
 
     <!-- Settings -->
-    <sys:String x:Key="LOC_SPG_NumberOfGames">Number of Games:</sys:String>
-    <sys:String x:Key="LOC_SPG_NextRandomBackground">Next Random Background</sys:String>
+    <sys:String x:Key="LOC_SPG_NumberOfGames">nombre de jeux :</sys:String>
+    <sys:String x:Key="LOC_SPG_NextRandomBackground">Image de fond aléatoire suivante</sys:String>
     <sys:String x:Key="LOC_SPG_ShowFavorites">Afficher les jeux favoris</sys:String>
     <sys:String x:Key="LOC_SPG_ShowClock">Afficher l'horloge</sys:String>
     <sys:String x:Key="LOC_SPG_ShowRecentlyPlayed">Afficher les jeux lancés récemment</sys:String>
@@ -41,10 +41,10 @@
     <sys:String x:Key="LOC_SPG_BackgroundScale">Échelle de rendu de l'image de fond :</sys:String>
     <sys:String x:Key="LOC_SPG_OverlayOpacity">Opacité du filtre :</sys:String>
     <sys:String x:Key="LOC_SPG_NoiseOpacity">Opacité du grain :</sys:String>
-    <sys:String x:Key="LOC_SPG_CoverAspectRatio">Cover Aspect Ratio</sys:String>
-    <sys:String x:Key="LOC_SPG_MaxCoverWidth">Maximum Cover Width</sys:String>
+    <sys:String x:Key="LOC_SPG_CoverAspectRatio">Format des couvertures</sys:String>
+    <sys:String x:Key="LOC_SPG_MaxCoverWidth">Largeur maximale des couvertures</sys:String>
     <sys:String x:Key="LOC_SPG_BackgroundImageSource">Méthode de sélection de l'image de fond :</sys:String>
     <sys:String x:Key="LOC_SPG_BackgroundImagePath">Répertoire de l'image de fond :</sys:String>
-    <sys:String x:Key="LOC_SPG_SwitchWithLowPrio">Lower Priority when switching View (automatically enabled upon Playnite crashing)</sys:String>
+    <sys:String x:Key="LOC_SPG_SwitchWithLowPrio">Diminuer la priorité lors du changement de modes d'affichage (fait automatiquement en cas de crash)</sys:String>
     <sys:String x:Key="LOC_SPG_UnsupportedToolTip">Cette fonctionnalité n'est pas supportée par l'API de Playnite et pourrait provoquer des erreurs.</sys:String>
 </ResourceDictionary>
