@@ -58,6 +58,9 @@
     <Compile Include="Controls\GroupListBox.xaml.cs">
       <DependentUpon>GroupListBox.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\RevealControl.xaml.cs">
+      <DependentUpon>RevealControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Converters\AchievementsToProgressConverter.cs" />
     <Compile Include="Converters\ActualHeightToWidthConverter.cs" />
     <Compile Include="Converters\BoolToGridLengthConverter.cs" />
@@ -122,6 +125,10 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="Controls\GroupListBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\RevealControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

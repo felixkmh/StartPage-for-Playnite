@@ -30,9 +30,20 @@ namespace LandingPage
 
                 double? scrollWidth = null;
 
-                if (itemsControl.ItemContainerGenerator.ContainerFromIndex(0) is FrameworkElement container)
+                var itemCount = itemsControl.ItemsSource?.Cast<object>().Count() ?? 0;
+                FrameworkElement container = null;
+                for (int i = 0; i < itemCount; ++i)
                 {
-                    scrollWidth = container.DesiredSize.Width;
+                    if (itemsControl.ItemContainerGenerator.ContainerFromIndex(i) is FrameworkElement element)
+                    {
+                        container = element;
+                        break;
+                    }
+                }
+
+                if (container is FrameworkElement)
+                {
+                    scrollWidth = container.ActualWidth + container.Margin.Left + container.Margin.Right;
                 }
 
                 if (scrollWidth is double delta)

@@ -11,7 +11,7 @@
              xmlns:system="clr-namespace:System;assembly=mscorlib"
              xmlns:mu="clr-namespace:LandingPage.Markup"
              xmlns:scm="clr-namespace:System.ComponentModel;assembly=WindowsBase"
-             xmlns:pn="clr-namespace:Playnite.SDK;assembly=Playnite.SDK"
+             xmlns:pn="clr-namespace:Playnite.SDK;assembly=Playnite.SDK" xmlns:controls="clr-namespace:LandingPage.Controls"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
              d:DataContext="{d:DesignInstance IsDesignTimeCreatable=False, Type=lpvm:LandingPageViewModel}"
@@ -832,5 +832,30 @@
                 </StackPanel>
             </Border>
         </Grid>
+        <Button HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="4" Command="{Binding BackgroundSourceGame.OpenCommand}" Padding="0">
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <Grid Visibility="{Binding BackgroundSourceGame, Converter={StaticResource NullToVisibilityConverter}}" Background="{x:Null}">
+                        <Border Background="Black" CornerRadius="10" IsHitTestVisible="False"
+                                Margin="0" Padding="0" Opacity="0.08" x:Name="GameNameBorder">
+                        </Border>
+                        <TextBlock  Opacity="0.12" Margin="0" Text="i" Foreground="White" MinWidth="20" Height="20" TextAlignment="Center"
+                                    x:Name="BackgroundImageSourceGameTitle" FontSize="13" Padding="5,3" LineStackingStrategy="BlockLineHeight"
+                                    LineHeight="{Binding RelativeSource={RelativeSource Mode=Self}, Path=FontSize}"
+                                    IsHitTestVisible="False"/>
+                        <Border Background="Transparent" CornerRadius="10" HorizontalAlignment="Left"
+                                Margin="0" Padding="0" Width="20" Height="20">
+                        </Border>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Opacity" Value="0.9" TargetName="BackgroundImageSourceGameTitle"/>
+                            <Setter Property="Opacity" Value="0.3" TargetName="GameNameBorder"/>
+                            <Setter Property="Text" Value="{Binding BackgroundSourceGame.Game.Name, FallbackValue=''}" TargetName="BackgroundImageSourceGameTitle"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
     </Grid>
 </UserControl>

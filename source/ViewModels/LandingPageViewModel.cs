@@ -29,7 +29,10 @@ namespace LandingPage.ViewModels
         public ObservableCollection<GameModel> FavoriteGames => favoriteGames;
 
         internal Uri backgroundImagePath = null;
-        public Uri BackgroundImagePath { get => backgroundImagePath; set { SetValue(ref backgroundImagePath, value); } }
+        public Uri BackgroundImagePath { get => backgroundImagePath; set => SetValue(ref backgroundImagePath, value); }
+
+        internal GameModel backgroundSourceGame = null;
+        public GameModel BackgroundSourceGame { get => backgroundSourceGame; set => SetValue(ref backgroundSourceGame, value); }
 
         internal ObservableCollection<GameGroup> specialGames = new ObservableCollection<GameGroup>();
         public ObservableCollection<GameGroup> SpecialGames => specialGames;
@@ -173,6 +176,7 @@ namespace LandingPage.ViewModels
 
         private void UpdateBackgroundImagePath(bool updateRandomBackground = true)
         {
+            Game gameSource = null;
             Uri path = null;
             if (Settings.Settings.BackgroundImageUri is Uri)
             {
@@ -184,23 +188,27 @@ namespace LandingPage.ViewModels
                 {
                     case BackgroundImageSource.LastPlayed:
                         {
-                            var databasePath = recentlyPlayedGames.OrderByDescending(g => g.Game.LastActivity)
-                                                 .FirstOrDefault(g => !string.IsNullOrEmpty(g.Game.BackgroundImage))?.Game.BackgroundImage;
+                            var mostRecent = recentlyPlayedGames.OrderByDescending(g => g.Game.LastActivity)
+                                                 .FirstOrDefault(g => !string.IsNullOrEmpty(g.Game.BackgroundImage));
+                            var databasePath = mostRecent?.Game.BackgroundImage;
                             var fullPath = playniteAPI.Database.GetFullFilePath(databasePath);
                             if (Uri.TryCreate(fullPath, UriKind.RelativeOrAbsolute, out var uri))
                             {
                                 path = uri;
+                                gameSource = mostRecent.Game;
                             }
                             break;
                         }
                     case BackgroundImageSource.LastAdded:
                         {
-                            var databasePath = recentlyAddedGames.OrderByDescending(g => g.Game.Added)
-                                                 .FirstOrDefault(g => !string.IsNullOrEmpty(g.Game.BackgroundImage))?.Game.BackgroundImage;
+                            var mostRecent = recentlyAddedGames.OrderByDescending(g => g.Game.Added)
+                                                 .FirstOrDefault(g => !string.IsNullOrEmpty(g.Game.BackgroundImage));
+                            var databasePath = mostRecent?.Game.BackgroundImage;
                             var fullPath = playniteAPI.Database.GetFullFilePath(databasePath);
                             if (Uri.TryCreate(fullPath, UriKind.RelativeOrAbsolute, out var uri))
                             {
                                 path = uri;
+                                gameSource = mostRecent.Game;
                             }
                             break;
                         }
@@ -209,13 +217,14 @@ namespace LandingPage.ViewModels
                             var mostPlayed = playniteAPI.Database.Games.MaxElement(game => game.Playtime);
                             if (mostPlayed.Value is Game)
                             {
-                                var databasePath = mostPlayed.Value.BackgroundImage;
+                                var databasePath = mostPlayed.Value?.BackgroundImage;
                                 if (!string.IsNullOrEmpty(databasePath))
                                 {
                                     var fullPath = playniteAPI.Database.GetFullFilePath(databasePath);
                                     if (Uri.TryCreate(fullPath, UriKind.RelativeOrAbsolute, out var uri))
                                     {
                                         path = uri;
+                                        gameSource = mostPlayed.Value;
                                     }
                                 }
                             }
@@ -236,6 +245,7 @@ namespace LandingPage.ViewModels
                                     if (Uri.TryCreate(fullPath, UriKind.RelativeOrAbsolute, out var uri))
                                     {
                                         path = uri;
+                                        gameSource = randomGame;
                                     }
                                 }
                             }
@@ -254,6 +264,7 @@ namespace LandingPage.ViewModels
                                 if (Uri.TryCreate(fullPath, UriKind.RelativeOrAbsolute, out var uri))
                                 {
                                     path = uri;
+                                    gameSource = lastSelectedGame;
                                 }
                             }
                         }
@@ -262,9 +273,10 @@ namespace LandingPage.ViewModels
             }
             if (path == null)
             {
-                var databasePath = recentlyPlayedGames.OrderByDescending(g => g.Game.LastActivity)
+                gameSource = recentlyPlayedGames.OrderByDescending(g => g.Game.LastActivity)
                     .Concat(recentlyAddedGames.OrderByDescending(g => g.Game.Added))
-                    .FirstOrDefault(g => !string.IsNullOrEmpty(g.Game.BackgroundImage))?.Game.BackgroundImage;
+                    .FirstOrDefault(g => !string.IsNullOrEmpty(g.Game.BackgroundImage))?.Game;
+                var databasePath = gameSource?.BackgroundImage;
                 var fullPath = playniteAPI.Database.GetFullFilePath(databasePath);
                 if (Uri.TryCreate(fullPath, UriKind.RelativeOrAbsolute, out var uri))
                 {
@@ -275,6 +287,7 @@ namespace LandingPage.ViewModels
             {
                 Application.Current.Dispatcher.Invoke(() =>
                 {
+                    BackgroundSourceGame = gameSource != null ? new GameModel(gameSource) : null;
                     BackgroundImagePath = path;
                 });
             }

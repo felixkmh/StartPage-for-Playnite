@@ -103,8 +103,16 @@ namespace LandingPage.Views
                           var itemCount = listBox.ItemsSource?.Cast<object>().Count() ?? 0;
                           if (listBox.IsVisible && itemCount > 0)
                           {
+                              FrameworkElement container = null;
+                              for (int i = 0; i < itemCount; ++i)
+                              {
+                                  if (listBox.ItemContainerGenerator.ContainerFromIndex(i) is FrameworkElement element)
+                                  {
+                                      container = element;
+                                      break;
+                                  }
+                              }
                               var desiredWidth = listBox.DesiredSize.Width;
-                              var container = listBox.ItemContainerGenerator.ContainerFromIndex(0) as FrameworkElement;
                               var itemWidth = container.ActualWidth + container.Margin.Left + container.Margin.Right;
                               var scrollViewer = Helper.UiHelper.FindVisualChildren<ScrollViewer>(listBox).FirstOrDefault();
                             // itemWidth = desiredWidth / itemCount;
