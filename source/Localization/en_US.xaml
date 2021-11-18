@@ -18,6 +18,8 @@
     <sys:String x:Key="LOC_SPG_BackgroundImageSourceLastSelected">Last Selected</sys:String>
 
     <!-- Settings -->
+    <sys:String x:Key="LOC_SPG_NumberOfGames">Number of Games:</sys:String>
+    <sys:String x:Key="LOC_SPG_NextRandomBackground">Next Random Background</sys:String>
     <sys:String x:Key="LOC_SPG_ShowFavorites">Show Favorite Games</sys:String>
     <sys:String x:Key="LOC_SPG_ShowClock">Show Clock</sys:String>
     <sys:String x:Key="LOC_SPG_ShowRecentlyPlayed">Show Recently Played Games</sys:String>
