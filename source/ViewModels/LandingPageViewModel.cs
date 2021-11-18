@@ -59,6 +59,7 @@ namespace LandingPage.ViewModels
         internal IPlayniteAPI playniteAPI;
         internal LandingPageExtension plugin;
 
+        private static readonly Random rng = new Random();
 
         public ICommand OpenSettingsCommand => new RelayCommand(() => plugin.OpenSettingsView());
         public LandingPageViewModel(IPlayniteAPI playniteAPI, LandingPageExtension landingPage,
@@ -224,7 +225,6 @@ namespace LandingPage.ViewModels
                         {
                             if (updateRandomBackground || BackgroundImagePath == null)
                             {
-                                var rng = new Random();
                                 var candidates = playniteAPI.Database.Games
                                     .Where(game => !game.Hidden)
                                     .Where(game => !string.IsNullOrEmpty(game.BackgroundImage));
