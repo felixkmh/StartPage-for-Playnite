@@ -226,6 +226,7 @@ namespace LandingPage.ViewModels
                             {
                                 var rng = new Random();
                                 var candidates = playniteAPI.Database.Games
+                                    .Where(game => !game.Hidden)
                                     .Where(game => !string.IsNullOrEmpty(game.BackgroundImage));
                                 var randomGame = candidates.ElementAtOrDefault(rng.Next(candidates.Count()));
                                 if (randomGame is Game)
