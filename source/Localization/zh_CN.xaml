@@ -18,6 +18,8 @@
     <sys:String x:Key="LOC_SPG_BackgroundImageSourceLastSelected">上次选择</sys:String>
 
     <!-- Settings -->
+    <sys:String x:Key="LOC_SPG_NumberOfGames">Number of Games:</sys:String>
+    <sys:String x:Key="LOC_SPG_NextRandomBackground">Next Random Background</sys:String>
     <sys:String x:Key="LOC_SPG_ShowFavorites">显示最爱的游戏</sys:String>
     <sys:String x:Key="LOC_SPG_ShowClock">显示时钟</sys:String>
     <sys:String x:Key="LOC_SPG_ShowRecentlyPlayed">显示最近玩过的游戏</sys:String>
@@ -40,7 +42,7 @@
     <sys:String x:Key="LOC_SPG_OverlayOpacity">覆盖不透明度：</sys:String>
     <sys:String x:Key="LOC_SPG_NoiseOpacity">噪声不透明度：</sys:String>
     <sys:String x:Key="LOC_SPG_CoverAspectRatio">封面宽高比</sys:String>
-    <sys:String x:Key="LOC_SPG_MaxCoverWidth">Maximum Cover Width</sys:String>
+    <sys:String x:Key="LOC_SPG_MaxCoverWidth">最大封面宽度</sys:String>
     <sys:String x:Key="LOC_SPG_BackgroundImageSource">游戏背景图像选择：</sys:String>
     <sys:String x:Key="LOC_SPG_BackgroundImagePath">背景图像路径：</sys:String>
     <sys:String x:Key="LOC_SPG_SwitchWithLowPrio">切换视图时降低优先级（在Playnite崩溃时自动启用）</sys:String>
