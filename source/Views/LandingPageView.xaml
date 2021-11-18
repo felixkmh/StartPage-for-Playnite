@@ -460,6 +460,19 @@
                                     </Grid>
                                 </MenuItem.Header>
                             </MenuItem>
+                            <MenuItem>
+                                <MenuItem.Header>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition SharedSizeGroup="PropertyName"/>
+                                            <ColumnDefinition SharedSizeGroup="Value"/>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Text="{DynamicResource LOC_SPG_NoiseOpacity}" VerticalAlignment="Center" Margin="0,0,5,0"/>
+                                        <Slider Grid.Column="1" Value="{Binding Settings.Settings.NoiseOpacity}" Minimum="0" Maximum="1" Width="100" VerticalAlignment="Center" 
+                                                IsSnapToTickEnabled="True" TickFrequency="0.01" SmallChange="0.01"/>
+                                    </Grid>
+                                </MenuItem.Header>
+                            </MenuItem>
                             <MenuItem Command="{Binding OpenSettingsCommand}" Header="{DynamicResource LOCMenuPlayniteSettingsTitle}"/>
                         </ContextMenu>
                     </Grid.ContextMenu>
