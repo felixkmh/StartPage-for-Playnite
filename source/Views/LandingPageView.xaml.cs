@@ -135,9 +135,10 @@ namespace LandingPage.Views
             }
         }
 
+        static readonly Random rng = new Random();
+
         private void Description_Closed(object sender, EventArgs e)
         {
-            var rng = new Random();
             if (rng.NextDouble() <= 0.25)
             {
                 GC.Collect();
