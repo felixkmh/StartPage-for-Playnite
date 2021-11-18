@@ -65,6 +65,9 @@ namespace LandingPage.ViewModels
         private static readonly Random rng = new Random();
 
         public ICommand OpenSettingsCommand => new RelayCommand(() => plugin.OpenSettingsView());
+
+        public ICommand NextRandomBackgroundCommand { get; set; }
+
         public LandingPageViewModel(IPlayniteAPI playniteAPI, LandingPageExtension landingPage,
                                     LandingPageSettingsViewModel settings,
                                     SuccessStory.SuccessStoryViewModel successStory)
@@ -80,6 +83,10 @@ namespace LandingPage.ViewModels
             Settings.Settings.PropertyChanged += Settings_PropertyChanged;
             Settings.PropertyChanged += Settings_PropertyChanged1;
             clock.DayChanged += Clock_DayChanged;
+            NextRandomBackgroundCommand = new RelayCommand(() => 
+            {
+                UpdateBackgroundImagePath(true);
+            }, () => Settings.Settings.BackgroundImageSource == BackgroundImageSource.Random && Settings.Settings.BackgroundImageUri == null);
         }
 
         private void Clock_DayChanged(object sender, EventArgs e)

@@ -398,7 +398,7 @@
         </Style>
     </UserControl.Resources>
     <Grid>
-        <Grid>
+        <Grid Background="Transparent">
             <Grid.CacheMode>
                 <BitmapCache EnableClearType="False" 
                          RenderAtScale="{Binding Settings.Settings.RenderScale}" 
@@ -414,7 +414,7 @@
                 </Image.Effect>
             </Image>
         </Grid>
-        <Border Background="{StaticResource DarkNoiseBrush}" Opacity="{Binding Settings.Settings.OverlayOpacity}">
+        <Border Background="{StaticResource DarkNoiseBrush}" Opacity="{Binding Settings.Settings.OverlayOpacity}" IsHitTestVisible="False">
             <Border.OpacityMask>
                 <LinearGradientBrush StartPoint="0,1" EndPoint="0,0">
                     <LinearGradientBrush.GradientStops>
@@ -424,11 +424,47 @@
                 </LinearGradientBrush>
             </Border.OpacityMask>
         </Border>
-        <Border Background="{StaticResource TransparentNoiseBrush}" Opacity="{Binding Settings.Settings.NoiseOpacity}"/>
+        <Border Background="{StaticResource TransparentNoiseBrush}" Opacity="{Binding Settings.Settings.NoiseOpacity}" IsHitTestVisible="False">
+        </Border>
         <ScrollViewer HorizontalScrollBarVisibility="Disabled"
-                  VerticalScrollBarVisibility="Disabled" Padding="0,40,0,5" Background="{x:Null}">
-            <Grid>
-                <Grid HorizontalAlignment="Center">
+                  VerticalScrollBarVisibility="Disabled" Padding="0,40,0,5">
+            <Grid Background="{x:Null}" ContextMenu="{x:Null}">
+                <Grid Background="Transparent">
+                    <Grid.ContextMenu>
+                        <ContextMenu Grid.IsSharedSizeScope="True">
+                            <MenuItem Command="{Binding NextRandomBackgroundCommand}" Header="{DynamicResource LOC_SPG_NextRandomBackground}" 
+                                      Visibility="{Binding IsEnabled, RelativeSource={RelativeSource Mode=Self}, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+                            <MenuItem>
+                                <MenuItem.Header>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition SharedSizeGroup="PropertyName"/>
+                                            <ColumnDefinition SharedSizeGroup="Value"/>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Text="{DynamicResource LOC_SPG_BlurAmount}" VerticalAlignment="Center" Margin="0,0,5,0"/>
+                                        <Slider Grid.Column="1" Value="{Binding Settings.Settings.BlurAmount}" Minimum="0" Maximum="100" Width="100" VerticalAlignment="Center" 
+                                                IsSnapToTickEnabled="True" TickFrequency="1" SmallChange="1"/>
+                                    </Grid>
+                                </MenuItem.Header>
+                            </MenuItem>
+                            <MenuItem>
+                                <MenuItem.Header>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition SharedSizeGroup="PropertyName"/>
+                                            <ColumnDefinition SharedSizeGroup="Value"/>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Text="{DynamicResource LOC_SPG_OverlayOpacity}" VerticalAlignment="Center" Margin="0,0,5,0"/>
+                                        <Slider Grid.Column="1" Value="{Binding Settings.Settings.OverlayOpacity}" Minimum="0" Maximum="1" Width="100" VerticalAlignment="Center" 
+                                                IsSnapToTickEnabled="True" TickFrequency="0.01" SmallChange="0.01"/>
+                                    </Grid>
+                                </MenuItem.Header>
+                            </MenuItem>
+                            <MenuItem Command="{Binding OpenSettingsCommand}" Header="{DynamicResource LOCMenuPlayniteSettingsTitle}"/>
+                        </ContextMenu>
+                    </Grid.ContextMenu>
+                </Grid>
+                <Grid HorizontalAlignment="Center" Background="{x:Null}">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="{Binding Settings.Settings.LayoutSettings.UpperRowHeight, Mode=TwoWay}"/>
                         <RowDefinition Height="10"/>
@@ -651,9 +687,9 @@
                 </Grid>
             </Grid>
         </ScrollViewer>
-        <Button HorizontalAlignment="Right" VerticalAlignment="Top" Margin="20,40" Command="{Binding OpenSettingsCommand}">
+        <!--<Button HorizontalAlignment="Right" VerticalAlignment="Top" Margin="20,40" Command="{Binding OpenSettingsCommand}">
             <TextBlock Text="" FontFamily="{DynamicResource FontIcoFont}"/>
-        </Button>
+        </Button>-->
         <Grid HorizontalAlignment="Center" VerticalAlignment="Top" x:Name="NotificationGrid" ClipToBounds="True"
               Width="360" Margin="0" Visibility="{Binding Settings.Settings.EnableNotifications, Converter={StaticResource BooleanToVisibilityConverter}}">
             <Border Padding="0" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,25,0,0"
@@ -837,9 +873,9 @@
                 <ControlTemplate TargetType="Button">
                     <Grid Visibility="{Binding BackgroundSourceGame, Converter={StaticResource NullToVisibilityConverter}}" Background="{x:Null}">
                         <Border Background="Black" CornerRadius="10" IsHitTestVisible="False"
-                                Margin="0" Padding="0" Opacity="0.08" x:Name="GameNameBorder">
+                                Margin="0" Padding="0" Opacity="0.11" x:Name="GameNameBorder">
                         </Border>
-                        <TextBlock  Opacity="0.12" Margin="0" Text="i" Foreground="White" MinWidth="20" Height="20" TextAlignment="Center"
+                        <TextBlock  Opacity="0.2" Margin="0" Text="i" Foreground="White" MinWidth="20" Height="20" TextAlignment="Center"
                                     x:Name="BackgroundImageSourceGameTitle" FontSize="13" Padding="5,3" LineStackingStrategy="BlockLineHeight"
                                     LineHeight="{Binding RelativeSource={RelativeSource Mode=Self}, Path=FontSize}"
                                     IsHitTestVisible="False"/>
