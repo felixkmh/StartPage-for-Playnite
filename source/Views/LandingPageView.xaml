@@ -506,21 +506,17 @@
                         <Grid Margin="0" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.IsSharedSizeScope="True" Grid.Column="1"
                               Visibility="{Binding Settings.Settings.ShowClock, Converter={StaticResource BooleanToVisibilityConverter}}">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto" SharedSizeGroup="T"/>
-                                <ColumnDefinition Width="*" SharedSizeGroup="Digits"/>
-                                <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition Width="*" SharedSizeGroup="Digits"/>
-                                <ColumnDefinition Width="Auto" SharedSizeGroup="T"/>
+                                <ColumnDefinition SharedSizeGroup="T"/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition SharedSizeGroup="T"/>
                             </Grid.ColumnDefinitions>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
-                            <TextBlock Text="{Binding Clock.Hour}" FontSize="120" Grid.Column="1" TextAlignment="Right" LineStackingStrategy="BlockLineHeight" BaselineOffset="20" LineHeight="120" Padding="0"/>
-                            <TextBlock Text="{Binding Clock.Separator}" FontSize="120" Grid.Column="2" TextAlignment="Center" LineStackingStrategy="BlockLineHeight" LineHeight="120" Padding="0"/>
-                            <TextBlock Text="{Binding Clock.Minute}" FontSize="120" Grid.Column="3" TextAlignment="Left" LineStackingStrategy="BlockLineHeight" LineHeight="120" Padding="0"/>
-                            <TextBlock Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" Text="{Binding Clock.DateString}" LineStackingStrategy="BlockLineHeight" FontSize="16" HorizontalAlignment="Center" Padding="0" LineHeight="16"/>
-                            <TextBlock Text="{Binding Clock.T}" VerticalAlignment="Top" FontSize="20" Grid.Column="4" TextAlignment="Left" LineStackingStrategy="BlockLineHeight" LineHeight="20" Padding="0"/>
+                            <TextBlock Grid.Column="1" Background="{x:Null}" Text="{Binding Clock.TimeString}" FontSize="120" TextAlignment="Left" LineStackingStrategy="BlockLineHeight" LineHeight="120" Padding="0"/>
+                            <TextBlock Grid.Column="2" Background="{x:Null}" Text="{Binding Clock.T}" VerticalAlignment="Top" FontSize="20" TextAlignment="Left" LineStackingStrategy="BlockLineHeight" LineHeight="20" Padding="0"/>
+                            <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding Clock.DateString}" LineStackingStrategy="BlockLineHeight" FontSize="16" HorizontalAlignment="Center" Padding="0" LineHeight="16"/>
                         </Grid>
                         <DockPanel Grid.Column="0" UseLayoutRounding="True" SnapsToDevicePixels="True">
                             <Label Content=" " DockPanel.Dock="Left" Margin="10,10,5,10">

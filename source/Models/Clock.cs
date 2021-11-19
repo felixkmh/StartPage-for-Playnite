@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Globalization;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Threading;
@@ -16,7 +17,6 @@ namespace LandingPage.Models
 
         public Clock()
         {
-            var hours = Hour;
             dispatcherTimer = new DispatcherTimer(
                 TimeSpan.FromSeconds(60 - (DateTime.Now.TimeOfDay.TotalSeconds % 60) + 0.01),
                 DispatcherPriority.Normal,
@@ -35,10 +35,9 @@ namespace LandingPage.Models
                         }
                         OnPropertyChanged(nameof(Time));
                         OnPropertyChanged(nameof(DateString));
-                        OnPropertyChanged(nameof(Hour));
-                        OnPropertyChanged(nameof(Minute));
                         OnPropertyChanged(nameof(Separator));
                         OnPropertyChanged(nameof(T));
+                        OnPropertyChanged(nameof(TimeString));
                     }
                     //CultureInfo.CurrentCulture = currentCulture;
                 },
@@ -55,25 +54,13 @@ namespace LandingPage.Models
 
         public DateTime Time { get; set; } = DateTime.Now;
 
-        public string Hour 
-        { 
-            get
-            {
-                if (!string.IsNullOrEmpty(DateTimeFormatInfo.CurrentInfo.AMDesignator) || !string.IsNullOrEmpty(DateTimeFormatInfo.CurrentInfo.PMDesignator))
-                {
-                    return Time.ToString("hh");
-                } else
-                {
-                    return Time.ToString("HH");
-                }
-            } 
-        }
-
-        public string Minute
+        public string TimeString
         {
             get
             {
-                return Time.ToString("mm");
+                DateTimeFormatInfo currentInfo = DateTimeFormatInfo.CurrentInfo;
+                var format = currentInfo.ShortTimePattern.Replace("t", string.Empty).Trim();
+                return Time.ToString(format);
             }
         }
 
@@ -85,11 +72,18 @@ namespace LandingPage.Models
             }
         }
 
+        private static readonly Regex tPattern = new Regex(@"t+", RegexOptions.IgnoreCase);
         public string T
         {
             get
             {
-                return Time.ToString("tt");
+                DateTimeFormatInfo currentInfo = DateTimeFormatInfo.CurrentInfo;
+                var format = tPattern.Match(currentInfo.ShortTimePattern)?.Value ?? string.Empty;
+                if (string.IsNullOrEmpty(format))
+                {
+                    return string.Empty;
+                }
+                return Time.ToString(format);
             }
         }
 
