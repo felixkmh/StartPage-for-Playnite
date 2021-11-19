@@ -7,7 +7,7 @@ Packages:
     Changelog:
       - added clickable info icon (bottom left) showing the name of the game that provides the current background
       - added context menu with some quick settings and a shortcut to the extension settings (right-click on the background to open)
-      - random backround only updates manually using the context menu
+      - random backround is updated manually using the context menu
       - added option to set the number of displayed games
       - clock now uses the system time format
       - exclude hidden games when choosing a random background image
