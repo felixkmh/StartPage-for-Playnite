@@ -1,5 +1,17 @@
 AddonId: felixkmh_StartPage_Plugin
 Packages:  
+  - Version: 1.7.0
+    RequiredApiVersion: 6.1.0
+    ReleaseDate: 2021-11-19
+    PackageUrl: https://github.com/felixkmh/StartPage-for-Playnite/releases/download/v1.7.0/felixkmh_StartPage_Plugin_1_7_0.pext
+    Changelog:
+      - added clickable info icon (bottom left) showing the name of the game that provides the current background
+      - added context menu with some quick settings and a shortcut to the extension settings (right-click on the background to open)
+      - random backround only updates manually using the context menu
+      - added option to set the number of displayed games
+      - clock now uses the system time format
+      - exclude hidden games when choosing a random background image
+      - updated localization
   - Version: 1.6.0
     RequiredApiVersion: 6.1.0
     ReleaseDate: 2021-11-18
