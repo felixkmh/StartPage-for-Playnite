@@ -313,7 +313,7 @@ namespace LandingPage.ViewModels
             {
                 var displayedGames = Math.Min(Math.Max(15, games.Count(g => g.LastActivity?.CompareTo(DateTime.Today.AddDays(-7)) > 0)), 20);
                 
-                IEnumerable<Game> gameSelection = games.Take(displayedGames);
+                IEnumerable<Game> gameSelection = games.Take(Settings.Settings.NumberOfGames);
                 foreach (var game in gameSelection)
                 {
                     if (collection.FirstOrDefault(item => item.Game?.Id == game.Id) is GameModel model)
@@ -363,7 +363,7 @@ namespace LandingPage.ViewModels
             {
                 var displayedGames = Math.Min(Math.Max(15, games.Count(g => g.Added?.CompareTo(DateTime.Today.AddDays(-7)) > 0)), 20);
                 
-                IEnumerable<Game> gameSelection = games.Take(displayedGames);
+                IEnumerable<Game> gameSelection = games.Take(Settings.Settings.NumberOfGames);
                 foreach (var game in gameSelection)
                 {
                     if (collection.FirstOrDefault(item => item.Game?.Id == game.Id) is GameModel model)
@@ -411,7 +411,7 @@ namespace LandingPage.ViewModels
             {
                 var displayedGames = 20;
 
-                IEnumerable<Game> gameSelection = games.Take(displayedGames);
+                IEnumerable<Game> gameSelection = games.Take(Settings.Settings.NumberOfGames);
                 foreach (var game in gameSelection)
                 {
                     if (collection.FirstOrDefault(item => item.Game?.Id == game.Id) is GameModel model)

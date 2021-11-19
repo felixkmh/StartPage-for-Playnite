@@ -529,12 +529,14 @@
                                     <Run Text="{Binding Clock.T, Mode=OneWay}" FontSize="24" Foreground="{x:Null}"/><Run Text="{Binding Clock.TimeString, Mode=OneWay}" FontSize="140"/><Run Text="{Binding Clock.T, Mode=OneWay}" FontSize="24"/>
                                 </TextBlock>
                                 <!--<TextBlock Grid.Column="2" BaselineOffset="0" Background="{x:Null}" Text="{Binding Clock.T}" VerticalAlignment="Top" FontSize="24" TextAlignment="Left" LineStackingStrategy="BlockLineHeight" LineHeight="24" Padding="0"/>-->
-                                <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding Clock.DateString}" LineStackingStrategy="BlockLineHeight" FontSize="16" HorizontalAlignment="Center" Padding="0" LineHeight="16">
+                                <TextBlock x:Name="DateStringTextBlock" Grid.Row="1" Grid.Column="1" Text="{Binding Clock.DateString}" LineStackingStrategy="BlockLineHeight" FontSize="16" HorizontalAlignment="Center" Padding="0" LineHeight="16">
                                     <TextBlock.RenderTransform>
                                         <TransformGroup>
                                             <ScaleTransform ScaleY="-0.00714"/>
                                             <TranslateTransform Y="{Binding ElementName=ClockTextBlock, Path=FontFamily.Baseline, Converter={StaticResource OneMinusConverter}}"/>
-                                            <ScaleTransform ScaleY="-140"/>
+                                            <ScaleTransform ScaleY="280"/>
+                                            <TranslateTransform Y="{Binding ElementName=DateStringTextBlock, Path=ActualHeight}"/>
+                                            <ScaleTransform ScaleY="-0.5"/>
                                         </TransformGroup>
                                     </TextBlock.RenderTransform>
                                 </TextBlock>

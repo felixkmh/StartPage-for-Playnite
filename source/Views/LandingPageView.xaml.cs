@@ -50,6 +50,7 @@ namespace LandingPage.Views
             {
                 collectionView3.Refresh();
             }
+            GC.Collect();
         }
 
         private void ListBoxItem_MouseUp(object sender, MouseButtonEventArgs e)

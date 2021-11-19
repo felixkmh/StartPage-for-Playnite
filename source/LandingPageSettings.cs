@@ -99,6 +99,9 @@ namespace LandingPage
         private double maxCoverWidth = 140;
         public double MaxCoverWidth { get => maxCoverWidth; set { SetValue(ref maxCoverWidth, value); } }
 
+        private int numberOfGames = 10;
+        public int NumberOfGames { get => numberOfGames; set { SetValue(ref numberOfGames, value); } }
+
         [DontSerialize]
         public double BlurAmountScaled { get => Math.Round(blurAmount / renderScale); }
 
