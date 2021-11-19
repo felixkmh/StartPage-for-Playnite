@@ -32,8 +32,14 @@
         </Image>
         <TextBlock Grid.Row="0" Text="{Binding Game.Name}" HorizontalAlignment="Center" TextAlignment="Center" VerticalAlignment="Top" FontSize="18" Margin="0,8,0,5" TextWrapping="Wrap"
                    Visibility="{Binding LogoUri, Converter={StaticResource NullToHiddenConverter}}"/>
-        <StackPanel Grid.Row="1" Grid.IsSharedSizeScope="True" VerticalAlignment="Center">
-            <Grid Margin="0,0,0,5">
+        <Grid Grid.Row="1" Grid.IsSharedSizeScope="True" VerticalAlignment="Center">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid Margin="0,0,0,5" Grid.Row="0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" SharedSizeGroup="LabelColumn"/>
                     <ColumnDefinition Width="{DynamicResource LabelDistance}"/>
@@ -42,17 +48,17 @@
                 <TextBlock Text="{DynamicResource LOCSourceLabel}"/>
                 <TextBlock Text="{Binding Game.Source, TargetNullValue=Playnite}" Grid.Column="2"/>
             </Grid>
-            <Grid Margin="0,0,0,5">
+            <Grid Margin="0,0,0,5"  Grid.Row="1">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" SharedSizeGroup="LabelColumn"/>
                     <ColumnDefinition Width="{DynamicResource LabelDistance}"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <TextBlock Text="{DynamicResource LOCFeaturesLabel}"/>
-                <TextBlock Grid.Column="2" Text="{Binding Game.Features, Converter={StaticResource ListToStringConverter}, ConverterParameter=', '}"
-                       TextWrapping="Wrap" TextTrimming="WordEllipsis" MaxHeight="80"/>
+                <TextBlock x:Name="FeatureGrid" Grid.Column="2" Text="{Binding Game.Features, Converter={StaticResource ListToStringConverter}, ConverterParameter=', '}"
+                       TextWrapping="Wrap" TextTrimming="WordEllipsis"/>
             </Grid>
-            <Grid Margin="0,0,0,5">
+            <Grid Margin="0,0,0,5" Grid.Row="2">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" SharedSizeGroup="LabelColumn"/>
                     <ColumnDefinition Width="{DynamicResource LabelDistance}"/>
@@ -61,7 +67,7 @@
                 <TextBlock Text="{DynamicResource LOCTimePlayed}"/>
                 <TextBlock Grid.Column="2" Text="{Binding Game.Playtime, Converter={StaticResource PlayTimeToStringConverter}}"/>
             </Grid>
-            <Grid Margin="0,0,0,5">
+            <Grid Margin="0,0,0,5" Grid.Row="3">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" SharedSizeGroup="LabelColumn"/>
                     <ColumnDefinition Width="{DynamicResource LabelDistance}"/>
@@ -70,6 +76,6 @@
                 <TextBlock Text="{DynamicResource LOCLastPlayed}"/>
                 <TextBlock Grid.Column="2" Text="{Binding Game.LastActivity, Converter={StaticResource DateTimeToLastPlayedConverter}}"/>
             </Grid>
-        </StackPanel>
+        </Grid>
     </Grid>
 </UserControl>
