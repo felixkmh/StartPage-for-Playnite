@@ -11,7 +11,7 @@
              xmlns:system="clr-namespace:System;assembly=mscorlib"
              xmlns:mu="clr-namespace:LandingPage.Markup"
              xmlns:scm="clr-namespace:System.ComponentModel;assembly=WindowsBase"
-             xmlns:pn="clr-namespace:Playnite.SDK;assembly=Playnite.SDK" xmlns:controls="clr-namespace:LandingPage.Controls"
+             xmlns:pn="clr-namespace:Playnite.SDK;assembly=Playnite.SDK" xmlns:controls="clr-namespace:LandingPage.Controls" xmlns:system1="clr-namespace:System;assembly=System"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
              d:DataContext="{d:DesignInstance IsDesignTimeCreatable=False, Type=lpvm:LandingPageViewModel}"
@@ -568,11 +568,25 @@
                                         ScrollViewer.VerticalScrollBarVisibility="Disabled"
                                         ClipToBounds="False"
                                         Visibility="{Binding Settings.Settings.ShowRecentAchievements, Converter={StaticResource BooleanToHiddenConverter}}">
-                                <Label Content="{DynamicResource LOC_SPG_RecentAchievements}" DockPanel.Dock="Left" Margin="10,10,5,2">
+                                <!--<Label Content="{DynamicResource LOC_SPG_RecentAchievements}" DockPanel.Dock="Left" Margin="10,10,5,2">
                                     <Label.LayoutTransform>
                                         <RotateTransform Angle="-90" />
                                     </Label.LayoutTransform>
-                                </Label>
+                                </Label>-->
+                                <!--<TextBlock Text="{DynamicResource LOC_SPG_RecentAchievements}" DockPanel.Dock="Left" Margin="10,10,5,2"
+                                       Visibility="{Binding LanguageSupportsVertical, Converter={StaticResource InvertedBooleanToVisibilityConverter}}">
+                                    <TextBlock.LayoutTransform>
+                                        <RotateTransform Angle="-90" />
+                                    </TextBlock.LayoutTransform>
+                                </TextBlock>
+                                <TextBlock Text="{DynamicResource LOC_SPG_RecentAchievements}" 
+                                       DockPanel.Dock="Left" Margin="10,10,5,2" 
+                                       MaxWidth="{Binding RelativeSource={RelativeSource Mode=Self}, Path=FontSize}"
+                                       TextWrapping="Wrap" VerticalAlignment="Bottom"
+                                       Visibility="{Binding LanguageSupportsVertical, Converter={StaticResource BooleanToVisibilityConverter}}">
+                                </TextBlock>-->
+                                <controls:SidewaysTextBlock Text="{DynamicResource LOC_SPG_RecentAchievements}" VerticalAlignment="Bottom"
+                                                            DockPanel.Dock="Left" Margin="10,10,5,2"/>
                                 <local:RecentAchievementsView DataContext="{Binding SuccessStory}" Width="320" ClipToBounds="False"/>
                             </StackPanel>
                         </Grid>
@@ -586,11 +600,25 @@
                         </Grid.RowDefinitions>
                         <DockPanel Grid.Row="2" UseLayoutRounding="True" SnapsToDevicePixels="True"
                             Visibility="{Binding Settings.Settings.ShowAddedGames, Converter={StaticResource BooleanToVisibilityConverter}}">
-                            <Label Content="{DynamicResource LOC_SPG_RecentlyAddedGames}" DockPanel.Dock="Left" Margin="10,10,5,30">
+                            <!--<Label Content="{DynamicResource LOC_SPG_RecentlyAddedGames}" DockPanel.Dock="Left" Margin="10,10,5,30">
                                 <Label.LayoutTransform>
                                     <RotateTransform Angle="-90" />
                                 </Label.LayoutTransform>
-                            </Label>
+                            </Label>-->
+                            <controls:SidewaysTextBlock Text="{DynamicResource LOC_SPG_RecentlyAddedGames}" VerticalAlignment="Bottom"
+                                                            DockPanel.Dock="Left" Margin="10,10,5,30"/>
+                            <!--<TextBlock Text="{DynamicResource LOC_SPG_RecentlyAddedGames}" DockPanel.Dock="Left" Margin="10,10,5,30"
+                                       Visibility="{Binding LanguageSupportsVertical, Converter={StaticResource InvertedBooleanToVisibilityConverter}}">
+                                <TextBlock.LayoutTransform>
+                                    <RotateTransform Angle="-90" />
+                                </TextBlock.LayoutTransform>
+                            </TextBlock>
+                            <TextBlock Text="{DynamicResource LOC_SPG_RecentlyAddedGames}" 
+                                       DockPanel.Dock="Left" Margin="10,10,5,30" 
+                                       MaxWidth="{Binding RelativeSource={RelativeSource Mode=Self}, Path=FontSize}"
+                                       TextWrapping="Wrap" VerticalAlignment="Bottom"
+                                       Visibility="{Binding LanguageSupportsVertical, Converter={StaticResource BooleanToVisibilityConverter}}">
+                            </TextBlock>-->
                             <ListBox x:Name="RecentlyAddedListBox" 
                                      Style="{DynamicResource GameGroupListStyle}"
                                      DockPanel.Dock="Left"
@@ -630,11 +658,20 @@
                         </DockPanel>
                         <DockPanel Grid.Row="1" UseLayoutRounding="True" SnapsToDevicePixels="True"
                             Visibility="{Binding Settings.Settings.ShowRecentGames, Converter={StaticResource BooleanToVisibilityConverter}, Mode=OneWay}">
-                            <Label Content="{DynamicResource LOCQuickFilterRecentlyPlayed}" DockPanel.Dock="Left" Margin="10,10,5,30">
-                                <Label.LayoutTransform>
+                            <!--<TextBlock Text="{DynamicResource LOCQuickFilterRecentlyPlayed}" DockPanel.Dock="Left" Margin="10,10,5,30"
+                                       Visibility="{Binding LanguageSupportsVertical, Converter={StaticResource InvertedBooleanToVisibilityConverter}}">
+                                <TextBlock.LayoutTransform>
                                     <RotateTransform Angle="-90" />
-                                </Label.LayoutTransform>
-                            </Label>
+                                </TextBlock.LayoutTransform>
+                            </TextBlock>
+                            <TextBlock Text="{DynamicResource LOCQuickFilterRecentlyPlayed}" 
+                                       DockPanel.Dock="Left" Margin="10,10,5,30" 
+                                       MaxWidth="{Binding RelativeSource={RelativeSource Mode=Self}, Path=FontSize}"
+                                       TextWrapping="Wrap" VerticalAlignment="Bottom"
+                                       Visibility="{Binding LanguageSupportsVertical, Converter={StaticResource BooleanToVisibilityConverter}}">
+                            </TextBlock>-->
+                            <controls:SidewaysTextBlock Text="{DynamicResource LOCQuickFilterRecentlyPlayed}" VerticalAlignment="Bottom"
+                                                            DockPanel.Dock="Left" Margin="10,10,5,30"/>
                             <ListBox x:Name="RecentlyPlayedListBox" 
                                          Style="{DynamicResource GameGroupListStyle}"
                                          DockPanel.Dock="Left" 
@@ -674,11 +711,23 @@
                         </DockPanel>
                         <DockPanel Grid.Row="0" UseLayoutRounding="True" SnapsToDevicePixels="True"
                             Visibility="{Binding Settings.Settings.ShowFavoriteGames, Converter={StaticResource BooleanToVisibilityConverter}, Mode=OneWay}">
-                            <Label Content="{DynamicResource LOCQuickFilterFavorites}" DockPanel.Dock="Left" Margin="10,10,5,30">
+                            <!--<Label Content="{DynamicResource LOCQuickFilterFavorites}" DockPanel.Dock="Left" Margin="10,10,5,30">
                                 <Label.LayoutTransform>
                                     <RotateTransform Angle="-90" />
                                 </Label.LayoutTransform>
-                            </Label>
+                            </Label>-->
+                            <TextBlock Text="{DynamicResource LOCQuickFilterFavorites}" DockPanel.Dock="Left" Margin="10,10,5,30"
+                                       Visibility="{Binding LanguageSupportsVertical, Converter={StaticResource InvertedBooleanToVisibilityConverter}}">
+                                <TextBlock.LayoutTransform>
+                                    <RotateTransform Angle="-90" />
+                                </TextBlock.LayoutTransform>
+                            </TextBlock>
+                            <TextBlock Text="{DynamicResource LOCQuickFilterFavorites}" 
+                                       DockPanel.Dock="Left" Margin="10,10,5,30" 
+                                       MaxWidth="{Binding RelativeSource={RelativeSource Mode=Self}, Path=FontSize}"
+                                       TextWrapping="Wrap" VerticalAlignment="Bottom"
+                                       Visibility="{Binding LanguageSupportsVertical, Converter={StaticResource BooleanToVisibilityConverter}}">
+                            </TextBlock>
                             <ListBox x:Name="FavoritesListBox" 
                                          Style="{DynamicResource GameGroupListStyle}"
                                          DockPanel.Dock="Left" 

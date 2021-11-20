@@ -13,6 +13,7 @@ using System.Windows.Data;
 using System.Windows;
 using LandingPage.Extensions;
 using System.Collections;
+using System.Globalization;
 
 namespace LandingPage.ViewModels
 {
@@ -58,6 +59,8 @@ namespace LandingPage.ViewModels
         internal SuccessStory.SuccessStoryViewModel successStory;
         public SuccessStory.SuccessStoryViewModel SuccessStory => successStory;
 
+        internal bool languageSupportsVertical = false;
+        public bool LanguageSupportsVertical { get => languageSupportsVertical; set => SetValue(ref languageSupportsVertical, value); }
 
         internal IPlayniteAPI playniteAPI;
         internal LandingPageExtension plugin;
@@ -67,6 +70,8 @@ namespace LandingPage.ViewModels
         public ICommand OpenSettingsCommand => new RelayCommand(() => plugin.OpenSettingsView());
 
         public ICommand NextRandomBackgroundCommand { get; set; }
+
+        private static readonly HashSet<string> verticalLanguages = new HashSet<string> { "zh_CN", "zh_TW", "vi_VN", "ja_JP", "zh_CN", "ko_KR", };
 
         public LandingPageViewModel(IPlayniteAPI playniteAPI, LandingPageExtension landingPage,
                                     LandingPageSettingsViewModel settings,
@@ -87,6 +92,7 @@ namespace LandingPage.ViewModels
             {
                 UpdateBackgroundImagePath(true);
             }, () => Settings.Settings.BackgroundImageSource == BackgroundImageSource.Random && Settings.Settings.BackgroundImageUri == null);
+            languageSupportsVertical = verticalLanguages.Contains(playniteAPI.ApplicationSettings.Language);
         }
 
         private void Clock_DayChanged(object sender, EventArgs e)
