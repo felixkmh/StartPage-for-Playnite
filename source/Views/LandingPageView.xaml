@@ -716,7 +716,7 @@
                                     <RotateTransform Angle="-90" />
                                 </Label.LayoutTransform>
                             </Label>-->
-                            <TextBlock Text="{DynamicResource LOCQuickFilterFavorites}" DockPanel.Dock="Left" Margin="10,10,5,30"
+                            <!--<TextBlock Text="{DynamicResource LOCQuickFilterFavorites}" DockPanel.Dock="Left" Margin="10,10,5,30"
                                        Visibility="{Binding LanguageSupportsVertical, Converter={StaticResource InvertedBooleanToVisibilityConverter}}">
                                 <TextBlock.LayoutTransform>
                                     <RotateTransform Angle="-90" />
@@ -727,7 +727,9 @@
                                        MaxWidth="{Binding RelativeSource={RelativeSource Mode=Self}, Path=FontSize}"
                                        TextWrapping="Wrap" VerticalAlignment="Bottom"
                                        Visibility="{Binding LanguageSupportsVertical, Converter={StaticResource BooleanToVisibilityConverter}}">
-                            </TextBlock>
+                            </TextBlock>-->
+                            <controls:SidewaysTextBlock Text="{DynamicResource LOCQuickFilterFavorites}" VerticalAlignment="Bottom"
+                                                            DockPanel.Dock="Left" Margin="10,10,5,30"/>
                             <ListBox x:Name="FavoritesListBox" 
                                          Style="{DynamicResource GameGroupListStyle}"
                                          DockPanel.Dock="Left" 

@@ -36,10 +36,9 @@ namespace LandingPage.Controls
 
         RotateTransform rotateTransform = new RotateTransform(-90);
 
-        private static readonly Regex cjkCharRegex = new Regex(@"\p{IsCJKUnifiedIdeographs}");
         public static bool IsCJK(char c)
         {
-            return cjkCharRegex.IsMatch(c.ToString());
+            return ((uint)c >= 0x4E00 && (uint)c <= 0x2FA1F) || ((uint)c >= 0x3040 && (uint)c <= 0x30FF);
         }
 
         private class SubString
