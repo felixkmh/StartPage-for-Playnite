@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace LandingPage.Models.SuccessStory
 {
-    public class Achievements : ObservableObject
+    public class Achievements : ObservableObject, IEqualityComparer<Achievements>
     {
         private List<Achivement> items = new List<Achivement>();
         private bool haveAchivements;
@@ -27,6 +27,30 @@ namespace LandingPage.Models.SuccessStory
         public string Name { get => name; set { name = value; OnPropertyChanged(); } }
 
         public DateTime LastUnlocked => items.OrderByDescending(i => i.DateUnlocked).Select(i => i.DateUnlocked).FirstOrDefault() ?? default;
+
+        public override bool Equals(object obj)
+        {
+            if (obj is Achievements achievements)
+            {
+                return achievements.Id == Id;
+            }
+            return base.Equals(obj);
+        }
+
+        public bool Equals(Achievements x, Achievements y)
+        {
+            return x.Id == x.Id;
+        }
+
+        public override int GetHashCode()
+        {
+            return Id.GetHashCode();
+        }
+
+        public int GetHashCode(Achievements obj)
+        {
+            return Id.GetHashCode();
+        }
 
         public override string ToString()
         {

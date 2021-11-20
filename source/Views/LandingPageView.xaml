@@ -411,7 +411,7 @@
                     <BitmapImage CreateOptions="IgnoreColorProfile" CacheOption="None" UriSource="{Binding BackgroundImagePath, TargetNullValue='pack://application:,,,/StartPagePlugin;component/empty.png'}"/>
                 </Image.Source>-->
                 <Image.Effect>
-                    <BlurEffect Radius="{Binding Settings.Settings.BlurAmountScaled}" KernelType="Gaussian" RenderingBias="Performance"/>
+                    <BlurEffect Radius="{Binding Settings.Settings.BlurAmountScaled}" KernelType="Gaussian" RenderingBias="Quality"/>
                 </Image.Effect>
             </Image>
         </Grid>
