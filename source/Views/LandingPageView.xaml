@@ -60,7 +60,6 @@
         <conv:HeightToWidthMultiConverter x:Key="HeightToWidthMultiConverter"/>
         <conv:WidthToHeightMultiConverter x:Key="WidthToHeightMultiConverter"/>
         <conv:ElementToScaledRectConverter x:Key="ElementToScaledRectConverter"/>
-        <conv:OneMinusConverter x:Key="OneMinusConverter"/>
         <conv:UriToBitmapImageConverter x:Key="UriToBitmapImageConverter"/>
         <conv:VisibilityInverter x:Key="VisibilityInverter"/>
         <conv:IEnumerableNullOrEmptyToVisibilityConverter x:Key="IEnumerableNullOrEmptyToVisibilityConverter"/>
@@ -504,43 +503,9 @@
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="Auto" SharedSizeGroup="LeftRight"/>
                         </Grid.ColumnDefinitions>
-                        <Viewbox StretchDirection="DownOnly" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.IsSharedSizeScope="True" Grid.Column="1">
-                            <Grid Margin="0" 
-                                  Visibility="{Binding Settings.Settings.ShowClock, Converter={StaticResource BooleanToVisibilityConverter}}">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition SharedSizeGroup="T"/>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition SharedSizeGroup="T"/>
-                                </Grid.ColumnDefinitions>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                </Grid.RowDefinitions>
-                                <!--<RichTextBox Grid.Column="1" IsReadOnly="True" IsHitTestVisible="False" HorizontalAlignment="Center" Width="500">
-                                    <FlowDocument>
-                                        <Paragraph TextAlignment="Center">
-                                            <Run Text="{Binding Clock.T, Mode=OneWay}" FontSize="24" Foreground="Transparent"/>
-                                            <Run Text="{Binding Clock.TimeString, Mode=OneWay}" FontSize="150"/>
-                                            <Run Text="{Binding Clock.T, Mode=OneWay}" FontSize="24" BaselineAlignment="Baseline"/>
-                                        </Paragraph>
-                                    </FlowDocument>
-                                </RichTextBox>-->
-                                <TextBlock Grid.Column="1" x:Name="ClockTextBlock" Background="{x:Null}" FontSize="140" TextAlignment="Center" Padding="0" HorizontalAlignment="Center">
-                                    <Run Text="{Binding Clock.T, Mode=OneWay}" FontSize="24" Foreground="{x:Null}"/><Run Text="{Binding Clock.TimeString, Mode=OneWay}" FontSize="140"/><Run Text="{Binding Clock.T, Mode=OneWay}" FontSize="24"/>
-                                </TextBlock>
-                                <!--<TextBlock Grid.Column="2" BaselineOffset="0" Background="{x:Null}" Text="{Binding Clock.T}" VerticalAlignment="Top" FontSize="24" TextAlignment="Left" LineStackingStrategy="BlockLineHeight" LineHeight="24" Padding="0"/>-->
-                                <TextBlock x:Name="DateStringTextBlock" Grid.Row="1" Grid.Column="1" Text="{Binding Clock.DateString}" LineStackingStrategy="BlockLineHeight" FontSize="16" HorizontalAlignment="Center" Padding="0" LineHeight="16">
-                                    <TextBlock.RenderTransform>
-                                        <TransformGroup>
-                                            <ScaleTransform ScaleY="-0.00714"/>
-                                            <TranslateTransform Y="{Binding ElementName=ClockTextBlock, Path=FontFamily.Baseline, Converter={StaticResource OneMinusConverter}}"/>
-                                            <ScaleTransform ScaleY="280"/>
-                                            <TranslateTransform Y="{Binding ElementName=DateStringTextBlock, Path=ActualHeight}"/>
-                                            <ScaleTransform ScaleY="-0.5"/>
-                                        </TransformGroup>
-                                    </TextBlock.RenderTransform>
-                                </TextBlock>
-                            </Grid>
+                        <Viewbox StretchDirection="DownOnly" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.IsSharedSizeScope="True" Grid.Column="1"
+                                 Visibility="{Binding Settings.Settings.ShowClock, Converter={StaticResource BooleanToVisibilityConverter}}">
+                            <local:ClockView/>
                         </Viewbox>
                         <DockPanel Grid.Column="0" UseLayoutRounding="True" SnapsToDevicePixels="True">
                             <Label Content=" " DockPanel.Dock="Left" Margin="10,10,5,10">

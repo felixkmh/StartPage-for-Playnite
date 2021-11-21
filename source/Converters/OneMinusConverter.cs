@@ -15,6 +15,10 @@ namespace LandingPage.Converters
         {
             if (value is double val)
             {
+                if (parameter is string scalarString && double.TryParse(scalarString, out var scalar))
+                {
+                    return (1 - val) * scalar;
+                }
                 return 1 - val;
             }
             return DependencyProperty.UnsetValue;
