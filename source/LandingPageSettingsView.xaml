@@ -284,15 +284,17 @@
                                 </ComboBox.ItemTemplate>
                             </ComboBox>
                         </DockPanel>
-                        <DockPanel LastChildFill="False">
-                            <TextBlock Text="{DynamicResource LOC_SPG_BackgroundImagePath}" VerticalAlignment="Center"/>
-                            <TextBox IsReadOnly="True" 
-                             Text="{Binding Settings.BackgroundImageUri.LocalPath, FallbackValue='  ---  ', Mode=OneWay}" 
-                             VerticalAlignment="Center"
-                             MaxWidth="400"
-                             Margin="5,0"/>
-                            <Button Margin="2,0" VerticalAlignment="Center" Command="{Binding SelectImagePathCommand}" Content="{DynamicResource LOCSelectImageTitle}"/>
-                            <Button Margin="2,0" VerticalAlignment="Center" Command="{Binding ClearImagePathCommand}" Content="{DynamicResource LOCClearLabel}"/>
+                        <DockPanel LastChildFill="True">
+                            <WrapPanel>
+                                <TextBlock Text="{DynamicResource LOC_SPG_BackgroundImagePath}" VerticalAlignment="Center"/>
+                                <TextBox IsReadOnly="True" 
+                                 Text="{Binding Settings.BackgroundImageUri.LocalPath, FallbackValue='  ---  ', Mode=OneWay}" 
+                                 VerticalAlignment="Center"
+                                 MaxWidth="400"
+                                 Margin="5,0"/>
+                                <Button Margin="2,0" VerticalAlignment="Center" Command="{Binding SelectImagePathCommand}" Content="{DynamicResource LOCSelectImageTitle}"/>
+                                <Button Margin="2,0" VerticalAlignment="Center" Command="{Binding ClearImagePathCommand}" Content="{DynamicResource LOCClearLabel}"/>
+                            </WrapPanel>
                         </DockPanel>
                     </StackPanel>
                 </Grid>
