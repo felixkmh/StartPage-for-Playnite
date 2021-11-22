@@ -458,12 +458,36 @@ namespace LandingPage.ViewModels
 
         private void Games_ItemCollectionChanged(object sender, ItemCollectionChangedEventArgs<Game> e)
         {
-            Update(false);
+            if (e.RemovedItems.Count + e.AddedItems.Count > 0)
+            {
+                Update(false);
+            }
         }
 
         private void Games_ItemUpdated(object sender, ItemUpdatedEventArgs<Game> e)
         {
-            Update(false);
+            if (e.UpdatedItems.Any(u => IsRelevantUpdate(u)))
+            {
+                Update(false);
+            }
+        }
+
+        private static bool IsRelevantUpdate(ItemUpdateEvent<Game> update)
+        {
+            var old = update.OldData;
+            var updated = update.NewData;
+            if (old.Name != updated.Name) return true;
+            if (old.LastActivity != updated.LastActivity) return true;
+            if (old.Added != updated.Added) return true;
+            if (old.Playtime != updated.Playtime) return true;
+            if (old.Hidden != updated.Hidden) return true;
+            if (old.Favorite != updated.Favorite) return true;
+            if (old.BackgroundImage != updated.BackgroundImage) return true;
+            if (old.CoverImage != updated.CoverImage) return true;
+            if (old.Icon != updated.Icon) return true;
+            if (!(old.PlatformIds.All(id => updated.PlatformIds.Contains(id)) && old.PlatformIds.Count == updated.PlatformIds.Count)) return true;
+            if (!(old.FeatureIds.All(id => updated.FeatureIds.Contains(id)) && old.FeatureIds.Count == updated.FeatureIds.Count)) return true;
+            return false;
         }
     }
 }

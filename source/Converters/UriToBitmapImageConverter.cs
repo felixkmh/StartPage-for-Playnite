@@ -30,7 +30,7 @@ namespace LandingPage.Converters
                 BitmapImage bmp = new BitmapImage();
                 bmp.BeginInit();
                 bmp.CreateOptions = BitmapCreateOptions.IgnoreColorProfile | BitmapCreateOptions.DelayCreation;
-                bmp.CacheOption = BitmapCacheOption.OnDemand;
+                bmp.CacheOption = BitmapCacheOption.OnLoad;
                 if (parameter is string maxHeightString && int.TryParse(maxHeightString, out var maxHeight))
                 {
                     bmp.DecodePixelHeight = maxHeight;
