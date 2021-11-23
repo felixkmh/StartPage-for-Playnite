@@ -45,6 +45,13 @@
                             <TextBlock Text="{DynamicResource LOC_SPG_MoveIconToTop}" Margin="3" VerticalAlignment="Center" TextWrapping="Wrap"/>
                         </DockPanel>
                         <DockPanel>
+                            <DockPanel.ToolTip>
+                                <TextBlock Text="{DynamicResource LOC_SPG_UnsupportedToolTip}" TextWrapping="Wrap" MaxWidth="550"/>
+                            </DockPanel.ToolTip>
+                            <CheckBox IsChecked="{Binding Settings.EnableGlobalProgressBar}" VerticalAlignment="Center" Margin="3"/>
+                            <TextBlock Text="{DynamicResource LOC_SPG_ShowGlobalProgressBar}" Margin="3" VerticalAlignment="Center" TextWrapping="Wrap"/>
+                        </DockPanel>
+                        <DockPanel>
                             <CheckBox IsChecked="{Binding Settings.ShowClock}" VerticalAlignment="Center" Margin="3"/>
                             <TextBlock Text="{DynamicResource LOC_SPG_ShowClock}" Margin="3" VerticalAlignment="Center"/>
                         </DockPanel>

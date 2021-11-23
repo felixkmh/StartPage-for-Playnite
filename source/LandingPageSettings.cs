@@ -75,6 +75,9 @@ namespace LandingPage
         private bool enableNotifications = true;
         public bool EnableNotifications { get => enableNotifications; set => SetValue(ref enableNotifications, value); }
 
+        private bool enableGlobalProgressBar = false;
+        public bool EnableGlobalProgressBar { get => enableGlobalProgressBar; set => SetValue(ref enableGlobalProgressBar, value); }
+
         private bool minimizeNotificationsOnLaunch = false;
         public bool MinimizeNotificationsOnLaunch { get => minimizeNotificationsOnLaunch; set => SetValue(ref minimizeNotificationsOnLaunch, value); }
 

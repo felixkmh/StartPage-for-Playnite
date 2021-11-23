@@ -398,7 +398,7 @@
             </Setter>
         </Style>
     </UserControl.Resources>
-    <Grid>
+    <Grid ClipToBounds="True">
         <Grid Background="Transparent">
             <Grid.CacheMode>
                 <BitmapCache EnableClearType="False" 
@@ -742,7 +742,7 @@
         </Button>-->
         <Grid HorizontalAlignment="Center" VerticalAlignment="Top" x:Name="NotificationGrid" ClipToBounds="True"
               Width="360" Margin="0" Visibility="{Binding Settings.Settings.EnableNotifications, Converter={StaticResource BooleanToVisibilityConverter}}">
-            <Border Padding="0" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,25,0,0"
+            <Border Padding="0" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,31,0,0"
                     Visibility="{Binding ElementName=NotificationsBorder, Path=Tag, Converter={StaticResource VisibilityInverter}}">
                 <Button Visibility="{Binding Notifications, Converter={StaticResource IEnumerableNullOrEmptyToVisibilityConverter}}"
                         ClickMode="Release" Click="ToggleNotifications_Click">
@@ -803,6 +803,9 @@
                 </Border.Style>
                 <StackPanel x:Name="NotificationPanel" 
                         Margin="5,50,5,5">
+                    <Border Height="{Binding ElementName=ProgressbarGrid, Path=ActualHeight}" 
+                            Visibility="{Binding ElementName=ProgressbarGrid, Path=Visibility}"
+                            Background="Transparent" BorderThickness="0"/>
                     <TextBlock HorizontalAlignment="Center" VerticalAlignment="Bottom"
                                Text="{DynamicResource LOCNotifications}"
                                Margin="0,6,0,4"/>
@@ -862,12 +865,13 @@
                                             </ControlTemplate>
                                         </Button.Template>
                                         <StackPanel VerticalAlignment="Center">
-                                            <TextBox Text="{Binding Text}"  VerticalAlignment="Center"
+                                            <TextBlock Text="{Binding Text, Mode=OneWay}"  VerticalAlignment="Center"
                                                      TextWrapping="Wrap"
                                                      Padding="4"
                                                      Foreground="{DynamicResource TextBrush}"
                                                      Background="Transparent"
-                                                     IsReadOnly="True"/>
+                                                     >
+                                            </TextBlock>
                                         </StackPanel>
                                     </Button>
                                     <Button Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ItemsControl}, Path=DataContext.DeleteNotificationCommand}" 
@@ -919,6 +923,51 @@
                     </Grid>
                 </StackPanel>
             </Border>
+        </Grid>
+        <Grid VerticalAlignment="Top" HorizontalAlignment="Center" x:Name="ProgressbarGrid" Margin="0,2,0,0"
+              WindowChrome.IsHitTestVisibleInChrome="True" Visibility="Collapsed">
+            <Grid.Style>
+                <Style TargetType="Grid">
+                    <Setter Property="RenderTransform">
+                        <Setter.Value>
+                            <TranslateTransform Y="-60"/>
+                        </Setter.Value>
+                    </Setter>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=Self}, Path=Visibility, Mode=OneWay}" Value="{x:Static Visibility.Visible}">
+                            <DataTrigger.EnterActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation
+                                                To="0"
+                                                Storyboard.TargetProperty="(Grid.RenderTransform).(TranslateTransform.Y)">
+                                            <DoubleAnimation.EasingFunction>
+                                                <ElasticEase Springiness="12" Oscillations="2" EasingMode="EaseOut"/>
+                                            </DoubleAnimation.EasingFunction>
+                                        </DoubleAnimation>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </DataTrigger.EnterActions>
+                            <DataTrigger.ExitActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation Duration="0:0:0.5"
+                                                To="-60"
+                                                Storyboard.TargetProperty="(Grid.RenderTransform).(TranslateTransform.Y)">
+                                        </DoubleAnimation>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </DataTrigger.ExitActions>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Grid.Style>
+            <ProgressBar x:Name="ProgressBar" MinWidth="350">
+            </ProgressBar>
+            <TextBlock x:Name="ProgressText" Margin="5" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <Button x:Name="ProgressCancelButton" VerticalAlignment="Center" HorizontalAlignment="Right" Content="X" Foreground="Red" Background="Transparent" BorderThickness="0" 
+                    Visibility="{Binding ElementName=ProgressbarGrid, Path=IsMouseOver, Converter={StaticResource BooleanToVisibilityConverter}}">
+            </Button>
         </Grid>
         <Button HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="4" Command="{Binding BackgroundSourceGame.OpenCommand}" Padding="0">
             <Button.Template>

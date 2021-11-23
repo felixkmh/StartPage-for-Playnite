@@ -75,6 +75,10 @@ namespace LandingPage
             }
         }
 
+        ProgressBar progressBar = null;
+        TextBlock progressText = null;
+        Button cancelButton = null;
+
         public LandingPageExtension(IPlayniteAPI api) : base(api)
         {
             Instance = this;
@@ -104,6 +108,14 @@ namespace LandingPage
         private Control ViewOpened()
         {
             ViewModel.Subscribe();
+            if (Settings.EnableGlobalProgressBar && progressText is TextBlock && progressBar is ProgressBar && cancelButton is Button)
+            {
+                View.ProgressbarGrid.SetBinding(FrameworkElement.VisibilityProperty, progressBar.GetBindingExpression(FrameworkElement.VisibilityProperty).ParentBinding);
+                View.ProgressText.SetBinding(TextBlock.TextProperty, progressText.GetBindingExpression(TextBlock.TextProperty).ParentBinding);
+                View.ProgressBar.SetBinding(ProgressBar.ValueProperty, progressBar.GetBindingExpression(ProgressBar.ValueProperty).ParentBinding);
+                View.ProgressBar.SetBinding(ProgressBar.MaximumProperty, progressBar.GetBindingExpression(ProgressBar.MaximumProperty).ParentBinding);
+                View.ProgressCancelButton.Command = cancelButton.Command;
+            }
             return View;
         }
 
@@ -161,6 +173,21 @@ namespace LandingPage
         public override void OnApplicationStarted(OnApplicationStartedEventArgs args)
         {
             var switchWithLowPrio = false;
+            var parentWindow = Application.Current.Windows.Cast<Window>().FirstOrDefault(w => w.Name == "WindowMain");
+            parentWindow?.Dispatcher.Invoke(() => {
+                if (Helper.UiHelper.FindVisualChildren<ProgressBar>(parentWindow, "PART_ProgressGlobal").FirstOrDefault() is ProgressBar bar)
+                {
+                    progressBar = bar;
+                }
+                if (Helper.UiHelper.FindVisualChildren<TextBlock>(parentWindow, "PART_TextProgressText").FirstOrDefault() is TextBlock info)
+                {
+                    progressText = info;
+                }
+                if (Helper.UiHelper.FindVisualChildren<Button>(parentWindow, "PART_ButtonProgressCancel").FirstOrDefault() is Button bt)
+                {
+                    cancelButton = bt;
+                }
+            });
             //Settings.SwitchWithLowPriority = true;
             //SavePluginSettings(Settings);
             if (Settings.EnableStartupOverride || Settings.MoveToTopOfList)
