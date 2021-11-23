@@ -45,7 +45,7 @@
     <sys:String x:Key="LOC_SPG_MaxCoverWidth">最大封面宽度</sys:String>
     <sys:String x:Key="LOC_SPG_BackgroundImageSource">游戏背景图像选择：</sys:String>
     <sys:String x:Key="LOC_SPG_BackgroundImagePath">背景图像路径：</sys:String>
-    <sys:String x:Key="LOC_SPG_ShowGlobalProgressBar">(Unsupported) Show Global Progress Bar</sys:String>
+    <sys:String x:Key="LOC_SPG_ShowGlobalProgressBar">(不支持) 显示全局进度条</sys:String>
     <sys:String x:Key="LOC_SPG_SwitchWithLowPrio">切换视图时降低优先级（在Playnite崩溃时自动启用）</sys:String>
     <sys:String x:Key="LOC_SPG_UnsupportedToolTip">使用这个功能的风险由你自己承担。因为它不被PlayniteAPI正式支持，所以可能导致意外行为。</sys:String>
 </ResourceDictionary>
