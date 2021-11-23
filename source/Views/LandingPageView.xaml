@@ -15,7 +15,8 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
              d:DataContext="{d:DesignInstance IsDesignTimeCreatable=False, Type=lpvm:LandingPageViewModel}"
-             SizeChanged="UserControl_SizeChanged">
+             SizeChanged="UserControl_SizeChanged"
+             ClipToBounds="True">
     <UserControl.Resources>
         <system:Double x:Key="CoverAspectRatio">1</system:Double>
         <BitmapImage x:Key="InnerGlowBitmap" CreateOptions="IgnoreColorProfile" UriSource="pack://application:,,,/StartPagePlugin;component/innerglow.png" CacheOption="OnLoad"/>
@@ -924,8 +925,18 @@
                 </StackPanel>
             </Border>
         </Grid>
-        <Grid VerticalAlignment="Top" HorizontalAlignment="Center" x:Name="ProgressbarGrid" Margin="0,2,0,0"
+        <Grid VerticalAlignment="Top" HorizontalAlignment="Center" x:Name="ProgressbarGrid" Margin="0,0,0,0"
               WindowChrome.IsHitTestVisibleInChrome="True" Visibility="Collapsed">
+            <Grid.OpacityMask>
+                <VisualBrush AutoLayoutContent="True">
+                    <VisualBrush.Visual>
+                        <Border Background="Black" CornerRadius="0,0,6,6"
+                                Width="{Binding ElementName=ProgressbarGrid, Path=ActualWidth}"
+                                Height="{Binding ElementName=ProgressbarGrid, Path=ActualHeight}"
+                                BorderThickness="0"/>
+                    </VisualBrush.Visual>
+                </VisualBrush>
+            </Grid.OpacityMask>
             <Grid.Style>
                 <Style TargetType="Grid">
                     <Setter Property="RenderTransform">
