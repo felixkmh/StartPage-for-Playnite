@@ -104,10 +104,17 @@ namespace LandingPage.Models.SuccessStory
                         var iconPath = Path.Combine(iconCachePath, iconFileName);
                         if (File.Exists(iconPath) && Uri.TryCreate(iconPath, UriKind.RelativeOrAbsolute, out var localUri))
                         {
-                            return localUri;
-                        } else
-                        {
-
+                            try
+                            {
+                                using (var file = File.Open(iconPath, FileMode.Open, FileAccess.Read))
+                                {
+                                    return localUri;
+                                }
+                            }
+                            catch (Exception ex)
+                            {
+                                LandingPageExtension.logger.Debug(ex, $"Could not open achievement image at \"{iconPath}\". Falling back to using \"{UrlUnlocked}\".");
+                            }
                         }
                     }
                     if (Uri.TryCreate(UrlUnlocked, UriKind.RelativeOrAbsolute, out var onlineUri))
