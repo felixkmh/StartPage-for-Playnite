@@ -45,7 +45,7 @@
     <sys:String x:Key="LOC_SPG_MaxCoverWidth">Maximale Cover-Breite</sys:String>
     <sys:String x:Key="LOC_SPG_BackgroundImageSource">Auswahl des Spiel-Hintergrundbildes:</sys:String>
     <sys:String x:Key="LOC_SPG_BackgroundImagePath">Hintergrundbild Pfad:</sys:String>
-    <sys:String x:Key="LOC_SPG_ShowGlobalProgressBar">(Unsupported) Show Global Progress Bar</sys:String>
+    <sys:String x:Key="LOC_SPG_ShowGlobalProgressBar">(Nicht unterstützt) Globalen Fortschrittsbalken anzeigen</sys:String>
     <sys:String x:Key="LOC_SPG_SwitchWithLowPrio">Niedrigere Priorität beim Umschalten der Ansicht (wird automatisch beim Absturz von Playnite aktiviert)</sys:String>
     <sys:String x:Key="LOC_SPG_UnsupportedToolTip">Die Verwendung dieser Funktion erfolgt auf eigene Gefahr. Sie wird nicht offiziell von der PlayniteAPI unterstützt und kann daher zu unerwartetem Verhalten führen.</sys:String>
 </ResourceDictionary>
