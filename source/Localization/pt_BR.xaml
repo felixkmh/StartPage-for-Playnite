@@ -45,6 +45,7 @@
     <sys:String x:Key="LOC_SPG_MaxCoverWidth">Largura máxima da capa</sys:String>
     <sys:String x:Key="LOC_SPG_BackgroundImageSource">Seleção de imagem de fundo do jogo:</sys:String>
     <sys:String x:Key="LOC_SPG_BackgroundImagePath">Local da imagem de fundo:</sys:String>
+    <sys:String x:Key="LOC_SPG_ShowGlobalProgressBar">(Unsupported) Show Global Progress Bar</sys:String>
     <sys:String x:Key="LOC_SPG_SwitchWithLowPrio">Baixa prioridade ao alternar a visualização (automaticamente ativado quando Playnite trava)</sys:String>
     <sys:String x:Key="LOC_SPG_UnsupportedToolTip">Use este recurso por sua própria conta e risco. Ela não é oficialmente apoiada pela PlayniteAPI e, portanto, pode levar a comportamentos inesperados.</sys:String>
 </ResourceDictionary>
