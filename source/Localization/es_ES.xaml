@@ -45,6 +45,7 @@
     <sys:String x:Key="LOC_SPG_MaxCoverWidth">Ancho de portada máximo</sys:String>
     <sys:String x:Key="LOC_SPG_BackgroundImageSource">Selección de la imagen de fondo del juego:</sys:String>
     <sys:String x:Key="LOC_SPG_BackgroundImagePath">Ruta de la imagen de fondo:</sys:String>
+    <sys:String x:Key="LOC_SPG_ShowGlobalProgressBar">(Unsupported) Show Global Progress Bar</sys:String>
     <sys:String x:Key="LOC_SPG_SwitchWithLowPrio">Bajar prioridad al cambiar la vista (activado automáticamente al bloquearse Playnite)</sys:String>
     <sys:String x:Key="LOC_SPG_UnsupportedToolTip">Use this feature at your own risk. It is not officially supported by the PlayniteAPI and can thus lead to unexpected behaviour.</sys:String>
 </ResourceDictionary>
