@@ -45,6 +45,7 @@
     <sys:String x:Key="LOC_SPG_MaxCoverWidth">Largeur maximale des couvertures</sys:String>
     <sys:String x:Key="LOC_SPG_BackgroundImageSource">Méthode de sélection de l'image de fond :</sys:String>
     <sys:String x:Key="LOC_SPG_BackgroundImagePath">Répertoire de l'image de fond :</sys:String>
+    <sys:String x:Key="LOC_SPG_ShowGlobalProgressBar">(Unsupported) Show Global Progress Bar</sys:String>
     <sys:String x:Key="LOC_SPG_SwitchWithLowPrio">Diminuer la priorité lors du changement de modes d'affichage (fait automatiquement en cas de crash)</sys:String>
     <sys:String x:Key="LOC_SPG_UnsupportedToolTip">Cette fonctionnalité n'est pas supportée par l'API de Playnite et pourrait provoquer des erreurs.</sys:String>
 </ResourceDictionary>
