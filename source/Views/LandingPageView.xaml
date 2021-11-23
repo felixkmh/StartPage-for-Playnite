@@ -164,7 +164,7 @@
                                 </LinearGradientBrush>
                             </Image.OpacityMask>
                         </Image>-->
-                        <local:GameDetailsView Margin="10,5"/>
+                        <local:GameDetailsView Margin="10,5" DataContext="{x:Null}" x:Name="GameDetails"/>
                     </Grid>
                 </Popup>
             </StackPanel>
@@ -185,6 +185,7 @@
                     </MultiTrigger.Setters>
                 </MultiTrigger>
                 <Trigger Property="IsOpen" SourceName="Description" Value="True">
+                    <Setter Property="DataContext" TargetName="GameDetails" Value="{Binding .}"/>
                     <Setter Property="Content" TargetName="PopupImageContentControl">
                         <Setter.Value>
                             <Image Opacity="0.3" Source="{Binding Game.BackgroundImage, Converter={StaticResource ImageStringToImageConverter}, 
@@ -861,10 +862,12 @@
                                             </ControlTemplate>
                                         </Button.Template>
                                         <StackPanel VerticalAlignment="Center">
-                                            <TextBlock Text="{Binding Text}"  VerticalAlignment="Center"
-                                                        TextWrapping="Wrap"
-                                                        Padding="4"
-                                                        Foreground="{DynamicResource TextBrush}"/>
+                                            <TextBox Text="{Binding Text}"  VerticalAlignment="Center"
+                                                     TextWrapping="Wrap"
+                                                     Padding="4"
+                                                     Foreground="{DynamicResource TextBrush}"
+                                                     Background="Transparent"
+                                                     IsReadOnly="True"/>
                                         </StackPanel>
                                     </Button>
                                     <Button Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ItemsControl}, Path=DataContext.DeleteNotificationCommand}" 

@@ -12,6 +12,7 @@
              d:DesignHeight="450" d:DesignWidth="800"
              d:DataContext="{d:DesignInstance IsDesignTimeCreatable=False, Type=m:SuccessStoryViewModel}">
     <UserControl.Resources>
+        <conv:AchievementToImageConverter x:Key="AchievementToImageConverter"/>
         <system:Uri x:Key="DefaultAchievementUri">pack://application:,,,/StartPagePlugin;component/star.png</system:Uri>
         <CollectionViewSource x:Key="LatestAchievementsSource" Source="{Binding LatestAchievements}" IsLiveGroupingRequested="True" IsLiveSortingRequested="True">
             <CollectionViewSource.SortDescriptions>
@@ -118,7 +119,7 @@
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Border CornerRadius="3" RenderTransformOrigin="0.5,0.5" ClipToBounds="False"
-                        RenderOptions.BitmapScalingMode="HighQuality">
+                        RenderOptions.BitmapScalingMode="Fant">
                         <Border.RenderTransform>
                             <TransformGroup>
                                 <TranslateTransform/>
@@ -157,12 +158,15 @@
                                         </VisualBrush.Visual>
                                     </VisualBrush>
                                 </Border.OpacityMask>
-                                <Image Stretch="UniformToFill" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <Image Stretch="UniformToFill" 
+                                       HorizontalAlignment="Center" 
+                                       VerticalAlignment="Center" 
+                                       RenderOptions.BitmapScalingMode="Fant">
                                     <Image.Source>
                                         <BitmapImage UriSource="{Binding Achievement.UriUnlocked, FallbackValue={StaticResource DefaultAchievementUri}}" 
                                                     CreateOptions="IgnoreColorProfile" 
                                                     CacheOption="OnLoad"
-                                                    DecodePixelHeight="70"/>
+                                                    DecodePixelHeight="64"/>
                                     </Image.Source>
                                 </Image>
                             </Border>

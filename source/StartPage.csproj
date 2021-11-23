@@ -65,6 +65,7 @@
       <DependentUpon>SidewaysTextBlock.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters\AchievementsToProgressConverter.cs" />
+    <Compile Include="Converters\AchievementToImageConverter.cs" />
     <Compile Include="Converters\ActualHeightToWidthConverter.cs" />
     <Compile Include="Converters\BoolToGridLengthConverter.cs" />
     <Compile Include="Converters\DatabaseIdToUriConverter.cs" />
