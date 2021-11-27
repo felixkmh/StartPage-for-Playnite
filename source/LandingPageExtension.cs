@@ -67,14 +67,14 @@ namespace LandingPage
                         successStory = new ViewModels.SuccessStory.SuccessStoryViewModel(null, PlayniteApi, SettingsViewModel);
                     }
                     var gameActivityPath = Directory.GetDirectories(PlayniteApi.Paths.ExtensionsDataPath, "GameActivity", SearchOption.AllDirectories).FirstOrDefault();
-                    if (!string.IsNullOrEmpty(successStoryPath))
+                    if (!string.IsNullOrEmpty(gameActivityPath))
                     {
                         gameActivity = new ViewModels.GameActivity.GameActivityViewModel(gameActivityPath, PlayniteApi, SettingsViewModel);
                         gameActivity.ParseAllActivites();
                     }
                     else
                     {
-                        successStory = new ViewModels.SuccessStory.SuccessStoryViewModel(null, PlayniteApi, SettingsViewModel);
+                        gameActivity = new ViewModels.GameActivity.GameActivityViewModel(null, PlayniteApi, SettingsViewModel);
                     }
                     viewModel = new LandingPageViewModel(PlayniteApi, this, SettingsViewModel, successStory, gameActivity);
                     viewModel.Update(true);

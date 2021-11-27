@@ -13,7 +13,7 @@ namespace LandingPage.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value is double length)
+            if (value is double length && length != double.NaN)
             {
                 return new GridLength(length, GridUnitType.Star);
             }

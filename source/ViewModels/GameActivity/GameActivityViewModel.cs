@@ -39,14 +39,18 @@ namespace LandingPage.ViewModels.GameActivity
         public ObservableCollection<PlayTimePerSource> WeeklyPlaytime { get; set; } = new ObservableCollection<PlayTimePerSource>();
 
 
-        public ulong PlaytimeLastWeekMax => PlaytimeLastWeek.Max(dpt => dpt.Playtime);
+        public ulong PlaytimeLastWeekMax => PlaytimeLastWeek?.Max(dpt => dpt.Playtime) ?? 0;
 
-        public ulong TotalPlaytimeThisWeek => (ulong)PlaytimeLastWeek.Sum(a => (long)a.Playtime);
+        public ulong TotalPlaytimeThisWeek => (ulong)(PlaytimeLastWeek?.Sum(a => (long)a.Playtime) ?? 0);
 
         public List<DayPlaytime> PlaytimeLastWeek
         {
             get
             {
+                if (Activities.Count == 0)
+                {
+                    return null;
+                }
                 var lastSevenDays = new[] { 6, 5, 4, 3, 2, 1, 0 }.Select(i => DateTime.Today.AddDays(-i).Date);
                 var summed = lastSevenDays.Select(day => new DayPlaytime { Day = day, Playtime = (ulong)Activities.SelectMany(a => a.Items).Where(item => item.DateSession.Date == day).Sum(item => (long)item.ElapsedSeconds) });
                 double max = summed.Max(dpt => dpt.Playtime);
