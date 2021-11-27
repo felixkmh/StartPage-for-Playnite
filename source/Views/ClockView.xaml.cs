@@ -41,7 +41,8 @@ namespace LandingPage.Views
 
             var baseline = formattedText.Height - formattedText.Baseline;
 
-            DateTransform.Y = -baseline;
+            //DateTransform.Y = -baseline;
+            ClockTextBlock.Height = formattedText.Baseline;
             ClockTextBlock.Loaded -= ClockTextBlock_Loaded;
         }
     }

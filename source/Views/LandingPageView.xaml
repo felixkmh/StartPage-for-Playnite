@@ -550,14 +550,15 @@
                                 </ItemsControl.ItemsPanel>
                                 <ItemsControl.ItemTemplate>
                                     <DataTemplate>
-                                        <DockPanel Margin="9,0" LastChildFill="True">
+                                        <DockPanel LastChildFill="True">
                                             <DockPanel.ToolTip>
                                                 <TextBlock Text="{Binding Playtime, Converter={StaticResource PlayTimeToStringConverter}}"/>
                                             </DockPanel.ToolTip>
                                             <TextBlock Text="{Binding DayString}" TextAlignment="Center"
                                                        Style="{StaticResource BaseTextBlockStyle}"
                                                        Margin="0,5" DockPanel.Dock="Bottom"/>
-                                            <Grid DockPanel.Dock="Bottom" Width="21">
+                                            <Grid DockPanel.Dock="Bottom" Width="21"
+                                                  Margin="9,0">
                                                 <Grid.RowDefinitions>
                                                     <RowDefinition Height="{Binding OneMinusFilled, Converter={StaticResource DoubleToGridLengthConverter}}"/>
                                                     <RowDefinition Height="10"/>

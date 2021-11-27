@@ -12,7 +12,7 @@
     <UserControl.Resources>
         <conv:OneMinusConverter x:Key="OneMinusConverter"/>
     </UserControl.Resources>
-    <Grid Margin="0">
+    <Grid Margin="0" ClipToBounds="False">
         <Grid.ColumnDefinitions>
             <ColumnDefinition SharedSizeGroup="T"/>
             <ColumnDefinition Width="*"/>
@@ -25,12 +25,7 @@
         <TextBlock Grid.Column="1" x:Name="ClockTextBlock" Background="{x:Null}" FontSize="140" TextAlignment="Center" Padding="0" HorizontalAlignment="Center" VerticalAlignment="Bottom" LineHeight="140" LineStackingStrategy="BlockLineHeight">
                                     <Run Text="{Binding Clock.T, Mode=OneWay}" FontSize="24" Foreground="{x:Null}"/><Run Text="{Binding Clock.TimeString, Mode=OneWay}" FontSize="140"/><Run Text="{Binding Clock.T, Mode=OneWay}" FontSize="24"/>
         </TextBlock>
-        <TextBlock x:Name="DateStringTextBlock" Margin="0,25,0,0" Grid.Row="1" Grid.Column="1" Text="{Binding Clock.DateString}" LineStackingStrategy="BlockLineHeight" FontSize="16" HorizontalAlignment="Center" Padding="0" LineHeight="16">
-            <TextBlock.RenderTransform>
-                <TransformGroup>
-                    <TranslateTransform x:Name="DateTransform"/>
-                </TransformGroup>
-            </TextBlock.RenderTransform>
+        <TextBlock x:Name="DateStringTextBlock" Grid.Row="1" Grid.Column="1" Text="{Binding Clock.DateString}" LineStackingStrategy="BlockLineHeight" FontSize="16" HorizontalAlignment="Center" Padding="0" LineHeight="16">
         </TextBlock>
     </Grid>
 </UserControl>
