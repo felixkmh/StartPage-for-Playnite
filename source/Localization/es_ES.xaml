@@ -6,11 +6,11 @@
     <sys:String x:Key="LOC_SPG_RecentAchievements">Logros recientes</sys:String>
     <sys:String x:Key="LOC_SPG_RecentlyAddedGames">Añadidos recientemente</sys:String>
 
-    <sys:String x:Key="LOC_SPG_DailyPlaytime">Daily Playtime</sys:String>
-    <sys:String x:Key="LOC_SPG_WeeklyPlaytime">Weekly Playtime</sys:String>
-    <sys:String x:Key="LOC_SPG_MonthlyPlaytime">Monthly Playtime</sys:String>
-    <sys:String x:Key="LOC_SPG_PlaytimePerSource">Playtime per Source</sys:String>
-    <sys:String x:Key="LOC_SPG_MostPlayedWeekly">Most Played this Week</sys:String>
+    <sys:String x:Key="LOC_SPG_DailyPlaytime">Tiempo de juego diario</sys:String>
+    <sys:String x:Key="LOC_SPG_WeeklyPlaytime">Tiempo de juego semanal</sys:String>
+    <sys:String x:Key="LOC_SPG_MonthlyPlaytime">Tiempo de juego mensual</sys:String>
+    <sys:String x:Key="LOC_SPG_PlaytimePerSource">Tiempo de juego por fuente</sys:String>
+    <sys:String x:Key="LOC_SPG_MostPlayedWeekly">Más jugados esta semana</sys:String>
     <sys:String x:Key="LOC_SPG_TotalPlaytime" xml:space="preserve">Total: </sys:String>
     
     <!--Settings Tabs-->
@@ -25,7 +25,7 @@
     <sys:String x:Key="LOC_SPG_BackgroundImageSourceLastSelected">Última selección</sys:String>
 
     <!-- Settings -->
-    <sys:String x:Key="LOC_SPG_ShowGameActivity">Show GameActivity Views</sys:String>
+    <sys:String x:Key="LOC_SPG_ShowGameActivity">Mostrar vistas de GameActivity</sys:String>
     <sys:String x:Key="LOC_SPG_NumberOfGames">Número de Juegos:</sys:String>
     <sys:String x:Key="LOC_SPG_NextRandomBackground">Siguiente Fondo aleatorio</sys:String>
     <sys:String x:Key="LOC_SPG_ShowFavorites">Mostrar juegos favoritos</sys:String>
@@ -53,7 +53,7 @@
     <sys:String x:Key="LOC_SPG_MaxCoverWidth">Ancho de portada máximo</sys:String>
     <sys:String x:Key="LOC_SPG_BackgroundImageSource">Selección de la imagen de fondo del juego:</sys:String>
     <sys:String x:Key="LOC_SPG_BackgroundImagePath">Ruta de la imagen de fondo:</sys:String>
-    <sys:String x:Key="LOC_SPG_ShowGlobalProgressBar">(Unsupported) Show Global Progress Bar</sys:String>
+    <sys:String x:Key="LOC_SPG_ShowGlobalProgressBar">(No soportado) Mostrar barra de progreso global</sys:String>
     <sys:String x:Key="LOC_SPG_SwitchWithLowPrio">Bajar prioridad al cambiar la vista (activado automáticamente al bloquearse Playnite)</sys:String>
     <sys:String x:Key="LOC_SPG_UnsupportedToolTip">Use this feature at your own risk. It is not officially supported by the PlayniteAPI and can thus lead to unexpected behaviour.</sys:String>
 </ResourceDictionary>
