@@ -565,12 +565,12 @@
                                                 </Grid.RowDefinitions>
                                                 <Border Grid.Row="1" Grid.RowSpan="2"
                                                         CornerRadius="5" x:Name="BarBorder" RenderTransformOrigin="0.5,1"
-                                                        BorderThickness="1" BorderBrush="#41FFFFFF">
+                                                        BorderThickness="1" BorderBrush="#6FFFFFFF">
                                                     <Border.Background>
                                                         <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
                                                             <LinearGradientBrush.GradientStops>
-                                                                <GradientStop Color="#2FFFFFFF"/>
-                                                                <GradientStop Color="#3FFFFFFF" Offset="1"/>
+                                                                <GradientStop Color="#40FFFFFF"/>
+                                                                <GradientStop Color="#5FFFFFFF" Offset="1"/>
                                                             </LinearGradientBrush.GradientStops>
                                                         </LinearGradientBrush>
                                                     </Border.Background>
@@ -582,7 +582,7 @@
                                         </DockPanel>
                                         <DataTemplate.Triggers>
                                             <Trigger Property="IsMouseOver" Value="True">
-                                                <Setter Property="Background" TargetName="BarBorder" Value="#4FFFFFFF"/>
+                                                <Setter Property="Background" TargetName="BarBorder" Value="#6FFFFFFF"/>
                                             </Trigger>
                                             <EventTrigger RoutedEvent="Loaded">
                                                 <BeginStoryboard>
