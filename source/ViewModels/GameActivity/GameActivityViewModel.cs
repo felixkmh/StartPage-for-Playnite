@@ -166,6 +166,9 @@ namespace LandingPage.ViewModels.GameActivity
                         Activities.Remove(old);
                     }
                     Activities.Add(activity);
+                    OnPropertyChanged(nameof(PlaytimeLastWeek));
+                    OnPropertyChanged(nameof(PlaytimeLastWeekMax));
+                    OnPropertyChanged(nameof(TotalPlaytimeThisWeek));
                 }
             }
         }
@@ -178,6 +181,9 @@ namespace LandingPage.ViewModels.GameActivity
                 if (Activities.FirstOrDefault(a => id == a.Id) is Activity old)
                 {
                     Activities.Remove(old);
+                    OnPropertyChanged(nameof(PlaytimeLastWeek));
+                    OnPropertyChanged(nameof(PlaytimeLastWeekMax));
+                    OnPropertyChanged(nameof(TotalPlaytimeThisWeek));
                 }
             }
         }
@@ -194,6 +200,9 @@ namespace LandingPage.ViewModels.GameActivity
                         Activities.Remove(old);
                     }
                     Activities.Add(activity);
+                    OnPropertyChanged(nameof(PlaytimeLastWeek));
+                    OnPropertyChanged(nameof(PlaytimeLastWeekMax));
+                    OnPropertyChanged(nameof(TotalPlaytimeThisWeek));
                 }
             }
         }
