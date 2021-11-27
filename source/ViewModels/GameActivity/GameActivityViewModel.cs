@@ -54,6 +54,7 @@ namespace LandingPage.ViewModels.GameActivity
                 var lastSevenDays = new[] { 6, 5, 4, 3, 2, 1, 0 }.Select(i => DateTime.Today.AddDays(-i).Date);
                 var summed = lastSevenDays.Select(day => new DayPlaytime { Day = day, Playtime = (ulong)Activities.SelectMany(a => a.Items).Where(item => item.DateSession.Date == day).Sum(item => (long)item.ElapsedSeconds) });
                 double max = summed.Max(dpt => dpt.Playtime);
+                max = double.IsNaN(max) ? 1 : max;
                 var withSize = summed.Select(a => { a.Filled = (float)a.Playtime / max; return a; });
                 return withSize.ToList();
             }
