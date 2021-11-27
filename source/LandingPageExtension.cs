@@ -56,16 +56,27 @@ namespace LandingPage
                 if (viewModel == null)
                 {
                     ViewModels.SuccessStory.SuccessStoryViewModel successStory = null;
-                    var path = Directory.GetDirectories(PlayniteApi.Paths.ExtensionsDataPath, "SuccessStory", SearchOption.AllDirectories).FirstOrDefault();
-                    if (!string.IsNullOrEmpty(path))
+                    ViewModels.GameActivity.GameActivityViewModel gameActivity = null;
+                    var successStoryPath = Directory.GetDirectories(PlayniteApi.Paths.ExtensionsDataPath, "SuccessStory", SearchOption.AllDirectories).FirstOrDefault();
+                    if (!string.IsNullOrEmpty(successStoryPath))
                     {
-                        successStory = new ViewModels.SuccessStory.SuccessStoryViewModel(path, PlayniteApi, SettingsViewModel);
+                        successStory = new ViewModels.SuccessStory.SuccessStoryViewModel(successStoryPath, PlayniteApi, SettingsViewModel);
                         successStory.ParseAllAchievements();
                     } else
                     {
                         successStory = new ViewModels.SuccessStory.SuccessStoryViewModel(null, PlayniteApi, SettingsViewModel);
                     }
-                    viewModel = new LandingPageViewModel(PlayniteApi, this, SettingsViewModel, successStory);
+                    var gameActivityPath = Directory.GetDirectories(PlayniteApi.Paths.ExtensionsDataPath, "GameActivity", SearchOption.AllDirectories).FirstOrDefault();
+                    if (!string.IsNullOrEmpty(successStoryPath))
+                    {
+                        gameActivity = new ViewModels.GameActivity.GameActivityViewModel(gameActivityPath, PlayniteApi, SettingsViewModel);
+                        gameActivity.ParseAllActivites();
+                    }
+                    else
+                    {
+                        successStory = new ViewModels.SuccessStory.SuccessStoryViewModel(null, PlayniteApi, SettingsViewModel);
+                    }
+                    viewModel = new LandingPageViewModel(PlayniteApi, this, SettingsViewModel, successStory, gameActivity);
                     viewModel.Update(true);
                 } else
                 {

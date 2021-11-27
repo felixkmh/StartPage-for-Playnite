@@ -127,6 +127,10 @@
                             </Grid>
                         </DockPanel>
                         <DockPanel>
+                            <CheckBox IsChecked="{Binding Settings.EnableGameActivity}" VerticalAlignment="Center" Margin="3"/>
+                            <TextBlock Text="{DynamicResource LOC_SPG_ShowGameActivity}" Margin="3" VerticalAlignment="Center"/>
+                        </DockPanel>
+                        <DockPanel>
                             <CheckBox IsChecked="{Binding Settings.ShowRecentAchievements}" VerticalAlignment="Center" Margin="3"/>
                             <TextBlock Text="{DynamicResource LOC_SPG_ShowRecentAchievements}" Margin="3" VerticalAlignment="Center"/>
                         </DockPanel>

@@ -71,8 +71,8 @@ namespace LandingPage.Models.SuccessStory
         private DateTime? dateUnlocked;
         private bool isHidden = false;
         private float percent = 100;
-        private string category = string.Empty;
-        private string parentCategory = string.Empty;
+        //private string category = string.Empty;
+        //private string parentCategory = string.Empty;
 
         public string Name { get => name; set { name = value; OnPropertyChanged(); } }
         public string ApiName { get => apiName; set { apiName = value; OnPropertyChanged(); } }
@@ -82,8 +82,8 @@ namespace LandingPage.Models.SuccessStory
         public DateTime? DateUnlocked { get => dateUnlocked ?? DateTime.MinValue; set { dateUnlocked = value; OnPropertyChanged(); } }
         public bool IsHidden { get => isHidden; set { isHidden = value; OnPropertyChanged(); } }
         public float Percent { get => percent; set { percent = value; OnPropertyChanged(); } }
-        public string Category { get => category; set { category = value; OnPropertyChanged(); } }
-        public string ParentCategory { get => parentCategory; set { parentCategory = value; OnPropertyChanged(); } }
+        //public string Category { get => category; set { category = value; OnPropertyChanged(); } }
+        //public string ParentCategory { get => parentCategory; set { parentCategory = value; OnPropertyChanged(); } }
         [Newtonsoft.Json.JsonIgnore]
         public Uri UriUnlocked {
             get

@@ -59,6 +59,9 @@ namespace LandingPage.ViewModels
         internal SuccessStory.SuccessStoryViewModel successStory;
         public SuccessStory.SuccessStoryViewModel SuccessStory => successStory;
 
+        internal GameActivity.GameActivityViewModel gameActivity;
+        public GameActivity.GameActivityViewModel GameActivity => gameActivity;
+
         internal bool languageSupportsVertical = false;
         public bool LanguageSupportsVertical { get => languageSupportsVertical; set => SetValue(ref languageSupportsVertical, value); }
 
@@ -75,12 +78,14 @@ namespace LandingPage.ViewModels
 
         public LandingPageViewModel(IPlayniteAPI playniteAPI, LandingPageExtension landingPage,
                                     LandingPageSettingsViewModel settings,
-                                    SuccessStory.SuccessStoryViewModel successStory)
+                                    SuccessStory.SuccessStoryViewModel successStory,
+                                    GameActivity.GameActivityViewModel gameActivity)
         {
             this.playniteAPI = playniteAPI;
             this.plugin = landingPage;
             this.settings = settings;
             this.successStory = successStory;
+            this.gameActivity = gameActivity;
             notifications = playniteAPI.Notifications.Messages;
             notifications.CollectionChanged += (sender, args) => OnPropertyChanged(nameof(Notifications));
             deleteNotificationCommand = new RelayCommand<NotificationMessage>(sender => playniteAPI.Notifications.Remove(sender.Id));
