@@ -6,6 +6,13 @@
     <sys:String x:Key="LOC_SPG_RecentAchievements">Conquistas recentes</sys:String>
     <sys:String x:Key="LOC_SPG_RecentlyAddedGames">Adicionado Recentemente</sys:String>
 
+    <sys:String x:Key="LOC_SPG_DailyPlaytime">Daily Playtime</sys:String>
+    <sys:String x:Key="LOC_SPG_WeeklyPlaytime">Weekly Playtime</sys:String>
+    <sys:String x:Key="LOC_SPG_MonthlyPlaytime">Monthly Playtime</sys:String>
+    <sys:String x:Key="LOC_SPG_PlaytimePerSource">Playtime per Source</sys:String>
+    <sys:String x:Key="LOC_SPG_MostPlayedWeekly">Most Played this Week</sys:String>
+    <sys:String x:Key="LOC_SPG_TotalPlaytime" xml:space="preserve">Total: </sys:String>
+    
     <!--Settings Tabs-->
     <sys:String x:Key="LOC_SPG_CommonTab">Comum</sys:String>
     <sys:String x:Key="LOC_SPG_BackgroundTab">Plano de fundo</sys:String>
@@ -18,6 +25,7 @@
     <sys:String x:Key="LOC_SPG_BackgroundImageSourceLastSelected">Último selecionado</sys:String>
 
     <!-- Settings -->
+    <sys:String x:Key="LOC_SPG_ShowGameActivity">Show GameActivity Views</sys:String>
     <sys:String x:Key="LOC_SPG_NumberOfGames">Número de jogos:</sys:String>
     <sys:String x:Key="LOC_SPG_NextRandomBackground">Próximo Fundo Aleatório</sys:String>
     <sys:String x:Key="LOC_SPG_ShowFavorites">Mostrar Jogos Favoritos</sys:String>
