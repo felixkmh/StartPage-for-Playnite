@@ -11,7 +11,7 @@
     <sys:String x:Key="LOC_SPG_MonthlyPlaytime">Monthly Playtime</sys:String>
     <sys:String x:Key="LOC_SPG_PlaytimePerSource">Playtime per Source</sys:String>
     <sys:String x:Key="LOC_SPG_MostPlayedWeekly">Most Played this Week</sys:String>
-    <sys:String x:Key="LOC_SPG_TotalPlaytime">Total: </sys:String>
+    <sys:String x:Key="LOC_SPG_TotalPlaytime" xml:space="preserve">Total: </sys:String>
     
     <!--Settings Tabs-->
     <sys:String x:Key="LOC_SPG_CommonTab">Ogólne</sys:String>
