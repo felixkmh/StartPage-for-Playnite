@@ -47,13 +47,13 @@
     <sys:String x:Key="LOC_SPG_EffectiveBlur">Ефективний радіус розмиття:</sys:String>
     <sys:String x:Key="LOC_SPG_EffectiveBlurToolTip">Ефективний радіус розмиття визначається як (Радіус розмиття) / (Рівень візуалізації фону). Низький рівень візуалізації в поєднанні з низьким радіусом розмиття може призвести до небажаних результатів. Зменшення рівню візуалізації може підвищити продуктивність і створити сильніший ефект розмиття.</sys:String>
     <sys:String x:Key="LOC_SPG_BackgroundScale">Рівень візуалізації фону:</sys:String>
-    <sys:String x:Key="LOC_SPG_OverlayOpacity">Overlay Opacity:</sys:String>
-    <sys:String x:Key="LOC_SPG_NoiseOpacity">Noise Opacity:</sys:String>
-    <sys:String x:Key="LOC_SPG_CoverAspectRatio">Cover Aspect Ratio</sys:String>
-    <sys:String x:Key="LOC_SPG_MaxCoverWidth">Maximum Cover Width</sys:String>
+    <sys:String x:Key="LOC_SPG_OverlayOpacity">Прозорість оверлею:</sys:String>
+    <sys:String x:Key="LOC_SPG_NoiseOpacity">Прозорість шуму:</sys:String>
+    <sys:String x:Key="LOC_SPG_CoverAspectRatio">Співвідношення сторін обкладинок</sys:String>
+    <sys:String x:Key="LOC_SPG_MaxCoverWidth">Максимальна ширина обкладинки</sys:String>
     <sys:String x:Key="LOC_SPG_BackgroundImageSource">Вибір фонового зображення гри:</sys:String>
-    <sys:String x:Key="LOC_SPG_BackgroundImagePath">Background Image Path:</sys:String>
-    <sys:String x:Key="LOC_SPG_ShowGlobalProgressBar">(Unsupported) Show Global Progress Bar</sys:String>
-    <sys:String x:Key="LOC_SPG_SwitchWithLowPrio">Lower Priority when switching View (automatically enabled upon Playnite crashing)</sys:String>
-    <sys:String x:Key="LOC_SPG_UnsupportedToolTip">Use this feature at your own risk. It is not officially supported by the PlayniteAPI and can thus lead to unexpected behaviour.</sys:String>
+    <sys:String x:Key="LOC_SPG_BackgroundImagePath">Шлях до зображення фону:</sys:String>
+    <sys:String x:Key="LOC_SPG_ShowGlobalProgressBar">(Не підтримується) Показати панель глобального прогресу</sys:String>
+    <sys:String x:Key="LOC_SPG_SwitchWithLowPrio">Знижувати пріоритет при перемиканні режиму перегляду (автоматично вмикається при збою Playnite)</sys:String>
+    <sys:String x:Key="LOC_SPG_UnsupportedToolTip">Використовуйте цю функцію на свій страх і ризик. Вона офіційно не підтримується PlayniteAPI і, таким чином, може призвести до неочікуваної поведінки.</sys:String>
 </ResourceDictionary>
