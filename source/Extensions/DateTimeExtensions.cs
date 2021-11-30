@@ -12,14 +12,9 @@ namespace LandingPage
     {
         public static DateTime RoundToClosestMinute(this DateTime time)
         {
-            double seconds = time.TimeOfDay.TotalSeconds % 60;
-            if (seconds >= 30)
-            {
-                return time.AddSeconds(60 - seconds);
-            } else
-            {
-                return time.AddSeconds(-seconds);
-            }
+            var seconds = time.TimeOfDay.TotalSeconds / 60;
+            var roundedSeconds = Math.Round(seconds) * 60;
+            return time.Date.AddSeconds(roundedSeconds);
         }
 
         public static string ToGroupName(this DateTime? dateTime)
