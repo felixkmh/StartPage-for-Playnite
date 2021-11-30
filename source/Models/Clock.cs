@@ -28,11 +28,11 @@ namespace LandingPage.Models
                     var currentTime = DateTime.Now;
                     if (currentTime != Time)
                     {
-                        Time = currentTime;
                         if (currentTime.DayOfYear != Time.DayOfYear)
                         {
                             OnDayChanged(EventArgs.Empty);
                         }
+                        Time = currentTime;
                         OnPropertyChanged(nameof(Time));
                         OnPropertyChanged(nameof(DateString));
                         OnPropertyChanged(nameof(Separator));
