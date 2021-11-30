@@ -10,6 +10,18 @@ namespace LandingPage
 {
     public static class DateTimeExtensions
     {
+        public static DateTime RoundToClosestMinute(this DateTime time)
+        {
+            double seconds = time.TimeOfDay.TotalSeconds % 60;
+            if (seconds >= 30)
+            {
+                return time.AddSeconds(60 - seconds);
+            } else
+            {
+                return time.AddSeconds(-seconds);
+            }
+        }
+
         public static string ToGroupName(this DateTime? dateTime)
         {
             IValueConverter converter = ResourceProvider.GetResource<IValueConverter>("DateTimeToLastPlayedConverter");

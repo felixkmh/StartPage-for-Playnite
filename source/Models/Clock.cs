@@ -25,7 +25,7 @@ namespace LandingPage.Models
                     dispatcherTimer.Interval = TimeSpan.FromSeconds(60);
                     //var currentCulture = CultureInfo.CurrentCulture;
                     //CultureInfo.CurrentCulture = CultureInfo.GetCultureInfo("en-US");
-                    var currentTime = DateTime.Now;
+                    var currentTime = DateTime.Now.RoundToClosestMinute();
                     if (currentTime != Time)
                     {
                         if (currentTime.DayOfYear != Time.DayOfYear)
