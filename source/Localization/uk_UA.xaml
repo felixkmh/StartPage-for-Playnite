@@ -53,7 +53,7 @@
     <sys:String x:Key="LOC_SPG_MaxCoverWidth">Максимальна ширина обкладинки</sys:String>
     <sys:String x:Key="LOC_SPG_BackgroundImageSource">Вибір фонового зображення гри:</sys:String>
     <sys:String x:Key="LOC_SPG_BackgroundImagePath">Шлях до зображення фону:</sys:String>
-    <sys:String x:Key="LOC_SPG_ShowGlobalProgressBar">(Не підтримується) Показати панель глобального прогресу</sys:String>
+    <sys:String x:Key="LOC_SPG_ShowGlobalProgressBar">(Не підтримується) Показувати панель глобального прогресу</sys:String>
     <sys:String x:Key="LOC_SPG_SwitchWithLowPrio">Знижувати пріоритет при перемиканні режиму перегляду (автоматично вмикається при збою Playnite)</sys:String>
     <sys:String x:Key="LOC_SPG_UnsupportedToolTip">Використовуйте цю функцію на свій страх і ризик. Вона офіційно не підтримується PlayniteAPI і, таким чином, може призвести до неочікуваної поведінки.</sys:String>
 </ResourceDictionary>
