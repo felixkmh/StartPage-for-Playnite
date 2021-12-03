@@ -30,7 +30,7 @@
     <sys:String x:Key="LOC_SPG_NextRandomBackground">Наступний випадковий фон</sys:String>
     <sys:String x:Key="LOC_SPG_ShowFavorites">Показувати улюблені ігри</sys:String>
     <sys:String x:Key="LOC_SPG_ShowClock">Показувати годинник</sys:String>
-    <sys:String x:Key="LOC_SPG_ShowRecentlyPlayed">Показати нещодавно зіграні ігри</sys:String>
+    <sys:String x:Key="LOC_SPG_ShowRecentlyPlayed">Показувати нещодавно зіграні ігри</sys:String>
     <sys:String x:Key="LOC_SPG_ShowRecentAchievements">Показувати останні досягнення, використовуючи SuccessStory</sys:String>
     <sys:String x:Key="LOC_SPG_ShowRecentlyAdded">Показувати нещодавно додані ігри</sys:String>
     <sys:String x:Key="LOC_SPG_StartupItem">(Не підтримується) Вкладка бічної панелі після запуску</sys:String>
