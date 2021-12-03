@@ -420,8 +420,6 @@ namespace LandingPage.ViewModels
             var changed = false;
             Application.Current.Dispatcher.Invoke(() =>
             {
-                var displayedGames = 20;
-
                 IEnumerable<Game> gameSelection = games.Take(Settings.Settings.NumberOfGames);
                 foreach (var game in gameSelection)
                 {
