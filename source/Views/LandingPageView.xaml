@@ -53,6 +53,11 @@
             <Setter Property="BorderThickness" Value="0"/>
             <Setter Property="VirtualizingPanel.VirtualizationMode" Value="Standard"/>
             <Setter Property="Padding" Value="0"/>
+            <!--<Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect BlurRadius="17" ShadowDepth="0" Color="Black" Opacity="0.7" RenderingBias="Performance"/>
+                </Setter.Value>
+            </Setter>-->
         </Style>
         <system:Double x:Key="CoverHeight">195</system:Double>
         <system:Double x:Key="CoverWidth">140</system:Double>
@@ -68,7 +73,7 @@
         <conv:BoolToGridLengthConverter x:Key="BoolToGridLengthConverter"/>
         <DataTemplate x:Key="GameCoverDataTemplate" DataType="{x:Type lpm:GameModel}">
             <StackPanel Orientation="Horizontal">
-                <Grid ClipToBounds="True" 
+                <Grid ClipToBounds="True"
                       MaxWidth="{mu:LandingPageSettings Settings.MaxCoverWidth}" x:Name="ImageGrid">
                     <Grid.Width>
                         <MultiBinding Converter="{StaticResource HeightToWidthMultiConverter}">
