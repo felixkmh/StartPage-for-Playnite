@@ -12,6 +12,8 @@
     <sys:String x:Key="LOC_SPG_PlaytimePerSource">Час гри по джерелам</sys:String>
     <sys:String x:Key="LOC_SPG_MostPlayedWeekly">Найбільше награно цього тижня</sys:String>
     <sys:String x:Key="LOC_SPG_TotalPlaytime" xml:space="preserve">Разом: </sys:String>
+    <sys:String x:Key="LOC_SPG_LastSevenDays">Last 7 Days</sys:String>
+    <sys:String x:Key="LOC_SPG_LastThirtyDays">Last 30 Days</sys:String>
     
     <!--Settings Tabs-->
     <sys:String x:Key="LOC_SPG_CommonTab">Загальні</sys:String>
