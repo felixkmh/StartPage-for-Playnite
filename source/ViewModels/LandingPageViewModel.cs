@@ -159,7 +159,7 @@ namespace LandingPage.ViewModels
                 groups.Add(group);
             }
 
-            var dateComparer = new Func<Game, Game, int>((Game a, Game b) =>
+            var releaseDateComparer = new Func<Game, Game, int>((Game a, Game b) =>
             {
                 if (a?.ReleaseDate == null)
                     return 1;
@@ -167,12 +167,49 @@ namespace LandingPage.ViewModels
                     return -1;
                 return -a.ReleaseDate.Value.CompareTo(b.ReleaseDate.Value);
             });
+            var thisWeek = GameActivity.Activities
+                .Select(a => new { Game = playniteAPI.Database.Games.Get(a.Id), Items = a.Items.Where(i => i.DateSession.AddDays(7) >= DateTime.Today).ToList() })
+                .Where(a => a.Game is Game && a.Items.Count > 0);
+            var mostPlayedThisWeek = thisWeek
+                .Select(a => new { Game = a.Game, Playtime = a.Items.Sum(i => (long)i.ElapsedSeconds) })
+                .MaxElement(g => g.Playtime).Value.Game;
+            var thisMonth = GameActivity.Activities
+                .Select(a => new { Game = playniteAPI.Database.Games.Get(a.Id), Items = a.Items.Where(i => i.DateSession.AddDays(30) >= DateTime.Today).ToList() })
+                .Where(a => a.Game is Game && a.Items.Count > 0);
+            var mostPlayedThisMonth = thisWeek
+                .Select(a => new { Game = a.Game, Playtime = a.Items.Sum(i => (long)i.ElapsedSeconds) })
+                .MaxElement(g => g.Playtime).Value.Game;
 
-            if (playniteAPI.Database.Games.Where(g => !g.Hidden).MaxElement(dateComparer) is Game newestGame)
+            var lastPlayedComparer = new Func<Game, Game, int>((Game a, Game b) =>
+            {
+                if (a?.LastActivity == null)
+                    return 1;
+                if (b?.LastActivity == null)
+                    return -1;
+                return -a.LastActivity.Value.CompareTo(b.LastActivity.Value);
+            });
+
+            //if (playniteAPI.Database.Games.Where(g => !g.Hidden).MaxElement(releaseDateComparer) is Game newestGame)
+            //{
+            //    var group = new GameGroup();
+            //    group.Games.Add(new GameModel(newestGame));
+            //    group.Label = ResourceProvider.GetString("LOC_SPG_LatestReleaseGame");
+            //    groups.Add(group);
+            //}
+
+            if (mostPlayedThisWeek is Game mostPlayedWeek)
             {
                 var group = new GameGroup();
-                group.Games.Add(new GameModel(newestGame));
-                group.Label = ResourceProvider.GetString("LOC_SPG_LatestReleaseGame");
+                group.Games.Add(new GameModel(mostPlayedWeek));
+                group.Label = ResourceProvider.GetString("LOC_SPG_LastSevenDays");
+                groups.Add(group);
+            }
+
+            if (mostPlayedThisMonth is Game mostPlayedMonth)
+            {
+                var group = new GameGroup();
+                group.Games.Add(new GameModel(mostPlayedMonth));
+                group.Label = ResourceProvider.GetString("LOC_SPG_LastThirtyDays");
                 groups.Add(group);
             }
 
