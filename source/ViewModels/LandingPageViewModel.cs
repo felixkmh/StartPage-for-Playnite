@@ -128,14 +128,21 @@ namespace LandingPage.ViewModels
 
         public void Subscribe()
         {
+            GameActivity.Activities.CollectionChanged += Activities_CollectionChanged;
             playniteAPI.Database.Games.ItemUpdated += Games_ItemUpdated;
             playniteAPI.Database.Games.ItemCollectionChanged += Games_ItemCollectionChanged;
         }
 
         public void Unsubscribe()
         {
+            GameActivity.Activities.CollectionChanged -= Activities_CollectionChanged;
             playniteAPI.Database.Games.ItemUpdated -= Games_ItemUpdated;
             playniteAPI.Database.Games.ItemCollectionChanged -= Games_ItemCollectionChanged;
+        }
+
+        private void Activities_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            UpdateMostPlayedGame();
         }
 
         public void Update(bool updateRandomBackground = true)
