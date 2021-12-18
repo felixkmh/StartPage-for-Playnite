@@ -12,8 +12,8 @@
     <sys:String x:Key="LOC_SPG_PlaytimePerSource">每个来源游戏时间</sys:String>
     <sys:String x:Key="LOC_SPG_MostPlayedWeekly">本周游玩最多</sys:String>
     <sys:String x:Key="LOC_SPG_TotalPlaytime" xml:space="preserve">总计： </sys:String>
-    <sys:String x:Key="LOC_SPG_LastSevenDays">Last 7 Days</sys:String>
-    <sys:String x:Key="LOC_SPG_LastThirtyDays">Last 30 Days</sys:String>
+    <sys:String x:Key="LOC_SPG_LastSevenDays">最近7天</sys:String>
+    <sys:String x:Key="LOC_SPG_LastThirtyDays">最近30天</sys:String>
     
     <!--Settings Tabs-->
     <sys:String x:Key="LOC_SPG_CommonTab">常规</sys:String>

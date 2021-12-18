@@ -12,8 +12,8 @@
     <sys:String x:Key="LOC_SPG_PlaytimePerSource">Tiempo de juego por fuente</sys:String>
     <sys:String x:Key="LOC_SPG_MostPlayedWeekly">Más jugados esta semana</sys:String>
     <sys:String x:Key="LOC_SPG_TotalPlaytime" xml:space="preserve">Total: </sys:String>
-    <sys:String x:Key="LOC_SPG_LastSevenDays">Last 7 Days</sys:String>
-    <sys:String x:Key="LOC_SPG_LastThirtyDays">Last 30 Days</sys:String>
+    <sys:String x:Key="LOC_SPG_LastSevenDays">Últimos 7 días</sys:String>
+    <sys:String x:Key="LOC_SPG_LastThirtyDays">Últimos 30 días</sys:String>
     
     <!--Settings Tabs-->
     <sys:String x:Key="LOC_SPG_CommonTab">General</sys:String>
