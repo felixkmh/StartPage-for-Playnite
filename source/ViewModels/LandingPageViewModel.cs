@@ -230,7 +230,10 @@ namespace LandingPage.ViewModels
                     foreach(var group in specialGames)
                     {
                         var currentGroup = groups.FirstOrDefault(g => g.Label == group.Label);
-                        group.Games.FirstOrDefault().Game = currentGroup.Games.FirstOrDefault().Game;
+                        if (currentGroup?.Games?.FirstOrDefault()?.Game is Game updatedGame)
+                        {
+                            group.Games.FirstOrDefault().Game = updatedGame;
+                        }
                     }
                 }
             });
