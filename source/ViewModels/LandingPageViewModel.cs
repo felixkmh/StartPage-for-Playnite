@@ -547,8 +547,12 @@ namespace LandingPage.ViewModels
             if (old.BackgroundImage != updated.BackgroundImage) return true;
             if (old.CoverImage != updated.CoverImage) return true;
             if (old.Icon != updated.Icon) return true;
-            if (!(old.PlatformIds.All(id => updated.PlatformIds.Contains(id)) && old.PlatformIds.Count == updated.PlatformIds.Count)) return true;
-            if (!(old.FeatureIds.All(id => updated.FeatureIds.Contains(id)) && old.FeatureIds.Count == updated.FeatureIds.Count)) return true;
+            var oldPlatformIds = old.PlatformIds ?? new List<Guid>();
+            var updatedPlatformIds = updated.PlatformIds ?? new List<Guid>();
+            if (!(oldPlatformIds.All(id => updatedPlatformIds.Contains(id)) && oldPlatformIds.Count == updatedPlatformIds.Count)) return true;
+            var oldFeatureIds = old.FeatureIds ?? new List<Guid>();
+            var updatedFeatureIds = updated.FeatureIds ?? new List<Guid>();
+            if (!(oldFeatureIds.All(id => updatedFeatureIds.Contains(id)) && oldFeatureIds.Count == updatedFeatureIds.Count)) return true;
             return false;
         }
     }
