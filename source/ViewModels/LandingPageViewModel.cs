@@ -176,16 +176,16 @@ namespace LandingPage.ViewModels
             });
             var thisWeek = GameActivity.Activities
                 .Select(a => new { Game = playniteAPI.Database.Games.Get(a.Id), Items = a.Items.Where(i => i.DateSession.AddDays(7) >= DateTime.Today).ToList() })
-                .Where(a => a.Game is Game && a.Items.Count > 0);
+                .Where(a => a.Game is Game && a.Items?.Count > 0);
             var mostPlayedThisWeek = thisWeek
                 .Select(a => new { Game = a.Game, Playtime = a.Items.Sum(i => (long)i.ElapsedSeconds) })
-                .MaxElement(g => g.Playtime).Value.Game;
+                .MaxElement(g => g.Playtime).Value?.Game;
             var thisMonth = GameActivity.Activities
                 .Select(a => new { Game = playniteAPI.Database.Games.Get(a.Id), Items = a.Items.Where(i => i.DateSession.AddDays(30) >= DateTime.Today).ToList() })
-                .Where(a => a.Game is Game && a.Items.Count > 0);
+                .Where(a => a.Game is Game && a.Items?.Count > 0);
             var mostPlayedThisMonth = thisWeek
                 .Select(a => new { Game = a.Game, Playtime = a.Items.Sum(i => (long)i.ElapsedSeconds) })
-                .MaxElement(g => g.Playtime).Value.Game;
+                .MaxElement(g => g.Playtime).Value?.Game;
 
             var lastPlayedComparer = new Func<Game, Game, int>((Game a, Game b) =>
             {
