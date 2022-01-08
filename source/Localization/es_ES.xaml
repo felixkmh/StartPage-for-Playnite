@@ -35,16 +35,16 @@
     <sys:String x:Key="LOC_SPG_ShowRecentlyPlayed">Mostrar juegos jugados recientemente</sys:String>
     <sys:String x:Key="LOC_SPG_ShowRecentAchievements">Mostrar logros recientes usando SuccessStory</sys:String>
     <sys:String x:Key="LOC_SPG_ShowRecentlyAdded">Mostrar juegos añadidos recientemente</sys:String>
-    <sys:String x:Key="LOC_SPG_StartupItem">(Unsupported) SidebarItem activated on Launch</sys:String>
+    <sys:String x:Key="LOC_SPG_StartupItem">(No soportado) Activar elemento de barra lateral al inicio</sys:String>
     <sys:String x:Key="LOC_SPG_MaxRecentAchievements">Número máximo de logros recientes:</sys:String>
     <sys:String x:Key="LOC_SPG_MaxRecentAchievementsPerGame">Número máximo de logros recientes por juego:</sys:String>
     <sys:String x:Key="LOC_SPG_ShowTitelOnCover">Mostrar título en la portada de juegos</sys:String>
     <sys:String x:Key="LOC_SPG_ShowGameDetails">Mostrar detalles del juego</sys:String>
-    <sys:String x:Key="LOC_SPG_EnableNotifications">Enable Notifications</sys:String>
-    <sys:String x:Key="LOC_SPG_MinimizeNotification">Minimize Notifications on Launch</sys:String>
-    <sys:String x:Key="LOC_SPG_ShowNotificationButtons">Show &quot;Discard&quot; and &quot;Minimize&quot; Buttons</sys:String>
-    <sys:String x:Key="LOC_SPG_KeepInMemory">Keep StartPage in Memory when switching to another View</sys:String>
-    <sys:String x:Key="LOC_SPG_MoveIconToTop">(Unsupported) Move StartPage Item to Top of SideBar on Launch</sys:String>
+    <sys:String x:Key="LOC_SPG_EnableNotifications">Habilitar notificaciones</sys:String>
+    <sys:String x:Key="LOC_SPG_MinimizeNotification">Minimizar las notificaciones al inicio</sys:String>
+    <sys:String x:Key="LOC_SPG_ShowNotificationButtons">Mostrar los botones &quot;Descartar&quot; y &quot;Minimizar&quot;</sys:String>
+    <sys:String x:Key="LOC_SPG_KeepInMemory">Mantener la página de inicio en la memoria cuando se cambia a otra vista</sys:String>
+    <sys:String x:Key="LOC_SPG_MoveIconToTop">(No soportado) Mover el elemento de StartPage al principio de la barra lateral al iniciar</sys:String>
     <sys:String x:Key="LOC_SPG_BlurAmount">Radio de desenfoque:</sys:String>
     <sys:String x:Key="LOC_SPG_EffectiveBlur">Radio de desenfoque efectivo:</sys:String>
     <sys:String x:Key="LOC_SPG_EffectiveBlurToolTip">El radio de desenfoque efectivo viene dado por (Radio de desenfoque) / (Escala de renderizado del fondo). Una escala de renderizado baja combinada con un radio de desenfoque bajo puede conducir a resultados no deseados. Disminuir la escala de renderizado puede producir un mejor rendimiento y puede crear un efecto de desenfoque más fuerte.</sys:String>
@@ -57,5 +57,5 @@
     <sys:String x:Key="LOC_SPG_BackgroundImagePath">Ruta de la imagen de fondo:</sys:String>
     <sys:String x:Key="LOC_SPG_ShowGlobalProgressBar">(No soportado) Mostrar barra de progreso global</sys:String>
     <sys:String x:Key="LOC_SPG_SwitchWithLowPrio">Bajar prioridad al cambiar la vista (activado automáticamente al bloquearse Playnite)</sys:String>
-    <sys:String x:Key="LOC_SPG_UnsupportedToolTip">Use this feature at your own risk. It is not officially supported by the PlayniteAPI and can thus lead to unexpected behaviour.</sys:String>
+    <sys:String x:Key="LOC_SPG_UnsupportedToolTip">Utilice esta función bajo su propio riesgo. No está soportada oficialmente por la PlayniteAPI y por lo tanto puede conducir a un comportamiento inesperado.</sys:String>
 </ResourceDictionary>
