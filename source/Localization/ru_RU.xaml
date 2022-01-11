@@ -1,37 +1,37 @@
 ﻿<?xml version="1.0"?>
 <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:sys="clr-namespace:System;assembly=mscorlib">
 
-    <sys:String x:Key="LOC_SPG_MostPlayedGame">Most Played</sys:String>
-    <sys:String x:Key="LOC_SPG_LatestReleaseGame">Latest Release</sys:String>
-    <sys:String x:Key="LOC_SPG_RecentAchievements">Recent Achievements</sys:String>
-    <sys:String x:Key="LOC_SPG_RecentlyAddedGames">Recently Added</sys:String>
+    <sys:String x:Key="LOC_SPG_MostPlayedGame">Самая популярная</sys:String>
+    <sys:String x:Key="LOC_SPG_LatestReleaseGame">Последний релиз</sys:String>
+    <sys:String x:Key="LOC_SPG_RecentAchievements">Последние достижения</sys:String>
+    <sys:String x:Key="LOC_SPG_RecentlyAddedGames">Недавно добавленные</sys:String>
 
-    <sys:String x:Key="LOC_SPG_DailyPlaytime">Daily Playtime</sys:String>
-    <sys:String x:Key="LOC_SPG_WeeklyPlaytime">Weekly Playtime</sys:String>
-    <sys:String x:Key="LOC_SPG_MonthlyPlaytime">Monthly Playtime</sys:String>
+    <sys:String x:Key="LOC_SPG_DailyPlaytime">Ежедневное игровое время</sys:String>
+    <sys:String x:Key="LOC_SPG_WeeklyPlaytime">Еженедельное игровое время</sys:String>
+    <sys:String x:Key="LOC_SPG_MonthlyPlaytime">Ежемесячное время игры</sys:String>
     <sys:String x:Key="LOC_SPG_PlaytimePerSource">Playtime per Source</sys:String>
     <sys:String x:Key="LOC_SPG_MostPlayedWeekly">Most Played this Week</sys:String>
-    <sys:String x:Key="LOC_SPG_TotalPlaytime" xml:space="preserve">Total: </sys:String>
-    <sys:String x:Key="LOC_SPG_LastSevenDays">Last 7 Days</sys:String>
-    <sys:String x:Key="LOC_SPG_LastThirtyDays">Last 30 Days</sys:String>
+    <sys:String x:Key="LOC_SPG_TotalPlaytime" xml:space="preserve">Всего: </sys:String>
+    <sys:String x:Key="LOC_SPG_LastSevenDays">За последние 7 дней</sys:String>
+    <sys:String x:Key="LOC_SPG_LastThirtyDays">За последние 30 дней</sys:String>
     
     <!--Settings Tabs-->
     <sys:String x:Key="LOC_SPG_CommonTab">Common</sys:String>
-    <sys:String x:Key="LOC_SPG_BackgroundTab">Background</sys:String>
+    <sys:String x:Key="LOC_SPG_BackgroundTab">Фон</sys:String>
     
     <!--BackgroundImageSource Enum-->
     <sys:String x:Key="LOC_SPG_BackgroundImageSourceLastPlayed">Last Played</sys:String>
     <sys:String x:Key="LOC_SPG_BackgroundImageSourceLastAdded">Last Added</sys:String>
-    <sys:String x:Key="LOC_SPG_BackgroundImageSourceMostPlayed">Most Played</sys:String>
-    <sys:String x:Key="LOC_SPG_BackgroundImageSourceRandom">Random</sys:String>
-    <sys:String x:Key="LOC_SPG_BackgroundImageSourceLastSelected">Last Selected</sys:String>
+    <sys:String x:Key="LOC_SPG_BackgroundImageSourceMostPlayed">Самая популярная</sys:String>
+    <sys:String x:Key="LOC_SPG_BackgroundImageSourceRandom">Случайный</sys:String>
+    <sys:String x:Key="LOC_SPG_BackgroundImageSourceLastSelected">Последние выбранные</sys:String>
 
     <!-- Settings -->
-    <sys:String x:Key="LOC_SPG_ShowGameActivity">Show GameActivity Views</sys:String>
-    <sys:String x:Key="LOC_SPG_NumberOfGames">Number of Games:</sys:String>
-    <sys:String x:Key="LOC_SPG_NextRandomBackground">Next Random Background</sys:String>
-    <sys:String x:Key="LOC_SPG_ShowFavorites">Show Favorite Games</sys:String>
-    <sys:String x:Key="LOC_SPG_ShowClock">Show Clock</sys:String>
+    <sys:String x:Key="LOC_SPG_ShowGameActivity">Показать данные GameActivity</sys:String>
+    <sys:String x:Key="LOC_SPG_NumberOfGames">Количество игр:</sys:String>
+    <sys:String x:Key="LOC_SPG_NextRandomBackground">Следующий случайный фон</sys:String>
+    <sys:String x:Key="LOC_SPG_ShowFavorites">Показать любимые игры</sys:String>
+    <sys:String x:Key="LOC_SPG_ShowClock">Показать часы</sys:String>
     <sys:String x:Key="LOC_SPG_ShowRecentlyPlayed">Show Recently Played Games</sys:String>
     <sys:String x:Key="LOC_SPG_ShowRecentAchievements">Show recent Achievements using SuccessStory</sys:String>
     <sys:String x:Key="LOC_SPG_ShowRecentlyAdded">Show Recently Added Games</sys:String>
@@ -44,18 +44,18 @@
     <sys:String x:Key="LOC_SPG_MinimizeNotification">Minimize Notifications on Launch</sys:String>
     <sys:String x:Key="LOC_SPG_ShowNotificationButtons">Show &quot;Discard&quot; and &quot;Minimize&quot; Buttons</sys:String>
     <sys:String x:Key="LOC_SPG_KeepInMemory">Keep StartPage in Memory when switching to another View</sys:String>
-    <sys:String x:Key="LOC_SPG_MoveIconToTop">(Unsupported) Move StartPage Item to Top of SideBar on Launch</sys:String>
-    <sys:String x:Key="LOC_SPG_BlurAmount">Blur Radius:</sys:String>
-    <sys:String x:Key="LOC_SPG_EffectiveBlur">Effective Blur Radius:</sys:String>
+    <sys:String x:Key="LOC_SPG_MoveIconToTop">(Не поддерживается) Переместить элемент StartPage в верхнюю часть боковой панели при запуске</sys:String>
+    <sys:String x:Key="LOC_SPG_BlurAmount">Радиус размытия:</sys:String>
+    <sys:String x:Key="LOC_SPG_EffectiveBlur">Эффективный радиус размытия:</sys:String>
     <sys:String x:Key="LOC_SPG_EffectiveBlurToolTip">The effective blur radius is given by (Blur Radius) / (Background Render Scale). A low render scale paired with a low blur radius may lead to undesired results. Decreasing the render scale can yield better performance and can create a stronger blur effect.</sys:String>
     <sys:String x:Key="LOC_SPG_BackgroundScale">Background Render Scale:</sys:String>
     <sys:String x:Key="LOC_SPG_OverlayOpacity">Overlay Opacity:</sys:String>
-    <sys:String x:Key="LOC_SPG_NoiseOpacity">Noise Opacity:</sys:String>
-    <sys:String x:Key="LOC_SPG_CoverAspectRatio">Cover Aspect Ratio</sys:String>
-    <sys:String x:Key="LOC_SPG_MaxCoverWidth">Maximum Cover Width</sys:String>
-    <sys:String x:Key="LOC_SPG_BackgroundImageSource">Game Background Image Selection:</sys:String>
+    <sys:String x:Key="LOC_SPG_NoiseOpacity">Прозрачность шума:</sys:String>
+    <sys:String x:Key="LOC_SPG_CoverAspectRatio">Соотношение сторон обложки</sys:String>
+    <sys:String x:Key="LOC_SPG_MaxCoverWidth">Максимальная ширина обложки</sys:String>
+    <sys:String x:Key="LOC_SPG_BackgroundImageSource">Выбор фонового изображения игры:</sys:String>
     <sys:String x:Key="LOC_SPG_BackgroundImagePath">Background Image Path:</sys:String>
-    <sys:String x:Key="LOC_SPG_ShowGlobalProgressBar">(Unsupported) Show Global Progress Bar</sys:String>
+    <sys:String x:Key="LOC_SPG_ShowGlobalProgressBar">(Не поддерживается) Показать глобальный индикатор выполнения</sys:String>
     <sys:String x:Key="LOC_SPG_SwitchWithLowPrio">Lower Priority when switching View (automatically enabled upon Playnite crashing)</sys:String>
     <sys:String x:Key="LOC_SPG_UnsupportedToolTip">Use this feature at your own risk. It is not officially supported by the PlayniteAPI and can thus lead to unexpected behaviour.</sys:String>
 </ResourceDictionary>
