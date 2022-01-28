@@ -117,9 +117,12 @@ namespace LandingPage.Models.SuccessStory
                             }
                         }
                     }
-                    if (Uri.TryCreate(UrlUnlocked, UriKind.RelativeOrAbsolute, out var onlineUri))
+                    if (UrlUnlocked.StartsWith("http", StringComparison.OrdinalIgnoreCase))
                     {
-                        return onlineUri;
+                        if (Uri.TryCreate(UrlUnlocked, UriKind.Absolute, out var onlineUri))
+                        {
+                            return onlineUri;
+                        }
                     }
                 }
                 return null;
