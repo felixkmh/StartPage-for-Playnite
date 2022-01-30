@@ -60,5 +60,5 @@
     <sys:String x:Key="LOC_SPG_UnsupportedToolTip">Використовуйте цю функцію на свій страх і ризик. Вона офіційно не підтримується PlayniteAPI і, таким чином, може призвести до неочікуваної поведінки.</sys:String>
     <sys:String x:Key="LOC_SPG_IgnoreHidden">Ігнорувати приховані ігри</sys:String>
     <sys:String x:Key="LOC_SPG_AddShelve">Додати полицю</sys:String>
-    <sys:String x:Key="LOC_SPG_ShowMostPlayedGames">Show Most Played Games</sys:String>
+    <sys:String x:Key="LOC_SPG_ShowMostPlayedGames">Показувати найбільше зіграні ігри</sys:String>
 </ResourceDictionary>
