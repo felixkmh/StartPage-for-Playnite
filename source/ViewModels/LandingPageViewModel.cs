@@ -29,6 +29,9 @@ namespace LandingPage.ViewModels
         internal ObservableCollection<GameModel> favoriteGames = new ObservableCollection<GameModel>();
         public ObservableCollection<GameModel> FavoriteGames => favoriteGames;
 
+        internal ObservableCollection<ShelveViewModel> shelveViewModels = new ObservableCollection<ShelveViewModel>();
+        public ObservableCollection<ShelveViewModel> ShelveViewModels { get => shelveViewModels; set => SetValue(ref shelveViewModels, value); }
+
         internal Uri backgroundImagePath = null;
         public Uri BackgroundImagePath { get => backgroundImagePath; set => SetValue(ref backgroundImagePath, value); }
 
@@ -74,6 +77,10 @@ namespace LandingPage.ViewModels
 
         public ICommand NextRandomBackgroundCommand { get; set; }
 
+        public ICommand AddShelveCommand { get; set; }
+
+        public ICommand RemoveShelveCommand { get; set; }
+
         private static readonly HashSet<string> verticalLanguages = new HashSet<string> { "zh_CN", "zh_TW", "vi_VN", "ja_JP", "zh_CN", "ko_KR", };
 
         public LandingPageViewModel(IPlayniteAPI playniteAPI, LandingPageExtension landingPage,
@@ -98,6 +105,11 @@ namespace LandingPage.ViewModels
                 UpdateBackgroundImagePath(true);
             }, () => Settings.Settings.BackgroundImageSource == BackgroundImageSource.Random && Settings.Settings.BackgroundImageUri == null);
             languageSupportsVertical = verticalLanguages.Contains(playniteAPI.ApplicationSettings.Language);
+            AddShelveCommand = new RelayCommand(() => 
+            {
+                ShelveViewModels.Add(new ShelveViewModel(ShelveProperties.RecentlyPlayed, playniteAPI));
+            });
+            RemoveShelveCommand = new RelayCommand<ShelveViewModel>(svm => {if (svm != null) ShelveViewModels.Remove(svm); });
         }
 
         private void Clock_DayChanged(object sender, EventArgs e)
@@ -153,19 +165,13 @@ namespace LandingPage.ViewModels
             UpdateBackgroundImagePath(updateRandomBackground);
             UpdateMostPlayedGame();
             successStory.Update();
+            ShelveViewModels.ForEach(m => m.UpdateGames(m.ShelveProperties));
         }
 
         private void UpdateMostPlayedGame()
         {
             var groups = new List<GameGroup>();
-            if (playniteAPI.Database.Games.Where(g => !g.Hidden).MaxElement(g => g.Playtime).Value is Game game)
-            {
-                var group = new GameGroup();
-                group.Games.Add(new GameModel(game));
-                group.Label = ResourceProvider.GetString("LOC_SPG_MostPlayedGame");
-                groups.Add(group);
-            }
-
+            
             var releaseDateComparer = new Func<Game, Game, int>((Game a, Game b) =>
             {
                 if (a?.ReleaseDate == null)
@@ -183,7 +189,7 @@ namespace LandingPage.ViewModels
             var thisMonth = GameActivity.Activities
                 .Select(a => new { Game = playniteAPI.Database.Games.Get(a.Id), Items = a.Items.Where(i => i.DateSession.AddDays(30) >= DateTime.Today).ToList() })
                 .Where(a => a.Game is Game && a.Items?.Count > 0);
-            var mostPlayedThisMonth = thisWeek
+            var mostPlayedThisMonth = thisMonth
                 .Select(a => new { Game = a.Game, Playtime = a.Items.Sum(i => (long)i.ElapsedSeconds) })
                 .MaxElement(g => g.Playtime).Value?.Game;
 
@@ -217,6 +223,14 @@ namespace LandingPage.ViewModels
                 var group = new GameGroup();
                 group.Games.Add(new GameModel(mostPlayedMonth));
                 group.Label = ResourceProvider.GetString("LOC_SPG_LastThirtyDays");
+                groups.Add(group);
+            }
+
+            if (playniteAPI.Database.Games.Where(g => !g.Hidden).MaxElement(g => g.Playtime).Value is Game game)
+            {
+                var group = new GameGroup();
+                group.Games.Add(new GameModel(game));
+                group.Label = ResourceProvider.GetString("LOC_SPG_MostPlayedGame");
                 groups.Add(group);
             }
 

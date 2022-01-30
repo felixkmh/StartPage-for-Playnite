@@ -56,16 +56,8 @@
                             <TextBlock Text="{DynamicResource LOC_SPG_ShowClock}" Margin="3" VerticalAlignment="Center"/>
                         </DockPanel>
                         <DockPanel>
-                            <CheckBox IsChecked="{Binding Settings.ShowRecentGames}" VerticalAlignment="Center" Margin="3"/>
-                            <TextBlock Text="{DynamicResource LOC_SPG_ShowRecentlyPlayed}" Margin="3" VerticalAlignment="Center"/>
-                        </DockPanel>
-                        <DockPanel>
-                            <CheckBox IsChecked="{Binding Settings.ShowAddedGames}" VerticalAlignment="Center" Margin="3"/>
-                            <TextBlock Text="{DynamicResource LOC_SPG_ShowRecentlyAdded}" Margin="3" VerticalAlignment="Center"/>
-                        </DockPanel>
-                        <DockPanel>
-                            <CheckBox IsChecked="{Binding Settings.ShowFavoriteGames}" VerticalAlignment="Center" Margin="3"/>
-                            <TextBlock Text="{DynamicResource LOC_SPG_ShowFavorites}" Margin="3" VerticalAlignment="Center"/>
+                            <CheckBox IsChecked="{Binding Settings.ShowMostPlayedGames}" VerticalAlignment="Center" Margin="3"/>
+                            <TextBlock Text="{DynamicResource LOC_SPG_ShowMostPlayedGames}" Margin="3" VerticalAlignment="Center"/>
                         </DockPanel>
                         <DockPanel>
                             <CheckBox IsChecked="{Binding Settings.ShowTitleOnCover}" VerticalAlignment="Center" Margin="3"/>

@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using LandingPage.Models;
+using Newtonsoft.Json;
 using Playnite.SDK;
 using Playnite.SDK.Data;
 using System;
@@ -56,6 +57,9 @@ namespace LandingPage
 
         private bool showRecentGames = true;
         public bool ShowRecentGames { get => showRecentGames; set => SetValue(ref showRecentGames, value); }
+
+        private bool showMostPlayedGames = true;
+        public bool ShowMostPlayedGames { get => showMostPlayedGames; set => SetValue(ref showMostPlayedGames, value); }
 
         private bool showAddedGames = true;
         public bool ShowAddedGames { get => showAddedGames; set => SetValue(ref showAddedGames, value); }
@@ -132,6 +136,9 @@ namespace LandingPage
         private BackgroundImageSource backgroundImageSource = BackgroundImageSource.LastPlayed;
         public BackgroundImageSource BackgroundImageSource { get => backgroundImageSource; set => SetValue(ref backgroundImageSource, value); }
 
+        private List<ShelveProperties> shelveProperties = new List<ShelveProperties>{};
+        public List<ShelveProperties> ShelveProperties { get => shelveProperties; set => SetValue(ref shelveProperties, value); }
+
         // Playnite serializes settings object to a JSON object and saves it as text file.
         // If you want to exclude some property from being saved then use `JsonDontSerialize` ignore attribute.
         [DontSerialize]
@@ -188,6 +195,7 @@ namespace LandingPage
             else
             {
                 Settings = new LandingPageSettings();
+                Settings.ShelveProperties = new List<ShelveProperties> { ShelveProperties.RecentlyPlayed, ShelveProperties.RecentlyAdded };
             }
 
             SelectImagePathCommand = new RelayCommand(() =>

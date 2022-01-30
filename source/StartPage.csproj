@@ -71,6 +71,7 @@
     <Compile Include="Converters\DatabaseIdToUriConverter.cs" />
     <Compile Include="Converters\DoubleToGridLengthConverter.cs" />
     <Compile Include="Converters\ElementToScaledRectConverter.cs" />
+    <Compile Include="Converters\EnumDescriptionTypeConverter.cs" />
     <Compile Include="Converters\IEnumerableNullOrEmptyToVisibilityConverter.cs" />
     <Compile Include="Converters\LogConverter.cs" />
     <Compile Include="Converters\MultiplyConverter.cs" />
@@ -79,6 +80,7 @@
     <Compile Include="Converters\UriToBitmapImageConverter.cs" />
     <Compile Include="Converters\VisibilityInverter.cs" />
     <Compile Include="Extensions\DateTimeExtensions.cs" />
+    <Compile Include="Extensions\EnumBindingSourceExtension.cs" />
     <Compile Include="Extensions\IEnumerableExtensions.cs" />
     <Compile Include="Extensions\ObservableCollectionExtensions.cs" />
     <Compile Include="LandingPageExtension.cs" />
@@ -94,12 +96,14 @@
     <Compile Include="Models\GameModel.cs" />
     <Compile Include="Models\LandingPage.cs" />
     <Compile Include="Models\ObservableObject.cs" />
+    <Compile Include="Models\ShelveProperties.cs" />
     <Compile Include="Models\SuccessStory\Achievements.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ScrollViewerHelper.cs" />
     <Compile Include="UiHelper.cs" />
     <Compile Include="ViewModels\GameActivity\GameActivityViewModel.cs" />
     <Compile Include="ViewModels\LandingPageViewModel.cs" />
+    <Compile Include="ViewModels\ShelveViewModel.cs" />
     <Compile Include="ViewModels\SuccessStory\SuccessStoryViewModel.cs" />
     <Compile Include="Views\ClockView.xaml.cs">
       <DependentUpon>ClockView.xaml</DependentUpon>

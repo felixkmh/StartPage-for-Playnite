@@ -12,6 +12,7 @@
              xmlns:mu="clr-namespace:LandingPage.Markup"
              xmlns:scm="clr-namespace:System.ComponentModel;assembly=WindowsBase"
              xmlns:pn="clr-namespace:Playnite.SDK;assembly=Playnite.SDK" xmlns:controls="clr-namespace:LandingPage.Controls" xmlns:system1="clr-namespace:System;assembly=System"
+             xmlns:ext="clr-namespace:LandingPage.Extensions" xmlns:numeric="http://gu.se/NumericInput"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
              d:DataContext="{d:DesignInstance IsDesignTimeCreatable=False, Type=lpvm:LandingPageViewModel}"
@@ -43,7 +44,7 @@
             <Setter Property="VirtualizingPanel.ScrollUnit" Value="Pixel"/>
             <Setter Property="VirtualizingPanel.CacheLengthUnit" Value="Item"/>
             <Setter Property="VirtualizingPanel.CacheLength" Value="5"/>
-            <Setter Property="ScrollViewer.CanContentScroll" Value="True"/>
+            <Setter Property="ScrollViewer.CanContentScroll" Value="False"/>
             <Setter Property="SelectionMode" Value="Single"/>
             <Setter Property="MaxWidth" Value="1544"/>
             <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Visible"/>
@@ -82,10 +83,7 @@
                                          Path="ActualHeight" 
                                          Mode="OneWay">
                                 </Binding>
-                                <Binding RelativeSource="{RelativeSource Mode=FindAncestor, AncestorType=local:LandingPageView}" 
-                                         Path="DataContext.Settings.Settings.CoverAspectRatio" 
-                                         Mode="OneWay">
-                                </Binding>
+                                <mu:LandingPageSettings Path="Settings.CoverAspectRatio"/>
                             </MultiBinding.Bindings>
                         </MultiBinding>
                     </Grid.Width>
@@ -96,10 +94,7 @@
                                          Path="MaxWidth" 
                                          Mode="OneWay">
                                 </Binding>
-                                <Binding RelativeSource="{RelativeSource Mode=FindAncestor, AncestorType=local:LandingPageView}" 
-                                         Path="DataContext.Settings.Settings.CoverAspectRatio" 
-                                         Mode="OneWay">
-                                </Binding>
+                                <mu:LandingPageSettings Path="Settings.CoverAspectRatio"/>
                             </MultiBinding.Bindings>
                         </MultiBinding>
                     </Grid.MaxHeight>
@@ -112,9 +107,9 @@
                             </VisualBrush.Visual>
                         </VisualBrush>
                     </Grid.OpacityMask>
-                    <Image Source="{Binding Game.CoverImage, Converter={StaticResource ImageStringToImageConverter}, FallbackValue={StaticResource DefaultGameCover}}" Stretch="UniformToFill" 
+                    <Image Source="{Binding Game.CoverImage, Converter={StaticResource ImageStringToImageConverterCached}, FallbackValue={StaticResource DefaultGameCover}, Mode=OneWay}" Stretch="UniformToFill" 
                                             HorizontalAlignment="Center" VerticalAlignment="Center"
-                                            RenderOptions.BitmapScalingMode="HighQuality"
+                                            RenderOptions.BitmapScalingMode="Fant"
                            x:Name="CoverImage"/>
                     <Image Source="{StaticResource InnerGlowBitmap}" Stretch="Fill" x:Name="GlowImage"
                                             RenderOptions.BitmapScalingMode="Fant" Opacity="0.0"/>
@@ -352,6 +347,8 @@
             <EventSetter Event="MouseDoubleClick" Handler="ListBoxItem_MouseDoubleClick"/>
             <Setter Property="Cursor" Value="Hand"/>
             <Setter Property="Margin" Value="7"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
             <Setter Property="RenderTransformOrigin" Value="0.5,0.5"/>
             <Setter Property="RenderTransform">
                 <Setter.Value>
@@ -442,6 +439,7 @@
                         <ContextMenu Grid.IsSharedSizeScope="True">
                             <MenuItem Command="{Binding NextRandomBackgroundCommand}" Header="{DynamicResource LOC_SPG_NextRandomBackground}" 
                                       Visibility="{Binding IsEnabled, RelativeSource={RelativeSource Mode=Self}, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+                            <Separator/>
                             <MenuItem>
                                 <MenuItem.Header>
                                     <Grid>
@@ -481,6 +479,9 @@
                                     </Grid>
                                 </MenuItem.Header>
                             </MenuItem>
+                            <Separator/>
+                            <MenuItem Command="{Binding AddShelveCommand}" Header="{DynamicResource LOC_SPG_AddShelve}"/>
+                            <Separator/>
                             <MenuItem Command="{Binding OpenSettingsCommand}" Header="{DynamicResource LOCMenuPlayniteSettingsTitle}"/>
                         </ContextMenu>
                     </Grid.ContextMenu>
@@ -607,7 +608,7 @@
                                 </ItemsControl.ItemTemplate>
                             </ItemsControl>
                         </DockPanel>
-                        <DockPanel Grid.Column="0" UseLayoutRounding="True" SnapsToDevicePixels="True" Grid.RowSpan="3">
+                        <DockPanel Grid.Column="0" UseLayoutRounding="True" SnapsToDevicePixels="True" Grid.RowSpan="3" Visibility="{Binding Settings.Settings.ShowMostPlayedGames, Converter={StaticResource BooleanToVisibilityConverter}}">
                             <Label Content=" " DockPanel.Dock="Left" Margin="10,10,5,10">
                                 <Label.LayoutTransform>
                                     <RotateTransform Angle="-90" />
@@ -657,182 +658,109 @@
                         </Grid>
                     </Grid>
 
-                    <Grid Grid.Row="2" VerticalAlignment="Bottom">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="{Binding IsVisible, ElementName=FavoritesListBox, Converter={StaticResource BoolToGridLengthConverter}}"/>
-                            <RowDefinition Height="{Binding IsVisible, ElementName=RecentlyPlayedListBox, Converter={StaticResource BoolToGridLengthConverter}}"/>
-                            <RowDefinition Height="{Binding IsVisible, ElementName=RecentlyAddedListBox, Converter={StaticResource BoolToGridLengthConverter}}"/>
-                        </Grid.RowDefinitions>
-                        <DockPanel Grid.Row="2" UseLayoutRounding="True" SnapsToDevicePixels="True"
-                            Visibility="{Binding Settings.Settings.ShowAddedGames, Converter={StaticResource BooleanToVisibilityConverter}}">
-                            <!--<Label Content="{DynamicResource LOC_SPG_RecentlyAddedGames}" DockPanel.Dock="Left" Margin="10,10,5,30">
-                                <Label.LayoutTransform>
-                                    <RotateTransform Angle="-90" />
-                                </Label.LayoutTransform>
-                            </Label>-->
-                            <controls:SidewaysTextBlock Text="{DynamicResource LOC_SPG_RecentlyAddedGames}" VerticalAlignment="Bottom"
-                                                            DockPanel.Dock="Left" Margin="10,10,5,30"/>
-                            <!--<TextBlock Text="{DynamicResource LOC_SPG_RecentlyAddedGames}" DockPanel.Dock="Left" Margin="10,10,5,30"
-                                       Visibility="{Binding LanguageSupportsVertical, Converter={StaticResource InvertedBooleanToVisibilityConverter}}">
-                                <TextBlock.LayoutTransform>
-                                    <RotateTransform Angle="-90" />
-                                </TextBlock.LayoutTransform>
-                            </TextBlock>
-                            <TextBlock Text="{DynamicResource LOC_SPG_RecentlyAddedGames}" 
-                                       DockPanel.Dock="Left" Margin="10,10,5,30" 
-                                       MaxWidth="{Binding RelativeSource={RelativeSource Mode=Self}, Path=FontSize}"
-                                       TextWrapping="Wrap" VerticalAlignment="Bottom"
-                                       Visibility="{Binding LanguageSupportsVertical, Converter={StaticResource BooleanToVisibilityConverter}}">
-                            </TextBlock>-->
-                            <ListBox x:Name="RecentlyAddedListBox" 
-                                     Style="{DynamicResource GameGroupListStyle}"
-                                     DockPanel.Dock="Left"
-                                     ItemsSource="{Binding Source={StaticResource RecentlyAddedSource}}"
-                                     ItemContainerStyle="{StaticResource GameListItem}"
-                                     ItemTemplate="{StaticResource GameCoverDataTemplate}"
-                                     SizeChanged="UserControl_SizeChanged">
-                                <ListBox.GroupStyle>
-                                    <GroupStyle>
-                                        <GroupStyle.Panel>
-                                            <ItemsPanelTemplate>
-                                                <VirtualizingStackPanel Orientation="Horizontal" 
-                                                                        Style="{DynamicResource VirtualizedStackPanelStyle}"/>
-                                            </ItemsPanelTemplate>
-                                        </GroupStyle.Panel>
-                                        <GroupStyle.ContainerStyle>
-                                            <Style TargetType="GroupItem">
-                                                <Setter Property="Template">
-                                                    <Setter.Value>
-                                                        <ControlTemplate>
-                                                            <GroupBox Style="{StaticResource GameGroupBox}" Header="{Binding Name, Converter={StaticResource DateTimeToLastPlayedConverter}}">
-                                                                <ItemsPresenter/>
-                                                            </GroupBox>
-                                                        </ControlTemplate>
-                                                    </Setter.Value>
-                                                </Setter>
-                                            </Style>
-                                        </GroupStyle.ContainerStyle>
-                                    </GroupStyle>
-                                </ListBox.GroupStyle>
-                                <ListBox.ItemsPanel>
-                                    <ItemsPanelTemplate>
-                                        <StackPanel Orientation="Horizontal"/>
-                                    </ItemsPanelTemplate>
-                                </ListBox.ItemsPanel>
-                            </ListBox>
-                        </DockPanel>
-                        <DockPanel Grid.Row="1" UseLayoutRounding="True" SnapsToDevicePixels="True"
-                            Visibility="{Binding Settings.Settings.ShowRecentGames, Converter={StaticResource BooleanToVisibilityConverter}, Mode=OneWay}">
-                            <!--<TextBlock Text="{DynamicResource LOCQuickFilterRecentlyPlayed}" DockPanel.Dock="Left" Margin="10,10,5,30"
-                                       Visibility="{Binding LanguageSupportsVertical, Converter={StaticResource InvertedBooleanToVisibilityConverter}}">
-                                <TextBlock.LayoutTransform>
-                                    <RotateTransform Angle="-90" />
-                                </TextBlock.LayoutTransform>
-                            </TextBlock>
-                            <TextBlock Text="{DynamicResource LOCQuickFilterRecentlyPlayed}" 
-                                       DockPanel.Dock="Left" Margin="10,10,5,30" 
-                                       MaxWidth="{Binding RelativeSource={RelativeSource Mode=Self}, Path=FontSize}"
-                                       TextWrapping="Wrap" VerticalAlignment="Bottom"
-                                       Visibility="{Binding LanguageSupportsVertical, Converter={StaticResource BooleanToVisibilityConverter}}">
-                            </TextBlock>-->
-                            <controls:SidewaysTextBlock Text="{DynamicResource LOCQuickFilterRecentlyPlayed}" VerticalAlignment="Bottom"
-                                                            DockPanel.Dock="Left" Margin="10,10,5,30"/>
-                            <ListBox x:Name="RecentlyPlayedListBox" 
+                    <ItemsControl ItemsSource="{Binding ShelveViewModels}" Grid.Row="2" VerticalAlignment="Bottom" x:Name="ShelvesItemsControl" VerticalContentAlignment="Bottom">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <UniformGrid Columns="1" VerticalAlignment="Bottom"/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate DataType="{x:Type lpvm:ShelveViewModel}">
+                                <DockPanel Grid.Row="1" UseLayoutRounding="True" SnapsToDevicePixels="True" VerticalAlignment="Bottom">
+                                    <DockPanel DockPanel.Dock="Left" Background="Transparent" x:Name="ListDescription" LastChildFill="False" VerticalAlignment="Bottom" Height="{Binding ElementName=GamesListBox, Path=ActualHeight}">
+                                        <ToggleButton x:Name="shelvetoggle" DockPanel.Dock="Top" Background="Transparent"
+                                                      Visibility="{Binding ElementName=ListDescription, Path=IsMouseOver, Converter={StaticResource BooleanToVisibilityConverter}}">
+                                            <ToggleButton.Content>
+                                                <TextBlock Text="" FontFamily="IcoFont"/>
+                                            </ToggleButton.Content>
+                                        </ToggleButton>
+                                        <Popup StaysOpen="False" Placement="Right" PlacementTarget="{Binding ElementName=shelvetoggle}" IsOpen="{Binding IsChecked, ElementName=shelvetoggle, Delay=100}" DataContext="{Binding .}">
+                                            <Border Background="{DynamicResource PopupBackgroundBrush}" Padding="8" CornerRadius="8">
+                                                <StackPanel>
+                                                    <TextBox Text="{Binding ShelveProperties.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="2"/>
+                                                    <CheckBox Content="{DynamicResource LOCGameIsGameInstalledTitle}" IsChecked="{Binding ShelveProperties.InstalledOnly}" Margin="2"/>
+                                                    <CheckBox Content="{DynamicResource LOCQuickFilterFavorites}" IsChecked="{Binding ShelveProperties.FavoritesOnly}" Margin="2"/>
+                                                    <CheckBox Content="{DynamicResource LOC_SPG_IgnoreHidden}" IsChecked="{Binding ShelveProperties.IgnoreHidden}" Margin="2"/>
+                                                    <DockPanel LastChildFill="False">
+                                                        <TextBlock Text="{DynamicResource LOC_SPG_NumberOfGames}" VerticalAlignment="Center" Style="{StaticResource {x:Type TextBlock}}" Margin="2"/>
+                                                        <numeric:IntBox Value="{Binding ShelveProperties.NumberOfGames, UpdateSourceTrigger=PropertyChanged}" Margin="2"
+                                                                        MinValue="0"
+                                                                        MaxValue="30"
+                                                                        MinWidth="30"
+                                                                        ValidationTrigger="PropertyChanged"
+                                                                        Style="{StaticResource {x:Type TextBox}}"
+                                                                        TextAlignment="Center">
+                                                        </numeric:IntBox>
+                                                    </DockPanel>
+                                                    <DockPanel LastChildFill="False">
+                                                        <TextBlock Margin="2" Text="{DynamicResource LOCMenuSortByTitle}" Foreground="{DynamicResource TextBrush}" DockPanel.Dock="Left" VerticalAlignment="Center"/>
+                                                        <ComboBox Margin="2" ItemsSource="{Binding Source={ext:EnumBindingSource {x:Type lpm:SortingField}}}" SelectedItem="{Binding ShelveProperties.SortBy}" Text="Sorting" DockPanel.Dock="Right"/>
+                                                    </DockPanel>
+                                                    <Button Click="Button_Click" Margin="2">
+                                                        <Button.Content>
+                                                            <TextBlock Text="{Binding ShelveProperties.Order}"/>
+                                                        </Button.Content>
+                                                    </Button>
+                                                    <DockPanel LastChildFill="False">
+                                                        <TextBlock Margin="2" Text="{DynamicResource LOCMenuGroupByTitle}" DockPanel.Dock="Left" Foreground="{DynamicResource TextBrush}" VerticalAlignment="Center"/>
+                                                        <ComboBox Margin="2" ItemsSource="{Binding Source={ext:EnumBindingSource {x:Type lpm:GroupingField}}}" SelectedItem="{Binding ShelveProperties.GroupBy}" Text="Grouping" DockPanel.Dock="Right"/>
+                                                    </DockPanel>
+                                                    <Button Margin="2"
+                                                            Command="{Binding RelativeSource={RelativeSource AncestorType=local:LandingPageView, Mode=FindAncestor}, Path=DataContext.RemoveShelveCommand}"
+                                                            CommandParameter="{Binding .}">
+                                                        <Button.Content>
+                                                            <TextBlock Foreground="{DynamicResource WarningBrush}" Text="{DynamicResource LOCRemoveTitle}"/>
+                                                        </Button.Content>
+                                                    </Button>
+                                                </StackPanel>
+                                            </Border>
+                                        </Popup>
+                                        <controls:SidewaysTextBlock Text="{Binding ShelveProperties.Name}" VerticalAlignment="Bottom"
+                                                                DockPanel.Dock="Bottom" Margin="10,10,5,30"/>
+                                        <controls:SidewaysTextBlock Text="Placeholder" VerticalAlignment="Bottom" Visibility="Hidden"
+                                                                DockPanel.Dock="Bottom" Margin="10,10,5,30"/>
+                                    </DockPanel>
+                                    <ListBox x:Name="GamesListBox" 
+                                         VerticalAlignment="Bottom"
                                          Style="{DynamicResource GameGroupListStyle}"
                                          DockPanel.Dock="Left" 
-                                         ItemsSource="{Binding Source={StaticResource RecentlyPlayedSource}}"
+                                         ItemsSource="{Binding CollectionViewSource.View}"
                                          ItemContainerStyle="{StaticResource GameListItem}"
                                          ItemTemplate="{StaticResource GameCoverDataTemplate}"
                                          SizeChanged="UserControl_SizeChanged">
-                                <ListBox.GroupStyle>
-                                    <GroupStyle>
-                                        <GroupStyle.Panel>
-                                            <ItemsPanelTemplate>
-                                                <VirtualizingStackPanel Orientation="Horizontal" 
+                                        <ListBox.GroupStyle>
+                                            <GroupStyle>
+                                                <GroupStyle.Panel>
+                                                    <ItemsPanelTemplate>
+                                                        <VirtualizingStackPanel Orientation="Horizontal" 
                                                                         Style="{DynamicResource VirtualizedStackPanelStyle}"/>
-                                            </ItemsPanelTemplate>
-                                        </GroupStyle.Panel>
-                                        <GroupStyle.ContainerStyle>
-                                            <Style TargetType="GroupItem">
-                                                <Setter Property="Template">
-                                                    <Setter.Value>
-                                                        <ControlTemplate>
-                                                            <GroupBox Style="{StaticResource GameGroupBox}" Header="{Binding Name, Converter={StaticResource DateTimeToLastPlayedConverter}}">
-                                                                <ItemsPresenter/>
-                                                            </GroupBox>
-                                                        </ControlTemplate>
-                                                    </Setter.Value>
-                                                </Setter>
-                                            </Style>
-                                        </GroupStyle.ContainerStyle>
-                                    </GroupStyle>
-                                </ListBox.GroupStyle>
-                                <ListBox.ItemsPanel>
-                                    <ItemsPanelTemplate>
-                                        <StackPanel Orientation="Horizontal"/>
-                                    </ItemsPanelTemplate>
-                                </ListBox.ItemsPanel>
-                            </ListBox>
-                        </DockPanel>
-                        <DockPanel Grid.Row="0" UseLayoutRounding="True" SnapsToDevicePixels="True"
-                            Visibility="{Binding Settings.Settings.ShowFavoriteGames, Converter={StaticResource BooleanToVisibilityConverter}, Mode=OneWay}">
-                            <!--<Label Content="{DynamicResource LOCQuickFilterFavorites}" DockPanel.Dock="Left" Margin="10,10,5,30">
-                                <Label.LayoutTransform>
-                                    <RotateTransform Angle="-90" />
-                                </Label.LayoutTransform>
-                            </Label>-->
-                            <!--<TextBlock Text="{DynamicResource LOCQuickFilterFavorites}" DockPanel.Dock="Left" Margin="10,10,5,30"
-                                       Visibility="{Binding LanguageSupportsVertical, Converter={StaticResource InvertedBooleanToVisibilityConverter}}">
-                                <TextBlock.LayoutTransform>
-                                    <RotateTransform Angle="-90" />
-                                </TextBlock.LayoutTransform>
-                            </TextBlock>
-                            <TextBlock Text="{DynamicResource LOCQuickFilterFavorites}" 
-                                       DockPanel.Dock="Left" Margin="10,10,5,30" 
-                                       MaxWidth="{Binding RelativeSource={RelativeSource Mode=Self}, Path=FontSize}"
-                                       TextWrapping="Wrap" VerticalAlignment="Bottom"
-                                       Visibility="{Binding LanguageSupportsVertical, Converter={StaticResource BooleanToVisibilityConverter}}">
-                            </TextBlock>-->
-                            <controls:SidewaysTextBlock Text="{DynamicResource LOCQuickFilterFavorites}" VerticalAlignment="Bottom"
-                                                            DockPanel.Dock="Left" Margin="10,10,5,30"/>
-                            <ListBox x:Name="FavoritesListBox" 
-                                         Style="{DynamicResource GameGroupListStyle}"
-                                         DockPanel.Dock="Left" 
-                                         ItemsSource="{Binding Source={StaticResource FavoritesSource}}"
-                                         ItemContainerStyle="{StaticResource GameListItem}"
-                                         ItemTemplate="{StaticResource GameCoverDataTemplate}"
-                                         SizeChanged="UserControl_SizeChanged">
-                                <ListBox.GroupStyle>
-                                    <GroupStyle>
-                                        <GroupStyle.Panel>
+                                                    </ItemsPanelTemplate>
+                                                </GroupStyle.Panel>
+                                                <GroupStyle.ContainerStyle>
+                                                    <Style TargetType="GroupItem">
+                                                        <Setter Property="Template">
+                                                            <Setter.Value>
+                                                                <ControlTemplate>
+                                                                    <GroupBox Style="{StaticResource GameGroupBox}" Header="{Binding Name, Converter={StaticResource DateTimeToLastPlayedConverter}}">
+                                                                        <ItemsPresenter/>
+                                                                    </GroupBox>
+                                                                </ControlTemplate>
+                                                            </Setter.Value>
+                                                        </Setter>
+                                                    </Style>
+                                                </GroupStyle.ContainerStyle>
+                                            </GroupStyle>
+                                        </ListBox.GroupStyle>
+                                        <ListBox.ItemsPanel>
                                             <ItemsPanelTemplate>
-                                                <VirtualizingStackPanel Orientation="Horizontal" 
-                                                                        Style="{DynamicResource VirtualizedStackPanelStyle}"/>
+                                                <StackPanel Orientation="Horizontal"/>
                                             </ItemsPanelTemplate>
-                                        </GroupStyle.Panel>
-                                        <GroupStyle.ContainerStyle>
-                                            <Style TargetType="GroupItem">
-                                                <Setter Property="Template">
-                                                    <Setter.Value>
-                                                        <ControlTemplate>
-                                                            <GroupBox Style="{StaticResource GameGroupBox}" Header="{Binding Name, Converter={StaticResource DateTimeToLastPlayedConverter}}">
-                                                                <ItemsPresenter/>
-                                                            </GroupBox>
-                                                        </ControlTemplate>
-                                                    </Setter.Value>
-                                                </Setter>
-                                            </Style>
-                                        </GroupStyle.ContainerStyle>
-                                    </GroupStyle>
-                                </ListBox.GroupStyle>
-                                <ListBox.ItemsPanel>
-                                    <ItemsPanelTemplate>
-                                        <StackPanel Orientation="Horizontal"/>
-                                    </ItemsPanelTemplate>
-                                </ListBox.ItemsPanel>
-                            </ListBox>
-                        </DockPanel>
-                    </Grid>
+                                        </ListBox.ItemsPanel>
+                                    </ListBox>
+                                </DockPanel>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
                 </Grid>
             </Grid>
         </ScrollViewer>
@@ -912,7 +840,8 @@
                               VirtualizingPanel.ScrollUnit="Pixel"
                               VirtualizingPanel.IsVirtualizing="True"
                               VirtualizingPanel.VirtualizationMode="Recycling"
-                              MaxHeight="300">
+                              MaxHeight="300"
+                              x:Name="NotificationItemsControl">
                         <ItemsControl.ItemsPanel>
                             <ItemsPanelTemplate>
                                 <VirtualizingStackPanel/>
@@ -973,7 +902,7 @@
                                             </TextBlock>
                                         </StackPanel>
                                     </Button>
-                                    <Button Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ItemsControl}, Path=DataContext.DeleteNotificationCommand}" 
+                                    <Button Command="{Binding ElementName=NotificationItemsControl, Path=DataContext.DeleteNotificationCommand}" 
                                             CommandParameter="{Binding .}"
                                             BorderThickness="0" Background="Transparent" Visibility="Hidden" HorizontalAlignment="Right"
                                             x:Name="HideButton">

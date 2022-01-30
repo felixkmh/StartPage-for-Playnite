@@ -16,7 +16,11 @@ namespace LandingPage.Markup
     {
         public static Type GetTargetType(IProvideValueTarget provider)
         {
-            var type = provider.TargetProperty.GetType();
+            var type = provider.TargetProperty?.GetType();
+            if (type == null)
+            {
+                return typeof(Binding);
+            }
             if (type == typeof(DependencyProperty))
             {
                 type = ((DependencyProperty)provider.TargetProperty).PropertyType;
@@ -30,6 +34,12 @@ namespace LandingPage.Markup
         }
 
         internal string path;
+        public string Path { get => path; set => path = value; }
+
+        public LandingPageSettings()
+        {
+
+        }
 
         public LandingPageSettings(string path)
         {

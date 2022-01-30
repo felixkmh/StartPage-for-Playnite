@@ -38,18 +38,7 @@ namespace LandingPage.Views
 
         private void Clock_DayChanged(object sender, EventArgs e)
         {
-            if (RecentlyAddedListBox.ItemsSource is ListCollectionView collectionView)
-            {
-                collectionView.Refresh();
-            }
-            if (RecentlyPlayedListBox.ItemsSource is ListCollectionView collectionView2)
-            {
-                collectionView2.Refresh();
-            }
-            if (FavoritesListBox.ItemsSource is ListCollectionView collectionView3)
-            {
-                collectionView3.Refresh();
-            }
+            ShelvesItemsControl.ItemsSource.OfType<ShelveViewModel>().ForEach(svm => svm.CollectionViewSource.View.Refresh());
             GC.Collect();
         }
 
@@ -96,37 +85,40 @@ namespace LandingPage.Views
             if (e.HeightChanged || e.WidthChanged)
             {
                 _ = Dispatcher.BeginInvoke(new Action(() =>
-                  {
-                      var newWidth = ActualWidth;
-                      ListBox[] listBoxes = new[] { FavoritesListBox, RecentlyAddedListBox, RecentlyPlayedListBox };
-                      foreach (var listBox in sender is ListBox lb ? new[] { lb } : listBoxes)
-                      {
-                          var itemCount = listBox.ItemsSource?.Cast<object>().Count() ?? 0;
-                          if (listBox.IsVisible && itemCount > 0)
-                          {
-                              FrameworkElement container = null;
-                              for (int i = 0; i < itemCount; ++i)
-                              {
-                                  if (listBox.ItemContainerGenerator.ContainerFromIndex(i) is FrameworkElement element)
-                                  {
-                                      container = element;
-                                      break;
-                                  }
-                              }
-                              var desiredWidth = listBox.DesiredSize.Width;
-                              var itemWidth = container.ActualWidth + container.Margin.Left + container.Margin.Right;
-                              var scrollViewer = Helper.UiHelper.FindVisualChildren<ScrollViewer>(listBox).FirstOrDefault();
+                    {
+                        var newWidth = ActualWidth;
+                        var listBoxes = ShelvesItemsControl.ItemContainerGenerator.Items
+                        .Select(item => ShelvesItemsControl.ItemContainerGenerator.ContainerFromItem(item))
+                        .OfType<ContentPresenter>()
+                        .Select(ele => ele.ContentTemplate.FindName("GamesListBox", ele))
+                        .OfType<ListBox>();
+                        foreach (var listBox in sender is ListBox lb ? new[] { lb } : listBoxes)
+                        {
+                            var itemCount = listBox.ItemsSource?.Cast<object>().Count() ?? 0;
+                            if (listBox.IsVisible && itemCount > 0)
+                            {
+                                FrameworkElement container = null;
+                                for (int i = 0; i < itemCount; ++i)
+                                {
+                                    if (listBox.ItemContainerGenerator.ContainerFromIndex(i) is FrameworkElement element)
+                                    {
+                                        container = element;
+                                        break;
+                                    }
+                                }
+                                var desiredWidth = listBox.DesiredSize.Width;
+                                var itemWidth = container.ActualWidth + container.Margin.Left + container.Margin.Right;
+                                var scrollViewer = Helper.UiHelper.FindVisualChildren<ScrollViewer>(listBox).FirstOrDefault();
                             // itemWidth = desiredWidth / itemCount;
-                              var availableWidth = newWidth - 120;
-                              var newListWidth = Math.Floor(availableWidth / Math.Max(itemWidth, 1)) * itemWidth;
-                              if (listBox.MaxWidth != newListWidth)
-                              {
-                                  listBox.MaxWidth = newListWidth;
-                              }
-                          }
-                      }
-                  }), System.Windows.Threading.DispatcherPriority.Background);
-
+                                var availableWidth = newWidth - 120;
+                                var newListWidth = Math.Floor(availableWidth / Math.Max(itemWidth, 1)) * itemWidth;
+                                if (listBox.MaxWidth != newListWidth)
+                                {
+                                    listBox.MaxWidth = newListWidth;
+                                }
+                            }
+                        }
+                    }), System.Windows.Threading.DispatcherPriority.Background);
             }
         }
 
@@ -151,6 +143,23 @@ namespace LandingPage.Views
             if (rng.NextDouble() <= 0.25)
             {
                 GC.Collect();
+            }
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            if (sender is Button bt)
+            {
+                if (bt.DataContext is ShelveViewModel svm)
+                {
+                    if (svm.ShelveProperties.Order == Order.Ascending)
+                    {
+                        svm.ShelveProperties.Order = Order.Descending;
+                    } else
+                    {
+                        svm.ShelveProperties.Order = Order.Ascending;
+                    }
+                }
             }
         }
     }

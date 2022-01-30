@@ -17,6 +17,7 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using System.IO;
 using System.Runtime.CompilerServices;
+using LandingPage.Models;
 
 namespace LandingPage
 {
@@ -77,6 +78,10 @@ namespace LandingPage
                         gameActivity = new ViewModels.GameActivity.GameActivityViewModel(null, PlayniteApi, SettingsViewModel);
                     }
                     viewModel = new LandingPageViewModel(PlayniteApi, this, SettingsViewModel, successStory, gameActivity);
+                    foreach(var shelve in Settings.ShelveProperties)
+                    {
+                        viewModel.ShelveViewModels.Add(new ShelveViewModel(shelve, PlayniteApi));
+                    }
                     viewModel.Update(true);
                 } else
                 {
@@ -273,6 +278,10 @@ namespace LandingPage
         public override void OnApplicationStopped(OnApplicationStoppedEventArgs args)
         {
             // Add code to be executed when Playnite is shutting down.
+            if (viewModel is LandingPageViewModel)
+            {
+                Settings.ShelveProperties = viewModel.ShelveViewModels.Select(svm => svm.ShelveProperties).ToList();
+            }
             SavePluginSettings(Settings);
         }
 
