@@ -1,16 +1,16 @@
 ﻿<?xml version="1.0"?>
 <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:sys="clr-namespace:System;assembly=mscorlib">
 
-    <sys:String x:Key="LOC_SPG_MostPlayedGame">最常观访</sys:String>
+    <sys:String x:Key="LOC_SPG_MostPlayedGame">最常游玩</sys:String>
     <sys:String x:Key="LOC_SPG_LatestReleaseGame">最新发布</sys:String>
     <sys:String x:Key="LOC_SPG_RecentAchievements">近期成就</sys:String>
     <sys:String x:Key="LOC_SPG_RecentlyAddedGames">最近添加</sys:String>
 
-    <sys:String x:Key="LOC_SPG_DailyPlaytime">每日观访时间</sys:String>
-    <sys:String x:Key="LOC_SPG_WeeklyPlaytime">每周观访时间</sys:String>
-    <sys:String x:Key="LOC_SPG_MonthlyPlaytime">每月观访时间</sys:String>
-    <sys:String x:Key="LOC_SPG_PlaytimePerSource">每个来源观访时间</sys:String>
-    <sys:String x:Key="LOC_SPG_MostPlayedWeekly">本周最常观访</sys:String>
+    <sys:String x:Key="LOC_SPG_DailyPlaytime">每日游玩时间</sys:String>
+    <sys:String x:Key="LOC_SPG_WeeklyPlaytime">每周游玩时间</sys:String>
+    <sys:String x:Key="LOC_SPG_MonthlyPlaytime">每月游玩时间</sys:String>
+    <sys:String x:Key="LOC_SPG_PlaytimePerSource">每个来源游玩时间</sys:String>
+    <sys:String x:Key="LOC_SPG_MostPlayedWeekly">本周最常游玩</sys:String>
     <sys:String x:Key="LOC_SPG_TotalPlaytime" xml:space="preserve">总计： </sys:String>
     <sys:String x:Key="LOC_SPG_LastSevenDays">最近 7 天</sys:String>
     <sys:String x:Key="LOC_SPG_LastThirtyDays">最近 30 天</sys:String>
@@ -20,9 +20,9 @@
     <sys:String x:Key="LOC_SPG_BackgroundTab">背景</sys:String>
     
     <!--BackgroundImageSource Enum-->
-    <sys:String x:Key="LOC_SPG_BackgroundImageSourceLastPlayed">上次观访</sys:String>
+    <sys:String x:Key="LOC_SPG_BackgroundImageSourceLastPlayed">上次游玩</sys:String>
     <sys:String x:Key="LOC_SPG_BackgroundImageSourceLastAdded">上次添加</sys:String>
-    <sys:String x:Key="LOC_SPG_BackgroundImageSourceMostPlayed">最常观访</sys:String>
+    <sys:String x:Key="LOC_SPG_BackgroundImageSourceMostPlayed">最常游玩</sys:String>
     <sys:String x:Key="LOC_SPG_BackgroundImageSourceRandom">随机</sys:String>
     <sys:String x:Key="LOC_SPG_BackgroundImageSourceLastSelected">上次选择</sys:String>
 
@@ -32,7 +32,7 @@
     <sys:String x:Key="LOC_SPG_NextRandomBackground">下一个随机背景</sys:String>
     <sys:String x:Key="LOC_SPG_ShowFavorites">显示收藏游戏</sys:String>
     <sys:String x:Key="LOC_SPG_ShowClock">显示时钟</sys:String>
-    <sys:String x:Key="LOC_SPG_ShowRecentlyPlayed">显示最近观访的游戏</sys:String>
+    <sys:String x:Key="LOC_SPG_ShowRecentlyPlayed">显示最近游玩的游戏</sys:String>
     <sys:String x:Key="LOC_SPG_ShowRecentAchievements">使用功成名就（SuccessStory）显示近期成就</sys:String>
     <sys:String x:Key="LOC_SPG_ShowRecentlyAdded">显示最近添加的游戏</sys:String>
     <sys:String x:Key="LOC_SPG_StartupItem">（不支持）启动时激活侧边栏项目</sys:String>
@@ -58,4 +58,6 @@
     <sys:String x:Key="LOC_SPG_ShowGlobalProgressBar">（不支持）显示全局进度条</sys:String>
     <sys:String x:Key="LOC_SPG_SwitchWithLowPrio">切换视图时降低优先级（在 Playnite 崩溃时自动启用）</sys:String>
     <sys:String x:Key="LOC_SPG_UnsupportedToolTip">使用这个功能的风险由你自己承担。它不被 PlayniteAPI 官方支持，可能导致意外行为。</sys:String>
+    <sys:String x:Key="LOC_SPG_IgnoreHidden">Ignore hidden games</sys:String>
+    <sys:String x:Key="LOC_SPG_AddShelve">Add Shelve</sys:String>
 </ResourceDictionary>
