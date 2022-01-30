@@ -60,4 +60,5 @@
     <sys:String x:Key="LOC_SPG_UnsupportedToolTip">Utilice esta función bajo su propio riesgo. No está soportada oficialmente por la PlayniteAPI y por lo tanto puede conducir a un comportamiento inesperado.</sys:String>
     <sys:String x:Key="LOC_SPG_IgnoreHidden">Ignore hidden games</sys:String>
     <sys:String x:Key="LOC_SPG_AddShelve">Add Shelve</sys:String>
+    <sys:String x:Key="LOC_SPG_ShowMostPlayedGames">Show Most Played Games</sys:String>
 </ResourceDictionary>
