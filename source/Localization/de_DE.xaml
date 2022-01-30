@@ -58,4 +58,6 @@
     <sys:String x:Key="LOC_SPG_ShowGlobalProgressBar">(Nicht unterstützt) Globalen Fortschrittsbalken anzeigen</sys:String>
     <sys:String x:Key="LOC_SPG_SwitchWithLowPrio">Niedrigere Priorität beim Umschalten der Ansicht (wird automatisch beim Absturz von Playnite aktiviert)</sys:String>
     <sys:String x:Key="LOC_SPG_UnsupportedToolTip">Die Verwendung dieser Funktion erfolgt auf eigene Gefahr. Sie wird nicht offiziell von der PlayniteAPI unterstützt und kann daher zu unerwartetem Verhalten führen.</sys:String>
+    <sys:String x:Key="LOC_SPG_IgnoreHidden">Ignore hidden games</sys:String>
+    <sys:String x:Key="LOC_SPG_AddShelve">Add Shelve</sys:String>
 </ResourceDictionary>
