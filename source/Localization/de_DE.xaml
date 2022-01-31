@@ -25,6 +25,7 @@
     <sys:String x:Key="LOC_SPG_BackgroundImageSourceMostPlayed">Meistgespielt</sys:String>
     <sys:String x:Key="LOC_SPG_BackgroundImageSourceRandom">Zufällig</sys:String>
     <sys:String x:Key="LOC_SPG_BackgroundImageSourceLastSelected">Zuletzt ausgewählt</sys:String>
+    <sys:String x:Key="LOC_SPG_BackgroundImageSourceLastHovered">Zuletzt überfahren</sys:String>
 
     <!-- Settings -->
     <sys:String x:Key="LOC_SPG_ShowGameActivity">GameActivity-Ansichten anzeigen</sys:String>
@@ -61,4 +62,9 @@
     <sys:String x:Key="LOC_SPG_IgnoreHidden">Versteckte Spiele ignorieren</sys:String>
     <sys:String x:Key="LOC_SPG_AddShelve">Regal hinzufügen</sys:String>
     <sys:String x:Key="LOC_SPG_ShowMostPlayedGames">Meistgespielte Spiele anzeigen</sys:String>
+    <sys:String x:Key="LOC_SPG_SkippedGames">Überspringe:</sys:String>
+    <sys:String x:Key="LOC_SPG_ExtendShelve">Regal erweitern</sys:String>
+    <sys:String x:Key="LOC_SPG_BackgroundGameInfoOpacity">Deckkraft der Spiel-Info:</sys:String>
+    <sys:String x:Key="LOC_SPG_BackgroundAnimationDuration">Animationsdauer:</sys:String>
+    <sys:String x:Key="LOC_SPG_BackgroundRefreshInterval">Aktualisierungsintervall (Minuten):</sys:String>
 </ResourceDictionary>

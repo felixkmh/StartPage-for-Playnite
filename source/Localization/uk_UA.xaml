@@ -25,6 +25,7 @@
     <sys:String x:Key="LOC_SPG_BackgroundImageSourceMostPlayed">Найбільше зіграна</sys:String>
     <sys:String x:Key="LOC_SPG_BackgroundImageSourceRandom">Випадково</sys:String>
     <sys:String x:Key="LOC_SPG_BackgroundImageSourceLastSelected">Остання вибрана</sys:String>
+    <sys:String x:Key="LOC_SPG_BackgroundImageSourceLastHovered">Last Hovered</sys:String>
 
     <!-- Settings -->
     <sys:String x:Key="LOC_SPG_ShowGameActivity">Відображати перегляди GameActivity</sys:String>
@@ -60,5 +61,10 @@
     <sys:String x:Key="LOC_SPG_UnsupportedToolTip">Використовуйте цю функцію на свій страх і ризик. Вона офіційно не підтримується PlayniteAPI і, таким чином, може призвести до неочікуваної поведінки.</sys:String>
     <sys:String x:Key="LOC_SPG_IgnoreHidden">Ігнорувати приховані ігри</sys:String>
     <sys:String x:Key="LOC_SPG_AddShelve">Додати полицю</sys:String>
-    <sys:String x:Key="LOC_SPG_ShowMostPlayedGames">Show Most Played Games</sys:String>
+    <sys:String x:Key="LOC_SPG_ShowMostPlayedGames">Показувати найбільше зіграні ігри</sys:String>
+    <sys:String x:Key="LOC_SPG_SkippedGames">Skip:</sys:String>
+    <sys:String x:Key="LOC_SPG_ExtendShelve">Extend Shelve</sys:String>
+    <sys:String x:Key="LOC_SPG_BackgroundGameInfoOpacity">Game Info Opacity:</sys:String>
+    <sys:String x:Key="LOC_SPG_BackgroundAnimationDuration">Animation Duration:</sys:String>
+    <sys:String x:Key="LOC_SPG_BackgroundRefreshInterval">Refresh Interval (Minutes):</sys:String>
 </ResourceDictionary>
