@@ -30,7 +30,9 @@ namespace LandingPage.Models
         [Description("LOCDateAddedLabel")]
         DateAdded,
         [Description("LOCTimePlayed")]
-        Playtime
+        Playtime,
+        [Description("LOCGameReleaseDateTitle")]
+        ReleaseDate
     }
 
     [TypeConverter(typeof(EnumDescriptionTypeConverter))]
@@ -57,6 +59,9 @@ namespace LandingPage.Models
 
         private int numberOfGames = 11;
         public int NumberOfGames { get => numberOfGames; set => SetValue(ref numberOfGames, value); }
+
+        private int skippedGames = 0;
+        public int SkippedGames { get => Math.Max(0, skippedGames); set => SetValue(ref skippedGames, Math.Max(0, value)); }
 
         private Order order = Order.Ascending;
         public Order Order { get => order; set => SetValue(ref order, value); }

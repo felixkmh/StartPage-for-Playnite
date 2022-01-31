@@ -176,6 +176,9 @@ namespace LandingPage.ViewModels
                     case SortingField.Playtime:
                         games = games.OrderBy(g => g.Playtime);
                         break;
+                    case SortingField.ReleaseDate:
+                        games = games.OrderBy(g => g.ReleaseDate);
+                        break;
                     default:
                         break;
                 }
@@ -199,6 +202,9 @@ namespace LandingPage.ViewModels
                     case SortingField.Playtime:
                         games = games.OrderByDescending(g => g.Playtime);
                         break;
+                    case SortingField.ReleaseDate:
+                        games = games.OrderByDescending(g => g.ReleaseDate);
+                        break;
                     default:
                         break;
                 }
@@ -206,7 +212,7 @@ namespace LandingPage.ViewModels
             var collection = Games;
             var changed = false;
 
-            IEnumerable<Game> gameSelection = games.Take(shelveProperties.NumberOfGames);
+            IEnumerable<Game> gameSelection = games.Skip(shelveProperties.SkippedGames).Take(shelveProperties.NumberOfGames);
             foreach (var game in gameSelection)
             {
                 if (collection.FirstOrDefault(item => item.Game?.Id == game.Id) is GameModel model)
