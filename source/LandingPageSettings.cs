@@ -152,7 +152,7 @@ namespace LandingPage
         private BackgroundImageSource backgroundImageSource = BackgroundImageSource.LastPlayed;
         public BackgroundImageSource BackgroundImageSource { get => backgroundImageSource; set => SetValue(ref backgroundImageSource, value); }
 
-        private List<ShelveProperties> shelveProperties = new List<ShelveProperties>{};
+        private List<ShelveProperties> shelveProperties = null;
         public List<ShelveProperties> ShelveProperties { get => shelveProperties; set => SetValue(ref shelveProperties, value); }
 
         // Playnite serializes settings object to a JSON object and saves it as text file.
@@ -211,6 +211,11 @@ namespace LandingPage
             else
             {
                 Settings = new LandingPageSettings();
+                Settings.ShelveProperties = new List<ShelveProperties> { ShelveProperties.RecentlyPlayed, ShelveProperties.RecentlyAdded };
+            }
+
+            if (Settings.ShelveProperties == null)
+            {
                 Settings.ShelveProperties = new List<ShelveProperties> { ShelveProperties.RecentlyPlayed, ShelveProperties.RecentlyAdded };
             }
 
