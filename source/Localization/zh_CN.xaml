@@ -58,7 +58,7 @@
     <sys:String x:Key="LOC_SPG_ShowGlobalProgressBar">（不支持）显示全局进度条</sys:String>
     <sys:String x:Key="LOC_SPG_SwitchWithLowPrio">切换视图时降低优先级（在 Playnite 崩溃时自动启用）</sys:String>
     <sys:String x:Key="LOC_SPG_UnsupportedToolTip">使用这个功能的风险由你自己承担。它不被 PlayniteAPI 官方支持，可能导致意外行为。</sys:String>
-    <sys:String x:Key="LOC_SPG_IgnoreHidden">Ignore hidden games</sys:String>
-    <sys:String x:Key="LOC_SPG_AddShelve">Add Shelve</sys:String>
-    <sys:String x:Key="LOC_SPG_ShowMostPlayedGames">Show Most Played Games</sys:String>
+    <sys:String x:Key="LOC_SPG_IgnoreHidden">忽略已隐藏游戏</sys:String>
+    <sys:String x:Key="LOC_SPG_AddShelve">添加展架</sys:String>
+    <sys:String x:Key="LOC_SPG_ShowMostPlayedGames">显示最常游玩的游戏</sys:String>
 </ResourceDictionary>
