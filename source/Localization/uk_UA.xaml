@@ -25,7 +25,7 @@
     <sys:String x:Key="LOC_SPG_BackgroundImageSourceMostPlayed">Найбільше зіграна</sys:String>
     <sys:String x:Key="LOC_SPG_BackgroundImageSourceRandom">Випадково</sys:String>
     <sys:String x:Key="LOC_SPG_BackgroundImageSourceLastSelected">Остання вибрана</sys:String>
-    <sys:String x:Key="LOC_SPG_BackgroundImageSourceLastHovered">Last Hovered</sys:String>
+    <sys:String x:Key="LOC_SPG_BackgroundImageSourceLastHovered">Останнє наведене</sys:String>
 
     <!-- Settings -->
     <sys:String x:Key="LOC_SPG_ShowGameActivity">Відображати перегляди GameActivity</sys:String>
@@ -62,9 +62,9 @@
     <sys:String x:Key="LOC_SPG_IgnoreHidden">Ігнорувати приховані ігри</sys:String>
     <sys:String x:Key="LOC_SPG_AddShelve">Додати полицю</sys:String>
     <sys:String x:Key="LOC_SPG_ShowMostPlayedGames">Показувати найбільше зіграні ігри</sys:String>
-    <sys:String x:Key="LOC_SPG_SkippedGames">Skip:</sys:String>
-    <sys:String x:Key="LOC_SPG_ExtendShelve">Extend Shelve</sys:String>
-    <sys:String x:Key="LOC_SPG_BackgroundGameInfoOpacity">Game Info Opacity:</sys:String>
-    <sys:String x:Key="LOC_SPG_BackgroundAnimationDuration">Animation Duration:</sys:String>
-    <sys:String x:Key="LOC_SPG_BackgroundRefreshInterval">Refresh Interval (Minutes):</sys:String>
+    <sys:String x:Key="LOC_SPG_SkippedGames">Пропустити:</sys:String>
+    <sys:String x:Key="LOC_SPG_ExtendShelve">Розширити полицю</sys:String>
+    <sys:String x:Key="LOC_SPG_BackgroundGameInfoOpacity">Прозорість інформації про гру:</sys:String>
+    <sys:String x:Key="LOC_SPG_BackgroundAnimationDuration">Тривалість анімації:</sys:String>
+    <sys:String x:Key="LOC_SPG_BackgroundRefreshInterval">Інтервал оновлення (хвилини):</sys:String>
 </ResourceDictionary>
