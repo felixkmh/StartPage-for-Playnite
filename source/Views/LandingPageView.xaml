@@ -73,7 +73,7 @@
         <conv:IEnumerableNullOrEmptyToVisibilityConverter x:Key="IEnumerableNullOrEmptyToVisibilityConverter"/>
         <conv:BoolToGridLengthConverter x:Key="BoolToGridLengthConverter"/>
         <DataTemplate x:Key="GameCoverDataTemplate" DataType="{x:Type lpm:GameModel}">
-            <StackPanel Orientation="Horizontal">
+            <StackPanel Orientation="Horizontal" MouseEnter="StackPanel_MouseEnter" MouseLeave="StackPanel_MouseLeave">
                 <Grid ClipToBounds="True"
                       MaxWidth="{mu:LandingPageSettings Settings.MaxCoverWidth}" x:Name="ImageGrid">
                     <Grid.Width>
@@ -156,6 +156,7 @@
                         <Border Background="{StaticResource GridItemBackgroundBrush}"
                                                 CornerRadius="7"/>
                         <ContentControl x:Name="PopupImageContentControl"/>
+                        <ContentControl x:Name="PopupTrailerContentControl"/>
                         <!--<Image x:Name="PopupBackgroundImage" Opacity="0.3" Source="{x:Null}" Stretch="UniformToFill" RenderOptions.BitmapScalingMode="HighQuality">
                             <Image.OpacityMask>
                                 <LinearGradientBrush StartPoint="1,0" EndPoint="0,1">
@@ -203,6 +204,11 @@
                                     </LinearGradientBrush>
                                 </Image.OpacityMask>
                             </Image>
+                        </Setter.Value>
+                    </Setter>
+                    <Setter Property="Content" TargetName="PopupTrailerContentControl">
+                        <Setter.Value>
+                            <MediaElement Source="{Binding TrailerUri}" Stretch="UniformToFill" Volume="0" LoadedBehavior="Play" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Setter.Value>
                     </Setter>
                 </Trigger>
@@ -409,15 +415,32 @@
                          RenderAtScale="{Binding Settings.Settings.RenderScale}" 
                          SnapsToDevicePixels="False" />
             </Grid.CacheMode>
-            <Image Stretch="UniformToFill" Source="{Binding BackgroundImagePath, Converter={StaticResource UriToBitmapImageConverter}}"
+            <ItemsControl ItemsSource="{Binding BackgroundImageQueue}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <Grid/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate DataType="{x:Type lpvm:BackgroundQueueItem}">
+                        <Image Stretch="UniformToFill" Source="{Binding Uri, Converter={StaticResource UriToBitmapImageConverter}}"
+                   Opacity="{Binding Opacity}" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        </Image>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+                <ItemsControl.Effect>
+                    <BlurEffect Radius="{Binding Settings.Settings.BlurAmountScaled}" KernelType="Gaussian" RenderingBias="Quality"/>
+                </ItemsControl.Effect>
+            </ItemsControl>
+            <!--<Image Stretch="UniformToFill" Source="{Binding BackgroundImagePath, Converter={StaticResource UriToBitmapImageConverter}}"
                    Opacity="1" HorizontalAlignment="Center" VerticalAlignment="Center">
-                <!--<Image.Source>
+                --><!--<Image.Source>
                     <BitmapImage CreateOptions="IgnoreColorProfile" CacheOption="None" UriSource="{Binding BackgroundImagePath, TargetNullValue='pack://application:,,,/StartPagePlugin;component/empty.png'}"/>
-                </Image.Source>-->
+                </Image.Source>--><!--
                 <Image.Effect>
                     <BlurEffect Radius="{Binding Settings.Settings.BlurAmountScaled}" KernelType="Gaussian" RenderingBias="Quality"/>
                 </Image.Effect>
-            </Image>
+            </Image>-->
         </Grid>
         <Border Background="{StaticResource DarkNoiseBrush}" Opacity="{Binding Settings.Settings.OverlayOpacity}" IsHitTestVisible="False">
             <Border.OpacityMask>
@@ -437,9 +460,9 @@
                 <Grid Background="Transparent">
                     <Grid.ContextMenu>
                         <ContextMenu Grid.IsSharedSizeScope="True">
-                            <MenuItem Command="{Binding NextRandomBackgroundCommand}" Header="{DynamicResource LOC_SPG_NextRandomBackground}" 
+                            <MenuItem x:Name="NextBackgroundEntry" Command="{Binding NextRandomBackgroundCommand}" Header="{DynamicResource LOC_SPG_NextRandomBackground}" 
                                       Visibility="{Binding IsEnabled, RelativeSource={RelativeSource Mode=Self}, Converter={StaticResource BooleanToVisibilityConverter}}"/>
-                            <Separator/>
+                            
                             <MenuItem>
                                 <MenuItem.Header>
                                     <Grid>
@@ -691,6 +714,15 @@
                                                                         Style="{StaticResource {x:Type TextBox}}"
                                                                         TextAlignment="Center">
                                                         </numeric:IntBox>
+                                                        <TextBlock Text="{DynamicResource LOC_SPG_SkippedGames}" VerticalAlignment="Center" Style="{StaticResource {x:Type TextBlock}}" Margin="2"/>
+                                                        <numeric:IntBox Value="{Binding ShelveProperties.SkippedGames, UpdateSourceTrigger=PropertyChanged}" Margin="2"
+                                                                        MinValue="0"
+                                                                        MaxValue="30"
+                                                                        MinWidth="30"
+                                                                        ValidationTrigger="PropertyChanged"
+                                                                        Style="{StaticResource {x:Type TextBox}}"
+                                                                        TextAlignment="Center">
+                                                        </numeric:IntBox>
                                                     </DockPanel>
                                                     <DockPanel LastChildFill="False">
                                                         <TextBlock Margin="2" Text="{DynamicResource LOCMenuSortByTitle}" Foreground="{DynamicResource TextBrush}" DockPanel.Dock="Left" VerticalAlignment="Center"/>
@@ -705,6 +737,13 @@
                                                         <TextBlock Margin="2" Text="{DynamicResource LOCMenuGroupByTitle}" DockPanel.Dock="Left" Foreground="{DynamicResource TextBrush}" VerticalAlignment="Center"/>
                                                         <ComboBox Margin="2" ItemsSource="{Binding Source={ext:EnumBindingSource {x:Type lpm:GroupingField}}}" SelectedItem="{Binding ShelveProperties.GroupBy}" Text="Grouping" DockPanel.Dock="Right"/>
                                                     </DockPanel>
+                                                    <Button Margin="2"
+                                                            Command="{Binding RelativeSource={RelativeSource AncestorType=local:LandingPageView, Mode=FindAncestor}, Path=DataContext.ExtendShelveCommand}"
+                                                            CommandParameter="{Binding .}">
+                                                        <Button.Content>
+                                                            <TextBlock Text="{DynamicResource LOC_SPG_ExtendShelve}"/>
+                                                        </Button.Content>
+                                                    </Button>
                                                     <Button Margin="2"
                                                             Command="{Binding RelativeSource={RelativeSource AncestorType=local:LandingPageView, Mode=FindAncestor}, Path=DataContext.RemoveShelveCommand}"
                                                             CommandParameter="{Binding .}">
@@ -1012,9 +1051,9 @@
                 <ControlTemplate TargetType="Button">
                     <Grid Visibility="{Binding BackgroundSourceGame, Converter={StaticResource NullToVisibilityConverter}}" Background="{x:Null}">
                         <Border Background="Black" CornerRadius="10" IsHitTestVisible="False"
-                                Margin="0" Padding="0" Opacity="0.11" x:Name="GameNameBorder">
+                                Margin="0" Padding="0" Opacity="{mu:LandingPageSettings Settings.BackgroundGameInfoOpacity}" x:Name="GameNameBorder">
                         </Border>
-                        <TextBlock  Opacity="0.2" Margin="0" Text="i" Foreground="White" MinWidth="20" Height="20" TextAlignment="Center"
+                        <TextBlock  Opacity="{mu:LandingPageSettings Settings.BackgroundGameInfoOpacity}" Margin="0" Text="i" Foreground="White" MinWidth="20" Height="20" TextAlignment="Center"
                                     x:Name="BackgroundImageSourceGameTitle" FontSize="13" Padding="5,3" LineStackingStrategy="BlockLineHeight"
                                     LineHeight="{Binding RelativeSource={RelativeSource Mode=Self}, Path=FontSize}"
                                     IsHitTestVisible="False"/>

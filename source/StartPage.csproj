@@ -79,6 +79,7 @@
     <Compile Include="Converters\OneMinusConverter.cs" />
     <Compile Include="Converters\UriToBitmapImageConverter.cs" />
     <Compile Include="Converters\VisibilityInverter.cs" />
+    <Compile Include="Extensions\CopyExtension.cs" />
     <Compile Include="Extensions\DateTimeExtensions.cs" />
     <Compile Include="Extensions\EnumBindingSourceExtension.cs" />
     <Compile Include="Extensions\IEnumerableExtensions.cs" />

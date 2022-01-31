@@ -6,6 +6,7 @@
              xmlns:numeric="http://gu.se/NumericInput"
              xmlns:local="clr-namespace:LandingPage" xmlns:system="clr-namespace:System;assembly=mscorlib"
              xmlns:conv="clr-namespace:LandingPage.Converters"
+             xmlns:ext="clr-namespace:LandingPage.Extensions"
              mc:Ignorable="d"
              d:DesignHeight="400" d:DesignWidth="600"
              d:DataContext="{d:DesignInstance IsDesignTimeCreatable=False, Type=local:LandingPageSettingsViewModel}"
@@ -269,33 +270,76 @@
                             </Grid>
                         </DockPanel>
                         <DockPanel LastChildFill="False">
+                            <Grid VerticalAlignment="Center">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition SharedSizeGroup="Descriptions"/>
+                                    <ColumnDefinition SharedSizeGroup="Controls"/>
+                                    <ColumnDefinition SharedSizeGroup="Value"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Column="0" Text="{DynamicResource LOC_SPG_BackgroundGameInfoOpacity}" VerticalAlignment="Center"/>
+                                <Slider Grid.Column="1" Margin="10,0" VerticalAlignment="Center" Value="{Binding Settings.BackgroundGameInfoOpacity}" Minimum="0" Maximum="1" Width="180" IsSnapToTickEnabled="True" TickFrequency="0.01"/>
+                                <numeric:DoubleBox Grid.Column="2" Value="{Binding Settings.BackgroundGameInfoOpacity, UpdateSourceTrigger=PropertyChanged}" 
+                                        MinValue="0"
+                                        MaxValue="1"
+                                        MinWidth="30"
+                                        ValidationTrigger="PropertyChanged"
+                                        Style="{StaticResource {x:Type TextBox}}"
+                                        TextAlignment="Center">
+                                </numeric:DoubleBox>
+                            </Grid>
+                        </DockPanel>
+                        <DockPanel LastChildFill="False">
+                            <Grid VerticalAlignment="Center">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition SharedSizeGroup="Descriptions"/>
+                                    <ColumnDefinition SharedSizeGroup="Controls"/>
+                                    <ColumnDefinition SharedSizeGroup="Value"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Column="0" Text="{DynamicResource LOC_SPG_BackgroundAnimationDuration}" VerticalAlignment="Center"/>
+                                <Slider Grid.Column="1" Margin="10,0" VerticalAlignment="Center" Value="{Binding Settings.AnimationDuration}" Minimum="0" Maximum="5" Width="180" IsSnapToTickEnabled="True" TickFrequency="0.01"/>
+                                <numeric:DoubleBox Grid.Column="2" Value="{Binding Settings.AnimationDuration, UpdateSourceTrigger=PropertyChanged}" 
+                                        MinValue="0"
+                                        MaxValue="5"
+                                        MinWidth="30"
+                                        ValidationTrigger="PropertyChanged"
+                                        Style="{StaticResource {x:Type TextBox}}"
+                                        TextAlignment="Center">
+                                </numeric:DoubleBox>
+                            </Grid>
+                        </DockPanel>
+                        <DockPanel LastChildFill="False">
+                            <Grid VerticalAlignment="Center">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition SharedSizeGroup="Descriptions"/>
+                                    <ColumnDefinition SharedSizeGroup="Controls"/>
+                                    <ColumnDefinition SharedSizeGroup="Value"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Column="0" Text="{DynamicResource LOC_SPG_BackgroundRefreshInterval}" VerticalAlignment="Center"/>
+                                <numeric:IntBox Grid.Column="1" HorizontalAlignment="Left" Value="{Binding Settings.BackgroundRefreshInterval, UpdateSourceTrigger=PropertyChanged}" 
+                                        MinValue="0"
+                                        MinWidth="30"
+                                        ValidationTrigger="PropertyChanged"
+                                        Style="{StaticResource {x:Type TextBox}}"
+                                        TextAlignment="Center">
+                                </numeric:IntBox>
+                            </Grid>
+                        </DockPanel>
+                        <DockPanel LastChildFill="False">
                             <TextBlock Text="{DynamicResource LOC_SPG_BackgroundImageSource}" VerticalAlignment="Center"/>
-                            <ComboBox SelectedValue="{Binding Settings.BackgroundImageSource}" Margin="5,0" MinWidth="120">
-                                <ComboBox.ItemsSource>
-                                    <x:Array Type="{x:Type system:Enum}">
-                                        <local:BackgroundImageSource>LastPlayed</local:BackgroundImageSource>
-                                        <local:BackgroundImageSource>LastAdded</local:BackgroundImageSource>
-                                        <local:BackgroundImageSource>LastSelected</local:BackgroundImageSource>
-                                        <local:BackgroundImageSource>MostPlayed</local:BackgroundImageSource>
-                                        <local:BackgroundImageSource>Random</local:BackgroundImageSource>
-                                    </x:Array>
-                                </ComboBox.ItemsSource>
-                                <ComboBox.ItemTemplate>
-                                    <DataTemplate DataType="{x:Type local:BackgroundImageSource}">
-                                        <TextBlock Text="{Binding Converter={StaticResource ObjectToStringConverter}}"/>
-                                    </DataTemplate>
-                                </ComboBox.ItemTemplate>
+                            <ComboBox ItemsSource="{Binding Source={ext:EnumBindingSource {x:Type local:BackgroundImageSource}}}" 
+                                      SelectedValue="{Binding Settings.BackgroundImageSource}" Margin="5,0" MinWidth="120">
                             </ComboBox>
                         </DockPanel>
                         <DockPanel LastChildFill="True">
                             <WrapPanel>
                                 <TextBlock Text="{DynamicResource LOC_SPG_BackgroundImagePath}" VerticalAlignment="Center"/>
                                 <TextBox IsReadOnly="True" 
-                                 Text="{Binding Settings.BackgroundImageUri.LocalPath, FallbackValue='  ---  ', Mode=OneWay}" 
+                                 Text="{Binding Settings.BackgroundImagePath, FallbackValue='  ---  ', TargetNullValue='  ---  ', Mode=OneWay}" 
                                  VerticalAlignment="Center"
                                  MaxWidth="400"
                                  Margin="5,0"/>
-                                <Button Margin="2,0" VerticalAlignment="Center" Command="{Binding SelectImagePathCommand}" Content="{DynamicResource LOCSelectImageTitle}"/>
+                                <Button Margin="2,0" VerticalAlignment="Center" Command="{Binding SelectImagePathCommand}" Content="{DynamicResource LOCSelectFileTooltip}"/>
+                                <Button Margin="2,0" VerticalAlignment="Center" Command="{Binding SelectImageFolderPathCommand}" Content="{DynamicResource LOCSelectDirectoryTooltip}"/>
                                 <Button Margin="2,0" VerticalAlignment="Center" Command="{Binding ClearImagePathCommand}" Content="{DynamicResource LOCClearLabel}"/>
                             </WrapPanel>
                         </DockPanel>

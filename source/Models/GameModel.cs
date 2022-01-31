@@ -61,6 +61,26 @@ namespace LandingPage.Models
             }
         }
 
+        public Uri TrailerUri 
+        { 
+            get 
+            {
+                var playniteApi = LandingPageExtension.Instance.PlayniteApi;
+                var dir = System.IO.Path.Combine(playniteApi.Paths.ConfigurationPath, "ExtraMetadata", "games", Game.Id.ToString());
+                var trailerPath = System.IO.Path.Combine(dir, "VideoTrailer.mp4");
+                if (System.IO.File.Exists(trailerPath))
+                {
+                    return new Uri(trailerPath);
+                }
+                var microTrailerPath = System.IO.Path.Combine(dir, "VideoMicrotrailer.mp4");
+                if (System.IO.File.Exists(microTrailerPath))
+                {
+                    return new Uri(microTrailerPath);
+                }
+                return null;
+            } 
+        }
+
         public ICommand OpenCommand { get; private set; }
 
         public ICommand StartCommand { get; private set; }

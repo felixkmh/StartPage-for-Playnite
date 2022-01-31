@@ -1,4 +1,5 @@
-﻿using LandingPage.Models;
+﻿using LandingPage.Converters;
+using LandingPage.Models;
 using Newtonsoft.Json;
 using Playnite.SDK;
 using Playnite.SDK.Data;
@@ -14,6 +15,7 @@ using System.Windows.Input;
 
 namespace LandingPage
 {
+    [TypeConverter(typeof(EnumDescriptionTypeConverter))]
     public enum BackgroundImageSource
     {
         [Description("LOC_SPG_BackgroundImageSourceLastPlayed")]
@@ -25,7 +27,9 @@ namespace LandingPage
         [Description("LOC_SPG_BackgroundImageSourceRandom")]
         Random,
         [Description("LOC_SPG_BackgroundImageSourceLastSelected")]
-        LastSelected
+        LastSelected,
+        [Description("LOC_SPG_BackgroundImageSourceLastHovered")]
+        LastHovered
     }
 
     [Serializable]
@@ -115,6 +119,15 @@ namespace LandingPage
         [DontSerialize]
         public double BlurAmountScaled { get => Math.Round(blurAmount / renderScale); }
 
+        private double animationDuration = 1;
+        public double AnimationDuration { get => animationDuration; set => SetValue(ref animationDuration, value); }
+
+        private int backgroundRefreshInterval = 0;
+        public int BackgroundRefreshInterval { get => backgroundRefreshInterval; set => SetValue(ref backgroundRefreshInterval, value); }
+
+        private double backgroundGameInfoOpacity = 0.11;
+        public double BackgroundGameInfoOpacity { get => backgroundGameInfoOpacity; set => SetValue(ref backgroundGameInfoOpacity, value); }
+
         private double overlayOpacity = 0.1;
         public double OverlayOpacity { get => overlayOpacity; set => SetValue(ref overlayOpacity, value); }
 
@@ -129,6 +142,9 @@ namespace LandingPage
 
         private bool moveToTopOfList = false;
         public bool MoveToTopOfList { get => moveToTopOfList; set => SetValue(ref moveToTopOfList, value); }
+
+        private string backgroundImagePath = null;
+        public string BackgroundImagePath { get => backgroundImagePath; set => SetValue(ref backgroundImagePath, value); }
 
         private Uri backgroundImageUri = null;
         public Uri BackgroundImageUri { get => backgroundImageUri; set => SetValue(ref backgroundImageUri, value); }
@@ -176,7 +192,7 @@ namespace LandingPage
         }
 
         public ICommand SelectImagePathCommand { get; private set; }
-
+        public ICommand SelectImageFolderPathCommand { get; private set; }
         public ICommand ClearImagePathCommand { get; private set; }
 
         public LandingPageSettingsViewModel(LandingPageExtension plugin)
@@ -207,7 +223,20 @@ namespace LandingPage
                         if (Uri.TryCreate(path, UriKind.RelativeOrAbsolute, out var uri))
                         {
                             Settings.BackgroundImageUri = uri;
+                            Settings.BackgroundImagePath = path;
                         }
+                    }
+                }
+            });
+
+            SelectImageFolderPathCommand = new RelayCommand(() =>
+            {
+                if (plugin.PlayniteApi.Dialogs.SelectFolder() is string path)
+                {
+                    if (System.IO.Directory.Exists(path))
+                    {
+                        Settings.BackgroundImagePath = path;
+                        Settings.BackgroundImageUri = null;
                     }
                 }
             });
@@ -215,6 +244,7 @@ namespace LandingPage
             ClearImagePathCommand = new RelayCommand(() =>
             {
                 Settings.BackgroundImageUri = null;
+                Settings.BackgroundImagePath = null;
             });
         }
 

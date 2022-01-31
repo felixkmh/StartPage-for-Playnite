@@ -162,5 +162,27 @@ namespace LandingPage.Views
                 }
             }
         }
+
+        private void StackPanel_MouseEnter(object sender, MouseEventArgs e)
+        {
+            if (sender is FrameworkElement element && element.DataContext is GameModel model)
+            {
+                if (DataContext is LandingPageViewModel viewModel)
+                {
+                    viewModel.CurrentlyHoveredGame = model.Game;
+                }
+            }
+        }
+
+        private void StackPanel_MouseLeave(object sender, MouseEventArgs e)
+        {
+            if (sender is FrameworkElement element && element.DataContext is GameModel model)
+            {
+                if (DataContext is LandingPageViewModel viewModel)
+                {
+                    viewModel.CurrentlyHoveredGame = null;
+                }
+            }
+        }
     }
 }

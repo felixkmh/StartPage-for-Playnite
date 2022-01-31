@@ -14,9 +14,27 @@ using System.Windows;
 using LandingPage.Extensions;
 using System.Collections;
 using System.Globalization;
+using System.Windows.Threading;
+using System.Diagnostics;
 
 namespace LandingPage.ViewModels
 {
+    public class BackgroundQueueItem : ObservableObject
+    {
+        public BackgroundQueueItem(Uri uri, double opacity)
+        {
+            Uri = uri;
+            Opacity = opacity;
+            TTL = LandingPageExtension.Instance.Settings.AnimationDuration;
+        }
+        public const double MaxTTL = 0;
+        internal Uri uri;
+        public Uri Uri { get => uri; set => SetValue(ref uri, value); }
+        internal double ttl = 0;
+        public double TTL { get => ttl; set => SetValue(ref ttl, value); }
+        internal double opacity = 0;
+        public double Opacity { get => Math.Max(0, Math.Min(1, opacity)); set => SetValue(ref opacity, value); }
+    }
 
     public class LandingPageViewModel : ObservableObject
     {
@@ -33,7 +51,25 @@ namespace LandingPage.ViewModels
         public ObservableCollection<ShelveViewModel> ShelveViewModels { get => shelveViewModels; set => SetValue(ref shelveViewModels, value); }
 
         internal Uri backgroundImagePath = null;
-        public Uri BackgroundImagePath { get => backgroundImagePath; set => SetValue(ref backgroundImagePath, value); }
+        public Uri BackgroundImagePath 
+        {
+            get => backgroundImagePath;
+            set
+            {
+                SetValue(ref backgroundImagePath, value);
+                if (BackgroundImageQueue.Count == 0)
+                {
+                    BackgroundImageQueue.Add(new BackgroundQueueItem(value, 1) { TTL = 0 });
+                } 
+                else if (BackgroundImageQueue.LastOrDefault()?.Uri != value)
+                {
+                    BackgroundImageQueue.Add(new BackgroundQueueItem(value, 0));
+                }
+            }
+        }
+
+        internal ObservableCollection<BackgroundQueueItem> backgroundImageQueue = new ObservableCollection<BackgroundQueueItem>();
+        public ObservableCollection<BackgroundQueueItem> BackgroundImageQueue => backgroundImageQueue;
 
         internal GameModel backgroundSourceGame = null;
         public GameModel BackgroundSourceGame { get => backgroundSourceGame; set => SetValue(ref backgroundSourceGame, value); }
@@ -56,6 +92,23 @@ namespace LandingPage.ViewModels
         internal Game lastSelectedGame;
         public Game LastSelectedGame { get => lastSelectedGame; set { SetValue(ref lastSelectedGame, value); UpdateBackgroundImagePath(false); } }
 
+        internal Game lastHoveredGame;
+        public Game LastHoveredGame { get => lastHoveredGame; set { SetValue(ref lastHoveredGame, value); UpdateBackgroundImagePath(false); } }
+
+        internal Game currentlyHoveredGame;
+        public Game CurrentlyHoveredGame
+        {
+            get => currentlyHoveredGame;
+            set
+            {
+                SetValue(ref currentlyHoveredGame, value);
+                if (value is Game && LastHoveredGame != value)
+                {
+                    LastHoveredGame = value;
+                }
+            }
+        }
+
         internal Clock clock = new Clock();
         public Clock Clock => clock;
 
@@ -70,6 +123,8 @@ namespace LandingPage.ViewModels
 
         internal IPlayniteAPI playniteAPI;
         internal LandingPageExtension plugin;
+        internal DispatcherTimer backgroundImageTimer;
+        internal DispatcherTimer backgroundRefreshTimer;
 
         private static readonly Random rng = new Random();
 
@@ -80,6 +135,8 @@ namespace LandingPage.ViewModels
         public ICommand AddShelveCommand { get; set; }
 
         public ICommand RemoveShelveCommand { get; set; }
+
+        public ICommand ExtendShelveCommand { get; set; }
 
         private static readonly HashSet<string> verticalLanguages = new HashSet<string> { "zh_CN", "zh_TW", "vi_VN", "ja_JP", "zh_CN", "ko_KR", };
 
@@ -100,16 +157,91 @@ namespace LandingPage.ViewModels
             Settings.Settings.PropertyChanged += Settings_PropertyChanged;
             Settings.PropertyChanged += Settings_PropertyChanged1;
             clock.DayChanged += Clock_DayChanged;
+            backgroundImageQueue.CollectionChanged += BackgroundImageQueue_CollectionChanged;
             NextRandomBackgroundCommand = new RelayCommand(() => 
             {
                 UpdateBackgroundImagePath(true);
-            }, () => Settings.Settings.BackgroundImageSource == BackgroundImageSource.Random && Settings.Settings.BackgroundImageUri == null);
+            }, () => (Settings.Settings.BackgroundImageSource == BackgroundImageSource.Random && !System.IO.File.Exists(Settings.Settings.BackgroundImagePath))
+            || System.IO.Directory.Exists(Settings.Settings.BackgroundImagePath));
             languageSupportsVertical = verticalLanguages.Contains(playniteAPI.ApplicationSettings.Language);
             AddShelveCommand = new RelayCommand(() => 
             {
                 ShelveViewModels.Add(new ShelveViewModel(ShelveProperties.RecentlyPlayed, playniteAPI));
             });
             RemoveShelveCommand = new RelayCommand<ShelveViewModel>(svm => {if (svm != null) ShelveViewModels.Remove(svm); });
+            ExtendShelveCommand = new RelayCommand<ShelveViewModel>(svm =>
+            {
+                var idx = ShelveViewModels.IndexOf(svm);
+                if (idx > -1)
+                {
+                    var properties = svm.ShelveProperties.Copy();
+                    properties.SkippedGames = svm.ShelveProperties.NumberOfGames + svm.ShelveProperties.SkippedGames;
+                    properties.Name = string.Empty;
+                    ShelveViewModels.Insert(idx + 1, new ShelveViewModel(properties, playniteAPI));
+                }
+            });
+            UpdateBackgroundTimer();
+        }
+
+        private void BackgroundImageQueue_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            if (e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Add)
+            {
+                if (BackgroundImageQueue.Count > 1)
+                {
+                    BackgroundImageQueue[BackgroundImageQueue.Count - 2].TTL = Settings.Settings.AnimationDuration - BackgroundImageQueue[BackgroundImageQueue.Count - 2].TTL;
+                }
+                if (backgroundImageTimer == null)
+                {
+                    backgroundImageTimer = new DispatcherTimer(DispatcherPriority.Render, Application.Current.Dispatcher);
+                    backgroundImageTimer.Interval = TimeSpan.FromMilliseconds(16);
+                    Stopwatch stopwatch = new Stopwatch();
+                    backgroundImageTimer.Tick += (_, args) => 
+                    {
+                        double elapsedSeconds = backgroundImageTimer.Interval.TotalSeconds;
+                        if (!stopwatch.IsRunning)
+                        {
+                            stopwatch.Start();
+                        } else
+                        {
+                            elapsedSeconds = stopwatch.Elapsed.TotalSeconds;
+                            stopwatch.Restart();
+                        }
+                        // Debug.WriteLine(string.Join("|", BackgroundImageQueue.Select(i => string.Format("TTL = {0}, Opacity = {1}", i.TTL, i.Opacity))));
+                        if (BackgroundImageQueue.Count > 0)
+                        {
+                            BackgroundImageQueue.ForEach(item => item.TTL -= elapsedSeconds);
+                        }
+                        for(int i = 0; i < BackgroundImageQueue.Count; ++i)
+                        {
+                            if (i < BackgroundImageQueue.Count - 1)
+                            {
+                                BackgroundImageQueue[i].Opacity = BackgroundImageQueue[i].TTL / Settings.Settings.AnimationDuration;
+                            } else
+                            {
+                                BackgroundImageQueue[i].Opacity = 1.0 - (BackgroundImageQueue[i].TTL / Settings.Settings.AnimationDuration);
+                            }
+                        }
+                        for(int i = BackgroundImageQueue.Count - 2; i >= 0; --i)
+                        {
+                            if (BackgroundImageQueue[i].TTL <= 0)
+                            {
+                                BackgroundImageQueue.RemoveAt(i);
+                            }
+                        }
+                        if (BackgroundImageQueue.Count == 1 && BackgroundImageQueue.Last().Opacity >= 1.0)
+                        {
+                            backgroundImageTimer.Stop();
+                            stopwatch.Stop();
+                            GC.Collect();
+                        }
+                    };
+                }
+                if (!backgroundImageTimer.IsEnabled && BackgroundImageQueue.Count > 1)
+                {
+                    backgroundImageTimer.Start();
+                }
+            }
         }
 
         private void Clock_DayChanged(object sender, EventArgs e)
@@ -122,7 +254,40 @@ namespace LandingPage.ViewModels
             if (e.PropertyName == nameof(LandingPageSettingsViewModel.Settings))
             {
                 UpdateBackgroundImagePath();
+                UpdateBackgroundTimer();
                 Settings.Settings.PropertyChanged += Settings_PropertyChanged;
+            }
+        }
+
+        private void UpdateBackgroundTimer()
+        {
+            if (Settings.Settings.BackgroundRefreshInterval != 0)
+            {
+                if (backgroundRefreshTimer == null)
+                {
+                    backgroundRefreshTimer = new DispatcherTimer(DispatcherPriority.Background, Application.Current.Dispatcher);
+                    backgroundRefreshTimer.Tick += (s, e) => 
+                    {
+                        if (!playniteAPI.Database.Games.Any(g => g.IsRunning))
+                        {
+                            UpdateBackgroundImagePath(true);
+                        }
+                    };
+                }
+                if (backgroundRefreshTimer.Interval.TotalMinutes != Settings.Settings.BackgroundRefreshInterval)
+                {
+                    backgroundRefreshTimer.Stop();
+                    backgroundRefreshTimer.Interval = TimeSpan.FromMinutes(Settings.Settings.BackgroundRefreshInterval);
+                }
+                if (!backgroundRefreshTimer.IsEnabled)
+                {
+                    backgroundRefreshTimer.Start();
+                }
+            }
+            else
+            {
+                backgroundRefreshTimer?.Stop();
+                backgroundRefreshTimer = null;
             }
         }
 
@@ -135,6 +300,10 @@ namespace LandingPage.ViewModels
             if (e.PropertyName == nameof(LandingPageSettings.BackgroundImageSource))
             {
                 UpdateBackgroundImagePath();
+            }
+            if (e.PropertyName == nameof(LandingPageSettings.BackgroundRefreshInterval))
+            {
+                UpdateBackgroundTimer();
             }
         }
 
@@ -263,6 +432,30 @@ namespace LandingPage.ViewModels
             }
             if (path == null)
             {
+                if (System.IO.Directory.Exists(Settings.Settings.BackgroundImagePath))
+                {
+                    var imagePaths = System.IO.Directory.EnumerateFiles(Settings.Settings.BackgroundImagePath)
+                        .Where(file => file.EndsWith(".jpg", StringComparison.OrdinalIgnoreCase)
+                        || file.EndsWith(".jpeg", StringComparison.OrdinalIgnoreCase)
+                        || file.EndsWith(".png", StringComparison.OrdinalIgnoreCase))
+                        .Where(file => BackgroundImagePath?.LocalPath != file);
+                    if (BackgroundImagePath?.LocalPath != null 
+                        
+                        && !updateRandomBackground)
+                    {
+                        path = BackgroundImagePath;
+                    } 
+                    else if(imagePaths.ElementAtOrDefault(rng.Next(imagePaths.Count())) is string imagePath)
+                    {
+                        if (Uri.TryCreate(imagePath, UriKind.RelativeOrAbsolute, out var uri))
+                        {
+                            path = uri;
+                        }
+                    }
+                }
+            }
+            if (path == null)
+            {
                 switch (Settings.Settings.BackgroundImageSource)
                 {
                     case BackgroundImageSource.LastPlayed:
@@ -360,6 +553,23 @@ namespace LandingPage.ViewModels
                             }
                         }
                         break;
+                    case BackgroundImageSource.LastHovered:
+                        {
+                            if (LastHoveredGame != null && LastHoveredGame.BackgroundImage != null)
+                            {
+                                var databasePath = LastHoveredGame.BackgroundImage;
+                                if (!string.IsNullOrEmpty(databasePath))
+                                {
+                                    var fullPath = playniteAPI.Database.GetFullFilePath(databasePath);
+                                    if (Uri.TryCreate(fullPath, UriKind.RelativeOrAbsolute, out var uri))
+                                    {
+                                        path = uri;
+                                        gameSource = LastHoveredGame;
+                                    }
+                                }
+                            }
+                        }
+                        break;
                 }
             }
             if (path == null)
@@ -381,6 +591,11 @@ namespace LandingPage.ViewModels
             {
                 Application.Current.Dispatcher.Invoke(() =>
                 {
+                    if (backgroundRefreshTimer != null && backgroundRefreshTimer.IsEnabled)
+                    {
+                        backgroundRefreshTimer.Stop();
+                        backgroundRefreshTimer.Start();
+                    }
                     BackgroundSourceGame = gameSource != null ? new GameModel(gameSource) : null;
                     BackgroundImagePath = path;
                 });
