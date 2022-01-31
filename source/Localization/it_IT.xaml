@@ -25,7 +25,7 @@
     <sys:String x:Key="LOC_SPG_BackgroundImageSourceMostPlayed">Più giocati</sys:String>
     <sys:String x:Key="LOC_SPG_BackgroundImageSourceRandom">Casuale</sys:String>
     <sys:String x:Key="LOC_SPG_BackgroundImageSourceLastSelected">Ultimo selezionato</sys:String>
-    <sys:String x:Key="LOC_SPG_BackgroundImageSourceLastHovered">Last Hovered</sys:String>
+    <sys:String x:Key="LOC_SPG_BackgroundImageSourceLastHovered">Ultimo passaggio</sys:String>
 
     <!-- Settings -->
     <sys:String x:Key="LOC_SPG_ShowGameActivity">Mostra le viste di GameActivity</sys:String>
@@ -62,9 +62,9 @@
     <sys:String x:Key="LOC_SPG_IgnoreHidden">Ignora i giochi nascosti</sys:String>
     <sys:String x:Key="LOC_SPG_AddShelve">Aggiungi scaffale</sys:String>
     <sys:String x:Key="LOC_SPG_ShowMostPlayedGames">Mostra i giochi più giocati</sys:String>
-    <sys:String x:Key="LOC_SPG_SkippedGames">Skip:</sys:String>
-    <sys:String x:Key="LOC_SPG_ExtendShelve">Extend Shelve</sys:String>
-    <sys:String x:Key="LOC_SPG_BackgroundGameInfoOpacity">Game Info Opacity:</sys:String>
-    <sys:String x:Key="LOC_SPG_BackgroundAnimationDuration">Animation Duration:</sys:String>
-    <sys:String x:Key="LOC_SPG_BackgroundRefreshInterval">Refresh Interval (Minutes):</sys:String>
+    <sys:String x:Key="LOC_SPG_SkippedGames">Salta:</sys:String>
+    <sys:String x:Key="LOC_SPG_ExtendShelve">Estendi scaffale</sys:String>
+    <sys:String x:Key="LOC_SPG_BackgroundGameInfoOpacity">Opacità informazioni gioco:</sys:String>
+    <sys:String x:Key="LOC_SPG_BackgroundAnimationDuration">Durata dell'animazione:</sys:String>
+    <sys:String x:Key="LOC_SPG_BackgroundRefreshInterval">Intervallo di aggiornamento (minuti):</sys:String>
 </ResourceDictionary>
