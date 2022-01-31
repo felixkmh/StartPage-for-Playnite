@@ -1,5 +1,18 @@
 AddonId: felixkmh_StartPage_Plugin
 Packages:  
+  - Version: 1.11.0
+    RequiredApiVersion: 6.1.0
+    ReleaseDate: 2022-01-31
+    PackageUrl: https://github.com/felixkmh/StartPage-for-Playnite/releases/download/v1.11.0/felixkmh_StartPage_Plugin_1_11_0.pext
+    Changelog:
+      - added option to extend shelves into other ones below it by skipping the number of games in the previous shelve
+      - added background transition animation (can be disabled by setting the duration to 0 in the settings)
+      - added option to choose the background depending on the last hovered game
+      - added option to select an image folder of which random images are chosen as the background
+      - added option to automatically refresh random background images (from random games or a folder) every x minutes (set to 0 (disabled) by default)
+      - added support for locally available trailers managed by ExtraMetadata extension in game details popup 
+      - added option to set opacity of the game background info icon
+      - updated localizations
   - Version: 1.10.0
     RequiredApiVersion: 6.1.0
     ReleaseDate: 2022-01-31
