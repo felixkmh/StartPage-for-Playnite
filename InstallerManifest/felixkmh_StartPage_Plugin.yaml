@@ -1,5 +1,12 @@
 AddonId: felixkmh_StartPage_Plugin
 Packages:  
+  - Version: 1.11.1
+    RequiredApiVersion: 6.1.0
+    ReleaseDate: 2022-01-31
+    PackageUrl: https://github.com/felixkmh/StartPage-for-Playnite/releases/download/v1.11.1/felixkmh_StartPage_Plugin_1_11_1.pext
+    Changelog:
+      - fixed no default shelves being created when updating from v1.9.0 or older (won't fix missing shelves when already on v1.10.0 or newer, in this case shelves need to be added and customized manually)
+      - updated localizations
   - Version: 1.11.0
     RequiredApiVersion: 6.1.0
     ReleaseDate: 2022-01-31
