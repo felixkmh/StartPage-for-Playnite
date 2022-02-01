@@ -328,13 +328,14 @@ namespace LandingPage.ViewModels
 
         public void Update(bool updateRandomBackground = true)
         {
-            UpdateRecentlyPlayedGames();
-            UpdateRecentlyAddedGames();
+            //UpdateRecentlyPlayedGames();
+            //UpdateRecentlyAddedGames();
+            ShelveViewModels.ForEach(m => m.UpdateGames(m.ShelveProperties));
             UpdateFavorites();
             UpdateBackgroundImagePath(updateRandomBackground);
             UpdateMostPlayedGame();
             successStory.Update();
-            ShelveViewModels.ForEach(m => m.UpdateGames(m.ShelveProperties));
+
         }
 
         private void UpdateMostPlayedGame()

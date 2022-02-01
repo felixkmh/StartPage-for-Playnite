@@ -8,6 +8,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Data;
 
 namespace LandingPage.ViewModels
@@ -213,41 +214,43 @@ namespace LandingPage.ViewModels
             var changed = false;
 
             IEnumerable<Game> gameSelection = games.Skip(shelveProperties.SkippedGames).Take(shelveProperties.NumberOfGames);
-            foreach (var game in gameSelection)
-            {
-                if (collection.FirstOrDefault(item => item.Game?.Id == game.Id) is GameModel model)
+            Application.Current.Dispatcher.Invoke(() => {
+                foreach (var game in gameSelection)
                 {
-                    if (model.Game.LastActivity != game.LastActivity)
+                    if (collection.FirstOrDefault(item => item.Game?.Id == game.Id) is GameModel model)
+                    {
+                        if (model.Game.LastActivity != game.LastActivity)
+                        {
+                            changed = true;
+                        }
+                        model.Game = game;
+                    }
+                    else if (collection.FirstOrDefault(item => gameSelection.All(s => s.Id != item.Game?.Id)) is GameModel unusedModel)
                     {
                         changed = true;
+                        collection.Remove(unusedModel);
+                        unusedModel.Game = game;
+                        collection.Add(unusedModel);
                     }
-                    model.Game = game;
+                    else
+                    {
+                        changed = true;
+                        collection.Add(new GameModel(game));
+                    }
                 }
-                else if (collection.FirstOrDefault(item => gameSelection.All(s => s.Id != item.Game?.Id)) is GameModel unusedModel)
+                for (int j = collection.Count - 1; j >= 0; --j)
                 {
-                    changed = true;
-                    collection.Remove(unusedModel);
-                    unusedModel.Game = game;
-                    collection.Add(unusedModel);
+                    if (gameSelection.All(g => g.Id != collection[j].Game?.Id))
+                    {
+                        changed = true;
+                        collection.RemoveAt(j);
+                    }
                 }
-                else
+                if (changed && collection.Count > 1)
                 {
-                    changed = true;
-                    collection.Add(new GameModel(game));
+                    collection.Move(collection.Count - 1, 0);
                 }
-            }
-            for (int j = collection.Count - 1; j >= 0; --j)
-            {
-                if (gameSelection.All(g => g.Id != collection[j].Game?.Id))
-                {
-                    changed = true;
-                    collection.RemoveAt(j);
-                }
-            }
-            if (changed && collection.Count > 1)
-            {
-                collection.Move(collection.Count - 1, 0);
-            }
+            });
         }
     }
 }

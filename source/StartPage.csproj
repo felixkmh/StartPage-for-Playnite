@@ -93,6 +93,12 @@
     <Compile Include="Models\Clock.cs" />
     <Compile Include="Models\GameActivity\GameActivity.cs" />
     <Compile Include="Models\GameActivity\PlayTimePerSource.cs" />
+    <Compile Include="Models\GameFilters\CategoryFilter.cs" />
+    <Compile Include="Models\GameFilters\CompletionFilter.cs" />
+    <Compile Include="Models\GameFilters\GenreFilter.cs" />
+    <Compile Include="Models\GameFilters\IFilter.cs" />
+    <Compile Include="Models\GameFilters\ScoreFilter.cs" />
+    <Compile Include="Models\GameFilters\TagFilter.cs" />
     <Compile Include="Models\GameGroup.cs" />
     <Compile Include="Models\GameModel.cs" />
     <Compile Include="Models\LandingPage.cs" />
