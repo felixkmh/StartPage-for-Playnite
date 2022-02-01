@@ -208,7 +208,8 @@
                     </Setter>
                     <Setter Property="Content" TargetName="PopupTrailerContentControl">
                         <Setter.Value>
-                            <MediaElement Source="{Binding TrailerUri}" Stretch="UniformToFill" Volume="0" LoadedBehavior="Play" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            <controls:TrailerPlayer Source="{Binding TrailerUri}" Stretch="UniformToFill" 
+                                          Volume="0" LoadedBehavior="Play" HorizontalAlignment="Center" VerticalAlignment="Center" IsMuted="True"/>
                         </Setter.Value>
                     </Setter>
                 </Trigger>

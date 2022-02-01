@@ -64,6 +64,9 @@
     <Compile Include="Controls\SidewaysTextBlock.xaml.cs">
       <DependentUpon>SidewaysTextBlock.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\TrailerPlayer.xaml.cs">
+      <DependentUpon>TrailerPlayer.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Converters\AchievementsToProgressConverter.cs" />
     <Compile Include="Converters\AchievementToImageConverter.cs" />
     <Compile Include="Converters\ActualHeightToWidthConverter.cs" />
@@ -243,6 +246,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\SidewaysTextBlock.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\TrailerPlayer.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
