@@ -62,8 +62,8 @@
     <sys:String x:Key="LOC_SPG_IgnoreHidden">忽略已隐藏游戏</sys:String>
     <sys:String x:Key="LOC_SPG_AddShelve">添加展架</sys:String>
     <sys:String x:Key="LOC_SPG_ShowMostPlayedGames">显示最常游玩的游戏</sys:String>
-    <sys:String x:Key="LOC_SPG_SkippedGames">忽略：</sys:String>
-    <sys:String x:Key="LOC_SPG_ExtendShelve">延长展栏</sys:String>
+    <sys:String x:Key="LOC_SPG_SkippedGames">跳过：</sys:String>
+    <sys:String x:Key="LOC_SPG_ExtendShelve">延长展架</sys:String>
     <sys:String x:Key="LOC_SPG_BackgroundGameInfoOpacity">游戏信息栏不透明度：</sys:String>
     <sys:String x:Key="LOC_SPG_BackgroundAnimationDuration">动画持续时间：</sys:String>
     <sys:String x:Key="LOC_SPG_BackgroundRefreshInterval">刷新间隔（分钟）：</sys:String>
