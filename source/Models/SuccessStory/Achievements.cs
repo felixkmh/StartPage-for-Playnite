@@ -125,7 +125,7 @@ namespace LandingPage.Models.SuccessStory
                         }
                     }
                 }
-                return null;
+                return new Uri(@"/StartPagePlugin;component/star.png", UriKind.Relative);
             }
         }
 
