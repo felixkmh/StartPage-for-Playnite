@@ -79,6 +79,7 @@
     <Compile Include="Converters\LogConverter.cs" />
     <Compile Include="Converters\MultiplyConverter.cs" />
     <Compile Include="Converters\NullToHiddenConverter.cs" />
+    <Compile Include="Converters\ObjectToGroupHeaderConverter.cs" />
     <Compile Include="Converters\OneMinusConverter.cs" />
     <Compile Include="Converters\UriToBitmapImageConverter.cs" />
     <Compile Include="Converters\VisibilityInverter.cs" />
@@ -136,6 +137,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="packages.config" />
+    <Resource Include="StarRating.ttf" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="transparent_noise.png" />

@@ -32,7 +32,15 @@ namespace LandingPage.Models
         [Description("LOCTimePlayed")]
         Playtime,
         [Description("LOCGameReleaseDateTitle")]
-        ReleaseDate
+        ReleaseDate,
+        [Description("LOCCriticScore")]
+        CriticScore,
+        [Description("LOCUserScore")]
+        UserScore,
+        [Description("LOCCommunityScore")]
+        CommunityScore,
+        [Description("LOCCompletionStatus")]
+        CompletionStatus
     }
 
     [TypeConverter(typeof(EnumDescriptionTypeConverter))]
@@ -43,7 +51,17 @@ namespace LandingPage.Models
         [Description("LOCGameLastActivityTitle")]
         LastActivity,
         [Description("LOCDateAddedLabel")]
-        DateAdded
+        DateAdded,
+        [Description("LOCCriticScore")]
+        CriticScore,
+        [Description("LOCUserScore")]
+        UserScore,
+        [Description("LOCCommunityScore")]
+        CommunityScore,
+        [Description("LOCLibrary")]
+        Library,
+        [Description("LOCCompletionStatus")]
+        CompletionStatus
     }
 
     public class ShelveProperties : ObservableObject
@@ -80,5 +98,26 @@ namespace LandingPage.Models
 
         private bool favoritesOnly = false;
         public bool FavoritesOnly { get => favoritesOnly; set => SetValue(ref favoritesOnly, value); }
+
+        private HashSet<Guid> categories = new HashSet<Guid>();
+        public HashSet<Guid> Categories { get => categories; set => SetValue(ref categories, value); }
+
+        private HashSet<Guid> tags = new HashSet<Guid>();
+        public HashSet<Guid> Tags { get => tags; set => SetValue(ref tags, value); }
+
+        private HashSet<Guid> completionStatus = new HashSet<Guid>();
+        public HashSet<Guid> CompletionStatus { get => completionStatus; set => SetValue(ref completionStatus, value); }
+
+        private HashSet<Guid> features = new HashSet<Guid>();
+        public HashSet<Guid> Features { get => features; set => SetValue(ref features, value); }
+
+        private HashSet<Guid> platforms = new HashSet<Guid>();
+        public HashSet<Guid> Platforms { get => platforms; set => SetValue(ref platforms, value); }
+
+        private HashSet<Guid> sources = new HashSet<Guid>();
+        public HashSet<Guid> Sources { get => sources; set => SetValue(ref sources, value); }
+
+        private HashSet<Guid> genres = new HashSet<Guid>();
+        public HashSet<Guid> Genres { get => genres; set => SetValue(ref genres, value); }
     }
 }

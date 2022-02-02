@@ -2,6 +2,7 @@
 using Playnite.SDK;
 using Playnite.SDK.Models;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -74,9 +75,136 @@ namespace LandingPage.ViewModels
                     || e.PropertyName == nameof(ShelveProperties.IgnoreHidden)
                     || e.PropertyName == nameof(ShelveProperties.NumberOfGames))
                 {
-                    
+
                 }
                 UpdateGames(shelveProperties);
+            }
+        }
+
+        public class ToggleFilter : ObservableObject
+        {
+            public ToggleFilter(Guid id, string name, HashSet<Guid> source, ShelveViewModel viewModel, bool isChecked = false)
+            {
+                ViewModel = viewModel;
+                Source = source;
+                this.id = id;
+                this.name = name;
+                this.isChecked = isChecked;
+            }
+
+            private Guid id;
+            public Guid Id { get => id; set => SetValue(ref id, value); }
+            private string name;
+            public string Name { get => name; set => SetValue(ref name, value); }
+            private bool isChecked;
+            public bool IsChecked { get => isChecked;
+                set
+                {
+                    var oldValue = isChecked;
+                    SetValue(ref isChecked, value);
+                    if (value)
+                    {
+                        Source.Add(id);
+                    } else
+                    {
+                        Source.Remove(id);
+                    }
+                    if (oldValue != isChecked)
+                    {
+                        ViewModel.UpdateGames(ViewModel.ShelveProperties);
+                    }
+                }
+            }
+
+            public HashSet<Guid> Source { get; private set; }
+            public ShelveViewModel ViewModel { get; private set; }
+        }
+
+        public IEnumerable<ToggleFilter> Categories => playniteAPI.Database.Categories
+                .Select(item => new ToggleFilter(item.Id, item.Name, shelveProperties.Categories, this, shelveProperties.Categories?.Contains(item.Id) ?? false)).OrderByDescending(f => f.IsChecked).ThenBy(f => f.Name);
+
+        public IEnumerable<ToggleFilter> Tags => playniteAPI.Database.Tags
+                .Select(item => new ToggleFilter(item.Id, item.Name, shelveProperties.Tags, this, shelveProperties.Tags?.Contains(item.Id) ?? false)).OrderByDescending(f => f.IsChecked).ThenBy(f => f.Name);
+
+        public IEnumerable<ToggleFilter> CompletionStatus => playniteAPI.Database.CompletionStatuses
+                .Select(item => new ToggleFilter(item.Id, item.Name, shelveProperties.CompletionStatus, this, shelveProperties.CompletionStatus?.Contains(item.Id) ?? false)).OrderByDescending(f => f.IsChecked).ThenBy(f => f.Name);
+
+        public IEnumerable<ToggleFilter> Features => playniteAPI.Database.Features
+                .Select(item => new ToggleFilter(item.Id, item.Name, shelveProperties.Features, this, shelveProperties.Features?.Contains(item.Id) ?? false)).OrderByDescending(f => f.IsChecked).ThenBy(f => f.Name);
+
+        public IEnumerable<ToggleFilter> Platforms => playniteAPI.Database.Platforms
+                .Select(item => new ToggleFilter(item.Id, item.Name, shelveProperties.Platforms, this, shelveProperties.Platforms?.Contains(item.Id) ?? false)).OrderByDescending(f => f.IsChecked).ThenBy(f => f.Name);
+
+        public IEnumerable<ToggleFilter> Sources => playniteAPI.Database.Sources
+                .Select(item => new ToggleFilter(item.Id, item.Name, shelveProperties.Sources, this, shelveProperties.Sources?.Contains(item.Id) ?? false)).OrderByDescending(f => f.IsChecked).ThenBy(f => f.Name);
+
+        public IEnumerable<ToggleFilter> Genres => playniteAPI.Database.Genres
+                .Select(item => new ToggleFilter(item.Id, item.Name, shelveProperties.Genres, this, shelveProperties.Genres?.Contains(item.Id) ?? false)).OrderByDescending(f => f.IsChecked).ThenBy(f => f.Name);
+
+        internal class ScoreGroupComparer : IComparer, IComparer<ScoreGroup>
+        {
+            public readonly static ScoreGroupComparer Ascending = new ScoreGroupComparer(false);
+            public readonly static ScoreGroupComparer Descending = new ScoreGroupComparer(true);
+
+            private ScoreGroupComparer(bool descending)
+            {
+                multiplier = descending ? -1 : 1;
+            }
+
+            private int multiplier = 1;
+
+            public int Compare(object x, object y)
+            {
+                if (x is CollectionViewGroup xView && y is CollectionViewGroup yView)
+                {
+                    if (xView.Name is ScoreGroup xGroup && yView.Name is ScoreGroup yGroup)
+                    {
+                        return Compare(xGroup, yGroup);
+                    }
+                }
+                return 0;
+            }
+
+            public int Compare(ScoreGroup x, ScoreGroup y)
+            {
+                if (x != ScoreGroup.None && y != ScoreGroup.None)
+                {
+                    var xScore = (int)x + 1;
+                    var yScore = (int)y + 1;
+                    return multiplier * xScore.CompareTo(yScore);
+                }
+                if (x == ScoreGroup.None && y != ScoreGroup.None) return 1;
+                if (y == ScoreGroup.None && x != ScoreGroup.None) return -1;
+                return 0;
+            }
+        }
+
+        internal class ScoreComparer : IComparer, IComparer<int?>
+        {
+            public readonly static ScoreComparer Ascending = new ScoreComparer(false);
+            public readonly static ScoreComparer Descending = new ScoreComparer(true);
+
+            private ScoreComparer(bool descending)
+            {
+                multiplier = descending ? -1 : 1;
+            }
+
+            private int multiplier = 1;
+
+            public int Compare(object x, object y)
+            {
+                return Compare((int?)x, (int?)x);
+            }
+
+            public int Compare(int? x, int? y)
+            {
+                if (x is int xScore && y is int yScore)
+                {
+                    return multiplier * xScore.CompareTo(yScore);
+                }
+                if (x == null && y != null) return 1;
+                if (y == null && x != null) return -1;
+                return 0;
             }
         }
 
@@ -108,10 +236,53 @@ namespace LandingPage.ViewModels
                         groupDescriptions.Add(newGroupDescription);
                         break;
                     }
+                case GroupingField.CriticScore:
+                    {
+                        newGroupDescription.PropertyName = "Game.CriticScoreGroup";
+                        //var newSortDescription = new SortDescription { PropertyName = "Name" };
+                        //newGroupDescription.SortDescriptions.Add(newSortDescription);
+                        newGroupDescription.CustomSort = ScoreGroupComparer.Descending;
+                        groupDescriptions.Add(newGroupDescription);
+                        break;
+                    }
+                case GroupingField.UserScore:
+                    {
+                        newGroupDescription.PropertyName = "Game.UserScoreGroup";
+                        //var newSortDescription = new SortDescription { PropertyName = "Name" };
+                        //newGroupDescription.SortDescriptions.Add(newSortDescription);
+                        newGroupDescription.CustomSort = ScoreGroupComparer.Descending;
+                        groupDescriptions.Add(newGroupDescription);
+                        break;
+                    }
+                case GroupingField.CommunityScore:
+                    {
+                        newGroupDescription.PropertyName = "Game.CommunityScoreGroup";
+                        //var newSortDescription = new SortDescription { PropertyName = "Name" };
+                        //newGroupDescription.SortDescriptions.Add(newSortDescription);
+                        newGroupDescription.CustomSort = ScoreGroupComparer.Descending;
+                        groupDescriptions.Add(newGroupDescription);
+                        break;
+                    }
+                case GroupingField.Library:
+                    {
+                        newGroupDescription.PropertyName = "Source";
+                        var newSortDescription = new SortDescription { PropertyName = "Name" };
+                        newGroupDescription.SortDescriptions.Add(newSortDescription);
+                        groupDescriptions.Add(newGroupDescription);
+                        break;
+                    }
+                case GroupingField.CompletionStatus:
+                    {
+                        newGroupDescription.PropertyName = "Game.CompletionStatus";
+                        var newSortDescription = new SortDescription { Direction = (ListSortDirection)shelveProperties.Order, PropertyName = "Name" };
+                        newGroupDescription.SortDescriptions.Add(newSortDescription);
+                        groupDescriptions.Add(newGroupDescription);
+                        break;
+                    }
                 default:
                     break;
             }
-            
+
         }
 
         private static void UpdateSorting(ShelveProperties shelveProperties, CollectionViewSource cvs)
@@ -126,7 +297,7 @@ namespace LandingPage.ViewModels
                     newSortDescription.PropertyName = "Game.Name";
                     break;
                 case SortingField.SortingName:
-                    newSortDescription.PropertyName = "Game.SortingName";
+                    newSortDescription.PropertyName = "SortingName";
                     break;
                 case SortingField.LastActivity:
                     newSortDescription.PropertyName = "Game.LastActivity";
@@ -136,6 +307,21 @@ namespace LandingPage.ViewModels
                     break;
                 case SortingField.Playtime:
                     newSortDescription.PropertyName = "Game.Playtime";
+                    break;
+                case SortingField.UserScore:
+                    newSortDescription.PropertyName = "Game.UserScore";
+                    break;
+                case SortingField.CommunityScore:
+                    newSortDescription.PropertyName = "Game.CommunityScore";
+                    break;
+                case SortingField.CriticScore:
+                    newSortDescription.PropertyName = "Game.CriticScore";
+                    break;
+                case SortingField.ReleaseDate:
+                    newSortDescription.PropertyName = "Game.ReleaseDate";
+                    break;
+                case SortingField.CompletionStatus:
+                    newSortDescription.PropertyName = "Game.CompletionStatus";
                     break;
                 default:
                     break;
@@ -151,65 +337,74 @@ namespace LandingPage.ViewModels
             sortDescriptions.Add(new SortDescription { Direction = (ListSortDirection)shelveProperties.Order, PropertyName = sortDescription.PropertyName });
         }
 
+        internal IEnumerable<T> OrderBy<T, U>(IEnumerable<T> enumerable, Func<T, U> func, Order order = Order.Descending)
+        {
+            if (order == Order.Descending)
+            {
+                return enumerable.OrderByDescending(func);
+            }
+            return enumerable.OrderBy(func);
+        }
+
         public void UpdateGames(ShelveProperties shelveProperties)
         {
             IEnumerable<Game> games = playniteAPI.Database.Games
                             .Where(g => g.Favorite || !shelveProperties.FavoritesOnly)
                             .Where(g => !g.Hidden || !shelveProperties.IgnoreHidden)
                             .Where(g => g.IsInstalled || !shelveProperties.InstalledOnly);
+            // apply filters
+            if (shelveProperties.Categories.Any())
+                games = games.Where(g => g.CategoryIds?.Any(id => shelveProperties.Categories.Contains(id)) ?? false);
+            if (shelveProperties.Genres.Any())
+                games = games.Where(g => g.GenreIds?.Any(id => shelveProperties.Genres.Contains(id)) ?? false);
+            if (shelveProperties.Tags.Any())
+                games = games.Where(g => g.TagIds?.Any(id => shelveProperties.Tags.Contains(id)) ?? false);
+            if (shelveProperties.CompletionStatus.Any())
+                games = games.Where(g => shelveProperties.CompletionStatus.Contains(g.CompletionStatusId));
+            if (shelveProperties.Features.Any())
+                games = games.Where(g => g.FeatureIds?.Any(id => shelveProperties.Features.Contains(id)) ?? false);
+            if (shelveProperties.Sources.Any())
+                games = games.Where(g => shelveProperties.Sources.Contains(g.SourceId));
+            if (shelveProperties.Platforms.Any())
+                games = games.Where(g => g.PlatformIds?.Any(id => shelveProperties.Platforms.Contains(id)) ?? false);
 
-            if (shelveProperties.Order == Order.Ascending)
+            switch (shelveProperties.SortBy)
             {
-                switch (shelveProperties.SortBy)
-                {
-                    case SortingField.Name:
-                        games = games.OrderBy(g => g.Name);
-                        break;
-                    case SortingField.SortingName:
-                        games = games.OrderBy(g => g.SortingName);
-                        break;
-                    case SortingField.LastActivity:
-                        games = games.OrderBy(g => g.LastActivity);
-                        break;
-                    case SortingField.DateAdded:
-                        games = games.OrderBy(g => g.Added);
-                        break;
-                    case SortingField.Playtime:
-                        games = games.OrderBy(g => g.Playtime);
-                        break;
-                    case SortingField.ReleaseDate:
-                        games = games.OrderBy(g => g.ReleaseDate);
-                        break;
-                    default:
-                        break;
-                }
+                case SortingField.Name:
+                    games = OrderBy(games, g => g.Name, shelveProperties.Order);
+                    break;
+                case SortingField.SortingName:
+                    games = OrderBy(games, g => string.IsNullOrEmpty(g.SortingName) ? g.Name : g.SortingName, shelveProperties.Order);
+                    break;
+                case SortingField.LastActivity:
+                    games = OrderBy(games, g => g.LastActivity, shelveProperties.Order);
+                    break;
+                case SortingField.DateAdded:
+                    games = OrderBy(games, g => g.Added, shelveProperties.Order);
+                    break;
+                case SortingField.Playtime:
+                    games = OrderBy(games, g => g.Playtime, shelveProperties.Order);
+                    break;
+                case SortingField.ReleaseDate:
+                    games = OrderBy(games, g => g.ReleaseDate, shelveProperties.Order);
+                    break;
+                case SortingField.UserScore:
+                    games = games.OrderBy(g => g.UserScore, shelveProperties.Order == Order.Ascending ? ScoreComparer.Ascending : ScoreComparer.Descending);
+                    break;
+                case SortingField.CommunityScore:
+                    games = games.OrderBy(g => g.CommunityScore, shelveProperties.Order == Order.Ascending ? ScoreComparer.Ascending : ScoreComparer.Descending);
+                    break;
+                case SortingField.CriticScore:
+                    games = games.OrderBy(g => g.CriticScore, shelveProperties.Order == Order.Ascending ? ScoreComparer.Ascending : ScoreComparer.Descending);
+                    break;
+                case SortingField.CompletionStatus:
+                    games = OrderBy(games, g => g.CompletionStatus, shelveProperties.Order);
+                    break;
+                default:
+                    break;
             }
-            else
-            {
-                switch (shelveProperties.SortBy)
-                {
-                    case SortingField.Name:
-                        games = games.OrderByDescending(g => g.Name);
-                        break;
-                    case SortingField.SortingName:
-                        games = games.OrderByDescending(g => g.SortingName);
-                        break;
-                    case SortingField.LastActivity:
-                        games = games.OrderByDescending(g => g.LastActivity);
-                        break;
-                    case SortingField.DateAdded:
-                        games = games.OrderByDescending(g => g.Added);
-                        break;
-                    case SortingField.Playtime:
-                        games = games.OrderByDescending(g => g.Playtime);
-                        break;
-                    case SortingField.ReleaseDate:
-                        games = games.OrderByDescending(g => g.ReleaseDate);
-                        break;
-                    default:
-                        break;
-                }
-            }
+
+
             var collection = Games;
             var changed = false;
 

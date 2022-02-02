@@ -14,6 +14,8 @@ namespace LandingPage.Models
 {
     public class GameModel : ObservableObject
     {
+        private readonly static GameSource DefaultGameSource = new GameSource("Playnite");
+
         public GameModel(Game game)
         {
             Game = game;
@@ -42,7 +44,20 @@ namespace LandingPage.Models
         }
 
         private Game game = null;
-        public Game Game { get => game; set { if (value != game) { SetValue(ref game, value); OnPropertyChanged(nameof(LogoUri)); } } }
+        public Game Game
+        { 
+            get => game;
+            set
+            {
+                if (value != game) 
+                {
+                    SetValue(ref game, value);
+                    OnPropertyChanged(nameof(LogoUri));
+                    OnPropertyChanged(nameof(SortingName));
+                    OnPropertyChanged(nameof(TrailerUri));
+                }
+            }
+        }
 
         public Uri LogoUri
         {
@@ -80,6 +95,9 @@ namespace LandingPage.Models
                 return null;
             } 
         }
+
+        public string SortingName => string.IsNullOrEmpty(Game?.SortingName) ? Game?.Name : Game?.SortingName;
+        public GameSource Source => Game?.Source ?? DefaultGameSource;
 
         public ICommand OpenCommand { get; private set; }
 

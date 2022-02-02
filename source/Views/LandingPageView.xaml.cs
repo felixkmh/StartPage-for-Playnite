@@ -16,6 +16,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using static LandingPage.ViewModels.ShelveViewModel;
 
 namespace LandingPage.Views
 {
@@ -183,6 +184,16 @@ namespace LandingPage.Views
                     viewModel.CurrentlyHoveredGame = null;
                 }
             }
+        }
+
+        private void ComboBox_DropDownOpened(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ComboBox_DropDownClosed(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -72,6 +72,7 @@
         <conv:DoubleToGridLengthConverter x:Key="DoubleToGridLengthConverter"/>
         <conv:IEnumerableNullOrEmptyToVisibilityConverter x:Key="IEnumerableNullOrEmptyToVisibilityConverter"/>
         <conv:BoolToGridLengthConverter x:Key="BoolToGridLengthConverter"/>
+        <conv:ObjectToGroupHeaderConverter x:Key="ObjectToGroupHeaderConverter"/>
         <DataTemplate x:Key="GameCoverDataTemplate" DataType="{x:Type lpm:GameModel}">
             <StackPanel Orientation="Horizontal" MouseEnter="StackPanel_MouseEnter" MouseLeave="StackPanel_MouseLeave">
                 <Grid ClipToBounds="True"
@@ -263,50 +264,18 @@
                 </DataTrigger>
             </DataTemplate.Triggers>
         </DataTemplate>
-        <CollectionViewSource x:Key="RecentlyAddedSource" Source="{Binding RecentlyAddedGames}" IsLiveGroupingRequested="True" IsLiveSortingRequested="True">
-            <CollectionViewSource.SortDescriptions>
-                <scm:SortDescription PropertyName="Game.Added" Direction="Descending"/>
-            </CollectionViewSource.SortDescriptions>
-            <CollectionViewSource.GroupDescriptions>
-                <PropertyGroupDescription PropertyName="Game.Added.Date">
-                    <PropertyGroupDescription.SortDescriptions>
-                        <scm:SortDescription PropertyName="Name" Direction="Descending"/>
-                    </PropertyGroupDescription.SortDescriptions>
-                </PropertyGroupDescription>
-            </CollectionViewSource.GroupDescriptions>
-        </CollectionViewSource>
-        <CollectionViewSource x:Key="RecentlyPlayedSource" Source="{Binding RecentlyPlayedGames}" IsLiveGroupingRequested="True" IsLiveSortingRequested="True">
-            <CollectionViewSource.SortDescriptions>
-                <scm:SortDescription PropertyName="Game.LastActivity" Direction="Descending"/>
-            </CollectionViewSource.SortDescriptions>
-            <CollectionViewSource.GroupDescriptions>
-                <PropertyGroupDescription PropertyName="Game.LastActivity.Date">
-                    <PropertyGroupDescription.SortDescriptions>
-                        <scm:SortDescription PropertyName="Name" Direction="Descending"/>
-                    </PropertyGroupDescription.SortDescriptions>
-                </PropertyGroupDescription>
-            </CollectionViewSource.GroupDescriptions>
-        </CollectionViewSource>
-        <CollectionViewSource x:Key="FavoritesSource" Source="{Binding FavoriteGames}" IsLiveGroupingRequested="True" IsLiveSortingRequested="True">
-            <CollectionViewSource.SortDescriptions>
-                <scm:SortDescription PropertyName="Game.LastActivity" Direction="Descending"/>
-            </CollectionViewSource.SortDescriptions>
-            <CollectionViewSource.GroupDescriptions>
-                <PropertyGroupDescription PropertyName="Game.LastActivity.Date">
-                    <PropertyGroupDescription.SortDescriptions>
-                        <scm:SortDescription PropertyName="Name" Direction="Descending"/>
-                    </PropertyGroupDescription.SortDescriptions>
-                </PropertyGroupDescription>
-            </CollectionViewSource.GroupDescriptions>
-        </CollectionViewSource>
         <Style x:Key="GameGroupBox" TargetType="{x:Type GroupBox}" BasedOn="{StaticResource {x:Type GroupBox}}">
             <Setter Property="Padding" Value="0" />
             <Setter Property="Margin" Value="0"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type GroupBox}">
-                        <DockPanel>
-                            <Border DockPanel.Dock="Top" Padding="5,0">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition SharedSizeGroup="GroupHeaderSize"/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <Border Grid.Row="0" Padding="5,0">
                                 <Border BorderThickness="0,0,0,1" BorderBrush="{StaticResource NormalBrush}" Padding="0">
                                     <TextBlock Style="{StaticResource BaseTextBlockStyle}" Margin="{TemplateBinding Padding}">
                                         <ContentPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" ContentSource="Header"
@@ -314,9 +283,9 @@
                                     </TextBlock>
                                 </Border>
                             </Border>
-                            <ContentPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" DockPanel.Dock="Top"
+                            <ContentPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" Grid.Row="1"
                                               Margin="0"/>
-                        </DockPanel>
+                        </Grid>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
@@ -682,7 +651,8 @@
                         </Grid>
                     </Grid>
 
-                    <ItemsControl ItemsSource="{Binding ShelveViewModels}" Grid.Row="2" VerticalAlignment="Bottom" x:Name="ShelvesItemsControl" VerticalContentAlignment="Bottom">
+                    <ItemsControl ItemsSource="{Binding ShelveViewModels}" Grid.Row="2" VerticalAlignment="Bottom" x:Name="ShelvesItemsControl" VerticalContentAlignment="Bottom"
+                                  Grid.IsSharedSizeScope="True">
                         <ItemsControl.ItemsPanel>
                             <ItemsPanelTemplate>
                                 <UniformGrid Columns="1" VerticalAlignment="Bottom"/>
@@ -698,12 +668,133 @@
                                                 <TextBlock Text="" FontFamily="IcoFont"/>
                                             </ToggleButton.Content>
                                         </ToggleButton>
-                                        <Popup StaysOpen="False" Placement="Right" PlacementTarget="{Binding ElementName=shelvetoggle}" IsOpen="{Binding IsChecked, ElementName=shelvetoggle, Delay=100}" DataContext="{Binding .}">
-                                            <Border Background="{DynamicResource PopupBackgroundBrush}" Padding="8" CornerRadius="8">
-                                                <StackPanel>
+                                        <Popup StaysOpen="False" Placement="Right" PlacementTarget="{Binding ElementName=shelvetoggle}" x:Name="SettingsPopup"
+                                               IsOpen="{Binding IsChecked, ElementName=shelvetoggle, Delay=100}"
+                                               DataContext="{x:Null}">
+                                            <Border Background="{DynamicResource PopupBackgroundBrush}" Padding="8" CornerRadius="8" MinWidth="260" MaxWidth="400">
+                                                <StackPanel Grid.IsSharedSizeScope="True">
                                                     <TextBox Text="{Binding ShelveProperties.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="2"/>
                                                     <CheckBox Content="{DynamicResource LOCGameIsGameInstalledTitle}" IsChecked="{Binding ShelveProperties.InstalledOnly}" Margin="2"/>
                                                     <CheckBox Content="{DynamicResource LOCQuickFilterFavorites}" IsChecked="{Binding ShelveProperties.FavoritesOnly}" Margin="2"/>
+                                                    <Grid>
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition SharedSizeGroup="FilterLabelWidht"/>
+                                                            <ColumnDefinition Width="*"/>
+                                                        </Grid.ColumnDefinitions>
+                                                        <TextBlock Grid.Column="0" VerticalAlignment="Center" Text="{DynamicResource LOCPlatformsTitle}" Style="{StaticResource {x:Type TextBlock}}" Margin="2"/>
+                                                        <ComboBox ItemsSource="{Binding Platforms}" Margin="2" Grid.Column="1"
+                                                                  StaysOpenOnEdit="True" IsSynchronizedWithCurrentItem="False" IsEditable="True"
+                                                                  IsTextSearchEnabled="True" IsTextSearchCaseSensitive="False"
+                                                                  TextSearch.TextPath="Name" DropDownOpened="ComboBox_DropDownOpened" DropDownClosed="ComboBox_DropDownClosed">
+                                                            <ComboBox.ItemTemplate>
+                                                                <DataTemplate>
+                                                                    <CheckBox Content="{Binding Name}" IsChecked="{Binding IsChecked, Mode=TwoWay}"/>
+                                                                </DataTemplate>
+                                                            </ComboBox.ItemTemplate>
+                                                        </ComboBox>
+                                                    </Grid>
+                                                    <Grid>
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition SharedSizeGroup="FilterLabelWidht"/>
+                                                            <ColumnDefinition Width="*"/>
+                                                        </Grid.ColumnDefinitions>
+                                                        <TextBlock Grid.Column="0" VerticalAlignment="Center" Text="{DynamicResource LOCGenresLabel}" Style="{StaticResource {x:Type TextBlock}}" Margin="2"/>
+                                                        <ComboBox ItemsSource="{Binding Genres}" Margin="2" Grid.Column="1"
+                                                                  StaysOpenOnEdit="True" IsSynchronizedWithCurrentItem="False" IsEditable="True"
+                                                                  IsTextSearchEnabled="True" IsTextSearchCaseSensitive="False"
+                                                                  TextSearch.TextPath="Name" DropDownOpened="ComboBox_DropDownOpened" DropDownClosed="ComboBox_DropDownClosed">
+                                                            <ComboBox.ItemTemplate>
+                                                                <DataTemplate>
+                                                                    <CheckBox Content="{Binding Name}" IsChecked="{Binding IsChecked, Mode=TwoWay}"/>
+                                                                </DataTemplate>
+                                                            </ComboBox.ItemTemplate>
+                                                        </ComboBox>
+                                                    </Grid>
+                                                    <Grid>
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition SharedSizeGroup="FilterLabelWidht"/>
+                                                            <ColumnDefinition Width="*"/>
+                                                        </Grid.ColumnDefinitions>
+                                                        <TextBlock Grid.Column="0" VerticalAlignment="Center" Text="{DynamicResource LOCCategoriesLabel}" Style="{StaticResource {x:Type TextBlock}}" Margin="2"/>
+                                                        <ComboBox ItemsSource="{Binding Categories}" Margin="2" Grid.Column="1"
+                                                                  StaysOpenOnEdit="True" IsSynchronizedWithCurrentItem="False" IsEditable="True"
+                                                                  IsTextSearchEnabled="True" IsTextSearchCaseSensitive="False"
+                                                                  TextSearch.TextPath="Name" DropDownOpened="ComboBox_DropDownOpened" DropDownClosed="ComboBox_DropDownClosed">
+                                                            <ComboBox.ItemTemplate>
+                                                                <DataTemplate>
+                                                                    <CheckBox Content="{Binding Name}" IsChecked="{Binding IsChecked, Mode=TwoWay}"/>
+                                                                </DataTemplate>
+                                                            </ComboBox.ItemTemplate>
+                                                        </ComboBox>
+                                                    </Grid>
+                                                    <Grid>
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition SharedSizeGroup="FilterLabelWidht"/>
+                                                            <ColumnDefinition Width="*"/>
+                                                        </Grid.ColumnDefinitions>
+                                                        <TextBlock Grid.Column="0" VerticalAlignment="Center" Text="{DynamicResource LOCTagsLabel}" Style="{StaticResource {x:Type TextBlock}}" Margin="2"/>
+                                                        <ComboBox ItemsSource="{Binding Tags}" Margin="2" Grid.Column="1"
+                                                                  StaysOpenOnEdit="True" IsSynchronizedWithCurrentItem="False" IsEditable="True"
+                                                                  IsTextSearchEnabled="True" IsTextSearchCaseSensitive="False"
+                                                                  TextSearch.TextPath="Name" DropDownOpened="ComboBox_DropDownOpened" DropDownClosed="ComboBox_DropDownClosed">
+                                                            <ComboBox.ItemTemplate>
+                                                                <DataTemplate>
+                                                                    <CheckBox Content="{Binding Name}" IsChecked="{Binding IsChecked, Mode=TwoWay}"/>
+                                                                </DataTemplate>
+                                                            </ComboBox.ItemTemplate>
+                                                        </ComboBox>
+                                                    </Grid>
+                                                    <Grid>
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition SharedSizeGroup="FilterLabelWidht"/>
+                                                            <ColumnDefinition Width="*"/>
+                                                        </Grid.ColumnDefinitions>
+                                                        <TextBlock Grid.Column="0" VerticalAlignment="Center" Text="{DynamicResource LOCFeaturesLabel}" Style="{StaticResource {x:Type TextBlock}}" Margin="2"/>
+                                                        <ComboBox ItemsSource="{Binding Features}" Margin="2" Grid.Column="1"
+                                                                  StaysOpenOnEdit="True" IsSynchronizedWithCurrentItem="False" IsEditable="True"
+                                                                  IsTextSearchEnabled="True" IsTextSearchCaseSensitive="False"
+                                                                  TextSearch.TextPath="Name" DropDownOpened="ComboBox_DropDownOpened" DropDownClosed="ComboBox_DropDownClosed">
+                                                            <ComboBox.ItemTemplate>
+                                                                <DataTemplate>
+                                                                    <CheckBox Content="{Binding Name}" IsChecked="{Binding IsChecked, Mode=TwoWay}"/>
+                                                                </DataTemplate>
+                                                            </ComboBox.ItemTemplate>
+                                                        </ComboBox>
+                                                    </Grid>
+                                                    <Grid>
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition SharedSizeGroup="FilterLabelWidht"/>
+                                                            <ColumnDefinition Width="*"/>
+                                                        </Grid.ColumnDefinitions>
+                                                        <TextBlock Grid.Column="0" VerticalAlignment="Center" Text="{DynamicResource LOCCompletionStatus}" Style="{StaticResource {x:Type TextBlock}}" Margin="2"/>
+                                                        <ComboBox ItemsSource="{Binding CompletionStatus}" Margin="2" Grid.Column="1"
+                                                                  StaysOpenOnEdit="True" IsSynchronizedWithCurrentItem="False" IsEditable="True"
+                                                                  IsTextSearchEnabled="True" IsTextSearchCaseSensitive="False"
+                                                                  TextSearch.TextPath="Name" DropDownOpened="ComboBox_DropDownOpened" DropDownClosed="ComboBox_DropDownClosed">
+                                                            <ComboBox.ItemTemplate>
+                                                                <DataTemplate>
+                                                                    <CheckBox Content="{Binding Name}" IsChecked="{Binding IsChecked, Mode=TwoWay}"/>
+                                                                </DataTemplate>
+                                                            </ComboBox.ItemTemplate>
+                                                        </ComboBox>
+                                                    </Grid>
+                                                    <Grid>
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition SharedSizeGroup="FilterLabelWidht"/>
+                                                            <ColumnDefinition Width="*"/>
+                                                        </Grid.ColumnDefinitions>
+                                                        <TextBlock Grid.Column="0" VerticalAlignment="Center" Text="{DynamicResource LOCSourcesLabel}" Style="{StaticResource {x:Type TextBlock}}" Margin="2"/>
+                                                        <ComboBox ItemsSource="{Binding Sources}" Margin="2" Grid.Column="1"
+                                                                  StaysOpenOnEdit="True" IsSynchronizedWithCurrentItem="False" IsEditable="True"
+                                                                  IsTextSearchEnabled="True" IsTextSearchCaseSensitive="False"
+                                                                  TextSearch.TextPath="Name" DropDownOpened="ComboBox_DropDownOpened" DropDownClosed="ComboBox_DropDownClosed">
+                                                            <ComboBox.ItemTemplate>
+                                                                <DataTemplate>
+                                                                    <CheckBox Content="{Binding Name}" IsChecked="{Binding IsChecked, Mode=TwoWay}"/>
+                                                                </DataTemplate>
+                                                            </ComboBox.ItemTemplate>
+                                                        </ComboBox>
+                                                    </Grid>
                                                     <CheckBox Content="{DynamicResource LOC_SPG_IgnoreHidden}" IsChecked="{Binding ShelveProperties.IgnoreHidden}" Margin="2"/>
                                                     <DockPanel LastChildFill="False">
                                                         <TextBlock Text="{DynamicResource LOC_SPG_NumberOfGames}" VerticalAlignment="Center" Style="{StaticResource {x:Type TextBlock}}" Margin="2"/>
@@ -781,7 +872,7 @@
                                                         <Setter Property="Template">
                                                             <Setter.Value>
                                                                 <ControlTemplate>
-                                                                    <GroupBox Style="{StaticResource GameGroupBox}" Header="{Binding Name, Converter={StaticResource DateTimeToLastPlayedConverter}}">
+                                                                    <GroupBox Style="{StaticResource GameGroupBox}" Header="{Binding Name, Converter={StaticResource ObjectToGroupHeaderConverter}}">
                                                                         <ItemsPresenter/>
                                                                     </GroupBox>
                                                                 </ControlTemplate>
@@ -798,6 +889,11 @@
                                         </ListBox.ItemsPanel>
                                     </ListBox>
                                 </DockPanel>
+                                <DataTemplate.Triggers>
+                                    <Trigger Property="IsOpen" SourceName="SettingsPopup" Value="True">
+                                        <Setter Property="DataContext" TargetName="SettingsPopup" Value="{Binding .}"/>
+                                    </Trigger>
+                                </DataTemplate.Triggers>
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>
