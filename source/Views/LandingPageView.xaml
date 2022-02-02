@@ -796,7 +796,7 @@
                                                             </ComboBox.ItemTemplate>
                                                         </ComboBox>
                                                     </Grid>
-                                                    <Button Margin="2" Content="{DynamicResource LOCClearFilters}" Command="{Binding ResetFiltersCommand}"/>
+                                                    <Button Margin="2" Content="{DynamicResource LOCClearFilters}" Command="{Binding ResetFiltersCommand}" Padding="2"/>
                                                     <DockPanel LastChildFill="False">
                                                         <TextBlock Text="{DynamicResource LOC_SPG_NumberOfGames}" VerticalAlignment="Center" Style="{StaticResource {x:Type TextBlock}}" Margin="2"/>
                                                         <numeric:IntBox Value="{Binding ShelveProperties.NumberOfGames, UpdateSourceTrigger=PropertyChanged}" Margin="2"
@@ -821,7 +821,7 @@
                                                         <TextBlock Margin="2" Text="{DynamicResource LOCMenuSortByTitle}" Foreground="{DynamicResource TextBrush}" DockPanel.Dock="Left" VerticalAlignment="Center"/>
                                                         <ComboBox Margin="2" ItemsSource="{Binding Source={ext:EnumBindingSource {x:Type lpm:SortingField}}}" SelectedItem="{Binding ShelveProperties.SortBy}" Text="Sorting" DockPanel.Dock="Right"/>
                                                     </DockPanel>
-                                                    <Button Click="Button_Click" Margin="2">
+                                                    <Button Click="Button_Click" Margin="2" Padding="2">
                                                         <Button.Content>
                                                             <TextBlock Text="{Binding ShelveProperties.Order}"/>
                                                         </Button.Content>
@@ -830,14 +830,14 @@
                                                         <TextBlock Margin="2" Text="{DynamicResource LOCMenuGroupByTitle}" DockPanel.Dock="Left" Foreground="{DynamicResource TextBrush}" VerticalAlignment="Center"/>
                                                         <ComboBox Margin="2" ItemsSource="{Binding Source={ext:EnumBindingSource {x:Type lpm:GroupingField}}}" SelectedItem="{Binding ShelveProperties.GroupBy}" Text="Grouping" DockPanel.Dock="Right"/>
                                                     </DockPanel>
-                                                    <Button Margin="2"
+                                                    <Button Margin="2" Padding="2"
                                                             Command="{Binding RelativeSource={RelativeSource AncestorType=local:LandingPageView, Mode=FindAncestor}, Path=DataContext.ExtendShelveCommand}"
                                                             CommandParameter="{Binding .}">
                                                         <Button.Content>
                                                             <TextBlock Text="{DynamicResource LOC_SPG_ExtendShelve}"/>
                                                         </Button.Content>
                                                     </Button>
-                                                    <Button Margin="2"
+                                                    <Button Margin="2" Padding="2"
                                                             Command="{Binding RelativeSource={RelativeSource AncestorType=local:LandingPageView, Mode=FindAncestor}, Path=DataContext.RemoveShelveCommand}"
                                                             CommandParameter="{Binding .}">
                                                         <Button.Content>
