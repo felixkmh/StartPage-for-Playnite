@@ -375,19 +375,19 @@ namespace LandingPage.ViewModels
                             .Where(g => !g.Hidden || !shelveProperties.IgnoreHidden)
                             .Where(g => g.IsInstalled || !shelveProperties.InstalledOnly);
             // apply filters
-            if (shelveProperties.Categories.Any())
+            if (shelveProperties.Categories?.Any() ?? false)
                 games = games.Where(g => g.CategoryIds?.Any(id => shelveProperties.Categories.Contains(id)) ?? false);
-            if (shelveProperties.Genres.Any())
+            if (shelveProperties.Genres?.Any() ?? false)
                 games = games.Where(g => g.GenreIds?.Any(id => shelveProperties.Genres.Contains(id)) ?? false);
-            if (shelveProperties.Tags.Any())
+            if (shelveProperties.Tags?.Any() ?? false)
                 games = games.Where(g => g.TagIds?.Any(id => shelveProperties.Tags.Contains(id)) ?? false);
-            if (shelveProperties.CompletionStatus.Any())
+            if (shelveProperties.CompletionStatus?.Any() ?? false)
                 games = games.Where(g => shelveProperties.CompletionStatus.Contains(g.CompletionStatusId));
-            if (shelveProperties.Features.Any())
+            if (shelveProperties.Features?.Any() ?? false)
                 games = games.Where(g => g.FeatureIds?.Any(id => shelveProperties.Features.Contains(id)) ?? false);
-            if (shelveProperties.Sources.Any())
+            if (shelveProperties.Sources?.Any() ?? false)
                 games = games.Where(g => shelveProperties.Sources.Contains(g.SourceId));
-            if (shelveProperties.Platforms.Any())
+            if (shelveProperties.Platforms?.Any() ?? false)
                 games = games.Where(g => g.PlatformIds?.Any(id => shelveProperties.Platforms.Contains(id)) ?? false);
 
             switch (shelveProperties.SortBy)
