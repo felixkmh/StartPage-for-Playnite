@@ -11,6 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Data;
+using System.Windows.Input;
 
 namespace LandingPage.ViewModels
 {
@@ -27,6 +28,9 @@ namespace LandingPage.ViewModels
         private ObservableCollection<GameModel> games = new ObservableCollection<GameModel>();
         public ObservableCollection<GameModel> Games { get => games; set => SetValue(ref games, value); }
 
+        private ICommand resetFiltersCommand;
+        public ICommand ResetFiltersCommand { get => resetFiltersCommand; set => SetValue(ref resetFiltersCommand, value); }
+
         public ShelveViewModel(ShelveProperties shelveProperties, IPlayniteAPI playniteAPI)
         {
             collectionViewSource.SortDescriptions.Add(new System.ComponentModel.SortDescription());
@@ -41,6 +45,24 @@ namespace LandingPage.ViewModels
             UpdateGames(shelveProperties);
             this.shelveProperties.PropertyChanged += ShelveProperties_PropertyChanged;
             PropertyChanged += ShelveViewModel_PropertyChanged;
+            resetFiltersCommand = new RelayCommand(() =>
+            {
+                ShelveProperties.Categories.Clear();
+                ShelveProperties.Tags.Clear();
+                ShelveProperties.Genres.Clear();
+                ShelveProperties.Platforms.Clear();
+                ShelveProperties.Sources.Clear();
+                ShelveProperties.Features.Clear();
+                ShelveProperties.CompletionStatus.Clear();
+                OnPropertyChanged(nameof(Categories));
+                OnPropertyChanged(nameof(Tags));
+                OnPropertyChanged(nameof(Genres));
+                OnPropertyChanged(nameof(Platforms));
+                OnPropertyChanged(nameof(Sources));
+                OnPropertyChanged(nameof(Features));
+                OnPropertyChanged(nameof(CompletionStatus));
+                UpdateGames(ShelveProperties);
+            });
         }
 
         private void ShelveViewModel_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
