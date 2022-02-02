@@ -8,7 +8,7 @@ Packages:
       - added filters for shelves
       - added grouping options
       - added sorting options
-      - fixed crash related to achievements (@Lacro59)
+      - 'fixed crash related to achievements (@Lacro59)'
       - fixed sorting by release date not working
       - localization updates
   - Version: 1.11.2
