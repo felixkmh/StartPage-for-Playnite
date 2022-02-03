@@ -25,7 +25,7 @@
     <sys:String x:Key="LOC_SPG_BackgroundImageSourceMostPlayed">Más jugado</sys:String>
     <sys:String x:Key="LOC_SPG_BackgroundImageSourceRandom">Aleatorio</sys:String>
     <sys:String x:Key="LOC_SPG_BackgroundImageSourceLastSelected">Última selección</sys:String>
-    <sys:String x:Key="LOC_SPG_BackgroundImageSourceLastHovered">Last Hovered</sys:String>
+    <sys:String x:Key="LOC_SPG_BackgroundImageSourceLastHovered">Última vez que se pasó por encima</sys:String>
 
     <!-- Settings -->
     <sys:String x:Key="LOC_SPG_ShowGameActivity">Mostrar vistas de GameActivity</sys:String>
@@ -59,12 +59,12 @@
     <sys:String x:Key="LOC_SPG_ShowGlobalProgressBar">(No soportado) Mostrar barra de progreso global</sys:String>
     <sys:String x:Key="LOC_SPG_SwitchWithLowPrio">Bajar prioridad al cambiar la vista (activado automáticamente al bloquearse Playnite)</sys:String>
     <sys:String x:Key="LOC_SPG_UnsupportedToolTip">Utilice esta función bajo su propio riesgo. No está soportada oficialmente por la PlayniteAPI y por lo tanto puede conducir a un comportamiento inesperado.</sys:String>
-    <sys:String x:Key="LOC_SPG_IgnoreHidden">Ignore hidden games</sys:String>
-    <sys:String x:Key="LOC_SPG_AddShelve">Add Shelve</sys:String>
-    <sys:String x:Key="LOC_SPG_ShowMostPlayedGames">Show Most Played Games</sys:String>
-    <sys:String x:Key="LOC_SPG_SkippedGames">Skip:</sys:String>
-    <sys:String x:Key="LOC_SPG_ExtendShelve">Extend Shelve</sys:String>
-    <sys:String x:Key="LOC_SPG_BackgroundGameInfoOpacity">Game Info Opacity:</sys:String>
-    <sys:String x:Key="LOC_SPG_BackgroundAnimationDuration">Animation Duration:</sys:String>
-    <sys:String x:Key="LOC_SPG_BackgroundRefreshInterval">Refresh Interval (Minutes):</sys:String>
+    <sys:String x:Key="LOC_SPG_IgnoreHidden">Ignorar los juegos ocultos</sys:String>
+    <sys:String x:Key="LOC_SPG_AddShelve">Añadir Estantería</sys:String>
+    <sys:String x:Key="LOC_SPG_ShowMostPlayedGames">Mostrar los juegos más jugados</sys:String>
+    <sys:String x:Key="LOC_SPG_SkippedGames">Omitir:</sys:String>
+    <sys:String x:Key="LOC_SPG_ExtendShelve">Extender la estantería</sys:String>
+    <sys:String x:Key="LOC_SPG_BackgroundGameInfoOpacity">Opacidad de información del juego:</sys:String>
+    <sys:String x:Key="LOC_SPG_BackgroundAnimationDuration">Duración de la Animación:</sys:String>
+    <sys:String x:Key="LOC_SPG_BackgroundRefreshInterval">Intervalo de actualización (Minutos):</sys:String>
 </ResourceDictionary>
