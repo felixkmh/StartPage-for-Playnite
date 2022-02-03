@@ -461,32 +461,32 @@ namespace LandingPage.ViewModels
                 {
                     case BackgroundImageSource.LastPlayed:
                         {
-                            var mostRecent = recentlyPlayedGames.OrderByDescending(g => g.Game.LastActivity)
-                                                 .FirstOrDefault(g => !string.IsNullOrEmpty(g.Game.BackgroundImage));
-                            var databasePath = mostRecent?.Game.BackgroundImage;
+                            var mostRecent = playniteAPI.Database.Games.OrderByDescending(g => g.LastActivity)
+                                                 .FirstOrDefault(g => !string.IsNullOrEmpty(g.BackgroundImage));
+                            var databasePath = mostRecent?.BackgroundImage;
                             if (!string.IsNullOrEmpty(databasePath))
                             {
                                 var fullPath = playniteAPI.Database.GetFullFilePath(databasePath);
                                 if (Uri.TryCreate(fullPath, UriKind.RelativeOrAbsolute, out var uri))
                                 {
                                     path = uri;
-                                    gameSource = mostRecent.Game;
+                                    gameSource = mostRecent;
                                 }
                             }
                             break;
                         }
                     case BackgroundImageSource.LastAdded:
                         {
-                            var mostRecent = recentlyAddedGames.OrderByDescending(g => g.Game.Added)
-                                                 .FirstOrDefault(g => !string.IsNullOrEmpty(g.Game.BackgroundImage));
-                            var databasePath = mostRecent?.Game.BackgroundImage;
+                            var mostRecent = playniteAPI.Database.Games.OrderByDescending(g => g.Added)
+                                                 .FirstOrDefault(g => !string.IsNullOrEmpty(g.BackgroundImage));
+                            var databasePath = mostRecent?.BackgroundImage;
                             if (!string.IsNullOrEmpty(databasePath))
                             {
                                 var fullPath = playniteAPI.Database.GetFullFilePath(databasePath);
                                 if (Uri.TryCreate(fullPath, UriKind.RelativeOrAbsolute, out var uri))
                                 {
                                     path = uri;
-                                    gameSource = mostRecent.Game;
+                                    gameSource = mostRecent;
                                 }
                             }
                             break;
