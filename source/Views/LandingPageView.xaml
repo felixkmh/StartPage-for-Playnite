@@ -665,7 +665,7 @@
                                         <ToggleButton x:Name="shelvetoggle" DockPanel.Dock="Top" Background="Transparent"
                                                       Visibility="{Binding ElementName=ListDescription, Path=IsMouseOver, Converter={StaticResource BooleanToVisibilityConverter}}">
                                             <ToggleButton.Content>
-                                                <TextBlock Text="" FontFamily="IcoFont"/>
+                                                <TextBlock Text="" FontFamily="{DynamicResource FontIcoFont}"/>
                                             </ToggleButton.Content>
                                         </ToggleButton>
                                         <Popup StaysOpen="False" Placement="Right" PlacementTarget="{Binding ElementName=shelvetoggle}" x:Name="SettingsPopup"
