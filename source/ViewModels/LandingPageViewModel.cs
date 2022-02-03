@@ -461,8 +461,9 @@ namespace LandingPage.ViewModels
                 {
                     case BackgroundImageSource.LastPlayed:
                         {
-                            var mostRecent = playniteAPI.Database.Games.OrderByDescending(g => g.LastActivity)
-                                                 .FirstOrDefault(g => !string.IsNullOrEmpty(g.BackgroundImage));
+                            var mostRecent = playniteAPI.Database.Games
+                                .OrderByDescending(g => g.LastActivity)
+                                .FirstOrDefault(g => !string.IsNullOrEmpty(g.BackgroundImage));
                             var databasePath = mostRecent?.BackgroundImage;
                             if (!string.IsNullOrEmpty(databasePath))
                             {
@@ -477,8 +478,9 @@ namespace LandingPage.ViewModels
                         }
                     case BackgroundImageSource.LastAdded:
                         {
-                            var mostRecent = playniteAPI.Database.Games.OrderByDescending(g => g.Added)
-                                                 .FirstOrDefault(g => !string.IsNullOrEmpty(g.BackgroundImage));
+                            var mostRecent = playniteAPI.Database.Games
+                                .OrderByDescending(g => g.Added)
+                                .FirstOrDefault(g => !string.IsNullOrEmpty(g.BackgroundImage));
                             var databasePath = mostRecent?.BackgroundImage;
                             if (!string.IsNullOrEmpty(databasePath))
                             {
@@ -493,7 +495,9 @@ namespace LandingPage.ViewModels
                         }
                     case BackgroundImageSource.MostPlayed:
                         {
-                            var mostPlayed = playniteAPI.Database.Games.MaxElement(game => game.Playtime);
+                            var mostPlayed = playniteAPI.Database.Games
+                                .Where(g => !string.IsNullOrEmpty(g.BackgroundImage))
+                                .MaxElement(game => game.Playtime);
                             if (mostPlayed.Value is Game)
                             {
                                 var databasePath = mostPlayed.Value?.BackgroundImage;
