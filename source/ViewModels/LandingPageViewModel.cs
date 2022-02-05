@@ -25,14 +25,31 @@ namespace LandingPage.ViewModels
         {
             Uri = uri;
             Opacity = opacity;
+            Position = opacity;
             TTL = LandingPageExtension.Instance.Settings.AnimationDuration;
+            var T = LandingPageExtension.Instance.Settings.AnimationDuration;
+            var a0 = 0;
+            Acceleration = a0;
+            if (T > 0)
+            {
+                Force = (6 - 3 * a0 * T * T) / (T * T * T);
+            } else
+            {
+                Position = 1;
+            }
         }
         public const double MaxTTL = 0;
         internal Uri uri;
         public Uri Uri { get => uri; set => SetValue(ref uri, value); }
         internal double ttl = 0;
         public double TTL { get => ttl; set => SetValue(ref ttl, value); }
+        public double Velocity { get; set; } = 0;
+        public double Acceleration { get; set; } = 0;
+        public double Force { get; set; }
+        internal double position = 0;
+        public double Position { get => Math.Max(0, Math.Min(1, position)); set => SetValue(ref position, value); }
         internal double opacity = 0;
+        public double elapsed = 0;
         public double Opacity { get => Math.Max(0, Math.Min(1, opacity)); set => SetValue(ref opacity, value); }
     }
 
@@ -216,21 +233,33 @@ namespace LandingPage.ViewModels
                         {
                             if (i < BackgroundImageQueue.Count - 1)
                             {
-                                BackgroundImageQueue[i].Opacity = BackgroundImageQueue[i].TTL / Settings.Settings.AnimationDuration;
+                                BackgroundImageQueue[i].Acceleration -= BackgroundImageQueue[i].Force * elapsedSeconds;
                             } else
                             {
-                                BackgroundImageQueue[i].Opacity = 1.0 - (BackgroundImageQueue[i].TTL / Settings.Settings.AnimationDuration);
+                                BackgroundImageQueue[i].Acceleration += BackgroundImageQueue[i].Force * elapsedSeconds;
                             }
+                            BackgroundImageQueue[i].Velocity += BackgroundImageQueue[i].Acceleration * elapsedSeconds;
+                            BackgroundImageQueue[i].Position += BackgroundImageQueue[i].Velocity * elapsedSeconds;
+                            BackgroundImageQueue[i].Opacity = Math.Sqrt(BackgroundImageQueue[i].Position);
+                            BackgroundImageQueue[i].elapsed += elapsedSeconds;
                         }
                         for(int i = BackgroundImageQueue.Count - 2; i >= 0; --i)
                         {
-                            if (BackgroundImageQueue[i].TTL <= 0)
+                            if (BackgroundImageQueue[i].Position <= 0)
                             {
                                 BackgroundImageQueue.RemoveAt(i);
                             }
                         }
-                        if (BackgroundImageQueue.Count == 1 && BackgroundImageQueue.Last().Opacity >= 1.0)
+                        if (BackgroundImageQueue.Count > 0 && BackgroundImageQueue.Last().Position >= 1)
                         {
+                            Debug.WriteLine(string.Format("Animation duration: {0}", BackgroundImageQueue.Last().elapsed));
+                            BackgroundImageQueue.Last().Velocity = 0;
+                            BackgroundImageQueue.Last().Acceleration = 0;
+                            BackgroundImageQueue.Last().Opacity = 1;
+                            for(int i = BackgroundImageQueue.Count - 2; i >= 0; --i)
+                            {
+                                BackgroundImageQueue.RemoveAt(i);
+                            }
                             backgroundImageTimer.Stop();
                             stopwatch.Stop();
                             GC.Collect();
