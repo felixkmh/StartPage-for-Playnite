@@ -20,12 +20,12 @@
     <sys:String x:Key="LOC_SPG_BackgroundTab">الخلفية</sys:String>
     
     <!--BackgroundImageSource Enum-->
-    <sys:String x:Key="LOC_SPG_BackgroundImageSourceLastPlayed">Last Played</sys:String>
+    <sys:String x:Key="LOC_SPG_BackgroundImageSourceLastPlayed">لعبت آخر مرة</sys:String>
     <sys:String x:Key="LOC_SPG_BackgroundImageSourceLastAdded">آخر إضافة</sys:String>
     <sys:String x:Key="LOC_SPG_BackgroundImageSourceMostPlayed">الأكثر لعب</sys:String>
     <sys:String x:Key="LOC_SPG_BackgroundImageSourceRandom">عشوائي</sys:String>
     <sys:String x:Key="LOC_SPG_BackgroundImageSourceLastSelected">اخر إختيار</sys:String>
-    <sys:String x:Key="LOC_SPG_BackgroundImageSourceLastHovered">Last Hovered</sys:String>
+    <sys:String x:Key="LOC_SPG_BackgroundImageSourceLastHovered">اخر تأشير</sys:String>
 
     <!-- Settings -->
     <sys:String x:Key="LOC_SPG_ShowGameActivity">عرض لوحة GameActivity</sys:String>
@@ -48,10 +48,10 @@
     <sys:String x:Key="LOC_SPG_MoveIconToTop">(غير مدعوم) نقل عنصر StartPage إلى أعلى الشريط الجانبي عند الإطلاق</sys:String>
     <sys:String x:Key="LOC_SPG_BlurAmount">نسبة التمويه:</sys:String>
     <sys:String x:Key="LOC_SPG_EffectiveBlur">شعاع الضبابي الفعال:</sys:String>
-    <sys:String x:Key="LOC_SPG_EffectiveBlurToolTip">The effective blur radius is given by (Blur Radius) / (Background Render Scale). A low render scale paired with a low blur radius may lead to undesired results. Decreasing the render scale can yield better performance and can create a stronger blur effect.</sys:String>
+    <sys:String x:Key="LOC_SPG_EffectiveBlurToolTip">أما نصف قطر الضبابي الفعّال فيعطى بواسطة (Background Render Scale) / (Blur Radius). وقد يؤدي مقياس العرض المنخفض المقترن بقطر منخفض الضبابية إلى نتائج غير مرغوب فيها. ومن شأن تخفيض جدول الإنجاز أن يسفر عن أداء أفضل ويمكن أن يخلق أثرا أكثر وضوحا.</sys:String>
     <sys:String x:Key="LOC_SPG_BackgroundScale">مقياس عرض الخلفية:</sys:String>
-    <sys:String x:Key="LOC_SPG_OverlayOpacity">Overlay Opacity:</sys:String>
-    <sys:String x:Key="LOC_SPG_NoiseOpacity">Noise Opacity:</sys:String>
+    <sys:String x:Key="LOC_SPG_OverlayOpacity">شفافية التراكب:</sys:String>
+    <sys:String x:Key="LOC_SPG_NoiseOpacity">شفافية الضوضاء:</sys:String>
     <sys:String x:Key="LOC_SPG_CoverAspectRatio">نسبة جوانب الغطاء</sys:String>
     <sys:String x:Key="LOC_SPG_MaxCoverWidth">أقصى عرض للغلاف</sys:String>
     <sys:String x:Key="LOC_SPG_BackgroundImageSource">تحديد صورة خلفية اللعبة:</sys:String>
