@@ -252,7 +252,7 @@ namespace LandingPage.ViewModels
                         }
                         if (BackgroundImageQueue.Count > 0 && BackgroundImageQueue.Last().Position >= 1)
                         {
-                            Debug.WriteLine(string.Format("Animation duration: {0}", BackgroundImageQueue.Last().elapsed));
+                            // Debug.WriteLine(string.Format("Animation duration: {0}", BackgroundImageQueue.Last().elapsed));
                             BackgroundImageQueue.Last().Velocity = 0;
                             BackgroundImageQueue.Last().Acceleration = 0;
                             BackgroundImageQueue.Last().Opacity = 1;
