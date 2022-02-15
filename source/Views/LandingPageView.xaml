@@ -499,7 +499,7 @@
                             </Style>
                         </GridSplitter.Style>
                     </GridSplitter>
-                    <Grid Grid.Row="0" Grid.IsSharedSizeScope="True" VerticalAlignment="Top">
+                    <Grid Grid.Row="0" Grid.IsSharedSizeScope="True" VerticalAlignment="Stretch">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto" SharedSizeGroup="LeftRight"/>
                             <ColumnDefinition Width="*"/>
@@ -660,11 +660,12 @@
                         </ItemsControl.ItemsPanel>
                         <ItemsControl.ItemTemplate>
                             <DataTemplate DataType="{x:Type lpvm:ShelveViewModel}">
-                                <DockPanel Grid.Row="1" UseLayoutRounding="True" SnapsToDevicePixels="True" VerticalAlignment="Bottom">
-                                    <DockPanel DockPanel.Dock="Left" Background="Transparent" x:Name="ListDescription" LastChildFill="False" VerticalAlignment="Bottom" Height="{Binding ElementName=GamesListBox, Path=ActualHeight}">
+                                <DockPanel Grid.Row="1" UseLayoutRounding="True" SnapsToDevicePixels="True" VerticalAlignment="Bottom" LastChildFill="False" HorizontalAlignment="Center">
+                                    <DockPanel DockPanel.Dock="Left" Background="Transparent" x:Name="ListDescription" LastChildFill="False" VerticalAlignment="Bottom" Height="{Binding ElementName=GamesListBox, Path=ActualHeight}"
+                                               HorizontalAlignment="Right">
                                         <ToggleButton x:Name="shelvetoggle" DockPanel.Dock="Top" Background="Transparent"
                                                       Visibility="{Binding ElementName=ListDescription, Path=IsMouseOver, Converter={StaticResource BooleanToVisibilityConverter}}"
-                                                      Padding="0" Margin="0" BorderThickness="0" BorderBrush="Transparent">
+                                                      Padding="0,4,0,4" Margin="0" BorderThickness="0" BorderBrush="Transparent">
                                             <ToggleButton.Content>
                                                 <TextBlock Text="" FontFamily="{DynamicResource FontIcoFont}"/>
                                             </ToggleButton.Content>
@@ -849,9 +850,9 @@
                                             </Border>
                                         </Popup>
                                         <controls:SidewaysTextBlock Text="{Binding ShelveProperties.Name}" VerticalAlignment="Bottom"
-                                                                DockPanel.Dock="Bottom" Margin="10,10,5,30"/>
+                                                                DockPanel.Dock="Bottom" Margin="10,10,5,30" HorizontalAlignment="Right"/>
                                         <controls:SidewaysTextBlock Text="Placeholder" VerticalAlignment="Bottom" Visibility="Hidden"
-                                                                DockPanel.Dock="Bottom" Margin="10,10,5,30"/>
+                                                                DockPanel.Dock="Bottom" HorizontalAlignment="Right" Margin="10,10,5,30"/>
                                     </DockPanel>
                                     <ListBox x:Name="GamesListBox" 
                                          VerticalAlignment="Bottom"
