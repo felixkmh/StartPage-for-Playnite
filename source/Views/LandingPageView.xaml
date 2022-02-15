@@ -663,7 +663,8 @@
                                 <DockPanel Grid.Row="1" UseLayoutRounding="True" SnapsToDevicePixels="True" VerticalAlignment="Bottom">
                                     <DockPanel DockPanel.Dock="Left" Background="Transparent" x:Name="ListDescription" LastChildFill="False" VerticalAlignment="Bottom" Height="{Binding ElementName=GamesListBox, Path=ActualHeight}">
                                         <ToggleButton x:Name="shelvetoggle" DockPanel.Dock="Top" Background="Transparent"
-                                                      Visibility="{Binding ElementName=ListDescription, Path=IsMouseOver, Converter={StaticResource BooleanToVisibilityConverter}}">
+                                                      Visibility="{Binding ElementName=ListDescription, Path=IsMouseOver, Converter={StaticResource BooleanToVisibilityConverter}}"
+                                                      Padding="0" Margin="0" BorderThickness="0" BorderBrush="Transparent">
                                             <ToggleButton.Content>
                                                 <TextBlock Text="" FontFamily="{DynamicResource FontIcoFont}"/>
                                             </ToggleButton.Content>
