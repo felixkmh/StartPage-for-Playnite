@@ -652,7 +652,7 @@
                     </Grid>
 
                     <ItemsControl ItemsSource="{Binding ShelveViewModels}" Grid.Row="2" VerticalAlignment="Bottom" x:Name="ShelvesItemsControl" VerticalContentAlignment="Bottom"
-                                  Grid.IsSharedSizeScope="True">
+                                  Grid.IsSharedSizeScope="True" HorizontalAlignment="Center">
                         <ItemsControl.ItemsPanel>
                             <ItemsPanelTemplate>
                                 <UniformGrid Columns="1" VerticalAlignment="Bottom"/>
