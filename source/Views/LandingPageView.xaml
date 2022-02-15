@@ -660,7 +660,7 @@
                         </ItemsControl.ItemsPanel>
                         <ItemsControl.ItemTemplate>
                             <DataTemplate DataType="{x:Type lpvm:ShelveViewModel}">
-                                <DockPanel Grid.Row="1" UseLayoutRounding="True" SnapsToDevicePixels="True" VerticalAlignment="Bottom" LastChildFill="False" HorizontalAlignment="Center">
+                                <DockPanel Grid.Row="1" UseLayoutRounding="True" SnapsToDevicePixels="True" VerticalAlignment="Bottom" LastChildFill="False" HorizontalAlignment="Left">
                                     <DockPanel DockPanel.Dock="Left" Background="Transparent" x:Name="ListDescription" LastChildFill="False" VerticalAlignment="Bottom" Height="{Binding ElementName=GamesListBox, Path=ActualHeight}"
                                                HorizontalAlignment="Right">
                                         <ToggleButton x:Name="shelvetoggle" DockPanel.Dock="Top" Background="Transparent"
