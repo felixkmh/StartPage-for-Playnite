@@ -381,13 +381,15 @@ namespace LandingPage.ViewModels
             });
             var thisWeek = GameActivity.Activities
                 .Select(a => new { Game = playniteAPI.Database.Games.Get(a.Id), Items = a.Items.Where(i => i.DateSession.AddDays(7) >= DateTime.Today).ToList() })
-                .Where(a => a.Game is Game && a.Items?.Count > 0);
+                .Where(a => a.Game is Game && a.Items?.Count > 0)
+                .Where(a => (!a.Game.TagIds?.Contains(LandingPageExtension.Instance.SettingsViewModel.Settings.IgnoreMostPlayedTagId) ?? true));
             var mostPlayedThisWeek = thisWeek
                 .Select(a => new { Game = a.Game, Playtime = a.Items.Sum(i => (long)i.ElapsedSeconds) })
                 .MaxElement(g => g.Playtime).Value?.Game;
             var thisMonth = GameActivity.Activities
                 .Select(a => new { Game = playniteAPI.Database.Games.Get(a.Id), Items = a.Items.Where(i => i.DateSession.AddDays(30) >= DateTime.Today).ToList() })
-                .Where(a => a.Game is Game && a.Items?.Count > 0);
+                .Where(a => a.Game is Game && a.Items?.Count > 0)
+                .Where(a => (!a.Game.TagIds?.Contains(LandingPageExtension.Instance.SettingsViewModel.Settings.IgnoreMostPlayedTagId) ?? true));
             var mostPlayedThisMonth = thisMonth
                 .Select(a => new { Game = a.Game, Playtime = a.Items.Sum(i => (long)i.ElapsedSeconds) })
                 .MaxElement(g => g.Playtime).Value?.Game;
@@ -425,7 +427,10 @@ namespace LandingPage.ViewModels
                 groups.Add(group);
             }
 
-            if (playniteAPI.Database.Games.Where(g => !g.Hidden).MaxElement(g => g.Playtime).Value is Game game)
+            if (playniteAPI.Database.Games
+                .Where(g => !g.Hidden)
+                .Where(g => (!g.TagIds?.Contains(LandingPageExtension.Instance.SettingsViewModel.Settings.IgnoreMostPlayedTagId) ?? true))
+                .MaxElement(g => g.Playtime).Value is Game game)
             {
                 var group = new GameGroup();
                 group.Games.Add(new GameModel(game));

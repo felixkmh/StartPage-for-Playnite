@@ -155,6 +155,42 @@ namespace LandingPage
         private List<ShelveProperties> shelveProperties = null;
         public List<ShelveProperties> ShelveProperties { get => shelveProperties; set => SetValue(ref shelveProperties, value); }
 
+        private Guid ignoreTagId;
+        public Guid IgnoreTagId
+        {
+            get
+            {
+                if (LandingPageExtension.Instance.PlayniteApi != null && ignoreTagId == Guid.Empty)
+                {
+                    ignoreTagId = LandingPageExtension.Instance.PlayniteApi.Database.Tags.Add("[SPG] Ignored").Id;
+                }
+                else if (LandingPageExtension.Instance?.PlayniteApi != null && LandingPageExtension.Instance.PlayniteApi.Database.Tags.Get(ignoreTagId) == null)
+                {
+                    ignoreTagId = LandingPageExtension.Instance.PlayniteApi.Database.Tags.Add("[SPG] Ignored").Id;
+                }
+                return ignoreTagId;
+            }
+            set => ignoreTagId = value;
+        }
+
+        private Guid ignoreMostPlayedTagId;
+        public Guid IgnoreMostPlayedTagId
+        {
+            get
+            {
+                if (LandingPageExtension.Instance.PlayniteApi != null && ignoreMostPlayedTagId == Guid.Empty)
+                {
+                    ignoreMostPlayedTagId = LandingPageExtension.Instance.PlayniteApi.Database.Tags.Add("[SPG] Most Played Ignored").Id;
+                }
+                else if (LandingPageExtension.Instance?.PlayniteApi != null && LandingPageExtension.Instance.PlayniteApi.Database.Tags.Get(ignoreMostPlayedTagId) == null)
+                {
+                    ignoreMostPlayedTagId = LandingPageExtension.Instance.PlayniteApi.Database.Tags.Add("[SPG] Most Played Ignored").Id;
+                }
+                return ignoreMostPlayedTagId;
+            }
+            set => ignoreMostPlayedTagId = value;
+        }
+
         // Playnite serializes settings object to a JSON object and saves it as text file.
         // If you want to exclude some property from being saved then use `JsonDontSerialize` ignore attribute.
         [DontSerialize]
