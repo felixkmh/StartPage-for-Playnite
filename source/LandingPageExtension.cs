@@ -49,6 +49,8 @@ namespace LandingPage
             }
         }
 
+        public HashSet<Guid> RunningGames { get; } = new HashSet<Guid>();
+
         internal LandingPageViewModel viewModel = null;
         internal LandingPageViewModel ViewModel
         {
@@ -168,7 +170,7 @@ namespace LandingPage
 
         public override void OnGameStarted(OnGameStartedEventArgs args)
         {
-            // Add code to be executed when game is started running.
+            RunningGames.Add(args.Game.Id);
         }
 
         public override void OnGameStarting(OnGameStartingEventArgs args)
@@ -178,7 +180,7 @@ namespace LandingPage
 
         public override void OnGameStopped(OnGameStoppedEventArgs args)
         {
-            // Add code to be executed when game is preparing to be started.
+            RunningGames.Remove(args.Game.Id);
         }
 
         public override void OnGameUninstalled(OnGameUninstalledEventArgs args)

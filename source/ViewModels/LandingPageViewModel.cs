@@ -297,7 +297,7 @@ namespace LandingPage.ViewModels
                     backgroundRefreshTimer = new DispatcherTimer(DispatcherPriority.Background, Application.Current.Dispatcher);
                     backgroundRefreshTimer.Tick += (s, e) => 
                     {
-                        if (!playniteAPI.Database.Games.Any(g => g.IsRunning))
+                        if (LandingPageExtension.Instance.RunningGames.Count == 0)
                         {
                             UpdateBackgroundImagePath(true);
                         }
