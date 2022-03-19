@@ -155,6 +155,9 @@ namespace LandingPage
         private List<ShelveProperties> shelveProperties = null;
         public List<ShelveProperties> ShelveProperties { get => shelveProperties; set => SetValue(ref shelveProperties, value); }
 
+        private bool skipGamesInPreviousShelves = false;
+        public bool SkipGamesInPreviousShelves { get => skipGamesInPreviousShelves; set => SetValue(ref skipGamesInPreviousShelves, value); }
+
         private Guid ignoreTagId;
         public Guid IgnoreTagId
         {

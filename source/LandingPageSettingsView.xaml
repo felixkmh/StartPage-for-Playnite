@@ -68,6 +68,10 @@
                             <CheckBox IsChecked="{Binding Settings.ShowDetails}" VerticalAlignment="Center" Margin="3"/>
                             <TextBlock Text="{DynamicResource LOC_SPG_ShowGameDetails}" Margin="3" VerticalAlignment="Center"/>
                         </DockPanel>
+                        <DockPanel>
+                            <CheckBox IsChecked="{Binding Settings.SkipGamesInPreviousShelves}" VerticalAlignment="Center" Margin="3"/>
+                            <TextBlock Text="{DynamicResource LOC_SPG_SkipGamesInPreviousShelves}" Margin="3" VerticalAlignment="Center"/>
+                        </DockPanel>
                         <DockPanel LastChildFill="False">
                             <TextBlock Text="{DynamicResource LOC_SPG_NumberOfGames}" VerticalAlignment="Center"/>
                             <numeric:IntBox Value="{Binding Settings.NumberOfGames, UpdateSourceTrigger=PropertyChanged}" 

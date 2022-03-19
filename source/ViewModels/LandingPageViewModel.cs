@@ -183,7 +183,7 @@ namespace LandingPage.ViewModels
             languageSupportsVertical = verticalLanguages.Contains(playniteAPI.ApplicationSettings.Language);
             AddShelveCommand = new RelayCommand(() => 
             {
-                ShelveViewModels.Add(new ShelveViewModel(ShelveProperties.RecentlyPlayed, playniteAPI));
+                ShelveViewModels.Add(new ShelveViewModel(ShelveProperties.RecentlyPlayed, playniteAPI, this));
             });
             RemoveShelveCommand = new RelayCommand<ShelveViewModel>(svm => {if (svm != null) ShelveViewModels.Remove(svm); });
             ExtendShelveCommand = new RelayCommand<ShelveViewModel>(svm =>
@@ -194,7 +194,7 @@ namespace LandingPage.ViewModels
                     var properties = svm.ShelveProperties.Copy();
                     properties.SkippedGames = svm.ShelveProperties.NumberOfGames + svm.ShelveProperties.SkippedGames;
                     properties.Name = string.Empty;
-                    ShelveViewModels.Insert(idx + 1, new ShelveViewModel(properties, playniteAPI));
+                    ShelveViewModels.Insert(idx + 1, new ShelveViewModel(properties, playniteAPI, this));
                 }
             });
             UpdateBackgroundTimer();
@@ -284,6 +284,7 @@ namespace LandingPage.ViewModels
             {
                 UpdateBackgroundImagePath();
                 UpdateBackgroundTimer();
+                Update();
                 Settings.Settings.PropertyChanged += Settings_PropertyChanged;
             }
         }
@@ -333,6 +334,10 @@ namespace LandingPage.ViewModels
             if (e.PropertyName == nameof(LandingPageSettings.BackgroundRefreshInterval))
             {
                 UpdateBackgroundTimer();
+            }
+            if (e.PropertyName == nameof(LandingPageSettings.SkipGamesInPreviousShelves))
+            {
+                Update();
             }
         }
 

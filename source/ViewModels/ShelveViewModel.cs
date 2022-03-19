@@ -31,8 +31,11 @@ namespace LandingPage.ViewModels
         private ICommand resetFiltersCommand;
         public ICommand ResetFiltersCommand { get => resetFiltersCommand; set => SetValue(ref resetFiltersCommand, value); }
 
-        public ShelveViewModel(ShelveProperties shelveProperties, IPlayniteAPI playniteAPI)
+        private LandingPageViewModel landingPageViewModel;
+
+        public ShelveViewModel(ShelveProperties shelveProperties, IPlayniteAPI playniteAPI, LandingPageViewModel landingPageViewModel)
         {
+            this.landingPageViewModel = landingPageViewModel;
             collectionViewSource.SortDescriptions.Add(new System.ComponentModel.SortDescription());
             UpdateOrder(shelveProperties, collectionViewSource);
             UpdateSorting(shelveProperties, collectionViewSource);
@@ -390,6 +393,19 @@ namespace LandingPage.ViewModels
                 games = games.Where(g => shelveProperties.Sources.Contains(g.SourceId));
             if (shelveProperties.Platforms?.Any() ?? false)
                 games = games.Where(g => g.PlatformIds?.Any(id => shelveProperties.Platforms.Contains(id)) ?? false);
+
+            if (LandingPageExtension.Instance.SettingsViewModel.Settings.SkipGamesInPreviousShelves)
+            {
+                var current = landingPageViewModel.ShelveViewModels.IndexOf(this);
+                if (current > -1)
+                {
+                    for(var i = current - 1; i >= 0; --i)
+                    {
+                        ShelveViewModel shelveViewModel = landingPageViewModel.ShelveViewModels[i];
+                        games = games.Where(g => !shelveViewModel.Games.Any(m => m.Game.Id == g.Id));
+                    }
+                }
+            }
 
             switch (shelveProperties.SortBy)
             {

@@ -82,7 +82,7 @@ namespace LandingPage
                     viewModel = new LandingPageViewModel(PlayniteApi, this, SettingsViewModel, successStory, gameActivity);
                     foreach(var shelve in Settings.ShelveProperties)
                     {
-                        viewModel.ShelveViewModels.Add(new ShelveViewModel(shelve, PlayniteApi));
+                        viewModel.ShelveViewModels.Add(new ShelveViewModel(shelve, PlayniteApi, viewModel));
                     }
                     viewModel.Update(true);
                 } else
