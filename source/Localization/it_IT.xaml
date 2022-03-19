@@ -67,4 +67,6 @@
     <sys:String x:Key="LOC_SPG_BackgroundGameInfoOpacity">Opacità informazioni gioco:</sys:String>
     <sys:String x:Key="LOC_SPG_BackgroundAnimationDuration">Durata dell'animazione:</sys:String>
     <sys:String x:Key="LOC_SPG_BackgroundRefreshInterval">Intervallo di aggiornamento (minuti):</sys:String>
+    <sys:String x:Key="LOC_SPG_SkipGamesInPreviousShelves">Skip Games present in preceding Shelves</sys:String>
+    
 </ResourceDictionary>
