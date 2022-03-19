@@ -447,7 +447,14 @@ namespace LandingPage.ViewModels
             var collection = Games;
             var changed = false;
 
-            IEnumerable<Game> gameSelection = games.Skip(shelveProperties.SkippedGames).Take(shelveProperties.NumberOfGames);
+            var skipped = shelveProperties.SkippedGames;
+
+            if (LandingPageExtension.Instance.SettingsViewModel.Settings.SkipGamesInPreviousShelves)
+            {
+                skipped = 0;
+            }
+
+            IEnumerable<Game> gameSelection = games.Skip(skipped).Take(shelveProperties.NumberOfGames);
             Application.Current.Dispatcher.Invoke(() => {
                 foreach (var game in gameSelection)
                 {
