@@ -68,5 +68,6 @@
     <sys:String x:Key="LOC_SPG_BackgroundAnimationDuration">مدة المؤثر الحركي:</sys:String>
     <sys:String x:Key="LOC_SPG_BackgroundRefreshInterval">فاصل التحديث (الدقائق):</sys:String>
     <sys:String x:Key="LOC_SPG_SkipGamesInPreviousShelves">Skip Games present in preceding Shelves</sys:String>
+    <sys:String x:Key="LOC_SPG_EnableTags">Create [SPG] tags on launch. Used to mark games as ignored.</sys:String>
     
 </ResourceDictionary>
