@@ -68,5 +68,6 @@
     <sys:String x:Key="LOC_SPG_BackgroundAnimationDuration">Durata dell'animazione:</sys:String>
     <sys:String x:Key="LOC_SPG_BackgroundRefreshInterval">Intervallo di aggiornamento (minuti):</sys:String>
     <sys:String x:Key="LOC_SPG_SkipGamesInPreviousShelves">Salta i giochi presenti negli scaffali precedenti</sys:String>
+    <sys:String x:Key="LOC_SPG_EnableTags">Create [SPG] tags on launch. Used to mark games as ignored.</sys:String>
     
 </ResourceDictionary>

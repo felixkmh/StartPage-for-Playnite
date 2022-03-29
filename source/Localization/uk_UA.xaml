@@ -67,6 +67,7 @@
     <sys:String x:Key="LOC_SPG_BackgroundGameInfoOpacity">Прозорість інформації про гру:</sys:String>
     <sys:String x:Key="LOC_SPG_BackgroundAnimationDuration">Тривалість анімації:</sys:String>
     <sys:String x:Key="LOC_SPG_BackgroundRefreshInterval">Інтервал оновлення (хвилини):</sys:String>
-    <sys:String x:Key="LOC_SPG_SkipGamesInPreviousShelves">Skip Games present in preceding Shelves</sys:String>
+    <sys:String x:Key="LOC_SPG_SkipGamesInPreviousShelves">Пропустити ігри наявні на попередніх Полицях</sys:String>
+    <sys:String x:Key="LOC_SPG_EnableTags">Створювати теги [SPG] при запуску. Використовується для маркування ігнорованих ігор.</sys:String>
     
 </ResourceDictionary>
