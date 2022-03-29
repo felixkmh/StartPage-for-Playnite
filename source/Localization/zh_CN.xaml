@@ -68,5 +68,6 @@
     <sys:String x:Key="LOC_SPG_BackgroundAnimationDuration">动画持续时间：</sys:String>
     <sys:String x:Key="LOC_SPG_BackgroundRefreshInterval">刷新间隔（分钟）：</sys:String>
     <sys:String x:Key="LOC_SPG_SkipGamesInPreviousShelves">跳过前面的展架中存在的游戏</sys:String>
+    <sys:String x:Key="LOC_SPG_EnableTags">Create [SPG] tags on launch. Used to mark games as ignored.</sys:String>
     
 </ResourceDictionary>
