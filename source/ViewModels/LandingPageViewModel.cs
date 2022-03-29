@@ -384,17 +384,18 @@ namespace LandingPage.ViewModels
                     return -1;
                 return -a.ReleaseDate.Value.CompareTo(b.ReleaseDate.Value);
             });
+            var tagId = LandingPageExtension.Instance.SettingsViewModel.Settings.IgnoreMostPlayedTagId;
             var thisWeek = GameActivity.Activities
                 .Select(a => new { Game = playniteAPI.Database.Games.Get(a.Id), Items = a.Items.Where(i => i.DateSession.AddDays(7) >= DateTime.Today).ToList() })
                 .Where(a => a.Game is Game && a.Items?.Count > 0)
-                .Where(a => (!a.Game.TagIds?.Contains(LandingPageExtension.Instance.SettingsViewModel.Settings.IgnoreMostPlayedTagId) ?? true));
+                .Where(a => !(a.Game.TagIds?.Contains(tagId) ?? false));
             var mostPlayedThisWeek = thisWeek
                 .Select(a => new { Game = a.Game, Playtime = a.Items.Sum(i => (long)i.ElapsedSeconds) })
                 .MaxElement(g => g.Playtime).Value?.Game;
             var thisMonth = GameActivity.Activities
                 .Select(a => new { Game = playniteAPI.Database.Games.Get(a.Id), Items = a.Items.Where(i => i.DateSession.AddDays(30) >= DateTime.Today).ToList() })
                 .Where(a => a.Game is Game && a.Items?.Count > 0)
-                .Where(a => (!a.Game.TagIds?.Contains(LandingPageExtension.Instance.SettingsViewModel.Settings.IgnoreMostPlayedTagId) ?? true));
+                .Where(a => !(a.Game.TagIds?.Contains(tagId) ?? false));
             var mostPlayedThisMonth = thisMonth
                 .Select(a => new { Game = a.Game, Playtime = a.Items.Sum(i => (long)i.ElapsedSeconds) })
                 .MaxElement(g => g.Playtime).Value?.Game;
@@ -434,7 +435,7 @@ namespace LandingPage.ViewModels
 
             if (playniteAPI.Database.Games
                 .Where(g => !g.Hidden)
-                .Where(g => (!g.TagIds?.Contains(LandingPageExtension.Instance.SettingsViewModel.Settings.IgnoreMostPlayedTagId) ?? true))
+                .Where(g => !(g.TagIds?.Contains(tagId) ?? false))
                 .MaxElement(g => g.Playtime).Value is Game game)
             {
                 var group = new GameGroup();
@@ -453,9 +454,18 @@ namespace LandingPage.ViewModels
                     foreach(var group in specialGames)
                     {
                         var currentGroup = groups.FirstOrDefault(g => g.Label == group.Label);
-                        if (currentGroup?.Games?.FirstOrDefault()?.Game is Game updatedGame)
+                        if (currentGroup?.Games?.FirstOrDefault() is GameModel updatedGame)
                         {
-                            group.Games.FirstOrDefault().Game = updatedGame;
+                            if (group.Games.FirstOrDefault()?.Game?.Id != updatedGame?.Game?.Id)
+                            {
+                                if (group.Games.Count > 0)
+                                {
+                                    group.Games[0].Game = updatedGame.Game;
+                                } else
+                                {
+                                    group.Games.Add(updatedGame);
+                                }
+                            }
                         }
                     }
                 }

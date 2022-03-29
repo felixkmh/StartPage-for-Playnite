@@ -6,8 +6,10 @@ using Playnite.SDK.Data;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -158,39 +160,20 @@ namespace LandingPage
         private bool skipGamesInPreviousShelves = false;
         public bool SkipGamesInPreviousShelves { get => skipGamesInPreviousShelves; set => SetValue(ref skipGamesInPreviousShelves, value); }
 
-        private Guid ignoreTagId;
+        private bool enableTagCreation = false;
+        public bool EnableTagCreation { get => enableTagCreation; set => enableTagCreation = value; }
+
+        private Guid ignoreTagId = Guid.Empty;
         public Guid IgnoreTagId
         {
-            get
-            {
-                if (LandingPageExtension.Instance.PlayniteApi != null && ignoreTagId == Guid.Empty)
-                {
-                    ignoreTagId = LandingPageExtension.Instance.PlayniteApi.Database.Tags.Add("[SPG] Ignored").Id;
-                }
-                else if (LandingPageExtension.Instance?.PlayniteApi != null && LandingPageExtension.Instance.PlayniteApi.Database.Tags.Get(ignoreTagId) == null)
-                {
-                    ignoreTagId = LandingPageExtension.Instance.PlayniteApi.Database.Tags.Add("[SPG] Ignored").Id;
-                }
-                return ignoreTagId;
-            }
+            get => ignoreTagId;
             set => ignoreTagId = value;
         }
 
-        private Guid ignoreMostPlayedTagId;
+        private Guid ignoreMostPlayedTagId = Guid.Empty;
         public Guid IgnoreMostPlayedTagId
         {
-            get
-            {
-                if (LandingPageExtension.Instance.PlayniteApi != null && ignoreMostPlayedTagId == Guid.Empty)
-                {
-                    ignoreMostPlayedTagId = LandingPageExtension.Instance.PlayniteApi.Database.Tags.Add("[SPG] Most Played Ignored").Id;
-                }
-                else if (LandingPageExtension.Instance?.PlayniteApi != null && LandingPageExtension.Instance.PlayniteApi.Database.Tags.Get(ignoreMostPlayedTagId) == null)
-                {
-                    ignoreMostPlayedTagId = LandingPageExtension.Instance.PlayniteApi.Database.Tags.Add("[SPG] Most Played Ignored").Id;
-                }
-                return ignoreMostPlayedTagId;
-            }
+            get => ignoreMostPlayedTagId;
             set => ignoreMostPlayedTagId = value;
         }
 

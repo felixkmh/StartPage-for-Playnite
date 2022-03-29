@@ -143,6 +143,10 @@
                             <CheckBox IsChecked="{Binding Settings.ShowNotificationButtons}" VerticalAlignment="Center" Margin="3"/>
                             <TextBlock Text="{DynamicResource LOC_SPG_ShowNotificationButtons}" Margin="3" VerticalAlignment="Center"/>
                         </DockPanel>
+                        <DockPanel>
+                            <CheckBox IsChecked="{Binding Settings.EnableTagCreation}" VerticalAlignment="Center" Margin="3"/>
+                            <TextBlock Text="{DynamicResource LOC_SPG_EnableTags}" Margin="3" VerticalAlignment="Center"/>
+                        </DockPanel>
                         <!--<StackPanel Orientation="Horizontal">
                     <CheckBox IsChecked="{Binding Settings.KeepInMemory}" VerticalAlignment="Center" Margin="3"/>
                     <TextBlock Text="{DynamicResource LOC_SPG_KeepInMemory}" Margin="3" VerticalAlignment="Center"/>

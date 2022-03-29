@@ -373,7 +373,7 @@ namespace LandingPage.ViewModels
 
         public void UpdateGames(ShelveProperties shelveProperties)
         {
-            IEnumerable<Game> games = playniteAPI.Database.Games
+            IEnumerable<Game> games = playniteAPI.Database.Games.AsParallel()
                             .Where(g => (!g.TagIds?.Contains(LandingPageExtension.Instance.SettingsViewModel.Settings.IgnoreTagId)) ?? true)
                             .Where(g => g.Favorite || !shelveProperties.FavoritesOnly)
                             .Where(g => !g.Hidden || !shelveProperties.IgnoreHidden)
