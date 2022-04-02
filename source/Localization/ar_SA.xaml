@@ -67,7 +67,7 @@
     <sys:String x:Key="LOC_SPG_BackgroundGameInfoOpacity">شفافية معلومات اللعبة:</sys:String>
     <sys:String x:Key="LOC_SPG_BackgroundAnimationDuration">مدة المؤثر الحركي:</sys:String>
     <sys:String x:Key="LOC_SPG_BackgroundRefreshInterval">فاصل التحديث (الدقائق):</sys:String>
-    <sys:String x:Key="LOC_SPG_SkipGamesInPreviousShelves">Skip Games present in preceding Shelves</sys:String>
-    <sys:String x:Key="LOC_SPG_EnableTags">Create [SPG] tags on launch. Used to mark games as ignored.</sys:String>
+    <sys:String x:Key="LOC_SPG_SkipGamesInPreviousShelves">تخطي الألعاب الموجودة في الرفوف السابقة</sys:String>
+    <sys:String x:Key="LOC_SPG_EnableTags">إنشاء وسوم [SPG] عند التشغيل. تستخدم لوضع علامة على الألعاب لتجاهلها.</sys:String>
     
 </ResourceDictionary>
