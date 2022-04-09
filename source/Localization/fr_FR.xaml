@@ -25,11 +25,11 @@
     <sys:String x:Key="LOC_SPG_BackgroundImageSourceMostPlayed">Le plus joué</sys:String>
     <sys:String x:Key="LOC_SPG_BackgroundImageSourceRandom">Aléatoire</sys:String>
     <sys:String x:Key="LOC_SPG_BackgroundImageSourceLastSelected">Dernière sélection</sys:String>
-    <sys:String x:Key="LOC_SPG_BackgroundImageSourceLastHovered">Last Hovered</sys:String>
+    <sys:String x:Key="LOC_SPG_BackgroundImageSourceLastHovered">Dernier survol</sys:String>
 
     <!-- Settings -->
     <sys:String x:Key="LOC_SPG_ShowGameActivity">Afficher les vues GameActivity</sys:String>
-    <sys:String x:Key="LOC_SPG_NumberOfGames">nombre de jeux :</sys:String>
+    <sys:String x:Key="LOC_SPG_NumberOfGames">Nombre de jeux :</sys:String>
     <sys:String x:Key="LOC_SPG_NextRandomBackground">Image de fond aléatoire suivante</sys:String>
     <sys:String x:Key="LOC_SPG_ShowFavorites">Afficher les jeux favoris</sys:String>
     <sys:String x:Key="LOC_SPG_ShowClock">Afficher l'horloge</sys:String>
@@ -60,14 +60,14 @@
     <sys:String x:Key="LOC_SPG_SwitchWithLowPrio">Diminuer la priorité lors du changement de modes d'affichage (fait automatiquement en cas de crash)</sys:String>
     <sys:String x:Key="LOC_SPG_UnsupportedToolTip">Cette fonctionnalité n'est pas supportée par l'API de Playnite et pourrait provoquer des erreurs.</sys:String>
     <sys:String x:Key="LOC_SPG_IgnoreHidden">Ignorer les jeux masqués</sys:String>
-    <sys:String x:Key="LOC_SPG_AddShelve">Add Shelve</sys:String>
+    <sys:String x:Key="LOC_SPG_AddShelve">Ajouter une étagère</sys:String>
     <sys:String x:Key="LOC_SPG_ShowMostPlayedGames">Afficher les jeux les plus joués</sys:String>
-    <sys:String x:Key="LOC_SPG_SkippedGames">Skip:</sys:String>
-    <sys:String x:Key="LOC_SPG_ExtendShelve">Extend Shelve</sys:String>
-    <sys:String x:Key="LOC_SPG_BackgroundGameInfoOpacity">Game Info Opacity:</sys:String>
+    <sys:String x:Key="LOC_SPG_SkippedGames">Ignorer :</sys:String>
+    <sys:String x:Key="LOC_SPG_ExtendShelve">Étendre l'étagère</sys:String>
+    <sys:String x:Key="LOC_SPG_BackgroundGameInfoOpacity">Opacité des infos de jeu:</sys:String>
     <sys:String x:Key="LOC_SPG_BackgroundAnimationDuration">Durée de l'animation :</sys:String>
     <sys:String x:Key="LOC_SPG_BackgroundRefreshInterval">Intervalle d'actualisation (minutes) :</sys:String>
-    <sys:String x:Key="LOC_SPG_SkipGamesInPreviousShelves">Skip Games present in preceding Shelves</sys:String>
-    <sys:String x:Key="LOC_SPG_EnableTags">Create [SPG] tags on launch. Used to mark games as ignored.</sys:String>
+    <sys:String x:Key="LOC_SPG_SkipGamesInPreviousShelves">Ignorer les jeux présents dans les étagères précédentes</sys:String>
+    <sys:String x:Key="LOC_SPG_EnableTags">Crée des étiquettes [SPG] au lancement. Utilisées pour marquer les jeux comme étant ignorés.</sys:String>
     
 </ResourceDictionary>
