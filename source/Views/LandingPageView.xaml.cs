@@ -33,14 +33,7 @@ namespace LandingPage.Views
         public LandingPageView(LandingPageViewModel model)
         {
             DataContext = model;
-            model.Clock.DayChanged += Clock_DayChanged;
             InitializeComponent();
-        }
-
-        private void Clock_DayChanged(object sender, EventArgs e)
-        {
-            ShelvesItemsControl.ItemsSource.OfType<ShelveViewModel>().ForEach(svm => svm.CollectionViewSource.View.Refresh());
-            GC.Collect();
         }
 
         private void ListBoxItem_MouseUp(object sender, MouseButtonEventArgs e)

@@ -275,7 +275,15 @@ namespace LandingPage.ViewModels
 
         private void Clock_DayChanged(object sender, EventArgs e)
         {
-            
+            foreach(var model in ShelveViewModels)
+            {
+                for(int i = model.Games.Count - 1; i >= 0; --i)
+                {
+                    model.Games.RemoveAt(i);
+                }
+            }
+            GC.Collect();
+            Update(false);
         }
 
         private void Settings_PropertyChanged1(object sender, PropertyChangedEventArgs e)
