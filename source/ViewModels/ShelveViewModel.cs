@@ -455,6 +455,12 @@ namespace LandingPage.ViewModels
             }
 
             IEnumerable<Game> gameSelection = games.Skip(skipped).Take(shelveProperties.NumberOfGames);
+            if (!gameSelection.Any())
+            {
+                var dummies = new List<Game>();
+                dummies.Add(new Game());
+                gameSelection = dummies;
+            }
             Application.Current.Dispatcher.Invoke(() => {
                 foreach (var game in gameSelection)
                 {
