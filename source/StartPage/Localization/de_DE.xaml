@@ -1,0 +1,73 @@
+﻿<?xml version="1.0"?>
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:sys="clr-namespace:System;assembly=mscorlib">
+
+    <sys:String x:Key="LOC_SPG_MostPlayedGame">Meistgespielt</sys:String>
+    <sys:String x:Key="LOC_SPG_LatestReleaseGame">Neu Veröffentlicht</sys:String>
+    <sys:String x:Key="LOC_SPG_RecentAchievements">Aktuelle Erfolge</sys:String>
+    <sys:String x:Key="LOC_SPG_RecentlyAddedGames">Zuletzt hinzugefügt</sys:String>
+
+    <sys:String x:Key="LOC_SPG_DailyPlaytime">Tägliche Spielzeit</sys:String>
+    <sys:String x:Key="LOC_SPG_WeeklyPlaytime">Wöchentliche Spielzeit</sys:String>
+    <sys:String x:Key="LOC_SPG_MonthlyPlaytime">Monatliche Spielzeit</sys:String>
+    <sys:String x:Key="LOC_SPG_PlaytimePerSource">Spielzeit pro Quelle</sys:String>
+    <sys:String x:Key="LOC_SPG_MostPlayedWeekly">Meistgespielt in dieser Woche</sys:String>
+    <sys:String x:Key="LOC_SPG_TotalPlaytime" xml:space="preserve">Gesamt:  </sys:String>
+    <sys:String x:Key="LOC_SPG_LastSevenDays">Letzten 7 Tage</sys:String>
+    <sys:String x:Key="LOC_SPG_LastThirtyDays">Letzten 30 Tage</sys:String>
+    
+    <!--Settings Tabs-->
+    <sys:String x:Key="LOC_SPG_CommonTab">Allgemein</sys:String>
+    <sys:String x:Key="LOC_SPG_BackgroundTab">Hintergrund</sys:String>
+    
+    <!--BackgroundImageSource Enum-->
+    <sys:String x:Key="LOC_SPG_BackgroundImageSourceLastPlayed">Zuletzt gespielt</sys:String>
+    <sys:String x:Key="LOC_SPG_BackgroundImageSourceLastAdded">Zuletzt hinzugefügt</sys:String>
+    <sys:String x:Key="LOC_SPG_BackgroundImageSourceMostPlayed">Meistgespielt</sys:String>
+    <sys:String x:Key="LOC_SPG_BackgroundImageSourceRandom">Zufällig</sys:String>
+    <sys:String x:Key="LOC_SPG_BackgroundImageSourceLastSelected">Zuletzt ausgewählt</sys:String>
+    <sys:String x:Key="LOC_SPG_BackgroundImageSourceLastHovered">Zuletzt überfahren</sys:String>
+
+    <!-- Settings -->
+    <sys:String x:Key="LOC_SPG_ShowGameActivity">GameActivity-Ansichten anzeigen</sys:String>
+    <sys:String x:Key="LOC_SPG_NumberOfGames">Spielanzahl:</sys:String>
+    <sys:String x:Key="LOC_SPG_NextRandomBackground">Nächster zufälliger Hintergrund</sys:String>
+    <sys:String x:Key="LOC_SPG_ShowFavorites">Favoriten anzeigen</sys:String>
+    <sys:String x:Key="LOC_SPG_ShowClock">Uhr anzeigen</sys:String>
+    <sys:String x:Key="LOC_SPG_ShowRecentlyPlayed">Zuletzt gespielte Spiele anzeigen</sys:String>
+    <sys:String x:Key="LOC_SPG_ShowRecentAchievements">Aktuelle Erfolge mit SuccessStory anzeigen</sys:String>
+    <sys:String x:Key="LOC_SPG_ShowRecentlyAdded">Kürzlich hinzugefügte Spiele anzeigen</sys:String>
+    <sys:String x:Key="LOC_SPG_StartupItem">(Nicht unterstützt) Beim Start aktiviertes SidebarItem</sys:String>
+    <sys:String x:Key="LOC_SPG_MaxRecentAchievements">Maximale Anzahl neuer Erfolge:</sys:String>
+    <sys:String x:Key="LOC_SPG_MaxRecentAchievementsPerGame">Maximale Anzahl neuer Erfolge pro Spiel:</sys:String>
+    <sys:String x:Key="LOC_SPG_ShowTitelOnCover">Titel auf dem Spielcover anzeigen</sys:String>
+    <sys:String x:Key="LOC_SPG_ShowGameDetails">Spieldetails anzeigen</sys:String>
+    <sys:String x:Key="LOC_SPG_EnableNotifications">Benachrichtigungen aktivieren</sys:String>
+    <sys:String x:Key="LOC_SPG_MinimizeNotification">Benachrichtigungen beim Start minimieren</sys:String>
+    <sys:String x:Key="LOC_SPG_ShowNotificationButtons">Buttons &quot;Verwerfen&quot; und &quot;Minimieren&quot; anzeigen</sys:String>
+    <sys:String x:Key="LOC_SPG_KeepInMemory">StartPage im Speicher behalten, wenn zu einer anderen Ansicht gewechselt wird</sys:String>
+    <sys:String x:Key="LOC_SPG_MoveIconToTop">(Nicht unterstützt) StartPage-Element beim Start an den oberen Rand der Seitenleiste verschieben</sys:String>
+    <sys:String x:Key="LOC_SPG_BlurAmount">Unschärferadius:</sys:String>
+    <sys:String x:Key="LOC_SPG_EffectiveBlur">Effektiver Unschärferadius:</sys:String>
+    <sys:String x:Key="LOC_SPG_EffectiveBlurToolTip">Der effektive Unschärferadius ergibt sich aus (Unschärferadius) / (Hintergrund-Render-Skalierung). Eine niedrige Render-Skalierung in Verbindung mit einem niedrigen Unschärferadius kann zu unerwünschten Ergebnissen führen. Eine Verringerung der Render-Skalierung kann die Leistung verbessern und einen stärkeren Unschärfe-Effekt erzeugen.</sys:String>
+    <sys:String x:Key="LOC_SPG_BackgroundScale">Hintergrund-Render-Skalierung:</sys:String>
+    <sys:String x:Key="LOC_SPG_OverlayOpacity">Deckkraft der Überlagerung:</sys:String>
+    <sys:String x:Key="LOC_SPG_NoiseOpacity">Deckkraft des Rauschens:</sys:String>
+    <sys:String x:Key="LOC_SPG_CoverAspectRatio">Cover-Seitenverhältnis</sys:String>
+    <sys:String x:Key="LOC_SPG_MaxCoverWidth">Maximale Cover-Breite</sys:String>
+    <sys:String x:Key="LOC_SPG_BackgroundImageSource">Auswahl des Spiel-Hintergrundbildes:</sys:String>
+    <sys:String x:Key="LOC_SPG_BackgroundImagePath">Hintergrundbild Pfad:</sys:String>
+    <sys:String x:Key="LOC_SPG_ShowGlobalProgressBar">(Nicht unterstützt) Globalen Fortschrittsbalken anzeigen</sys:String>
+    <sys:String x:Key="LOC_SPG_SwitchWithLowPrio">Niedrigere Priorität beim Umschalten der Ansicht (wird automatisch beim Absturz von Playnite aktiviert)</sys:String>
+    <sys:String x:Key="LOC_SPG_UnsupportedToolTip">Die Verwendung dieser Funktion erfolgt auf eigene Gefahr. Sie wird nicht offiziell von der PlayniteAPI unterstützt und kann daher zu unerwartetem Verhalten führen.</sys:String>
+    <sys:String x:Key="LOC_SPG_IgnoreHidden">Versteckte Spiele ignorieren</sys:String>
+    <sys:String x:Key="LOC_SPG_AddShelve">Regal hinzufügen</sys:String>
+    <sys:String x:Key="LOC_SPG_ShowMostPlayedGames">Meistgespielte Spiele anzeigen</sys:String>
+    <sys:String x:Key="LOC_SPG_SkippedGames">Überspringe:</sys:String>
+    <sys:String x:Key="LOC_SPG_ExtendShelve">Regal erweitern</sys:String>
+    <sys:String x:Key="LOC_SPG_BackgroundGameInfoOpacity">Deckkraft der Spiel-Info:</sys:String>
+    <sys:String x:Key="LOC_SPG_BackgroundAnimationDuration">Animationsdauer:</sys:String>
+    <sys:String x:Key="LOC_SPG_BackgroundRefreshInterval">Aktualisierungsintervall (Minuten):</sys:String>
+    <sys:String x:Key="LOC_SPG_SkipGamesInPreviousShelves">Spiele aus vorherigen Regalen überspringen</sys:String>
+    <sys:String x:Key="LOC_SPG_EnableTags">Erstelle [SPG] Schlagwörter beim Start. Werden verwendet, um Spiele als ignoriert zu markieren.</sys:String>
+    
+</ResourceDictionary>

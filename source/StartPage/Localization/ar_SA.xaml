@@ -1,0 +1,73 @@
+﻿<?xml version="1.0"?>
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:sys="clr-namespace:System;assembly=mscorlib">
+
+    <sys:String x:Key="LOC_SPG_MostPlayedGame">الأكثر لعبًا</sys:String>
+    <sys:String x:Key="LOC_SPG_LatestReleaseGame">آخر إصدار</sys:String>
+    <sys:String x:Key="LOC_SPG_RecentAchievements">الإنجازات الحديثة</sys:String>
+    <sys:String x:Key="LOC_SPG_RecentlyAddedGames">أضيفت مؤخراً</sys:String>
+
+    <sys:String x:Key="LOC_SPG_DailyPlaytime">وقت اللعب اليومي</sys:String>
+    <sys:String x:Key="LOC_SPG_WeeklyPlaytime">وقت اللعب الأسبوعي</sys:String>
+    <sys:String x:Key="LOC_SPG_MonthlyPlaytime">وقت اللعب الشهري</sys:String>
+    <sys:String x:Key="LOC_SPG_PlaytimePerSource">وقت اللعب لكل مصدر</sys:String>
+    <sys:String x:Key="LOC_SPG_MostPlayedWeekly">الأكثر لعبًا هذا الأسبوع</sys:String>
+    <sys:String x:Key="LOC_SPG_TotalPlaytime" xml:space="preserve">المجموع: </sys:String>
+    <sys:String x:Key="LOC_SPG_LastSevenDays">آخر 7 أيام</sys:String>
+    <sys:String x:Key="LOC_SPG_LastThirtyDays">آخر 30 يوم</sys:String>
+    
+    <!--Settings Tabs-->
+    <sys:String x:Key="LOC_SPG_CommonTab">الشائعة</sys:String>
+    <sys:String x:Key="LOC_SPG_BackgroundTab">الخلفية</sys:String>
+    
+    <!--BackgroundImageSource Enum-->
+    <sys:String x:Key="LOC_SPG_BackgroundImageSourceLastPlayed">لعبت آخر مرة</sys:String>
+    <sys:String x:Key="LOC_SPG_BackgroundImageSourceLastAdded">آخر إضافة</sys:String>
+    <sys:String x:Key="LOC_SPG_BackgroundImageSourceMostPlayed">الأكثر لعب</sys:String>
+    <sys:String x:Key="LOC_SPG_BackgroundImageSourceRandom">عشوائي</sys:String>
+    <sys:String x:Key="LOC_SPG_BackgroundImageSourceLastSelected">اخر إختيار</sys:String>
+    <sys:String x:Key="LOC_SPG_BackgroundImageSourceLastHovered">اخر تأشير</sys:String>
+
+    <!-- Settings -->
+    <sys:String x:Key="LOC_SPG_ShowGameActivity">عرض لوحة GameActivity</sys:String>
+    <sys:String x:Key="LOC_SPG_NumberOfGames">عدد الألعاب:</sys:String>
+    <sys:String x:Key="LOC_SPG_NextRandomBackground">الخلفية العشوائية التالية</sys:String>
+    <sys:String x:Key="LOC_SPG_ShowFavorites">إظهار الألعاب المفضلة</sys:String>
+    <sys:String x:Key="LOC_SPG_ShowClock">إظهار الساعة</sys:String>
+    <sys:String x:Key="LOC_SPG_ShowRecentlyPlayed">إظهار الألعاب التي لعبت مؤخرا</sys:String>
+    <sys:String x:Key="LOC_SPG_ShowRecentAchievements">إظهار الإنجازات الأخيرة باستخدام SuccessStory</sys:String>
+    <sys:String x:Key="LOC_SPG_ShowRecentlyAdded">إظهار الألعاب المضافة مؤخرا</sys:String>
+    <sys:String x:Key="LOC_SPG_StartupItem">(غير مدعوم) تفعيل العنصر الجانبي عند الإطلاق</sys:String>
+    <sys:String x:Key="LOC_SPG_MaxRecentAchievements">الحد الأقصى لعدد الإنجازات الأخيرة:</sys:String>
+    <sys:String x:Key="LOC_SPG_MaxRecentAchievementsPerGame">العدد الأقصى للإنجازات الأخيرة لكل لعبة:</sys:String>
+    <sys:String x:Key="LOC_SPG_ShowTitelOnCover">إظهار العنوان على غلاف اللعبة</sys:String>
+    <sys:String x:Key="LOC_SPG_ShowGameDetails">إظهار تفاصيل اللعبة</sys:String>
+    <sys:String x:Key="LOC_SPG_EnableNotifications">تفعيل الإشعارات</sys:String>
+    <sys:String x:Key="LOC_SPG_MinimizeNotification">تصغير الإشعارات عند التشغيل</sys:String>
+    <sys:String x:Key="LOC_SPG_ShowNotificationButtons">إظهار الأزرار &quot;تجاهل&quot; و &quot;تصغير&quot;</sys:String>
+    <sys:String x:Key="LOC_SPG_KeepInMemory">احتفظ بـ StartPage في الذاكرة عند تبديل علامة تبويب</sys:String>
+    <sys:String x:Key="LOC_SPG_MoveIconToTop">(غير مدعوم) نقل عنصر StartPage إلى أعلى الشريط الجانبي عند الإطلاق</sys:String>
+    <sys:String x:Key="LOC_SPG_BlurAmount">نسبة التمويه:</sys:String>
+    <sys:String x:Key="LOC_SPG_EffectiveBlur">شعاع الضبابي الفعال:</sys:String>
+    <sys:String x:Key="LOC_SPG_EffectiveBlurToolTip">أما نصف قطر الضبابي الفعّال فيعطى بواسطة (Background Render Scale) / (Blur Radius). وقد يؤدي مقياس العرض المنخفض المقترن بقطر منخفض الضبابية إلى نتائج غير مرغوب فيها. ومن شأن تخفيض جدول الإنجاز أن يسفر عن أداء أفضل ويمكن أن يخلق أثرا أكثر وضوحا.</sys:String>
+    <sys:String x:Key="LOC_SPG_BackgroundScale">مقياس عرض الخلفية:</sys:String>
+    <sys:String x:Key="LOC_SPG_OverlayOpacity">شفافية التراكب:</sys:String>
+    <sys:String x:Key="LOC_SPG_NoiseOpacity">شفافية الضوضاء:</sys:String>
+    <sys:String x:Key="LOC_SPG_CoverAspectRatio">نسبة جوانب الغطاء</sys:String>
+    <sys:String x:Key="LOC_SPG_MaxCoverWidth">أقصى عرض للغلاف</sys:String>
+    <sys:String x:Key="LOC_SPG_BackgroundImageSource">تحديد صورة خلفية اللعبة:</sys:String>
+    <sys:String x:Key="LOC_SPG_BackgroundImagePath">مسار صورة الخلفية:</sys:String>
+    <sys:String x:Key="LOC_SPG_ShowGlobalProgressBar">(غير مدعوم) إظهار شريط التقدم العام</sys:String>
+    <sys:String x:Key="LOC_SPG_SwitchWithLowPrio">أولوية أقل عند تبديل العرض (يتم تمكينه تلقائيًا عند تعطل Playnite)</sys:String>
+    <sys:String x:Key="LOC_SPG_UnsupportedToolTip">استخدم هذه الميزة على مسؤوليتك الخاصة. غير مدعوم رسمياً من قبل PlayniteAPI ومن ثم يمكن أن يؤدي إلى سلوك غير متوقع.</sys:String>
+    <sys:String x:Key="LOC_SPG_IgnoreHidden">تجاهل الألعاب المخفية</sys:String>
+    <sys:String x:Key="LOC_SPG_AddShelve">إضافة رف</sys:String>
+    <sys:String x:Key="LOC_SPG_ShowMostPlayedGames">إظهار الألعاب الأكثر لعبًا</sys:String>
+    <sys:String x:Key="LOC_SPG_SkippedGames">تخطى:</sys:String>
+    <sys:String x:Key="LOC_SPG_ExtendShelve">تمديد الرف</sys:String>
+    <sys:String x:Key="LOC_SPG_BackgroundGameInfoOpacity">شفافية معلومات اللعبة:</sys:String>
+    <sys:String x:Key="LOC_SPG_BackgroundAnimationDuration">مدة المؤثر الحركي:</sys:String>
+    <sys:String x:Key="LOC_SPG_BackgroundRefreshInterval">فاصل التحديث (الدقائق):</sys:String>
+    <sys:String x:Key="LOC_SPG_SkipGamesInPreviousShelves">تخطي الألعاب الموجودة في الرفوف السابقة</sys:String>
+    <sys:String x:Key="LOC_SPG_EnableTags">إنشاء وسوم [SPG] عند التشغيل. تستخدم لوضع علامة على الألعاب لتجاهلها.</sys:String>
+    
+</ResourceDictionary>
