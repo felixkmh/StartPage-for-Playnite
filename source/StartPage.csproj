@@ -285,7 +285,12 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\StartPage.SDK\StartPage.SDK.csproj">
+      <Project>{e5b54cc9-566f-4e3e-8829-65c2fccb7bde}</Project>
+      <Name>StartPage.SDK</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>del /q $(ProjectDir)$(OutDir)*.xml

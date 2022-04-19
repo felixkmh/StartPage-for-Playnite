@@ -32,6 +32,7 @@ namespace LandingPage.ViewModels
         public ICommand ResetFiltersCommand { get => resetFiltersCommand; set => SetValue(ref resetFiltersCommand, value); }
 
         private LandingPageViewModel landingPageViewModel;
+        private readonly Game DummyGame = new Game();
 
         public ShelveViewModel(ShelveProperties shelveProperties, IPlayniteAPI playniteAPI, LandingPageViewModel landingPageViewModel)
         {
@@ -458,7 +459,7 @@ namespace LandingPage.ViewModels
             if (!gameSelection.Any())
             {
                 var dummies = new List<Game>();
-                dummies.Add(new Game());
+                dummies.Add(DummyGame);
                 gameSelection = dummies;
             }
             Application.Current.Dispatcher.Invoke(() => {
