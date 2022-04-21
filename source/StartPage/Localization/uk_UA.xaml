@@ -74,13 +74,22 @@
     <sys:String x:Key="LOC_SPG_SplitHorizonatlly">Розділити горизонтально</sys:String>
     <sys:String x:Key="LOC_SPG_SplitVertically">Розділити вертикально</sys:String>
     <sys:String x:Key="LOC_SPG_Merge">Об'єднання</sys:String>
-    <sys:String x:Key="LOC_SPG_MergeKeepLeftUpper">Залишити ліву/верхню панель</sys:String>
-    <sys:String x:Key="LOC_SPG_MergeKeepRightLower">Залишити праву/нижню панель</sys:String>
+    <sys:String x:Key="LOC_SPG_MergeKeepUpper">Keep upper panel</sys:String>
+    <sys:String x:Key="LOC_SPG_MergeKeepLower">Keep lower panel</sys:String>
+    <sys:String x:Key="LOC_SPG_MergeKeepLeft">Keep left panel</sys:String>
+    <sys:String x:Key="LOC_SPG_MergeKeepRight">Keep right panel</sys:String>
     <sys:String x:Key="LOC_SPG_AddView">Додати вигляд</sys:String>
     <sys:String x:Key="LOC_SPG_RemoveView">Прибрати вигляд</sys:String>
     <sys:String x:Key="LOC_SPG_EditMode">Режим редагування</sys:String>
+    <sys:String x:Key="LOC_SPG_ExitEditMode">Exit Edit Mode</sys:String>
+    <sys:String x:Key="LOC_SPG_ExitEditMode">Exit Edit Mode</sys:String>
     <sys:String x:Key="LOC_SPG_ResetLayout">Скинути макет до стандартного</sys:String>
     <sys:String x:Key="LOC_SPG_DragPanelTooltip">Перетягніть панелі, щоб поміняти їх місцями</sys:String>
+    <sys:String x:Key="LOC_SPG_AddPanel">Add Panel</sys:String>
+    <sys:String x:Key="LOC_SPG_AddPanelTop">Top</sys:String>
+    <sys:String x:Key="LOC_SPG_AddPanelBottom">Bottom</sys:String>
+    <sys:String x:Key="LOC_SPG_AddPanelLeft">Leftmost</sys:String>
+    <sys:String x:Key="LOC_SPG_AddPanelRight">Rightmost</sys:String>
 
     <!-- Integrated Views -->
     <sys:String x:Key="LOC_SPG_ClockView">Годинник</sys:String>
