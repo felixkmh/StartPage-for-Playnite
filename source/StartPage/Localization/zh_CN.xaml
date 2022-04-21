@@ -69,5 +69,29 @@
     <sys:String x:Key="LOC_SPG_BackgroundRefreshInterval">刷新间隔（分钟）：</sys:String>
     <sys:String x:Key="LOC_SPG_SkipGamesInPreviousShelves">跳过前面的展架中存在的游戏</sys:String>
     <sys:String x:Key="LOC_SPG_EnableTags">在启动时创建 [SPG] 标签。用于将游戏标记为忽略。</sys:String>
-    
+
+    <!-- Grid -->
+    <sys:String x:Key="LOC_SPG_SplitHorizonatlly">Split horizontally</sys:String>
+    <sys:String x:Key="LOC_SPG_SplitVertically">Split vertically</sys:String>
+    <sys:String x:Key="LOC_SPG_Merge">Merge</sys:String>
+    <sys:String x:Key="LOC_SPG_MergeKeepLeftUpper">Keep left/upper panel</sys:String>
+    <sys:String x:Key="LOC_SPG_MergeKeepRightLower">Keep right/lower panel</sys:String>
+    <sys:String x:Key="LOC_SPG_AddView">Add View</sys:String>
+    <sys:String x:Key="LOC_SPG_RemoveView">Remove View</sys:String>
+    <sys:String x:Key="LOC_SPG_EditMode">Edit Mode</sys:String>
+    <sys:String x:Key="LOC_SPG_ResetLayout">Reset layout to default</sys:String>
+    <sys:String x:Key="LOC_SPG_DragPanelTooltip">Drag-and-Drop panels to swap them</sys:String>
+
+    <!-- Integrated Views -->
+    <sys:String x:Key="LOC_SPG_ClockView">Clock</sys:String>
+    <sys:String x:Key="LOC_SPG_ClockViewDescription">Digital clock that also shows the current date. Uses the system time format.</sys:String>
+    <sys:String x:Key="LOC_SPG_ShelvesView">Game Shelves</sys:String>
+    <sys:String x:Key="LOC_SPG_ShelvesViewDescription">Shelves showing game covers with custom filters, sorting and grouping options.</sys:String>
+    <sys:String x:Key="LOC_SPG_MostPlayedView">Most Played</sys:String>
+    <sys:String x:Key="LOC_SPG_MostPlayedDescription">Shows most played games for different time frames.</sys:String>
+    <sys:String x:Key="LOC_SPG_WeeklyActivityView">Weekly Activity</sys:String>
+    <sys:String x:Key="LOC_SPG_WeeklyActivityDescription">Shows a compact overview of the playtime in the last 7 days. Requires the GameActivity extension.</sys:String>
+    <sys:String x:Key="LOC_SPG_RecentAchievementsView">Recent Achievements</sys:String>
+    <sys:String x:Key="LOC_SPG_RecentAchievementsDescription">Shows an overview of recently unlocked achievements grouped by game. Requires the SuccessStory extension.</sys:String>
+
 </ResourceDictionary>
