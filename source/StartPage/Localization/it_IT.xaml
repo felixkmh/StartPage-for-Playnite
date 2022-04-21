@@ -74,13 +74,22 @@
     <sys:String x:Key="LOC_SPG_SplitHorizonatlly">Dividi orizzontalmente</sys:String>
     <sys:String x:Key="LOC_SPG_SplitVertically">Dividi verticalmente</sys:String>
     <sys:String x:Key="LOC_SPG_Merge">Unisci</sys:String>
-    <sys:String x:Key="LOC_SPG_MergeKeepLeftUpper">Mantieni il pannello sinistro/superiore</sys:String>
-    <sys:String x:Key="LOC_SPG_MergeKeepRightLower">Mantieni il pannello destro/inferiore</sys:String>
+    <sys:String x:Key="LOC_SPG_MergeKeepUpper">Keep upper panel</sys:String>
+    <sys:String x:Key="LOC_SPG_MergeKeepLower">Keep lower panel</sys:String>
+    <sys:String x:Key="LOC_SPG_MergeKeepLeft">Keep left panel</sys:String>
+    <sys:String x:Key="LOC_SPG_MergeKeepRight">Keep right panel</sys:String>
     <sys:String x:Key="LOC_SPG_AddView">Aggiungi vista</sys:String>
     <sys:String x:Key="LOC_SPG_RemoveView">Rimuovi vista</sys:String>
     <sys:String x:Key="LOC_SPG_EditMode">Modalità di modifica</sys:String>
+    <sys:String x:Key="LOC_SPG_ExitEditMode">Exit Edit Mode</sys:String>
+    <sys:String x:Key="LOC_SPG_ExitEditMode">Exit Edit Mode</sys:String>
     <sys:String x:Key="LOC_SPG_ResetLayout">Ripristina il layout predefinito</sys:String>
     <sys:String x:Key="LOC_SPG_DragPanelTooltip">Pannelli drag-and-drop per scambiarli</sys:String>
+    <sys:String x:Key="LOC_SPG_AddPanel">Add Panel</sys:String>
+    <sys:String x:Key="LOC_SPG_AddPanelTop">Top</sys:String>
+    <sys:String x:Key="LOC_SPG_AddPanelBottom">Bottom</sys:String>
+    <sys:String x:Key="LOC_SPG_AddPanelLeft">Leftmost</sys:String>
+    <sys:String x:Key="LOC_SPG_AddPanelRight">Rightmost</sys:String>
 
     <!-- Integrated Views -->
     <sys:String x:Key="LOC_SPG_ClockView">Orologio</sys:String>
