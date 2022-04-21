@@ -71,36 +71,36 @@
     <sys:String x:Key="LOC_SPG_EnableTags">在启动时创建 [SPG] 标签。用于将游戏标记为忽略。</sys:String>
 
     <!-- Grid -->
-    <sys:String x:Key="LOC_SPG_SplitHorizonatlly">Split horizontally</sys:String>
-    <sys:String x:Key="LOC_SPG_SplitVertically">Split vertically</sys:String>
-    <sys:String x:Key="LOC_SPG_Merge">Merge</sys:String>
-    <sys:String x:Key="LOC_SPG_MergeKeepUpper">Keep upper panel</sys:String>
-    <sys:String x:Key="LOC_SPG_MergeKeepLower">Keep lower panel</sys:String>
-    <sys:String x:Key="LOC_SPG_MergeKeepLeft">Keep left panel</sys:String>
-    <sys:String x:Key="LOC_SPG_MergeKeepRight">Keep right panel</sys:String>
-    <sys:String x:Key="LOC_SPG_AddView">Add View</sys:String>
-    <sys:String x:Key="LOC_SPG_RemoveView">Remove View</sys:String>
-    <sys:String x:Key="LOC_SPG_EditMode">Edit Mode</sys:String>
-    <sys:String x:Key="LOC_SPG_EnterEditMode">Enter Edit Mode</sys:String>
-    <sys:String x:Key="LOC_SPG_ExitEditMode">Exit Edit Mode</sys:String>
-    <sys:String x:Key="LOC_SPG_ResetLayout">Reset layout to default</sys:String>
-    <sys:String x:Key="LOC_SPG_DragPanelTooltip">Drag-and-Drop panels to swap them</sys:String>
-    <sys:String x:Key="LOC_SPG_AddPanel">Add Panel</sys:String>
-    <sys:String x:Key="LOC_SPG_AddPanelTop">Top</sys:String>
-    <sys:String x:Key="LOC_SPG_AddPanelBottom">Bottom</sys:String>
-    <sys:String x:Key="LOC_SPG_AddPanelLeft">Leftmost</sys:String>
-    <sys:String x:Key="LOC_SPG_AddPanelRight">Rightmost</sys:String>
+    <sys:String x:Key="LOC_SPG_SplitHorizonatlly">水平分割</sys:String>
+    <sys:String x:Key="LOC_SPG_SplitVertically">垂直分割</sys:String>
+    <sys:String x:Key="LOC_SPG_Merge">合并</sys:String>
+    <sys:String x:Key="LOC_SPG_MergeKeepUpper">保留顶部面板</sys:String>
+    <sys:String x:Key="LOC_SPG_MergeKeepLower">保留底部面板</sys:String>
+    <sys:String x:Key="LOC_SPG_MergeKeepLeft">保留左侧面板</sys:String>
+    <sys:String x:Key="LOC_SPG_MergeKeepRight">保留右侧面板</sys:String>
+    <sys:String x:Key="LOC_SPG_AddView">添加视图</sys:String>
+    <sys:String x:Key="LOC_SPG_RemoveView">移除视图</sys:String>
+    <sys:String x:Key="LOC_SPG_EditMode">编辑模式</sys:String>
+    <sys:String x:Key="LOC_SPG_EnterEditMode">进入编辑模式</sys:String>
+    <sys:String x:Key="LOC_SPG_ExitEditMode">退出编辑模式</sys:String>
+    <sys:String x:Key="LOC_SPG_ResetLayout">重置布局为默认</sys:String>
+    <sys:String x:Key="LOC_SPG_DragPanelTooltip">拖放面板来交换它们</sys:String>
+    <sys:String x:Key="LOC_SPG_AddPanel">添加面板</sys:String>
+    <sys:String x:Key="LOC_SPG_AddPanelTop">顶部</sys:String>
+    <sys:String x:Key="LOC_SPG_AddPanelBottom">底部</sys:String>
+    <sys:String x:Key="LOC_SPG_AddPanelLeft">左侧</sys:String>
+    <sys:String x:Key="LOC_SPG_AddPanelRight">右侧</sys:String>
 
     <!-- Integrated Views -->
-    <sys:String x:Key="LOC_SPG_ClockView">Clock</sys:String>
-    <sys:String x:Key="LOC_SPG_ClockViewDescription">Digital clock that also shows the current date. Uses the system time format.</sys:String>
-    <sys:String x:Key="LOC_SPG_ShelvesView">Game Shelves</sys:String>
-    <sys:String x:Key="LOC_SPG_ShelvesViewDescription">Shelves showing game covers with custom filters, sorting and grouping options.</sys:String>
-    <sys:String x:Key="LOC_SPG_MostPlayedView">Most Played</sys:String>
-    <sys:String x:Key="LOC_SPG_MostPlayedDescription">Shows most played games for different time frames.</sys:String>
-    <sys:String x:Key="LOC_SPG_WeeklyActivityView">Weekly Activity</sys:String>
-    <sys:String x:Key="LOC_SPG_WeeklyActivityDescription">Shows a compact overview of the playtime in the last 7 days. Requires the GameActivity extension.</sys:String>
-    <sys:String x:Key="LOC_SPG_RecentAchievementsView">Recent Achievements</sys:String>
-    <sys:String x:Key="LOC_SPG_RecentAchievementsDescription">Shows an overview of recently unlocked achievements grouped by game. Requires the SuccessStory extension.</sys:String>
+    <sys:String x:Key="LOC_SPG_ClockView">时钟</sys:String>
+    <sys:String x:Key="LOC_SPG_ClockViewDescription">同时显示当前日期的数字时钟。使用系统时间格式。</sys:String>
+    <sys:String x:Key="LOC_SPG_ShelvesView">游戏展架</sys:String>
+    <sys:String x:Key="LOC_SPG_ShelvesViewDescription">显示游戏封面的展架，有自定义过滤器、排序和分组选项。</sys:String>
+    <sys:String x:Key="LOC_SPG_MostPlayedView">最常游玩</sys:String>
+    <sys:String x:Key="LOC_SPG_MostPlayedDescription">显示不同时间段内玩得最多的游戏。</sys:String>
+    <sys:String x:Key="LOC_SPG_WeeklyActivityView">一周活动</sys:String>
+    <sys:String x:Key="LOC_SPG_WeeklyActivityDescription">显示过去7天内的游戏时间的简介概述。需要GameActivity扩展。</sys:String>
+    <sys:String x:Key="LOC_SPG_RecentAchievementsView">近期成就</sys:String>
+    <sys:String x:Key="LOC_SPG_RecentAchievementsDescription">显示最近解锁的成就概览，按游戏分组。需要SuccessStory扩展。</sys:String>
 
 </ResourceDictionary>
