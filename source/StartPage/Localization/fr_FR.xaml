@@ -3,7 +3,7 @@
 
     <sys:String x:Key="LOC_SPG_MostPlayedGame">Le plus joué</sys:String>
     <sys:String x:Key="LOC_SPG_LatestReleaseGame">Dernière sortie</sys:String>
-    <sys:String x:Key="LOC_SPG_RecentAchievements">Succès</sys:String>
+    <sys:String x:Key="LOC_SPG_RecentAchievements">Succès récents</sys:String>
     <sys:String x:Key="LOC_SPG_RecentlyAddedGames">Ajouté récemment</sys:String>
 
     <sys:String x:Key="LOC_SPG_DailyPlaytime">Temps de jeu quotidien</sys:String>
@@ -83,7 +83,7 @@
     <sys:String x:Key="LOC_SPG_DragPanelTooltip">Drag-and-Drop panels to swap them</sys:String>
 
     <!-- Integrated Views -->
-    <sys:String x:Key="LOC_SPG_ClockView">Clock</sys:String>
+    <sys:String x:Key="LOC_SPG_ClockView">Horloge</sys:String>
     <sys:String x:Key="LOC_SPG_ClockViewDescription">Digital clock that also shows the current date. Uses the system time format.</sys:String>
     <sys:String x:Key="LOC_SPG_ShelvesView">Game Shelves</sys:String>
     <sys:String x:Key="LOC_SPG_ShelvesViewDescription">Shelves showing game covers with custom filters, sorting and grouping options.</sys:String>
@@ -91,7 +91,7 @@
     <sys:String x:Key="LOC_SPG_MostPlayedDescription">Shows most played games for different time frames.</sys:String>
     <sys:String x:Key="LOC_SPG_WeeklyActivityView">Weekly Activity</sys:String>
     <sys:String x:Key="LOC_SPG_WeeklyActivityDescription">Shows a compact overview of the playtime in the last 7 days. Requires the GameActivity extension.</sys:String>
-    <sys:String x:Key="LOC_SPG_RecentAchievementsView">Recent Achievements</sys:String>
-    <sys:String x:Key="LOC_SPG_RecentAchievementsDescription">Shows an overview of recently unlocked achievements grouped by game. Requires the SuccessStory extension.</sys:String>
+    <sys:String x:Key="LOC_SPG_RecentAchievementsView">Succès récents</sys:String>
+    <sys:String x:Key="LOC_SPG_RecentAchievementsDescription">Affiche un aperçu des succès récemment débloqués, regroupés par jeu. Nécessite l'extension SuccessStory.</sys:String>
 
 </ResourceDictionary>
