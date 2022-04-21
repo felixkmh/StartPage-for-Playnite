@@ -74,13 +74,22 @@
     <sys:String x:Key="LOC_SPG_SplitHorizonatlly">Split horizontally</sys:String>
     <sys:String x:Key="LOC_SPG_SplitVertically">Split vertically</sys:String>
     <sys:String x:Key="LOC_SPG_Merge">Merge</sys:String>
-    <sys:String x:Key="LOC_SPG_MergeKeepLeftUpper">Keep left/upper panel</sys:String>
-    <sys:String x:Key="LOC_SPG_MergeKeepRightLower">Keep right/lower panel</sys:String>
+    <sys:String x:Key="LOC_SPG_MergeKeepUpper">Keep upper panel</sys:String>
+    <sys:String x:Key="LOC_SPG_MergeKeepLower">Keep lower panel</sys:String>
+    <sys:String x:Key="LOC_SPG_MergeKeepLeft">Keep left panel</sys:String>
+    <sys:String x:Key="LOC_SPG_MergeKeepRight">Keep right panel</sys:String>
     <sys:String x:Key="LOC_SPG_AddView">Add View</sys:String>
     <sys:String x:Key="LOC_SPG_RemoveView">Remove View</sys:String>
     <sys:String x:Key="LOC_SPG_EditMode">Edit Mode</sys:String>
+    <sys:String x:Key="LOC_SPG_ExitEditMode">Enter Edit Mode</sys:String>
+    <sys:String x:Key="LOC_SPG_ExitEditMode">Exit Edit Mode</sys:String>
     <sys:String x:Key="LOC_SPG_ResetLayout">Reset layout to default</sys:String>
     <sys:String x:Key="LOC_SPG_DragPanelTooltip">Drag-and-Drop panels to swap them</sys:String>
+    <sys:String x:Key="LOC_SPG_AddPanel">Add Panel</sys:String>
+    <sys:String x:Key="LOC_SPG_AddPanelTop">Top</sys:String>
+    <sys:String x:Key="LOC_SPG_AddPanelBottom">Bottom</sys:String>
+    <sys:String x:Key="LOC_SPG_AddPanelLeft">Leftmost</sys:String>
+    <sys:String x:Key="LOC_SPG_AddPanelRight">Rightmost</sys:String>
 
     <!-- Integrated Views -->
     <sys:String x:Key="LOC_SPG_ClockView">Clock</sys:String>
