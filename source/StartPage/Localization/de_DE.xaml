@@ -11,7 +11,7 @@
     <sys:String x:Key="LOC_SPG_MonthlyPlaytime">Monatliche Spielzeit</sys:String>
     <sys:String x:Key="LOC_SPG_PlaytimePerSource">Spielzeit pro Quelle</sys:String>
     <sys:String x:Key="LOC_SPG_MostPlayedWeekly">Meistgespielt in dieser Woche</sys:String>
-    <sys:String x:Key="LOC_SPG_TotalPlaytime" xml:space="preserve">Gesamt:  </sys:String>
+    <sys:String x:Key="LOC_SPG_TotalPlaytime" xml:space="preserve">Gesamt: </sys:String>
     <sys:String x:Key="LOC_SPG_LastSevenDays">Letzten 7 Tage</sys:String>
     <sys:String x:Key="LOC_SPG_LastThirtyDays">Letzten 30 Tage</sys:String>
     
@@ -69,5 +69,29 @@
     <sys:String x:Key="LOC_SPG_BackgroundRefreshInterval">Aktualisierungsintervall (Minuten):</sys:String>
     <sys:String x:Key="LOC_SPG_SkipGamesInPreviousShelves">Spiele aus vorherigen Regalen überspringen</sys:String>
     <sys:String x:Key="LOC_SPG_EnableTags">Erstelle [SPG] Schlagwörter beim Start. Werden verwendet, um Spiele als ignoriert zu markieren.</sys:String>
-    
+
+    <!-- Grid -->
+    <sys:String x:Key="LOC_SPG_SplitHorizonatlly">Horizontal teilen</sys:String>
+    <sys:String x:Key="LOC_SPG_SplitVertically">Vertikal teilen</sys:String>
+    <sys:String x:Key="LOC_SPG_Merge">Vereinen</sys:String>
+    <sys:String x:Key="LOC_SPG_MergeKeepLeftUpper">Linkes/oberes Panel behalten</sys:String>
+    <sys:String x:Key="LOC_SPG_MergeKeepRightLower">Rechtes/unteres Panel behalten</sys:String>
+    <sys:String x:Key="LOC_SPG_AddView">Ansicht hinzufügen</sys:String>
+    <sys:String x:Key="LOC_SPG_RemoveView">Ansicht entfernen</sys:String>
+    <sys:String x:Key="LOC_SPG_EditMode">Bearbeitungs-Modus</sys:String>
+    <sys:String x:Key="LOC_SPG_ResetLayout">Layout auf Standard zurücksetzen</sys:String>
+    <sys:String x:Key="LOC_SPG_DragPanelTooltip">Panels per Drag-and-Drop austauschen</sys:String>
+
+    <!-- Integrated Views -->
+    <sys:String x:Key="LOC_SPG_ClockView">Uhr</sys:String>
+    <sys:String x:Key="LOC_SPG_ClockViewDescription">Digitale Uhr, die auch das aktuelle Datum anzeigt. Verwendet das Systemzeitformat.</sys:String>
+    <sys:String x:Key="LOC_SPG_ShelvesView">Spiel-Regale</sys:String>
+    <sys:String x:Key="LOC_SPG_ShelvesViewDescription">Regale mit Spielecovern mit benutzerdefinierten Filtern, Sortier- und Gruppieroptionen.</sys:String>
+    <sys:String x:Key="LOC_SPG_MostPlayedView">Meistgespielt</sys:String>
+    <sys:String x:Key="LOC_SPG_MostPlayedDescription">Zeigt die meistgespielten Spiele für verschiedene Zeiträume an.</sys:String>
+    <sys:String x:Key="LOC_SPG_WeeklyActivityView">Wöchentliche Aktivität</sys:String>
+    <sys:String x:Key="LOC_SPG_WeeklyActivityDescription">Zeigt eine kompakte Übersicht über die Spielzeit der letzten 7 Tage. Erfordert die GameActivity-Erweiterung.</sys:String>
+    <sys:String x:Key="LOC_SPG_RecentAchievementsView">Aktuelle Erfolge</sys:String>
+    <sys:String x:Key="LOC_SPG_RecentAchievementsDescription">Zeigt eine Übersicht der kürzlich freigeschalteten Erfolge, gruppiert nach Spiel. Erfordert die SuccessStory-Erweiterung.</sys:String>
+
 </ResourceDictionary>
