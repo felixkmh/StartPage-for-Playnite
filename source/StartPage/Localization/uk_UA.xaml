@@ -81,7 +81,7 @@
     <sys:String x:Key="LOC_SPG_AddView">Додати вигляд</sys:String>
     <sys:String x:Key="LOC_SPG_RemoveView">Прибрати вигляд</sys:String>
     <sys:String x:Key="LOC_SPG_EditMode">Режим редагування</sys:String>
-    <sys:String x:Key="LOC_SPG_ExitEditMode">Exit Edit Mode</sys:String>
+    <sys:String x:Key="LOC_SPG_EnterEditMode">Enter Edit Mode</sys:String>
     <sys:String x:Key="LOC_SPG_ExitEditMode">Exit Edit Mode</sys:String>
     <sys:String x:Key="LOC_SPG_ResetLayout">Скинути макет до стандартного</sys:String>
     <sys:String x:Key="LOC_SPG_DragPanelTooltip">Перетягніть панелі, щоб поміняти їх місцями</sys:String>

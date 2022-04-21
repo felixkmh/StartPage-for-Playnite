@@ -81,7 +81,7 @@
     <sys:String x:Key="LOC_SPG_AddView">Add View</sys:String>
     <sys:String x:Key="LOC_SPG_RemoveView">Remove View</sys:String>
     <sys:String x:Key="LOC_SPG_EditMode">Edit Mode</sys:String>
-    <sys:String x:Key="LOC_SPG_ExitEditMode">Exit Edit Mode</sys:String>
+    <sys:String x:Key="LOC_SPG_EnterEditMode">Enter Edit Mode</sys:String>
     <sys:String x:Key="LOC_SPG_ExitEditMode">Exit Edit Mode</sys:String>
     <sys:String x:Key="LOC_SPG_ResetLayout">Reset layout to default</sys:String>
     <sys:String x:Key="LOC_SPG_DragPanelTooltip">Drag-and-Drop panels to swap them</sys:String>
