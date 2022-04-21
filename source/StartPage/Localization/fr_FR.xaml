@@ -71,8 +71,8 @@
     <sys:String x:Key="LOC_SPG_EnableTags">Crée des étiquettes [SPG] au lancement. Utilisées pour marquer les jeux comme étant ignorés.</sys:String>
 
     <!-- Grid -->
-    <sys:String x:Key="LOC_SPG_SplitHorizonatlly">Split horizontally</sys:String>
-    <sys:String x:Key="LOC_SPG_SplitVertically">Split vertically</sys:String>
+    <sys:String x:Key="LOC_SPG_SplitHorizonatlly">Séparer horizontalement</sys:String>
+    <sys:String x:Key="LOC_SPG_SplitVertically">Séparer verticalement</sys:String>
     <sys:String x:Key="LOC_SPG_Merge">Fusionner</sys:String>
     <sys:String x:Key="LOC_SPG_MergeKeepUpper">Keep upper panel</sys:String>
     <sys:String x:Key="LOC_SPG_MergeKeepLower">Keep lower panel</sys:String>
@@ -81,8 +81,8 @@
     <sys:String x:Key="LOC_SPG_AddView">Add View</sys:String>
     <sys:String x:Key="LOC_SPG_RemoveView">Remove View</sys:String>
     <sys:String x:Key="LOC_SPG_EditMode">Mode Édition</sys:String>
-    <sys:String x:Key="LOC_SPG_EnterEditMode">Enter Edit Mode</sys:String>
-    <sys:String x:Key="LOC_SPG_ExitEditMode">Exit Edit Mode</sys:String>
+    <sys:String x:Key="LOC_SPG_EnterEditMode">Mode Édition</sys:String>
+    <sys:String x:Key="LOC_SPG_ExitEditMode">Quitter l'éditeur</sys:String>
     <sys:String x:Key="LOC_SPG_ResetLayout">Rétablir la disposition par défaut</sys:String>
     <sys:String x:Key="LOC_SPG_DragPanelTooltip">Drag-and-Drop panels to swap them</sys:String>
     <sys:String x:Key="LOC_SPG_AddPanel">Add Panel</sys:String>
