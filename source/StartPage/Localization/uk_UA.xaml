@@ -80,18 +80,18 @@
     <sys:String x:Key="LOC_SPG_RemoveView">Прибрати вигляд</sys:String>
     <sys:String x:Key="LOC_SPG_EditMode">Режим редагування</sys:String>
     <sys:String x:Key="LOC_SPG_ResetLayout">Скинути макет до стандартного</sys:String>
-    <sys:String x:Key="LOC_SPG_DragPanelTooltip">Drag-and-Drop panels to swap them</sys:String>
+    <sys:String x:Key="LOC_SPG_DragPanelTooltip">Перетягніть панелі, щоб поміняти їх місцями</sys:String>
 
     <!-- Integrated Views -->
-    <sys:String x:Key="LOC_SPG_ClockView">Clock</sys:String>
-    <sys:String x:Key="LOC_SPG_ClockViewDescription">Digital clock that also shows the current date. Uses the system time format.</sys:String>
-    <sys:String x:Key="LOC_SPG_ShelvesView">Game Shelves</sys:String>
-    <sys:String x:Key="LOC_SPG_ShelvesViewDescription">Shelves showing game covers with custom filters, sorting and grouping options.</sys:String>
-    <sys:String x:Key="LOC_SPG_MostPlayedView">Most Played</sys:String>
-    <sys:String x:Key="LOC_SPG_MostPlayedDescription">Shows most played games for different time frames.</sys:String>
-    <sys:String x:Key="LOC_SPG_WeeklyActivityView">Weekly Activity</sys:String>
-    <sys:String x:Key="LOC_SPG_WeeklyActivityDescription">Shows a compact overview of the playtime in the last 7 days. Requires the GameActivity extension.</sys:String>
-    <sys:String x:Key="LOC_SPG_RecentAchievementsView">Recent Achievements</sys:String>
-    <sys:String x:Key="LOC_SPG_RecentAchievementsDescription">Shows an overview of recently unlocked achievements grouped by game. Requires the SuccessStory extension.</sys:String>
+    <sys:String x:Key="LOC_SPG_ClockView">Годинник</sys:String>
+    <sys:String x:Key="LOC_SPG_ClockViewDescription">Цифровий годинник, який також показує поточну дату. Використовує системний формат часу.</sys:String>
+    <sys:String x:Key="LOC_SPG_ShelvesView">Ігрові полиці</sys:String>
+    <sys:String x:Key="LOC_SPG_ShelvesViewDescription">Полиці показують ігрові обкладинки із користувацькими фільтрами, параметрами сортування та групування.</sys:String>
+    <sys:String x:Key="LOC_SPG_MostPlayedView">Найбільше награно</sys:String>
+    <sys:String x:Key="LOC_SPG_MostPlayedDescription">Показує найбільш награні ігри за різні часові проміжки.</sys:String>
+    <sys:String x:Key="LOC_SPG_WeeklyActivityView">Тижнева активність</sys:String>
+    <sys:String x:Key="LOC_SPG_WeeklyActivityDescription">Показує компактний огляд часу гри за останні 7 днів. Потрібне розширення GameActivity.</sys:String>
+    <sys:String x:Key="LOC_SPG_RecentAchievementsView">Останні досягнення</sys:String>
+    <sys:String x:Key="LOC_SPG_RecentAchievementsDescription">Показує огляд нещодавно розкритих досягнень, згрупованих за грою. Потрібне розширення SuccessStory.</sys:String>
 
 </ResourceDictionary>
