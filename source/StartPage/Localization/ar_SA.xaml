@@ -71,36 +71,36 @@
     <sys:String x:Key="LOC_SPG_EnableTags">إنشاء وسوم [SPG] عند التشغيل. تستخدم لوضع علامة على الألعاب لتجاهلها.</sys:String>
 
     <!-- Grid -->
-    <sys:String x:Key="LOC_SPG_SplitHorizonatlly">Split horizontally</sys:String>
-    <sys:String x:Key="LOC_SPG_SplitVertically">Split vertically</sys:String>
-    <sys:String x:Key="LOC_SPG_Merge">Merge</sys:String>
-    <sys:String x:Key="LOC_SPG_MergeKeepUpper">Keep upper panel</sys:String>
+    <sys:String x:Key="LOC_SPG_SplitHorizonatlly">قسم أفقياً</sys:String>
+    <sys:String x:Key="LOC_SPG_SplitVertically">قسم عمودياً</sys:String>
+    <sys:String x:Key="LOC_SPG_Merge">دمج</sys:String>
+    <sys:String x:Key="LOC_SPG_MergeKeepUpper">احتفظ باللوحة العليا</sys:String>
     <sys:String x:Key="LOC_SPG_MergeKeepLower">Keep lower panel</sys:String>
     <sys:String x:Key="LOC_SPG_MergeKeepLeft">Keep left panel</sys:String>
     <sys:String x:Key="LOC_SPG_MergeKeepRight">Keep right panel</sys:String>
-    <sys:String x:Key="LOC_SPG_AddView">Add View</sys:String>
-    <sys:String x:Key="LOC_SPG_RemoveView">Remove View</sys:String>
-    <sys:String x:Key="LOC_SPG_EditMode">Edit Mode</sys:String>
-    <sys:String x:Key="LOC_SPG_EnterEditMode">Enter Edit Mode</sys:String>
-    <sys:String x:Key="LOC_SPG_ExitEditMode">Exit Edit Mode</sys:String>
-    <sys:String x:Key="LOC_SPG_ResetLayout">Reset layout to default</sys:String>
+    <sys:String x:Key="LOC_SPG_AddView">إضافة عرض</sys:String>
+    <sys:String x:Key="LOC_SPG_RemoveView">إزالة العرض</sys:String>
+    <sys:String x:Key="LOC_SPG_EditMode">وضع التعديل</sys:String>
+    <sys:String x:Key="LOC_SPG_EnterEditMode">أدخل وضع التعديل</sys:String>
+    <sys:String x:Key="LOC_SPG_ExitEditMode">الخروج من وضع التعديل</sys:String>
+    <sys:String x:Key="LOC_SPG_ResetLayout">إعادة تعيين التخطيط الافتراضي</sys:String>
     <sys:String x:Key="LOC_SPG_DragPanelTooltip">Drag-and-Drop panels to swap them</sys:String>
-    <sys:String x:Key="LOC_SPG_AddPanel">Add Panel</sys:String>
-    <sys:String x:Key="LOC_SPG_AddPanelTop">Top</sys:String>
-    <sys:String x:Key="LOC_SPG_AddPanelBottom">Bottom</sys:String>
-    <sys:String x:Key="LOC_SPG_AddPanelLeft">Leftmost</sys:String>
-    <sys:String x:Key="LOC_SPG_AddPanelRight">Rightmost</sys:String>
+    <sys:String x:Key="LOC_SPG_AddPanel">إضافة لوحة</sys:String>
+    <sys:String x:Key="LOC_SPG_AddPanelTop">أعلى</sys:String>
+    <sys:String x:Key="LOC_SPG_AddPanelBottom">أسفل</sys:String>
+    <sys:String x:Key="LOC_SPG_AddPanelLeft">أقصى اليسار</sys:String>
+    <sys:String x:Key="LOC_SPG_AddPanelRight">أقصى اليمين</sys:String>
 
     <!-- Integrated Views -->
-    <sys:String x:Key="LOC_SPG_ClockView">Clock</sys:String>
-    <sys:String x:Key="LOC_SPG_ClockViewDescription">Digital clock that also shows the current date. Uses the system time format.</sys:String>
-    <sys:String x:Key="LOC_SPG_ShelvesView">Game Shelves</sys:String>
+    <sys:String x:Key="LOC_SPG_ClockView">الساعة</sys:String>
+    <sys:String x:Key="LOC_SPG_ClockViewDescription">الساعة الرقمية التي تظهر أيضا التاريخ الحالي. تستخدم تنسيق وقت النظام.</sys:String>
+    <sys:String x:Key="LOC_SPG_ShelvesView">رفوف الألعاب</sys:String>
     <sys:String x:Key="LOC_SPG_ShelvesViewDescription">Shelves showing game covers with custom filters, sorting and grouping options.</sys:String>
-    <sys:String x:Key="LOC_SPG_MostPlayedView">Most Played</sys:String>
-    <sys:String x:Key="LOC_SPG_MostPlayedDescription">Shows most played games for different time frames.</sys:String>
-    <sys:String x:Key="LOC_SPG_WeeklyActivityView">Weekly Activity</sys:String>
-    <sys:String x:Key="LOC_SPG_WeeklyActivityDescription">Shows a compact overview of the playtime in the last 7 days. Requires the GameActivity extension.</sys:String>
-    <sys:String x:Key="LOC_SPG_RecentAchievementsView">Recent Achievements</sys:String>
-    <sys:String x:Key="LOC_SPG_RecentAchievementsDescription">Shows an overview of recently unlocked achievements grouped by game. Requires the SuccessStory extension.</sys:String>
+    <sys:String x:Key="LOC_SPG_MostPlayedView">الأكثر لعبًا</sys:String>
+    <sys:String x:Key="LOC_SPG_MostPlayedDescription">يعرض أكثر الألعاب التي تم لعبها وفقًا لأطر زمنية مختلفة.</sys:String>
+    <sys:String x:Key="LOC_SPG_WeeklyActivityView">النشاط الأسبوعي</sys:String>
+    <sys:String x:Key="LOC_SPG_WeeklyActivityDescription">يعرض نظرة عامة موجزة عن وقت اللعب في آخر 7 أيام. يتطلب إضافة GameActivity.</sys:String>
+    <sys:String x:Key="LOC_SPG_RecentAchievementsView">الإنجازات الحديثة</sys:String>
+    <sys:String x:Key="LOC_SPG_RecentAchievementsDescription">يعرض نظرة عامة على الإنجازات التي تم فتحها مؤخرًا مجمعة حسب اللعبة. يتطلب إضافة SuccessStory.</sys:String>
 
 </ResourceDictionary>
