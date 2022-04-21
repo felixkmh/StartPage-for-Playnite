@@ -15,6 +15,18 @@
     <sys:String x:Key="LOC_SPG_LastSevenDays">Letzten 7 Tage</sys:String>
     <sys:String x:Key="LOC_SPG_LastThirtyDays">Letzten 30 Tage</sys:String>
     
+    <!-- Timeframes -->
+    <sys:String x:Key="LOC_SPG_TimeframeLastDay">Letzte 24h</sys:String>
+    <sys:String x:Key="LOC_SPG_TimeframeLast7Days">Letzte Woche</sys:String>
+    <sys:String x:Key="LOC_SPG_TimeframeLast14Days">Letzte 2 Wochen</sys:String>
+    <sys:String x:Key="LOC_SPG_TimeframeLast21Days">Letzte 3 Wochen</sys:String>
+    <sys:String x:Key="LOC_SPG_TimeframeLastMonth">Letzter Monat</sys:String>
+    <sys:String x:Key="LOC_SPG_TimeframeLast3Months">Letzte 3 Monate</sys:String>
+    <sys:String x:Key="LOC_SPG_TimeframeLast6Months">Letzte 6 Monate</sys:String>
+    <sys:String x:Key="LOC_SPG_TimeframeLastYear">Letztes Jahr</sys:String>
+    <sys:String x:Key="LOC_SPG_TimeframeLast5Years">Letzte 5 Jahre</sys:String>
+    <sys:String x:Key="LOC_SPG_TimeframeAllTime">Allzeit</sys:String>
+
     <!--Settings Tabs-->
     <sys:String x:Key="LOC_SPG_CommonTab">Allgemein</sys:String>
     <sys:String x:Key="LOC_SPG_BackgroundTab">Hintergrund</sys:String>
