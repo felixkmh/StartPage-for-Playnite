@@ -74,22 +74,22 @@
     <sys:String x:Key="LOC_SPG_SplitHorizonatlly">Dividi orizzontalmente</sys:String>
     <sys:String x:Key="LOC_SPG_SplitVertically">Dividi verticalmente</sys:String>
     <sys:String x:Key="LOC_SPG_Merge">Unisci</sys:String>
-    <sys:String x:Key="LOC_SPG_MergeKeepUpper">Keep upper panel</sys:String>
-    <sys:String x:Key="LOC_SPG_MergeKeepLower">Keep lower panel</sys:String>
-    <sys:String x:Key="LOC_SPG_MergeKeepLeft">Keep left panel</sys:String>
-    <sys:String x:Key="LOC_SPG_MergeKeepRight">Keep right panel</sys:String>
+    <sys:String x:Key="LOC_SPG_MergeKeepUpper">Mantieni il pannello superiore</sys:String>
+    <sys:String x:Key="LOC_SPG_MergeKeepLower">Mantieni il pannello inferiore</sys:String>
+    <sys:String x:Key="LOC_SPG_MergeKeepLeft">Mantieni il pannello sinistro</sys:String>
+    <sys:String x:Key="LOC_SPG_MergeKeepRight">Mantieni il pannello destro</sys:String>
     <sys:String x:Key="LOC_SPG_AddView">Aggiungi vista</sys:String>
     <sys:String x:Key="LOC_SPG_RemoveView">Rimuovi vista</sys:String>
     <sys:String x:Key="LOC_SPG_EditMode">Modalità di modifica</sys:String>
-    <sys:String x:Key="LOC_SPG_EnterEditMode">Enter Edit Mode</sys:String>
-    <sys:String x:Key="LOC_SPG_ExitEditMode">Exit Edit Mode</sys:String>
+    <sys:String x:Key="LOC_SPG_EnterEditMode">Attivazione della modalità di modifica</sys:String>
+    <sys:String x:Key="LOC_SPG_ExitEditMode">Esci dalla modalità di modifica</sys:String>
     <sys:String x:Key="LOC_SPG_ResetLayout">Ripristina il layout predefinito</sys:String>
     <sys:String x:Key="LOC_SPG_DragPanelTooltip">Pannelli drag-and-drop per scambiarli</sys:String>
-    <sys:String x:Key="LOC_SPG_AddPanel">Add Panel</sys:String>
-    <sys:String x:Key="LOC_SPG_AddPanelTop">Top</sys:String>
-    <sys:String x:Key="LOC_SPG_AddPanelBottom">Bottom</sys:String>
-    <sys:String x:Key="LOC_SPG_AddPanelLeft">Leftmost</sys:String>
-    <sys:String x:Key="LOC_SPG_AddPanelRight">Rightmost</sys:String>
+    <sys:String x:Key="LOC_SPG_AddPanel">Aggiungi pannello</sys:String>
+    <sys:String x:Key="LOC_SPG_AddPanelTop">In alto</sys:String>
+    <sys:String x:Key="LOC_SPG_AddPanelBottom">In basso</sys:String>
+    <sys:String x:Key="LOC_SPG_AddPanelLeft">Il più a sinistra</sys:String>
+    <sys:String x:Key="LOC_SPG_AddPanelRight">Il più a destra</sys:String>
 
     <!-- Integrated Views -->
     <sys:String x:Key="LOC_SPG_ClockView">Orologio</sys:String>
