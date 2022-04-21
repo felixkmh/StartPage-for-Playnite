@@ -74,22 +74,22 @@
     <sys:String x:Key="LOC_SPG_SplitHorizonatlly">Horizontal teilen</sys:String>
     <sys:String x:Key="LOC_SPG_SplitVertically">Vertikal teilen</sys:String>
     <sys:String x:Key="LOC_SPG_Merge">Vereinen</sys:String>
-    <sys:String x:Key="LOC_SPG_MergeKeepUpper">Keep upper panel</sys:String>
-    <sys:String x:Key="LOC_SPG_MergeKeepLower">Keep lower panel</sys:String>
-    <sys:String x:Key="LOC_SPG_MergeKeepLeft">Keep left panel</sys:String>
-    <sys:String x:Key="LOC_SPG_MergeKeepRight">Keep right panel</sys:String>
+    <sys:String x:Key="LOC_SPG_MergeKeepUpper">Oberes Panel behalten</sys:String>
+    <sys:String x:Key="LOC_SPG_MergeKeepLower">Unteres Panel behalten</sys:String>
+    <sys:String x:Key="LOC_SPG_MergeKeepLeft">Linkes Panel behalten</sys:String>
+    <sys:String x:Key="LOC_SPG_MergeKeepRight">Rechtes Panel behalten</sys:String>
     <sys:String x:Key="LOC_SPG_AddView">Ansicht hinzufügen</sys:String>
     <sys:String x:Key="LOC_SPG_RemoveView">Ansicht entfernen</sys:String>
     <sys:String x:Key="LOC_SPG_EditMode">Bearbeitungs-Modus</sys:String>
-    <sys:String x:Key="LOC_SPG_ExitEditMode">Exit Edit Mode</sys:String>
+    <sys:String x:Key="LOC_SPG_ExitEditMode">Bearbeitungsmodus verlassen</sys:String>
     <sys:String x:Key="LOC_SPG_ExitEditMode">Exit Edit Mode</sys:String>
     <sys:String x:Key="LOC_SPG_ResetLayout">Layout auf Standard zurücksetzen</sys:String>
     <sys:String x:Key="LOC_SPG_DragPanelTooltip">Panels per Drag-and-Drop austauschen</sys:String>
-    <sys:String x:Key="LOC_SPG_AddPanel">Add Panel</sys:String>
-    <sys:String x:Key="LOC_SPG_AddPanelTop">Top</sys:String>
-    <sys:String x:Key="LOC_SPG_AddPanelBottom">Bottom</sys:String>
-    <sys:String x:Key="LOC_SPG_AddPanelLeft">Leftmost</sys:String>
-    <sys:String x:Key="LOC_SPG_AddPanelRight">Rightmost</sys:String>
+    <sys:String x:Key="LOC_SPG_AddPanel">Panel hinzufügen</sys:String>
+    <sys:String x:Key="LOC_SPG_AddPanelTop">Oberer Rand</sys:String>
+    <sys:String x:Key="LOC_SPG_AddPanelBottom">Unterer Rand</sys:String>
+    <sys:String x:Key="LOC_SPG_AddPanelLeft">Linker Rand</sys:String>
+    <sys:String x:Key="LOC_SPG_AddPanelRight">Rechter Rand</sys:String>
 
     <!-- Integrated Views -->
     <sys:String x:Key="LOC_SPG_ClockView">Uhr</sys:String>
