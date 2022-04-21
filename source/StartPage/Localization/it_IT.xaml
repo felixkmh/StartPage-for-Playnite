@@ -3,7 +3,7 @@
 
     <sys:String x:Key="LOC_SPG_MostPlayedGame">Più giocati</sys:String>
     <sys:String x:Key="LOC_SPG_LatestReleaseGame">Ultima versione</sys:String>
-    <sys:String x:Key="LOC_SPG_RecentAchievements">Achievement recenti</sys:String>
+    <sys:String x:Key="LOC_SPG_RecentAchievements">Obiettivi recenti</sys:String>
     <sys:String x:Key="LOC_SPG_RecentlyAddedGames">Aggiunti di recente</sys:String>
 
     <sys:String x:Key="LOC_SPG_DailyPlaytime">Tempo di gioco quotidiano</sys:String>
@@ -34,11 +34,11 @@
     <sys:String x:Key="LOC_SPG_ShowFavorites">Mostra giochi preferiti</sys:String>
     <sys:String x:Key="LOC_SPG_ShowClock">Mostra orologio</sys:String>
     <sys:String x:Key="LOC_SPG_ShowRecentlyPlayed">Giochi avviati di recente</sys:String>
-    <sys:String x:Key="LOC_SPG_ShowRecentAchievements">Mostra gli achievement recenti usando SuccessStory</sys:String>
+    <sys:String x:Key="LOC_SPG_ShowRecentAchievements">Mostra gli obiettivi recenti usando SuccessStory</sys:String>
     <sys:String x:Key="LOC_SPG_ShowRecentlyAdded">Mostra giochi aggiunti recentemente</sys:String>
     <sys:String x:Key="LOC_SPG_StartupItem">(Non supportato) SidebarItem attivato all'avvio</sys:String>
-    <sys:String x:Key="LOC_SPG_MaxRecentAchievements">Numero massimo di achievement recenti:</sys:String>
-    <sys:String x:Key="LOC_SPG_MaxRecentAchievementsPerGame">Numero massimo di achievement recenti per Gioco:</sys:String>
+    <sys:String x:Key="LOC_SPG_MaxRecentAchievements">Numero massimo di obiettivi recenti:</sys:String>
+    <sys:String x:Key="LOC_SPG_MaxRecentAchievementsPerGame">Numero massimo di obiettivi recenti per gioco:</sys:String>
     <sys:String x:Key="LOC_SPG_ShowTitelOnCover">Mostra titolo sulla copertina del gioco</sys:String>
     <sys:String x:Key="LOC_SPG_ShowGameDetails">Mostra dettagli del gioco</sys:String>
     <sys:String x:Key="LOC_SPG_EnableNotifications">Abilita notifiche</sys:String>
@@ -71,27 +71,27 @@
     <sys:String x:Key="LOC_SPG_EnableTags">Crea tag [SPG] al lancio. Usato per contrassegnare i giochi come ignorati.</sys:String>
 
     <!-- Grid -->
-    <sys:String x:Key="LOC_SPG_SplitHorizonatlly">Split horizontally</sys:String>
-    <sys:String x:Key="LOC_SPG_SplitVertically">Split vertically</sys:String>
-    <sys:String x:Key="LOC_SPG_Merge">Merge</sys:String>
-    <sys:String x:Key="LOC_SPG_MergeKeepLeftUpper">Keep left/upper panel</sys:String>
-    <sys:String x:Key="LOC_SPG_MergeKeepRightLower">Keep right/lower panel</sys:String>
-    <sys:String x:Key="LOC_SPG_AddView">Add View</sys:String>
-    <sys:String x:Key="LOC_SPG_RemoveView">Remove View</sys:String>
-    <sys:String x:Key="LOC_SPG_EditMode">Edit Mode</sys:String>
-    <sys:String x:Key="LOC_SPG_ResetLayout">Reset layout to default</sys:String>
-    <sys:String x:Key="LOC_SPG_DragPanelTooltip">Drag-and-Drop panels to swap them</sys:String>
+    <sys:String x:Key="LOC_SPG_SplitHorizonatlly">Dividi orizzontalmente</sys:String>
+    <sys:String x:Key="LOC_SPG_SplitVertically">Dividi verticalmente</sys:String>
+    <sys:String x:Key="LOC_SPG_Merge">Unisci</sys:String>
+    <sys:String x:Key="LOC_SPG_MergeKeepLeftUpper">Mantieni il pannello sinistro/superiore</sys:String>
+    <sys:String x:Key="LOC_SPG_MergeKeepRightLower">Mantieni il pannello destro/inferiore</sys:String>
+    <sys:String x:Key="LOC_SPG_AddView">Aggiungi vista</sys:String>
+    <sys:String x:Key="LOC_SPG_RemoveView">Rimuovi vista</sys:String>
+    <sys:String x:Key="LOC_SPG_EditMode">Modalità di modifica</sys:String>
+    <sys:String x:Key="LOC_SPG_ResetLayout">Ripristina il layout predefinito</sys:String>
+    <sys:String x:Key="LOC_SPG_DragPanelTooltip">Pannelli drag-and-drop per scambiarli</sys:String>
 
     <!-- Integrated Views -->
-    <sys:String x:Key="LOC_SPG_ClockView">Clock</sys:String>
-    <sys:String x:Key="LOC_SPG_ClockViewDescription">Digital clock that also shows the current date. Uses the system time format.</sys:String>
-    <sys:String x:Key="LOC_SPG_ShelvesView">Game Shelves</sys:String>
-    <sys:String x:Key="LOC_SPG_ShelvesViewDescription">Shelves showing game covers with custom filters, sorting and grouping options.</sys:String>
-    <sys:String x:Key="LOC_SPG_MostPlayedView">Most Played</sys:String>
-    <sys:String x:Key="LOC_SPG_MostPlayedDescription">Shows most played games for different time frames.</sys:String>
-    <sys:String x:Key="LOC_SPG_WeeklyActivityView">Weekly Activity</sys:String>
-    <sys:String x:Key="LOC_SPG_WeeklyActivityDescription">Shows a compact overview of the playtime in the last 7 days. Requires the GameActivity extension.</sys:String>
-    <sys:String x:Key="LOC_SPG_RecentAchievementsView">Recent Achievements</sys:String>
-    <sys:String x:Key="LOC_SPG_RecentAchievementsDescription">Shows an overview of recently unlocked achievements grouped by game. Requires the SuccessStory extension.</sys:String>
+    <sys:String x:Key="LOC_SPG_ClockView">Orologio</sys:String>
+    <sys:String x:Key="LOC_SPG_ClockViewDescription">Orologio digitale che mostra anche la data corrente. Utilizza il formato dell'ora del sistema.</sys:String>
+    <sys:String x:Key="LOC_SPG_ShelvesView">Scaffali di gioco</sys:String>
+    <sys:String x:Key="LOC_SPG_ShelvesViewDescription">Scaffali che mostrano le copertine dei giochi con filtri personalizzati, opzioni di ordinamento e raggruppamento.</sys:String>
+    <sys:String x:Key="LOC_SPG_MostPlayedView">Più giocati</sys:String>
+    <sys:String x:Key="LOC_SPG_MostPlayedDescription">Mostra i giochi più giocati per diversi periodi di tempo.</sys:String>
+    <sys:String x:Key="LOC_SPG_WeeklyActivityView">Attività settimanale</sys:String>
+    <sys:String x:Key="LOC_SPG_WeeklyActivityDescription">Mostra una panoramica compatta del tempo di gioco negli ultimi 7 giorni. Richiede l'estensione GameActivity.</sys:String>
+    <sys:String x:Key="LOC_SPG_RecentAchievementsView">Obiettivi recenti</sys:String>
+    <sys:String x:Key="LOC_SPG_RecentAchievementsDescription">Mostra una panoramica degli obiettivi sbloccati di recente, raggruppate per gioco. Richiede l'estensione SuccessStory.</sys:String>
 
 </ResourceDictionary>
