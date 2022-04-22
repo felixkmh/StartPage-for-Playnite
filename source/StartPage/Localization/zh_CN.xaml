@@ -16,16 +16,16 @@
     <sys:String x:Key="LOC_SPG_LastThirtyDays">最近 30 天</sys:String>
     
     <!-- Timeframes -->
-    <sys:String x:Key="LOC_SPG_TimeframeLastDay">Last 24 Hours</sys:String>
-    <sys:String x:Key="LOC_SPG_TimeframeLast7Days">Last Week</sys:String>
-    <sys:String x:Key="LOC_SPG_TimeframeLast14Days">Last 2 Weeks</sys:String>
-    <sys:String x:Key="LOC_SPG_TimeframeLast21Days">Last 3 Weeks</sys:String>
-    <sys:String x:Key="LOC_SPG_TimeframeLastMonth">Last Month</sys:String>
-    <sys:String x:Key="LOC_SPG_TimeframeLast3Months">Last 3 Months</sys:String>
-    <sys:String x:Key="LOC_SPG_TimeframeLast6Months">Last 6 Month</sys:String>
-    <sys:String x:Key="LOC_SPG_TimeframeLastYear">Last Year</sys:String>
-    <sys:String x:Key="LOC_SPG_TimeframeLast5Years">Last 5 Year</sys:String>
-    <sys:String x:Key="LOC_SPG_TimeframeAllTime">All Time</sys:String>
+    <sys:String x:Key="LOC_SPG_TimeframeLastDay">过去24小时</sys:String>
+    <sys:String x:Key="LOC_SPG_TimeframeLast7Days">过去一周</sys:String>
+    <sys:String x:Key="LOC_SPG_TimeframeLast14Days">过去两周</sys:String>
+    <sys:String x:Key="LOC_SPG_TimeframeLast21Days">过去三周</sys:String>
+    <sys:String x:Key="LOC_SPG_TimeframeLastMonth">过去一个月</sys:String>
+    <sys:String x:Key="LOC_SPG_TimeframeLast3Months">过去三个月</sys:String>
+    <sys:String x:Key="LOC_SPG_TimeframeLast6Months">过去六个月</sys:String>
+    <sys:String x:Key="LOC_SPG_TimeframeLastYear">过去一年</sys:String>
+    <sys:String x:Key="LOC_SPG_TimeframeLast5Years">过去五年</sys:String>
+    <sys:String x:Key="LOC_SPG_TimeframeAllTime">全部时间</sys:String>
 
     <!--Settings Tabs-->
     <sys:String x:Key="LOC_SPG_CommonTab">常规</sys:String>
