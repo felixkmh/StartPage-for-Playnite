@@ -53,14 +53,14 @@
                             <CheckBox IsChecked="{Binding Settings.EnableGlobalProgressBar}" VerticalAlignment="Center" Margin="3"/>
                             <TextBlock Text="{DynamicResource LOC_SPG_ShowGlobalProgressBar}" Margin="3" VerticalAlignment="Center" TextWrapping="Wrap"/>
                         </DockPanel>
-                        <DockPanel>
+                        <!--<DockPanel>
                             <CheckBox IsChecked="{Binding Settings.ShowClock}" VerticalAlignment="Center" Margin="3"/>
                             <TextBlock Text="{DynamicResource LOC_SPG_ShowClock}" Margin="3" VerticalAlignment="Center"/>
-                        </DockPanel>
-                        <DockPanel>
+                        </DockPanel>-->
+                        <!--<DockPanel>
                             <CheckBox IsChecked="{Binding Settings.ShowMostPlayedGames}" VerticalAlignment="Center" Margin="3"/>
                             <TextBlock Text="{DynamicResource LOC_SPG_ShowMostPlayedGames}" Margin="3" VerticalAlignment="Center"/>
-                        </DockPanel>
+                        </DockPanel>-->
                         <DockPanel>
                             <CheckBox IsChecked="{Binding Settings.ShowTitleOnCover}" VerticalAlignment="Center" Margin="3"/>
                             <TextBlock Text="{DynamicResource LOC_SPG_ShowTitelOnCover}" Margin="3" VerticalAlignment="Center"/>
