@@ -99,6 +99,7 @@
     <sys:String x:Key="LOC_SPG_ResetLayout">إعادة تعيين التخطيط الافتراضي</sys:String>
     <sys:String x:Key="LOC_SPG_DragPanelTooltip">سحب و إسقاط الألواح لمبادلتها</sys:String>
     <sys:String x:Key="LOC_SPG_AddPanel">إضافة لوحة</sys:String>
+    <sys:String x:Key="LOC_SPG_RemovePanel">Remove Panel</sys:String>
     <sys:String x:Key="LOC_SPG_AddPanelTop">أعلى</sys:String>
     <sys:String x:Key="LOC_SPG_AddPanelBottom">أسفل</sys:String>
     <sys:String x:Key="LOC_SPG_AddPanelLeft">أقصى اليسار</sys:String>
