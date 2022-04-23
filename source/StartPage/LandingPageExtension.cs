@@ -513,7 +513,7 @@ namespace LandingPage
 
         public void OnViewRemoved(string viewId, Guid instanceId)
         {
-            Debug.WriteLine($"Removed instance {instanceId} of {viewId}");
+            // Debug.WriteLine($"Removed instance {instanceId} of {viewId}");
         }
     }
 }
