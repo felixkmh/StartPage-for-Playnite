@@ -99,6 +99,12 @@
     <sys:String x:Key="LOC_SPG_ResetLayout">Layout auf Standard zurücksetzen</sys:String>
     <sys:String x:Key="LOC_SPG_DragPanelTooltip">Panels per Drag-and-Drop austauschen</sys:String>
     <sys:String x:Key="LOC_SPG_AddPanel">Panel hinzufügen</sys:String>
+    <sys:String x:Key="LOC_SPG_RemovePanel">Panel entfernen</sys:String>
+    <sys:String x:Key="LOC_SPG_MergeWith">Vereinen mit</sys:String>
+    <sys:String x:Key="LOC_SPG_MergeWithAbove">Oberem Panel</sys:String>
+    <sys:String x:Key="LOC_SPG_MergeWithBelow">Unterem Panel</sys:String>
+    <sys:String x:Key="LOC_SPG_MergeWithLeft">Linkem Panel</sys:String>
+    <sys:String x:Key="LOC_SPG_MergeWithRight">Rechtem Panel</sys:String>
     <sys:String x:Key="LOC_SPG_AddPanelTop">Oberer Rand</sys:String>
     <sys:String x:Key="LOC_SPG_AddPanelBottom">Unterer Rand</sys:String>
     <sys:String x:Key="LOC_SPG_AddPanelLeft">Linker Rand</sys:String>
