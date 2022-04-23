@@ -14,7 +14,7 @@
     <sys:String x:Key="LOC_SPG_TotalPlaytime" xml:space="preserve">Total : </sys:String>
     <sys:String x:Key="LOC_SPG_LastSevenDays">7 derniers jours</sys:String>
     <sys:String x:Key="LOC_SPG_LastThirtyDays">30 derniers jours</sys:String>
-    <sys:String x:Key="LOC_SPG_TimeframeNone">None</sys:String>
+    <sys:String x:Key="LOC_SPG_TimeframeNone">Aucun(e)</sys:String>
 
     <!-- Timeframes -->
     <sys:String x:Key="LOC_SPG_TimeframeLastDay">Dernières 24 heures</sys:String>
@@ -99,16 +99,24 @@
     <sys:String x:Key="LOC_SPG_ResetLayout">Rétablir la disposition par défaut</sys:String>
     <sys:String x:Key="LOC_SPG_DragPanelTooltip">Glisser-déposez les panneaux pour les intervertir</sys:String>
     <sys:String x:Key="LOC_SPG_AddPanel">Ajouter un panneau</sys:String>
-    <sys:String x:Key="LOC_SPG_RemovePanel">Remove Panel</sys:String>
-    <sys:String x:Key="LOC_SPG_MergeWith">Merge with</sys:String>
-    <sys:String x:Key="LOC_SPG_MergeWithAbove">Upper Panel</sys:String>
-    <sys:String x:Key="LOC_SPG_MergeWithBelow">Lower Panel</sys:String>
-    <sys:String x:Key="LOC_SPG_MergeWithLeft">Left Panel</sys:String>
-    <sys:String x:Key="LOC_SPG_MergeWithRight">Right Panel</sys:String>
+    <sys:String x:Key="LOC_SPG_RemovePanel">Supprimer le panneau</sys:String>
+    <sys:String x:Key="LOC_SPG_MergeWith">Fusionner avec</sys:String>
+    <sys:String x:Key="LOC_SPG_MergeWithAbove">Panneau supérieur</sys:String>
+    <sys:String x:Key="LOC_SPG_MergeWithBelow">Panneau inférieur</sys:String>
+    <sys:String x:Key="LOC_SPG_MergeWithLeft">Panneau de gauche</sys:String>
+    <sys:String x:Key="LOC_SPG_MergeWithRight">Panneau de droite</sys:String>
     <sys:String x:Key="LOC_SPG_AddPanelTop">En haut</sys:String>
     <sys:String x:Key="LOC_SPG_AddPanelBottom">En bas</sys:String>
     <sys:String x:Key="LOC_SPG_AddPanelLeft">Gauche</sys:String>
     <sys:String x:Key="LOC_SPG_AddPanelRight">Droite</sys:String>
+    <sys:String x:Key="LOC_SPG_HorizontalAlignment">Horizontal Alignment</sys:String>
+    <sys:String x:Key="LOC_SPG_HorizontalAlignmentLeft">Left</sys:String>
+    <sys:String x:Key="LOC_SPG_HorizontalAlignmentRight">Right</sys:String>
+    <sys:String x:Key="LOC_SPG_VerticalAlignment">Vertical Alignment</sys:String>
+    <sys:String x:Key="LOC_SPG_VerticalAlignmentTop">Top</sys:String>
+    <sys:String x:Key="LOC_SPG_VerticalAlignmentBottom">Bottom</sys:String>
+    <sys:String x:Key="LOC_SPG_AlignmentStretch">Stretch</sys:String>
+    <sys:String x:Key="LOC_SPG_AlignmentCenter">Center</sys:String>
 
     <!-- Integrated Views -->
     <sys:String x:Key="LOC_SPG_ClockView">Horloge</sys:String>
