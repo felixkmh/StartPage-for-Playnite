@@ -216,6 +216,27 @@ namespace LandingPage.ViewModels.Layout
             if (Parent != null)
             {
                 Parent.GridNode.Children.Remove(GridNode);
+                var properties = GridNode.ViewProperties;
+                if (properties != null)
+                {
+                    GridNode.ViewProperties = null;
+                    var plugin = LandingPageExtension.Instance.PlayniteApi.Addons.Plugins.FirstOrDefault(p => p.Id == properties.PluginId);
+                    if (plugin is IStartPageExtension extension)
+                    {
+                        try
+                        {
+                            extension.OnViewRemoved(properties.ViewId, properties.InstanceId);
+                        }
+                        catch (Exception ex)
+                        {
+                            LandingPageExtension.logger.Warn
+                                (
+                                    ex,
+                                    $"Error when calling OnViewRemoved() on extension {plugin.GetType().Name} with viewId {properties.ViewId} and instanceId {properties.InstanceId}."
+                                );
+                        }
+                    }
+                }
             }
         }
 
