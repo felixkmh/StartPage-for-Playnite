@@ -85,6 +85,8 @@
                     <ContextMenu>
                         <MenuItem Header="{DynamicResource LOC_SPG_SplitHorizonatlly}" Command="{Binding SplitHorizontallyCommand}"/>
                         <MenuItem Header="{DynamicResource LOC_SPG_SplitVertically}" Command="{Binding SplitVerticallyCommand}"/>
+                        <Separator/>
+                        <MenuItem Header="{DynamicResource LOC_SPG_RemovePanel}" Command="{Binding RemovePanelCommand}"/>
                     </ContextMenu>
                 </Border.ContextMenu>
                 <Grid>

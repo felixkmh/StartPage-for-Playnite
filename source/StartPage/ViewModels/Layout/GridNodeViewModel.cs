@@ -53,6 +53,7 @@ namespace LandingPage.ViewModels.Layout
         public ICommand SplitHorizontallyCommand { get; private set; }
         public ICommand SplitVerticallyCommand { get; private set; }
         public ICommand RemoveViewCommand { get; private set; }
+        public ICommand RemovePanelCommand { get; private set; }
 
         public Control ViewSettings
         { 
@@ -161,7 +162,22 @@ namespace LandingPage.ViewModels.Layout
                 RemoveCurrentView();
             });
 
+            RemovePanelCommand = new RelayCommand(() =>
+            {
+                RemovePanel();
+            },
+            () => Parent != null);
+
             CreateView(node);
+        }
+
+        private void RemovePanel()
+        {
+            if (Parent != null)
+            {
+                var index = Parent.GridNode.Children.IndexOf(GridNode);
+                Parent.GridNode.Children.RemoveAt(index);
+            }
         }
 
         private void RemoveCurrentView()
