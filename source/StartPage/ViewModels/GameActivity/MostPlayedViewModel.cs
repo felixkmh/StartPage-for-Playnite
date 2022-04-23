@@ -89,23 +89,45 @@ namespace LandingPage.ViewModels.GameActivity
 
             foreach(var options in Settings.Settings.MostPlayedOptions)
             {
-                var thisWeek = GameActivityViewModel.Activities
-                    .Select(a => new { Game = playniteAPI.Database.Games.Get(a.Id), Items = a.Items.Where(i => options.Timeframe == Timeframe.AllTime || i.DateSession.Add(options.TimeSpan) >= DateTime.Today).ToList() })
-                    .Where(a => a.Game is Game && a.Items?.Count > 0)
-                    .Where(a => !(a.Game.TagIds?.Contains(tagId) ?? false));
-                var mostPlayedThisWeek = thisWeek
-                    .Select(a => new { Game = a.Game, Playtime = a.Items.Sum(i => (long)i.ElapsedSeconds) })
-                    .MaxElement(g => g.Playtime).Value?.Game;
-
-                if (mostPlayedThisWeek is Game mostPlayedWeek)
+                if (options.Timeframe == Timeframe.None)
                 {
-                    var group = new GameGroup();
-                    group.Games.Add(new GameModel(mostPlayedWeek));
-                    group.Label = converter.ConvertToString(options.Timeframe);
-                    Application.Current.Dispatcher.Invoke(() =>
+                    continue;
+                }
+                if (options.Timeframe == Timeframe.AllTime)
+                {
+                    if (playniteAPI.Database.Games
+                        .Where(g => !g.Hidden)
+                        .Where(g => !(g.TagIds?.Contains(tagId) ?? false))
+                        .MaxElement(g => g.Playtime).Value is Game game)
                     {
-                        groups.Add(group);
-                    });
+                        var group = new GameGroup();
+                        group.Games.Add(new GameModel(game));
+                        group.Label = converter.ConvertToString(options.Timeframe);
+                        Application.Current.Dispatcher.Invoke(() =>
+                        {
+                            groups.Add(group);
+                        });
+                    }
+                } else
+                {
+                    var thisWeek = GameActivityViewModel.Activities
+                        .Select(a => new { Game = playniteAPI.Database.Games.Get(a.Id), Items = a.Items.Where(i => options.Timeframe == Timeframe.AllTime || i.DateSession.Add(options.TimeSpan) >= DateTime.Today).ToList() })
+                        .Where(a => a.Game is Game && a.Items?.Count > 0)
+                        .Where(a => !(a.Game.TagIds?.Contains(tagId) ?? false));
+                    var mostPlayedThisWeek = thisWeek
+                        .Select(a => new { Game = a.Game, Playtime = a.Items.Sum(i => (long)i.ElapsedSeconds) })
+                        .MaxElement(g => g.Playtime).Value?.Game;
+
+                    if (mostPlayedThisWeek is Game mostPlayedWeek)
+                    {
+                        var group = new GameGroup();
+                        group.Games.Add(new GameModel(mostPlayedWeek));
+                        group.Label = converter.ConvertToString(options.Timeframe);
+                        Application.Current.Dispatcher.Invoke(() =>
+                        {
+                            groups.Add(group);
+                        });
+                    }
                 }
             }
         }
