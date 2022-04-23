@@ -157,16 +157,9 @@ namespace LandingPage.ViewModels.Layout
                 Split(Orientation.Vertical);
 
             });
-            RemoveViewCommand = new RelayCommand(() =>
-            {
-                RemoveCurrentView();
-            });
 
-            RemovePanelCommand = new RelayCommand(() =>
-            {
-                RemovePanel();
-            },
-            () => Parent != null);
+            RemoveViewCommand = new RelayCommand(RemoveCurrentView);
+            RemovePanelCommand = new RelayCommand(RemovePanel, () => Parent != null);
 
             CreateView(node);
         }
