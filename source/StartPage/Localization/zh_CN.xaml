@@ -25,7 +25,7 @@
     <sys:String x:Key="LOC_SPG_TimeframeLast3Months">过去三个月</sys:String>
     <sys:String x:Key="LOC_SPG_TimeframeLast6Months">过去六个月</sys:String>
     <sys:String x:Key="LOC_SPG_TimeframeLastYear">过去一年</sys:String>
-    <sys:String x:Key="LOC_SPG_TimeframeLast5Years">过去五年</sys:String>
+    <sys:String x:Key="LOC_SPG_TimeframeLast5Years">Last 5 Years</sys:String>
     <sys:String x:Key="LOC_SPG_TimeframeAllTime">全部时间</sys:String>
 
     <!--Settings Tabs-->
