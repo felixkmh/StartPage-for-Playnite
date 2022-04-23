@@ -100,6 +100,11 @@
     <sys:String x:Key="LOC_SPG_DragPanelTooltip">سحب و إسقاط الألواح لمبادلتها</sys:String>
     <sys:String x:Key="LOC_SPG_AddPanel">إضافة لوحة</sys:String>
     <sys:String x:Key="LOC_SPG_RemovePanel">Remove Panel</sys:String>
+    <sys:String x:Key="LOC_SPG_MergeWith">Merge with</sys:String>
+    <sys:String x:Key="LOC_SPG_MergeWithAbove">Upper Panel</sys:String>
+    <sys:String x:Key="LOC_SPG_MergeWithBelow">Lower Panel</sys:String>
+    <sys:String x:Key="LOC_SPG_MergeWithLeft">Left Panel</sys:String>
+    <sys:String x:Key="LOC_SPG_MergeWithRight">Right Panel</sys:String>
     <sys:String x:Key="LOC_SPG_AddPanelTop">أعلى</sys:String>
     <sys:String x:Key="LOC_SPG_AddPanelBottom">أسفل</sys:String>
     <sys:String x:Key="LOC_SPG_AddPanelLeft">أقصى اليسار</sys:String>
