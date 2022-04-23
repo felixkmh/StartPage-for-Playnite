@@ -19,6 +19,12 @@ namespace LandingPage.Models.Layout
         private Orientation orientation;
         public Orientation Orientation { get => orientation; set => SetValue(ref orientation, value); }
 
+        private HorizontalAlignment horizontalAlignment = HorizontalAlignment.Stretch;
+        public HorizontalAlignment HorizontalAlignment { get => horizontalAlignment; set => SetValue(ref horizontalAlignment, value); }
+
+        private VerticalAlignment verticalAlignment = VerticalAlignment.Stretch;
+        public VerticalAlignment VerticalAlignment { get => verticalAlignment; set => SetValue(ref verticalAlignment, value); }
+
         private ViewProperties viewProperties = null;
         public ViewProperties ViewProperties { get => viewProperties; set => SetValue(ref viewProperties, value); }
 

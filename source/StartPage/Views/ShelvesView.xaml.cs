@@ -96,6 +96,15 @@ namespace LandingPage.Views
                             var scrollViewer = Helper.UiHelper.FindVisualChildren<ScrollViewer>(listBox).FirstOrDefault();
                             // itemWidth = desiredWidth / itemCount;
                             var availableWidth = newWidth - 120;
+                            if (availableWidth < 0)
+                            {
+                                FrameworkElement panel = (Parent as FrameworkElement);
+                                while(!(panel is Panel))
+                                {
+                                    panel = Parent as FrameworkElement;
+                                }
+                                availableWidth = panel.ActualWidth;
+                            }
                             var newListWidth = Math.Floor(availableWidth / Math.Max(itemWidth, 1)) * itemWidth;
                             if (listBox.MaxWidth != newListWidth)
                             {

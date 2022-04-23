@@ -56,6 +56,8 @@ namespace LandingPage.ViewModels.Layout
         public ICommand RemovePanelCommand { get; private set; }
         public ICommand MergeWithPreviousPanelCommand { get; private set; }
         public ICommand MergeWithNextPanelCommand { get; private set; }
+        public ICommand SetVerticalAlignmentCommand { get; private set; }
+        public ICommand SetHorizontalAlignmentCommand { get; private set; }
 
         public Control ViewSettings
         { 
@@ -169,7 +171,20 @@ namespace LandingPage.ViewModels.Layout
             MergeWithPreviousPanelCommand = new RelayCommand(MergeWithPreviousPanel,
                 () => Parent != null && Parent.GridNode.Children.IndexOf(GridNode) > 0);
 
+            SetHorizontalAlignmentCommand = new RelayCommand<HorizontalAlignment>(SetHorizontalAlignment);
+            SetVerticalAlignmentCommand = new RelayCommand<VerticalAlignment>(SetVerticalAlignment);
+
             CreateView(node);
+        }
+
+        public void SetHorizontalAlignment(HorizontalAlignment align)
+        {
+            GridNode.HorizontalAlignment = align;
+        }
+
+        public void SetVerticalAlignment(VerticalAlignment align)
+        {
+            GridNode.VerticalAlignment = align;
         }
 
         public void MergeWithPreviousPanel()
@@ -246,6 +261,12 @@ namespace LandingPage.ViewModels.Layout
             {
                 target.View.Children.Remove(element2);
             }
+            var tempVerticalAlignemnt = source.GridNode.VerticalAlignment;
+            var tempHorizontalAlignemnt = source.GridNode.HorizontalAlignment;
+            source.GridNode.VerticalAlignment = target.GridNode.VerticalAlignment;
+            source.GridNode.HorizontalAlignment = target.GridNode.HorizontalAlignment;
+            target.GridNode.VerticalAlignment = tempVerticalAlignemnt;
+            target.GridNode.HorizontalAlignment = tempHorizontalAlignemnt;
             var temp = source.GridNode.ViewProperties;
             source.GridNode.ViewProperties = target.GridNode.ViewProperties;
             target.GridNode.ViewProperties = temp;

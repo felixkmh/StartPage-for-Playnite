@@ -55,11 +55,15 @@
             </Style.Resources>
         </Style>
     </UserControl.Resources>
-    <Grid>
+    <Grid Name="NodeGrid">
         <ContentControl Content="{Binding View}">
             <ContentControl.Style>
                 <Style TargetType="ContentControl">
                     <Style.Triggers>
+                        <DataTrigger Binding="{Binding IsLeaf}" Value="{StaticResource True}">
+                            <Setter Property="VerticalAlignment" Value="{Binding GridNode.VerticalAlignment}"/>
+                            <Setter Property="HorizontalAlignment" Value="{Binding GridNode.HorizontalAlignment}"/>
+                        </DataTrigger>
                         <MultiDataTrigger>
                             <MultiDataTrigger.Conditions>
                                 <Condition Binding="{Binding IsLeaf}" Value="{StaticResource True}"/>
@@ -111,6 +115,27 @@
                                     </Style>
                                 </MenuItem.Style>
                             </MenuItem>
+                        </MenuItem>
+                        <Separator/>
+                        <MenuItem Header="{DynamicResource LOC_SPG_VerticalAlignment}" IsEnabled="{Binding IsLeaf}">
+                            <MenuItem Header="{DynamicResource LOC_SPG_AlignmentStretch}" Command="{Binding SetVerticalAlignmentCommand}" CommandParameter="{x:Static VerticalAlignment.Stretch}"
+                                      IsEnabled="{Binding GridNode.VerticalAlignment, Converter={StaticResource InvertedObjectEqualityToBoolConverter}, ConverterParameter={x:Static VerticalAlignment.Stretch}}"/>
+                            <MenuItem Header="{DynamicResource LOC_SPG_VerticalAlignmentTop}" Command="{Binding SetVerticalAlignmentCommand}" CommandParameter="{x:Static VerticalAlignment.Top}"
+                                      IsEnabled="{Binding GridNode.VerticalAlignment, Converter={StaticResource InvertedObjectEqualityToBoolConverter}, ConverterParameter={x:Static VerticalAlignment.Top}}"/>
+                            <MenuItem Header="{DynamicResource LOC_SPG_AlignmentCenter}" Command="{Binding SetVerticalAlignmentCommand}" CommandParameter="{x:Static VerticalAlignment.Center}"
+                                      IsEnabled="{Binding GridNode.VerticalAlignment, Converter={StaticResource InvertedObjectEqualityToBoolConverter}, ConverterParameter={x:Static VerticalAlignment.Center}}"/>
+                            <MenuItem Header="{DynamicResource LOC_SPG_VerticalAlignmentBottom}" Command="{Binding SetVerticalAlignmentCommand}" CommandParameter="{x:Static VerticalAlignment.Bottom}"
+                                      IsEnabled="{Binding GridNode.VerticalAlignment, Converter={StaticResource InvertedObjectEqualityToBoolConverter}, ConverterParameter={x:Static VerticalAlignment.Bottom}}"/>
+                        </MenuItem>
+                        <MenuItem Header="{DynamicResource LOC_SPG_HorizontalAlignment}" IsEnabled="{Binding IsLeaf}">
+                            <MenuItem Header="{DynamicResource LOC_SPG_AlignmentStretch}" Command="{Binding SetHorizontalAlignmentCommand}" CommandParameter="{x:Static HorizontalAlignment.Stretch}"
+                                      IsEnabled="{Binding GridNode.HorizontalAlignment, Converter={StaticResource InvertedObjectEqualityToBoolConverter}, ConverterParameter={x:Static HorizontalAlignment.Stretch}}"/>
+                            <MenuItem Header="{DynamicResource LOC_SPG_HorizontalAlignmentLeft}" Command="{Binding SetHorizontalAlignmentCommand}" CommandParameter="{x:Static HorizontalAlignment.Left}"
+                                      IsEnabled="{Binding GridNode.HorizontalAlignment, Converter={StaticResource InvertedObjectEqualityToBoolConverter}, ConverterParameter={x:Static HorizontalAlignment.Left}}"/>
+                            <MenuItem Header="{DynamicResource LOC_SPG_AlignmentCenter}" Command="{Binding SetHorizontalAlignmentCommand}" CommandParameter="{x:Static HorizontalAlignment.Center}"
+                                      IsEnabled="{Binding GridNode.HorizontalAlignment, Converter={StaticResource InvertedObjectEqualityToBoolConverter}, ConverterParameter={x:Static HorizontalAlignment.Center}}"/>
+                            <MenuItem Header="{DynamicResource LOC_SPG_HorizontalAlignmentRight}" Command="{Binding SetHorizontalAlignmentCommand}" CommandParameter="{x:Static HorizontalAlignment.Right}"
+                                      IsEnabled="{Binding GridNode.HorizontalAlignment, Converter={StaticResource InvertedObjectEqualityToBoolConverter}, ConverterParameter={x:Static HorizontalAlignment.Right}}"/>
                         </MenuItem>
                         <Separator/>
                         <MenuItem Header="{DynamicResource LOC_SPG_RemovePanel}" Command="{Binding RemovePanelCommand}"/>
