@@ -14,19 +14,19 @@
     <sys:String x:Key="LOC_SPG_TotalPlaytime" xml:space="preserve">Total: </sys:String>
     <sys:String x:Key="LOC_SPG_LastSevenDays">Últimos 7 días</sys:String>
     <sys:String x:Key="LOC_SPG_LastThirtyDays">Últimos 30 días</sys:String>
-    <sys:String x:Key="LOC_SPG_TimeframeNone">None</sys:String>
+    <sys:String x:Key="LOC_SPG_TimeframeNone">Ninguno</sys:String>
 
     <!-- Timeframes -->
-    <sys:String x:Key="LOC_SPG_TimeframeLastDay">Last 24 Hours</sys:String>
-    <sys:String x:Key="LOC_SPG_TimeframeLast7Days">Last Week</sys:String>
-    <sys:String x:Key="LOC_SPG_TimeframeLast14Days">Last 2 Weeks</sys:String>
-    <sys:String x:Key="LOC_SPG_TimeframeLast21Days">Last 3 Weeks</sys:String>
-    <sys:String x:Key="LOC_SPG_TimeframeLastMonth">Last Month</sys:String>
-    <sys:String x:Key="LOC_SPG_TimeframeLast3Months">Last 3 Months</sys:String>
-    <sys:String x:Key="LOC_SPG_TimeframeLast6Months">Last 6 Month</sys:String>
-    <sys:String x:Key="LOC_SPG_TimeframeLastYear">Last Year</sys:String>
-    <sys:String x:Key="LOC_SPG_TimeframeLast5Years">Last 5 Year</sys:String>
-    <sys:String x:Key="LOC_SPG_TimeframeAllTime">All Time</sys:String>
+    <sys:String x:Key="LOC_SPG_TimeframeLastDay">Últimas 24 horas</sys:String>
+    <sys:String x:Key="LOC_SPG_TimeframeLast7Days">Última semana</sys:String>
+    <sys:String x:Key="LOC_SPG_TimeframeLast14Days">Últimas 2 semanas</sys:String>
+    <sys:String x:Key="LOC_SPG_TimeframeLast21Days">Últimas 3 semanas</sys:String>
+    <sys:String x:Key="LOC_SPG_TimeframeLastMonth">Último mes</sys:String>
+    <sys:String x:Key="LOC_SPG_TimeframeLast3Months">Últimos 3 meses</sys:String>
+    <sys:String x:Key="LOC_SPG_TimeframeLast6Months">Últimos 6 meses</sys:String>
+    <sys:String x:Key="LOC_SPG_TimeframeLastYear">Último año</sys:String>
+    <sys:String x:Key="LOC_SPG_TimeframeLast5Years">Últimos 5 años</sys:String>
+    <sys:String x:Key="LOC_SPG_TimeframeAllTime">Siempre</sys:String>
 
     <!--Settings Tabs-->
     <sys:String x:Key="LOC_SPG_CommonTab">General</sys:String>
@@ -84,50 +84,50 @@
     <sys:String x:Key="LOC_SPG_EnableTags">Crear [SPG] etiquetas al lanzar. Utilizado para marcar juegos como ignorados.</sys:String>
 
     <!-- Grid -->
-    <sys:String x:Key="LOC_SPG_SplitHorizonatlly">Split horizontally</sys:String>
-    <sys:String x:Key="LOC_SPG_SplitVertically">Split vertically</sys:String>
-    <sys:String x:Key="LOC_SPG_Merge">Merge</sys:String>
-    <sys:String x:Key="LOC_SPG_MergeKeepUpper">Keep upper panel</sys:String>
-    <sys:String x:Key="LOC_SPG_MergeKeepLower">Keep lower panel</sys:String>
-    <sys:String x:Key="LOC_SPG_MergeKeepLeft">Keep left panel</sys:String>
-    <sys:String x:Key="LOC_SPG_MergeKeepRight">Keep right panel</sys:String>
-    <sys:String x:Key="LOC_SPG_AddView">Add View</sys:String>
-    <sys:String x:Key="LOC_SPG_RemoveView">Remove View</sys:String>
-    <sys:String x:Key="LOC_SPG_EditMode">Edit Mode</sys:String>
-    <sys:String x:Key="LOC_SPG_EnterEditMode">Enter Edit Mode</sys:String>
-    <sys:String x:Key="LOC_SPG_ExitEditMode">Exit Edit Mode</sys:String>
-    <sys:String x:Key="LOC_SPG_ResetLayout">Reset layout to default</sys:String>
-    <sys:String x:Key="LOC_SPG_DragPanelTooltip">Drag-and-Drop panels to swap them</sys:String>
-    <sys:String x:Key="LOC_SPG_AddPanel">Add Panel</sys:String>
-    <sys:String x:Key="LOC_SPG_RemovePanel">Remove Panel</sys:String>
-    <sys:String x:Key="LOC_SPG_MergeWith">Merge with</sys:String>
-    <sys:String x:Key="LOC_SPG_MergeWithAbove">Upper Panel</sys:String>
-    <sys:String x:Key="LOC_SPG_MergeWithBelow">Lower Panel</sys:String>
-    <sys:String x:Key="LOC_SPG_MergeWithLeft">Left Panel</sys:String>
-    <sys:String x:Key="LOC_SPG_MergeWithRight">Right Panel</sys:String>
-    <sys:String x:Key="LOC_SPG_AddPanelTop">Top</sys:String>
-    <sys:String x:Key="LOC_SPG_AddPanelBottom">Bottom</sys:String>
-    <sys:String x:Key="LOC_SPG_AddPanelLeft">Leftmost</sys:String>
-    <sys:String x:Key="LOC_SPG_AddPanelRight">Rightmost</sys:String>
-    <sys:String x:Key="LOC_SPG_HorizontalAlignment">Horizontal Alignment</sys:String>
-    <sys:String x:Key="LOC_SPG_HorizontalAlignmentLeft">Left</sys:String>
-    <sys:String x:Key="LOC_SPG_HorizontalAlignmentRight">Right</sys:String>
-    <sys:String x:Key="LOC_SPG_VerticalAlignment">Vertical Alignment</sys:String>
-    <sys:String x:Key="LOC_SPG_VerticalAlignmentTop">Top</sys:String>
-    <sys:String x:Key="LOC_SPG_VerticalAlignmentBottom">Bottom</sys:String>
-    <sys:String x:Key="LOC_SPG_AlignmentStretch">Stretch</sys:String>
-    <sys:String x:Key="LOC_SPG_AlignmentCenter">Center</sys:String>
+    <sys:String x:Key="LOC_SPG_SplitHorizonatlly">Dividir horizontalmente</sys:String>
+    <sys:String x:Key="LOC_SPG_SplitVertically">Dividir verticalmente</sys:String>
+    <sys:String x:Key="LOC_SPG_Merge">Combinar</sys:String>
+    <sys:String x:Key="LOC_SPG_MergeKeepUpper">Mantener el panel superior</sys:String>
+    <sys:String x:Key="LOC_SPG_MergeKeepLower">Mantener el panel inferior</sys:String>
+    <sys:String x:Key="LOC_SPG_MergeKeepLeft">Mantener el panel izquierdo</sys:String>
+    <sys:String x:Key="LOC_SPG_MergeKeepRight">Mantener el panel derecho</sys:String>
+    <sys:String x:Key="LOC_SPG_AddView">Añadir Vista</sys:String>
+    <sys:String x:Key="LOC_SPG_RemoveView">Eliminar vista</sys:String>
+    <sys:String x:Key="LOC_SPG_EditMode">Modo de Edición</sys:String>
+    <sys:String x:Key="LOC_SPG_EnterEditMode">Entrar a modo de edición</sys:String>
+    <sys:String x:Key="LOC_SPG_ExitEditMode">Salir del modo de edición</sys:String>
+    <sys:String x:Key="LOC_SPG_ResetLayout">Restablecer el diseño por defecto</sys:String>
+    <sys:String x:Key="LOC_SPG_DragPanelTooltip">Arrastre y suelte los paneles para intercambiarlos</sys:String>
+    <sys:String x:Key="LOC_SPG_AddPanel">Añadir panel</sys:String>
+    <sys:String x:Key="LOC_SPG_RemovePanel">Quitar panel</sys:String>
+    <sys:String x:Key="LOC_SPG_MergeWith">Combinar con</sys:String>
+    <sys:String x:Key="LOC_SPG_MergeWithAbove">Panel superior</sys:String>
+    <sys:String x:Key="LOC_SPG_MergeWithBelow">Panel inferior</sys:String>
+    <sys:String x:Key="LOC_SPG_MergeWithLeft">Panel izquierdo</sys:String>
+    <sys:String x:Key="LOC_SPG_MergeWithRight">Panel derecho</sys:String>
+    <sys:String x:Key="LOC_SPG_AddPanelTop">Arriba</sys:String>
+    <sys:String x:Key="LOC_SPG_AddPanelBottom">Abajo</sys:String>
+    <sys:String x:Key="LOC_SPG_AddPanelLeft">Más a la izquierda</sys:String>
+    <sys:String x:Key="LOC_SPG_AddPanelRight">Más a la derecha</sys:String>
+    <sys:String x:Key="LOC_SPG_HorizontalAlignment">Alineación horizontal</sys:String>
+    <sys:String x:Key="LOC_SPG_HorizontalAlignmentLeft">Izquierda</sys:String>
+    <sys:String x:Key="LOC_SPG_HorizontalAlignmentRight">Derecha</sys:String>
+    <sys:String x:Key="LOC_SPG_VerticalAlignment">Alineación vertical</sys:String>
+    <sys:String x:Key="LOC_SPG_VerticalAlignmentTop">Arriba</sys:String>
+    <sys:String x:Key="LOC_SPG_VerticalAlignmentBottom">Abajo</sys:String>
+    <sys:String x:Key="LOC_SPG_AlignmentStretch">Estirado</sys:String>
+    <sys:String x:Key="LOC_SPG_AlignmentCenter">Centro</sys:String>
 
     <!-- Integrated Views -->
-    <sys:String x:Key="LOC_SPG_ClockView">Clock</sys:String>
-    <sys:String x:Key="LOC_SPG_ClockViewDescription">Digital clock that also shows the current date. Uses the system time format.</sys:String>
-    <sys:String x:Key="LOC_SPG_ShelvesView">Game Shelves</sys:String>
-    <sys:String x:Key="LOC_SPG_ShelvesViewDescription">Shelves showing game covers with custom filters, sorting and grouping options.</sys:String>
-    <sys:String x:Key="LOC_SPG_MostPlayedView">Most Played</sys:String>
-    <sys:String x:Key="LOC_SPG_MostPlayedDescription">Shows most played games for different time frames.</sys:String>
-    <sys:String x:Key="LOC_SPG_WeeklyActivityView">Weekly Activity</sys:String>
-    <sys:String x:Key="LOC_SPG_WeeklyActivityDescription">Shows a compact overview of the playtime in the last 7 days. Requires the GameActivity extension.</sys:String>
-    <sys:String x:Key="LOC_SPG_RecentAchievementsView">Recent Achievements</sys:String>
-    <sys:String x:Key="LOC_SPG_RecentAchievementsDescription">Shows an overview of recently unlocked achievements grouped by game. Requires the SuccessStory extension.</sys:String>
+    <sys:String x:Key="LOC_SPG_ClockView">Reloj</sys:String>
+    <sys:String x:Key="LOC_SPG_ClockViewDescription">Reloj digital que también muestra la fecha actual. Utiliza el formato de la hora del sistema.</sys:String>
+    <sys:String x:Key="LOC_SPG_ShelvesView">Estanterías de juegos</sys:String>
+    <sys:String x:Key="LOC_SPG_ShelvesViewDescription">Estanterías que muestran las carátulas de los juegos con filtros personalizados, opciones de clasificación y agrupación.</sys:String>
+    <sys:String x:Key="LOC_SPG_MostPlayedView">Más jugados</sys:String>
+    <sys:String x:Key="LOC_SPG_MostPlayedDescription">Muestra los juegos más jugados en diferentes periodos de tiempo.</sys:String>
+    <sys:String x:Key="LOC_SPG_WeeklyActivityView">Actividad semanal</sys:String>
+    <sys:String x:Key="LOC_SPG_WeeklyActivityDescription">Muestra un resumen compacto del tiempo de juego en los últimos 7 días. Requiere la extensión GameActivity.</sys:String>
+    <sys:String x:Key="LOC_SPG_RecentAchievementsView">Logros recientes</sys:String>
+    <sys:String x:Key="LOC_SPG_RecentAchievementsDescription">Muestra un resumen de los logros recientemente desbloqueados agrupados por juego. Requiere la extensión SuccessStory.</sys:String>
 
 </ResourceDictionary>
