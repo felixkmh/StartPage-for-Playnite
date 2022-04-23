@@ -175,8 +175,7 @@ namespace LandingPage.ViewModels.Layout
         {
             if (Parent != null)
             {
-                var index = Parent.GridNode.Children.IndexOf(GridNode);
-                Parent.GridNode.Children.RemoveAt(index);
+                Parent.GridNode.Children.Remove(GridNode);
             }
         }
 
