@@ -44,11 +44,12 @@ namespace StartPage.SDK
     public class StartPageExtensionArgs
     {
         /// <summary>
-        /// 
+        /// Name of the extionsion that is shown as the header for the
+        /// submenu containing the available views.
         /// </summary>
         public string ExtensionName { get; set; }
         /// <summary>
-        /// 
+        /// All views that this extension can add to the StartPage.
         /// </summary>
         public IEnumerable<StartPageViewArgsBase> Views { get; set; }
     }
