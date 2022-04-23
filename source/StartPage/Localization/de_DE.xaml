@@ -109,6 +109,14 @@
     <sys:String x:Key="LOC_SPG_AddPanelBottom">Unterer Rand</sys:String>
     <sys:String x:Key="LOC_SPG_AddPanelLeft">Linker Rand</sys:String>
     <sys:String x:Key="LOC_SPG_AddPanelRight">Rechter Rand</sys:String>
+    <sys:String x:Key="LOC_SPG_HorizontalAlignment">Horizontale Ausrichtung</sys:String>
+    <sys:String x:Key="LOC_SPG_HorizontalAlignmentLeft">Links</sys:String>
+    <sys:String x:Key="LOC_SPG_HorizontalAlignmentRight">Right</sys:String>
+    <sys:String x:Key="LOC_SPG_VerticalAlignment">Vertical Alignment</sys:String>
+    <sys:String x:Key="LOC_SPG_VerticalAlignmentTop">Top</sys:String>
+    <sys:String x:Key="LOC_SPG_VerticalAlignmentBottom">Bottom</sys:String>
+    <sys:String x:Key="LOC_SPG_AlignmentStretch">Stretch</sys:String>
+    <sys:String x:Key="LOC_SPG_AlignmentCenter">Center</sys:String>
 
     <!-- Integrated Views -->
     <sys:String x:Key="LOC_SPG_ClockView">Uhr</sys:String>
