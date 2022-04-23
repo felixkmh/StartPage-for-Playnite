@@ -1,5 +1,6 @@
 ﻿using LandingPage.Extensions;
 using LandingPage.Models;
+using LandingPage.Models.Layout;
 using LandingPage.ViewModels.Layout;
 using Playnite.SDK;
 using Playnite.SDK.Models;
@@ -132,9 +133,11 @@ namespace LandingPage.ViewModels
             EnterEditModeCommand = new RelayCommand(() => 
                 RootNodeViewModel.EditModeEnabled = true
             );
-            ExitEditModeCommand = new RelayCommand(() => 
-                RootNodeViewModel.EditModeEnabled = false
-            );
+            ExitEditModeCommand = new RelayCommand(() =>
+            {
+                RootNodeViewModel.EditModeEnabled = false;
+                GridNode.Minimize(RootNodeViewModel.GridNode, null);
+            });
 
             Settings.Settings.PropertyChanged += Settings_PropertyChanged;
             Settings.PropertyChanged += Settings_PropertyChanged1;

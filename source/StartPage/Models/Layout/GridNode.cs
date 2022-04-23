@@ -43,6 +43,8 @@ namespace LandingPage.Models.Layout
                 parent.Children = current.Children;
                 parent.Orientation = current.Orientation;
                 parent.ViewProperties = current.ViewProperties;
+                parent.HorizontalAlignment = current.HorizontalAlignment;
+                parent.VerticalAlignment = current.VerticalAlignment;
             }
             if (current.Children.Count > 0)
             {
