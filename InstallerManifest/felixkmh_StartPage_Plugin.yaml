@@ -1,5 +1,15 @@
 AddonId: felixkmh_StartPage_Plugin
 Packages:  
+  - Version: 2.1.0
+    RequiredApiVersion: 6.1.0
+    ReleaseDate: 2022-04-23
+    PackageUrl: https://github.com/felixkmh/StartPage-for-Playnite/releases/download/v2.1.0/felixkmh_StartPage_Plugin_2_1_0.pext
+    Changelog:
+      - added remove panel command to panel context menu
+      - added merge panel commands to panel context menu
+      - added alignment options to panel context menu
+      - fixed most played of all time not using playnites playtime
+      - localization updates
   - Version: 2.0.0
     RequiredApiVersion: 6.1.0
     ReleaseDate: 2022-04-23
