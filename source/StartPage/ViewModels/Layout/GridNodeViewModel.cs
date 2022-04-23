@@ -54,6 +54,8 @@ namespace LandingPage.ViewModels.Layout
         public ICommand SplitVerticallyCommand { get; private set; }
         public ICommand RemoveViewCommand { get; private set; }
         public ICommand RemovePanelCommand { get; private set; }
+        public ICommand MergeWithPreviousPanelCommand { get; private set; }
+        public ICommand MergeWithNextPanelCommand { get; private set; }
 
         public Control ViewSettings
         { 
@@ -161,7 +163,37 @@ namespace LandingPage.ViewModels.Layout
             RemoveViewCommand = new RelayCommand(RemoveCurrentView);
             RemovePanelCommand = new RelayCommand(RemovePanel, () => Parent != null);
 
+            MergeWithNextPanelCommand = new RelayCommand(MergeWithNextPanel, 
+                () => Parent != null && Parent.GridNode.Children.IndexOf(GridNode) < Parent.GridNode.Children.Count - 1);
+
+            MergeWithPreviousPanelCommand = new RelayCommand(MergeWithPreviousPanel,
+                () => Parent != null && Parent.GridNode.Children.IndexOf(GridNode) > 0);
+
             CreateView(node);
+        }
+
+        public void MergeWithPreviousPanel()
+        {
+            if (Parent != null)
+            {
+                var index = Parent.GridNode.Children.IndexOf(GridNode);
+                if (index > 0)
+                {
+                    Parent.GridNode.Children.RemoveAt(index - 1);
+                }
+            }
+        }
+
+        public void MergeWithNextPanel()
+        {
+            if (Parent != null)
+            {
+                var index = Parent.GridNode.Children.IndexOf(GridNode);
+                if (index > -1 && index < Parent.GridNode.Children.Count - 1)
+                {
+                    Parent.GridNode.Children.RemoveAt(index + 1);
+                }
+            }
         }
 
         private void RemovePanel()

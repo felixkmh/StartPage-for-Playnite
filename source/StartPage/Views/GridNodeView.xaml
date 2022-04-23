@@ -86,6 +86,33 @@
                         <MenuItem Header="{DynamicResource LOC_SPG_SplitHorizonatlly}" Command="{Binding SplitHorizontallyCommand}"/>
                         <MenuItem Header="{DynamicResource LOC_SPG_SplitVertically}" Command="{Binding SplitVerticallyCommand}"/>
                         <Separator/>
+                        <MenuItem Header="{DynamicResource LOC_SPG_MergeWith}" IsEnabled="{Binding Parent, Converter={StaticResource NullToBoolConverter}}">
+                            <MenuItem Command="{Binding MergeWithPreviousPanelCommand}">
+                                <MenuItem.Style>
+                                    <Style TargetType="MenuItem" BasedOn="{StaticResource {x:Type MenuItem}}">
+                                        <Setter Property="Header" Value="{DynamicResource LOC_SPG_MergeWithAbove}"/>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Parent.GridNode.Orientation}" Value="{x:Static Orientation.Horizontal}">
+                                                <Setter Property="Header" Value="{DynamicResource LOC_SPG_MergeWithLeft}"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </MenuItem.Style>
+                            </MenuItem>
+                            <MenuItem Command="{Binding MergeWithNextPanelCommand}">
+                                <MenuItem.Style>
+                                    <Style TargetType="MenuItem" BasedOn="{StaticResource {x:Type MenuItem}}">
+                                        <Setter Property="Header" Value="{DynamicResource LOC_SPG_MergeWithBelow}"/>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Parent.GridNode.Orientation}" Value="{x:Static Orientation.Horizontal}">
+                                                <Setter Property="Header" Value="{DynamicResource LOC_SPG_MergeWithRight}"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </MenuItem.Style>
+                            </MenuItem>
+                        </MenuItem>
+                        <Separator/>
                         <MenuItem Header="{DynamicResource LOC_SPG_RemovePanel}" Command="{Binding RemovePanelCommand}"/>
                     </ContextMenu>
                 </Border.ContextMenu>
