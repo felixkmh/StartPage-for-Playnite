@@ -109,6 +109,14 @@
     <sys:String x:Key="LOC_SPG_AddPanelBottom">底部</sys:String>
     <sys:String x:Key="LOC_SPG_AddPanelLeft">左侧</sys:String>
     <sys:String x:Key="LOC_SPG_AddPanelRight">右侧</sys:String>
+    <sys:String x:Key="LOC_SPG_HorizontalAlignment">Horizontal Alignment</sys:String>
+    <sys:String x:Key="LOC_SPG_HorizontalAlignmentLeft">Left</sys:String>
+    <sys:String x:Key="LOC_SPG_HorizontalAlignmentRight">Right</sys:String>
+    <sys:String x:Key="LOC_SPG_VerticalAlignment">Vertical Alignment</sys:String>
+    <sys:String x:Key="LOC_SPG_VerticalAlignmentTop">Top</sys:String>
+    <sys:String x:Key="LOC_SPG_VerticalAlignmentBottom">Bottom</sys:String>
+    <sys:String x:Key="LOC_SPG_AlignmentStretch">Stretch</sys:String>
+    <sys:String x:Key="LOC_SPG_AlignmentCenter">Center</sys:String>
 
     <!-- Integrated Views -->
     <sys:String x:Key="LOC_SPG_ClockView">时钟</sys:String>
