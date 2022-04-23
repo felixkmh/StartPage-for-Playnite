@@ -14,7 +14,8 @@
     <sys:String x:Key="LOC_SPG_TotalPlaytime" xml:space="preserve">المجموع: </sys:String>
     <sys:String x:Key="LOC_SPG_LastSevenDays">آخر 7 أيام</sys:String>
     <sys:String x:Key="LOC_SPG_LastThirtyDays">آخر 30 يوم</sys:String>
-    
+    <sys:String x:Key="LOC_SPG_TimeframeNone">None</sys:String>
+
     <!-- Timeframes -->
     <sys:String x:Key="LOC_SPG_TimeframeLastDay">Last 24 Hours</sys:String>
     <sys:String x:Key="LOC_SPG_TimeframeLast7Days">Last Week</sys:String>
