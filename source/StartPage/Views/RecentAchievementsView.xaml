@@ -34,7 +34,7 @@
         <ListBox ItemsSource="{Binding Source={StaticResource LatestAchievementsSource}}" SelectionMode="Single"
                  Background="Transparent" BorderBrush="Transparent"
                  ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                 Padding="0"
+                 Padding="15,0"
                  VirtualizingPanel.IsVirtualizingWhenGrouping="True"
                  VirtualizingPanel.IsVirtualizing="True"
                  VirtualizingPanel.ScrollUnit="Pixel"
