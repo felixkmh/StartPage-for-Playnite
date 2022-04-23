@@ -25,7 +25,7 @@
     <sys:String x:Key="LOC_SPG_TimeframeLast6Months">Letzte 6 Monate</sys:String>
     <sys:String x:Key="LOC_SPG_TimeframeLastYear">Letztes Jahr</sys:String>
     <sys:String x:Key="LOC_SPG_TimeframeLast5Years">Letzte 5 Jahre</sys:String>
-    <sys:String x:Key="LOC_SPG_TimeframeAllTime">Allzeit</sys:String>
+    <sys:String x:Key="LOC_SPG_TimeframeAllTime">Aller Zeiten</sys:String>
 
     <!--Settings Tabs-->
     <sys:String x:Key="LOC_SPG_CommonTab">Allgemein</sys:String>
