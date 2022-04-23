@@ -1,5 +1,17 @@
 AddonId: felixkmh_StartPage_Plugin
 Packages:  
+  - Version: 2.0.0
+    RequiredApiVersion: 6.1.0
+    ReleaseDate: 2022-04-23
+    PackageUrl: https://github.com/felixkmh/StartPage-for-Playnite/releases/download/v2.0.0/felixkmh_StartPage_Plugin_2_0_0.pext
+    Changelog:
+      - completely reworked layout system
+      - new edit mode can be entered using the StartPage context menu
+      - panels can be split and merged
+      - each panel can have a different view
+      - views can be dragged-and-dropped across different panels
+      - most played view can now be customized by clicking the settings icon in edit mode
+      - StartPage.SDK (included in the Github release) can be used by other extensions to supply their own views usable to StartPage. So if you would like integration for some other extension, you need to ask its dev to add support for StartPage to their extension.
   - Version: 1.15.1
     RequiredApiVersion: 6.1.0
     ReleaseDate: 2022-04-18
