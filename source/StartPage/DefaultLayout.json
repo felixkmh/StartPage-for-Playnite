@@ -1,0 +1,88 @@
+﻿{
+  "Size": "*",
+  "Orientation": 1,
+  "Children": [
+    {
+      "Size": "34.0433213949258*",
+      "Orientation": 0,
+      "Children": []
+    },
+    {
+      "Size": "490.578097633475*",
+      "Orientation": 0,
+      "Children": [
+        {
+          "Size": "75.4439427257666*",
+          "Orientation": 0,
+          "Children": []
+        },
+        {
+          "Size": "526.979426379567*",
+          "Orientation": 0,
+          "ViewProperties": {
+            "ViewId": "MostPlayed",
+            "InstanceId": "0f3a5557-c677-46bc-94fe-833b7a7070c1",
+            "PluginId": "a6a3dcf6-9bfe-426c-afb0-9f49409ae0c5"
+          },
+          "Children": []
+        },
+        {
+          "Size": "625.525181837739*",
+          "Orientation": 1,
+          "Children": [
+            {
+              "Size": "241.814624171231*",
+              "Orientation": 0,
+              "ViewProperties": {
+                "ViewId": "DigitalClock",
+                "InstanceId": "ad50b407-45f3-4ef4-a3ed-4ef43ef57243",
+                "PluginId": "a6a3dcf6-9bfe-426c-afb0-9f49409ae0c5"
+              },
+              "Children": []
+            },
+            {
+              "Size": "223.814624171231*",
+              "Orientation": 0,
+              "ViewProperties": {
+                "ViewId": "WeeklyActivity",
+                "InstanceId": "e0977743-a570-4e46-ab9b-c30957dc99e7",
+                "PluginId": "a6a3dcf6-9bfe-426c-afb0-9f49409ae0c5"
+              },
+              "Children": []
+            }
+          ]
+        },
+        {
+          "Size": "192.791075482784*",
+          "Orientation": 0,
+          "Children": []
+        },
+        {
+          "Size": "375.726763863845*",
+          "Orientation": 0,
+          "ViewProperties": {
+            "ViewId": "RecentAchivements",
+            "InstanceId": "9dde5f20-3ca8-4cf0-851c-88fc02d73e30",
+            "PluginId": "a6a3dcf6-9bfe-426c-afb0-9f49409ae0c5"
+          },
+          "Children": []
+        },
+        {
+          "Size": "39.5336097102979*",
+          "Orientation": 0,
+          "Children": []
+        }
+      ]
+    },
+    {
+      "Size": "469.378580971599*",
+      "Orientation": 0,
+      "ViewProperties": {
+        "ViewId": "GameShelves",
+        "InstanceId": "978fad8b-15fb-480a-b58d-58dab9711c04",
+        "PluginId": "a6a3dcf6-9bfe-426c-afb0-9f49409ae0c5"
+      },
+      "Children": []
+    }
+  ]
+}

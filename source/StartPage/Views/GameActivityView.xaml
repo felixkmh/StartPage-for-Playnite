@@ -1,0 +1,86 @@
+﻿<UserControl x:Class="LandingPage.Views.GameActivityView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:LandingPage.Views" 
+             xmlns:conv="clr-namespace:LandingPage.Converters"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <conv:IEnumerableNullOrEmptyToVisibilityConverter x:Key="IEnumerableNullOrEmptyToVisibilityConverter"/>
+        <conv:DoubleToGridLengthConverter x:Key="DoubleToGridLengthConverter"/>
+    </UserControl.Resources>
+    <DockPanel HorizontalAlignment="Center" VerticalAlignment="Stretch" LastChildFill="True">
+        <StackPanel Orientation="Horizontal" DockPanel.Dock="Top" HorizontalAlignment="Center"
+                                        Visibility="{Binding PlaytimeLastWeek, Converter={StaticResource IEnumerableNullOrEmptyToVisibilityConverter}}">
+            <StackPanel Margin="2" Orientation="Horizontal">
+                <TextBlock Text="{DynamicResource LOC_SPG_DailyPlaytime}"/>
+                <TextBlock Text=" ("/>
+                <TextBlock Text="{DynamicResource LOC_SPG_TotalPlaytime}"/>
+                <TextBlock Text="{Binding TotalPlaytimeThisWeek, Converter={StaticResource PlayTimeToStringConverter}}"/>
+                <TextBlock Text=")"/>
+            </StackPanel>
+        </StackPanel>
+        <ItemsControl ItemsSource="{Binding PlaytimeLastWeek}" x:Name="WeeklyPlaytimeBars" DockPanel.Dock="Bottom"
+                                          Visibility="{Binding PlaytimeLastWeek, Converter={StaticResource IEnumerableNullOrEmptyToVisibilityConverter}}">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel Orientation="Horizontal"/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <DockPanel LastChildFill="True">
+                        <DockPanel.ToolTip>
+                            <TextBlock Text="{Binding Playtime, Converter={StaticResource PlayTimeToStringConverter}}"/>
+                        </DockPanel.ToolTip>
+                        <TextBlock Text="{Binding DayString}" TextAlignment="Center"
+                                                       Style="{StaticResource BaseTextBlockStyle}"
+                                                       Margin="0,5" DockPanel.Dock="Bottom"/>
+                        <Grid DockPanel.Dock="Bottom" Width="21"
+                                                  Margin="9,0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="{Binding OneMinusFilled, Converter={StaticResource DoubleToGridLengthConverter}}"/>
+                                <RowDefinition Height="10"/>
+                                <RowDefinition Height="{Binding Filled, Converter={StaticResource DoubleToGridLengthConverter}}"/>
+                            </Grid.RowDefinitions>
+                            <Border Grid.Row="1" Grid.RowSpan="2"
+                                                        CornerRadius="5" x:Name="BarBorder" RenderTransformOrigin="0.5,1"
+                                                        BorderThickness="1" BorderBrush="#60FFFFFF">
+                                <Border.Background>
+                                    <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                                        <LinearGradientBrush.GradientStops>
+                                            <GradientStop Color="#25FFFFFF"/>
+                                            <GradientStop Color="#42FFFFFF" Offset="1"/>
+                                        </LinearGradientBrush.GradientStops>
+                                    </LinearGradientBrush>
+                                </Border.Background>
+                                <Border.RenderTransform>
+                                    <ScaleTransform ScaleY="0.0" x:Name="BarScale"/>
+                                </Border.RenderTransform>
+                            </Border>
+                        </Grid>
+                    </DockPanel>
+                    <DataTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" TargetName="BarBorder" Value="#4FFFFFFF"/>
+                        </Trigger>
+                        <EventTrigger RoutedEvent="Loaded">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <DoubleAnimation Storyboard.TargetName="BarScale" Storyboard.TargetProperty="ScaleY" To="1"
+                                                                         Duration="0:0:1">
+                                        <DoubleAnimation.EasingFunction>
+                                            <ElasticEase/>
+                                        </DoubleAnimation.EasingFunction>
+                                    </DoubleAnimation>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                    </DataTemplate.Triggers>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+    </DockPanel>
+</UserControl>

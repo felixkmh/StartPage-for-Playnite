@@ -11,7 +11,9 @@
              xmlns:system="clr-namespace:System;assembly=mscorlib"
              xmlns:mu="clr-namespace:LandingPage.Markup"
              xmlns:scm="clr-namespace:System.ComponentModel;assembly=WindowsBase"
-             xmlns:pn="clr-namespace:Playnite.SDK;assembly=Playnite.SDK" xmlns:controls="clr-namespace:LandingPage.Controls" xmlns:system1="clr-namespace:System;assembly=System"
+             xmlns:pn="clr-namespace:Playnite.SDK;assembly=Playnite.SDK" 
+             xmlns:controls="clr-namespace:LandingPage.Controls" 
+             xmlns:system1="clr-namespace:System;assembly=System"
              xmlns:ext="clr-namespace:LandingPage.Extensions" xmlns:numeric="http://gu.se/NumericInput"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
@@ -54,11 +56,6 @@
             <Setter Property="BorderThickness" Value="0"/>
             <Setter Property="VirtualizingPanel.VirtualizationMode" Value="Standard"/>
             <Setter Property="Padding" Value="0"/>
-            <!--<Setter Property="Effect">
-                <Setter.Value>
-                    <DropShadowEffect BlurRadius="17" ShadowDepth="0" Color="Black" Opacity="0.7" RenderingBias="Performance"/>
-                </Setter.Value>
-            </Setter>-->
         </Style>
         <system:Double x:Key="CoverHeight">195</system:Double>
         <system:Double x:Key="CoverWidth">140</system:Double>
@@ -158,16 +155,6 @@
                                                 CornerRadius="7"/>
                         <ContentControl x:Name="PopupImageContentControl"/>
                         <ContentControl x:Name="PopupTrailerContentControl"/>
-                        <!--<Image x:Name="PopupBackgroundImage" Opacity="0.3" Source="{x:Null}" Stretch="UniformToFill" RenderOptions.BitmapScalingMode="HighQuality">
-                            <Image.OpacityMask>
-                                <LinearGradientBrush StartPoint="1,0" EndPoint="0,1">
-                                    <LinearGradientBrush.GradientStops>
-                                        <GradientStop Color="Transparent"/>
-                                        <GradientStop Color="Black" Offset="1"/>
-                                    </LinearGradientBrush.GradientStops>
-                                </LinearGradientBrush>
-                            </Image.OpacityMask>
-                        </Image>-->
                         <local:GameDetailsView Margin="10,5" DataContext="{x:Null}" x:Name="GameDetails"/>
                     </Grid>
                 </Popup>

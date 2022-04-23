@@ -96,6 +96,7 @@
     <Compile Include="Markup\LandingPageSettings.cs" />
     <Compile Include="Models\Clock.cs" />
     <Compile Include="Models\GameActivity\GameActivity.cs" />
+    <Compile Include="Models\GameActivity\MostPlayedOptions.cs" />
     <Compile Include="Models\GameActivity\PlayTimePerSource.cs" />
     <Compile Include="Models\GameFilters\CategoryFilter.cs" />
     <Compile Include="Models\GameFilters\CompletionFilter.cs" />
@@ -106,6 +107,8 @@
     <Compile Include="Models\GameGroup.cs" />
     <Compile Include="Models\GameModel.cs" />
     <Compile Include="Models\LandingPage.cs" />
+    <Compile Include="Models\Layout\ViewProperties.cs" />
+    <Compile Include="Models\Layout\GridNode.cs" />
     <Compile Include="Models\ObservableObject.cs" />
     <Compile Include="Models\ShelveProperties.cs" />
     <Compile Include="Models\SuccessStory\Achievements.cs" />
@@ -113,11 +116,18 @@
     <Compile Include="ScrollViewerHelper.cs" />
     <Compile Include="UiHelper.cs" />
     <Compile Include="ViewModels\GameActivity\GameActivityViewModel.cs" />
+    <Compile Include="ViewModels\GameActivity\MostPlayedViewModel.cs" />
     <Compile Include="ViewModels\LandingPageViewModel.cs" />
+    <Compile Include="ViewModels\Layout\GridNodeViewModel.cs" />
+    <Compile Include="ViewModels\ShelvesViewModel.cs" />
     <Compile Include="ViewModels\ShelveViewModel.cs" />
+    <Compile Include="ViewModels\StartPageViewModel.cs" />
     <Compile Include="ViewModels\SuccessStory\SuccessStoryViewModel.cs" />
     <Compile Include="Views\ClockView.xaml.cs">
       <DependentUpon>ClockView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\GameActivityView.xaml.cs">
+      <DependentUpon>GameActivityView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\GameCover.xaml.cs">
       <DependentUpon>GameCover.xaml</DependentUpon>
@@ -125,14 +135,32 @@
     <Compile Include="Views\GameDetailsView.xaml.cs">
       <DependentUpon>GameDetailsView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\GridNodeView.xaml.cs">
+      <DependentUpon>GridNodeView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\LandingPageView.xaml.cs">
       <DependentUpon>LandingPageView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MostPlayedView.xaml.cs">
+      <DependentUpon>MostPlayedView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\RecentAchievementsView.xaml.cs">
       <DependentUpon>RecentAchievementsView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Settings\MostPlayedSettingsView.xaml.cs">
+      <DependentUpon>MostPlayedSettingsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ShelvesView.xaml.cs">
+      <DependentUpon>ShelvesView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\StartPageView.xaml.cs">
+      <DependentUpon>StartPageView.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="DefaultLayout.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <None Include="extension.yaml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -263,6 +291,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\GameActivityView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\GameCover.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -271,11 +303,31 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\GridNodeView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\LandingPageView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\MostPlayedView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\RecentAchievementsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Settings\MostPlayedSettingsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ShelvesView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\StartPageView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

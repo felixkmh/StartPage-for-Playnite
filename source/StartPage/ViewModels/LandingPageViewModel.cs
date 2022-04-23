@@ -94,14 +94,11 @@ namespace LandingPage.ViewModels
         internal ObservableCollection<GameGroup> specialGames = new ObservableCollection<GameGroup>();
         public ObservableCollection<GameGroup> SpecialGames => specialGames;
 
-        internal ObservableCollection<NotificationMessage> notifications;
-        public ObservableCollection<NotificationMessage> Notifications => notifications;
+        public ObservableCollection<NotificationMessage> Notifications {get; private set;}
 
-        internal ICommand deleteNotificationCommand;
-        public ICommand DeleteNotificationCommand => deleteNotificationCommand;
+        public ICommand DeleteNotificationCommand { get; set; }
 
-        internal ICommand clearNotificationsCommand;
-        public ICommand ClearNotificationsCommand => clearNotificationsCommand;
+        public ICommand ClearNotificationsCommand { get; set; }
 
         internal LandingPageSettingsViewModel settings;
         public LandingPageSettingsViewModel Settings => settings;
@@ -126,8 +123,7 @@ namespace LandingPage.ViewModels
             }
         }
 
-        internal Clock clock = new Clock();
-        public Clock Clock => clock;
+        public Clock Clock { get; set; } = new Clock();
 
         internal SuccessStory.SuccessStoryViewModel successStory;
         public SuccessStory.SuccessStoryViewModel SuccessStory => successStory;
@@ -167,14 +163,20 @@ namespace LandingPage.ViewModels
             this.settings = settings;
             this.successStory = successStory;
             this.gameActivity = gameActivity;
-            notifications = playniteAPI.Notifications.Messages;
-            notifications.CollectionChanged += (sender, args) => OnPropertyChanged(nameof(Notifications));
-            deleteNotificationCommand = new RelayCommand<NotificationMessage>(sender => playniteAPI.Notifications.Remove(sender.Id));
-            clearNotificationsCommand = new RelayCommand(() => playniteAPI.Notifications.RemoveAll());
+            Notifications = playniteAPI.Notifications.Messages;
+            Notifications.CollectionChanged += (sender, args) => OnPropertyChanged(nameof(Notifications));
+            DeleteNotificationCommand = new RelayCommand<NotificationMessage>(sender => playniteAPI.Notifications.Remove(sender.Id));
+            ClearNotificationsCommand = new RelayCommand(() => playniteAPI.Notifications.RemoveAll());
             Settings.Settings.PropertyChanged += Settings_PropertyChanged;
             Settings.PropertyChanged += Settings_PropertyChanged1;
-            clock.DayChanged += Clock_DayChanged;
+            Clock.DayChanged += Clock_DayChanged;
             backgroundImageQueue.CollectionChanged += BackgroundImageQueue_CollectionChanged;
+
+            foreach(var shelveProperties in settings.Settings.ShelveProperties)
+            {
+                ShelveViewModels.Add(new ShelveViewModel(shelveProperties, playniteAPI, ShelveViewModels));
+            }
+
             NextRandomBackgroundCommand = new RelayCommand(() => 
             {
                 UpdateBackgroundImagePath(true);
@@ -183,9 +185,18 @@ namespace LandingPage.ViewModels
             languageSupportsVertical = verticalLanguages.Contains(playniteAPI.ApplicationSettings.Language);
             AddShelveCommand = new RelayCommand(() => 
             {
-                ShelveViewModels.Add(new ShelveViewModel(ShelveProperties.RecentlyPlayed, playniteAPI, this));
+                ShelveViewModel item = new ShelveViewModel(ShelveProperties.RecentlyPlayed, playniteAPI, ShelveViewModels);
+                Settings.Settings.ShelveProperties.Add(item.ShelveProperties);
+                ShelveViewModels.Add(item);
             });
-            RemoveShelveCommand = new RelayCommand<ShelveViewModel>(svm => {if (svm != null) ShelveViewModels.Remove(svm); });
+            RemoveShelveCommand = new RelayCommand<ShelveViewModel>(svm => 
+            {
+                if (svm != null)
+                {
+                    Settings.Settings.ShelveProperties.Remove(svm.ShelveProperties);
+                    ShelveViewModels.Remove(svm); 
+                }
+            });
             ExtendShelveCommand = new RelayCommand<ShelveViewModel>(svm =>
             {
                 var idx = ShelveViewModels.IndexOf(svm);
@@ -194,7 +205,9 @@ namespace LandingPage.ViewModels
                     var properties = svm.ShelveProperties.Copy();
                     properties.SkippedGames = svm.ShelveProperties.NumberOfGames + svm.ShelveProperties.SkippedGames;
                     properties.Name = string.Empty;
-                    ShelveViewModels.Insert(idx + 1, new ShelveViewModel(properties, playniteAPI, this));
+                    ShelveViewModel item = new ShelveViewModel(properties, playniteAPI, ShelveViewModels);
+                    Settings.Settings.ShelveProperties.Insert(idx + 1, item.ShelveProperties);
+                    ShelveViewModels.Insert(idx + 1, item);
                 }
             });
             UpdateBackgroundTimer();

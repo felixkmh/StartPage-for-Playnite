@@ -1,10 +1,13 @@
 ﻿using LandingPage.Converters;
 using LandingPage.Models;
+using LandingPage.Models.GameActivity;
+using LandingPage.Models.Layout;
 using Newtonsoft.Json;
 using Playnite.SDK;
 using Playnite.SDK.Data;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
@@ -48,6 +51,9 @@ namespace LandingPage
     {
         // workaround to get this module to be loaded by Playnite
         private Gu.Wpf.NumericInput.DoubleBox _ = new Gu.Wpf.NumericInput.DoubleBox();
+
+        private GridNode gridLayout = null;
+        public GridNode GridLayout { get => gridLayout; set => SetValue(ref gridLayout, value); }
 
         private string startPage = ResourceProvider.GetString("LOCLibrary");
         public string StartPage { get => startPage; set => SetValue(ref startPage, value); }
@@ -154,8 +160,11 @@ namespace LandingPage
         private BackgroundImageSource backgroundImageSource = BackgroundImageSource.LastPlayed;
         public BackgroundImageSource BackgroundImageSource { get => backgroundImageSource; set => SetValue(ref backgroundImageSource, value); }
 
-        private List<ShelveProperties> shelveProperties = null;
-        public List<ShelveProperties> ShelveProperties { get => shelveProperties; set => SetValue(ref shelveProperties, value); }
+        private ObservableCollection<ShelveProperties> shelveProperties = null;
+        public ObservableCollection<ShelveProperties> ShelveProperties { get => shelveProperties; set => SetValue(ref shelveProperties, value); }
+
+        private ObservableCollection<MostPlayedOptions> mostPlayedOptions = null;
+        public ObservableCollection<MostPlayedOptions> MostPlayedOptions { get => mostPlayedOptions; set => SetValue(ref mostPlayedOptions, value); }
 
         private bool skipGamesInPreviousShelves = false;
         public bool SkipGamesInPreviousShelves { get => skipGamesInPreviousShelves; set => SetValue(ref skipGamesInPreviousShelves, value); }
@@ -233,12 +242,21 @@ namespace LandingPage
             else
             {
                 Settings = new LandingPageSettings();
-                Settings.ShelveProperties = new List<ShelveProperties> { ShelveProperties.RecentlyPlayed, ShelveProperties.RecentlyAdded };
+                Settings.ShelveProperties = new ObservableCollection<ShelveProperties> { ShelveProperties.RecentlyPlayed, ShelveProperties.RecentlyAdded };
             }
 
             if (Settings.ShelveProperties == null)
             {
-                Settings.ShelveProperties = new List<ShelveProperties> { ShelveProperties.RecentlyPlayed, ShelveProperties.RecentlyAdded };
+                Settings.ShelveProperties = new ObservableCollection<ShelveProperties> { ShelveProperties.RecentlyPlayed, ShelveProperties.RecentlyAdded };
+            }
+
+            if (Settings.MostPlayedOptions == null)
+            {
+                Settings.MostPlayedOptions = new ObservableCollection<MostPlayedOptions> { 
+                    new MostPlayedOptions { Timeframe = Timeframe.Last14Days },
+                    new MostPlayedOptions { Timeframe = Timeframe.Last3Month },
+                    new MostPlayedOptions { Timeframe = Timeframe.AllTime    }
+                };
             }
 
             SelectImagePathCommand = new RelayCommand(() =>

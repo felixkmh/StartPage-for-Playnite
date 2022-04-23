@@ -12,6 +12,7 @@ namespace LandingPage.Converters
     // see https://brianlagunas.com/a-better-way-to-data-bind-enums-in-wpf/
     public class EnumDescriptionTypeConverter : EnumConverter
     {
+
         public EnumDescriptionTypeConverter(Type type) : base (type)
         {
         }

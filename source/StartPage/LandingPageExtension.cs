@@ -18,10 +18,17 @@ using System.Windows.Media;
 using System.IO;
 using System.Runtime.CompilerServices;
 using LandingPage.Models;
+using StartPage.SDK;
+using LandingPage.Models.Layout;
+using LandingPage.ViewModels.Layout;
+using System.Diagnostics;
+using LandingPage.ViewModels.GameActivity;
+using LandingPage.Views.Settings;
+using Newtonsoft.Json;
 
 namespace LandingPage
 {
-    public class LandingPageExtension : GenericPlugin
+    public class LandingPageExtension : GenericPlugin, IStartPageExtension
     {
 #pragma warning disable IDE0052 // Ungelesene private Member entfernen
         internal static readonly ILogger logger = LogManager.GetLogger();
@@ -32,8 +39,11 @@ namespace LandingPage
         internal LandingPageSettingsViewModel SettingsViewModel { get; set; }
         internal LandingPageSettings Settings => SettingsViewModel.Settings;
 
+        public Dictionary<string, List<StartPageViewArgs>> AllAvailableViews { get; set; } = new Dictionary<string, List<StartPageViewArgs>>();
+
         public override Guid Id { get; } = Guid.Parse("a6a3dcf6-9bfe-426c-afb0-9f49409ae0c5");
 
+        internal GameActivityViewModel gameActivityViewModel;
 
         internal LandingPageView view = null;
         internal LandingPageView View
@@ -82,7 +92,7 @@ namespace LandingPage
                     viewModel = new LandingPageViewModel(PlayniteApi, this, SettingsViewModel, successStory, gameActivity);
                     foreach(var shelve in Settings.ShelveProperties)
                     {
-                        viewModel.ShelveViewModels.Add(new ShelveViewModel(shelve, PlayniteApi, viewModel));
+                        //viewModel.ShelveViewModels.Add(new ShelveViewModel(shelve, PlayniteApi, viewModel));
                     }
                     viewModel.Update(true);
                 } else
@@ -107,16 +117,76 @@ namespace LandingPage
             };
         }
 
+        internal StartPageView startPageView;
+        internal StartPageViewModel startPageViewModel;
+
         public override IEnumerable<SidebarItem> GetSidebarItems()
         {
             var items = new List<SidebarItem>();
 
-            items.Add(new SidebarItem {
+            //items.Add(new SidebarItem {
+            //    Type = SiderbarItemType.View,
+            //    Title = "Start Page",
+            //    Visible = true,
+            //    Opened = ViewOpened,
+            //    Closed = ViewClosed,
+            //    Icon = new TextBlock { Text = "", FontFamily = ResourceProvider.GetResource<FontFamily>("FontIcoFont") }
+            //});
+
+            items.Add(new SidebarItem
+            {
                 Type = SiderbarItemType.View,
                 Title = "Start Page",
                 Visible = true,
-                Opened = ViewOpened,
-                Closed = ViewClosed,
+                Opened = () =>
+                {
+                    if (startPageView == null)
+                    {
+                        if (Settings.GridLayout == null)
+                        {
+                            Settings.GridLayout = new GridNode { Orientation = Orientation.Vertical };
+                            string path = Path.Combine(PlayniteApi.Paths.ConfigurationPath, "Extensions", "felixkmh_StartPage_Plugin", "DefaultLayout.json");
+                            if (File.Exists(path))
+                            {
+                                if (JsonConvert.DeserializeObject<GridNode>(File.ReadAllText(path)) is GridNode node)
+                                {
+                                    Settings.GridLayout = node;
+                                }
+                            }
+                        }
+
+                        startPageViewModel = new StartPageViewModel(PlayniteApi, this, SettingsViewModel, new GridNodeViewModel(Settings.GridLayout));
+
+                        var view = new StartPageView
+                        { 
+                            DataContext = startPageViewModel
+                        };
+
+                        if (Settings.EnableGlobalProgressBar && progressText is TextBlock && progressBar is ProgressBar && cancelButton is Button)
+                        {
+                            view.ProgressbarGrid.SetBinding(FrameworkElement.VisibilityProperty, progressBar.GetBindingExpression(FrameworkElement.VisibilityProperty).ParentBinding);
+                            view.ProgressText.SetBinding(TextBlock.TextProperty, progressText.GetBindingExpression(TextBlock.TextProperty).ParentBinding);
+                            view.ProgressBar.SetBinding(ProgressBar.ValueProperty, progressBar.GetBindingExpression(ProgressBar.ValueProperty).ParentBinding);
+                            view.ProgressBar.SetBinding(ProgressBar.MaximumProperty, progressBar.GetBindingExpression(ProgressBar.MaximumProperty).ParentBinding);
+                            view.ProgressCancelButton.Command = cancelButton.Command;
+                        }
+
+                        startPageView = view;
+                    }
+                    if (startPageView.DataContext is StartPageViewModel model)
+                    {
+                        model.Opened();
+                    }
+
+                    return startPageView;
+                },
+                Closed = () =>
+                {
+                    if (startPageView?.DataContext is StartPageViewModel model)
+                    {
+                        model.Closed();
+                    }
+                },
                 Icon = new TextBlock { Text = "", FontFamily = ResourceProvider.GetResource<FontFamily>("FontIcoFont") }
             });
 
@@ -145,7 +215,7 @@ namespace LandingPage
                 view.DataContext = null;
                 view = null;
                 viewModel.successStory = null;
-                viewModel.clock = null;
+                viewModel.Clock = null;
                 viewModel = null;
                 GC.Collect();
             }
@@ -159,6 +229,13 @@ namespace LandingPage
                 if (args.NewValue.FirstOrDefault() is Game last)
                 {
                     viewModel.LastSelectedGame = last;
+                }
+            }
+            if (startPageView?.DataContext is StartPageViewModel model)
+            {
+                if (args.NewValue.FirstOrDefault() is Game last)
+                {
+                    model.LastSelectedGame = last;
                 }
             }
         }
@@ -262,33 +339,24 @@ namespace LandingPage
                     }, switchWithLowPrio ? System.Windows.Threading.DispatcherPriority.ApplicationIdle : System.Windows.Threading.DispatcherPriority.DataBind);
                 }
             }
-#if DEBUG
-            //Task.Run(() =>
-            //{
-            //    var rng = new Random();
-            //    for (var i = 0; i < 10; ++i)
-            //    {
-            //        int n = i + 1;
-            //        Thread.Sleep(rng.Next(10000));
-            //        NotificationType type = NotificationType.Info;
-            //        if (rng.NextDouble() < 0.5)
-            //        {
-            //            type = NotificationType.Error;
-            //        }
-            //        if (rng.NextDouble() < 0.5)
-            //        {
-            //            PlayniteApi.Notifications.Add(new NotificationMessage($"{i}_test", $"Longer Notification #{n} with activation action that activates on click!!",
-            //                type,
-            //                () => PlayniteApi.Dialogs.ShowMessage($"You clicked on Notifaction #{n}")));
-            //        }
-            //        else
-            //        {
-            //            PlayniteApi.Notifications.Add(new NotificationMessage($"{i}_test", $"Notification #{n}!!", type));
-            //        }
-            //    }
-            //});
-#endif
-            //Settings.SwitchWithLowPriority = switchWithLowPrio;
+            foreach(var plugin in PlayniteApi.Addons.Plugins)
+            {
+                if (plugin is IStartPageExtension extension)
+                {
+                    if (extension.GetAvailableStartPageViews() is StartPageExtensionArgs extensionArgs 
+                        && extensionArgs.Views != null
+                        && extensionArgs.Views.Any())
+                    {
+                        AllAvailableViews.Add(extensionArgs.ExtensionName, extensionArgs.Views.Select(v => new StartPageViewArgs {
+                            PluginId = plugin.Id, 
+                            Description = v.Description, 
+                            ViewId = v.ViewId, 
+                            HasSettings = v.HasSettings, 
+                            Name = v.Name 
+                        }).ToList());
+                    }
+                }
+            }
         }
 
         public override void OnApplicationStopped(OnApplicationStoppedEventArgs args)
@@ -296,7 +364,12 @@ namespace LandingPage
             // Add code to be executed when Playnite is shutting down.
             if (viewModel is LandingPageViewModel)
             {
-                Settings.ShelveProperties = viewModel.ShelveViewModels.Select(svm => svm.ShelveProperties).ToList();
+                // Settings.ShelveProperties = viewModel.ShelveViewModels.Select(svm => svm.ShelveProperties).ToList();
+            }
+            // collapse layout
+            if (Settings.GridLayout != null)
+            {
+                GridNode.Minimize(Settings.GridLayout, null);
             }
             SavePluginSettings(Settings);
         }
@@ -314,6 +387,133 @@ namespace LandingPage
         public override UserControl GetSettingsView(bool firstRunSettings)
         {
             return new LandingPageSettingsView();
+        }
+
+        public StartPageExtensionArgs GetAvailableStartPageViews()
+        {
+            var views = new List<StartPageViewArgsBase>();
+            var args = new StartPageExtensionArgs() { ExtensionName = "StartPage", Views = views };
+
+            var successStoryPath = Directory.GetDirectories(PlayniteApi.Paths.ExtensionsDataPath, "SuccessStory", SearchOption.AllDirectories).FirstOrDefault();
+            if (!string.IsNullOrEmpty(successStoryPath))
+            {
+                views.Add(new StartPageViewArgsBase 
+                { 
+                    ViewId = "RecentAchivements", 
+                    Name = ResourceProvider.GetString("LOC_SPG_RecentAchievementsView"), 
+                    Description = ResourceProvider.GetString("LOC_SPG_RecentAchievementsDescription")
+                });
+            }
+
+            var gameActivityPath = Directory.GetDirectories(PlayniteApi.Paths.ExtensionsDataPath, "GameActivity", SearchOption.AllDirectories).FirstOrDefault();
+            if(!string.IsNullOrEmpty(gameActivityPath))
+            {
+                views.Add(new StartPageViewArgsBase 
+                { 
+                    ViewId = "WeeklyActivity", 
+                    Name = ResourceProvider.GetString("LOC_SPG_WeeklyActivityView"), 
+                    Description = ResourceProvider.GetString("LOC_SPG_WeeklyActivityDescription")
+                });
+            }
+
+            views.Add(new StartPageViewArgsBase 
+            { 
+                ViewId = "GameShelves", 
+                Name = ResourceProvider.GetString("LOC_SPG_ShelvesView"), 
+                Description = ResourceProvider.GetString("LOC_SPG_ShelvesViewDescription")
+            });
+            views.Add(new StartPageViewArgsBase 
+            { 
+                ViewId = "MostPlayed", 
+                Name = ResourceProvider.GetString("LOC_SPG_MostPlayedView"), 
+                Description = ResourceProvider.GetString("LOC_SPG_MostPlayedDescription"),
+                HasSettings = true
+            });
+            views.Add(new StartPageViewArgsBase 
+            { 
+                ViewId = "DigitalClock", 
+                Name = ResourceProvider.GetString("LOC_SPG_ClockView"), 
+                Description = ResourceProvider.GetString("LOC_SPG_ClockViewDescription")
+            });
+            return args;
+        }
+
+        public object GetStartPageView(string id, Guid instanceId)
+        {
+            if (id == "RecentAchivements")
+            {
+                var successStoryPath = Directory.GetDirectories(PlayniteApi.Paths.ExtensionsDataPath, "SuccessStory", SearchOption.AllDirectories).FirstOrDefault();
+                if (!string.IsNullOrEmpty(successStoryPath))
+                {
+                    var successStoryViewModel = new ViewModels.SuccessStory.SuccessStoryViewModel(successStoryPath, PlayniteApi, SettingsViewModel);
+                    successStoryViewModel.ParseAllAchievements();
+                    successStoryViewModel.Update();
+                    var view = new RecentAchievementsView() 
+                    { 
+                        DataContext = successStoryViewModel
+                    };
+                    return view;
+                }
+            }
+            if (id == "GameShelves")
+            {
+                var viewModel = new ShelvesViewModel(PlayniteApi, this, SettingsViewModel);
+                viewModel.ShelveViewModels.ForEach(m => m.UpdateGames(m.ShelveProperties));
+                return new ShelvesView { DataContext = viewModel };
+            }
+            if (id == "MostPlayed")
+            {
+                var gameAcitivityPath = Directory.GetDirectories(PlayniteApi.Paths.ExtensionsDataPath, "GameActivity", SearchOption.AllDirectories).FirstOrDefault();
+                if (!string.IsNullOrEmpty(gameAcitivityPath))
+                {
+                    if (gameActivityViewModel == null)
+                    {
+                        gameActivityViewModel = new ViewModels.GameActivity.GameActivityViewModel(gameAcitivityPath, PlayniteApi, SettingsViewModel);
+                        gameActivityViewModel.ParseAllActivites();
+                    }
+
+                    var mostPlayedViewModel = new MostPlayedViewModel(PlayniteApi, SettingsViewModel, gameActivityViewModel);
+                    
+                    var view = new MostPlayedView() { DataContext = mostPlayedViewModel };
+
+                    return view;
+                }
+            }
+            if (id == "DigitalClock")
+            {
+                var model = new { Clock = new Clock() };
+                return new ClockView() { DataContext = model };
+            }
+            if (id == "WeeklyActivity")
+            {
+                var gameAcitivityPath = Directory.GetDirectories(PlayniteApi.Paths.ExtensionsDataPath, "GameActivity", SearchOption.AllDirectories).FirstOrDefault();
+                if (!string.IsNullOrEmpty(gameAcitivityPath))
+                {
+                    if (gameActivityViewModel == null)
+                    {
+                        gameActivityViewModel = new ViewModels.GameActivity.GameActivityViewModel(gameAcitivityPath, PlayniteApi, SettingsViewModel);
+                        gameActivityViewModel.ParseAllActivites();
+                    }
+                    var view = new GameActivityView() { DataContext = gameActivityViewModel };
+
+                    return view;
+                }
+            }
+            return null;
+        }
+
+        public Control GetStartPageViewSettings(string id, Guid instanceId)
+        {
+            if (id == "MostPlayed")
+            {
+                return new MostPlayedSettingsView() { DataContext = SettingsViewModel };
+            }
+            return null;
+        }
+
+        public void OnViewRemoved(string viewId, Guid instanceId)
+        {
+            Debug.WriteLine($"Removed instance {instanceId} of {viewId}");
         }
     }
 }

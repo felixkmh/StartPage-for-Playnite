@@ -31,12 +31,12 @@ namespace LandingPage.ViewModels
         private ICommand resetFiltersCommand;
         public ICommand ResetFiltersCommand { get => resetFiltersCommand; set => SetValue(ref resetFiltersCommand, value); }
 
-        private LandingPageViewModel landingPageViewModel;
+        private ObservableCollection<ShelveViewModel> viewModels;
         private readonly Game DummyGame = new Game();
 
-        public ShelveViewModel(ShelveProperties shelveProperties, IPlayniteAPI playniteAPI, LandingPageViewModel landingPageViewModel)
+        public ShelveViewModel(ShelveProperties shelveProperties, IPlayniteAPI playniteAPI, ObservableCollection<ShelveViewModel> viewModels)
         {
-            this.landingPageViewModel = landingPageViewModel;
+            this.viewModels = viewModels;
             collectionViewSource.SortDescriptions.Add(new System.ComponentModel.SortDescription());
             UpdateOrder(shelveProperties, collectionViewSource);
             UpdateSorting(shelveProperties, collectionViewSource);
@@ -397,12 +397,12 @@ namespace LandingPage.ViewModels
 
             if (LandingPageExtension.Instance.SettingsViewModel.Settings.SkipGamesInPreviousShelves)
             {
-                var current = landingPageViewModel.ShelveViewModels.IndexOf(this);
+                var current = viewModels.IndexOf(this);
                 if (current > -1)
                 {
-                    for(var i = current - 1; i >= 0; --i)
+                    for (var i = current - 1; i >= 0; --i)
                     {
-                        ShelveViewModel shelveViewModel = landingPageViewModel.ShelveViewModels[i];
+                        ShelveViewModel shelveViewModel = viewModels[i];
                         games = games.Where(g => !shelveViewModel.Games.Any(m => m.Game.Id == g.Id));
                     }
                 }
