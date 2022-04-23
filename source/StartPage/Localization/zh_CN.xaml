@@ -14,7 +14,8 @@
     <sys:String x:Key="LOC_SPG_TotalPlaytime" xml:space="preserve">总计： </sys:String>
     <sys:String x:Key="LOC_SPG_LastSevenDays">最近 7 天</sys:String>
     <sys:String x:Key="LOC_SPG_LastThirtyDays">最近 30 天</sys:String>
-    
+    <sys:String x:Key="LOC_SPG_TimeframeNone">None</sys:String>
+
     <!-- Timeframes -->
     <sys:String x:Key="LOC_SPG_TimeframeLastDay">过去24小时</sys:String>
     <sys:String x:Key="LOC_SPG_TimeframeLast7Days">过去一周</sys:String>
