@@ -14,7 +14,7 @@
     <sys:String x:Key="LOC_SPG_TotalPlaytime" xml:space="preserve">总计： </sys:String>
     <sys:String x:Key="LOC_SPG_LastSevenDays">最近 7 天</sys:String>
     <sys:String x:Key="LOC_SPG_LastThirtyDays">最近 30 天</sys:String>
-    <sys:String x:Key="LOC_SPG_TimeframeNone">None</sys:String>
+    <sys:String x:Key="LOC_SPG_TimeframeNone">无</sys:String>
 
     <!-- Timeframes -->
     <sys:String x:Key="LOC_SPG_TimeframeLastDay">过去24小时</sys:String>
@@ -99,24 +99,24 @@
     <sys:String x:Key="LOC_SPG_ResetLayout">重置布局为默认</sys:String>
     <sys:String x:Key="LOC_SPG_DragPanelTooltip">拖放面板来交换它们</sys:String>
     <sys:String x:Key="LOC_SPG_AddPanel">添加面板</sys:String>
-    <sys:String x:Key="LOC_SPG_RemovePanel">Remove Panel</sys:String>
-    <sys:String x:Key="LOC_SPG_MergeWith">Merge with</sys:String>
-    <sys:String x:Key="LOC_SPG_MergeWithAbove">Upper Panel</sys:String>
-    <sys:String x:Key="LOC_SPG_MergeWithBelow">Lower Panel</sys:String>
-    <sys:String x:Key="LOC_SPG_MergeWithLeft">Left Panel</sys:String>
-    <sys:String x:Key="LOC_SPG_MergeWithRight">Right Panel</sys:String>
+    <sys:String x:Key="LOC_SPG_RemovePanel">移除面板</sys:String>
+    <sys:String x:Key="LOC_SPG_MergeWith">并入</sys:String>
+    <sys:String x:Key="LOC_SPG_MergeWithAbove">上方面板</sys:String>
+    <sys:String x:Key="LOC_SPG_MergeWithBelow">下方面板</sys:String>
+    <sys:String x:Key="LOC_SPG_MergeWithLeft">左侧面板</sys:String>
+    <sys:String x:Key="LOC_SPG_MergeWithRight">右侧面板</sys:String>
     <sys:String x:Key="LOC_SPG_AddPanelTop">顶部</sys:String>
     <sys:String x:Key="LOC_SPG_AddPanelBottom">底部</sys:String>
     <sys:String x:Key="LOC_SPG_AddPanelLeft">左侧</sys:String>
     <sys:String x:Key="LOC_SPG_AddPanelRight">右侧</sys:String>
-    <sys:String x:Key="LOC_SPG_HorizontalAlignment">Horizontal Alignment</sys:String>
-    <sys:String x:Key="LOC_SPG_HorizontalAlignmentLeft">Left</sys:String>
-    <sys:String x:Key="LOC_SPG_HorizontalAlignmentRight">Right</sys:String>
-    <sys:String x:Key="LOC_SPG_VerticalAlignment">Vertical Alignment</sys:String>
-    <sys:String x:Key="LOC_SPG_VerticalAlignmentTop">Top</sys:String>
-    <sys:String x:Key="LOC_SPG_VerticalAlignmentBottom">Bottom</sys:String>
-    <sys:String x:Key="LOC_SPG_AlignmentStretch">Stretch</sys:String>
-    <sys:String x:Key="LOC_SPG_AlignmentCenter">Center</sys:String>
+    <sys:String x:Key="LOC_SPG_HorizontalAlignment">水平对齐</sys:String>
+    <sys:String x:Key="LOC_SPG_HorizontalAlignmentLeft">左侧</sys:String>
+    <sys:String x:Key="LOC_SPG_HorizontalAlignmentRight">右侧</sys:String>
+    <sys:String x:Key="LOC_SPG_VerticalAlignment">垂直对齐</sys:String>
+    <sys:String x:Key="LOC_SPG_VerticalAlignmentTop">顶部</sys:String>
+    <sys:String x:Key="LOC_SPG_VerticalAlignmentBottom">底部</sys:String>
+    <sys:String x:Key="LOC_SPG_AlignmentStretch">拉伸</sys:String>
+    <sys:String x:Key="LOC_SPG_AlignmentCenter">居中</sys:String>
 
     <!-- Integrated Views -->
     <sys:String x:Key="LOC_SPG_ClockView">时钟</sys:String>
