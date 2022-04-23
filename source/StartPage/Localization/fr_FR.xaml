@@ -99,6 +99,7 @@
     <sys:String x:Key="LOC_SPG_ResetLayout">Rétablir la disposition par défaut</sys:String>
     <sys:String x:Key="LOC_SPG_DragPanelTooltip">Glisser-déposez les panneaux pour les intervertir</sys:String>
     <sys:String x:Key="LOC_SPG_AddPanel">Ajouter un panneau</sys:String>
+    <sys:String x:Key="LOC_SPG_RemovePanel">Remove Panel</sys:String>
     <sys:String x:Key="LOC_SPG_AddPanelTop">En haut</sys:String>
     <sys:String x:Key="LOC_SPG_AddPanelBottom">En bas</sys:String>
     <sys:String x:Key="LOC_SPG_AddPanelLeft">Gauche</sys:String>
