@@ -99,6 +99,7 @@
     <sys:String x:Key="LOC_SPG_ResetLayout">Reset layout to default</sys:String>
     <sys:String x:Key="LOC_SPG_DragPanelTooltip">Drag-and-Drop panels to swap them</sys:String>
     <sys:String x:Key="LOC_SPG_AddPanel">Add Panel</sys:String>
+    <sys:String x:Key="LOC_SPG_RemovePanel">Remove Panel</sys:String>
     <sys:String x:Key="LOC_SPG_AddPanelTop">Top</sys:String>
     <sys:String x:Key="LOC_SPG_AddPanelBottom">Bottom</sys:String>
     <sys:String x:Key="LOC_SPG_AddPanelLeft">Leftmost</sys:String>
