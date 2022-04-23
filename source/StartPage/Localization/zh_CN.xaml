@@ -100,6 +100,11 @@
     <sys:String x:Key="LOC_SPG_DragPanelTooltip">拖放面板来交换它们</sys:String>
     <sys:String x:Key="LOC_SPG_AddPanel">添加面板</sys:String>
     <sys:String x:Key="LOC_SPG_RemovePanel">Remove Panel</sys:String>
+    <sys:String x:Key="LOC_SPG_MergeWith">Merge with</sys:String>
+    <sys:String x:Key="LOC_SPG_MergeWithAbove">Upper Panel</sys:String>
+    <sys:String x:Key="LOC_SPG_MergeWithBelow">Lower Panel</sys:String>
+    <sys:String x:Key="LOC_SPG_MergeWithLeft">Left Panel</sys:String>
+    <sys:String x:Key="LOC_SPG_MergeWithRight">Right Panel</sys:String>
     <sys:String x:Key="LOC_SPG_AddPanelTop">顶部</sys:String>
     <sys:String x:Key="LOC_SPG_AddPanelBottom">底部</sys:String>
     <sys:String x:Key="LOC_SPG_AddPanelLeft">左侧</sys:String>
