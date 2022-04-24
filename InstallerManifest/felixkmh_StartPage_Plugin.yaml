@@ -8,6 +8,7 @@ Packages:
       - localization updates
       - fixed most played view flickering when games were added
       - fixed panels becoming unmovable in some cases
+      - 'added some documentation for StartPage.SDK (https://github.com/felixkmh/StartPage-for-Playnite/wiki/Integrating-with-other-Extensions)'
   - Version: 2.1.0
     RequiredApiVersion: 6.1.0
     ReleaseDate: 2022-04-23
