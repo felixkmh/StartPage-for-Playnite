@@ -17,7 +17,7 @@
     <sys:String x:Key="LOC_SPG_TimeframeNone">无</sys:String>
 
     <!-- Timeframes -->
-    <sys:String x:Key="LOC_SPG_TimeframeLastDay">过去24小时</sys:String>
+    <sys:String x:Key="LOC_SPG_TimeframeLastDay">过去 24 小时</sys:String>
     <sys:String x:Key="LOC_SPG_TimeframeLast7Days">过去一周</sys:String>
     <sys:String x:Key="LOC_SPG_TimeframeLast14Days">过去两周</sys:String>
     <sys:String x:Key="LOC_SPG_TimeframeLast21Days">过去三周</sys:String>
@@ -126,8 +126,8 @@
     <sys:String x:Key="LOC_SPG_MostPlayedView">最常游玩</sys:String>
     <sys:String x:Key="LOC_SPG_MostPlayedDescription">显示不同时间段内玩得最多的游戏。</sys:String>
     <sys:String x:Key="LOC_SPG_WeeklyActivityView">一周活动</sys:String>
-    <sys:String x:Key="LOC_SPG_WeeklyActivityDescription">显示过去7天内的游戏时间的简介概述。需要GameActivity扩展。</sys:String>
+    <sys:String x:Key="LOC_SPG_WeeklyActivityDescription">显示过去 7 天内的游戏时间的简介概述。需要游戏活动（GameActivity）扩展。</sys:String>
     <sys:String x:Key="LOC_SPG_RecentAchievementsView">近期成就</sys:String>
-    <sys:String x:Key="LOC_SPG_RecentAchievementsDescription">显示最近解锁的成就概览，按游戏分组。需要SuccessStory扩展。</sys:String>
+    <sys:String x:Key="LOC_SPG_RecentAchievementsDescription">显示最近解锁的成就概览，按游戏分组。需要功成名就（SuccessStory）扩展。</sys:String>
 
 </ResourceDictionary>
