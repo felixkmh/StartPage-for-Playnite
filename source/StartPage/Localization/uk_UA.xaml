@@ -100,11 +100,11 @@
     <sys:String x:Key="LOC_SPG_DragPanelTooltip">Перетягніть панелі, щоб поміняти їх місцями</sys:String>
     <sys:String x:Key="LOC_SPG_AddPanel">Add Panel</sys:String>
     <sys:String x:Key="LOC_SPG_RemovePanel">Remove Panel</sys:String>
-    <sys:String x:Key="LOC_SPG_MergeWith">Merge with</sys:String>
-    <sys:String x:Key="LOC_SPG_MergeWithAbove">Upper Panel</sys:String>
-    <sys:String x:Key="LOC_SPG_MergeWithBelow">Lower Panel</sys:String>
-    <sys:String x:Key="LOC_SPG_MergeWithLeft">Left Panel</sys:String>
-    <sys:String x:Key="LOC_SPG_MergeWithRight">Right Panel</sys:String>
+    <sys:String x:Key="LOC_SPG_MergeWith">Об'єднати з</sys:String>
+    <sys:String x:Key="LOC_SPG_MergeWithAbove">Верхня панель</sys:String>
+    <sys:String x:Key="LOC_SPG_MergeWithBelow">Нижня панель</sys:String>
+    <sys:String x:Key="LOC_SPG_MergeWithLeft">Ліва панель</sys:String>
+    <sys:String x:Key="LOC_SPG_MergeWithRight">Права панель</sys:String>
     <sys:String x:Key="LOC_SPG_AddPanelTop">Top</sys:String>
     <sys:String x:Key="LOC_SPG_AddPanelBottom">Bottom</sys:String>
     <sys:String x:Key="LOC_SPG_AddPanelLeft">Leftmost</sys:String>
