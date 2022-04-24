@@ -137,6 +137,7 @@ namespace LandingPage.ViewModels
             {
                 RootNodeViewModel.EditModeEnabled = false;
                 GridNode.Minimize(RootNodeViewModel.GridNode, null);
+                GC.Collect();
             });
 
             Settings.Settings.PropertyChanged += Settings_PropertyChanged;
