@@ -100,13 +100,13 @@ namespace LandingPage.Views
                             var itemWidth = container.ActualWidth + container.Margin.Left + container.Margin.Right;
                             var scrollViewer = Helper.UiHelper.FindVisualChildren<ScrollViewer>(listBox).FirstOrDefault();
                             // itemWidth = desiredWidth / itemCount;
-                            var availableWidth = newWidth - 80;
+                            var availableWidth = newWidth - 60;
                             FrameworkElement panel = VisualTreeHelper.GetParent(this) as FrameworkElement;
                             while (!(panel is GridNodeView))
                             {
                                 panel = VisualTreeHelper.GetParent(panel) as FrameworkElement;
                             }
-                            availableWidth = panel.ActualWidth - 80;
+                            availableWidth = panel.ActualWidth - 60;
                             var newListWidth = Math.Floor(availableWidth / Math.Max(itemWidth, 1)) * itemWidth;
                             if (listBox.MaxWidth != newListWidth)
                             {
