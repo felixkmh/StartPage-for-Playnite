@@ -1,5 +1,11 @@
 AddonId: felixkmh_StartPage_Plugin
 Packages:  
+  - Version: 2.1.3
+    RequiredApiVersion: 6.1.0
+    ReleaseDate: 2022-04-24
+    PackageUrl: https://github.com/felixkmh/StartPage-for-Playnite/releases/download/v2.1.3/felixkmh_StartPage_Plugin_2_1_3.pext
+    Changelog:
+      - fixed shelves collapsing when setting horizontal alignment to anything but stretch
   - Version: 2.1.2
     RequiredApiVersion: 6.1.0
     ReleaseDate: 2022-04-24
