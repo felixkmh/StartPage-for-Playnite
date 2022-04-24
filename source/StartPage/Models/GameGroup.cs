@@ -9,16 +9,10 @@ using System.Threading.Tasks;
 
 namespace LandingPage.Models
 {
-    public class GameGroup : INotifyPropertyChanged
+    public class GameGroup : ObservableObject
     {
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        private void OnPropertyChanged(string propertyName)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-
-        public string Label { get; set; } = "Group";
+        private string label = "Group";
+        public string Label { get => label; set => SetValue(ref label, value); }
 
         public ObservableCollection<GameModel> Games { get; } = new ObservableCollection<GameModel>();
     }
