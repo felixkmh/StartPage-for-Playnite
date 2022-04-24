@@ -11,7 +11,7 @@ using Playnite.SDK.Data;
 
 namespace LandingPage.Models.Layout
 {
-    public class GridNode : ObservableObject
+    public class GridNode : ObservableObjectExt
     {
         private GridLength size = new GridLength(1, GridUnitType.Star);
         public GridLength Size { get => size; set => SetValue(ref size, value); }

@@ -14,6 +14,7 @@ using System.Windows.Data;
 using Playnite.SDK;
 using System.Windows.Shell;
 using System.Diagnostics;
+using System.Collections.ObjectModel;
 
 namespace LandingPage.ViewModels.Layout
 {
@@ -220,6 +221,13 @@ namespace LandingPage.ViewModels.Layout
         {
             if (Parent != null)
             {
+                var index = Parent.GridNode.Children.IndexOf(GridNode);
+                var siblings = new List<GridNode>();
+                if (index > 0) 
+                    siblings.Add(Parent.GridNode.Children[index - 1]);
+                if (index < Parent.GridNode.Children.Count - 1)
+                    siblings.Add(Parent.GridNode.Children[index + 1]);
+                siblings.ForEach(s => s.Size = new GridLength(s.Size.Value + GridNode.Size.Value / siblings.Count, GridUnitType.Star));
                 Parent.GridNode.Children.Remove(GridNode);
                 var properties = GridNode.ViewProperties;
                 if (properties != null)
@@ -337,6 +345,10 @@ namespace LandingPage.ViewModels.Layout
         {
             if (e.PropertyName == nameof(GridNode.Children))
             {
+                if (e is PropertyChangedExtendedEventArgs eventArgs && eventArgs.OldValue is ObservableCollection<GridNode> oldValue)
+                {
+                    oldValue.CollectionChanged -= Children_CollectionChanged;
+                }
                 CreateView(GridNode);
                 GridNode.Children.CollectionChanged += Children_CollectionChanged;
                 IsLeaf = GridNode.Children.Count == 0;
@@ -390,11 +402,6 @@ namespace LandingPage.ViewModels.Layout
                 }
                 HasView = hasView;
             }
-        }
-
-        private void Children_CollectionChanged1(object sender, NotifyCollectionChangedEventArgs e)
-        {
-            throw new NotImplementedException();
         }
 
         private void Split(Orientation orientation)
