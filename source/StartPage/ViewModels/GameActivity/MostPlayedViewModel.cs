@@ -79,11 +79,7 @@ namespace LandingPage.ViewModels.GameActivity
 
         private void UpdateMostPlayedGame()
         {
-            var groups = specialGames;
-            Application.Current.Dispatcher.Invoke(() =>
-            {
-                groups.Clear();
-            });
+            var groups = new List<GameGroup>();
 
             var tagId = LandingPageExtension.Instance.SettingsViewModel.Settings.IgnoreMostPlayedTagId;
 
@@ -129,6 +125,29 @@ namespace LandingPage.ViewModels.GameActivity
                         });
                     }
                 }
+            }
+
+            for (int i = 0; i < groups.Count; i++)
+            {
+                Application.Current.Dispatcher.Invoke(() =>
+                {
+                    if (specialGames.Count > i)
+                    {
+                        specialGames[i].Label = groups[i].Label;
+                        specialGames[i].Games[0].Game = groups[i].Games[0].Game;
+                    } else
+                    {
+                        specialGames.Add(groups[i]);
+                    }
+                });
+            }
+
+            for(int i = specialGames.Count - 1; i >= groups.Count; --i)
+            {
+                Application.Current.Dispatcher.Invoke(() =>
+                {
+                    specialGames.RemoveAt(i);
+                });
             }
         }
     }
