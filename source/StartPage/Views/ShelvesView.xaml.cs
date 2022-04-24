@@ -65,7 +65,12 @@ namespace LandingPage.Views
             }
         }
 
-        private void UserControl_SizeChanged(object sender, SizeChangedEventArgs e)
+        public void UserControl_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            UpdateWidth(sender, e);
+        }
+
+        private void UpdateWidth(object sender, SizeChangedEventArgs e)
         {
             if (e.HeightChanged || e.WidthChanged)
             {
@@ -95,16 +100,13 @@ namespace LandingPage.Views
                             var itemWidth = container.ActualWidth + container.Margin.Left + container.Margin.Right;
                             var scrollViewer = Helper.UiHelper.FindVisualChildren<ScrollViewer>(listBox).FirstOrDefault();
                             // itemWidth = desiredWidth / itemCount;
-                            var availableWidth = newWidth - 120;
-                            if (availableWidth < 0)
+                            var availableWidth = newWidth - 80;
+                            FrameworkElement panel = VisualTreeHelper.GetParent(this) as FrameworkElement;
+                            while (!(panel is GridNodeView))
                             {
-                                FrameworkElement panel = (Parent as FrameworkElement);
-                                while(!(panel is Panel))
-                                {
-                                    panel = Parent as FrameworkElement;
-                                }
-                                availableWidth = panel.ActualWidth;
+                                panel = VisualTreeHelper.GetParent(panel) as FrameworkElement;
                             }
+                            availableWidth = panel.ActualWidth - 80;
                             var newListWidth = Math.Floor(availableWidth / Math.Max(itemWidth, 1)) * itemWidth;
                             if (listBox.MaxWidth != newListWidth)
                             {
@@ -115,8 +117,6 @@ namespace LandingPage.Views
                 }), System.Windows.Threading.DispatcherPriority.Background);
             }
         }
-
-
 
         static readonly Random rng = new Random();
 

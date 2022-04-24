@@ -50,5 +50,17 @@ namespace LandingPage.Views
                 viewModel.Border_PreviewMouseMove(sender, e);
             } 
         }
+
+        private void UserControl_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            if (ViewContentControl.Content is ShelvesView shelvesView)
+            {
+                shelvesView.UserControl_SizeChanged(sender, e);
+            }
+            else if (ViewContentControl.Content is Grid grid)
+            {
+                grid.Children.OfType<ShelvesView>().ForEach(child => child.UserControl_SizeChanged(sender, e));
+            }
+        }
     }
 }
