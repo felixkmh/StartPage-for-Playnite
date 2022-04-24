@@ -14,7 +14,7 @@
     <sys:String x:Key="LOC_SPG_TotalPlaytime" xml:space="preserve">Разом: </sys:String>
     <sys:String x:Key="LOC_SPG_LastSevenDays">Останні 7 Днів</sys:String>
     <sys:String x:Key="LOC_SPG_LastThirtyDays">Останні 30 Днів</sys:String>
-    <sys:String x:Key="LOC_SPG_TimeframeNone">None</sys:String>
+    <sys:String x:Key="LOC_SPG_TimeframeNone">Жоден</sys:String>
 
     <!-- Timeframes -->
     <sys:String x:Key="LOC_SPG_TimeframeLastDay">Останні 24 години</sys:String>
@@ -87,36 +87,36 @@
     <sys:String x:Key="LOC_SPG_SplitHorizonatlly">Розділити горизонтально</sys:String>
     <sys:String x:Key="LOC_SPG_SplitVertically">Розділити вертикально</sys:String>
     <sys:String x:Key="LOC_SPG_Merge">Об'єднання</sys:String>
-    <sys:String x:Key="LOC_SPG_MergeKeepUpper">Keep upper panel</sys:String>
-    <sys:String x:Key="LOC_SPG_MergeKeepLower">Keep lower panel</sys:String>
-    <sys:String x:Key="LOC_SPG_MergeKeepLeft">Keep left panel</sys:String>
-    <sys:String x:Key="LOC_SPG_MergeKeepRight">Keep right panel</sys:String>
+    <sys:String x:Key="LOC_SPG_MergeKeepUpper">Залишити верхню панель</sys:String>
+    <sys:String x:Key="LOC_SPG_MergeKeepLower">Залишити нижню панель</sys:String>
+    <sys:String x:Key="LOC_SPG_MergeKeepLeft">Залишити ліву панель</sys:String>
+    <sys:String x:Key="LOC_SPG_MergeKeepRight">Залишити праву панель</sys:String>
     <sys:String x:Key="LOC_SPG_AddView">Додати вигляд</sys:String>
     <sys:String x:Key="LOC_SPG_RemoveView">Прибрати вигляд</sys:String>
     <sys:String x:Key="LOC_SPG_EditMode">Режим редагування</sys:String>
     <sys:String x:Key="LOC_SPG_EnterEditMode">Увійти у режим редагування</sys:String>
-    <sys:String x:Key="LOC_SPG_ExitEditMode">Exit Edit Mode</sys:String>
+    <sys:String x:Key="LOC_SPG_ExitEditMode">Вийти з режиму редагування</sys:String>
     <sys:String x:Key="LOC_SPG_ResetLayout">Скинути макет до стандартного</sys:String>
     <sys:String x:Key="LOC_SPG_DragPanelTooltip">Перетягніть панелі, щоб поміняти їх місцями</sys:String>
-    <sys:String x:Key="LOC_SPG_AddPanel">Add Panel</sys:String>
-    <sys:String x:Key="LOC_SPG_RemovePanel">Remove Panel</sys:String>
-    <sys:String x:Key="LOC_SPG_MergeWith">Merge with</sys:String>
-    <sys:String x:Key="LOC_SPG_MergeWithAbove">Upper Panel</sys:String>
-    <sys:String x:Key="LOC_SPG_MergeWithBelow">Lower Panel</sys:String>
-    <sys:String x:Key="LOC_SPG_MergeWithLeft">Left Panel</sys:String>
-    <sys:String x:Key="LOC_SPG_MergeWithRight">Right Panel</sys:String>
-    <sys:String x:Key="LOC_SPG_AddPanelTop">Top</sys:String>
-    <sys:String x:Key="LOC_SPG_AddPanelBottom">Bottom</sys:String>
-    <sys:String x:Key="LOC_SPG_AddPanelLeft">Leftmost</sys:String>
-    <sys:String x:Key="LOC_SPG_AddPanelRight">Rightmost</sys:String>
-    <sys:String x:Key="LOC_SPG_HorizontalAlignment">Horizontal Alignment</sys:String>
-    <sys:String x:Key="LOC_SPG_HorizontalAlignmentLeft">Left</sys:String>
-    <sys:String x:Key="LOC_SPG_HorizontalAlignmentRight">Right</sys:String>
-    <sys:String x:Key="LOC_SPG_VerticalAlignment">Vertical Alignment</sys:String>
-    <sys:String x:Key="LOC_SPG_VerticalAlignmentTop">Top</sys:String>
-    <sys:String x:Key="LOC_SPG_VerticalAlignmentBottom">Bottom</sys:String>
-    <sys:String x:Key="LOC_SPG_AlignmentStretch">Stretch</sys:String>
-    <sys:String x:Key="LOC_SPG_AlignmentCenter">Center</sys:String>
+    <sys:String x:Key="LOC_SPG_AddPanel">Додати панель</sys:String>
+    <sys:String x:Key="LOC_SPG_RemovePanel">Прибрати панель</sys:String>
+    <sys:String x:Key="LOC_SPG_MergeWith">Об'єднати з</sys:String>
+    <sys:String x:Key="LOC_SPG_MergeWithAbove">Верхня панель</sys:String>
+    <sys:String x:Key="LOC_SPG_MergeWithBelow">Нижня панель</sys:String>
+    <sys:String x:Key="LOC_SPG_MergeWithLeft">Ліва панель</sys:String>
+    <sys:String x:Key="LOC_SPG_MergeWithRight">Права панель</sys:String>
+    <sys:String x:Key="LOC_SPG_AddPanelTop">Зверху</sys:String>
+    <sys:String x:Key="LOC_SPG_AddPanelBottom">Знизу</sys:String>
+    <sys:String x:Key="LOC_SPG_AddPanelLeft">Найлівіше</sys:String>
+    <sys:String x:Key="LOC_SPG_AddPanelRight">Найправіше</sys:String>
+    <sys:String x:Key="LOC_SPG_HorizontalAlignment">Горизонтальне вирівнювання</sys:String>
+    <sys:String x:Key="LOC_SPG_HorizontalAlignmentLeft">Зліва</sys:String>
+    <sys:String x:Key="LOC_SPG_HorizontalAlignmentRight">Зправа</sys:String>
+    <sys:String x:Key="LOC_SPG_VerticalAlignment">Вертикальне вирівнювання</sys:String>
+    <sys:String x:Key="LOC_SPG_VerticalAlignmentTop">Зверху</sys:String>
+    <sys:String x:Key="LOC_SPG_VerticalAlignmentBottom">Знизу</sys:String>
+    <sys:String x:Key="LOC_SPG_AlignmentStretch">Розтягнути</sys:String>
+    <sys:String x:Key="LOC_SPG_AlignmentCenter">По центру</sys:String>
 
     <!-- Integrated Views -->
     <sys:String x:Key="LOC_SPG_ClockView">Годинник</sys:String>
