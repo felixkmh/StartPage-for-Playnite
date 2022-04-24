@@ -40,11 +40,16 @@ namespace LandingPage.Models.Layout
             }
             if (parent?.Children.Count == 1)
             {
-                parent.Children = current.Children;
                 parent.Orientation = current.Orientation;
                 parent.ViewProperties = current.ViewProperties;
                 parent.HorizontalAlignment = current.HorizontalAlignment;
                 parent.VerticalAlignment = current.VerticalAlignment;
+                var children = new ObservableCollection<GridNode>();
+                foreach(var child in current.Children)
+                {
+                    children.Add(child);
+                }
+                parent.Children = children;
             }
             if (current.Children.Count > 0)
             {

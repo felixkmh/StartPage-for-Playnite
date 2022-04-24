@@ -13,6 +13,7 @@ using System.Windows.Input;
 using System.Windows.Data;
 using Playnite.SDK;
 using System.Windows.Shell;
+using System.Diagnostics;
 
 namespace LandingPage.ViewModels.Layout
 {
@@ -58,6 +59,7 @@ namespace LandingPage.ViewModels.Layout
         public ICommand MergeWithNextPanelCommand { get; private set; }
         public ICommand SetVerticalAlignmentCommand { get; private set; }
         public ICommand SetHorizontalAlignmentCommand { get; private set; }
+        public ICommand OpenWikiCommand { get; private set; }
 
         public Control ViewSettings
         { 
@@ -143,6 +145,7 @@ namespace LandingPage.ViewModels.Layout
             gridNode = node;
             node.Children.CollectionChanged += Children_CollectionChanged;
             node.PropertyChanged += Node_PropertyChanged;
+
             AddCommand = new Playnite.SDK.RelayCommand(() =>
             {
                 if (GridNode.Children.Count == 0) 
@@ -173,6 +176,8 @@ namespace LandingPage.ViewModels.Layout
 
             SetHorizontalAlignmentCommand = new RelayCommand<HorizontalAlignment>(SetHorizontalAlignment);
             SetVerticalAlignmentCommand = new RelayCommand<VerticalAlignment>(SetVerticalAlignment);
+
+            OpenWikiCommand = new RelayCommand(() => Process.Start("https://github.com/felixkmh/StartPage-for-Playnite/wiki/Integrating-with-other-Extensions"));
 
             CreateView(node);
         }
@@ -330,6 +335,12 @@ namespace LandingPage.ViewModels.Layout
 
         private void Node_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
+            if (e.PropertyName == nameof(GridNode.Children))
+            {
+                CreateView(GridNode);
+                GridNode.Children.CollectionChanged += Children_CollectionChanged;
+                IsLeaf = GridNode.Children.Count == 0;
+            }
             if (e.PropertyName == nameof(GridNode.ViewProperties))
             {
                 var hasView = false;
@@ -379,6 +390,11 @@ namespace LandingPage.ViewModels.Layout
                 }
                 HasView = hasView;
             }
+        }
+
+        private void Children_CollectionChanged1(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            throw new NotImplementedException();
         }
 
         private void Split(Orientation orientation)
