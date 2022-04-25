@@ -117,7 +117,7 @@
     <sys:String x:Key="LOC_SPG_VerticalAlignmentBottom">Unten</sys:String>
     <sys:String x:Key="LOC_SPG_AlignmentStretch">Strecken</sys:String>
     <sys:String x:Key="LOC_SPG_AlignmentCenter">Zentriert</sys:String>
-    <sys:String x:Key="LOC_SPG_Padding">Padding</sys:String>
+    <sys:String x:Key="LOC_SPG_Padding">Abstand</sys:String>
 
     <!-- Integrated Views -->
     <sys:String x:Key="LOC_SPG_ClockView">Uhr</sys:String>
