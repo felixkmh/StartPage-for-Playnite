@@ -419,7 +419,7 @@ namespace LandingPage.ViewModels.Layout
                     Parent.GridNode.Orientation = orientation;
                     var temp = GridNode.ViewProperties;
                     GridNode.ViewProperties = null;
-                    Parent.GridNode.Children.Add(new GridNode() { ViewProperties = temp });
+                    Parent.GridNode.Children.Add(new GridNode() { ViewProperties = temp, Orientation = GridNode.Orientation });
                     Parent.GridNode.Children.Add(new GridNode());
                     return;
                 }
@@ -438,7 +438,7 @@ namespace LandingPage.ViewModels.Layout
                 GridNode.Orientation = orientation;
                 var temp = GridNode.ViewProperties;
                 GridNode.ViewProperties = null;
-                GridNode.Children.Add(new GridNode() { ViewProperties = temp });
+                GridNode.Children.Add(new GridNode() { ViewProperties = temp, Orientation = GridNode.Orientation });
                 GridNode.Children.Add(new GridNode());
                 return;
             }

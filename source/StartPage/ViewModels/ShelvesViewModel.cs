@@ -10,8 +10,10 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Threading;
 
 namespace LandingPage.ViewModels
 {
@@ -48,6 +50,8 @@ namespace LandingPage.ViewModels
         internal LandingPageSettingsViewModel settings;
         public LandingPageSettingsViewModel Settings => settings;
 
+        internal DispatcherTimer dispatcherTimer;
+
         public ShelvesViewModel(
             IPlayniteAPI playniteAPI,
             LandingPageExtension landingPage,
@@ -56,6 +60,10 @@ namespace LandingPage.ViewModels
             this.playniteAPI = playniteAPI;
             this.plugin = landingPage;
             this.settings = settings;
+
+            dispatcherTimer = new DispatcherTimer();
+            dispatcherTimer.Tick += DispatcherTimer_Tick;
+            dispatcherTimer.Interval = TimeSpan.FromMilliseconds(250);
 
             Settings.Settings.PropertyChanged += Settings_PropertyChanged;
             Settings.PropertyChanged += Settings_PropertyChanged1;
@@ -101,15 +109,29 @@ namespace LandingPage.ViewModels
         {
             if (e.UpdatedItems.Any(u => IsRelevantUpdate(u)))
             {
-                ShelveViewModels.ForEach(m => m.UpdateGames(m.ShelveProperties));
+                dispatcherTimer.Stop();
+                if(e.UpdatedItems.Any(u => u.NewData.LastActivity != u.OldData.LastActivity))
+                {
+                    ShelveViewModels.ForEach(m => m.UpdateGames(m.ShelveProperties));
+                } else
+                {
+                    dispatcherTimer.Start();
+                }
             }
+        }
+
+        private void DispatcherTimer_Tick(object sender, EventArgs e)
+        {
+            ShelveViewModels.ForEach(m => m.UpdateGames(m.ShelveProperties));
+            dispatcherTimer.Stop();
         }
 
         private void Games_ItemCollectionChanged(object sender, ItemCollectionChangedEventArgs<Game> e)
         {
             if (e.RemovedItems.Count + e.AddedItems.Count > 0)
             {
-                ShelveViewModels.ForEach(m => m.UpdateGames(m.ShelveProperties));
+                dispatcherTimer.Stop();
+                dispatcherTimer.Start();
             }
         }
 
