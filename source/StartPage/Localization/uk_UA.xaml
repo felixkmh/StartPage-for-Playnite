@@ -117,6 +117,7 @@
     <sys:String x:Key="LOC_SPG_VerticalAlignmentBottom">Знизу</sys:String>
     <sys:String x:Key="LOC_SPG_AlignmentStretch">Розтягнути</sys:String>
     <sys:String x:Key="LOC_SPG_AlignmentCenter">По центру</sys:String>
+    <sys:String x:Key="LOC_SPG_Padding">Padding</sys:String>
 
     <!-- Integrated Views -->
     <sys:String x:Key="LOC_SPG_ClockView">Годинник</sys:String>
