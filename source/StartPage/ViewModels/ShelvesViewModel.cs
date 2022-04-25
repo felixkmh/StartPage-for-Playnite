@@ -147,9 +147,9 @@ namespace LandingPage.ViewModels
             if (old.Playtime != updated.Playtime) return true;
             if (old.Hidden != updated.Hidden) return true;
             if (old.Favorite != updated.Favorite) return true;
-            if (old.BackgroundImage != updated.BackgroundImage) return true;
-            if (old.CoverImage != updated.CoverImage) return true;
-            if (old.Icon != updated.Icon) return true;
+            //if (old.BackgroundImage != updated.BackgroundImage) return true;
+            //if (old.CoverImage != updated.CoverImage) return true;
+            //if (old.Icon != updated.Icon) return true;
             var oldPlatformIds = old.PlatformIds ?? new List<Guid>();
             var updatedPlatformIds = updated.PlatformIds ?? new List<Guid>();
             if (!(oldPlatformIds.All(id => updatedPlatformIds.Contains(id)) && oldPlatformIds.Count == updatedPlatformIds.Count)) return true;
