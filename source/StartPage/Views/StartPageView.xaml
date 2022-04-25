@@ -80,6 +80,19 @@
                     </Grid>
                 </MenuItem.Header>
             </MenuItem>
+            <MenuItem>
+                <MenuItem.Header>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition SharedSizeGroup="PropertyName"/>
+                            <ColumnDefinition SharedSizeGroup="Value"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="{DynamicResource LOC_SPG_Padding}" VerticalAlignment="Center" Margin="0,0,5,0"/>
+                        <Slider Grid.Column="1" Value="{Binding Settings.Settings.Padding}" Minimum="0" Maximum="200" Width="100" VerticalAlignment="Center" 
+                                                IsSnapToTickEnabled="True" TickFrequency="1" SmallChange="1"/>
+                    </Grid>
+                </MenuItem.Header>
+            </MenuItem>
             <Separator/>
             <MenuItem Command="{Binding OpenSettingsCommand}" Header="{DynamicResource LOCMenuPlayniteSettingsTitle}"/>
             <Separator/>
@@ -158,51 +171,53 @@
                 </Style>
             </Border.Style>
         </Border>
-        <local:GridNodeView DataContext="{Binding RootNodeViewModel}">
-            <local:GridNodeView.RenderTransform>
-                <ScaleTransform/>
-            </local:GridNodeView.RenderTransform>
-            <local:GridNodeView.Style>
-                <Style TargetType="local:GridNodeView">
-                    <Style.Resources>
-                        <ElasticEase x:Key="EasingFunctiton" Oscillations="1"/>
-                    </Style.Resources>
-                    <Setter Property="RenderTransformOrigin" Value="0.5,0.5"/>
-                    <Style.Triggers>
-                        <DataTrigger Binding="{Binding EditModeEnabled}" Value="{StaticResource True}">
-                            <DataTrigger.EnterActions>
-                                <BeginStoryboard>
-                                    <Storyboard>
-                                        <DoubleAnimation Duration="0:0:0.3" To="0.95"
+        <Border Padding="{Binding Settings.Settings.Padding}">
+            <local:GridNodeView DataContext="{Binding RootNodeViewModel}">
+                <local:GridNodeView.RenderTransform>
+                    <ScaleTransform/>
+                </local:GridNodeView.RenderTransform>
+                <local:GridNodeView.Style>
+                    <Style TargetType="local:GridNodeView">
+                        <Style.Resources>
+                            <ElasticEase x:Key="EasingFunctiton" Oscillations="1"/>
+                        </Style.Resources>
+                        <Setter Property="RenderTransformOrigin" Value="0.5,0.5"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding EditModeEnabled}" Value="{StaticResource True}">
+                                <DataTrigger.EnterActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation Duration="0:0:0.3" To="0.95"
                                                          Storyboard.TargetProperty="RenderTransform.ScaleX"
                                                          EasingFunction="{StaticResource EasingFunctiton}">
-                                        </DoubleAnimation>
-                                        <DoubleAnimation Duration="0:0:0.3" To="0.95"
+                                            </DoubleAnimation>
+                                            <DoubleAnimation Duration="0:0:0.3" To="0.95"
                                                          Storyboard.TargetProperty="RenderTransform.ScaleY"
                                                          EasingFunction="{StaticResource EasingFunctiton}">
-                                        </DoubleAnimation>
-                                    </Storyboard>
-                                </BeginStoryboard>
-                            </DataTrigger.EnterActions>
-                            <DataTrigger.ExitActions>
-                                <BeginStoryboard>
-                                    <Storyboard>
-                                        <DoubleAnimation Duration="0:0:0.3" To="1"
+                                            </DoubleAnimation>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </DataTrigger.EnterActions>
+                                <DataTrigger.ExitActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation Duration="0:0:0.3" To="1"
                                                          Storyboard.TargetProperty="RenderTransform.ScaleX"
                                                          EasingFunction="{StaticResource EasingFunctiton}">
-                                        </DoubleAnimation>
-                                        <DoubleAnimation Duration="0:0:0.3" To="1"
+                                            </DoubleAnimation>
+                                            <DoubleAnimation Duration="0:0:0.3" To="1"
                                                          Storyboard.TargetProperty="RenderTransform.ScaleY"
                                                          EasingFunction="{StaticResource EasingFunctiton}">
-                                        </DoubleAnimation>
-                                    </Storyboard>
-                                </BeginStoryboard>
-                            </DataTrigger.ExitActions>
-                        </DataTrigger>
-                    </Style.Triggers>
-                </Style>
-            </local:GridNodeView.Style>
-        </local:GridNodeView>
+                                            </DoubleAnimation>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </DataTrigger.ExitActions>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </local:GridNodeView.Style>
+            </local:GridNodeView>
+        </Border>
         <Button Content="{DynamicResource LOC_SPG_ExitEditMode}" Command="{Binding ExitEditModeCommand}" HorizontalAlignment="Center" VerticalAlignment="Bottom"
                 Visibility="{Binding RootNodeViewModel.EditModeEnabled, Converter={StaticResource BooleanToVisibilityConverter}}"
                 Margin="10"/>

@@ -55,6 +55,9 @@ namespace LandingPage
         private GridNode gridLayout = null;
         public GridNode GridLayout { get => gridLayout; set => SetValue(ref gridLayout, value); }
 
+        private double padding = 0;
+        public double Padding { get => padding; set => SetValue(ref padding, value); }
+
         private string startPage = ResourceProvider.GetString("LOCLibrary");
         public string StartPage { get => startPage; set => SetValue(ref startPage, value); }
 
