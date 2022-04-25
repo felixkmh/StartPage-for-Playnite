@@ -552,6 +552,27 @@
                                                 <TextBlock Foreground="{DynamicResource WarningBrush}" Text="{DynamicResource LOCRemoveTitle}"/>
                                             </Button.Content>
                                         </Button>
+                                        <Grid Margin="2">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="4"/>
+                                                <ColumnDefinition Width="*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Button Padding="2" Grid.Column="0"
+                                                            Command="{Binding RelativeSource={RelativeSource AncestorType=local:ShelvesView, Mode=FindAncestor}, Path=DataContext.MoveShelveUpCommand}"
+                                                            CommandParameter="{Binding .}">
+                                                <Button.Content>
+                                                    <TextBlock Text="" FontFamily="{StaticResource FontIcoFont}"/>
+                                                </Button.Content>
+                                            </Button>
+                                            <Button Padding="2" Grid.Column="2"
+                                                            Command="{Binding RelativeSource={RelativeSource AncestorType=local:ShelvesView, Mode=FindAncestor}, Path=DataContext.MoveShelveDownCommand}"
+                                                            CommandParameter="{Binding .}">
+                                                <Button.Content>
+                                                    <TextBlock Text="" FontFamily="{StaticResource FontIcoFont}"/>
+                                                </Button.Content>
+                                            </Button>
+                                        </Grid>
                                     </StackPanel>
                                 </Border>
                             </Popup>

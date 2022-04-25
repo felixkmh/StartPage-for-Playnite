@@ -28,6 +28,9 @@ namespace LandingPage.ViewModels
 
         public ICommand ExtendShelveCommand { get; set; }
 
+        public ICommand MoveShelveUpCommand { get; set; }
+        public ICommand MoveShelveDownCommand { get; set;}
+
         public Game LastSelectedGame { get => plugin.startPageViewModel.LastSelectedGame; set => plugin.startPageViewModel.LastSelectedGame = value; }
 
         public Game LastHoveredGame { get => plugin.startPageViewModel.LastHoveredGame; set => plugin.startPageViewModel.LastHoveredGame = value; }
@@ -103,6 +106,25 @@ namespace LandingPage.ViewModels
                     ShelveViewModels.ForEach(m => m.UpdateGames(m.ShelveProperties));
                 }
             });
+            MoveShelveUpCommand = new RelayCommand<ShelveViewModel>(svm =>
+            {
+                var idx = ShelveViewModels.IndexOf(svm);
+                if (idx > 0)
+                {
+                    ShelveViewModels.Move(idx, idx - 1);
+                    Settings.Settings.ShelveProperties.Move(idx, idx - 1);
+                }
+            }, svm => ShelveViewModels.IndexOf(svm) > 0);
+
+            MoveShelveDownCommand = new RelayCommand<ShelveViewModel>(svm =>
+            {
+                var idx = ShelveViewModels.IndexOf(svm);
+                if (idx < ShelveViewModels.Count - 1)
+                {
+                    ShelveViewModels.Move(idx, idx + 1);
+                    Settings.Settings.ShelveProperties.Move(idx, idx + 1);
+                }
+            }, svm => ShelveViewModels.IndexOf(svm) < ShelveViewModels.Count - 1);
         }
 
         private void Games_ItemUpdated(object sender, ItemUpdatedEventArgs<Game> e)
