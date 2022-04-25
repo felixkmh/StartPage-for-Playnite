@@ -122,8 +122,10 @@ namespace LandingPage.ViewModels
 
         private void DispatcherTimer_Tick(object sender, EventArgs e)
         {
-            ShelveViewModels.ForEach(m => m.UpdateGames(m.ShelveProperties));
             dispatcherTimer.Stop();
+            dispatcherTimer.Tick -= DispatcherTimer_Tick;
+            ShelveViewModels.ForEach(m => m.UpdateGames(m.ShelveProperties));
+            dispatcherTimer.Tick += DispatcherTimer_Tick;
         }
 
         private void Games_ItemCollectionChanged(object sender, ItemCollectionChangedEventArgs<Game> e)
