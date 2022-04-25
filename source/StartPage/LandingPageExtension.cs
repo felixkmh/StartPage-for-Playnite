@@ -366,6 +366,11 @@ namespace LandingPage
             {
                 // Settings.ShelveProperties = viewModel.ShelveViewModels.Select(svm => svm.ShelveProperties).ToList();
             }
+            if (startPageView?.DataContext is StartPageViewModel startPageViewModel)
+            {
+                Settings.GridLayout = startPageViewModel.RootNodeViewModel.GridNode;
+            }
+
             // collapse layout
             if (Settings.GridLayout != null)
             {
