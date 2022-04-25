@@ -118,6 +118,7 @@
     <sys:String x:Key="LOC_SPG_AlignmentStretch">Etiré</sys:String>
     <sys:String x:Key="LOC_SPG_AlignmentCenter">Centrée</sys:String>
     <sys:String x:Key="LOC_SPG_Padding">Espacement</sys:String>
+    <sys:String x:Key="LOC_SPG_ShelvesHorizontalLabels">Horizontal Labels</sys:String>
 
     <!-- Integrated Views -->
     <sys:String x:Key="LOC_SPG_ClockView">Horloge</sys:String>
