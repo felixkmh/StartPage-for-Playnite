@@ -117,8 +117,8 @@
     <sys:String x:Key="LOC_SPG_VerticalAlignmentBottom">底部</sys:String>
     <sys:String x:Key="LOC_SPG_AlignmentStretch">拉伸</sys:String>
     <sys:String x:Key="LOC_SPG_AlignmentCenter">居中</sys:String>
-    <sys:String x:Key="LOC_SPG_Padding">Padding</sys:String>
-    <sys:String x:Key="LOC_SPG_ShelvesHorizontalLabels">Horizontal Labels</sys:String>
+    <sys:String x:Key="LOC_SPG_Padding">内边距</sys:String>
+    <sys:String x:Key="LOC_SPG_ShelvesHorizontalLabels">水平标签</sys:String>
 
     <!-- Integrated Views -->
     <sys:String x:Key="LOC_SPG_ClockView">时钟</sys:String>
