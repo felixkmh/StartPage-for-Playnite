@@ -202,6 +202,7 @@ namespace LandingPage.ViewModels.Layout
                 {
                     Parent.GridNode.Children.RemoveAt(index - 1);
                 }
+                GridNode.Minimize(GridNode, Parent.GridNode);
             }
         }
 
@@ -214,6 +215,7 @@ namespace LandingPage.ViewModels.Layout
                 {
                     Parent.GridNode.Children.RemoveAt(index + 1);
                 }
+                GridNode.Minimize(GridNode, Parent.GridNode);
             }
         }
 
@@ -250,6 +252,7 @@ namespace LandingPage.ViewModels.Layout
                         }
                     }
                 }
+                GridNode.Minimize(GridNode, Parent.GridNode);
             }
         }
 
@@ -553,6 +556,7 @@ namespace LandingPage.ViewModels.Layout
                                     var newSize = left.Size.Value + right.Size.Value;
                                     node.Children[curr].Size = new GridLength(newSize, GridUnitType.Star);
                                     node.Children.RemoveAt(curr + 1);
+                                    GridNode.Minimize(GridNode, Parent.GridNode);
                                 })
                             });
                             mergeItem.Items.Add(new MenuItem
@@ -565,6 +569,7 @@ namespace LandingPage.ViewModels.Layout
                                     var newSize = left.Size.Value + right.Size.Value;
                                     node.Children[curr + 1].Size = new GridLength(newSize, GridUnitType.Star);
                                     node.Children.RemoveAt(curr);
+                                    GridNode.Minimize(GridNode, Parent.GridNode);
                                 })
                             });
                             sep.ContextMenu.Items.Add(mergeItem);
