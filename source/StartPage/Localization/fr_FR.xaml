@@ -109,15 +109,15 @@
     <sys:String x:Key="LOC_SPG_AddPanelBottom">En bas</sys:String>
     <sys:String x:Key="LOC_SPG_AddPanelLeft">Gauche</sys:String>
     <sys:String x:Key="LOC_SPG_AddPanelRight">Droite</sys:String>
-    <sys:String x:Key="LOC_SPG_HorizontalAlignment">Horizontal Alignment</sys:String>
-    <sys:String x:Key="LOC_SPG_HorizontalAlignmentLeft">Left</sys:String>
-    <sys:String x:Key="LOC_SPG_HorizontalAlignmentRight">Right</sys:String>
-    <sys:String x:Key="LOC_SPG_VerticalAlignment">Vertical Alignment</sys:String>
-    <sys:String x:Key="LOC_SPG_VerticalAlignmentTop">Top</sys:String>
-    <sys:String x:Key="LOC_SPG_VerticalAlignmentBottom">Bottom</sys:String>
-    <sys:String x:Key="LOC_SPG_AlignmentStretch">Stretch</sys:String>
-    <sys:String x:Key="LOC_SPG_AlignmentCenter">Center</sys:String>
-    <sys:String x:Key="LOC_SPG_Padding">Padding</sys:String>
+    <sys:String x:Key="LOC_SPG_HorizontalAlignment">Alignement horizontal</sys:String>
+    <sys:String x:Key="LOC_SPG_HorizontalAlignmentLeft">Gauche</sys:String>
+    <sys:String x:Key="LOC_SPG_HorizontalAlignmentRight">Droite</sys:String>
+    <sys:String x:Key="LOC_SPG_VerticalAlignment">Alignement vertical</sys:String>
+    <sys:String x:Key="LOC_SPG_VerticalAlignmentTop">Haut</sys:String>
+    <sys:String x:Key="LOC_SPG_VerticalAlignmentBottom">Bas</sys:String>
+    <sys:String x:Key="LOC_SPG_AlignmentStretch">Etiré</sys:String>
+    <sys:String x:Key="LOC_SPG_AlignmentCenter">Centrée</sys:String>
+    <sys:String x:Key="LOC_SPG_Padding">Espacement</sys:String>
 
     <!-- Integrated Views -->
     <sys:String x:Key="LOC_SPG_ClockView">Horloge</sys:String>
