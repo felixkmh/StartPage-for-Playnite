@@ -1,5 +1,14 @@
 AddonId: felixkmh_StartPage_Plugin
 Packages:  
+  - Version: 2.2.0
+    RequiredApiVersion: 6.1.0
+    ReleaseDate: 2022-04-25
+    PackageUrl: https://github.com/felixkmh/StartPage-for-Playnite/releases/download/v2.2.0/felixkmh_StartPage_Plugin_2_2_0.pext
+    Changelog:
+      - added option to change padding for entire StartPage and individual views
+      - added buttons to shelve menus to move them up or down
+      - added option to use horizontal labels for shelves
+      - localization updates
   - Version: 2.1.3
     RequiredApiVersion: 6.1.0
     ReleaseDate: 2022-04-24
