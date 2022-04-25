@@ -114,6 +114,7 @@ namespace LandingPage.ViewModels
                     ShelveViewModels.Move(idx, idx - 1);
                     Settings.Settings.ShelveProperties.Move(idx, idx - 1);
                 }
+                ShelveViewModels.ForEach(m => m.UpdateGames(m.ShelveProperties));
             }, svm => ShelveViewModels.IndexOf(svm) > 0);
 
             MoveShelveDownCommand = new RelayCommand<ShelveViewModel>(svm =>
@@ -124,6 +125,7 @@ namespace LandingPage.ViewModels
                     ShelveViewModels.Move(idx, idx + 1);
                     Settings.Settings.ShelveProperties.Move(idx, idx + 1);
                 }
+                ShelveViewModels.ForEach(m => m.UpdateGames(m.ShelveProperties));
             }, svm => ShelveViewModels.IndexOf(svm) < ShelveViewModels.Count - 1);
         }
 
