@@ -392,7 +392,8 @@
                                     </Style.Triggers>
                                 </Style>
                             </StackPanel.Style>
-                            <TextBlock Text="{Binding ShelveProperties.Name}" Style="{StaticResource {x:Type TextBlock}}" FontSize="{DynamicResource FontSizeLarge}"/>
+                            <TextBlock Text="{Binding ShelveProperties.Name}" Style="{StaticResource {x:Type TextBlock}}" FontSize="{DynamicResource FontSizeLarge}"
+                                       FontWeight="Bold"/>
                             <ToggleButton x:Name="shelvetoggleHorizontal" DockPanel.Dock="Top" Background="Transparent"
                                                           Padding="6,0,4,0" Margin="0,0" BorderThickness="0" BorderBrush="Transparent">
                                 <ToggleButton.Style>
