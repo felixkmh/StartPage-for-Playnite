@@ -81,6 +81,7 @@
     <Compile Include="Converters\NullToHiddenConverter.cs" />
     <Compile Include="Converters\ObjectToGroupHeaderConverter.cs" />
     <Compile Include="Converters\OneMinusConverter.cs" />
+    <Compile Include="Converters\ThicknessToDoubleConverter.cs" />
     <Compile Include="Converters\UriToBitmapImageConverter.cs" />
     <Compile Include="Converters\VisibilityInverter.cs" />
     <Compile Include="Extensions\CopyExtension.cs" />

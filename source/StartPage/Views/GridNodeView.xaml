@@ -7,12 +7,16 @@
              xmlns:local="clr-namespace:LandingPage.Views" 
              xmlns:layout="clr-namespace:LandingPage.ViewModels.Layout"
              xmlns:m="clr-namespace:LandingPage.Models.Layout"
+             xmlns:conv="clr-namespace:LandingPage.Converters"
+             xmlns:numeric="http://gu.se/NumericInput"
              mc:Ignorable="d"
              d:DesignHeight="450" d:DesignWidth="800"
              d:DataContext="{d:DesignInstance Type=layout:GridNodeViewModel, IsDesignTimeCreatable=False}"
              Background="Transparent"
              SizeChanged="UserControl_SizeChanged">
     <UserControl.Resources>
+        <conv:ThicknessToDoubleConverter x:Key="ThicknessToDoubleConverter"/>
+        <conv:DoubleToThicknessConverter x:Key="DoubleToThicknessConverter"/>
         <sys:Boolean x:Key="True">True</sys:Boolean>
         <sys:Boolean x:Key="False">False</sys:Boolean>
         <Style TargetType="{x:Type GridSplitter}" BasedOn="{StaticResource {x:Type GridSplitter}}">
@@ -64,6 +68,7 @@
                         <DataTrigger Binding="{Binding IsLeaf}" Value="{StaticResource True}">
                             <Setter Property="VerticalAlignment" Value="{Binding GridNode.VerticalAlignment}"/>
                             <Setter Property="HorizontalAlignment" Value="{Binding GridNode.HorizontalAlignment}"/>
+                            <Setter Property="Margin" Value="{Binding GridNode.Padding}"/>
                         </DataTrigger>
                         <MultiDataTrigger>
                             <MultiDataTrigger.Conditions>
@@ -138,6 +143,26 @@
                             <MenuItem Header="{DynamicResource LOC_SPG_HorizontalAlignmentRight}" Command="{Binding SetHorizontalAlignmentCommand}" CommandParameter="{x:Static HorizontalAlignment.Right}"
                                       IsEnabled="{Binding GridNode.HorizontalAlignment, Converter={StaticResource InvertedObjectEqualityToBoolConverter}, ConverterParameter={x:Static HorizontalAlignment.Right}}"/>
                         </MenuItem>
+                        <Separator/>
+                        <MenuItem Header="{DynamicResource LOC_SPG_Padding}">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition SharedSizeGroup="Value"/>
+                                    <ColumnDefinition SharedSizeGroup="ValueText"/>
+                                </Grid.ColumnDefinitions>
+                                <Slider Grid.Column="0" Value="{Binding GridNode.Padding}" Minimum="0" Maximum="100" Width="100" VerticalAlignment="Center" 
+                                                        IsSnapToTickEnabled="True" TickFrequency="1" SmallChange="1"/>
+                                <numeric:DoubleBox Grid.Column="1" Value="{Binding GridNode.Padding, UpdateSourceTrigger=PropertyChanged}" Margin="10,0,0,0"
+                                                    MinValue="0"
+                                                    MinWidth="20"
+                                                    ValidationTrigger="PropertyChanged"
+                                                    Style="{StaticResource {x:Type TextBox}}"
+                                                    TextAlignment="Center"
+                                                    Padding="5,0">
+                                </numeric:DoubleBox>
+                            </Grid>
+                        </MenuItem>
+
                         <Separator/>
                         <MenuItem Header="{DynamicResource LOC_SPG_RemovePanel}" Command="{Binding RemovePanelCommand}"/>
                     </ContextMenu>

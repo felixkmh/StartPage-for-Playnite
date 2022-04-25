@@ -25,6 +25,9 @@ namespace LandingPage.Models.Layout
         private VerticalAlignment verticalAlignment = VerticalAlignment.Stretch;
         public VerticalAlignment VerticalAlignment { get => verticalAlignment; set => SetValue(ref verticalAlignment, value); }
 
+        private double padding = 0;
+        public double Padding { get => padding; set => SetValue(ref padding, value); }
+
         private ViewProperties viewProperties = null;
         public ViewProperties ViewProperties { get => viewProperties; set => SetValue(ref viewProperties, value); }
 
@@ -44,6 +47,7 @@ namespace LandingPage.Models.Layout
                 parent.ViewProperties = current.ViewProperties;
                 parent.HorizontalAlignment = current.HorizontalAlignment;
                 parent.VerticalAlignment = current.VerticalAlignment;
+                parent.Padding = current.Padding;
                 var children = new ObservableCollection<GridNode>();
                 foreach(var child in current.Children)
                 {

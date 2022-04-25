@@ -303,10 +303,13 @@ namespace LandingPage.ViewModels.Layout
             }
             var tempVerticalAlignemnt = source.GridNode.VerticalAlignment;
             var tempHorizontalAlignemnt = source.GridNode.HorizontalAlignment;
+            var tempPadding = source.GridNode.Padding;
             source.GridNode.VerticalAlignment = target.GridNode.VerticalAlignment;
             source.GridNode.HorizontalAlignment = target.GridNode.HorizontalAlignment;
+            source.GridNode.Padding = target.GridNode.Padding;
             target.GridNode.VerticalAlignment = tempVerticalAlignemnt;
             target.GridNode.HorizontalAlignment = tempHorizontalAlignemnt;
+            target.GridNode.Padding = tempPadding;
             var temp = source.GridNode.ViewProperties;
             source.GridNode.ViewProperties = target.GridNode.ViewProperties;
             target.GridNode.ViewProperties = temp;
@@ -419,7 +422,7 @@ namespace LandingPage.ViewModels.Layout
                     Parent.GridNode.Orientation = orientation;
                     var temp = GridNode.ViewProperties;
                     GridNode.ViewProperties = null;
-                    Parent.GridNode.Children.Add(new GridNode() { ViewProperties = temp, Orientation = GridNode.Orientation });
+                    Parent.GridNode.Children.Add(new GridNode() { ViewProperties = temp, Orientation = GridNode.Orientation, Padding = GridNode.Padding });
                     Parent.GridNode.Children.Add(new GridNode());
                     return;
                 }
@@ -438,7 +441,7 @@ namespace LandingPage.ViewModels.Layout
                 GridNode.Orientation = orientation;
                 var temp = GridNode.ViewProperties;
                 GridNode.ViewProperties = null;
-                GridNode.Children.Add(new GridNode() { ViewProperties = temp, Orientation = GridNode.Orientation });
+                GridNode.Children.Add(new GridNode() { ViewProperties = temp, Orientation = GridNode.Orientation, Padding = GridNode.Padding });
                 GridNode.Children.Add(new GridNode());
                 return;
             }
