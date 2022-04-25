@@ -152,6 +152,9 @@
     <Compile Include="Views\Settings\MostPlayedSettingsView.xaml.cs">
       <DependentUpon>MostPlayedSettingsView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Settings\ShelvesSettingsView.xaml.cs">
+      <DependentUpon>ShelvesSettingsView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\ShelvesView.xaml.cs">
       <DependentUpon>ShelvesView.xaml</DependentUpon>
     </Compile>
@@ -322,6 +325,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Settings\MostPlayedSettingsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Settings\ShelvesSettingsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -20,6 +20,8 @@
              SizeChanged="UserControl_SizeChanged"
              Background="Transparent">
     <UserControl.Resources>
+        <system:Boolean x:Key="False">False</system:Boolean>
+        <system:Boolean x:Key="True">True</system:Boolean>
         <BitmapImage x:Key="InnerGlowBitmap" CreateOptions="IgnoreColorProfile" UriSource="pack://application:,,,/StartPagePlugin;component/innerglow.png" CacheOption="OnLoad"/>
         <Style x:Key="VirtualizedStackPanelStyle" TargetType="{x:Type VirtualizingStackPanel}">
             <Setter Property="UseLayoutRounding" Value="False"/>
@@ -366,9 +368,59 @@
             </ItemsControl.ItemsPanel>
             <ItemsControl.ItemTemplate>
                 <DataTemplate DataType="{x:Type lpvm:ShelveViewModel}">
-                    <DockPanel Grid.Row="1" UseLayoutRounding="True" SnapsToDevicePixels="True" VerticalAlignment="Bottom" LastChildFill="False" HorizontalAlignment="Left">
+                    <DockPanel Grid.Row="1" UseLayoutRounding="True" SnapsToDevicePixels="True" VerticalAlignment="Bottom" LastChildFill="False" HorizontalAlignment="Left"
+                               x:Name="ShelveDockPanel">
+                        <DockPanel.Style>
+                            <Style TargetType="DockPanel">
+                                <Setter Property="Tag" Value="{Binding ElementName=shelvetoggle}"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{mu:LandingPageSettings Settings.HorizontalShelveLabels}" Value="{StaticResource True}">
+                                        <Setter Property="Tag" Value="{Binding ElementName=shelvetoggleHorizontal}"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </DockPanel.Style>
+                        <StackPanel Orientation="Horizontal" DockPanel.Dock="Top"
+                                    Margin="6,0,2,2" x:Name="HorizontalLabelStackPanel"
+                                    Background="Transparent">
+                            <StackPanel.Style>
+                                <Style TargetType="StackPanel">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{mu:LandingPageSettings Settings.HorizontalShelveLabels}" Value="{StaticResource False}">
+                                            <Setter Property="Visibility" Value="Collapsed"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </StackPanel.Style>
+                            <TextBlock Text="{Binding ShelveProperties.Name}" Style="{StaticResource {x:Type TextBlock}}" FontSize="{DynamicResource FontSizeLarge}"/>
+                            <ToggleButton x:Name="shelvetoggleHorizontal" DockPanel.Dock="Top" Background="Transparent"
+                                                          Padding="6,0,4,0" Margin="0,0" BorderThickness="0" BorderBrush="Transparent">
+                                <ToggleButton.Style>
+                                    <Style TargetType="ToggleButton" BasedOn="{StaticResource {x:Type ToggleButton}}">
+                                        <Setter Property="Visibility" Value="{Binding ElementName=HorizontalLabelStackPanel, Path=IsMouseOver, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding ElementName=SettingsPopup, Path=IsOpen}" Value="{StaticResource True}">
+                                                <Setter Property="Visibility" Value="Visible"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </ToggleButton.Style>
+                                <ToggleButton.Content>
+                                    <TextBlock Text="" FontFamily="{DynamicResource FontIcoFont}"/>
+                                </ToggleButton.Content>
+                            </ToggleButton>
+                        </StackPanel>
                         <DockPanel DockPanel.Dock="Left" Background="Transparent" x:Name="ListDescription" LastChildFill="False" VerticalAlignment="Bottom" Height="{Binding ElementName=GamesListBox, Path=ActualHeight}"
                                                HorizontalAlignment="Right">
+                            <DockPanel.Style>
+                                <Style TargetType="DockPanel">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{mu:LandingPageSettings Settings.HorizontalShelveLabels}" Value="{StaticResource True}">
+                                            <Setter Property="Visibility" Value="Collapsed"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </DockPanel.Style>
                             <ToggleButton x:Name="shelvetoggle" DockPanel.Dock="Top" Background="Transparent"
                                                       Visibility="{Binding ElementName=ListDescription, Path=IsMouseOver, Converter={StaticResource BooleanToVisibilityConverter}}"
                                                       Padding="0,4,0,4" Margin="0" BorderThickness="0" BorderBrush="Transparent">
@@ -376,8 +428,8 @@
                                     <TextBlock Text="" FontFamily="{DynamicResource FontIcoFont}"/>
                                 </ToggleButton.Content>
                             </ToggleButton>
-                            <Popup StaysOpen="False" Placement="Right" PlacementTarget="{Binding ElementName=shelvetoggle}" x:Name="SettingsPopup"
-                                               IsOpen="{Binding IsChecked, ElementName=shelvetoggle, Delay=100}"
+                            <Popup StaysOpen="False" Placement="Right" PlacementTarget="{Binding ElementName=ShelveDockPanel, Path=Tag}" x:Name="SettingsPopup"
+                                               IsOpen="{Binding Tag.IsChecked, ElementName=ShelveDockPanel, Delay=100}"
                                                DataContext="{x:Null}">
                                 <Border Background="{DynamicResource PopupBackgroundBrush}" Padding="8" CornerRadius="8" MinWidth="260" MaxWidth="400">
                                     <StackPanel Grid.IsSharedSizeScope="True">

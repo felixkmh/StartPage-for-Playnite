@@ -420,7 +420,8 @@ namespace LandingPage
             { 
                 ViewId = "GameShelves", 
                 Name = ResourceProvider.GetString("LOC_SPG_ShelvesView"), 
-                Description = ResourceProvider.GetString("LOC_SPG_ShelvesViewDescription")
+                Description = ResourceProvider.GetString("LOC_SPG_ShelvesViewDescription"),
+                HasSettings = true
             });
             views.Add(new StartPageViewArgsBase 
             { 
@@ -507,6 +508,10 @@ namespace LandingPage
             if (id == "MostPlayed")
             {
                 return new MostPlayedSettingsView() { DataContext = SettingsViewModel };
+            }
+            if (id == "GameShelves")
+            {
+                return new ShelvesSettingsView() { DataContext = SettingsViewModel };
             }
             return null;
         }

@@ -58,6 +58,9 @@ namespace LandingPage
         private double padding = 0;
         public double Padding { get => padding; set => SetValue(ref padding, value); }
 
+        private bool horizontalShelveLabels = false;
+        public bool HorizontalShelveLabels { get => horizontalShelveLabels; set => SetValue(ref horizontalShelveLabels, value); }
+
         private string startPage = ResourceProvider.GetString("LOCLibrary");
         public string StartPage { get => startPage; set => SetValue(ref startPage, value); }
 
