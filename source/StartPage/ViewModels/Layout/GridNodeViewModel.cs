@@ -197,12 +197,13 @@ namespace LandingPage.ViewModels.Layout
         {
             if (Parent != null)
             {
+                var root = Root.GridNode;
                 var index = Parent.GridNode.Children.IndexOf(GridNode);
                 if (index > 0)
                 {
                     Parent.GridNode.Children.RemoveAt(index - 1);
                 }
-                GridNode.Minimize(GridNode, Parent.GridNode);
+                GridNode.Minimize(root, null);
             }
         }
 
@@ -210,12 +211,13 @@ namespace LandingPage.ViewModels.Layout
         {
             if (Parent != null)
             {
+                var root = Root.GridNode;
                 var index = Parent.GridNode.Children.IndexOf(GridNode);
                 if (index > -1 && index < Parent.GridNode.Children.Count - 1)
                 {
                     Parent.GridNode.Children.RemoveAt(index + 1);
                 }
-                GridNode.Minimize(GridNode, Parent.GridNode);
+                GridNode.Minimize(root, null);
             }
         }
 
@@ -223,6 +225,7 @@ namespace LandingPage.ViewModels.Layout
         {
             if (Parent != null)
             {
+                var root = Root.GridNode;
                 var index = Parent.GridNode.Children.IndexOf(GridNode);
                 var siblings = new List<GridNode>();
                 if (index > 0) 
@@ -252,7 +255,7 @@ namespace LandingPage.ViewModels.Layout
                         }
                     }
                 }
-                GridNode.Minimize(GridNode, Parent.GridNode);
+                GridNode.Minimize(root, null);
             }
         }
 
@@ -551,12 +554,13 @@ namespace LandingPage.ViewModels.Layout
                                 Header = node.Orientation == Orientation.Horizontal ? ResourceProvider.GetString("LOC_SPG_MergeKeepLeft") : ResourceProvider.GetString("LOC_SPG_MergeKeepUpper"),
                                 Command = new RelayCommand(() =>
                                 {
+                                    var root = Root.GridNode;
                                     var left = node.Children[curr];
                                     var right = node.Children[curr + 1];
                                     var newSize = left.Size.Value + right.Size.Value;
                                     node.Children[curr].Size = new GridLength(newSize, GridUnitType.Star);
                                     node.Children.RemoveAt(curr + 1);
-                                    GridNode.Minimize(GridNode, Parent.GridNode);
+                                    GridNode.Minimize(root, null);
                                 })
                             });
                             mergeItem.Items.Add(new MenuItem
@@ -564,12 +568,13 @@ namespace LandingPage.ViewModels.Layout
                                 Header = node.Orientation == Orientation.Horizontal ? ResourceProvider.GetString("LOC_SPG_MergeKeepRight") : ResourceProvider.GetString("LOC_SPG_MergeKeepLower"),
                                 Command = new RelayCommand(() =>
                                 {
+                                    var root = Root.GridNode;
                                     var left = node.Children[curr];
                                     var right = node.Children[curr + 1];
                                     var newSize = left.Size.Value + right.Size.Value;
                                     node.Children[curr + 1].Size = new GridLength(newSize, GridUnitType.Star);
                                     node.Children.RemoveAt(curr);
-                                    GridNode.Minimize(GridNode, Parent.GridNode);
+                                    GridNode.Minimize(root, null);
                                 })
                             });
                             sep.ContextMenu.Items.Add(mergeItem);
