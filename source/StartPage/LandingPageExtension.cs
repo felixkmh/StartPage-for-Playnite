@@ -441,7 +441,6 @@ namespace LandingPage
                 ViewId = "DigitalClock", 
                 Name = ResourceProvider.GetString("LOC_SPG_ClockView"), 
                 Description = ResourceProvider.GetString("LOC_SPG_ClockViewDescription"),
-                AllowMultipleInstances = true
             });
             return args;
         }
