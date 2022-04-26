@@ -229,6 +229,7 @@
                                         <Setter.Value>
                                             <Style TargetType="MenuItem">
                                                 <Setter Property="Header" Value="{Binding ViewArgs.Name}"/>
+                                                <Setter Property="CommandParameter" Value="{Binding .}"/>
                                                 <Setter Property="Command" Value="{Binding AddCommand}"/>
                                                 <Style.Triggers>
                                                     <DataTrigger Binding="{Binding ViewArgs.Description, Converter={StaticResource StringNullOrEmptyToBoolConverter}}" Value="{StaticResource True}">

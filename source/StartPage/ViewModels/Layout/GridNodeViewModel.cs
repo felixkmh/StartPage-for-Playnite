@@ -124,17 +124,23 @@ namespace LandingPage.ViewModels.Layout
 
         public class AvailableView
         {
+            public GridNodeViewModel Model { get; private set; }
             public StartPageViewArgs ViewArgs { get; private set; }
-            public ICommand AddCommand { get; private set; }
+
+            public static ICommand AddCommand { get; } = new RelayCommand<AvailableView>(
+                v => {
+                    v.Model.RemoveCurrentView();
+                    v.Model.GridNode.ViewProperties = new ViewProperties { PluginId = v.ViewArgs.PluginId, StartPageViewArgs = v.ViewArgs, ViewId = v.ViewArgs.ViewId };
+                },
+                v =>
+                {
+                    return v.ViewArgs.AllowMultipleInstances || !v.Model.ActiveViews.Any(vp => vp.PluginId == v.ViewArgs.PluginId && vp.ViewId == v.ViewArgs.ViewId);
+                });
 
             public AvailableView(GridNodeViewModel model, StartPageViewArgs args)
             {
                 ViewArgs = args;
-                AddCommand = new RelayCommand<AvailableView>(v => {
-                    model.RemoveCurrentView();
-                    model.GridNode.ViewProperties = new ViewProperties { PluginId = args.PluginId, StartPageViewArgs = args, ViewId = args.ViewId };
-                },
-                v => args.AllowMultipleInstances || !model.ActiveViews.Any(vp => vp.PluginId == args.PluginId && vp.ViewId == args.ViewId));
+                Model = model;
             }
         }
 

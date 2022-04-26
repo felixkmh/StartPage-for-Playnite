@@ -352,7 +352,8 @@ namespace LandingPage
                             Description = v.Description, 
                             ViewId = v.ViewId, 
                             HasSettings = v.HasSettings, 
-                            Name = v.Name 
+                            Name = v.Name,
+                            AllowMultipleInstances = v.AllowMultipleInstances,
                         }).ToList());
                     }
                 }
@@ -439,7 +440,8 @@ namespace LandingPage
             { 
                 ViewId = "DigitalClock", 
                 Name = ResourceProvider.GetString("LOC_SPG_ClockView"), 
-                Description = ResourceProvider.GetString("LOC_SPG_ClockViewDescription")
+                Description = ResourceProvider.GetString("LOC_SPG_ClockViewDescription"),
+                AllowMultipleInstances = true
             });
             return args;
         }
