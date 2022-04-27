@@ -137,6 +137,8 @@ namespace LandingPage.ViewModels
             {
                 RootNodeViewModel.EditModeEnabled = false;
                 GridNode.Minimize(RootNodeViewModel.GridNode, null);
+                settings.Settings.GridLayout = RootNodeViewModel.GridNode;
+                landingPage.SavePluginSettings(settings.Settings);
                 GC.Collect();
             });
 

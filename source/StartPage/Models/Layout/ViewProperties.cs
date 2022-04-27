@@ -28,6 +28,24 @@ namespace LandingPage.Models.Layout
 
     public class StartPageViewArgs : StartPageViewArgsBase
     {
+        public StartPageViewArgs() : base() {}
+        public StartPageViewArgs(Guid pluginId)
+        {
+            PluginId = pluginId;
+        }
+        public StartPageViewArgs(StartPageViewArgsBase baseArgs, Guid pluginId) : this(pluginId)
+        {
+            var props = GetType().GetProperties();
+            foreach(var baseProp in typeof(StartPageViewArgsBase).GetProperties())
+            {
+                var targetProp = props.FirstOrDefault(prop => prop.Name == baseProp.Name && prop.PropertyType == baseProp.PropertyType);
+                if(targetProp != null)
+                {
+                    targetProp.SetValue(this, baseProp.GetValue(baseArgs), null);
+                }
+            }
+            
+        }
         public Guid PluginId { get; set; }
     }
 }

@@ -267,6 +267,7 @@ namespace LandingPage
 
         public override void OnApplicationStarted(OnApplicationStartedEventArgs args)
         {
+            Application.Current.Deactivated += OnApplicattionDeactivated;
             // create tags
             if (Settings.EnableTagCreation)
             {
@@ -347,15 +348,19 @@ namespace LandingPage
                         && extensionArgs.Views != null
                         && extensionArgs.Views.Any())
                     {
-                        AllAvailableViews.Add(extensionArgs.ExtensionName, extensionArgs.Views.Select(v => new StartPageViewArgs {
-                            PluginId = plugin.Id, 
-                            Description = v.Description, 
-                            ViewId = v.ViewId, 
-                            HasSettings = v.HasSettings, 
-                            Name = v.Name,
-                            AllowMultipleInstances = v.AllowMultipleInstances,
-                        }).ToList());
+                        AllAvailableViews.Add(extensionArgs.ExtensionName, extensionArgs.Views.Select(v => new StartPageViewArgs(v, plugin.Id)).ToList());
                     }
+                }
+            }
+        }
+
+        private void OnApplicattionDeactivated(object sender, EventArgs e)
+        {
+            if (startPageViewModel != null)
+            {
+                if (startPageViewModel.RootNodeViewModel.EditModeEnabled)
+                {
+                    startPageViewModel.ExitEditModeCommand.Execute(null);
                 }
             }
         }
