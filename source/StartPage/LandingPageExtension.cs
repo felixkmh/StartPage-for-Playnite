@@ -379,6 +379,8 @@ namespace LandingPage
                 Settings.GridLayout = startPageViewModel.RootNodeViewModel.GridNode;
             }
 
+            Settings.ShelveInstances = Settings.ShelveInstances.Where(p => shelvesViewModels.ContainsKey(p.Key)).ToDictionary(p => p.Key, p => p.Value);
+
             // collapse layout
             if (Settings.GridLayout != null)
             {
