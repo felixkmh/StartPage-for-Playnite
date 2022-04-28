@@ -46,7 +46,7 @@ namespace LandingPage.ViewModels
             collectionViewSource.Source = Games;
             this.playniteAPI = playniteAPI;
             this.shelveProperties = shelveProperties;
-            UpdateGames(shelveProperties);
+            // UpdateGames(shelveProperties);
             this.shelveProperties.PropertyChanged += ShelveProperties_PropertyChanged;
             PropertyChanged += ShelveViewModel_PropertyChanged;
             resetFiltersCommand = new RelayCommand(() =>
@@ -361,7 +361,7 @@ namespace LandingPage.ViewModels
             var sortDescriptions = cvs.SortDescriptions;
             var sortDescription = sortDescriptions.First();
             sortDescriptions.Clear();
-            sortDescriptions.Add(new SortDescription { Direction = (ListSortDirection)shelveProperties.Order, PropertyName = sortDescription.PropertyName });
+            sortDescriptions.Add(new SortDescription { Direction = shelveProperties.Order == Order.Ascending ? ListSortDirection.Ascending : ListSortDirection.Descending, PropertyName = sortDescription.PropertyName });
         }
 
         internal IEnumerable<T> OrderBy<T, U>(IEnumerable<T> enumerable, Func<T, U> func, Order order = Order.Descending)
@@ -375,7 +375,7 @@ namespace LandingPage.ViewModels
 
         public void UpdateGames(ShelveProperties shelveProperties)
         {
-            IEnumerable<Game> games = playniteAPI.Database.Games.AsParallel()
+            IEnumerable<Game> games = playniteAPI.Database.Games
                             .Where(g => (!g.TagIds?.Contains(LandingPageExtension.Instance.SettingsViewModel.Settings.IgnoreTagId)) ?? true)
                             .Where(g => g.Favorite || !shelveProperties.FavoritesOnly)
                             .Where(g => !g.Hidden || !shelveProperties.IgnoreHidden)
