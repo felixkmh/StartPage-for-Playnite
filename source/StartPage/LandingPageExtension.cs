@@ -140,55 +140,8 @@ namespace LandingPage
                 Type = SiderbarItemType.View,
                 Title = "Start Page",
                 Visible = true,
-                Opened = () =>
-                {
-                    if (startPageView == null)
-                    {
-                        if (Settings.GridLayout == null)
-                        {
-                            Settings.GridLayout = new GridNode { Orientation = Orientation.Vertical };
-                            string path = Path.Combine(PlayniteApi.Paths.ConfigurationPath, "Extensions", "felixkmh_StartPage_Plugin", "DefaultLayout.json");
-                            if (File.Exists(path))
-                            {
-                                if (JsonConvert.DeserializeObject<GridNode>(File.ReadAllText(path)) is GridNode node)
-                                {
-                                    Settings.GridLayout = node;
-                                }
-                            }
-                        }
-
-                        startPageViewModel = new StartPageViewModel(PlayniteApi, this, SettingsViewModel, new GridNodeViewModel(Settings.GridLayout));
-
-                        var view = new StartPageView
-                        { 
-                            DataContext = startPageViewModel
-                        };
-
-                        if (Settings.EnableGlobalProgressBar && progressText is TextBlock && progressBar is ProgressBar && cancelButton is Button)
-                        {
-                            view.ProgressbarGrid.SetBinding(FrameworkElement.VisibilityProperty, progressBar.GetBindingExpression(FrameworkElement.VisibilityProperty).ParentBinding);
-                            view.ProgressText.SetBinding(TextBlock.TextProperty, progressText.GetBindingExpression(TextBlock.TextProperty).ParentBinding);
-                            view.ProgressBar.SetBinding(ProgressBar.ValueProperty, progressBar.GetBindingExpression(ProgressBar.ValueProperty).ParentBinding);
-                            view.ProgressBar.SetBinding(ProgressBar.MaximumProperty, progressBar.GetBindingExpression(ProgressBar.MaximumProperty).ParentBinding);
-                            view.ProgressCancelButton.Command = cancelButton.Command;
-                        }
-
-                        startPageView = view;
-                    }
-                    if (startPageView.DataContext is StartPageViewModel model)
-                    {
-                        model.Opened();
-                    }
-
-                    return startPageView;
-                },
-                Closed = () =>
-                {
-                    if (startPageView?.DataContext is StartPageViewModel model)
-                    {
-                        model.Closed();
-                    }
-                },
+                Opened = ViewOpened,
+                Closed = ViewClosed,
                 Icon = new TextBlock { Text = "", FontFamily = ResourceProvider.GetResource<FontFamily>("FontIcoFont") }
             });
 
@@ -197,29 +150,52 @@ namespace LandingPage
 
         private Control ViewOpened()
         {
-            ViewModel.Subscribe();
-            if (Settings.EnableGlobalProgressBar && progressText is TextBlock && progressBar is ProgressBar && cancelButton is Button)
+            if (startPageView == null)
             {
-                View.ProgressbarGrid.SetBinding(FrameworkElement.VisibilityProperty, progressBar.GetBindingExpression(FrameworkElement.VisibilityProperty).ParentBinding);
-                View.ProgressText.SetBinding(TextBlock.TextProperty, progressText.GetBindingExpression(TextBlock.TextProperty).ParentBinding);
-                View.ProgressBar.SetBinding(ProgressBar.ValueProperty, progressBar.GetBindingExpression(ProgressBar.ValueProperty).ParentBinding);
-                View.ProgressBar.SetBinding(ProgressBar.MaximumProperty, progressBar.GetBindingExpression(ProgressBar.MaximumProperty).ParentBinding);
-                View.ProgressCancelButton.Command = cancelButton.Command;
+                if (Settings.GridLayout == null)
+                {
+                    Settings.GridLayout = new GridNode { Orientation = Orientation.Vertical };
+                    string path = Path.Combine(PlayniteApi.Paths.ConfigurationPath, "Extensions", "felixkmh_StartPage_Plugin", "DefaultLayout.json");
+                    if (File.Exists(path))
+                    {
+                        if (JsonConvert.DeserializeObject<GridNode>(File.ReadAllText(path)) is GridNode node)
+                        {
+                            Settings.GridLayout = node;
+                        }
+                    }
+                }
+
+                startPageViewModel = new StartPageViewModel(PlayniteApi, this, SettingsViewModel, new GridNodeViewModel(Settings.GridLayout));
+
+                var view = new StartPageView
+                {
+                    DataContext = startPageViewModel
+                };
+
+                if (Settings.EnableGlobalProgressBar && progressText is TextBlock && progressBar is ProgressBar && cancelButton is Button)
+                {
+                    view.ProgressbarGrid.SetBinding(FrameworkElement.VisibilityProperty, progressBar.GetBindingExpression(FrameworkElement.VisibilityProperty).ParentBinding);
+                    view.ProgressText.SetBinding(TextBlock.TextProperty, progressText.GetBindingExpression(TextBlock.TextProperty).ParentBinding);
+                    view.ProgressBar.SetBinding(ProgressBar.ValueProperty, progressBar.GetBindingExpression(ProgressBar.ValueProperty).ParentBinding);
+                    view.ProgressBar.SetBinding(ProgressBar.MaximumProperty, progressBar.GetBindingExpression(ProgressBar.MaximumProperty).ParentBinding);
+                    view.ProgressCancelButton.Command = cancelButton.Command;
+                }
+
+                startPageView = view;
             }
-            return View;
+            if (startPageView.DataContext is StartPageViewModel model)
+            {
+                model.Opened();
+            }
+
+            return startPageView;
         }
 
         private void ViewClosed()
         {
-            viewModel?.Unsubscribe();
-            if (!Settings.KeepInMemory)
+            if (startPageView?.DataContext is StartPageViewModel model)
             {
-                view.DataContext = null;
-                view = null;
-                viewModel.successStory = null;
-                viewModel.Clock = null;
-                viewModel = null;
-                GC.Collect();
+                model.Closed();
             }
             GC.Collect();
         }
@@ -490,10 +466,16 @@ namespace LandingPage
                 if (!string.IsNullOrEmpty(successStoryPath))
                 {
                     var successStoryViewModel = new ViewModels.SuccessStory.SuccessStoryViewModel(successStoryPath, PlayniteApi, SettingsViewModel);
-                    Application.Current.Dispatcher.BeginInvoke(new Action(() => { 
+                    Task.Run(() =>
+                    {
                         successStoryViewModel.ParseAllAchievements();
-                        successStoryViewModel.Update();
-                    }), System.Windows.Threading.DispatcherPriority.Normal);
+                    }).ContinueWith(t =>
+                    {
+                        t?.Dispose();
+                        Application.Current.Dispatcher.BeginInvoke(new Action(() => {
+                            successStoryViewModel.Update();
+                        }), System.Windows.Threading.DispatcherPriority.Normal);
+                    });
                     var view = new RecentAchievementsView() 
                     { 
                         DataContext = successStoryViewModel
