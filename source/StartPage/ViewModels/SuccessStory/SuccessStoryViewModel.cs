@@ -128,6 +128,7 @@ namespace LandingPage.ViewModels.SuccessStory
         public void UpdateLatestAchievements(int achievementsOverall = 6, int achievementsPerGame = 3)
         {
             var latest = achievements
+                .AsParallel()
                 .SelectMany(pair => pair.Value.Items
                     .OrderByDescending(a => a.DateUnlocked ?? default)
                     .Take(achievementsPerGame)

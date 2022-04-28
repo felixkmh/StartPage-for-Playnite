@@ -392,7 +392,7 @@ namespace LandingPage.ViewModels.Layout
                             {
                                 try
                                 {
-                                    if (extension.GetAvailableStartPageViews()?.Views?.Where(v => v.ViewId == viewProperties.ViewId).FirstOrDefault() is StartPageViewArgsBase args)
+                                    if (LandingPageExtension.Instance.AllAvailableViews.Values.SelectMany(v => v).Where(v => v.PluginId == viewProperties.PluginId && v.ViewId == viewProperties.ViewId).FirstOrDefault() is StartPageViewArgsBase args)
                                     {
                                         viewProperties.StartPageViewArgs = args;
                                         if (extension.GetStartPageView(viewProperties.ViewId, viewProperties.InstanceId) is FrameworkElement control2)
@@ -485,7 +485,7 @@ namespace LandingPage.ViewModels.Layout
                         {
                             try
                             {
-                                if (extension.GetAvailableStartPageViews()?.Views?.Where(v => v.ViewId == viewProperties.ViewId).FirstOrDefault() is StartPageViewArgsBase args)
+                                if (LandingPageExtension.Instance.AllAvailableViews.Values.SelectMany(v => v).Where(v => v.PluginId == viewProperties.PluginId && v.ViewId == viewProperties.ViewId).FirstOrDefault() is StartPageViewArgsBase args)
                                 {
                                     viewProperties.StartPageViewArgs = args;
                                     if (extension.GetStartPageView(viewProperties.ViewId, viewProperties.InstanceId) is FrameworkElement control2)

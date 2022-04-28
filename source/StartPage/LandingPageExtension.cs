@@ -409,7 +409,16 @@ namespace LandingPage
             var views = new List<StartPageViewArgsBase>();
             var args = new StartPageExtensionArgs() { ExtensionName = "StartPage", Views = views };
 
-            var successStoryPath = Directory.GetDirectories(PlayniteApi.Paths.ExtensionsDataPath, "SuccessStory", SearchOption.AllDirectories).FirstOrDefault();
+            string successStoryPath = null;
+            foreach (var dir in Directory.GetDirectories(PlayniteApi.Paths.ExtensionsDataPath))
+            {
+                string path = Path.Combine(dir, "SuccessStory");
+                if (Directory.Exists(path))
+                {
+                    successStoryPath = path;
+                    break;
+                }
+            }
             if (!string.IsNullOrEmpty(successStoryPath))
             {
                 views.Add(new StartPageViewArgsBase 
@@ -420,8 +429,17 @@ namespace LandingPage
                 });
             }
 
-            var gameActivityPath = Directory.GetDirectories(PlayniteApi.Paths.ExtensionsDataPath, "GameActivity", SearchOption.AllDirectories).FirstOrDefault();
-            if(!string.IsNullOrEmpty(gameActivityPath))
+            string gameActivityPath = null;
+            foreach (var dir in Directory.GetDirectories(PlayniteApi.Paths.ExtensionsDataPath))
+            {
+                string path = Path.Combine(dir, "GameActivity");
+                if (Directory.Exists(path))
+                {
+                    gameActivityPath = path;
+                    break;
+                }
+            }
+            if (!string.IsNullOrEmpty(gameActivityPath))
             {
                 views.Add(new StartPageViewArgsBase 
                 { 
@@ -459,7 +477,16 @@ namespace LandingPage
         {
             if (id == "RecentAchivements")
             {
-                var successStoryPath = Directory.GetDirectories(PlayniteApi.Paths.ExtensionsDataPath, "SuccessStory", SearchOption.AllDirectories).FirstOrDefault();
+                string successStoryPath = null;
+                foreach (var dir in Directory.GetDirectories(PlayniteApi.Paths.ExtensionsDataPath))
+                {
+                    string path = Path.Combine(dir, "SuccessStory");
+                    if (Directory.Exists(path))
+                    {
+                        successStoryPath = path;
+                        break;
+                    }
+                }
                 if (!string.IsNullOrEmpty(successStoryPath))
                 {
                     var successStoryViewModel = new ViewModels.SuccessStory.SuccessStoryViewModel(successStoryPath, PlayniteApi, SettingsViewModel);
@@ -476,17 +503,29 @@ namespace LandingPage
             {
                 var viewModel = new ShelvesViewModel(PlayniteApi, this, SettingsViewModel, instanceId);
                 shelvesViewModels.Add(instanceId, viewModel);
-                viewModel.ShelveViewModels.ForEach(m => m.UpdateGames(m.ShelveProperties));
+                if (startPageViewModel != null)
+                {
+                    viewModel.ShelveViewModels.ForEach(m => m.UpdateGames(m.ShelveProperties));
+                }
                 return new ShelvesView { DataContext = viewModel };
             }
             if (id == "MostPlayed")
             {
-                var gameAcitivityPath = Directory.GetDirectories(PlayniteApi.Paths.ExtensionsDataPath, "GameActivity", SearchOption.AllDirectories).FirstOrDefault();
-                if (!string.IsNullOrEmpty(gameAcitivityPath))
+                string gameActivityPath = null;
+                foreach (var dir in Directory.GetDirectories(PlayniteApi.Paths.ExtensionsDataPath))
+                {
+                    string path = Path.Combine(dir, "GameActivity");
+                    if (Directory.Exists(path))
+                    {
+                        gameActivityPath = path;
+                        break;
+                    }
+                }
+                if (!string.IsNullOrEmpty(gameActivityPath))
                 {
                     if (gameActivityViewModel == null)
                     {
-                        gameActivityViewModel = new ViewModels.GameActivity.GameActivityViewModel(gameAcitivityPath, PlayniteApi, SettingsViewModel);
+                        gameActivityViewModel = new ViewModels.GameActivity.GameActivityViewModel(gameActivityPath, PlayniteApi, SettingsViewModel);
                         gameActivityViewModel.ParseAllActivites();
                     }
 
@@ -504,12 +543,21 @@ namespace LandingPage
             }
             if (id == "WeeklyActivity")
             {
-                var gameAcitivityPath = Directory.GetDirectories(PlayniteApi.Paths.ExtensionsDataPath, "GameActivity", SearchOption.AllDirectories).FirstOrDefault();
-                if (!string.IsNullOrEmpty(gameAcitivityPath))
+                string gameActivityPath = null;
+                foreach (var dir in Directory.GetDirectories(PlayniteApi.Paths.ExtensionsDataPath))
+                {
+                    string path = Path.Combine(dir, "GameActivity");
+                    if (Directory.Exists(path))
+                    {
+                        gameActivityPath = path;
+                        break;
+                    }
+                }
+                if (!string.IsNullOrEmpty(gameActivityPath))
                 {
                     if (gameActivityViewModel == null)
                     {
-                        gameActivityViewModel = new ViewModels.GameActivity.GameActivityViewModel(gameAcitivityPath, PlayniteApi, SettingsViewModel);
+                        gameActivityViewModel = new ViewModels.GameActivity.GameActivityViewModel(gameActivityPath, PlayniteApi, SettingsViewModel);
                         gameActivityViewModel.ParseAllActivites();
                     }
                     var view = new GameActivityView() { DataContext = gameActivityViewModel };
