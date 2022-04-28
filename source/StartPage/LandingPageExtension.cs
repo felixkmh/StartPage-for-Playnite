@@ -490,8 +490,10 @@ namespace LandingPage
                 if (!string.IsNullOrEmpty(successStoryPath))
                 {
                     var successStoryViewModel = new ViewModels.SuccessStory.SuccessStoryViewModel(successStoryPath, PlayniteApi, SettingsViewModel);
-                    successStoryViewModel.ParseAllAchievements();
-                    successStoryViewModel.Update();
+                    Application.Current.Dispatcher.BeginInvoke(new Action(() => { 
+                        successStoryViewModel.ParseAllAchievements();
+                        successStoryViewModel.Update();
+                    }), System.Windows.Threading.DispatcherPriority.Normal);
                     var view = new RecentAchievementsView() 
                     { 
                         DataContext = successStoryViewModel
@@ -505,7 +507,9 @@ namespace LandingPage
                 shelvesViewModels.Add(instanceId, viewModel);
                 if (startPageViewModel != null)
                 {
-                    viewModel.ShelveViewModels.ForEach(m => m.UpdateGames(m.ShelveProperties));
+                    Application.Current.Dispatcher.BeginInvoke(new Action(() => {
+                        viewModel.ShelveViewModels.ForEach(m => m.UpdateGames(m.ShelveProperties));
+                    }), System.Windows.Threading.DispatcherPriority.Normal);
                 }
                 return new ShelvesView { DataContext = viewModel };
             }
@@ -526,7 +530,9 @@ namespace LandingPage
                     if (gameActivityViewModel == null)
                     {
                         gameActivityViewModel = new ViewModels.GameActivity.GameActivityViewModel(gameActivityPath, PlayniteApi, SettingsViewModel);
-                        gameActivityViewModel.ParseAllActivites();
+                        Application.Current.Dispatcher.BeginInvoke(new Action(() => {
+                            gameActivityViewModel.ParseAllActivites();
+                        }), System.Windows.Threading.DispatcherPriority.Normal);
                     }
 
                     var mostPlayedViewModel = new MostPlayedViewModel(PlayniteApi, SettingsViewModel, gameActivityViewModel);
@@ -558,7 +564,9 @@ namespace LandingPage
                     if (gameActivityViewModel == null)
                     {
                         gameActivityViewModel = new ViewModels.GameActivity.GameActivityViewModel(gameActivityPath, PlayniteApi, SettingsViewModel);
-                        gameActivityViewModel.ParseAllActivites();
+                        Application.Current.Dispatcher.BeginInvoke(new Action(() => {
+                            gameActivityViewModel.ParseAllActivites();
+                        }), System.Windows.Threading.DispatcherPriority.Normal);
                     }
                     var view = new GameActivityView() { DataContext = gameActivityViewModel };
 
