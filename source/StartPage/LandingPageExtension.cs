@@ -386,14 +386,10 @@ namespace LandingPage
             var args = new StartPageExtensionArgs() { ExtensionName = "StartPage", Views = views };
 
             string successStoryPath = null;
-            foreach (var dir in Directory.GetDirectories(PlayniteApi.Paths.ExtensionsDataPath))
+            string path = Path.Combine(PlayniteApi.Paths.ExtensionsDataPath, "cebe6d32-8c46-4459-b993-5a5189d60788", "SuccessStory");
+            if (Directory.Exists(path))
             {
-                string path = Path.Combine(dir, "SuccessStory");
-                if (Directory.Exists(path))
-                {
-                    successStoryPath = path;
-                    break;
-                }
+                successStoryPath = path;
             }
             if (!string.IsNullOrEmpty(successStoryPath))
             {
@@ -406,14 +402,10 @@ namespace LandingPage
             }
 
             string gameActivityPath = null;
-            foreach (var dir in Directory.GetDirectories(PlayniteApi.Paths.ExtensionsDataPath))
+            string path2 = Path.Combine(PlayniteApi.Paths.ExtensionsDataPath, "afbb1a0d-04a1-4d0c-9afa-c6e42ca855b4", "GameActivity");
+            if (Directory.Exists(path2))
             {
-                string path = Path.Combine(dir, "GameActivity");
-                if (Directory.Exists(path))
-                {
-                    gameActivityPath = path;
-                    break;
-                }
+                gameActivityPath = path2;
             }
             if (!string.IsNullOrEmpty(gameActivityPath))
             {
@@ -454,14 +446,10 @@ namespace LandingPage
             if (id == "RecentAchivements")
             {
                 string successStoryPath = null;
-                foreach (var dir in Directory.GetDirectories(PlayniteApi.Paths.ExtensionsDataPath))
+                string path = Path.Combine(PlayniteApi.Paths.ExtensionsDataPath, "cebe6d32-8c46-4459-b993-5a5189d60788", "SuccessStory");
+                if (Directory.Exists(path))
                 {
-                    string path = Path.Combine(dir, "SuccessStory");
-                    if (Directory.Exists(path))
-                    {
-                        successStoryPath = path;
-                        break;
-                    }
+                    successStoryPath = path;
                 }
                 if (!string.IsNullOrEmpty(successStoryPath))
                 {
@@ -498,15 +486,12 @@ namespace LandingPage
             if (id == "MostPlayed")
             {
                 string gameActivityPath = null;
-                foreach (var dir in Directory.GetDirectories(PlayniteApi.Paths.ExtensionsDataPath))
+                string path = Path.Combine(PlayniteApi.Paths.ExtensionsDataPath, "afbb1a0d-04a1-4d0c-9afa-c6e42ca855b4", "GameActivity");
+                if (Directory.Exists(path))
                 {
-                    string path = Path.Combine(dir, "GameActivity");
-                    if (Directory.Exists(path))
-                    {
-                        gameActivityPath = path;
-                        break;
-                    }
+                    gameActivityPath = path;
                 }
+
                 if (!string.IsNullOrEmpty(gameActivityPath))
                 {
                     if (gameActivityViewModel == null)
@@ -534,14 +519,10 @@ namespace LandingPage
             if (id == "WeeklyActivity")
             {
                 string gameActivityPath = null;
-                foreach (var dir in Directory.GetDirectories(PlayniteApi.Paths.ExtensionsDataPath))
+                string path = Path.Combine(PlayniteApi.Paths.ExtensionsDataPath, "afbb1a0d-04a1-4d0c-9afa-c6e42ca855b4", "GameActivity");
+                if (Directory.Exists(path))
                 {
-                    string path = Path.Combine(dir, "GameActivity");
-                    if (Directory.Exists(path))
-                    {
-                        gameActivityPath = path;
-                        break;
-                    }
+                    gameActivityPath = path;
                 }
                 if (!string.IsNullOrEmpty(gameActivityPath))
                 {
