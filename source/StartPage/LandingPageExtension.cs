@@ -518,7 +518,9 @@ namespace LandingPage
                     }
 
                     var mostPlayedViewModel = new MostPlayedViewModel(PlayniteApi, SettingsViewModel, gameActivityViewModel);
-                    
+                    Application.Current.Dispatcher.BeginInvoke(new Action(() => {
+                        mostPlayedViewModel.UpdateMostPlayedGame();
+                    }), System.Windows.Threading.DispatcherPriority.Normal);
                     var view = new MostPlayedView() { DataContext = mostPlayedViewModel };
 
                     return view;

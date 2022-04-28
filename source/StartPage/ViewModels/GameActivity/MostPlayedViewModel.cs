@@ -77,7 +77,7 @@ namespace LandingPage.ViewModels.GameActivity
             UpdateMostPlayedGame();
         }
 
-        private void UpdateMostPlayedGame()
+        public void UpdateMostPlayedGame()
         {
             var groups = new List<GameGroup>();
 
