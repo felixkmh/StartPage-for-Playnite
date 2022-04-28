@@ -55,14 +55,22 @@ namespace LandingPage.ViewModels
 
         internal DispatcherTimer dispatcherTimer;
 
+        private Guid instanceId;
+        public Guid InstanceId { get => instanceId; set => SetValue(ref instanceId, value); }
+
+        private ObservableCollection<ShelveProperties> shelves;
+        public ObservableCollection<ShelveProperties> Shelves { get => shelves; set => SetValue(ref shelves, value); }
+
         public ShelvesViewModel(
             IPlayniteAPI playniteAPI,
             LandingPageExtension landingPage,
-            LandingPageSettingsViewModel settings)
+            LandingPageSettingsViewModel settings,
+            Guid instanceId)
         {
             this.playniteAPI = playniteAPI;
             this.plugin = landingPage;
             this.settings = settings;
+            this.instanceId = instanceId;
 
             dispatcherTimer = new DispatcherTimer();
             dispatcherTimer.Tick += DispatcherTimer_Tick;
@@ -71,7 +79,20 @@ namespace LandingPage.ViewModels
             Settings.Settings.PropertyChanged += Settings_PropertyChanged;
             Settings.PropertyChanged += Settings_PropertyChanged1;
 
-            foreach (var shelveProperties in settings.Settings.ShelveProperties)
+            if (!Settings.Settings.ShelveInstances.ContainsKey(InstanceId))
+            {
+                if (Settings.Settings.ShelveInstances.Count == 0)
+                {
+                    Settings.Settings.ShelveInstances.Add(InstanceId, Settings.Settings.ShelveProperties);
+                } else
+                {
+                    Settings.Settings.ShelveInstances.Add(InstanceId, new ObservableCollection<ShelveProperties> { ShelveProperties.RecentlyPlayed });
+                }
+            }
+
+            Shelves = Settings.Settings.ShelveInstances[instanceId];
+
+            foreach (var shelveProperties in Shelves)
             {
                 ShelveViewModels.Add(new ShelveViewModel(shelveProperties, playniteAPI, ShelveViewModels));
             }
@@ -79,15 +100,16 @@ namespace LandingPage.ViewModels
             AddShelveCommand = new RelayCommand(() =>
             {
                 ShelveViewModel item = new ShelveViewModel(ShelveProperties.RecentlyPlayed, playniteAPI, ShelveViewModels);
-                Settings.Settings.ShelveProperties.Add(item.ShelveProperties);
+                Shelves.Add(item.ShelveProperties);
                 ShelveViewModels.Add(item);
                 ShelveViewModels.ForEach(m => m.UpdateGames(m.ShelveProperties));
             });
+
             RemoveShelveCommand = new RelayCommand<ShelveViewModel>(svm =>
             {
                 if (svm != null)
                 {
-                    Settings.Settings.ShelveProperties.Remove(svm.ShelveProperties);
+                    Shelves.Remove(svm.ShelveProperties);
                     ShelveViewModels.Remove(svm);
                     ShelveViewModels.ForEach(m => m.UpdateGames(m.ShelveProperties));
                 }
@@ -101,7 +123,7 @@ namespace LandingPage.ViewModels
                     properties.SkippedGames = svm.ShelveProperties.NumberOfGames + svm.ShelveProperties.SkippedGames;
                     properties.Name = string.Empty;
                     ShelveViewModel item = new ShelveViewModel(properties, playniteAPI, ShelveViewModels);
-                    Settings.Settings.ShelveProperties.Insert(idx + 1, item.ShelveProperties);
+                    Shelves.Insert(idx + 1, item.ShelveProperties);
                     ShelveViewModels.Insert(idx + 1, item);
                     ShelveViewModels.ForEach(m => m.UpdateGames(m.ShelveProperties));
                 }
@@ -112,7 +134,7 @@ namespace LandingPage.ViewModels
                 if (idx > 0)
                 {
                     ShelveViewModels.Move(idx, idx - 1);
-                    Settings.Settings.ShelveProperties.Move(idx, idx - 1);
+                    Shelves.Move(idx, idx - 1);
                 }
                 ShelveViewModels.ForEach(m => m.UpdateGames(m.ShelveProperties));
             }, svm => ShelveViewModels.IndexOf(svm) > 0);
@@ -123,7 +145,7 @@ namespace LandingPage.ViewModels
                 if (idx < ShelveViewModels.Count - 1)
                 {
                     ShelveViewModels.Move(idx, idx + 1);
-                    Settings.Settings.ShelveProperties.Move(idx, idx + 1);
+                    Shelves.Move(idx, idx + 1);
                 }
                 ShelveViewModels.ForEach(m => m.UpdateGames(m.ShelveProperties));
             }, svm => ShelveViewModels.IndexOf(svm) < ShelveViewModels.Count - 1);
@@ -195,6 +217,12 @@ namespace LandingPage.ViewModels
             playniteAPI.Database.Games.ItemCollectionChanged -= Games_ItemCollectionChanged;
         }
 
+        public void UnsubscribeSettings()
+        {
+            Settings.PropertyChanged -= Settings_PropertyChanged1;
+            Settings.Settings.PropertyChanged -= Settings_PropertyChanged;
+        }
+
         private void Settings_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             if (e.PropertyName == nameof(LandingPageSettings.SkipGamesInPreviousShelves))
@@ -207,14 +235,20 @@ namespace LandingPage.ViewModels
         {
             if (e.PropertyName == nameof(LandingPageSettingsViewModel.Settings))
             {
-                ShelveViewModels.ForEach(m => m.UpdateGames(m.ShelveProperties));
-                Settings.Settings.PropertyChanged += Settings_PropertyChanged;
+                if (Settings.Settings.ShelveInstances.ContainsKey(InstanceId))
+                {
+                    Settings.Settings.PropertyChanged += Settings_PropertyChanged;
+                    Shelves = Settings.Settings.ShelveInstances[InstanceId];
+                    for (int i = 0; i < Shelves.Count; ++i)
+                    {
+                        ShelveViewModels[i].ShelveProperties = Shelves[i];
+                    }
+                    ShelveViewModels.ForEach(m => m.UpdateGames(m.ShelveProperties));
+                } else
+                {
+                    Settings.PropertyChanged -= Settings_PropertyChanged1;
+                }
             }
-        }
-
-        public void OnViewRemoved(string viewId, Guid instanceId)
-        {
-
         }
 
         public void OnStartPageOpened()

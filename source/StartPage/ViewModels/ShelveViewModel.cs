@@ -73,6 +73,7 @@ namespace LandingPage.ViewModels
         {
             if (e.PropertyName == nameof(ShelveProperties))
             {
+                ShelveProperties.PropertyChanged += ShelveProperties_PropertyChanged;
                 UpdateOrder(ShelveProperties, CollectionViewSource);
                 UpdateSorting(ShelveProperties, CollectionViewSource);
                 UpdateGrouping(ShelveProperties, CollectionViewSource);

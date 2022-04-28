@@ -169,6 +169,9 @@ namespace LandingPage
         private ObservableCollection<ShelveProperties> shelveProperties = null;
         public ObservableCollection<ShelveProperties> ShelveProperties { get => shelveProperties; set => SetValue(ref shelveProperties, value); }
 
+        private Dictionary<Guid, ObservableCollection<ShelveProperties>> shelveInstances = new Dictionary<Guid, ObservableCollection<ShelveProperties>>();
+        public Dictionary<Guid, ObservableCollection<ShelveProperties>> ShelveInstances { get => shelveInstances; set => SetValue(ref shelveInstances, value); }
+
         private ObservableCollection<MostPlayedOptions> mostPlayedOptions = null;
         public ObservableCollection<MostPlayedOptions> MostPlayedOptions { get => mostPlayedOptions; set => SetValue(ref mostPlayedOptions, value); }
 

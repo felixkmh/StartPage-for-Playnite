@@ -39,6 +39,8 @@ namespace LandingPage
         internal LandingPageSettingsViewModel SettingsViewModel { get; set; }
         internal LandingPageSettings Settings => SettingsViewModel.Settings;
 
+        internal Dictionary<Guid, ShelvesViewModel> shelvesViewModels = new Dictionary<Guid, ShelvesViewModel>();
+
         public Dictionary<string, List<StartPageViewArgs>> AllAvailableViews { get; set; } = new Dictionary<string, List<StartPageViewArgs>>();
 
         public override Guid Id { get; } = Guid.Parse("a6a3dcf6-9bfe-426c-afb0-9f49409ae0c5");
@@ -432,7 +434,8 @@ namespace LandingPage
                 ViewId = "GameShelves", 
                 Name = ResourceProvider.GetString("LOC_SPG_ShelvesView"), 
                 Description = ResourceProvider.GetString("LOC_SPG_ShelvesViewDescription"),
-                HasSettings = true
+                HasSettings = true,
+                AllowMultipleInstances = true
             });
             views.Add(new StartPageViewArgsBase 
             { 
@@ -469,7 +472,8 @@ namespace LandingPage
             }
             if (id == "GameShelves")
             {
-                var viewModel = new ShelvesViewModel(PlayniteApi, this, SettingsViewModel);
+                var viewModel = new ShelvesViewModel(PlayniteApi, this, SettingsViewModel, instanceId);
+                shelvesViewModels.Add(instanceId, viewModel);
                 viewModel.ShelveViewModels.ForEach(m => m.UpdateGames(m.ShelveProperties));
                 return new ShelvesView { DataContext = viewModel };
             }
@@ -529,7 +533,13 @@ namespace LandingPage
 
         public void OnViewRemoved(string viewId, Guid instanceId)
         {
-            // Debug.WriteLine($"Removed instance {instanceId} of {viewId}");
+            if (viewId == "GameShelves")
+            {
+                shelvesViewModels[instanceId].Unsubscribe();
+                shelvesViewModels[instanceId].UnsubscribeSettings();
+                shelvesViewModels.Remove(instanceId);
+                Settings.ShelveInstances.Remove(instanceId);
+            }
         }
     }
 }

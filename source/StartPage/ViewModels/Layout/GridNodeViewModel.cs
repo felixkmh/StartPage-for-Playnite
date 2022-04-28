@@ -270,6 +270,7 @@ namespace LandingPage.ViewModels.Layout
             var properties = GridNode.ViewProperties;
             if (properties != null)
             {
+                var view = GridNode.ViewProperties.view as FrameworkElement;
                 GridNode.ViewProperties = null;
                 var plugin = LandingPageExtension.Instance.PlayniteApi.Addons.Plugins.FirstOrDefault(p => p.Id == properties.PluginId);
                 if (plugin is IStartPageExtension extension)
