@@ -52,6 +52,12 @@ namespace LandingPage
         // workaround to get this module to be loaded by Playnite
         private Gu.Wpf.NumericInput.DoubleBox _ = new Gu.Wpf.NumericInput.DoubleBox();
 
+        private bool fixGridSize = false;
+        public bool FixGridSize { get => fixGridSize; set => SetValue(ref fixGridSize, value); }
+
+        private double fixedGridHeight = 1080;
+        public double FixedGridHeight { get => fixedGridHeight; set => SetValue(ref fixedGridHeight, value); }
+
         private GridNode gridLayout = null;
         public GridNode GridLayout { get => gridLayout; set => SetValue(ref gridLayout, value); }
 

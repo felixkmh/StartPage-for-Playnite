@@ -175,7 +175,7 @@
                 </Style>
             </Border.Style>
         </Border>
-        <Border Padding="{Binding Settings.Settings.Padding}">
+        <ScrollViewer x:Name="StartPageScrollViewer" HorizontalScrollBarVisibility="Disabled" Padding="{Binding Settings.Settings.Padding}">
             <local:GridNodeView DataContext="{Binding RootNodeViewModel}">
                 <local:GridNodeView.RenderTransform>
                     <ScaleTransform/>
@@ -186,7 +186,11 @@
                             <ElasticEase x:Key="EasingFunctiton" Oscillations="1"/>
                         </Style.Resources>
                         <Setter Property="RenderTransformOrigin" Value="0.5,0.5"/>
+                        <Setter Property="Height" Value="{Binding ActualHeight, ElementName=StartPageScrollViewer}"/>
                         <Style.Triggers>
+                            <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType=local:StartPageView, Mode=FindAncestor}, Path=DataContext.Settings.Settings.FixGridSize}" Value="{StaticResource True}">
+                                <Setter Property="Height" Value="{Binding RelativeSource={RelativeSource AncestorType=local:StartPageView, Mode=FindAncestor}, Path=DataContext.Settings.Settings.FixedGridHeight}"/>
+                            </DataTrigger>
                             <DataTrigger Binding="{Binding EditModeEnabled}" Value="{StaticResource True}">
                                 <DataTrigger.EnterActions>
                                     <BeginStoryboard>
@@ -221,7 +225,7 @@
                     </Style>
                 </local:GridNodeView.Style>
             </local:GridNodeView>
-        </Border>
+        </ScrollViewer>
         <Button Content="{DynamicResource LOC_SPG_ExitEditMode}" Command="{Binding ExitEditModeCommand}" HorizontalAlignment="Center" VerticalAlignment="Bottom"
                 Visibility="{Binding RootNodeViewModel.EditModeEnabled, Converter={StaticResource BooleanToVisibilityConverter}}"
                 Margin="10"/>

@@ -46,6 +46,8 @@ namespace LandingPage
                     scrollWidth = container.ActualWidth + container.Margin.Left + container.Margin.Right;
                 }
 
+                var prev = scrollViewer.HorizontalOffset;
+
                 if (scrollWidth is double delta)
                 {
                     scrollViewer.ScrollToHorizontalOffset(Math.Round(Math.Max(0, scrollViewer.HorizontalOffset - delta * Math.Sign(args.Delta))));
@@ -62,6 +64,16 @@ namespace LandingPage
                 }
 
                 args.Handled = true;
+
+                bool begin = args.Delta > 0 && scrollViewer.HorizontalOffset == 0;
+                bool end = args.Delta <= 0 && scrollViewer.HorizontalOffset >= scrollViewer.ExtentWidth - scrollViewer.ViewportWidth;
+
+                if ((begin || end) && itemsControl.Parent is FrameworkElement parent)
+                {
+                    var e2 = new MouseWheelEventArgs(args.MouseDevice, args.Timestamp, args.Delta) { RoutedEvent = UIElement.MouseWheelEvent };
+                    parent.RaiseEvent(e2);
+                }
+
             };
         }
 
