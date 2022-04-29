@@ -176,10 +176,10 @@
                         </DockPanel>
                         <DockPanel LastChildFill="False">
                             <DockPanel.ToolTip>
-                                <TextBlock Text="Fixed Size" TextWrapping="Wrap" MaxWidth="550"/>
+                                <TextBlock Text="{DynamicResource LOC_SPG_FixGridHeight_Tooltip}" TextWrapping="Wrap" MaxWidth="550"/>
                             </DockPanel.ToolTip>
                             <CheckBox IsChecked="{Binding Settings.FixGridSize}" VerticalAlignment="Center" Margin="3"/>
-                            <TextBlock Text="Fixed Size: " Margin="3" VerticalAlignment="Center" TextWrapping="Wrap"/>
+                            <TextBlock Text="{DynamicResource LOC_SPG_FixGridHeight}" Margin="3" VerticalAlignment="Center" TextWrapping="Wrap"/>
                             <numeric:DoubleBox Value="{Binding Settings.FixedGridHeight, UpdateSourceTrigger=Default}" 
                                     MinValue="0"
                                     MinWidth="30"
