@@ -20,7 +20,8 @@ namespace LandingPage.ViewModels.GameActivity
         internal FileSystemWatcher activityWatcher;
         internal LandingPageSettingsViewModel landingPageSettingsViewModel;
 
-        public ObservableCollection<Activity> Activities { get; set; } = new ObservableCollection<Activity>();
+        private ObservableCollection<Activity> activities = new ObservableCollection<Activity>();
+        public ObservableCollection<Activity> Activities { get => activities; set => SetValue(ref activities, value); }
 
         public Dictionary<GameSource, ulong> PlaytimePerSource => Activities
             .SelectMany(activity => activity.Items)

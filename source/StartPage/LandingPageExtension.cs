@@ -491,15 +491,14 @@ namespace LandingPage
 
                 if (!string.IsNullOrEmpty(gameActivityPath))
                 {
-                    Task t = null;
                     if (gameActivityViewModel == null)
                     {
                         gameActivityViewModel = new GameActivityViewModel(gameActivityPath, PlayniteApi, SettingsViewModel);
-                        t = gameActivityViewModel.ParseAllActivites();
+                        gameActivityViewModel.ParseAllActivites();
                     }
 
                     mostPlayedViewModel = new MostPlayedViewModel(PlayniteApi, SettingsViewModel, gameActivityViewModel);
-                    t?.ContinueWith(tsk => { mostPlayedViewModel.UpdateMostPlayedGame(); tsk?.Dispose(); });
+                    mostPlayedViewModel.UpdateMostPlayedGame();
                     var view = new MostPlayedView() { DataContext = mostPlayedViewModel };
 
                     return view;
