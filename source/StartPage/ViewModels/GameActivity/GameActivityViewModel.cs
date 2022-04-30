@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Data;
 using LandingPage.Models.GameActivity;
 using Newtonsoft.Json;
@@ -81,22 +82,35 @@ namespace LandingPage.ViewModels.GameActivity
 
         }
 
-        public void ParseAllActivites()
+        public Task ParseAllActivites()
         {
-            Activities.Clear();
-            if (!string.IsNullOrEmpty(activityPath) && Directory.Exists(activityPath))
+            return Task.Run(() =>
             {
-                var files = Directory.GetFiles(activityPath);
-                var validFiles = files
-                    .AsParallel()
-                    .Where(path => Guid.TryParse(Path.GetFileNameWithoutExtension(path), out var id) && playniteAPI.Database.Games.Get(id) is Game);
-                var deserializedFiles = validFiles
-                    .Select(path => DeserializeActivityFile(path))
-                    .OfType<Activity>();
-                var withSessions = deserializedFiles
-                    .Where(ac => (ac.Items?.Count() ?? 0) > 0);
-                Activities = withSessions.ToObservable();
-            }
+                if (!string.IsNullOrEmpty(activityPath) && Directory.Exists(activityPath))
+                {
+                    var files = Directory.GetFiles(activityPath);
+                    var validFiles = files
+                        .AsParallel()
+                        .Where(path => Guid.TryParse(Path.GetFileNameWithoutExtension(path), out var id) && playniteAPI.Database.Games.Get(id) is Game);
+                    var deserializedFiles = validFiles
+                        .Select(path => DeserializeActivityFile(path))
+                        .OfType<Activity>();
+                    var withSessions = deserializedFiles
+                        .Where(ac => (ac.Items?.Count() ?? 0) > 0);
+                    return withSessions.ToObservable();
+                }
+                return null;
+            }).ContinueWith(t =>
+            {
+                Application.Current.Dispatcher.Invoke(() =>
+                {
+                    if (t.Result is ObservableCollection<Activity> collection)
+                    {
+                        Activities = collection;
+                    }
+                });
+                t?.Dispose();
+            });
         }
 
         public bool ParseActivities(Guid gameId)

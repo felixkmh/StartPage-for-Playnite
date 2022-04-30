@@ -15,7 +15,7 @@ using System.Windows.Input;
 
 namespace LandingPage.ViewModels
 {
-    public class ShelveViewModel : ObservableObject
+    public class ShelveViewModel : ObservableObject, IStartPageViewModel
     {
         private IPlayniteAPI playniteAPI;
 
@@ -376,10 +376,10 @@ namespace LandingPage.ViewModels
         public void UpdateGames(ShelveProperties shelveProperties)
         {
             IEnumerable<Game> games = playniteAPI.Database.Games
-                            .Where(g => (!g.TagIds?.Contains(LandingPageExtension.Instance.SettingsViewModel.Settings.IgnoreTagId)) ?? true)
-                            .Where(g => g.Favorite || !shelveProperties.FavoritesOnly)
-                            .Where(g => !g.Hidden || !shelveProperties.IgnoreHidden)
-                            .Where(g => g.IsInstalled || !shelveProperties.InstalledOnly);
+                        .Where(g => (!g.TagIds?.Contains(LandingPageExtension.Instance.SettingsViewModel.Settings.IgnoreTagId)) ?? true)
+                        .Where(g => g.Favorite || !shelveProperties.FavoritesOnly)
+                        .Where(g => !g.Hidden || !shelveProperties.IgnoreHidden)
+                        .Where(g => g.IsInstalled || !shelveProperties.InstalledOnly);
             // apply filters
             if (shelveProperties.Categories?.Any() ?? false)
                 games = games.Where(g => g.CategoryIds?.Any(id => shelveProperties.Categories.Contains(id)) ?? false);
@@ -445,10 +445,6 @@ namespace LandingPage.ViewModels
                     break;
             }
 
-
-            var collection = Games;
-            var changed = false;
-
             var skipped = shelveProperties.SkippedGames;
 
             if (LandingPageExtension.Instance.SettingsViewModel.Settings.SkipGamesInPreviousShelves)
@@ -463,6 +459,10 @@ namespace LandingPage.ViewModels
                 dummies.Add(DummyGame);
                 gameSelection = dummies;
             }
+
+            var collection = Games;
+            var changed = false;
+
             Application.Current.Dispatcher.Invoke(() => {
                 foreach (var game in gameSelection)
                 {
@@ -500,6 +500,13 @@ namespace LandingPage.ViewModels
                     collection.Move(collection.Count - 1, 0);
                 }
             });
+
+        }
+
+        public void OnViewClosed()
+        {
+            ShelveProperties.PropertyChanged -= ShelveProperties_PropertyChanged;
+            PropertyChanged -= ShelveViewModel_PropertyChanged;
         }
     }
 }

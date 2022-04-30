@@ -121,6 +121,7 @@ namespace LandingPage
 
         internal StartPageView startPageView;
         internal StartPageViewModel startPageViewModel;
+        private MostPlayedViewModel mostPlayedViewModel;
 
         public override IEnumerable<SidebarItem> GetSidebarItems()
         {
@@ -460,9 +461,7 @@ namespace LandingPage
                     }).ContinueWith(t =>
                     {
                         t?.Dispose();
-                        Application.Current.Dispatcher.BeginInvoke(new Action(() => {
-                            successStoryViewModel.Update();
-                        }), System.Windows.Threading.DispatcherPriority.Normal);
+                        successStoryViewModel.Update();
                     });
                     var view = new RecentAchievementsView() 
                     { 
@@ -477,9 +476,7 @@ namespace LandingPage
                 shelvesViewModels.Add(instanceId, viewModel);
                 if (startPageViewModel != null)
                 {
-                    Application.Current.Dispatcher.BeginInvoke(new Action(() => {
-                        viewModel.ShelveViewModels.ForEach(m => m.UpdateGames(m.ShelveProperties));
-                    }), System.Windows.Threading.DispatcherPriority.Normal);
+                    viewModel.UpdateShelves();
                 }
                 return new ShelvesView { DataContext = viewModel };
             }
@@ -494,18 +491,15 @@ namespace LandingPage
 
                 if (!string.IsNullOrEmpty(gameActivityPath))
                 {
+                    Task t = null;
                     if (gameActivityViewModel == null)
                     {
-                        gameActivityViewModel = new ViewModels.GameActivity.GameActivityViewModel(gameActivityPath, PlayniteApi, SettingsViewModel);
-                        Application.Current.Dispatcher.BeginInvoke(new Action(() => {
-                            gameActivityViewModel.ParseAllActivites();
-                        }), System.Windows.Threading.DispatcherPriority.Normal);
+                        gameActivityViewModel = new GameActivityViewModel(gameActivityPath, PlayniteApi, SettingsViewModel);
+                        t = gameActivityViewModel.ParseAllActivites();
                     }
 
-                    var mostPlayedViewModel = new MostPlayedViewModel(PlayniteApi, SettingsViewModel, gameActivityViewModel);
-                    Application.Current.Dispatcher.BeginInvoke(new Action(() => {
-                        mostPlayedViewModel.UpdateMostPlayedGame();
-                    }), System.Windows.Threading.DispatcherPriority.Normal);
+                    mostPlayedViewModel = new MostPlayedViewModel(PlayniteApi, SettingsViewModel, gameActivityViewModel);
+                    t?.ContinueWith(tsk => { mostPlayedViewModel.UpdateMostPlayedGame(); tsk?.Dispose(); });
                     var view = new MostPlayedView() { DataContext = mostPlayedViewModel };
 
                     return view;
@@ -528,10 +522,8 @@ namespace LandingPage
                 {
                     if (gameActivityViewModel == null)
                     {
-                        gameActivityViewModel = new ViewModels.GameActivity.GameActivityViewModel(gameActivityPath, PlayniteApi, SettingsViewModel);
-                        Application.Current.Dispatcher.BeginInvoke(new Action(() => {
-                            gameActivityViewModel.ParseAllActivites();
-                        }), System.Windows.Threading.DispatcherPriority.Normal);
+                        gameActivityViewModel = new GameActivityViewModel(gameActivityPath, PlayniteApi, SettingsViewModel);
+                        gameActivityViewModel.ParseAllActivites();
                     }
                     var view = new GameActivityView() { DataContext = gameActivityViewModel };
 
@@ -558,10 +550,18 @@ namespace LandingPage
         {
             if (viewId == "GameShelves")
             {
-                shelvesViewModels[instanceId].Unsubscribe();
-                shelvesViewModels[instanceId].UnsubscribeSettings();
+                shelvesViewModels[instanceId].OnViewClosed();
                 shelvesViewModels.Remove(instanceId);
                 Settings.ShelveInstances.Remove(instanceId);
+            }
+            if (viewId == "MostPlayed")
+            {
+                mostPlayedViewModel?.OnViewClosed();
+                mostPlayedViewModel = null;
+            }
+            if (viewId == "WeeklyActivity")
+            {
+
             }
         }
     }

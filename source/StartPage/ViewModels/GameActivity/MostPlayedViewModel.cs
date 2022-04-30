@@ -14,7 +14,7 @@ using System.Windows;
 
 namespace LandingPage.ViewModels.GameActivity
 {
-    public class MostPlayedViewModel : ObservableObject
+    public class MostPlayedViewModel : ObservableObject, IStartPageViewModel
     {
         private static readonly EnumDescriptionTypeConverter converter = new EnumDescriptionTypeConverter(typeof(Timeframe));
 
@@ -39,7 +39,17 @@ namespace LandingPage.ViewModels.GameActivity
                 options.PropertyChanged += Options_PropertyChanged;
             }
             gameActivityViewModel.Activities.CollectionChanged += Activities_CollectionChanged;
+            gameActivityViewModel.PropertyChanged += GameActivityViewModel_PropertyChanged;
             UpdateMostPlayedGame();
+        }
+
+        private void GameActivityViewModel_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == nameof(GameActivityViewModel.Activities))
+            {
+                GameActivityViewModel.Activities.CollectionChanged += Activities_CollectionChanged;
+                UpdateMostPlayedGame();
+            }
         }
 
         private void Options_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
@@ -79,76 +89,91 @@ namespace LandingPage.ViewModels.GameActivity
 
         public void UpdateMostPlayedGame()
         {
-            var groups = new List<GameGroup>();
-
-            var tagId = LandingPageExtension.Instance.SettingsViewModel.Settings.IgnoreMostPlayedTagId;
-
-            foreach(var options in Settings.Settings.MostPlayedOptions)
+            Task.Run(() =>
             {
-                if (options.Timeframe == Timeframe.None)
+                var groups = new List<GameGroup>();
+
+                var tagId = LandingPageExtension.Instance.SettingsViewModel.Settings.IgnoreMostPlayedTagId;
+
+                foreach (var options in Settings.Settings.MostPlayedOptions)
                 {
-                    continue;
-                }
-                if (options.Timeframe == Timeframe.AllTime)
-                {
-                    if (playniteAPI.Database.Games
-                        .Where(g => !g.Hidden)
-                        .Where(g => !(g.TagIds?.Contains(tagId) ?? false))
-                        .MaxElement(g => g.Playtime).Value is Game game)
+                    if (options.Timeframe == Timeframe.None)
                     {
-                        var group = new GameGroup();
-                        group.Games.Add(new GameModel(game));
-                        group.Label = converter.ConvertToString(options.Timeframe);
-                        Application.Current.Dispatcher.Invoke(() =>
+                        continue;
+                    }
+                    if (options.Timeframe == Timeframe.AllTime)
+                    {
+                        if (playniteAPI.Database.Games
+                            .Where(g => !g.Hidden)
+                            .Where(g => !(g.TagIds?.Contains(tagId) ?? false))
+                            .MaxElement(g => g.Playtime).Value is Game game)
                         {
-                            groups.Add(group);
-                        });
+                            var group = new GameGroup();
+                            group.Games.Add(new GameModel(game));
+                            group.Label = converter.ConvertToString(options.Timeframe);
+                            Application.Current.Dispatcher.Invoke(() =>
+                            {
+                                groups.Add(group);
+                            });
+                        }
                     }
-                } else
-                {
-                    var thisWeek = GameActivityViewModel.Activities
-                        .Select(a => new { Game = playniteAPI.Database.Games.Get(a.Id), Items = a.Items.Where(i => options.Timeframe == Timeframe.AllTime || i.DateSession.Add(options.TimeSpan) >= DateTime.Today).ToList() })
-                        .Where(a => a.Game is Game && a.Items?.Count > 0)
-                        .Where(a => !(a.Game.TagIds?.Contains(tagId) ?? false));
-                    var mostPlayedThisWeek = thisWeek
-                        .Select(a => new { Game = a.Game, Playtime = a.Items.Sum(i => (long)i.ElapsedSeconds) })
-                        .MaxElement(g => g.Playtime).Value?.Game;
-
-                    if (mostPlayedThisWeek is Game mostPlayedWeek)
+                    else
                     {
-                        var group = new GameGroup();
-                        group.Games.Add(new GameModel(mostPlayedWeek));
-                        group.Label = converter.ConvertToString(options.Timeframe);
-                        Application.Current.Dispatcher.Invoke(() =>
+                        var thisWeek = GameActivityViewModel.Activities
+                            .Select(a => new { Game = playniteAPI.Database.Games.Get(a.Id), Items = a.Items.Where(i => options.Timeframe == Timeframe.AllTime || i.DateSession.Add(options.TimeSpan) >= DateTime.Today).ToList() })
+                            .Where(a => a.Game is Game && a.Items?.Count > 0)
+                            .Where(a => !(a.Game.TagIds?.Contains(tagId) ?? false));
+                        var mostPlayedThisWeek = thisWeek
+                            .Select(a => new { Game = a.Game, Playtime = a.Items.Sum(i => (long)i.ElapsedSeconds) })
+                            .MaxElement(g => g.Playtime).Value?.Game;
+
+                        if (mostPlayedThisWeek is Game mostPlayedWeek)
                         {
-                            groups.Add(group);
-                        });
+                            var group = new GameGroup();
+                            group.Games.Add(new GameModel(mostPlayedWeek));
+                            group.Label = converter.ConvertToString(options.Timeframe);
+                            Application.Current.Dispatcher.Invoke(() =>
+                            {
+                                groups.Add(group);
+                            });
+                        }
                     }
                 }
-            }
-
-            for (int i = 0; i < groups.Count; i++)
+                return groups;
+            }).ContinueWith(t =>
             {
-                Application.Current.Dispatcher.Invoke(() =>
+                var groups = t.Result;
+                for (int i = 0; i < groups.Count; i++)
                 {
-                    if (specialGames.Count > i)
+                    Application.Current.Dispatcher.Invoke(() =>
                     {
-                        specialGames[i].Label = groups[i].Label;
-                        specialGames[i].Games[0].Game = groups[i].Games[0].Game;
-                    } else
-                    {
-                        specialGames.Add(groups[i]);
-                    }
-                });
-            }
+                        if (specialGames.Count > i)
+                        {
+                            specialGames[i].Label = groups[i].Label;
+                            specialGames[i].Games[0].Game = groups[i].Games[0].Game;
+                        }
+                        else
+                        {
+                            specialGames.Add(groups[i]);
+                        }
+                    });
+                }
 
-            for(int i = specialGames.Count - 1; i >= groups.Count; --i)
-            {
-                Application.Current.Dispatcher.Invoke(() =>
+                for (int i = specialGames.Count - 1; i >= groups.Count; --i)
                 {
-                    specialGames.RemoveAt(i);
-                });
-            }
+                    Application.Current.Dispatcher.Invoke(() =>
+                    {
+                        specialGames.RemoveAt(i);
+                    });
+                }
+                t?.Dispose();
+            });
+        }
+
+        public void OnViewClosed()
+        {
+            GameActivityViewModel.Activities.CollectionChanged -= Activities_CollectionChanged;
+            GameActivityViewModel.PropertyChanged -= GameActivityViewModel_PropertyChanged;
         }
     }
 }

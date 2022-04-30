@@ -89,6 +89,7 @@
     <Compile Include="Extensions\EnumBindingSourceExtension.cs" />
     <Compile Include="Extensions\IEnumerableExtensions.cs" />
     <Compile Include="Extensions\ObservableCollectionExtensions.cs" />
+    <Compile Include="IStartPageViewModel.cs" />
     <Compile Include="LandingPageExtension.cs" />
     <Compile Include="LandingPageSettings.cs" />
     <Compile Include="LandingPageSettingsView.xaml.cs">

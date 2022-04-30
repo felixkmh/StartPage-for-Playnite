@@ -17,7 +17,7 @@ using System.Windows.Threading;
 
 namespace LandingPage.ViewModels
 {
-    public class ShelvesViewModel : ObservableObject, IStartPageControl
+    public class ShelvesViewModel : ObservableObject, IStartPageControl, IStartPageViewModel
     {
         internal ObservableCollection<ShelveViewModel> shelveViewModels = new ObservableCollection<ShelveViewModel>();
         public ObservableCollection<ShelveViewModel> ShelveViewModels { get => shelveViewModels; set => SetValue(ref shelveViewModels, value); }
@@ -102,7 +102,7 @@ namespace LandingPage.ViewModels
                 ShelveViewModel item = new ShelveViewModel(ShelveProperties.RecentlyPlayed, playniteAPI, ShelveViewModels);
                 Shelves.Add(item.ShelveProperties);
                 ShelveViewModels.Add(item);
-                ShelveViewModels.ForEach(m => m.UpdateGames(m.ShelveProperties));
+                UpdateShelves();
             });
 
             RemoveShelveCommand = new RelayCommand<ShelveViewModel>(svm =>
@@ -111,7 +111,7 @@ namespace LandingPage.ViewModels
                 {
                     Shelves.Remove(svm.ShelveProperties);
                     ShelveViewModels.Remove(svm);
-                    ShelveViewModels.ForEach(m => m.UpdateGames(m.ShelveProperties));
+                    UpdateShelves();
                 }
             });
             ExtendShelveCommand = new RelayCommand<ShelveViewModel>(svm =>
@@ -125,7 +125,7 @@ namespace LandingPage.ViewModels
                     ShelveViewModel item = new ShelveViewModel(properties, playniteAPI, ShelveViewModels);
                     Shelves.Insert(idx + 1, item.ShelveProperties);
                     ShelveViewModels.Insert(idx + 1, item);
-                    ShelveViewModels.ForEach(m => m.UpdateGames(m.ShelveProperties));
+                    UpdateShelves();
                 }
             });
             MoveShelveUpCommand = new RelayCommand<ShelveViewModel>(svm =>
@@ -136,7 +136,7 @@ namespace LandingPage.ViewModels
                     ShelveViewModels.Move(idx, idx - 1);
                     Shelves.Move(idx, idx - 1);
                 }
-                ShelveViewModels.ForEach(m => m.UpdateGames(m.ShelveProperties));
+                UpdateShelves();
             }, svm => ShelveViewModels.IndexOf(svm) > 0);
 
             MoveShelveDownCommand = new RelayCommand<ShelveViewModel>(svm =>
@@ -147,8 +147,19 @@ namespace LandingPage.ViewModels
                     ShelveViewModels.Move(idx, idx + 1);
                     Shelves.Move(idx, idx + 1);
                 }
-                ShelveViewModels.ForEach(m => m.UpdateGames(m.ShelveProperties));
+                UpdateShelves();
             }, svm => ShelveViewModels.IndexOf(svm) < ShelveViewModels.Count - 1);
+        }
+
+        public Task UpdateShelves()
+        {
+            return Task.Run(() =>
+            {
+                foreach(var shelve in ShelveViewModels)
+                {
+                    shelve.UpdateGames(shelve.ShelveProperties);
+                }
+            });
         }
 
         private void Games_ItemUpdated(object sender, ItemUpdatedEventArgs<Game> e)
@@ -158,7 +169,7 @@ namespace LandingPage.ViewModels
                 dispatcherTimer.Stop();
                 if(e.UpdatedItems.Any(u => u.NewData.LastActivity != u.OldData.LastActivity))
                 {
-                    ShelveViewModels.ForEach(m => m.UpdateGames(m.ShelveProperties));
+                    UpdateShelves();
                 } else
                 {
                     dispatcherTimer.Start();
@@ -170,7 +181,7 @@ namespace LandingPage.ViewModels
         {
             dispatcherTimer.Stop();
             dispatcherTimer.Tick -= DispatcherTimer_Tick;
-            ShelveViewModels.ForEach(m => m.UpdateGames(m.ShelveProperties));
+            UpdateShelves();
             dispatcherTimer.Tick += DispatcherTimer_Tick;
         }
 
@@ -182,6 +193,7 @@ namespace LandingPage.ViewModels
                 dispatcherTimer.Start();
             }
         }
+
 
         private static bool IsRelevantUpdate(ItemUpdateEvent<Game> update)
         {
@@ -227,7 +239,7 @@ namespace LandingPage.ViewModels
         {
             if (e.PropertyName == nameof(LandingPageSettings.SkipGamesInPreviousShelves))
             {
-                ShelveViewModels.ForEach(m => m.UpdateGames(m.ShelveProperties));
+                UpdateShelves();
             }
         }
 
@@ -243,7 +255,7 @@ namespace LandingPage.ViewModels
                     {
                         ShelveViewModels[i].ShelveProperties = Shelves[i];
                     }
-                    ShelveViewModels.ForEach(m => m.UpdateGames(m.ShelveProperties));
+                    UpdateShelves();
                 } else
                 {
                     Settings.PropertyChanged -= Settings_PropertyChanged1;
@@ -253,7 +265,7 @@ namespace LandingPage.ViewModels
 
         public void OnStartPageOpened()
         {
-            ShelveViewModels.ForEach(m => m.UpdateGames(m.ShelveProperties));
+            UpdateShelves();
             Subscribe();
         }
 
@@ -264,7 +276,13 @@ namespace LandingPage.ViewModels
 
         public void OnDayChanged(DateTime newTime)
         {
-            ShelveViewModels.ForEach(m => m.UpdateGames(m.ShelveProperties));
+            UpdateShelves();
+        }
+
+        public void OnViewClosed()
+        {
+            Unsubscribe();
+            UnsubscribeSettings();
         }
     }
 }

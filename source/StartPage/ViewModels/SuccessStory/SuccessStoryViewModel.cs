@@ -17,7 +17,7 @@ using System.Runtime.CompilerServices;
 
 namespace LandingPage.ViewModels.SuccessStory
 {
-    public class SuccessStoryViewModel
+    public class SuccessStoryViewModel : IStartPageViewModel
     {
         internal string achievementsPath;
         internal IPlayniteAPI playniteAPI;
@@ -122,7 +122,7 @@ namespace LandingPage.ViewModels.SuccessStory
 
         public void Update()
         {
-            UpdateLatestAchievements(landingPageSettingsViewModel.Settings.MaxNumberRecentAchievements, landingPageSettingsViewModel.Settings.MaxNumberRecentAchievementsPerGame);
+            Task.Run(() => UpdateLatestAchievements(landingPageSettingsViewModel.Settings.MaxNumberRecentAchievements, landingPageSettingsViewModel.Settings.MaxNumberRecentAchievementsPerGame));
         }
 
         public void UpdateLatestAchievements(int achievementsOverall = 6, int achievementsPerGame = 3)
@@ -136,8 +136,8 @@ namespace LandingPage.ViewModels.SuccessStory
                     .Where(a => a.Game is Game))
                 .Where(a => (!a.Achievement.DateUnlocked?.Equals(default)) ?? false)
                 .OrderByDescending(a => a.Achievement.DateUnlocked ?? default)
-                .Take(achievementsOverall);
-            var collection = latestAchievements;
+                .Take(achievementsOverall).ToList();
+            var collection = LatestAchievements;
             Application.Current.Dispatcher.Invoke(() =>
             {
                 foreach (var achi in latest)
@@ -179,33 +179,6 @@ namespace LandingPage.ViewModels.SuccessStory
                     }
                 }
             });
-            //Application.Current.Dispatcher.Invoke(() => 
-            //{
-            //    int i = 0;
-            //    foreach (var achievement in latest)
-            //    {
-            //        if (latestAchievements.Count > i)
-            //        {
-            //            latestAchievements[i].Game.Game = achievement.Game;
-            //            latestAchievements[i].Achievement = achievement.Achievement;
-            //            latestAchievements[i].Source = achievement.Source;
-            //        }
-            //        else
-            //        {
-            //            latestAchievements.Add(new GameAchievement
-            //            {
-            //                Game = new GameModel(achievement.Game),
-            //                Achievement = achievement.Achievement,
-            //                Source = achievement.Source
-            //            });
-            //        }
-            //        ++i;
-            //    }
-            //    for (int j = latestAchievements.Count - 1; j >= i; --j)
-            //    {
-            //        latestAchievements.RemoveAt(j);
-            //    }
-            //});
         }
 
         public void ParseAllAchievements()
@@ -272,6 +245,14 @@ namespace LandingPage.ViewModels.SuccessStory
             }
             catch (Exception) {}
             return null;
+        }
+
+        public void OnViewClosed()
+        {
+            achievementWatcher.EnableRaisingEvents = false;
+            landingPageSettingsViewModel.PropertyChanged -= LandingPageSettings_PropertyChanged;
+            landingPageSettingsViewModel.Settings.PropertyChanged -= Settings_PropertyChanged;
+            achievementWatcher.Dispose();
         }
     }
 }
