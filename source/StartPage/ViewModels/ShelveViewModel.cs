@@ -404,7 +404,10 @@ namespace LandingPage.ViewModels
                     for (var i = current - 1; i >= 0; --i)
                     {
                         ShelveViewModel shelveViewModel = viewModels[i];
-                        games = games.Where(g => !shelveViewModel.Games.Any(m => m.Game.Id == g.Id));
+                        Application.Current.Dispatcher.Invoke(() =>
+                        {
+                            games = games.Where(g => !shelveViewModel.Games.Any(m => m.Game.Id == g.Id));
+                        });
                     }
                 }
             }
@@ -452,7 +455,7 @@ namespace LandingPage.ViewModels
                 skipped = 0;
             }
 
-            IEnumerable<Game> gameSelection = games.Skip(skipped).Take(shelveProperties.NumberOfGames);
+            IEnumerable<Game> gameSelection = games.Skip(skipped).Take(shelveProperties.NumberOfGames).ToList();
             if (!gameSelection.Any())
             {
                 var dummies = new List<Game>();
