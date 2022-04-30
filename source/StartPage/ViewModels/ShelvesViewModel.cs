@@ -86,7 +86,7 @@ namespace LandingPage.ViewModels
                     Settings.Settings.ShelveInstances.Add(InstanceId, Settings.Settings.ShelveProperties);
                 } else
                 {
-                    Settings.Settings.ShelveInstances.Add(InstanceId, new ObservableCollection<ShelveProperties> { ShelveProperties.RecentlyPlayed });
+                    Settings.Settings.ShelveInstances.Add(InstanceId, new ObservableCollection<ShelveProperties>());
                 }
             }
 
