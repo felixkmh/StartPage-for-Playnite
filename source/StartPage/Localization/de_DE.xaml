@@ -84,7 +84,7 @@
     <sys:String x:Key="LOC_SPG_EnableTags">Erstelle [SPG] Schlagwörter beim Start. Werden verwendet, um Spiele als ignoriert zu markieren.</sys:String>
     <sys:String x:Key="LOC_SPG_FixGridHeight">Fixed Grid Height:</sys:String>
     <sys:String x:Key="LOC_SPG_FixGridHeight_Tooltip" xml:space="preserve">If enabled, the grid height is no longer bound to the window height.
-    Instead, it can be set to a fixed value. If that value is bigger than the window height, the view can be scrolled.</sys:String>
+Instead, it can be set to a fixed value. If that value is bigger than the window height, the view can be scrolled.</sys:String>
 
     <!-- Grid -->
     <sys:String x:Key="LOC_SPG_SplitHorizonatlly">Horizontal teilen</sys:String>
