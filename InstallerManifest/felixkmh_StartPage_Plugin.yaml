@@ -1,5 +1,18 @@
 AddonId: felixkmh_StartPage_Plugin
 Packages:  
+  - Version: 2.3.0
+    RequiredApiVersion: 6.1.0
+    ReleaseDate: 2022-04-30
+    PackageUrl: https://github.com/felixkmh/StartPage-for-Playnite/releases/download/v2.3.0/felixkmh_StartPage_Plugin_2_3_0.pext
+    Changelog:
+      - added option to set a fixed grid height instead of having it bound to the window height
+      - support for multiple instances for the Game Shelves view
+      - improved start-up time
+      - layout is saved when edit mode is exited
+      - edit mode is exited when playnite loses focus
+      - localization updates
+      - 'fix: no view could provide multiple instance'
+      - 'fix: changing order direction not working correctly'
   - Version: 2.2.1
     RequiredApiVersion: 6.1.0
     ReleaseDate: 2022-04-25
