@@ -82,9 +82,9 @@
     <sys:String x:Key="LOC_SPG_BackgroundRefreshInterval">刷新间隔（分钟）：</sys:String>
     <sys:String x:Key="LOC_SPG_SkipGamesInPreviousShelves">跳过前面的展架中存在的游戏</sys:String>
     <sys:String x:Key="LOC_SPG_EnableTags">在启动时创建 [SPG] 标签。用于将游戏标记为忽略。</sys:String>
-    <sys:String x:Key="LOC_SPG_FixGridHeight">Fixed Grid Height:</sys:String>
-    <sys:String x:Key="LOC_SPG_FixGridHeight_Tooltip" xml:space="preserve">If enabled, the grid height is no longer bound to the window height.
-Instead, it can be set to a fixed value. If that value is bigger than the window height, the view can be scrolled.</sys:String>
+    <sys:String x:Key="LOC_SPG_FixGridHeight">固定网格高度：</sys:String>
+    <sys:String x:Key="LOC_SPG_FixGridHeight_Tooltip" xml:space="preserve">如果启用，网格高度将不再与窗口高度绑定。
+相反，可以将其设置为一个固定值。如果这个值大于窗口高度，界面将可以滚动。</sys:String>
 
     <!-- Grid -->
     <sys:String x:Key="LOC_SPG_SplitHorizonatlly">水平分割</sys:String>
