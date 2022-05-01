@@ -82,9 +82,9 @@
     <sys:String x:Key="LOC_SPG_BackgroundRefreshInterval">Intervallo di aggiornamento (minuti):</sys:String>
     <sys:String x:Key="LOC_SPG_SkipGamesInPreviousShelves">Salta i giochi presenti negli scaffali precedenti</sys:String>
     <sys:String x:Key="LOC_SPG_EnableTags">Crea tag [SPG] al lancio. Usato per contrassegnare i giochi come ignorati.</sys:String>
-    <sys:String x:Key="LOC_SPG_FixGridHeight">Fixed Grid Height:</sys:String>
-    <sys:String x:Key="LOC_SPG_FixGridHeight_Tooltip" xml:space="preserve">If enabled, the grid height is no longer bound to the window height.
-Instead, it can be set to a fixed value. If that value is bigger than the window height, the view can be scrolled.</sys:String>
+    <sys:String x:Key="LOC_SPG_FixGridHeight">Altezza della griglia fissa:</sys:String>
+    <sys:String x:Key="LOC_SPG_FixGridHeight_Tooltip" xml:space="preserve">Se abilitato, l'altezza della griglia non è più legata all'altezza della finestra.
+Invece, può essere impostata su un valore fisso. Se questo valore è più grande dell'altezza della finestra, la vista può essere fatta scorrere.</sys:String>
 
     <!-- Grid -->
     <sys:String x:Key="LOC_SPG_SplitHorizonatlly">Dividi orizzontalmente</sys:String>
