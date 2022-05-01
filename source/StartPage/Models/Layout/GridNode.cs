@@ -59,6 +59,10 @@ namespace LandingPage.Models.Layout
             {
                 current.ViewProperties = null;
             }
+            if (parent?.Children.Count > 0)
+            {
+                parent.ViewProperties = null;
+            }
         }
     }
 }
