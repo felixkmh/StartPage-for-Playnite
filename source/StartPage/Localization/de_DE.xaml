@@ -85,7 +85,9 @@
     <sys:String x:Key="LOC_SPG_FixGridHeight">Feste Grid-Höhe:</sys:String>
     <sys:String x:Key="LOC_SPG_FixGridHeight_Tooltip" xml:space="preserve">Wenn aktiviert, ist die Grid-Höhe nicht mehr an die Fensterhöhe gebunden.
 Stattdessen kann sie auf einen festen Wert gesetzt werden. Wenn dieser Wert größer als die Fensterhöhe ist, kann die Ansicht gescrollt werden.</sys:String>
-
+    <sys:String x:Key="LOC_SPG_DownScaleCovers">Load cover images at a lower resolution</sys:String>
+    <sys:String x:Key="LOC_SPG_DownScaleCoversTooltip" xml:space="preserve">If enabled, cover images are loaded into memory with a maximum width of (1.15 * Maximum Cover Width) pixels.
+This can lead to a much smaller memory footprint for StartPage. Will not affect covers already loaded before restarting Playnite.</sys:String>
     <!-- Grid -->
     <sys:String x:Key="LOC_SPG_SplitHorizonatlly">Horizontal teilen</sys:String>
     <sys:String x:Key="LOC_SPG_SplitVertically">Vertikal teilen</sys:String>
