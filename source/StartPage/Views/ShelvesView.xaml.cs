@@ -153,13 +153,16 @@ namespace LandingPage.Views
         {
             if (sender is FrameworkElement element && element.DataContext is GameModel model)
             {
-                if (Helper.UiHelper.FindVisualChildren<Grid>(element, "ImageGrid").FirstOrDefault() is Grid imageGrid)
+                if (LandingPageExtension.Instance.Settings.ShowDetails)
                 {
-                    infoPopup.Dispatcher.Invoke(() => {
-                        infoPopup.DataContext = element.DataContext;
-                        infoPopup.Description.PlacementTarget = imageGrid;
-                        infoPopup.Description.IsOpen = true;
-                    }, System.Windows.Threading.DispatcherPriority.Normal);
+                    if (Helper.UiHelper.FindVisualChildren<Grid>(element, "ImageGrid").FirstOrDefault() is Grid imageGrid)
+                    {
+                        infoPopup.Dispatcher.Invoke(() => {
+                            infoPopup.DataContext = element.DataContext;
+                            infoPopup.Description.PlacementTarget = imageGrid;
+                            infoPopup.Description.IsOpen = true;
+                        }, System.Windows.Threading.DispatcherPriority.Normal);
+                    }
                 }
 
                 if (DataContext is ShelvesViewModel viewModel)
