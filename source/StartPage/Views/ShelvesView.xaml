@@ -94,7 +94,7 @@
                             </VisualBrush.Visual>
                         </VisualBrush>
                     </Grid.OpacityMask>
-                    <Image Source="{Binding Game.CoverImage, Converter={StaticResource ImageStringToImageConverterCached}, FallbackValue={StaticResource DefaultGameCover}, Mode=OneWay}" Stretch="UniformToFill" 
+                    <Image Source="{Binding Game.CoverImage, Converter={StaticResource ImageStringToImageConverter}, FallbackValue={StaticResource DefaultGameCover}, Mode=OneWay}" Stretch="UniformToFill" 
                                             HorizontalAlignment="Center" VerticalAlignment="Center"
                                             RenderOptions.BitmapScalingMode="Fant"
                            x:Name="CoverImage"/>
@@ -121,32 +121,7 @@
                     </Viewbox>
                     <ContentControl x:Name="Proxy" Visibility="{mu:LandingPageSettings Settings.ShowDetails}" Width="0" Height="0"/>
                 </Grid>
-                <Popup MinHeight="204.75" Height="{Binding ElementName=ImageGrid, Path=ActualHeight, Converter={StaticResource MultiplyConverter}, ConverterParameter=1.05}" Width="462" x:Name="Description" IsOpen="False" Placement="Right" PlacementTarget="{Binding ElementName=ImageGrid}" 
-                                       ClipToBounds="True" PopupAnimation="Fade" Closed="Description_Closed">
-                    <Popup.PlacementRectangle>
-                        <MultiBinding Converter="{StaticResource ElementToScaledRectConverter}">
-                            <MultiBinding.ConverterParameter>
-                                <system:Double>1.05</system:Double>
-                            </MultiBinding.ConverterParameter>
-                            <MultiBinding.Bindings>
-                                <Binding ElementName="ImageGrid" Path="ActualWidth"/>
-                                <Binding ElementName="ImageGrid" Path="ActualHeight"/>
-                                <Binding ElementName="Description" Path="Height"/>
-                            </MultiBinding.Bindings>
-                        </MultiBinding>
-                    </Popup.PlacementRectangle>
-                    <Grid IsHitTestVisible="False">
-                        <Grid.OpacityMask>
-                            <VisualBrush Visual="{Binding ElementName=PopupSolidBackground}"/>
-                        </Grid.OpacityMask>
-                        <Border Background="#303030" CornerRadius="7" x:Name="PopupSolidBackground"/>
-                        <Border Background="{StaticResource GridItemBackgroundBrush}"
-                                                CornerRadius="7"/>
-                        <ContentControl x:Name="PopupImageContentControl"/>
-                        <ContentControl x:Name="PopupTrailerContentControl"/>
-                        <local:GameDetailsView Margin="10,5" DataContext="{x:Null}" x:Name="GameDetails"/>
-                    </Grid>
-                </Popup>
+                
             </StackPanel>
             <DataTemplate.Triggers>
                 <DataTrigger Binding="{mu:LandingPageSettings Settings.ShowTitleOnCover}" Value="{StaticResource True}">
@@ -155,41 +130,16 @@
                 <DataTrigger Binding="{Binding ElementName=CoverImage, Path=Source}" Value="{StaticResource DefaultGameCover}">
                     <Setter Property="Visibility" Value="Visible" TargetName="NameTextBlock"/>
                 </DataTrigger>
-                <MultiTrigger>
+                <!--<MultiTrigger>
                     <MultiTrigger.Conditions>
                         <Condition Property="IsMouseOver" Value="True"/>
                         <Condition Property="IsVisible" Value="True" SourceName="Proxy"/>
                     </MultiTrigger.Conditions>
                     <MultiTrigger.Setters>
                         <Setter Property="IsOpen" Value="True" TargetName="Description"/>
+                        --><!--<Setter Property="DataContext" TargetName="Description" Value="{Binding ., Mode=OneTime}"/>--><!--
                     </MultiTrigger.Setters>
-                </MultiTrigger>
-                <Trigger Property="IsOpen" SourceName="Description" Value="True">
-                    <Setter Property="DataContext" TargetName="GameDetails" Value="{Binding .}"/>
-                    <Setter Property="Content" TargetName="PopupImageContentControl">
-                        <Setter.Value>
-                            <Image Opacity="0.3" Source="{Binding Game.BackgroundImage, Converter={StaticResource ImageStringToImageConverter}, 
-                                                                                    FallbackValue={StaticResource DefaultGameCover},
-                                                                                    TargetNullValue={StaticResource DefaultGameCover}}"
-                                   Stretch="UniformToFill" RenderOptions.BitmapScalingMode="HighQuality">
-                                <Image.OpacityMask>
-                                    <LinearGradientBrush StartPoint="1,0" EndPoint="0,1">
-                                        <LinearGradientBrush.GradientStops>
-                                            <GradientStop Color="Transparent"/>
-                                            <GradientStop Color="Black" Offset="1"/>
-                                        </LinearGradientBrush.GradientStops>
-                                    </LinearGradientBrush>
-                                </Image.OpacityMask>
-                            </Image>
-                        </Setter.Value>
-                    </Setter>
-                    <Setter Property="Content" TargetName="PopupTrailerContentControl">
-                        <Setter.Value>
-                            <controls:TrailerPlayer Source="{Binding TrailerUri}" Stretch="UniformToFill" 
-                                          Volume="0" LoadedBehavior="Play" HorizontalAlignment="Center" VerticalAlignment="Center" IsMuted="True"/>
-                        </Setter.Value>
-                    </Setter>
-                </Trigger>
+                </MultiTrigger>-->
                 <Trigger Property="IsMouseOver" Value="True" SourceName="ImageGrid">
                     <Setter Property="Visibility" Value="Visible" TargetName="Buttons"/>
                 </Trigger>

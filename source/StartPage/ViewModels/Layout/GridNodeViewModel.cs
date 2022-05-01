@@ -243,6 +243,7 @@ namespace LandingPage.ViewModels.Layout
                 var properties = GridNode.ViewProperties;
                 if (properties != null)
                 {
+                    GridNode.ViewProperties.view = null;
                     GridNode.ViewProperties = null;
                     var plugin = LandingPageExtension.Instance.PlayniteApi.Addons.Plugins.FirstOrDefault(p => p.Id == properties.PluginId);
                     if (plugin is IStartPageExtension extension)
@@ -261,6 +262,7 @@ namespace LandingPage.ViewModels.Layout
                         }
                     }
                 }
+                View.Children.Clear();
                 GridNode.Minimize(root, null);
             }
         }
@@ -270,7 +272,7 @@ namespace LandingPage.ViewModels.Layout
             var properties = GridNode.ViewProperties;
             if (properties != null)
             {
-                var view = GridNode.ViewProperties.view as FrameworkElement;
+                GridNode.ViewProperties.view = null;
                 GridNode.ViewProperties = null;
                 var plugin = LandingPageExtension.Instance.PlayniteApi.Addons.Plugins.FirstOrDefault(p => p.Id == properties.PluginId);
                 if (plugin is IStartPageExtension extension)
@@ -289,6 +291,7 @@ namespace LandingPage.ViewModels.Layout
                     }
                 }
             }
+            View.Children.Clear();
             GridNode.ViewProperties = null;
             GC.Collect();
         }

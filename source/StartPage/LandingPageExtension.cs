@@ -562,6 +562,9 @@ namespace LandingPage
             {
 
             }
+            GC.Collect();
+            GC.Collect(1);
+            GC.Collect(2);
         }
     }
 }

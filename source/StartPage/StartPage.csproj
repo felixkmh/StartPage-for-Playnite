@@ -135,6 +135,9 @@
     <Compile Include="Views\GameCover.xaml.cs">
       <DependentUpon>GameCover.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\GameDetailsPopup.xaml.cs">
+      <DependentUpon>GameDetailsPopup.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\GameDetailsView.xaml.cs">
       <DependentUpon>GameDetailsView.xaml</DependentUpon>
     </Compile>
@@ -305,6 +308,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\GameCover.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\GameDetailsPopup.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -467,6 +467,15 @@ namespace LandingPage.ViewModels
             var changed = false;
 
             Application.Current.Dispatcher.Invoke(() => {
+                //for(int i = collection.Count - 1; i >= 0; i--)
+                //{
+                //    collection.RemoveAt(i);
+                //}
+                //foreach(var game in gameSelection)
+                //{
+                //    collection.Add(new GameModel(game));
+                //}
+                //return;
                 foreach (var game in gameSelection)
                 {
                     if (collection.FirstOrDefault(item => item.Game?.Id == game.Id) is GameModel model)
@@ -475,7 +484,6 @@ namespace LandingPage.ViewModels
                         {
                             changed = true;
                         }
-                        model.Game = game;
                     }
                     else if (collection.FirstOrDefault(item => gameSelection.All(s => s.Id != item.Game?.Id)) is GameModel unusedModel)
                     {
@@ -501,6 +509,7 @@ namespace LandingPage.ViewModels
                 if (changed && collection.Count > 1)
                 {
                     collection.Move(collection.Count - 1, 0);
+                    GC.Collect();
                 }
             });
 

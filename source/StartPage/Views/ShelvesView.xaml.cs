@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -146,10 +147,21 @@ namespace LandingPage.Views
             }
         }
 
+        GameDetailsPopup infoPopup = new GameDetailsPopup();
+
         private void StackPanel_MouseEnter(object sender, MouseEventArgs e)
         {
             if (sender is FrameworkElement element && element.DataContext is GameModel model)
             {
+                if (Helper.UiHelper.FindVisualChildren<Grid>(element, "ImageGrid").FirstOrDefault() is Grid imageGrid)
+                {
+                    infoPopup.Dispatcher.Invoke(() => {
+                        infoPopup.DataContext = element.DataContext;
+                        infoPopup.Description.PlacementTarget = imageGrid;
+                        infoPopup.Description.IsOpen = true;
+                    }, System.Windows.Threading.DispatcherPriority.Normal);
+                }
+
                 if (DataContext is ShelvesViewModel viewModel)
                 {
                     viewModel.CurrentlyHoveredGame = model.Game;
@@ -161,10 +173,25 @@ namespace LandingPage.Views
         {
             if (sender is FrameworkElement element && element.DataContext is GameModel model)
             {
+                if (Helper.UiHelper.FindVisualChildren<Grid>(element, "ImageGrid").FirstOrDefault() is Grid imageGrid)
+                {
+                    infoPopup.Dispatcher.Invoke(() => {
+                        infoPopup.Description.IsOpen = false;
+                    }, System.Windows.Threading.DispatcherPriority.Normal);
+                }
+
                 if (DataContext is ShelvesViewModel viewModel)
                 {
                     viewModel.CurrentlyHoveredGame = null;
                 }
+            }
+        }
+
+        private void Description_Opened(object sender, EventArgs e)
+        {
+            foreach (var window in Application.Current.Windows.Cast<Window>())
+            {
+                var type = window.GetType();
             }
         }
     }

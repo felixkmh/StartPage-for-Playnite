@@ -159,6 +159,9 @@ namespace LandingPage.ViewModels
                 {
                     shelve.UpdateGames(shelve.ShelveProperties);
                 }
+                GC.Collect();
+                GC.Collect(1);
+                GC.Collect(2);
             });
         }
 
@@ -283,6 +286,9 @@ namespace LandingPage.ViewModels
         {
             Unsubscribe();
             UnsubscribeSettings();
+            ShelveViewModels.ForEach(m => m.Games.Clear());
+            ShelveViewModels.ForEach(m => m.OnViewClosed());
+            ShelveViewModels.Clear();
         }
     }
 }
