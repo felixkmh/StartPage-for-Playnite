@@ -187,6 +187,9 @@ namespace LandingPage
         private bool enableTagCreation = false;
         public bool EnableTagCreation { get => enableTagCreation; set => enableTagCreation = value; }
 
+        private bool downScaleCovers = true;
+        public bool DownScaleCovers { get => downScaleCovers; set => SetValue(ref downScaleCovers, value); }
+
         private Guid ignoreTagId = Guid.Empty;
         public Guid IgnoreTagId
         {

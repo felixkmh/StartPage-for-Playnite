@@ -94,7 +94,7 @@
                             </VisualBrush.Visual>
                         </VisualBrush>
                     </Grid.OpacityMask>
-                    <Image Source="{Binding Game.CoverImage, Converter={StaticResource ImageStringToImageConverter}, FallbackValue={StaticResource DefaultGameCover}, Mode=OneWay}" Stretch="UniformToFill" 
+                    <Image Source="{Binding Game.CoverImage, ConverterParameter={StaticResource True}, Converter={StaticResource UriToBitmapImageConverter}, FallbackValue={StaticResource DefaultGameCover}, Mode=OneWay}" Stretch="UniformToFill" 
                                             HorizontalAlignment="Center" VerticalAlignment="Center"
                                             RenderOptions.BitmapScalingMode="Fant"
                            x:Name="CoverImage"/>

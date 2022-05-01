@@ -60,7 +60,11 @@
                         <!--<DockPanel>
                             <CheckBox IsChecked="{Binding Settings.ShowMostPlayedGames}" VerticalAlignment="Center" Margin="3"/>
                             <TextBlock Text="{DynamicResource LOC_SPG_ShowMostPlayedGames}" Margin="3" VerticalAlignment="Center"/>
-                        </DockPanel>-->
+                        </DockPanel> LOC_SPG_DownScaleCovers -->
+                        <DockPanel ToolTip="{DynamicResource LOC_SPG_DownScaleCoversTooltip}">
+                            <CheckBox IsChecked="{Binding Settings.DownScaleCovers}" VerticalAlignment="Center" Margin="3"/>
+                            <TextBlock Text="{DynamicResource LOC_SPG_DownScaleCovers}" Margin="3" VerticalAlignment="Center"/>
+                        </DockPanel>
                         <DockPanel>
                             <CheckBox IsChecked="{Binding Settings.ShowTitleOnCover}" VerticalAlignment="Center" Margin="3"/>
                             <TextBlock Text="{DynamicResource LOC_SPG_ShowTitelOnCover}" Margin="3" VerticalAlignment="Center"/>
