@@ -83,8 +83,8 @@
     <sys:String x:Key="LOC_SPG_SkipGamesInPreviousShelves">Ignorer les jeux présents dans les étagères précédentes</sys:String>
     <sys:String x:Key="LOC_SPG_EnableTags">Crée des étiquettes [SPG] au lancement. Utilisées pour marquer les jeux comme étant ignorés.</sys:String>
     <sys:String x:Key="LOC_SPG_FixGridHeight">Hauteur de la grille fixe :</sys:String>
-    <sys:String x:Key="LOC_SPG_FixGridHeight_Tooltip" xml:space="preserve">If enabled, the grid height is no longer bound to the window height.
-Instead, it can be set to a fixed value. If that value is bigger than the window height, the view can be scrolled.</sys:String>
+    <sys:String x:Key="LOC_SPG_FixGridHeight_Tooltip" xml:space="preserve">Si elle est activée, la hauteur de la grille n'est plus liée à la hauteur de la fenêtre.
+Au lieu de cela, elle peut être définie sur une valeur fixe. Si cette valeur est supérieure à la hauteur de la fenêtre, il est possible de faire défiler la vue.</sys:String>
 
     <!-- Grid -->
     <sys:String x:Key="LOC_SPG_SplitHorizonatlly">Séparer horizontalement</sys:String>
@@ -121,7 +121,7 @@ Instead, it can be set to a fixed value. If that value is bigger than the window
     <sys:String x:Key="LOC_SPG_AlignmentStretch">Etiré</sys:String>
     <sys:String x:Key="LOC_SPG_AlignmentCenter">Centrée</sys:String>
     <sys:String x:Key="LOC_SPG_Padding">Espacement</sys:String>
-    <sys:String x:Key="LOC_SPG_ShelvesHorizontalLabels">Horizontal Labels</sys:String>
+    <sys:String x:Key="LOC_SPG_ShelvesHorizontalLabels">Libellés horizontaux</sys:String>
 
     <!-- Integrated Views -->
     <sys:String x:Key="LOC_SPG_ClockView">Horloge</sys:String>
