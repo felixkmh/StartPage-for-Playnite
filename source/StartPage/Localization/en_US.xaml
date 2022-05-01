@@ -85,7 +85,7 @@
     <sys:String x:Key="LOC_SPG_FixGridHeight">Fixed Grid Height:</sys:String>
     <sys:String x:Key="LOC_SPG_FixGridHeight_Tooltip" xml:space="preserve">If enabled, the grid height is no longer bound to the window height.
 Instead, it can be set to a fixed value. If that value is bigger than the window height, the view can be scrolled.</sys:String>
-    <sys:String x:Key="LOC_SPG_DownScaleCovers">Load Cover Images at lower resolution</sys:String>
+    <sys:String x:Key="LOC_SPG_DownScaleCovers">Load cover images at lower resolution</sys:String>
     <sys:String x:Key="LOC_SPG_DownScaleCoversTooltip" xml:space="preserve">If enabled, cover images are loaded into memory with a maximum width of (1.15 * Maximum Cover Width) pixels.
 This can lead to a much smaller memory footprint for StartPage. Will not affect covers already loaded before restarting Playnite.</sys:String>
     <!-- Grid -->
