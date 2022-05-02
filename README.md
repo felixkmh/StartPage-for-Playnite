@@ -9,6 +9,8 @@ Each panel can have a view attached to it and views can be swapped in Edit Mode 
 |-------------|-----------|
 |![grafik](https://user-images.githubusercontent.com/24227002/166326510-6121a702-7abd-482b-b727-2ef2786fdaf4.png)|![grafik](https://user-images.githubusercontent.com/24227002/166326546-ed639a7d-6141-415f-8316-d98bc71118e5.png)|
 
+[![Crowdin](https://badges.crowdin.net/startpage-for-playnite/localized.svg)](https://crowdin.com/project/startpage-for-playnite)
+
 [![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/C1C6CH5IN)
 
 ## Features
