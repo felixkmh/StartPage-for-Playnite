@@ -1,5 +1,11 @@
 AddonId: felixkmh_StartPage_Plugin
 Packages:  
+  - Version: 2.3.5
+    RequiredApiVersion: 6.1.0
+    ReleaseDate: 2022-05-02
+    PackageUrl: https://github.com/felixkmh/StartPage-for-Playnite/releases/download/v2.3.5/felixkmh_StartPage_Plugin_2_3_5.pext
+    Changelog:
+      - fixed placeholder cover being invisible
   - Version: 2.3.4
     RequiredApiVersion: 6.1.0
     ReleaseDate: 2022-05-02
