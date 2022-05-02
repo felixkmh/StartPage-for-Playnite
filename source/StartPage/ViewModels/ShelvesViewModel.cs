@@ -252,7 +252,6 @@ namespace LandingPage.ViewModels
             {
                 if (Settings.Settings.ShelveInstances.ContainsKey(InstanceId))
                 {
-                    Settings.Settings.PropertyChanged += Settings_PropertyChanged;
                     Shelves = Settings.Settings.ShelveInstances[InstanceId];
                     for (int i = 0; i < Shelves.Count; ++i)
                     {
@@ -263,6 +262,7 @@ namespace LandingPage.ViewModels
                 {
                     Settings.Settings.ShelveInstances.Add(InstanceId, Shelves);
                 }
+                Settings.Settings.PropertyChanged += Settings_PropertyChanged;
             }
         }
 
