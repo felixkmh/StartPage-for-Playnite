@@ -54,6 +54,10 @@ namespace LandingPage.Views
         {
             if (sender is Button bt && bt.DataContext is GameModel game)
             {
+                infoPopup.Dispatcher.Invoke(() => {
+                    infoPopup.Description.IsOpen = false;
+                }, System.Windows.Threading.DispatcherPriority.Normal);
+
                 game.StartCommand?.Execute(null);
             }
         }
@@ -62,6 +66,9 @@ namespace LandingPage.Views
         {
             if (sender is Button bt && bt.DataContext is GameModel game)
             {
+                infoPopup.Dispatcher.Invoke(() => {
+                    infoPopup.Description.IsOpen = false;
+                }, System.Windows.Threading.DispatcherPriority.Normal);
                 game.OpenCommand?.Execute(null);
             }
         }
