@@ -190,6 +190,9 @@ namespace LandingPage
         private bool downScaleCovers = true;
         public bool DownScaleCovers { get => downScaleCovers; set => SetValue(ref downScaleCovers, value); }
 
+        private bool lockLayout = false;
+        public bool LockLayout { get => lockLayout; set => SetValue(ref lockLayout, value); }
+
         private Guid ignoreTagId = Guid.Empty;
         public Guid IgnoreTagId
         {

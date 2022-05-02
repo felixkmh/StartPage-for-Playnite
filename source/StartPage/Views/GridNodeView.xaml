@@ -6,6 +6,7 @@
              xmlns:sys="clr-namespace:System;assembly=mscorlib"
              xmlns:local="clr-namespace:LandingPage.Views" 
              xmlns:layout="clr-namespace:LandingPage.ViewModels.Layout"
+             xmlns:mu="clr-namespace:LandingPage.Markup"
              xmlns:m="clr-namespace:LandingPage.Models.Layout"
              xmlns:conv="clr-namespace:LandingPage.Converters"
              xmlns:numeric="http://gu.se/NumericInput"
@@ -32,6 +33,9 @@
             <Setter Property="Opacity" Value="0"/>
             <Setter Property="Visibility" Value="Visible"/>
             <Style.Triggers>
+                <DataTrigger Binding="{mu:LandingPageSettings Settings.LockLayout}" Value="{StaticResource True}">
+                    <Setter Property="Visibility" Value="Hidden"/>
+                </DataTrigger>
                 <MultiDataTrigger>
                     <MultiDataTrigger.Conditions>
                         <Condition Binding="{Binding EditModeEnabled}" Value="{StaticResource False}"/>
@@ -43,6 +47,7 @@
                 </MultiDataTrigger>
                 <DataTrigger Binding="{Binding EditModeEnabled}" Value="{StaticResource True}">
                     <DataTrigger.Setters>
+                        <Setter Property="Visibility" Value="Visible"/>
                         <Setter Property="Opacity" Value="0.9"/>
                     </DataTrigger.Setters>
                 </DataTrigger>
