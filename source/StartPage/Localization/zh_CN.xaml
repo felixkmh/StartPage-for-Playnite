@@ -85,9 +85,9 @@
     <sys:String x:Key="LOC_SPG_FixGridHeight">固定网格高度：</sys:String>
     <sys:String x:Key="LOC_SPG_FixGridHeight_Tooltip" xml:space="preserve">如果启用，网格高度将不再与窗口高度绑定。
 相反，可以将其设置为一个固定值。如果这个值大于窗口高度，界面将可以滚动。</sys:String>
-    <sys:String x:Key="LOC_SPG_DownScaleCovers">Load cover images at a lower resolution</sys:String>
-    <sys:String x:Key="LOC_SPG_DownScaleCoversTooltip" xml:space="preserve">If enabled, cover images are loaded into memory with a maximum width of (1.15 * Maximum Cover Width) pixels.
-This can lead to a much smaller memory footprint for StartPage. Will not affect covers already loaded before restarting Playnite.</sys:String>
+    <sys:String x:Key="LOC_SPG_DownScaleCovers">以较低的分辨率加载封面图像</sys:String>
+    <sys:String x:Key="LOC_SPG_DownScaleCoversTooltip" xml:space="preserve">如果启用，封面图像将以最大宽度（1.15 * 最大封面宽度）像素载入内存。
+这可以使 StartPage 的内存占用更小。不会影响重启Playnite前已加载的封面。</sys:String>
     <!-- Grid -->
     <sys:String x:Key="LOC_SPG_SplitHorizonatlly">水平分割</sys:String>
     <sys:String x:Key="LOC_SPG_SplitVertically">垂直分割</sys:String>
