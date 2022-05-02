@@ -88,7 +88,7 @@ Invece, può essere impostata su un valore fisso. Se questo valore è più grand
     <sys:String x:Key="LOC_SPG_DownScaleCovers">Carica le immagini di copertina con una risoluzione inferiore</sys:String>
     <sys:String x:Key="LOC_SPG_DownScaleCoversTooltip" xml:space="preserve">Se abilitato, le immagini di copertina vengono caricate in memoria con una larghezza massima di (1,15 * Larghezza massima della copertina) pixel.
 Questo può portare a un'impronta di memoria molto più piccola per StartPage. Non influenzerà le copertine già caricate prima del riavvio di Playnite.</sys:String>
-    <sys:String x:Key="LOC_SPG_LockLayout">Lock Layout outside of Edit Mode</sys:String>
+    <sys:String x:Key="LOC_SPG_LockLayout">Blocca il layout al di fuori della modalità di modifica</sys:String>
     
     <!-- Grid -->
     <sys:String x:Key="LOC_SPG_SplitHorizonatlly">Dividi orizzontalmente</sys:String>
