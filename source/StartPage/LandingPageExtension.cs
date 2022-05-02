@@ -354,9 +354,9 @@ namespace LandingPage
             if (startPageView?.DataContext is StartPageViewModel startPageViewModel)
             {
                 Settings.GridLayout = startPageViewModel.RootNodeViewModel.GridNode;
+                Settings.ShelveInstances = shelvesViewModels.ToDictionary(p => p.Key, p => p.Value.Shelves);
             }
 
-            Settings.ShelveInstances = shelvesViewModels.ToDictionary(p => p.Key, p => p.Value.Shelves);
 
             // collapse layout
             if (Settings.GridLayout != null)
