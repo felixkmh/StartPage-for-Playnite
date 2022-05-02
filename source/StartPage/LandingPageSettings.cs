@@ -172,6 +172,9 @@ namespace LandingPage
         private BackgroundImageSource backgroundImageSource = BackgroundImageSource.LastPlayed;
         public BackgroundImageSource BackgroundImageSource { get => backgroundImageSource; set => SetValue(ref backgroundImageSource, value); }
 
+        private Guid? lastRandomBackgroundId = null;
+        public Guid? LastRandomBackgroundId { get => lastRandomBackgroundId; set => SetValue(ref lastRandomBackgroundId, value); }
+
         private ObservableCollection<ShelveProperties> shelveProperties = null;
         public ObservableCollection<ShelveProperties> ShelveProperties { get => shelveProperties; set => SetValue(ref shelveProperties, value); }
 

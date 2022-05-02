@@ -146,7 +146,7 @@ namespace LandingPage.ViewModels
             Settings.PropertyChanged += Settings_PropertyChanged1;
             backgroundImageQueue.CollectionChanged += BackgroundImageQueue_CollectionChanged;
 
-            UpdateBackgroundImagePath(true);
+            UpdateBackgroundImagePath(Settings.Settings.BackgroundRefreshInterval != 0);
             UpdateBackgroundTimer();
         }
 
@@ -314,7 +314,7 @@ namespace LandingPage.ViewModels
         {
             if (e.PropertyName == nameof(LandingPageSettingsViewModel.Settings))
             {
-                UpdateBackgroundImagePath();
+                UpdateBackgroundImagePath(Settings.Settings.BackgroundRefreshInterval != 0);
                 UpdateBackgroundTimer();
                 // Update();
                 Settings.Settings.PropertyChanged += Settings_PropertyChanged;
@@ -520,7 +520,22 @@ namespace LandingPage.ViewModels
                         }
                     case BackgroundImageSource.Random:
                         {
-                            if (updateRandomBackground || BackgroundImagePath == null)
+                            if (Settings.Settings.LastRandomBackgroundId is Guid id && !updateRandomBackground
+                                && playniteAPI.Database.Games.Get(id) is Game lastGame)
+                            {
+                                var databasePath = lastGame.BackgroundImage;
+                                if (!string.IsNullOrEmpty(databasePath))
+                                {
+                                    var fullPath = playniteAPI.Database.GetFullFilePath(databasePath);
+                                    if (Uri.TryCreate(fullPath, UriKind.RelativeOrAbsolute, out var uri))
+                                    {
+                                        path = uri;
+                                        gameSource = lastGame;
+                                        Settings.Settings.LastRandomBackgroundId = lastGame.Id;
+                                    }
+                                }
+                            } 
+                            else if (updateRandomBackground || BackgroundImagePath == null)
                             {
                                 var candidates = playniteAPI.Database.Games
                                     .Where(game => !game.Hidden)
@@ -536,6 +551,7 @@ namespace LandingPage.ViewModels
                                         {
                                             path = uri;
                                             gameSource = randomGame;
+                                            Settings.Settings.LastRandomBackgroundId = randomGame.Id;
                                         }
                                     }
                                 }
