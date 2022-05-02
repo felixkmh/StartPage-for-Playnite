@@ -9,6 +9,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
@@ -41,7 +42,10 @@ namespace LandingPage.Models
             {
                 if (game is Game && LandingPageExtension.Instance.PlayniteApi.Database.Games.Get(Game.Id) is Game)
                 {
-                    LandingPageExtension.Instance.PlayniteApi.StartGame(Game.Id);
+                    Application.Current.Dispatcher.BeginInvoke(
+                        System.Windows.Threading.DispatcherPriority.Background,
+                        (Action<Guid>)LandingPageExtension.Instance.PlayniteApi.StartGame,
+                        Game.Id);
                 }
             });
         }
