@@ -1,5 +1,13 @@
 AddonId: felixkmh_StartPage_Plugin
 Packages:  
+  - Version: 2.3.3
+    RequiredApiVersion: 6.1.0
+    ReleaseDate: 2022-05-02
+    PackageUrl: https://github.com/felixkmh/StartPage-for-Playnite/releases/download/v2.3.3/felixkmh_StartPage_Plugin_2_3_3.pext
+    Changelog:
+      - added option to load cover images at a lower resolution (enabled by default)
+      - fixed shelve instances not being saved properly in some cases
+      - localization updates 
   - Version: 2.3.2
     RequiredApiVersion: 6.1.0
     ReleaseDate: 2022-05-01
