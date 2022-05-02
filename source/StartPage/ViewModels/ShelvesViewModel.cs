@@ -261,7 +261,7 @@ namespace LandingPage.ViewModels
                     UpdateShelves();
                 } else
                 {
-                    Settings.PropertyChanged -= Settings_PropertyChanged1;
+                    Settings.Settings.ShelveInstances.Add(InstanceId, Shelves);
                 }
             }
         }
