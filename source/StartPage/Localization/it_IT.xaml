@@ -85,9 +85,9 @@
     <sys:String x:Key="LOC_SPG_FixGridHeight">Altezza della griglia fissa:</sys:String>
     <sys:String x:Key="LOC_SPG_FixGridHeight_Tooltip" xml:space="preserve">Se abilitato, l'altezza della griglia non è più legata all'altezza della finestra.
 Invece, può essere impostata su un valore fisso. Se questo valore è più grande dell'altezza della finestra, la vista può essere fatta scorrere.</sys:String>
-    <sys:String x:Key="LOC_SPG_DownScaleCovers">Load cover images at a lower resolution</sys:String>
-    <sys:String x:Key="LOC_SPG_DownScaleCoversTooltip" xml:space="preserve">If enabled, cover images are loaded into memory with a maximum width of (1.15 * Maximum Cover Width) pixels.
-This can lead to a much smaller memory footprint for StartPage. Will not affect covers already loaded before restarting Playnite.</sys:String>
+    <sys:String x:Key="LOC_SPG_DownScaleCovers">Carica le immagini di copertina con una risoluzione inferiore</sys:String>
+    <sys:String x:Key="LOC_SPG_DownScaleCoversTooltip" xml:space="preserve">Se abilitato, le immagini di copertina vengono caricate in memoria con una larghezza massima di (1,15 * Larghezza massima della copertina) pixel.
+Questo può portare a un'impronta di memoria molto più piccola per StartPage. Non influenzerà le copertine già caricate prima del riavvio di Playnite.</sys:String>
     <!-- Grid -->
     <sys:String x:Key="LOC_SPG_SplitHorizonatlly">Dividi orizzontalmente</sys:String>
     <sys:String x:Key="LOC_SPG_SplitVertically">Dividi verticalmente</sys:String>
