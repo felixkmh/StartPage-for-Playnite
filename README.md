@@ -26,6 +26,8 @@ Each panel can have a view attached to it and views can be swapped in Edit Mode 
 
 ## Built-in Views
 
+StartPage comes with a set of built-in views. Other views can also be added by other extensions (see [here](https://github.com/felixkmh/StartPage-for-Playnite/wiki/Integrating-with-other-Extensions)). [PlayState](https://github.com/darklinkpower/PlayniteExtensionsCollection/tree/master/source/Generic/PlayState) provides a PlayState manage view, for example. 
+
 ### Game Shelves
 
 Game Shelves with customizable sorting, grouping and filters.
