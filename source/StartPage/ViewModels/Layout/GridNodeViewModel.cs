@@ -207,6 +207,7 @@ namespace LandingPage.ViewModels.Layout
                 var index = Parent.GridNode.Children.IndexOf(GridNode);
                 if (index > 0)
                 {
+                    var removed = Parent.GridNode.Children[index - 1];
                     Parent.GridNode.Children.RemoveAt(index - 1);
                 }
                 GridNode.Minimize(root, null);
@@ -221,6 +222,7 @@ namespace LandingPage.ViewModels.Layout
                 var index = Parent.GridNode.Children.IndexOf(GridNode);
                 if (index > -1 && index < Parent.GridNode.Children.Count - 1)
                 {
+                    var removed = Parent.GridNode.Children[index + 1];
                     Parent.GridNode.Children.RemoveAt(index + 1);
                 }
                 GridNode.Minimize(root, null);
@@ -245,26 +247,40 @@ namespace LandingPage.ViewModels.Layout
                 {
                     GridNode.ViewProperties.view = null;
                     GridNode.ViewProperties = null;
-                    var plugin = LandingPageExtension.Instance.PlayniteApi.Addons.Plugins.FirstOrDefault(p => p.Id == properties.PluginId);
-                    if (plugin is IStartPageExtension extension)
-                    {
-                        try
-                        {
-                            extension.OnViewRemoved(properties.ViewId, properties.InstanceId);
-                        }
-                        catch (Exception ex)
-                        {
-                            LandingPageExtension.logger.Warn
-                                (
-                                    ex,
-                                    $"Error when calling OnViewRemoved() on extension {plugin.GetType().Name} with viewId {properties.ViewId} and instanceId {properties.InstanceId}."
-                                );
-                        }
-                    }
                 }
                 View.Children.Clear();
                 GridNode.Minimize(root, null);
             }
+        }
+
+        static public void OnNodeRemoved(GridNode removed)
+        {
+            foreach(var child in removed.Children)
+            {
+                OnNodeRemoved(child);
+            }
+            var properties = removed.ViewProperties;
+            if (properties != null)
+            {
+                //Debug.WriteLine($"Removed view {removed.ViewProperties.ViewId}, {removed.ViewProperties.InstanceId}.");
+                var plugin = LandingPageExtension.Instance.PlayniteApi.Addons.Plugins.FirstOrDefault(p => p.Id == properties.PluginId);
+                if (plugin is IStartPageExtension extension)
+                {
+                    try
+                    {
+                        extension.OnViewRemoved(properties.ViewId, properties.InstanceId);
+                    }
+                    catch (Exception ex)
+                    {
+                        LandingPageExtension.logger.Warn
+                            (
+                                ex,
+                                $"Error when calling OnViewRemoved() on extension {plugin.GetType().Name} with viewId {properties.ViewId} and instanceId {properties.InstanceId}."
+                            );
+                    }
+                }
+            }
+
         }
 
         private void RemoveCurrentView()
@@ -630,7 +646,7 @@ namespace LandingPage.ViewModels.Layout
 
         private void Children_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
-            if (e.Action == NotifyCollectionChangedAction.Remove)
+            if (e.Action == NotifyCollectionChangedAction.Remove || e.Action == NotifyCollectionChangedAction.Reset)
             {
                 foreach(GridNode removed in e.OldItems)
                 {
@@ -648,27 +664,11 @@ namespace LandingPage.ViewModels.Layout
                         {
                             model.GridNode.Children.RemoveAt(i);
                         }
+                        OnNodeRemoved(removed);
                         if (model.GridNode.ViewProperties != null)
                         {
                             var props = model.GridNode.ViewProperties;
                             model.GridNode.ViewProperties = null;
-                            var plugin = LandingPageExtension.Instance.PlayniteApi.Addons.Plugins.FirstOrDefault(p => p.Id == props.PluginId);
-                            if (plugin is IStartPageExtension extension)
-                            {
-                                try
-                                {
-                                    extension.OnViewRemoved(props.ViewId, props.InstanceId);
-                                }
-                                catch (Exception ex)
-                                {
-                                    LandingPageExtension.logger.Warn
-                                        (
-                                            ex, 
-                                            $"Error when calling OnViewRemoved() on extension {plugin.GetType().Name} with viewId {props.ViewId} and instanceId {props.InstanceId}."
-                                        );
-                                }
-                            }
-                            
                         }
                     }
                 }
