@@ -88,6 +88,8 @@
     <sys:String x:Key="LOC_SPG_DownScaleCovers">Завантажувати обкладинки з меншою роздільною здатністю</sys:String>
     <sys:String x:Key="LOC_SPG_DownScaleCoversTooltip" xml:space="preserve">Якщо включено, обкладинки завантажуються в пам'ять з максимальною шириною (1.15 * Максимальна ширина обкладинки) пікселів.
 Це може призвести до значно меншого споживання пам’яті StartPage. Це не вплине на обкладинки, які вже завантажені до перезапуску Playnite.</sys:String>
+    <sys:String x:Key="LOC_SPG_LockLayout">Lock Layout outside of Edit Mode</sys:String>
+    
     <!-- Grid -->
     <sys:String x:Key="LOC_SPG_SplitHorizonatlly">Розділити горизонтально</sys:String>
     <sys:String x:Key="LOC_SPG_SplitVertically">Розділити вертикально</sys:String>

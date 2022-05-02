@@ -88,6 +88,8 @@ En su lugar, se puede establecer un valor fijo. Si ese valor es mayor que la alt
     <sys:String x:Key="LOC_SPG_DownScaleCovers">Load cover images at a lower resolution</sys:String>
     <sys:String x:Key="LOC_SPG_DownScaleCoversTooltip" xml:space="preserve">If enabled, cover images are loaded into memory with a maximum width of (1.15 * Maximum Cover Width) pixels.
 This can lead to a much smaller memory footprint for StartPage. Will not affect covers already loaded before restarting Playnite.</sys:String>
+    <sys:String x:Key="LOC_SPG_LockLayout">Lock Layout outside of Edit Mode</sys:String>
+    
     <!-- Grid -->
     <sys:String x:Key="LOC_SPG_SplitHorizonatlly">Dividir horizontalmente</sys:String>
     <sys:String x:Key="LOC_SPG_SplitVertically">Dividir verticalmente</sys:String>
