@@ -49,6 +49,7 @@ Brief summary of the playtime in the last 7 days. Requires the [GameActivity](ht
 
 ### Most Played
 Shows most played games for different timeframes. Can be customized in Edit Mode. Requires the [GameActivity](https://github.com/Lacro59/playnite-gameactivity-plugin) extension.
+
 ![grafik](https://user-images.githubusercontent.com/24227002/166330863-d50389dc-2a05-4183-95c8-e09b4fdcb770.png)
 
 ### Recent Achievements
