@@ -1,5 +1,12 @@
 AddonId: felixkmh_StartPage_Plugin
 Packages:  
+  - Version: 2.3.4
+    RequiredApiVersion: 6.1.0
+    ReleaseDate: 2022-05-02
+    PackageUrl: https://github.com/felixkmh/StartPage-for-Playnite/releases/download/v2.3.4/felixkmh_StartPage_Plugin_2_3_4.pext
+    Changelog:
+      - fixed shelve instances not being saved if Playnite exists before StartPage was opened
+      - localization updates
   - Version: 2.3.3
     RequiredApiVersion: 6.1.0
     ReleaseDate: 2022-05-02
