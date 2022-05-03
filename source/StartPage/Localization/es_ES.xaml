@@ -86,9 +86,9 @@
     <sys:String x:Key="LOC_SPG_FixGridHeight_Tooltip" xml:space="preserve">Si se activa, la altura de la rejilla ya no está vinculada a la altura de la ventana.
 En su lugar, se puede establecer un valor fijo. Si ese valor es mayor que la altura de la ventana, la vista puede desplazarse.</sys:String>
     <sys:String x:Key="LOC_SPG_DownScaleCovers">Cargar las imágenes de portada con una resolución inferior</sys:String>
-    <sys:String x:Key="LOC_SPG_DownScaleCoversTooltip" xml:space="preserve">If enabled, cover images are loaded into memory with a maximum width of (1.15 * Maximum Cover Width) pixels.
-This can lead to a much smaller memory footprint for StartPage. Will not affect covers already loaded before restarting Playnite.</sys:String>
-    <sys:String x:Key="LOC_SPG_LockLayout">Lock Layout outside of Edit Mode</sys:String>
+    <sys:String x:Key="LOC_SPG_DownScaleCoversTooltip" xml:space="preserve">Si se activa, las imágenes de portada se cargan en la memoria con un ancho máximo de (1.15 * Ancho máximo de portada) píxeles.
+Esto puede llevar a una huella de memoria mucho menor para StartPage. No afectará a las carátulas ya cargadas antes de reiniciar Playnite.</sys:String>
+    <sys:String x:Key="LOC_SPG_LockLayout">Bloquear disposición fuera del modo edición</sys:String>
     
     <!-- Grid -->
     <sys:String x:Key="LOC_SPG_SplitHorizonatlly">Dividir horizontalmente</sys:String>
