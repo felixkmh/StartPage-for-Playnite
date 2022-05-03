@@ -85,10 +85,9 @@
     <sys:String x:Key="LOC_SPG_FixGridHeight">Hauteur de la grille fixe :</sys:String>
     <sys:String x:Key="LOC_SPG_FixGridHeight_Tooltip" xml:space="preserve">Si elle est activée, la hauteur de la grille n'est plus liée à la hauteur de la fenêtre.
 Au lieu de cela, elle peut être définie sur une valeur fixe. Si cette valeur est supérieure à la hauteur de la fenêtre, il est possible de faire défiler la vue.</sys:String>
-    <sys:String x:Key="LOC_SPG_DownScaleCovers">Load cover images at a lower resolution</sys:String>
-    <sys:String x:Key="LOC_SPG_DownScaleCoversTooltip" xml:space="preserve">If enabled, cover images are loaded into memory with a maximum width of (1.15 * Maximum Cover Width) pixels.
-This can lead to a much smaller memory footprint for StartPage. Will not affect covers already loaded before restarting Playnite.</sys:String>
-    <sys:String x:Key="LOC_SPG_LockLayout">Lock Layout outside of Edit Mode</sys:String>
+    <sys:String x:Key="LOC_SPG_DownScaleCovers">Réduire la résolution des images de couverture</sys:String>
+    <sys:String x:Key="LOC_SPG_DownScaleCoversTooltip" xml:space="preserve">Lorsque ce paramètre est activé, les images de couverture seront chargées avec une limitation de la largeur des pixels (1.15* de la largeur de la couverture). Ce paramètre peut considérablement réduire l'utilisation mémoire de l'extension. Il n'affectera les images déjà chargées qu'après le redémarrage de Playnite.</sys:String>
+    <sys:String x:Key="LOC_SPG_LockLayout">Verrouiller l'agencement en dehors du mode édition</sys:String>
     
     <!-- Grid -->
     <sys:String x:Key="LOC_SPG_SplitHorizonatlly">Séparer horizontalement</sys:String>
