@@ -22,7 +22,7 @@ namespace LandingPage.Models
                 DispatcherPriority.Normal,
                 (sender, args) =>
                 {
-                    dispatcherTimer.Interval = TimeSpan.FromSeconds(60);
+                    dispatcherTimer.Interval = TimeSpan.FromSeconds(60 - (DateTime.Now.TimeOfDay.TotalSeconds % 60) + 0.01);
                     //var currentCulture = CultureInfo.CurrentCulture;
                     //CultureInfo.CurrentCulture = CultureInfo.GetCultureInfo("en-US");
                     var currentTime = DateTime.Now.RoundToClosestMinute();
