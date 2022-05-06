@@ -123,6 +123,38 @@ namespace LandingPage
         internal StartPageViewModel startPageViewModel;
         private MostPlayedViewModel mostPlayedViewModel;
 
+        public override IEnumerable<GameMenuItem> GetGameMenuItems(GetGameMenuItemsArgs args)
+        {
+            if (args.Games.Count == 1 && !string.IsNullOrEmpty(args.Games[0].BackgroundImage))
+            {
+                Action<GameMenuItemActionArgs> action = null;
+                var path = args.Games[0].BackgroundImage;
+                if (path.StartsWith("http", StringComparison.InvariantCultureIgnoreCase)
+                    || File.Exists(path))
+                {
+                    if (Uri.TryCreate(path, UriKind.RelativeOrAbsolute, out var url))
+                    {
+                        action = a => { Settings.BackgroundImageUri = url; Settings.BackgroundImagePath = a.Games[0].Name; };
+                    };
+                } else if (PlayniteApi.Database.GetFullFilePath(path) is string databasePath)
+                {
+                    if (Uri.TryCreate(databasePath, UriKind.RelativeOrAbsolute, out var url))
+                    {
+                        action = a => { Settings.BackgroundImageUri = url; Settings.BackgroundImagePath = a.Games[0].Name; };
+                    };
+                }
+                if (action != null)
+                {
+                    yield return new GameMenuItem
+                    {
+                        Action = action,
+                        Description = ResourceProvider.GetString("LOC_SPG_SetGameAsBackground")
+                    };
+                }
+            }     
+        }
+
+
         public override IEnumerable<SidebarItem> GetSidebarItems()
         {
             var items = new List<SidebarItem>();
