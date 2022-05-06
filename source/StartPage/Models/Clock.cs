@@ -18,11 +18,11 @@ namespace LandingPage.Models
         public Clock()
         {
             dispatcherTimer = new DispatcherTimer(
-                TimeSpan.FromSeconds(60 - (DateTime.Now.TimeOfDay.TotalSeconds % 60) + 0.01),
+                TimeSpan.FromSeconds(60 - (DateTime.Now.TimeOfDay.TotalSeconds % 60)),
                 DispatcherPriority.Normal,
                 (sender, args) =>
                 {
-                    dispatcherTimer.Interval = TimeSpan.FromSeconds(60 - (DateTime.Now.TimeOfDay.TotalSeconds % 60) + 0.01);
+                    dispatcherTimer.Interval = TimeSpan.FromSeconds(60 - (DateTime.Now.TimeOfDay.TotalSeconds % 60));
                     //var currentCulture = CultureInfo.CurrentCulture;
                     //CultureInfo.CurrentCulture = CultureInfo.GetCultureInfo("en-US");
                     var currentTime = DateTime.Now.RoundToClosestMinute();
