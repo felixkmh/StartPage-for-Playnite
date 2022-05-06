@@ -16,7 +16,7 @@
     <sys:String x:Key="LOC_SPG_LastThirtyDays">Ultimi 30 giorni</sys:String>
     <sys:String x:Key="LOC_SPG_TimeframeNone">Nessuno</sys:String>
 
-    <sys:String x:Key="LOC_SPG_SetGameAsBackground">Set as StartPage background</sys:String>
+    <sys:String x:Key="LOC_SPG_SetGameAsBackground">Imposta come sfondo della pagina iniziale</sys:String>
 
     <!-- Timeframes -->
     <sys:String x:Key="LOC_SPG_TimeframeLastDay">Ultime 24 ore</sys:String>
