@@ -26,9 +26,19 @@ Each panel can have a view attached to it and views can be swapped in Edit Mode 
   - Customizable transition animation
 - Built-in views as well as support for other extensions to add views to StartPage (see [here](https://github.com/felixkmh/StartPage-for-Playnite/wiki/Integrating-with-other-Extensions))
 
+## External Views
+
+Other views can be added by other extensions. For some info on how to add support for StartPage to an extension, see [here](https://github.com/felixkmh/StartPage-for-Playnite/wiki/Integrating-with-other-Extensions).
+
+Known extension with StartPage support (potentially incomplete):
+| Extension | Views |
+|-----------|-------|
+|[PlayState](https://github.com/darklinkpower/PlayniteExtensionsCollection/tree/master/source/Generic/PlayState)|PlayState manager|
+|[QuickSearch](https://github.com/felixkmh/QuickSearch-for-Playnite)|Search bar|
+
 ## Built-in Views
 
-StartPage comes with a set of built-in views. Other views can also be added by other extensions (see [here](https://github.com/felixkmh/StartPage-for-Playnite/wiki/Integrating-with-other-Extensions)). [PlayState](https://github.com/darklinkpower/PlayniteExtensionsCollection/tree/master/source/Generic/PlayState) provides a PlayState manager view, for example. 
+StartPage comes with a set of built-in views.
 
 ### Game Shelves
 
