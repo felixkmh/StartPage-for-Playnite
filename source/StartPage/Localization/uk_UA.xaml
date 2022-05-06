@@ -16,6 +16,8 @@
     <sys:String x:Key="LOC_SPG_LastThirtyDays">Останні 30 Днів</sys:String>
     <sys:String x:Key="LOC_SPG_TimeframeNone">Жоден</sys:String>
 
+    <sys:String x:Key="LOC_SPG_SetGameAsBackground">Set as StartPage background</sys:String>
+
     <!-- Timeframes -->
     <sys:String x:Key="LOC_SPG_TimeframeLastDay">Останні 24 години</sys:String>
     <sys:String x:Key="LOC_SPG_TimeframeLast7Days">Останній тиждень</sys:String>
