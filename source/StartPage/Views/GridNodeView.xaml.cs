@@ -53,13 +53,16 @@ namespace LandingPage.Views
 
         private void UserControl_SizeChanged(object sender, SizeChangedEventArgs e)
         {
-            if (ViewContentControl.Content is ShelvesView shelvesView)
+            if (ViewContentControl.Content is FrameworkElement ele)
             {
-                shelvesView.UserControl_SizeChanged(sender, e);
-            }
-            else if (ViewContentControl.Content is Grid grid)
-            {
-                grid.Children.OfType<ShelvesView>().ForEach(child => child.UserControl_SizeChanged(sender, e));
+                ele.RaiseEvent(e);
+                if (ele is Panel panel)
+                {
+                    foreach(FrameworkElement child in panel.Children)
+                    {
+                        child?.RaiseEvent(e);
+                    }
+                }
             }
         }
     }

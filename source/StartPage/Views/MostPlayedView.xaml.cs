@@ -14,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Helper;
 
 namespace LandingPage.Views
 {
@@ -28,6 +29,66 @@ namespace LandingPage.Views
         }
 
         static readonly Random rng = new Random();
+
+        public void UserControl_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            UpdateWidth(sender, e);
+        }
+
+        private void UpdateWidth(object sender, SizeChangedEventArgs e)
+        {
+            if (e.HeightChanged || e.WidthChanged)
+            {
+                _ = Dispatcher.BeginInvoke(new Action(() =>
+                {
+                    var newWidth = ActualWidth;
+                    var listBoxes = GameGroups.ItemContainerGenerator.Items;
+                    var items = listBoxes.Select(item => GameGroups.ItemContainerGenerator.ContainerFromItem(item));
+                    var presenters = items.OfType<ListBoxItem>();
+                    var lists = presenters.Select(ele => UiHelper.FindVisualChildren<ListBox>(ele, "GroupList").FirstOrDefault());
+                    foreach (var listBox in lists)
+                    {
+                        var itemCount = listBox.ItemsSource?.Cast<object>().Count() ?? 0;
+                        if (listBox.IsVisible && itemCount > 0)
+                        {
+                            FrameworkElement container = null;
+                            for (int i = 0; i < itemCount; ++i)
+                            {
+                                if (listBox.ItemContainerGenerator.ContainerFromIndex(i) is FrameworkElement element)
+                                {
+                                    container = element;
+                                    break;
+                                }
+                            }
+                            var desiredWidth = listBox.DesiredSize.Width;
+                            var itemWidth = container.ActualWidth + container.Margin.Left + container.Margin.Right;
+                            var scrollViewer = Helper.UiHelper.FindVisualChildren<ScrollViewer>(listBox).FirstOrDefault();
+                            // itemWidth = desiredWidth / itemCount;
+                            var availableWidth = newWidth / lists.Count();
+                            FrameworkElement panel = VisualTreeHelper.GetParent(this) as FrameworkElement;
+                            while (!(panel is GridNodeView))
+                            {
+                                panel = VisualTreeHelper.GetParent(panel) as FrameworkElement;
+                            }
+                            availableWidth = (panel.ActualWidth - 14 * lists.Count()) / lists.Count();
+                            var newListWidth = availableWidth;
+
+                            presenters.ForEach(p => p.MaxWidth = panel.ActualWidth / lists.Count());
+
+                            foreach (var gameItem in listBox.Items.OfType<object>().Select(item => listBox.ItemContainerGenerator.ContainerFromItem(item)).OfType<FrameworkElement>())
+                            {
+                                double newHeight = newListWidth / LandingPageExtension.Instance.Settings.CoverAspectRatio;
+                                if (newHeight != gameItem.MaxHeight)
+                                {
+                                    gameItem.MaxHeight = newHeight;
+                                }
+                            }
+                        }
+                        
+                    }
+                }), System.Windows.Threading.DispatcherPriority.Background);
+            }
+        }
 
         private void Description_Closed(object sender, EventArgs e)
         {

@@ -15,6 +15,7 @@
              xmlns:controls="clr-namespace:LandingPage.Controls" xmlns:gameactivity="clr-namespace:LandingPage.ViewModels.GameActivity"
              mc:Ignorable="d"
              d:DesignHeight="450" d:DesignWidth="800"
+             SizeChanged="UserControl_SizeChanged"
              d:DataContext="{d:DesignInstance IsDesignTimeCreatable=False, Type={x:Type gameactivity:MostPlayedViewModel}}">
     <UserControl.Resources>
         <system:Double x:Key="CoverHeight">195</system:Double>
@@ -51,7 +52,8 @@
                          BorderThickness="0" Background="Transparent" Padding="0"
                          ItemTemplate="{DynamicResource GameCoverDataTemplate}"
                          ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                         ScrollViewer.VerticalScrollBarVisibility="Disabled">
+                         ScrollViewer.VerticalScrollBarVisibility="Disabled"
+                         x:Name="GroupList">
                     <ListBox.ItemsPanel>
                         <ItemsPanelTemplate>
                             <StackPanel Orientation="Horizontal" Margin="0"/>
@@ -339,20 +341,23 @@
             </Style.Triggers>
         </Style>
     </UserControl.Resources>
-    <DockPanel UseLayoutRounding="True" SnapsToDevicePixels="True">
+    <Grid HorizontalAlignment="Left" VerticalAlignment="Top">
         <ListBox ItemsSource="{Binding SpecialGames}" Style="{StaticResource GameGroupListStyle}"
-                                     ItemTemplate="{StaticResource GameDataTemplate}"
-                             ItemContainerStyle="{StaticResource GameGroupItem}"
-                             DockPanel.Dock="Left" BorderThickness="0"
-                             VerticalAlignment="Top"
-                             HorizontalAlignment="Left"
-                             Background="Transparent"
-                 Grid.IsSharedSizeScope="True">
+                                        ItemTemplate="{StaticResource GameDataTemplate}"
+                                ItemContainerStyle="{StaticResource GameGroupItem}"
+                                BorderThickness="0"
+                                ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                            SizeChanged="UserControl_SizeChanged"
+                                UseLayoutRounding="True" SnapsToDevicePixels="True"            
+                                Background="Transparent"
+                    x:Name="GameGroups"
+                    Grid.IsSharedSizeScope="True">
             <ListBox.ItemsPanel>
                 <ItemsPanelTemplate>
                     <StackPanel Orientation="Horizontal"/>
                 </ItemsPanelTemplate>
             </ListBox.ItemsPanel>
         </ListBox>
-    </DockPanel>
+    </Grid>
+
 </UserControl>
