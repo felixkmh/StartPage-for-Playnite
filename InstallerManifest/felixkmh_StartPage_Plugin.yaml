@@ -6,7 +6,7 @@ Packages:
     PackageUrl: https://github.com/felixkmh/StartPage-for-Playnite/releases/download/v2.4.0/felixkmh_StartPage_Plugin_2_4_0.pext
     Changelog:
       - added game menu entry to set background image as the StartPage background
-      - if random backgrounds are enabled with an update interval of 0, the background persists after closing Playnite
+      - 'if random backgrounds are enabled with an update interval of 0, the background persists after closing Playnite'
       - set cover buttons color to text color on hover
       - fixed clock being out of sync
       - fixed most played covers not scaling correctly
