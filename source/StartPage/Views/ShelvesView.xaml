@@ -59,6 +59,7 @@
         <conv:IEnumerableNullOrEmptyToVisibilityConverter x:Key="IEnumerableNullOrEmptyToVisibilityConverter"/>
         <conv:BoolToGridLengthConverter x:Key="BoolToGridLengthConverter"/>
         <conv:ObjectToGroupHeaderConverter x:Key="ObjectToGroupHeaderConverter"/>
+        <conv:DoubleToNegativeTopMarginConverter x:Key="DoubleToNegativeTopMarginConverter"/>
         <DataTemplate x:Key="GameCoverDataTemplate" DataType="{x:Type lpm:GameModel}">
             <StackPanel Orientation="Horizontal" MouseEnter="StackPanel_MouseEnter" MouseLeave="StackPanel_MouseLeave">
                 <Grid ClipToBounds="True"
@@ -353,10 +354,15 @@
                                         <DataTrigger Binding="{mu:LandingPageSettings Settings.HorizontalShelveLabels}" Value="{StaticResource True}">
                                             <Setter Property="Tag" Value="{Binding ElementName=shelvetoggleHorizontal}"/>
                                         </DataTrigger>
+                                        <!--<DataTrigger Binding="{Binding ShelveProperties.GroupBy}" Value="{x:Static lpm:GroupingField.None}">
+                                            <DataTrigger.Setters>
+                                                <Setter Property="Margin" Value="{Binding ElementName=GroupLabelSpacer, Path=ActualHeight, Converter={StaticResource DoubleToNegativeTopMarginConverter}}"/>
+                                            </DataTrigger.Setters>
+                                        </DataTrigger>-->
                                     </Style.Triggers>
                                 </Style>
                             </DockPanel.Style>
-                            <Grid DockPanel.Dock="Top" Background="Transparent">
+                            <Grid DockPanel.Dock="Top" Background="Transparent" x:Name="GroupLabelSpacer">
                                 <Grid.RowDefinitions>
                                     <RowDefinition SharedSizeGroup="GroupHeaderSize"/>
                                 </Grid.RowDefinitions>

@@ -73,6 +73,7 @@
     <Compile Include="Converters\BoolToGridLengthConverter.cs" />
     <Compile Include="Converters\DatabaseIdToUriConverter.cs" />
     <Compile Include="Converters\DoubleToGridLengthConverter.cs" />
+    <Compile Include="Converters\DoubleToNegativeTopMarginConverter.cs" />
     <Compile Include="Converters\ElementToScaledRectConverter.cs" />
     <Compile Include="Converters\EnumDescriptionTypeConverter.cs" />
     <Compile Include="Converters\IEnumerableNullOrEmptyToVisibilityConverter.cs" />
