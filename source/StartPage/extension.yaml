@@ -1,7 +1,7 @@
 ﻿Id: felixkmh_StartPage_Plugin
 Name: StartPage
 Author: felixkmh
-Version: 2.3.5
+Version: 2.3.6
 Module: StartPagePlugin.dll
 Type: GenericPlugin
 Icon: icon.png
