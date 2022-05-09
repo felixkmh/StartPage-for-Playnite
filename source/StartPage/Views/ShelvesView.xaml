@@ -336,6 +336,23 @@
                                     </Style.Triggers>
                                 </Style>
                             </DockPanel.Style>
+                            <Grid DockPanel.Dock="Top" Background="Transparent">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition SharedSizeGroup="GroupHeaderSize"/>
+                                </Grid.RowDefinitions>
+                                <Grid.Style>
+                                    <Style TargetType="Grid">
+                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding ShelveProperties.GroupBy}" Value="{x:Static lpm:GroupingField.None}">
+                                                <DataTrigger.Setters>
+                                                    <Setter Property="Visibility" Value="Visible"/>
+                                                </DataTrigger.Setters>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Grid.Style>
+                            </Grid>
                             <StackPanel Orientation="Horizontal" DockPanel.Dock="Top"
                                         Margin="6,0,2,2" x:Name="HorizontalLabelStackPanel"
                                         Background="Transparent">
