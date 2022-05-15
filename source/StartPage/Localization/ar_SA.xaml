@@ -14,21 +14,21 @@
     <sys:String x:Key="LOC_SPG_TotalPlaytime" xml:space="preserve">المجموع: </sys:String>
     <sys:String x:Key="LOC_SPG_LastSevenDays">آخر 7 أيام</sys:String>
     <sys:String x:Key="LOC_SPG_LastThirtyDays">آخر 30 يوم</sys:String>
-    <sys:String x:Key="LOC_SPG_TimeframeNone">None</sys:String>
+    <sys:String x:Key="LOC_SPG_TimeframeNone">بدون</sys:String>
 
-    <sys:String x:Key="LOC_SPG_SetGameAsBackground">Set as StartPage background</sys:String>
+    <sys:String x:Key="LOC_SPG_SetGameAsBackground">تعيين كخلفية لصفحة البداية</sys:String>
 
     <!-- Timeframes -->
-    <sys:String x:Key="LOC_SPG_TimeframeLastDay">Last 24 Hours</sys:String>
-    <sys:String x:Key="LOC_SPG_TimeframeLast7Days">Last Week</sys:String>
-    <sys:String x:Key="LOC_SPG_TimeframeLast14Days">Last 2 Weeks</sys:String>
-    <sys:String x:Key="LOC_SPG_TimeframeLast21Days">Last 3 Weeks</sys:String>
-    <sys:String x:Key="LOC_SPG_TimeframeLastMonth">Last Month</sys:String>
-    <sys:String x:Key="LOC_SPG_TimeframeLast3Months">Last 3 Months</sys:String>
-    <sys:String x:Key="LOC_SPG_TimeframeLast6Months">Last 6 Months</sys:String>
-    <sys:String x:Key="LOC_SPG_TimeframeLastYear">Last Year</sys:String>
-    <sys:String x:Key="LOC_SPG_TimeframeLast5Years">Last 5 Years</sys:String>
-    <sys:String x:Key="LOC_SPG_TimeframeAllTime">All Time</sys:String>
+    <sys:String x:Key="LOC_SPG_TimeframeLastDay">آخر 24 ساعة</sys:String>
+    <sys:String x:Key="LOC_SPG_TimeframeLast7Days">آخر أسبوع</sys:String>
+    <sys:String x:Key="LOC_SPG_TimeframeLast14Days">آخر أسبوعين</sys:String>
+    <sys:String x:Key="LOC_SPG_TimeframeLast21Days">آخر 3 أسابيع</sys:String>
+    <sys:String x:Key="LOC_SPG_TimeframeLastMonth">آخر شهر</sys:String>
+    <sys:String x:Key="LOC_SPG_TimeframeLast3Months">آخر 3 أشهر</sys:String>
+    <sys:String x:Key="LOC_SPG_TimeframeLast6Months">اخر 6 أشهر</sys:String>
+    <sys:String x:Key="LOC_SPG_TimeframeLastYear">السنة الماضية</sys:String>
+    <sys:String x:Key="LOC_SPG_TimeframeLast5Years">آخر 5 سنوات</sys:String>
+    <sys:String x:Key="LOC_SPG_TimeframeAllTime">جميع الأوقات</sys:String>
 
     <!--Settings Tabs-->
     <sys:String x:Key="LOC_SPG_CommonTab">الشائعة</sys:String>
@@ -84,13 +84,13 @@
     <sys:String x:Key="LOC_SPG_BackgroundRefreshInterval">فاصل التحديث (الدقائق):</sys:String>
     <sys:String x:Key="LOC_SPG_SkipGamesInPreviousShelves">تخطي الألعاب الموجودة في الرفوف السابقة</sys:String>
     <sys:String x:Key="LOC_SPG_EnableTags">إنشاء وسوم [SPG] عند التشغيل. تستخدم لوضع علامة على الألعاب لتجاهلها.</sys:String>
-    <sys:String x:Key="LOC_SPG_FixGridHeight">Fixed Grid Height:</sys:String>
-    <sys:String x:Key="LOC_SPG_FixGridHeight_Tooltip" xml:space="preserve">If enabled, the grid height is no longer bound to the window height.
-Instead, it can be set to a fixed value. If that value is bigger than the window height, the view can be scrolled.</sys:String>
-    <sys:String x:Key="LOC_SPG_DownScaleCovers">Load cover images at a lower resolution</sys:String>
-    <sys:String x:Key="LOC_SPG_DownScaleCoversTooltip" xml:space="preserve">If enabled, cover images are loaded into memory with a maximum width of (1.15 * Maximum Cover Width) pixels.
-This can lead to a much smaller memory footprint for StartPage. Will not affect covers already loaded before restarting Playnite.</sys:String>
-    <sys:String x:Key="LOC_SPG_LockLayout">Lock Layout outside of Edit Mode</sys:String>
+    <sys:String x:Key="LOC_SPG_FixGridHeight">ارتفاع الشبكة الثابت:</sys:String>
+    <sys:String x:Key="LOC_SPG_FixGridHeight_Tooltip" xml:space="preserve">في حالة التمكين، لن يكون ارتفاع الشبكة مرتبطًا بارتفاع النافذة.
+بدلاً من ذلك، يمكن ضبطه على قيمة ثابتة. إذا كانت هذه القيمة أكبر من ارتفاع النافذة، فيمكن تمرير العرض.</sys:String>
+    <sys:String x:Key="LOC_SPG_DownScaleCovers">تحميل صور الغلاف بدقة أقل</sys:String>
+    <sys:String x:Key="LOC_SPG_DownScaleCoversTooltip" xml:space="preserve">في حالة التمكين ، يتم تحميل صور الغلاف في الذاكرة بعرض أقصى يبلغ (1.15 * أقصى عرض للغلاف) بكسل.
+يمكن أن يؤدي هذا إلى استخدام ذاكرة أصغر بكثير لـ StartPage. لن يؤثر على الأغلفة التي تم تحميلها قبل إعادة تشغيل Playnite.</sys:String>
+    <sys:String x:Key="LOC_SPG_LockLayout">قفل التخطيط خارج وضع التعديل</sys:String>
     
     <!-- Grid -->
     <sys:String x:Key="LOC_SPG_SplitHorizonatlly">قسم أفقياً</sys:String>
@@ -108,26 +108,26 @@ This can lead to a much smaller memory footprint for StartPage. Will not affect 
     <sys:String x:Key="LOC_SPG_ResetLayout">إعادة تعيين التخطيط الافتراضي</sys:String>
     <sys:String x:Key="LOC_SPG_DragPanelTooltip">سحب و إسقاط الألواح لمبادلتها</sys:String>
     <sys:String x:Key="LOC_SPG_AddPanel">إضافة لوحة</sys:String>
-    <sys:String x:Key="LOC_SPG_RemovePanel">Remove Panel</sys:String>
-    <sys:String x:Key="LOC_SPG_MergeWith">Merge with</sys:String>
-    <sys:String x:Key="LOC_SPG_MergeWithAbove">Upper Panel</sys:String>
-    <sys:String x:Key="LOC_SPG_MergeWithBelow">Lower Panel</sys:String>
-    <sys:String x:Key="LOC_SPG_MergeWithLeft">Left Panel</sys:String>
-    <sys:String x:Key="LOC_SPG_MergeWithRight">Right Panel</sys:String>
+    <sys:String x:Key="LOC_SPG_RemovePanel">إزالة اللوحة</sys:String>
+    <sys:String x:Key="LOC_SPG_MergeWith">دمج مع</sys:String>
+    <sys:String x:Key="LOC_SPG_MergeWithAbove">اللوحة العلوي</sys:String>
+    <sys:String x:Key="LOC_SPG_MergeWithBelow">اللوحة السفلية</sys:String>
+    <sys:String x:Key="LOC_SPG_MergeWithLeft">اللوحة اليسار</sys:String>
+    <sys:String x:Key="LOC_SPG_MergeWithRight">اللوحة اليمنى</sys:String>
     <sys:String x:Key="LOC_SPG_AddPanelTop">أعلى</sys:String>
     <sys:String x:Key="LOC_SPG_AddPanelBottom">أسفل</sys:String>
     <sys:String x:Key="LOC_SPG_AddPanelLeft">أقصى اليسار</sys:String>
     <sys:String x:Key="LOC_SPG_AddPanelRight">أقصى اليمين</sys:String>
-    <sys:String x:Key="LOC_SPG_HorizontalAlignment">Horizontal Alignment</sys:String>
-    <sys:String x:Key="LOC_SPG_HorizontalAlignmentLeft">Left</sys:String>
-    <sys:String x:Key="LOC_SPG_HorizontalAlignmentRight">Right</sys:String>
-    <sys:String x:Key="LOC_SPG_VerticalAlignment">Vertical Alignment</sys:String>
-    <sys:String x:Key="LOC_SPG_VerticalAlignmentTop">Top</sys:String>
-    <sys:String x:Key="LOC_SPG_VerticalAlignmentBottom">Bottom</sys:String>
-    <sys:String x:Key="LOC_SPG_AlignmentStretch">Stretch</sys:String>
-    <sys:String x:Key="LOC_SPG_AlignmentCenter">Center</sys:String>
-    <sys:String x:Key="LOC_SPG_Padding">Padding</sys:String>
-    <sys:String x:Key="LOC_SPG_ShelvesHorizontalLabels">Horizontal Labels</sys:String>
+    <sys:String x:Key="LOC_SPG_HorizontalAlignment">المحاذاة الأفقية</sys:String>
+    <sys:String x:Key="LOC_SPG_HorizontalAlignmentLeft">اليسار</sys:String>
+    <sys:String x:Key="LOC_SPG_HorizontalAlignmentRight">اليمين</sys:String>
+    <sys:String x:Key="LOC_SPG_VerticalAlignment">المحاذاة العمودية</sys:String>
+    <sys:String x:Key="LOC_SPG_VerticalAlignmentTop">الأعلى</sys:String>
+    <sys:String x:Key="LOC_SPG_VerticalAlignmentBottom">الأسفل</sys:String>
+    <sys:String x:Key="LOC_SPG_AlignmentStretch">تمديد</sys:String>
+    <sys:String x:Key="LOC_SPG_AlignmentCenter">الوسط</sys:String>
+    <sys:String x:Key="LOC_SPG_Padding">مساحة متروكة</sys:String>
+    <sys:String x:Key="LOC_SPG_ShelvesHorizontalLabels">تسميات أفقية</sys:String>
 
     <!-- Integrated Views -->
     <sys:String x:Key="LOC_SPG_ClockView">الساعة</sys:String>
