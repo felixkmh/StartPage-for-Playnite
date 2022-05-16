@@ -1,5 +1,16 @@
 AddonId: felixkmh_StartPage_Plugin
 Packages:  
+  - Version: 2.4.0
+    RequiredApiVersion: 6.1.0
+    ReleaseDate: 2022-05-09
+    PackageUrl: https://github.com/felixkmh/StartPage-for-Playnite/releases/download/v2.4.0/felixkmh_StartPage_Plugin_2_4_0.pext
+    Changelog:
+      - added game menu entry to set background image as the StartPage background
+      - 'if random backgrounds are enabled with an update interval of 0, the background persists after closing Playnite'
+      - set cover buttons color to text color on hover
+      - fixed clock being out of sync
+      - fixed most played covers not scaling correctly
+      - localization updates
   - Version: 2.3.5
     RequiredApiVersion: 6.1.0
     ReleaseDate: 2022-05-02
