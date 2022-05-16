@@ -113,7 +113,7 @@
                                Visibility="Hidden"/>
                     <Viewbox x:Name="Buttons" Visibility="Hidden">
                         <StackPanel Orientation="Horizontal" Margin="1">
-                            <Button Background="Transparent" Padding="8,5,4,5" x:Name="PlayButton" Click="PlayButton_Click" BorderThickness="0">
+                            <Button Background="Transparent" Padding="7,5,4,5" x:Name="PlayButton" Click="PlayButton_Click" BorderThickness="0">
                                 <TextBlock Text="" FontFamily="{StaticResource FontIcoFont}" x:Name="PlayIcon"/>
                                 <Button.Style>
                                     <Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
@@ -126,7 +126,7 @@
                                     </Style>
                                 </Button.Style>
                             </Button>
-                            <Button Background="Transparent"  Padding="4,5,8,5" x:Name="InfoButton" Click="InfoButton_Click" BorderThickness="0">
+                            <Button Background="Transparent"  Padding="4,5,7,5" x:Name="InfoButton" Click="InfoButton_Click" BorderThickness="0">
                                 <TextBlock Text="" FontFamily="{StaticResource FontIcoFont}"/>
                                 <Button.Style>
                                     <Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
