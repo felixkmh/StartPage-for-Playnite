@@ -312,7 +312,7 @@
             </DataTemplate.Triggers>
         </DataTemplate>
         <Style x:Key="GameListItem" TargetType="ListBoxItem">
-            <EventSetter Event="MouseUp" Handler="ListBoxItem_MouseUp"/>
+            <EventSetter Event="PreviewMouseLeftButtonDown" Handler="ListBoxItem_MouseUp"/>
             <EventSetter Event="MouseDoubleClick" Handler="ListBoxItem_MouseDoubleClick"/>
             <Setter Property="Cursor" Value="Hand"/>
             <Setter Property="Margin" Value="7"/>

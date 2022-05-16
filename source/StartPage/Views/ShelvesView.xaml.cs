@@ -35,7 +35,7 @@ namespace LandingPage.Views
 
         private void ListBoxItem_MouseUp(object sender, MouseButtonEventArgs e)
         {
-            if (sender is ListBoxItem item)
+            if (sender is ListBoxItem item && !(e.OriginalSource is TextBlock))
             {
                 if (dispatcherTimer == null)
                 {
