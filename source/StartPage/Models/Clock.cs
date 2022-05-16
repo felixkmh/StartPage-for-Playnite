@@ -63,14 +63,9 @@ namespace LandingPage.Models
             if (elapsedSeconds < 1)
             {
                 var display = TimeString;
-                var symbols = new List<char> {',', '.', ':' ,'*', '+', '-', '\\', '@', '$', '#', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' };
-                for (uint i = 97; i <= 122; ++i)
-                {
-                    symbols.Add((char)i);
-                }
-                var r = random.Next(symbols.Count);
+                var r = random.Next(33, 127);
                 var pos = random.Next(display.Length);
-                var c = symbols[r];
+                var c = (char)r;
                 var sb = new StringBuilder();
                 for (int i = 0; i < display.Length; ++i)
                 {
