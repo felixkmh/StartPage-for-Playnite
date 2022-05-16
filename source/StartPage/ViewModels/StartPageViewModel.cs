@@ -106,7 +106,7 @@ namespace LandingPage.ViewModels
                 DispatcherPriority.Normal,
                 (sender, args) =>
                 {
-                    clock.Interval = TimeSpan.FromSeconds(60);
+                    clock.Interval = TimeSpan.FromSeconds(60 - (DateTime.Now.TimeOfDay.TotalSeconds % 60));
                     var currentTime = DateTime.Now.RoundToClosestMinute();
                     if (currentTime != Time)
                     {
