@@ -15,6 +15,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace LandingPage.Views
 {
@@ -28,15 +29,34 @@ namespace LandingPage.Views
             InitializeComponent();
         }
 
+        private static DispatcherTimer dispatcherTimer = null;
+
+        private static GameModel clickedModel = null;
+
         private void ListBoxItem_MouseUp(object sender, MouseButtonEventArgs e)
         {
             if (sender is ListBoxItem item)
             {
+                if (dispatcherTimer == null)
+                {
+                    dispatcherTimer = new DispatcherTimer();
+                    dispatcherTimer.Interval = TimeSpan.FromMilliseconds(250);
+                    dispatcherTimer.Tick += DispatcherTimer_Tick;
+                }
+                dispatcherTimer.Start();
+
                 if (item.DataContext is GameModel model)
                 {
-                    model.OpenCommand?.Execute(null);
+                    clickedModel = model;
+                    //model.OpenCommand?.Execute(null);
                 }
             }
+        }
+
+        private void DispatcherTimer_Tick(object sender, EventArgs e)
+        {
+            dispatcherTimer.Stop();
+            clickedModel?.OpenCommand?.Execute(null);
         }
 
         private void ListBoxItem_MouseDoubleClick(object sender, MouseButtonEventArgs e)
@@ -45,7 +65,9 @@ namespace LandingPage.Views
             {
                 if (item.DataContext is GameModel model)
                 {
+                    dispatcherTimer?.Stop();
                     model.StartCommand?.Execute(null);
+                    e.Handled = true;
                 }
             }
         }
