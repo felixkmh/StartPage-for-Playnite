@@ -1,38 +1,38 @@
 ﻿<?xml version="1.0"?>
 <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:sys="clr-namespace:System;assembly=mscorlib">
 
-    <sys:String x:Key="LOC_SPG_MostPlayedGame">Most Played</sys:String>
-    <sys:String x:Key="LOC_SPG_LatestReleaseGame">Latest Release</sys:String>
-    <sys:String x:Key="LOC_SPG_RecentAchievements">Recent Achievements</sys:String>
-    <sys:String x:Key="LOC_SPG_RecentlyAddedGames">Recently Added</sys:String>
+    <sys:String x:Key="LOC_SPG_MostPlayedGame">Mest Spelade</sys:String>
+    <sys:String x:Key="LOC_SPG_LatestReleaseGame">Senaste släppt</sys:String>
+    <sys:String x:Key="LOC_SPG_RecentAchievements">Senaste Prestationer</sys:String>
+    <sys:String x:Key="LOC_SPG_RecentlyAddedGames">Senast tillagda</sys:String>
 
-    <sys:String x:Key="LOC_SPG_DailyPlaytime">Daily Playtime</sys:String>
-    <sys:String x:Key="LOC_SPG_WeeklyPlaytime">Weekly Playtime</sys:String>
-    <sys:String x:Key="LOC_SPG_MonthlyPlaytime">Monthly Playtime</sys:String>
-    <sys:String x:Key="LOC_SPG_PlaytimePerSource">Playtime per Source</sys:String>
-    <sys:String x:Key="LOC_SPG_MostPlayedWeekly">Most Played this Week</sys:String>
-    <sys:String x:Key="LOC_SPG_TotalPlaytime" xml:space="preserve">Total: </sys:String>
-    <sys:String x:Key="LOC_SPG_LastSevenDays">Last 7 Days</sys:String>
-    <sys:String x:Key="LOC_SPG_LastThirtyDays">Last 30 Days</sys:String>
-    <sys:String x:Key="LOC_SPG_TimeframeNone">None</sys:String>
+    <sys:String x:Key="LOC_SPG_DailyPlaytime">Daglig Speltid</sys:String>
+    <sys:String x:Key="LOC_SPG_WeeklyPlaytime">Veckovis Speltid</sys:String>
+    <sys:String x:Key="LOC_SPG_MonthlyPlaytime">Månadens Speltid</sys:String>
+    <sys:String x:Key="LOC_SPG_PlaytimePerSource">Speltid per Källa</sys:String>
+    <sys:String x:Key="LOC_SPG_MostPlayedWeekly">Mest spelade Denna Vecka</sys:String>
+    <sys:String x:Key="LOC_SPG_TotalPlaytime" xml:space="preserve">Totalt: </sys:String>
+    <sys:String x:Key="LOC_SPG_LastSevenDays">Senaste 7 Dagarna</sys:String>
+    <sys:String x:Key="LOC_SPG_LastThirtyDays">Senaste 30 Dagarna</sys:String>
+    <sys:String x:Key="LOC_SPG_TimeframeNone">Inget</sys:String>
 
-    <sys:String x:Key="LOC_SPG_SetGameAsBackground">Set as StartPage background</sys:String>
+    <sys:String x:Key="LOC_SPG_SetGameAsBackground">Använd som StartPage bakgrund</sys:String>
 
     <!-- Timeframes -->
-    <sys:String x:Key="LOC_SPG_TimeframeLastDay">Last 24 Hours</sys:String>
-    <sys:String x:Key="LOC_SPG_TimeframeLast7Days">Last Week</sys:String>
-    <sys:String x:Key="LOC_SPG_TimeframeLast14Days">Last 2 Weeks</sys:String>
-    <sys:String x:Key="LOC_SPG_TimeframeLast21Days">Last 3 Weeks</sys:String>
-    <sys:String x:Key="LOC_SPG_TimeframeLastMonth">Last Month</sys:String>
-    <sys:String x:Key="LOC_SPG_TimeframeLast3Months">Last 3 Months</sys:String>
-    <sys:String x:Key="LOC_SPG_TimeframeLast6Months">Last 6 Months</sys:String>
-    <sys:String x:Key="LOC_SPG_TimeframeLastYear">Last Year</sys:String>
-    <sys:String x:Key="LOC_SPG_TimeframeLast5Years">Last 5 Years</sys:String>
-    <sys:String x:Key="LOC_SPG_TimeframeAllTime">All Time</sys:String>
+    <sys:String x:Key="LOC_SPG_TimeframeLastDay">Senaste 24 Timmarna</sys:String>
+    <sys:String x:Key="LOC_SPG_TimeframeLast7Days">Senaste Veckan</sys:String>
+    <sys:String x:Key="LOC_SPG_TimeframeLast14Days">Senaste 2 Veckorna</sys:String>
+    <sys:String x:Key="LOC_SPG_TimeframeLast21Days">Senaste 3 Veckorna</sys:String>
+    <sys:String x:Key="LOC_SPG_TimeframeLastMonth">Senaste Månaden</sys:String>
+    <sys:String x:Key="LOC_SPG_TimeframeLast3Months">Senaste 3 Månaderna</sys:String>
+    <sys:String x:Key="LOC_SPG_TimeframeLast6Months">Senaste 6 Månaderna</sys:String>
+    <sys:String x:Key="LOC_SPG_TimeframeLastYear">Senaste Året</sys:String>
+    <sys:String x:Key="LOC_SPG_TimeframeLast5Years">Senaste 5 Åren</sys:String>
+    <sys:String x:Key="LOC_SPG_TimeframeAllTime">Från Början</sys:String>
 
     <!--Settings Tabs-->
     <sys:String x:Key="LOC_SPG_CommonTab">Common</sys:String>
-    <sys:String x:Key="LOC_SPG_BackgroundTab">Background</sys:String>
+    <sys:String x:Key="LOC_SPG_BackgroundTab">Bakgrund</sys:String>
     
     <!--BackgroundImageSource Enum-->
     <sys:String x:Key="LOC_SPG_BackgroundImageSourceLastPlayed">Last Played</sys:String>
