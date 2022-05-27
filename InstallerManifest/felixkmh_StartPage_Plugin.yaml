@@ -1,5 +1,12 @@
 AddonId: felixkmh_StartPage_Plugin
 Packages:  
+  - Version: 2.5.0
+    RequiredApiVersion: 6.1.0
+    ReleaseDate: 2022-05-28
+    PackageUrl: https://github.com/felixkmh/StartPage-for-Playnite/releases/download/v2.5.0/felixkmh_StartPage_Plugin_2_5_0.pext
+    Changelog:
+      - added randomized sorting option for shelves
+      - localization updates
   - Version: 2.4.1
     RequiredApiVersion: 6.1.0
     ReleaseDate: 2022-05-16
