@@ -19,6 +19,8 @@ namespace LandingPage.ViewModels
     {
         private IPlayniteAPI playniteAPI;
 
+        private static Random random = new Random();
+
         private ShelveProperties shelveProperties = ShelveProperties.RecentlyPlayed;
         public ShelveProperties ShelveProperties { get => shelveProperties; set => SetValue(ref shelveProperties, value); }
 
@@ -30,6 +32,9 @@ namespace LandingPage.ViewModels
 
         private ICommand resetFiltersCommand;
         public ICommand ResetFiltersCommand { get => resetFiltersCommand; set => SetValue(ref resetFiltersCommand, value); }
+
+        private ICommand manualUpdateCommand;
+        public ICommand ManualUpdateCommand { get => manualUpdateCommand; set => SetValue(ref manualUpdateCommand, value); }
 
         private ObservableCollection<ShelveViewModel> viewModels;
         private readonly Game DummyGame = new Game();
@@ -65,8 +70,9 @@ namespace LandingPage.ViewModels
                 OnPropertyChanged(nameof(Sources));
                 OnPropertyChanged(nameof(Features));
                 OnPropertyChanged(nameof(CompletionStatus));
-                UpdateGames(ShelveProperties);
+                UpdateGames(ShelveProperties, true);
             });
+            manualUpdateCommand = new RelayCommand(() => UpdateGames(ShelveProperties, true));
         }
 
         private void ShelveViewModel_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
@@ -77,7 +83,7 @@ namespace LandingPage.ViewModels
                 UpdateOrder(ShelveProperties, CollectionViewSource);
                 UpdateSorting(ShelveProperties, CollectionViewSource);
                 UpdateGrouping(ShelveProperties, CollectionViewSource);
-                UpdateGames(ShelveProperties);
+                UpdateGames(ShelveProperties, true);
             }
         }
 
@@ -105,7 +111,10 @@ namespace LandingPage.ViewModels
                 {
 
                 }
-                UpdateGames(shelveProperties);
+                if (e.PropertyName != nameof(ShelveProperties.Name))
+                {
+                    UpdateGames(shelveProperties, true);
+                }
             }
         }
 
@@ -139,7 +148,7 @@ namespace LandingPage.ViewModels
                     }
                     if (oldValue != isChecked)
                     {
-                        ViewModel.UpdateGames(ViewModel.ShelveProperties);
+                        ViewModel.UpdateGames(ViewModel.ShelveProperties, true);
                     }
                 }
             }
@@ -316,9 +325,9 @@ namespace LandingPage.ViewModels
         private static void UpdateSorting(ShelveProperties shelveProperties, CollectionViewSource cvs)
         {
             var sortDescriptions = cvs.SortDescriptions;
-            var sortDescription = sortDescriptions.First();
-            sortDescriptions.Clear();
-            var newSortDescription = new SortDescription { Direction = sortDescription.Direction };
+            var sortDescription = sortDescriptions.FirstOrDefault();
+            sortDescriptions?.Clear();
+            var newSortDescription = new SortDescription { Direction = shelveProperties.Order == Order.Ascending ? ListSortDirection.Ascending : ListSortDirection.Descending };
             switch (shelveProperties.SortBy)
             {
                 case SortingField.Name:
@@ -354,15 +363,25 @@ namespace LandingPage.ViewModels
                 default:
                     break;
             }
-            sortDescriptions.Add(newSortDescription);
+            if (shelveProperties.SortBy != SortingField.Random)
+            {
+                if (sortDescription == null)
+                {
+                    sortDescriptions.Add(newSortDescription);
+                }
+                sortDescriptions.Add(newSortDescription);
+            }
         }
 
         private static void UpdateOrder(ShelveProperties shelveProperties, CollectionViewSource cvs)
         {
             var sortDescriptions = cvs.SortDescriptions;
-            var sortDescription = sortDescriptions.First();
-            sortDescriptions.Clear();
-            sortDescriptions.Add(new SortDescription { Direction = shelveProperties.Order == Order.Ascending ? ListSortDirection.Ascending : ListSortDirection.Descending, PropertyName = sortDescription.PropertyName });
+            SortDescription sortDescription = sortDescriptions.FirstOrDefault();
+            sortDescriptions?.Clear();
+            if (sortDescription != null && sortDescription.PropertyName != null)
+            {
+                sortDescriptions?.Add(new SortDescription { Direction = shelveProperties.Order == Order.Ascending ? ListSortDirection.Ascending : ListSortDirection.Descending, PropertyName = sortDescription.PropertyName });
+            }
         }
 
         internal IEnumerable<T> OrderBy<T, U>(IEnumerable<T> enumerable, Func<T, U> func, Order order = Order.Descending)
@@ -374,8 +393,19 @@ namespace LandingPage.ViewModels
             return enumerable.OrderBy(func);
         }
 
-        public void UpdateGames(ShelveProperties shelveProperties)
+        public void UpdateGames(ShelveProperties shelveProperties, bool manualUpdate = false)
         {
+            var needsUpdate = manualUpdate;
+            needsUpdate |= Games.Count == 0;
+            needsUpdate |= ShelveProperties.SortBy != SortingField.Random;
+            if (Games.Any(g => playniteAPI.Database.Games.Get(g.Game.Id) == null))
+            {
+                needsUpdate |= true;
+            }
+
+            if (!needsUpdate)
+                return;
+
             IEnumerable<Game> games = playniteAPI.Database.Games
                         .Where(g => (!g.TagIds?.Contains(LandingPageExtension.Instance.SettingsViewModel.Settings.IgnoreTagId)) ?? true)
                         .Where(g => g.Favorite || !shelveProperties.FavoritesOnly)
@@ -444,6 +474,9 @@ namespace LandingPage.ViewModels
                     break;
                 case SortingField.CompletionStatus:
                     games = OrderBy(games, g => g.CompletionStatus, shelveProperties.Order);
+                    break;
+                case SortingField.Random:
+                    games = games.OrderBy(g => random.Next());
                     break;
                 default:
                     break;

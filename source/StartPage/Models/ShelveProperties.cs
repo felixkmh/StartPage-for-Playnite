@@ -40,7 +40,9 @@ namespace LandingPage.Models
         [Description("LOCCommunityScore")]
         CommunityScore,
         [Description("LOCCompletionStatus")]
-        CompletionStatus
+        CompletionStatus,
+        [Description("LOC_SPG_BackgroundImageSourceRandom")]
+        Random
     }
 
     [TypeConverter(typeof(EnumDescriptionTypeConverter))]

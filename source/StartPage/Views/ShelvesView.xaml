@@ -393,8 +393,29 @@
                                 </StackPanel.Style>
                                 <TextBlock Text="{Binding ShelveProperties.Name}" Style="{StaticResource {x:Type TextBlock}}" FontSize="{DynamicResource FontSizeLarge}"
                                            FontWeight="Bold"/>
+                                <Button Command="{Binding ManualUpdateCommand}"  DockPanel.Dock="Bottom" Background="Transparent">
+                                    <TextBlock Text="" FontFamily="{DynamicResource FontIcoFont}"/>
+                                    <Button.Style>
+                                        <Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
+                                            <Setter Property="BorderThickness" Value="0"/>
+                                            <Setter Property="Foreground" Value="{DynamicResource GlyphBrush}"/>
+                                            <Setter Property="Margin" Value="5,0,0,0"/>
+                                            <Setter Property="Padding" Value="0,0,0,0"/>
+                                            <Setter Property="Visibility" Value="Collapsed"/>
+                                            <Style.Triggers>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter Property="Foreground" Value="{DynamicResource TextBrush}"/>
+                                                </Trigger>
+                                                <DataTrigger Binding="{Binding ShelveProperties.SortBy}" Value="{x:Static lpm:SortingField.Random}">
+                                                    <Setter Property="Visibility" Value="Visible"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Button.Style>
+                                </Button>
                                 <ToggleButton x:Name="shelvetoggleHorizontal" DockPanel.Dock="Top" Background="Transparent"
-                                                              Padding="6,0,4,0" Margin="0,0" BorderThickness="0" BorderBrush="Transparent">
+                                                              Padding="6,0,4,0" Margin="0,0" BorderThickness="0" BorderBrush="Transparent"
+                                              Cursor="Hand">
                                     <ToggleButton.Style>
                                         <Style TargetType="ToggleButton" BasedOn="{StaticResource {x:Type ToggleButton}}">
                                             <Setter Property="Visibility" Value="{Binding ElementName=HorizontalLabelStackPanel, Path=IsMouseOver, Converter={StaticResource BooleanToVisibilityConverter}}"/>
@@ -423,7 +444,8 @@
                                 </DockPanel.Style>
                                 <ToggleButton x:Name="shelvetoggle" DockPanel.Dock="Top" Background="Transparent"
                                                           Visibility="{Binding ElementName=ListDescription, Path=IsMouseOver, Converter={StaticResource BooleanToVisibilityConverter}}"
-                                                          Padding="0,4,0,4" Margin="0" BorderThickness="0" BorderBrush="Transparent">
+                                                          Padding="0,4,0,4" Margin="5,0,0,0" BorderThickness="0" BorderBrush="Transparent"
+                                              Cursor="Hand">
                                     <ToggleButton.Content>
                                         <TextBlock Text="" FontFamily="{DynamicResource FontIcoFont}"/>
                                     </ToggleButton.Content>
@@ -628,8 +650,29 @@
                                         </StackPanel>
                                     </Border>
                                 </Popup>
+                                
                                 <controls:SidewaysTextBlock Text="{Binding ShelveProperties.Name}" VerticalAlignment="Bottom"
                                                                     DockPanel.Dock="Bottom" Margin="10,10,5,30" HorizontalAlignment="Right"/>
+                                <Button Command="{Binding ManualUpdateCommand}"  DockPanel.Dock="Bottom" Background="Transparent">
+                                    <TextBlock Text="" FontFamily="{DynamicResource FontIcoFont}"/>
+                                    <Button.Style>
+                                        <Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
+                                            <Setter Property="BorderThickness" Value="0"/>
+                                            <Setter Property="Foreground" Value="{DynamicResource GlyphBrush}"/>
+                                            <Setter Property="Margin" Value="5,0,0,0"/>
+                                            <Setter Property="Padding" Value="0,4,0,0"/>
+                                            <Setter Property="Visibility" Value="Collapsed"/>
+                                            <Style.Triggers>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter Property="Foreground" Value="{DynamicResource TextBrush}"/>
+                                                </Trigger>
+                                                <DataTrigger Binding="{Binding ShelveProperties.SortBy}" Value="{x:Static lpm:SortingField.Random}">
+                                                    <Setter Property="Visibility" Value="Visible"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Button.Style>
+                                </Button>
                                 <controls:SidewaysTextBlock Text="Placeholder" VerticalAlignment="Bottom" Visibility="Hidden"
                                                                     DockPanel.Dock="Bottom" HorizontalAlignment="Right" Margin="10,10,5,30"/>
                             </DockPanel>
