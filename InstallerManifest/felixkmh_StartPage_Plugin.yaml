@@ -1,5 +1,11 @@
 AddonId: felixkmh_StartPage_Plugin
 Packages:  
+  - Version: 2.6.0
+    RequiredApiVersion: 6.1.0
+    ReleaseDate: 2022-06-06
+    PackageUrl: https://github.com/felixkmh/StartPage-for-Playnite/releases/download/v2.6.0/felixkmh_StartPage_Plugin_2_6_0.pext
+    Changelog:
+      - MostPlayedView can have any number of entries (new one is added if the last entry is not None) 
   - Version: 2.5.0
     RequiredApiVersion: 6.1.0
     ReleaseDate: 2022-05-28
