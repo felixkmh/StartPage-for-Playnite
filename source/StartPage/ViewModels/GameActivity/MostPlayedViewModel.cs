@@ -11,6 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Threading;
 
 namespace LandingPage.ViewModels.GameActivity
 {
@@ -34,7 +35,8 @@ namespace LandingPage.ViewModels.GameActivity
             this.settings = settingsViewModel;
             settingsViewModel.Settings.PropertyChanged += Settings_PropertyChanged;
             settingsViewModel.PropertyChanged += SettingsViewModel_PropertyChanged;
-            foreach(var options in settingsViewModel.Settings.MostPlayedOptions)
+            settingsViewModel.Settings.MostPlayedOptions.CollectionChanged += MostPlayedOptions_CollectionChanged;
+            foreach (var options in settingsViewModel.Settings.MostPlayedOptions)
             {
                 options.PropertyChanged += Options_PropertyChanged;
             }
@@ -61,8 +63,10 @@ namespace LandingPage.ViewModels.GameActivity
         {
             if (e.PropertyName == nameof(LandingPageSettingsViewModel.Settings))
             {
+                Settings.Settings.MostPlayedOptions.CollectionChanged += MostPlayedOptions_CollectionChanged;
                 foreach (var options in Settings.Settings.MostPlayedOptions)
                 {
+                    options.PropertyChanged -= Options_PropertyChanged;
                     options.PropertyChanged += Options_PropertyChanged;
                 }
                 Settings.Settings.PropertyChanged += Settings_PropertyChanged;
@@ -74,12 +78,29 @@ namespace LandingPage.ViewModels.GameActivity
         {
             if (e.PropertyName == nameof(LandingPageSettings.MostPlayedOptions))
             {
+                Settings.Settings.MostPlayedOptions.CollectionChanged -= MostPlayedOptions_CollectionChanged;
+                Settings.Settings.MostPlayedOptions.CollectionChanged += MostPlayedOptions_CollectionChanged;
                 foreach (var options in Settings.Settings.MostPlayedOptions)
                 {
+                    options.PropertyChanged -= Options_PropertyChanged;
                     options.PropertyChanged += Options_PropertyChanged;
                 }
                 UpdateMostPlayedGame();
             }
+        }
+
+        private void MostPlayedOptions_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            if (e.OldItems != null)
+                foreach (MostPlayedOptions removed in e.OldItems)
+                {
+                    removed.PropertyChanged -= Options_PropertyChanged;
+                }
+            if (e.NewItems != null)
+                foreach(MostPlayedOptions added in e.NewItems)
+                {
+                    added.PropertyChanged += Options_PropertyChanged;
+                }
         }
 
         private void Activities_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
@@ -87,13 +108,41 @@ namespace LandingPage.ViewModels.GameActivity
             UpdateMostPlayedGame();
         }
 
+        Task backgroundTask = Task.CompletedTask;
+
         public void UpdateMostPlayedGame()
         {
-            Task.Run(() =>
+            backgroundTask = backgroundTask.ContinueWith(t =>
             {
                 var groups = new List<GameGroup>();
 
                 var tagId = LandingPageExtension.Instance.SettingsViewModel.Settings.IgnoreMostPlayedTagId;
+
+                Application.Current.Dispatcher.Invoke(() =>
+                {
+                    for(int i = Settings.Settings.MostPlayedOptions.Count - 1; i > 0; --i)
+                    {
+                        if (Settings.Settings.MostPlayedOptions[i  ].Timeframe == Timeframe.None &&
+                            Settings.Settings.MostPlayedOptions[i-1].Timeframe == Timeframe.None)
+                        {
+                            Settings.Settings.MostPlayedOptions.RemoveAt(i);
+                            continue;
+                        } 
+                        break;
+                    }
+
+                    if (Settings.Settings.MostPlayedOptions.LastOrDefault() is MostPlayedOptions option &&
+                        option.Timeframe != Timeframe.None)
+                    {
+                        Settings.Settings.MostPlayedOptions.Add(new MostPlayedOptions { Timeframe = Timeframe.None });
+                    }
+
+                    if (Settings.Settings.MostPlayedOptions.Count == 0)
+                    {
+                        Settings.Settings.MostPlayedOptions.Add(new MostPlayedOptions { Timeframe = Timeframe.None });
+                    }
+                });
+
 
                 foreach (var options in Settings.Settings.MostPlayedOptions)
                 {
@@ -139,6 +188,7 @@ namespace LandingPage.ViewModels.GameActivity
                         }
                     }
                 }
+                t?.Dispose();
                 return groups;
             }).ContinueWith(t =>
             {
@@ -159,13 +209,15 @@ namespace LandingPage.ViewModels.GameActivity
                     });
                 }
 
-                for (int i = specialGames.Count - 1; i >= groups.Count; --i)
+                int j = specialGames.Count - 1;
+                while(specialGames.Count > groups.Count)
                 {
                     Application.Current.Dispatcher.Invoke(() =>
                     {
-                        specialGames.RemoveAt(i);
+                        specialGames.RemoveAt(j--);
                     });
                 }
+
                 t?.Dispose();
             });
         }
