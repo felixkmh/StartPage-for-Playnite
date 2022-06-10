@@ -122,17 +122,17 @@ This can lead to a much smaller memory footprint for StartPage. Will not affect 
     <sys:String x:Key="LOC_SPG_HorizontalAlignmentLeft">Left</sys:String>
     <sys:String x:Key="LOC_SPG_HorizontalAlignmentRight">Right</sys:String>
     <sys:String x:Key="LOC_SPG_VerticalAlignment">Alinhamento vertical</sys:String>
-    <sys:String x:Key="LOC_SPG_VerticalAlignmentTop">Top</sys:String>
-    <sys:String x:Key="LOC_SPG_VerticalAlignmentBottom">Bottom</sys:String>
-    <sys:String x:Key="LOC_SPG_AlignmentStretch">Stretch</sys:String>
-    <sys:String x:Key="LOC_SPG_AlignmentCenter">Center</sys:String>
+    <sys:String x:Key="LOC_SPG_VerticalAlignmentTop">Superior</sys:String>
+    <sys:String x:Key="LOC_SPG_VerticalAlignmentBottom">Embaixo</sys:String>
+    <sys:String x:Key="LOC_SPG_AlignmentStretch">Estender</sys:String>
+    <sys:String x:Key="LOC_SPG_AlignmentCenter">Centralizar</sys:String>
     <sys:String x:Key="LOC_SPG_Padding">Padding</sys:String>
     <sys:String x:Key="LOC_SPG_ShelvesHorizontalLabels">Horizontal Labels</sys:String>
 
     <!-- Integrated Views -->
-    <sys:String x:Key="LOC_SPG_ClockView">Clock</sys:String>
-    <sys:String x:Key="LOC_SPG_ClockViewDescription">Digital clock that also shows the current date. Uses the system time format.</sys:String>
-    <sys:String x:Key="LOC_SPG_ShelvesView">Game Shelves</sys:String>
+    <sys:String x:Key="LOC_SPG_ClockView">Relógio</sys:String>
+    <sys:String x:Key="LOC_SPG_ClockViewDescription">Relógio digital que também mostra a data atual. Usa o formato de hora do sistema.</sys:String>
+    <sys:String x:Key="LOC_SPG_ShelvesView">Prateleiras de Jogos</sys:String>
     <sys:String x:Key="LOC_SPG_ShelvesViewDescription">Shelves showing game covers with custom filters, sorting and grouping options.</sys:String>
     <sys:String x:Key="LOC_SPG_MostPlayedView">Most Played</sys:String>
     <sys:String x:Key="LOC_SPG_MostPlayedDescription">Shows most played games for different time frames.</sys:String>
