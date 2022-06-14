@@ -83,6 +83,7 @@
     <sys:String x:Key="LOC_SPG_BackgroundAnimationDuration">مدة المؤثر الحركي:</sys:String>
     <sys:String x:Key="LOC_SPG_BackgroundRefreshInterval">فاصل التحديث (الدقائق):</sys:String>
     <sys:String x:Key="LOC_SPG_SkipGamesInPreviousShelves">تخطي الألعاب الموجودة في الرفوف السابقة</sys:String>
+    <sys:String x:Key="LOC_SPG_SkipGamesInPreviousTimeframes">Skip Games present in preceding Timeframes</sys:String>
     <sys:String x:Key="LOC_SPG_EnableTags">إنشاء وسوم [SPG] عند التشغيل. تستخدم لوضع علامة على الألعاب لتجاهلها.</sys:String>
     <sys:String x:Key="LOC_SPG_FixGridHeight">ارتفاع الشبكة الثابت:</sys:String>
     <sys:String x:Key="LOC_SPG_FixGridHeight_Tooltip" xml:space="preserve">في حالة التمكين، لن يكون ارتفاع الشبكة مرتبطًا بارتفاع النافذة.

@@ -83,6 +83,7 @@
     <sys:String x:Key="LOC_SPG_BackgroundAnimationDuration">Animationsdauer:</sys:String>
     <sys:String x:Key="LOC_SPG_BackgroundRefreshInterval">Aktualisierungsintervall (Minuten):</sys:String>
     <sys:String x:Key="LOC_SPG_SkipGamesInPreviousShelves">Spiele aus vorherigen Regalen überspringen</sys:String>
+    <sys:String x:Key="LOC_SPG_SkipGamesInPreviousTimeframes">Spiele aus vorherigen Zeitrahmen überspringen</sys:String>
     <sys:String x:Key="LOC_SPG_EnableTags">Erstelle [SPG] Schlagwörter beim Start. Werden verwendet, um Spiele als ignoriert zu markieren.</sys:String>
     <sys:String x:Key="LOC_SPG_FixGridHeight">Feste Grid-Höhe:</sys:String>
     <sys:String x:Key="LOC_SPG_FixGridHeight_Tooltip" xml:space="preserve">Wenn aktiviert, ist die Grid-Höhe nicht mehr an die Fensterhöhe gebunden.
