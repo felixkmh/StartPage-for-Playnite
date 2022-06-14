@@ -172,7 +172,7 @@ namespace LandingPage.ViewModels.GameActivity
                             .Where(g => !(g.TagIds?.Contains(tagId) ?? false));
                         candidates = candidates
                             .OrderByDescending(a => a.Playtime)
-                            .Skip(Math.Max(0, Math.Min(options.SkippedGames, candidates.Count() - 1)));
+                            .Skip(Math.Max(0, Math.Min(options.SkippedGames, candidates.Count())));
                         candidates = candidates.Where(g => !settings.Settings.SkipGamesInPreviousMostPlayed || !groups.Any(group => group.Games.Any(m => m.Game == g)));
                         if (candidates.FirstOrDefault() is Game game)
                         {
@@ -194,7 +194,7 @@ namespace LandingPage.ViewModels.GameActivity
                             .Select(a => new { Game = a.Game, Playtime = a.Items.Sum(i => (long)i.ElapsedSeconds) });
                         thisWeek = thisWeek
                             .OrderByDescending(a => a.Playtime)
-                            .Skip(Math.Max(0, Math.Min(options.SkippedGames, thisWeek.Count() - 1)));
+                            .Skip(Math.Max(0, Math.Min(options.SkippedGames, thisWeek.Count())));
 
                         thisWeek = thisWeek.Where(a => !settings.Settings.SkipGamesInPreviousMostPlayed || !groups.Any(group => group.Games.Any(m => m.Game == a.Game)));
                         var mostPlayedThisWeek = thisWeek.FirstOrDefault();
