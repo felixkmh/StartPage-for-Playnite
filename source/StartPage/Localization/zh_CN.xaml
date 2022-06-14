@@ -83,6 +83,7 @@
     <sys:String x:Key="LOC_SPG_BackgroundAnimationDuration">动画持续时间：</sys:String>
     <sys:String x:Key="LOC_SPG_BackgroundRefreshInterval">刷新间隔（分钟）：</sys:String>
     <sys:String x:Key="LOC_SPG_SkipGamesInPreviousShelves">跳过前面的展架中存在的游戏</sys:String>
+    <sys:String x:Key="LOC_SPG_SkipGamesInPreviousTimeframes">Skip Games present in preceding Timeframes</sys:String>
     <sys:String x:Key="LOC_SPG_EnableTags">在启动时创建 [SPG] 标签。用于将游戏标记为忽略。</sys:String>
     <sys:String x:Key="LOC_SPG_FixGridHeight">固定网格高度：</sys:String>
     <sys:String x:Key="LOC_SPG_FixGridHeight_Tooltip" xml:space="preserve">如果启用，网格高度将不再与窗口高度绑定。
