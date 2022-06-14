@@ -187,6 +187,9 @@ namespace LandingPage
         private bool skipGamesInPreviousShelves = false;
         public bool SkipGamesInPreviousShelves { get => skipGamesInPreviousShelves; set => SetValue(ref skipGamesInPreviousShelves, value); }
 
+        private bool skipGamesInPreviousMostPlayed = false;
+        public bool SkipGamesInPreviousMostPlayed { get => skipGamesInPreviousMostPlayed; set => SetValue(ref skipGamesInPreviousMostPlayed, value); }
+
         private bool enableTagCreation = false;
         public bool EnableTagCreation { get => enableTagCreation; set => enableTagCreation = value; }
 

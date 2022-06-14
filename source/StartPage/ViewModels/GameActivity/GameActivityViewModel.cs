@@ -5,8 +5,10 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Timers;
 using System.Windows;
 using System.Windows.Data;
+using System.Windows.Threading;
 using LandingPage.Models.GameActivity;
 using Newtonsoft.Json;
 using Playnite.SDK;
@@ -80,7 +82,15 @@ namespace LandingPage.ViewModels.GameActivity
             this.landingPageSettingsViewModel = landingPageSettings;
             landingPageSettings.PropertyChanged += LandingPageSettings_PropertyChanged;
             landingPageSettings.Settings.PropertyChanged += Settings_PropertyChanged;
-
+            timer = new DispatcherTimer() { Interval = TimeSpan.FromMilliseconds(500) };
+            timer.Tick += (s, a) =>
+            {
+                var t = (DispatcherTimer)s;
+                t.Stop();
+                OnPropertyChanged(nameof(PlaytimeLastWeek));
+                OnPropertyChanged(nameof(PlaytimeLastWeekMax));
+                OnPropertyChanged(nameof(TotalPlaytimeThisWeek));
+            };
         }
 
         public Task ParseAllActivites()
@@ -174,6 +184,14 @@ namespace LandingPage.ViewModels.GameActivity
             }
         }
 
+        private DispatcherTimer timer = null;
+
+        private void Activities_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            timer.Stop();
+            timer.Start();
+        }
+
         private void ActivityWatcher_Changed(object sender, FileSystemEventArgs e)
         {
             var idString = Path.GetFileNameWithoutExtension(e.Name);
@@ -186,9 +204,8 @@ namespace LandingPage.ViewModels.GameActivity
                         Activities.Remove(old);
                     }
                     Activities.Add(activity);
-                    OnPropertyChanged(nameof(PlaytimeLastWeek));
-                    OnPropertyChanged(nameof(PlaytimeLastWeekMax));
-                    OnPropertyChanged(nameof(TotalPlaytimeThisWeek));
+                    timer.Stop();
+                    timer.Start();
                 }
             }
         }
@@ -201,9 +218,8 @@ namespace LandingPage.ViewModels.GameActivity
                 if (Activities.FirstOrDefault(a => id == a.Id) is Activity old)
                 {
                     Activities.Remove(old);
-                    OnPropertyChanged(nameof(PlaytimeLastWeek));
-                    OnPropertyChanged(nameof(PlaytimeLastWeekMax));
-                    OnPropertyChanged(nameof(TotalPlaytimeThisWeek));
+                    timer.Stop();
+                    timer.Start();
                 }
             }
         }
@@ -220,9 +236,8 @@ namespace LandingPage.ViewModels.GameActivity
                         Activities.Remove(old);
                     }
                     Activities.Add(activity);
-                    OnPropertyChanged(nameof(PlaytimeLastWeek));
-                    OnPropertyChanged(nameof(PlaytimeLastWeekMax));
-                    OnPropertyChanged(nameof(TotalPlaytimeThisWeek));
+                    timer.Stop();
+                    timer.Start();
                 }
             }
         }

@@ -9,11 +9,15 @@
              xmlns:conv="clr-namespace:LandingPage.Converters"
              xmlns:ext="clr-namespace:LandingPage.Extensions"
              xmlns:m="clr-namespace:LandingPage.Models.GameActivity"
+             xmlns:numeric="http://gu.se/NumericInput"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
              d:DataContext="{d:DesignInstance IsDesignTimeCreatable=False, Type={x:Type lp:LandingPageSettingsViewModel}}">
-    <Grid>
-        <ItemsControl ItemsSource="{Binding Settings.MostPlayedOptions}">
+    <StackPanel>
+        <CheckBox Content="{DynamicResource LOC_SPG_SkipGamesInPreviousTimeframes}" IsChecked="{Binding Settings.SkipGamesInPreviousMostPlayed}"
+                  Margin="3"/>
+        <ItemsControl ItemsSource="{Binding Settings.MostPlayedOptions}" HorizontalAlignment="Left"
+                      Margin="3" Grid.IsSharedSizeScope="True">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                     <StackPanel Orientation="Vertical"/>
@@ -21,11 +25,25 @@
             </ItemsControl.ItemsPanel>
             <ItemsControl.ItemTemplate>
                 <DataTemplate DataType="{x:Type m:MostPlayedOptions}">
-                    <ComboBox ItemsSource="{Binding Source={ext:EnumBindingSource {x:Type m:Timeframe}}}" 
-                                      SelectedValue="{Binding Timeframe}" Margin="2">
-                    </ComboBox>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition SharedSizeGroup="Timeframe" Width="Auto"/>
+                            <ColumnDefinition SharedSizeGroup="SkippedGames" Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <ComboBox ItemsSource="{Binding Source={ext:EnumBindingSource {x:Type m:Timeframe}}}" 
+                                          SelectedValue="{Binding Timeframe}" Margin="2">
+                        </ComboBox>
+                        <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
+                            <TextBlock Foreground="{DynamicResource TextBrush}" Text="{DynamicResource LOC_SPG_SkippedGames}" Margin="2,2,0,2"
+                                       VerticalAlignment="Center"
+                                       FontSize="{DynamicResource FontSize}"/>
+                            <numeric:IntBox MinValue="0" Margin="2" MinWidth="10" Value="{Binding SkippedGames, UpdateSourceTrigger=LostFocus}"
+                                            Style="{StaticResource {x:Type TextBox}}"
+                                            VerticalAlignment="Stretch"/>
+                        </StackPanel>
+                    </Grid>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>  
-    </Grid>
+    </StackPanel>
 </UserControl>

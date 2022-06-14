@@ -57,5 +57,8 @@ namespace LandingPage.Models.GameActivity
         public Timeframe Timeframe { get => timeframe; set => SetValue(ref timeframe, value); }
 
         public TimeSpan TimeSpan => TimeframeToTimespan[Timeframe];
+
+        private int skippedGames = 0;
+        public int SkippedGames { get => skippedGames; set => SetValue(ref skippedGames, value); }
     }
 }

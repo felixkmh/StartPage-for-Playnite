@@ -10,8 +10,8 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Timers;
 using System.Windows;
-using System.Windows.Threading;
 
 namespace LandingPage.ViewModels.GameActivity
 {
@@ -87,6 +87,10 @@ namespace LandingPage.ViewModels.GameActivity
                 }
                 UpdateMostPlayedGame();
             }
+            if (e.PropertyName == nameof(LandingPageSettings.SkipGamesInPreviousMostPlayed))
+            {
+                UpdateMostPlayedGame();
+            }
         }
 
         private void MostPlayedOptions_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
@@ -103,9 +107,20 @@ namespace LandingPage.ViewModels.GameActivity
                 }
         }
 
+        private Timer timer = null;
+
         private void Activities_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
-            UpdateMostPlayedGame();
+            if (timer == null)
+            {
+                timer = new Timer(500) { AutoReset = false };
+                timer.Elapsed += (s, a) =>
+                {
+                    UpdateMostPlayedGame();
+                };
+            }
+            timer.Stop();
+            timer.Start();
         }
 
         Task backgroundTask = Task.CompletedTask;
@@ -152,10 +167,14 @@ namespace LandingPage.ViewModels.GameActivity
                     }
                     if (options.Timeframe == Timeframe.AllTime)
                     {
-                        if (playniteAPI.Database.Games
+                        var candidates = playniteAPI.Database.Games
                             .Where(g => !g.Hidden)
-                            .Where(g => !(g.TagIds?.Contains(tagId) ?? false))
-                            .MaxElement(g => g.Playtime).Value is Game game)
+                            .Where(g => !(g.TagIds?.Contains(tagId) ?? false));
+                        candidates = candidates
+                            .OrderByDescending(a => a.Playtime)
+                            .Skip(Math.Max(0, Math.Min(options.SkippedGames, candidates.Count() - 1)));
+                        candidates = candidates.Where(g => !settings.Settings.SkipGamesInPreviousMostPlayed || !groups.Any(group => group.Games.Any(m => m.Game == g)));
+                        if (candidates.FirstOrDefault() is Game game)
                         {
                             var group = new GameGroup();
                             group.Games.Add(new GameModel(game));
@@ -171,15 +190,19 @@ namespace LandingPage.ViewModels.GameActivity
                         var thisWeek = GameActivityViewModel.Activities
                             .Select(a => new { Game = playniteAPI.Database.Games.Get(a.Id), Items = a.Items.Where(i => options.Timeframe == Timeframe.AllTime || i.DateSession.Add(options.TimeSpan) >= DateTime.Today).ToList() })
                             .Where(a => a.Game is Game && a.Items?.Count > 0)
-                            .Where(a => !(a.Game.TagIds?.Contains(tagId) ?? false));
-                        var mostPlayedThisWeek = thisWeek
-                            .Select(a => new { Game = a.Game, Playtime = a.Items.Sum(i => (long)i.ElapsedSeconds) })
-                            .MaxElement(g => g.Playtime).Value?.Game;
+                            .Where(a => !(a.Game.TagIds?.Contains(tagId) ?? false))
+                            .Select(a => new { Game = a.Game, Playtime = a.Items.Sum(i => (long)i.ElapsedSeconds) });
+                        thisWeek = thisWeek
+                            .OrderByDescending(a => a.Playtime)
+                            .Skip(Math.Max(0, Math.Min(options.SkippedGames, thisWeek.Count() - 1)));
 
-                        if (mostPlayedThisWeek is Game mostPlayedWeek)
+                        thisWeek = thisWeek.Where(a => !settings.Settings.SkipGamesInPreviousMostPlayed || !groups.Any(group => group.Games.Any(m => m.Game == a.Game)));
+                        var mostPlayedThisWeek = thisWeek.FirstOrDefault();
+
+                        if (mostPlayedThisWeek?.Game is Game)
                         {
                             var group = new GameGroup();
-                            group.Games.Add(new GameModel(mostPlayedWeek));
+                            group.Games.Add(new GameModel(mostPlayedThisWeek.Game));
                             group.Label = converter.ConvertToString(options.Timeframe);
                             Application.Current.Dispatcher.Invoke(() =>
                             {
