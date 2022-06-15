@@ -83,7 +83,7 @@
     <sys:String x:Key="LOC_SPG_BackgroundAnimationDuration">Тривалість анімації:</sys:String>
     <sys:String x:Key="LOC_SPG_BackgroundRefreshInterval">Інтервал оновлення (хвилини):</sys:String>
     <sys:String x:Key="LOC_SPG_SkipGamesInPreviousShelves">Пропустити ігри наявні на попередніх Полицях</sys:String>
-    <sys:String x:Key="LOC_SPG_SkipGamesInPreviousTimeframes">Skip Games present in preceding Timeframes</sys:String>
+    <sys:String x:Key="LOC_SPG_SkipGamesInPreviousTimeframes">Пропустити ігри наявні у попередніх відрізках часу</sys:String>
     <sys:String x:Key="LOC_SPG_EnableTags">Створювати теги [SPG] при запуску. Використовується для маркування ігнорованих ігор.</sys:String>
     <sys:String x:Key="LOC_SPG_FixGridHeight">Фіксована висота сітки:</sys:String>
     <sys:String x:Key="LOC_SPG_FixGridHeight_Tooltip" xml:space="preserve">Якщо увімкнено, висота сітки більше не прив'язана до висоти вікна.
