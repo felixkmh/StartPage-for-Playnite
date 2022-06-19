@@ -24,6 +24,9 @@ namespace LandingPage.ViewModels
         private ShelveProperties shelveProperties = ShelveProperties.RecentlyPlayed;
         public ShelveProperties ShelveProperties { get => shelveProperties; set => SetValue(ref shelveProperties, value); }
 
+        private LandingPage.Settings.ShelvesSettings shelveSettings = new LandingPage.Settings.ShelvesSettings();
+        public LandingPage.Settings.ShelvesSettings ShelveSettings { get => shelveSettings; set => SetValue(ref shelveSettings, value); }
+
         private CollectionViewSource collectionViewSource = new CollectionViewSource();
         public CollectionViewSource CollectionViewSource { get => collectionViewSource; set => SetValue(ref collectionViewSource, value); }
 
@@ -39,7 +42,7 @@ namespace LandingPage.ViewModels
         private ObservableCollection<ShelveViewModel> viewModels;
         private readonly Game DummyGame = new Game();
 
-        public ShelveViewModel(ShelveProperties shelveProperties, IPlayniteAPI playniteAPI, ObservableCollection<ShelveViewModel> viewModels)
+        public ShelveViewModel(ShelveProperties shelveProperties, LandingPage.Settings.ShelvesSettings shelveSettings, IPlayniteAPI playniteAPI, ObservableCollection<ShelveViewModel> viewModels)
         {
             this.viewModels = viewModels;
             collectionViewSource.SortDescriptions.Add(new System.ComponentModel.SortDescription());
@@ -51,6 +54,7 @@ namespace LandingPage.ViewModels
             collectionViewSource.Source = Games;
             this.playniteAPI = playniteAPI;
             this.shelveProperties = shelveProperties;
+            this.shelveSettings = shelveSettings;
             // UpdateGames(shelveProperties);
             this.shelveProperties.PropertyChanged += ShelveProperties_PropertyChangedAsync;
             PropertyChanged += ShelveViewModel_PropertyChangedAsync;

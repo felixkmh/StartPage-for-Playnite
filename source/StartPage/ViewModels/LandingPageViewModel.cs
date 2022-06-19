@@ -174,7 +174,7 @@ namespace LandingPage.ViewModels
 
             foreach(var shelveProperties in settings.Settings.ShelveProperties)
             {
-                ShelveViewModels.Add(new ShelveViewModel(shelveProperties, playniteAPI, ShelveViewModels));
+                ShelveViewModels.Add(new ShelveViewModel(shelveProperties, null, playniteAPI, ShelveViewModels));
             }
 
             NextRandomBackgroundCommand = new RelayCommand(() => 
@@ -185,7 +185,7 @@ namespace LandingPage.ViewModels
             languageSupportsVertical = verticalLanguages.Contains(playniteAPI.ApplicationSettings.Language);
             AddShelveCommand = new RelayCommand(() => 
             {
-                ShelveViewModel item = new ShelveViewModel(ShelveProperties.RecentlyPlayed, playniteAPI, ShelveViewModels);
+                ShelveViewModel item = new ShelveViewModel(ShelveProperties.RecentlyPlayed, null, playniteAPI, ShelveViewModels);
                 Settings.Settings.ShelveProperties.Add(item.ShelveProperties);
                 ShelveViewModels.Add(item);
             });
@@ -205,7 +205,7 @@ namespace LandingPage.ViewModels
                     var properties = svm.ShelveProperties.Copy();
                     properties.SkippedGames = svm.ShelveProperties.NumberOfGames + svm.ShelveProperties.SkippedGames;
                     properties.Name = string.Empty;
-                    ShelveViewModel item = new ShelveViewModel(properties, playniteAPI, ShelveViewModels);
+                    ShelveViewModel item = new ShelveViewModel(properties, null, playniteAPI, ShelveViewModels);
                     Settings.Settings.ShelveProperties.Insert(idx + 1, item.ShelveProperties);
                     ShelveViewModels.Insert(idx + 1, item);
                 }

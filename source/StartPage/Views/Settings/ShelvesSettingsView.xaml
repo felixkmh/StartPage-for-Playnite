@@ -4,14 +4,15 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:LandingPage.Views.Settings"
+             xmlns:vm="clr-namespace:LandingPage.ViewModels"
              xmlns:lp="clr-namespace:LandingPage" 
              xmlns:system="clr-namespace:System;assembly=mscorlib"
              xmlns:conv="clr-namespace:LandingPage.Converters"
              xmlns:ext="clr-namespace:LandingPage.Extensions"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
-             d:DataContext="{d:DesignInstance IsDesignTimeCreatable=False, Type={x:Type lp:LandingPageSettingsViewModel}}">
+             d:DataContext="{d:DesignInstance IsDesignTimeCreatable=False, Type={x:Type vm:ShelvesSettingsViewModel}}">
     <Grid>
-        <CheckBox Content="{DynamicResource LOC_SPG_ShelvesHorizontalLabels}" IsChecked="{Binding Settings.HorizontalShelveLabels}"/>
+        <CheckBox Content="{DynamicResource LOC_SPG_ShelvesHorizontalLabels}" IsChecked="{Binding ShelvesSettings.HorizontalLabels}"/>
     </Grid>
 </UserControl>

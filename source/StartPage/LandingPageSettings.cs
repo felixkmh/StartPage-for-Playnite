@@ -181,6 +181,9 @@ namespace LandingPage
         private Dictionary<Guid, ObservableCollection<ShelveProperties>> shelveInstances = new Dictionary<Guid, ObservableCollection<ShelveProperties>>();
         public Dictionary<Guid, ObservableCollection<ShelveProperties>> ShelveInstances { get => shelveInstances; set => SetValue(ref shelveInstances, value); }
 
+        private Dictionary<Guid, Settings.ShelvesSettings> shelveInstanceSettings = null;
+        public Dictionary<Guid, Settings.ShelvesSettings> ShelveInstanceSettings { get => shelveInstanceSettings; set => SetValue(ref shelveInstanceSettings, value); }
+
         private ObservableCollection<MostPlayedOptions> mostPlayedOptions = null;
         public ObservableCollection<MostPlayedOptions> MostPlayedOptions { get => mostPlayedOptions; set => SetValue(ref mostPlayedOptions, value); }
 
@@ -284,6 +287,11 @@ namespace LandingPage
                     new MostPlayedOptions { Timeframe = Timeframe.Last3Month },
                     new MostPlayedOptions { Timeframe = Timeframe.AllTime    }
                 };
+            }
+
+            if (Settings.ShelveInstanceSettings == null)
+            {
+                Settings.ShelveInstanceSettings = Settings.ShelveInstances.ToDictionary(s => s.Key, s => new Settings.ShelvesSettings { ShelveProperties = s.Value });
             }
 
             SelectImagePathCommand = new RelayCommand(() =>

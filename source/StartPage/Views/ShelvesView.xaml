@@ -351,7 +351,7 @@
                                 <Style TargetType="DockPanel">
                                     <Setter Property="Tag" Value="{Binding ElementName=shelvetoggle}"/>
                                     <Style.Triggers>
-                                        <DataTrigger Binding="{mu:LandingPageSettings Settings.HorizontalShelveLabels}" Value="{StaticResource True}">
+                                        <DataTrigger Binding="{Binding ShelveSettings.HorizontalLabels}" Value="{StaticResource True}">
                                             <Setter Property="Tag" Value="{Binding ElementName=shelvetoggleHorizontal}"/>
                                         </DataTrigger>
                                         <!--<DataTrigger Binding="{Binding ShelveProperties.GroupBy}" Value="{x:Static lpm:GroupingField.None}">
@@ -385,7 +385,7 @@
                                 <StackPanel.Style>
                                     <Style TargetType="StackPanel">
                                         <Style.Triggers>
-                                            <DataTrigger Binding="{mu:LandingPageSettings Settings.HorizontalShelveLabels}" Value="{StaticResource False}">
+                                            <DataTrigger Binding="{Binding ShelveSettings.HorizontalLabels}" Value="{StaticResource False}">
                                                 <Setter Property="Visibility" Value="Collapsed"/>
                                             </DataTrigger>
                                         </Style.Triggers>
@@ -436,7 +436,7 @@
                                 <DockPanel.Style>
                                     <Style TargetType="DockPanel">
                                         <Style.Triggers>
-                                            <DataTrigger Binding="{mu:LandingPageSettings Settings.HorizontalShelveLabels}" Value="{StaticResource True}">
+                                            <DataTrigger Binding="{Binding ShelveSettings.HorizontalLabels}" Value="{StaticResource True}">
                                                 <Setter Property="Visibility" Value="Collapsed"/>
                                             </DataTrigger>
                                         </Style.Triggers>

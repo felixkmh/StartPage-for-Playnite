@@ -23,7 +23,6 @@ using LandingPage.Models.Layout;
 using LandingPage.ViewModels.Layout;
 using System.Diagnostics;
 using LandingPage.ViewModels.GameActivity;
-using LandingPage.Views.Settings;
 using Newtonsoft.Json;
 
 namespace LandingPage
@@ -404,7 +403,7 @@ namespace LandingPage
             if (startPageView?.DataContext is StartPageViewModel startPageViewModel)
             {
                 Settings.GridLayout = startPageViewModel.RootNodeViewModel.GridNode;
-                Settings.ShelveInstances = shelvesViewModels.ToDictionary(p => p.Key, p => p.Value.Shelves);
+                Settings.ShelveInstanceSettings = shelvesViewModels.ToDictionary(p => p.Key, p => p.Value.Shelves);
             }
 
 
@@ -571,11 +570,11 @@ namespace LandingPage
         {
             if (id == "MostPlayed")
             {
-                return new MostPlayedSettingsView() { DataContext = SettingsViewModel };
+                return new Views.Settings.MostPlayedSettingsView() { DataContext = SettingsViewModel };
             }
             if (id == "GameShelves")
             {
-                return new ShelvesSettingsView() { DataContext = SettingsViewModel };
+                return new Views.Settings.ShelvesSettingsView() { DataContext = new ViewModels.ShelvesSettingsViewModel(SettingsViewModel, Settings.ShelveInstanceSettings[instanceId]) };
             }
             return null;
         }
