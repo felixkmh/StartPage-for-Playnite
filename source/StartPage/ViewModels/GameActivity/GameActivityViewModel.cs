@@ -16,7 +16,7 @@ using Playnite.SDK.Models;
 
 namespace LandingPage.ViewModels.GameActivity
 {
-    public class GameActivityViewModel : ObservableObject
+    public class GameActivityViewModel : BusyObservableObject
     {
         internal IPlayniteAPI playniteAPI;
         internal FileSystemWatcher activityWatcher;
@@ -42,27 +42,14 @@ namespace LandingPage.ViewModels.GameActivity
 
         public ObservableCollection<PlayTimePerSource> WeeklyPlaytime { get; set; } = new ObservableCollection<PlayTimePerSource>();
 
+        private ulong playTimeLastWeekMax = 0;
+        public ulong PlaytimeLastWeekMax { get => playTimeLastWeekMax; set => SetValue(ref playTimeLastWeekMax, value); }
 
-        public ulong PlaytimeLastWeekMax => PlaytimeLastWeek?.Max(dpt => dpt.Playtime) ?? 0;
+        private ulong totalPlaytimeThisWeek = 0;
+        public ulong TotalPlaytimeThisWeek { get => totalPlaytimeThisWeek; set => SetValue(ref totalPlaytimeThisWeek, value); }
 
-        public ulong TotalPlaytimeThisWeek => (ulong)(PlaytimeLastWeek?.Sum(a => (long)a.Playtime) ?? 0);
-
-        public List<DayPlaytime> PlaytimeLastWeek
-        {
-            get
-            {
-                if (Activities.Count == 0)
-                {
-                    return null;
-                }
-                var lastSevenDays = new[] { 6, 5, 4, 3, 2, 1, 0 }.Select(i => DateTime.Today.AddDays(-i).Date);
-                var summed = lastSevenDays.Select(day => new DayPlaytime { Day = day, Playtime = (ulong)Activities.SelectMany(a => a.Items).Where(item => item.DateSession.Date == day).Sum(item => (long)item.ElapsedSeconds) });
-                double max = summed.Max(dpt => dpt.Playtime);
-                max = (double.IsNaN(max) || max == 0) ? 1 : max;
-                var withSize = summed.Select(a => { a.Filled = (float)a.Playtime / max; a.Filled = double.IsNaN(a.Filled) ? 0 : a.Filled; return a; });
-                return withSize.ToList();
-            }
-        }
+        private List<DayPlaytime> playtimeLastWeek = new List<DayPlaytime>();
+        public List<DayPlaytime> PlaytimeLastWeek { get => playtimeLastWeek; set => SetValue(ref playtimeLastWeek, value); }
 
         private string activityPath;
 
@@ -80,23 +67,96 @@ namespace LandingPage.ViewModels.GameActivity
                 activityWatcher.EnableRaisingEvents = true;
             }
             this.landingPageSettingsViewModel = landingPageSettings;
-            landingPageSettings.PropertyChanged += LandingPageSettings_PropertyChanged;
-            landingPageSettings.Settings.PropertyChanged += Settings_PropertyChanged;
+            PropertyChanged += GameActivityViewModel_PropertyChangedAsync;
+            Activities.CollectionChanged += Activities_CollectionChanged;
             timer = new DispatcherTimer() { Interval = TimeSpan.FromMilliseconds(500) };
-            timer.Tick += (s, a) =>
+            timer.Tick += async (s, a) =>
             {
                 var t = (DispatcherTimer)s;
                 t.Stop();
-                OnPropertyChanged(nameof(PlaytimeLastWeek));
-                OnPropertyChanged(nameof(PlaytimeLastWeekMax));
-                OnPropertyChanged(nameof(TotalPlaytimeThisWeek));
+                await UpdatePlaytimeLastWeekAsync();
             };
+        }
+
+        private async void GameActivityViewModel_PropertyChangedAsync(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == nameof(Activities))
+            {
+                Activities.CollectionChanged += Activities_CollectionChanged;
+                await UpdatePlaytimeLastWeekAsync();
+            }
+        }
+
+        public void UpdatePlaytimeLastWeek()
+        {
+            if (Activities.Count == 0)
+            {
+                PlaytimeLastWeek = null;
+            }
+            var lastSevenDays = Enumerable.Range(-6, 7).Reverse().Select(i => DateTime.Today.AddDays(i).Date);
+            var summed = lastSevenDays.Select(day => new DayPlaytime { Day = day, Playtime = (ulong)Activities.SelectMany(a => a.Items).Where(item => item.DateSession.Date == day).Sum(item => (long)item.ElapsedSeconds) });
+            double max = summed.Max(dpt => dpt.Playtime);
+            max = (double.IsNaN(max) || max == 0) ? 1 : max;
+            var withSize = summed.Select(a => { a.Filled = (float)a.Playtime / max; a.Filled = double.IsNaN(a.Filled) ? 0 : a.Filled; return a; });
+            PlaytimeLastWeek = withSize.ToList();
+
+            PlaytimeLastWeekMax = PlaytimeLastWeek?.Max(dpt => dpt.Playtime) ?? 0;
+            TotalPlaytimeThisWeek = (ulong)(PlaytimeLastWeek?.Sum(a => (long)a.Playtime) ?? 0);
+        }
+
+        public async Task UpdatePlaytimeLastWeekAsync()
+        {
+            PlaytimeLastWeek = await Task.Run(() =>
+            {
+                if (Activities.Count == 0)
+                {
+                    return null;
+                }
+                var lastSevenDays = new[] { 6, 5, 4, 3, 2, 1, 0 }.Select(i => DateTime.Today.AddDays(-i).Date);
+                var summed = lastSevenDays.Select(day => new DayPlaytime { Day = day, Playtime = (ulong)Activities.SelectMany(a => a.Items).Where(item => item.DateSession.Date == day).Sum(item => (long)item.ElapsedSeconds) });
+                double max = summed.Max(dpt => dpt.Playtime);
+                max = (double.IsNaN(max) || max == 0) ? 1 : max;
+                var withSize = summed.Select(a => { a.Filled = (float)a.Playtime / max; a.Filled = double.IsNaN(a.Filled) ? 0 : a.Filled; return a; });
+                return withSize.ToList();
+            });
+            PlaytimeLastWeekMax = await Task.Run(() => PlaytimeLastWeek?.Max(dpt => dpt.Playtime) ?? 0);
+            TotalPlaytimeThisWeek = await Task.Run(() => (ulong)(PlaytimeLastWeek?.Sum(a => (long)a.Playtime) ?? 0));
+        }
+
+        public async Task ParseAllActivitiesAsync()
+        {
+            IsBusy = true;
+            var activities = await Task.Run(() =>
+            {
+                if (!string.IsNullOrEmpty(activityPath) && Directory.Exists(activityPath))
+                {
+                    var files = Directory.GetFiles(activityPath);
+                    var validFiles = files
+                        .AsParallel()
+                        .Where(path => Guid.TryParse(Path.GetFileNameWithoutExtension(path), out var id) && playniteAPI.Database.Games.Get(id) is Game);
+                    var deserializedFiles = validFiles
+                        .Select(path => DeserializeActivityFile(path))
+                        .OfType<Activity>();
+                    var withSessions = deserializedFiles
+                        .Where(ac => (ac.Items?.Count() ?? 0) > 0);
+                    return withSessions.ToObservable();
+                }
+                return null;
+            });
+
+            if (activities is ObservableCollection<Activity>)
+            {
+                Activities = activities;
+                Activities.CollectionChanged += Activities_CollectionChanged;
+            }
+            IsBusy = false;
         }
 
         public Task ParseAllActivites()
         {
             return Task.Run(() =>
             {
+                IsBusy = true;
                 if (!string.IsNullOrEmpty(activityPath) && Directory.Exists(activityPath))
                 {
                     var files = Directory.GetFiles(activityPath);
@@ -113,14 +173,16 @@ namespace LandingPage.ViewModels.GameActivity
                 return null;
             }).ContinueWith(t =>
             {
-                Application.Current.Dispatcher.Invoke(() =>
+                Application.Current.Dispatcher.BeginInvoke(new Action(() =>
                 {
                     if (t.Result is ObservableCollection<Activity> collection)
                     {
                         Activities = collection;
+                        Activities.CollectionChanged += Activities_CollectionChanged;
                     }
-                });
-                t?.Dispose();
+                    t?.Dispose();
+                }));
+                IsBusy = true;
             });
         }
 
@@ -154,6 +216,11 @@ namespace LandingPage.ViewModels.GameActivity
             return false;
         }
 
+        public async Task<Activity> DeserializeActivityFileAsync(string path)
+        {
+            return await Task.Run(() => DeserializeActivityFile(path));
+        }
+
         public Activity DeserializeActivityFile(string path)
         {
             try
@@ -168,20 +235,6 @@ namespace LandingPage.ViewModels.GameActivity
             }
             catch (Exception) { }
             return null;
-        }
-
-        private void Settings_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
-        {
-            
-        }
-
-        private void LandingPageSettings_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
-        {
-            if (e.PropertyName == "Settings" && sender is LandingPageSettingsViewModel settingsViewModel)
-            {
-                // UpdateLatestAchievements(settingsViewModel.Settings.MaxNumberRecentAchievements, settingsViewModel.Settings.MaxNumberRecentAchievementsPerGame);
-                settingsViewModel.Settings.PropertyChanged += Settings_PropertyChanged;
-            }
         }
 
         private DispatcherTimer timer = null;
@@ -204,8 +257,6 @@ namespace LandingPage.ViewModels.GameActivity
                         Activities.Remove(old);
                     }
                     Activities.Add(activity);
-                    timer.Stop();
-                    timer.Start();
                 }
             }
         }
@@ -218,8 +269,6 @@ namespace LandingPage.ViewModels.GameActivity
                 if (Activities.FirstOrDefault(a => id == a.Id) is Activity old)
                 {
                     Activities.Remove(old);
-                    timer.Stop();
-                    timer.Start();
                 }
             }
         }
@@ -236,8 +285,6 @@ namespace LandingPage.ViewModels.GameActivity
                         Activities.Remove(old);
                     }
                     Activities.Add(activity);
-                    timer.Stop();
-                    timer.Start();
                 }
             }
         }

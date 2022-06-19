@@ -14,10 +14,11 @@ using LandingPage.Extensions;
 using System.Windows;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using StartPage.SDK;
 
 namespace LandingPage.ViewModels.SuccessStory
 {
-    public class SuccessStoryViewModel : IStartPageViewModel
+    public class SuccessStoryViewModel : IStartPageViewModel, IStartPageControl
     {
         internal string achievementsPath;
         internal IPlayniteAPI playniteAPI;
@@ -41,8 +42,8 @@ namespace LandingPage.ViewModels.SuccessStory
         {
             internal GameModel game;
             public GameModel Game { get => game; set { if (value != game) { game = value; OnPropertyChanged(); } } }
-            internal Achivement achievement;
-            public Achivement Achievement { get => achievement; set { if (value != achievement) { achievement = value; OnPropertyChanged(); } } }
+            internal Achievement achievement;
+            public Achievement Achievement { get => achievement; set { if (value != achievement) { achievement = value; OnPropertyChanged(); } } }
             internal Achievements source;
             public Achievements Source { get => source; set { if (value != source) { source = value; OnPropertyChanged(); } } }
         }
@@ -55,88 +56,160 @@ namespace LandingPage.ViewModels.SuccessStory
             {
                 achievementWatcher = new FileSystemWatcher(achievementsPath, "*.json");
                 achievementWatcher.NotifyFilter = NotifyFilters.LastWrite;
-                achievementWatcher.Created += AchievementWatcher_Created;
-                achievementWatcher.Deleted += AchievementWatcher_Deleted;
-                achievementWatcher.Changed += AchievementWatcher_Changed;
+                achievementWatcher.Created += AchievementWatcher_CreatedAsync;
+                achievementWatcher.Deleted += AchievementWatcher_DeletedAsync;
+                achievementWatcher.Changed += AchievementWatcher_ChangedAsync;
                 achievementWatcher.EnableRaisingEvents = true;
             }
             this.landingPageSettingsViewModel = landingPageSettings;
-            landingPageSettings.PropertyChanged += LandingPageSettings_PropertyChanged;
-            landingPageSettings.Settings.PropertyChanged += Settings_PropertyChanged;
+            landingPageSettings.PropertyChanged += LandingPageSettings_PropertyChangedAsync;
+            landingPageSettings.Settings.PropertyChanged += Settings_PropertyChangedAsync;
         }
 
-        private void Settings_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        private async void Settings_PropertyChangedAsync(object sender, PropertyChangedEventArgs e)
         {
             if ((e.PropertyName == nameof(LandingPageSettings.MaxNumberRecentAchievements)
                 || e.PropertyName == nameof(LandingPageSettings.MaxNumberRecentAchievementsPerGame))
                 && sender is LandingPageSettings settings)
             {
-                UpdateLatestAchievements(settings.MaxNumberRecentAchievements, settings.MaxNumberRecentAchievementsPerGame);
+                await UpdateLatestAchievementsAsync(settings.MaxNumberRecentAchievements, settings.MaxNumberRecentAchievementsPerGame);
             }
         }
 
-        private void LandingPageSettings_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        private async void LandingPageSettings_PropertyChangedAsync(object sender, PropertyChangedEventArgs e)
         {
             if (e.PropertyName == "Settings" && sender is LandingPageSettingsViewModel settingsViewModel)
             {
-                UpdateLatestAchievements(settingsViewModel.Settings.MaxNumberRecentAchievements, settingsViewModel.Settings.MaxNumberRecentAchievementsPerGame);
-                settingsViewModel.Settings.PropertyChanged += Settings_PropertyChanged;
+                await UpdateLatestAchievementsAsync(settingsViewModel.Settings.MaxNumberRecentAchievements, settingsViewModel.Settings.MaxNumberRecentAchievementsPerGame);
+                settingsViewModel.Settings.PropertyChanged += Settings_PropertyChangedAsync;
             }
         }
 
-        private void AchievementWatcher_Changed(object sender, FileSystemEventArgs e)
+        private async void AchievementWatcher_ChangedAsync(object sender, FileSystemEventArgs e)
         {
             var idString = Path.GetFileNameWithoutExtension(e.Name);
             if (Guid.TryParse(idString, out var id))
             {
                 if (ParseAchievements(id))
                 {
-                    UpdateLatestAchievements(landingPageSettingsViewModel.Settings.MaxNumberRecentAchievements, landingPageSettingsViewModel.Settings.MaxNumberRecentAchievementsPerGame);
+                    await UpdateLatestAchievementsAsync(landingPageSettingsViewModel.Settings.MaxNumberRecentAchievements, landingPageSettingsViewModel.Settings.MaxNumberRecentAchievementsPerGame);
                 }
             }
         }
 
-        private void AchievementWatcher_Deleted(object sender, FileSystemEventArgs e)
+        private async void AchievementWatcher_DeletedAsync(object sender, FileSystemEventArgs e)
         {
             var idString = Path.GetFileNameWithoutExtension(e.Name);
             if (Guid.TryParse(idString, out var id))
             {
                 if (achievements.Remove(id))
                 {
-                    UpdateLatestAchievements(landingPageSettingsViewModel.Settings.MaxNumberRecentAchievements, landingPageSettingsViewModel.Settings.MaxNumberRecentAchievementsPerGame);
+                    await UpdateLatestAchievementsAsync(landingPageSettingsViewModel.Settings.MaxNumberRecentAchievements, landingPageSettingsViewModel.Settings.MaxNumberRecentAchievementsPerGame);
                 }
             }
         }
 
-        private void AchievementWatcher_Created(object sender, FileSystemEventArgs e)
+        private async void AchievementWatcher_CreatedAsync(object sender, FileSystemEventArgs e)
         {
             var idString = Path.GetFileNameWithoutExtension(e.Name);
             if (Guid.TryParse(idString, out var id))
             {
                 if (ParseAchievements(id))
                 {
-                    UpdateLatestAchievements(landingPageSettingsViewModel.Settings.MaxNumberRecentAchievements, landingPageSettingsViewModel.Settings.MaxNumberRecentAchievementsPerGame);
+                    await UpdateLatestAchievementsAsync(landingPageSettingsViewModel.Settings.MaxNumberRecentAchievements, landingPageSettingsViewModel.Settings.MaxNumberRecentAchievementsPerGame);
                 }
             }
         }
 
         public void Update()
         {
-            Task.Run(() => UpdateLatestAchievements(landingPageSettingsViewModel.Settings.MaxNumberRecentAchievements, landingPageSettingsViewModel.Settings.MaxNumberRecentAchievementsPerGame));
+            Task.Run(() => UpdateLatestAchievements(
+                landingPageSettingsViewModel.Settings.MaxNumberRecentAchievements, 
+                landingPageSettingsViewModel.Settings.MaxNumberRecentAchievementsPerGame
+            ));
         }
 
-        public void UpdateLatestAchievements(int achievementsOverall = 6, int achievementsPerGame = 3)
+        public async Task UpdateAsync()
         {
-            var latest = achievements
+            await UpdateLatestAchievementsAsync(
+                landingPageSettingsViewModel.Settings.MaxNumberRecentAchievements, 
+                landingPageSettingsViewModel.Settings.MaxNumberRecentAchievementsPerGame
+            );
+        }
+
+        public class TempAchievement
+        {
+            public Game Game { get; set; }
+            public Achievement Achievement { get; set; }
+            public Achievements Source { get; set; }
+        }
+
+        public List<TempAchievement> GetLatestAchievements(int achievementsOverall = 6, int achievementsPerGame = 3)
+        {
+            return achievements
                 .AsParallel()
                 .SelectMany(pair => pair.Value.Items
                     .OrderByDescending(a => a.DateUnlocked ?? default)
                     .Take(achievementsPerGame)
-                    .Select(a => new { Game = playniteAPI.Database.Games.Get(pair.Value.Id), Achievement = a, Source = pair.Value })
+                    .Select(a => new TempAchievement { Game = playniteAPI.Database.Games.Get(pair.Value.Id), Achievement = a, Source = pair.Value })
                     .Where(a => a.Game is Game))
                 .Where(a => (!a.Achievement.DateUnlocked?.Equals(default)) ?? false)
                 .OrderByDescending(a => a.Achievement.DateUnlocked ?? default)
                 .Take(achievementsOverall).ToList();
+        }
+
+        public async Task<List<TempAchievement>> GetLatestAchievementsAsync(int achievementsOverall = 6, int achievementsPerGame = 3)
+        {
+            return await Task.Run(() => GetLatestAchievements(achievementsOverall, achievementsPerGame));
+        }
+
+        public async Task UpdateLatestAchievementsAsync(int achievementsOverall = 6, int achievementsPerGame = 3)
+        {
+            var latest = await GetLatestAchievementsAsync(achievementsOverall, achievementsPerGame);
+            var collection = LatestAchievements;
+            foreach (var achi in latest)
+            {
+                if (collection.FirstOrDefault(item => item.Game.Game?.Id == achi.Game?.Id && item.Achievement.Name == achi.Achievement.Name) is GameAchievement model)
+                {
+                    if (model.Achievement.DateUnlocked != achi.Achievement.DateUnlocked)
+                    {
+                        collection.Remove(model);
+                        model.Game.Game = achi.Game;
+                        model.Achievement = achi.Achievement;
+                        model.Source = achi.Source;
+                        collection.Add(model);
+                    }
+                }
+                else if (collection.FirstOrDefault(item => !latest.Any(s => s.Achievement.Name == item.Achievement.Name && s.Game?.Id == item.Game.Game?.Id)) is GameAchievement unusedModel)
+                {
+                    collection.Remove(unusedModel);
+                    unusedModel.Game.Game = achi.Game;
+                    unusedModel.Achievement = achi.Achievement;
+                    unusedModel.Source = achi.Source;
+                    collection.Add(unusedModel);
+                }
+                else
+                {
+                    collection.Add(new GameAchievement
+                    {
+                        Game = new GameModel(achi.Game),
+                        Achievement = achi.Achievement,
+                        Source = achi.Source
+                    });
+                }
+            }
+            for (int j = collection.Count - 1; j >= 0; --j)
+            {
+                if (!latest.Any(g => g.Achievement.Name == collection[j].Achievement.Name && g.Game?.Id == collection[j].Game.Game?.Id))
+                {
+                    collection.RemoveAt(j);
+                }
+            }
+        }
+
+        public void UpdateLatestAchievements(int achievementsOverall = 6, int achievementsPerGame = 3)
+        {
+            var latest = GetLatestAchievements(achievementsOverall, achievementsPerGame);
             var collection = LatestAchievements;
             Application.Current.Dispatcher.Invoke(() =>
             {
@@ -198,10 +271,21 @@ namespace LandingPage.ViewModels.SuccessStory
                             .OfType<Achievements>();
                         var withAchievements = deserializedFiles
                             .Where(ac => (ac.Items?.Count() ?? 0) > 0);
+                        // achievements = withAchievements.ToDictionary(ac => ac.Id);
                         achievements = withAchievements.ToDictionary(ac => ac.Id);
                     }
                 }
             }
+        }
+
+        public async Task ParseAllAchievementsAsync()
+        {
+            await Task.Run(ParseAllAchievements);
+        }
+
+        public async Task<bool> ParseAchievementsAsync(Guid gameId)
+        {
+            return await Task.Run(() => ParseAchievements(gameId));
         }
 
         public bool ParseAchievements(Guid gameId)
@@ -220,7 +304,6 @@ namespace LandingPage.ViewModels.SuccessStory
                             {
                                 achievements[gameId] = gameAchievements;
                                 return true;
-                            
                             }
                         }
                         catch (Exception) {}
@@ -229,6 +312,11 @@ namespace LandingPage.ViewModels.SuccessStory
                 }
             }
             return false;
+        }
+
+        internal async Task<Achievements> DeserializeAchievementsFileAsync(string path)
+        {
+            return await Task.Run(() => DeserializeAchievementsFile(path));
         }
 
         internal Achievements DeserializeAchievementsFile(string path)
@@ -250,9 +338,24 @@ namespace LandingPage.ViewModels.SuccessStory
         public void OnViewClosed()
         {
             achievementWatcher.EnableRaisingEvents = false;
-            landingPageSettingsViewModel.PropertyChanged -= LandingPageSettings_PropertyChanged;
-            landingPageSettingsViewModel.Settings.PropertyChanged -= Settings_PropertyChanged;
+            landingPageSettingsViewModel.PropertyChanged -= LandingPageSettings_PropertyChangedAsync;
+            landingPageSettingsViewModel.Settings.PropertyChanged -= Settings_PropertyChangedAsync;
             achievementWatcher.Dispose();
+        }
+
+        public async void OnStartPageOpened()
+        {
+            await UpdateAsync();
+        }
+
+        public void OnStartPageClosed()
+        {
+            
+        }
+
+        public void OnDayChanged(DateTime newTime)
+        {
+            
         }
     }
 }

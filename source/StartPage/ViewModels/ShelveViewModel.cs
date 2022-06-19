@@ -15,7 +15,7 @@ using System.Windows.Input;
 
 namespace LandingPage.ViewModels
 {
-    public class ShelveViewModel : ObservableObject, IStartPageViewModel
+    public class ShelveViewModel : BusyObservableObject, IStartPageViewModel
     {
         private IPlayniteAPI playniteAPI;
 
@@ -52,9 +52,9 @@ namespace LandingPage.ViewModels
             this.playniteAPI = playniteAPI;
             this.shelveProperties = shelveProperties;
             // UpdateGames(shelveProperties);
-            this.shelveProperties.PropertyChanged += ShelveProperties_PropertyChanged;
-            PropertyChanged += ShelveViewModel_PropertyChanged;
-            resetFiltersCommand = new RelayCommand(() =>
+            this.shelveProperties.PropertyChanged += ShelveProperties_PropertyChangedAsync;
+            PropertyChanged += ShelveViewModel_PropertyChangedAsync;
+            resetFiltersCommand = new RelayCommand(async () =>
             {
                 ShelveProperties.Categories.Clear();
                 ShelveProperties.Tags.Clear();
@@ -70,24 +70,24 @@ namespace LandingPage.ViewModels
                 OnPropertyChanged(nameof(Sources));
                 OnPropertyChanged(nameof(Features));
                 OnPropertyChanged(nameof(CompletionStatus));
-                UpdateGames(ShelveProperties, true);
+                await UpdateGamesAsync(ShelveProperties, true);
             });
-            manualUpdateCommand = new RelayCommand(() => UpdateGames(ShelveProperties, true));
+            manualUpdateCommand = new RelayCommand(async () => await UpdateGamesAsync(ShelveProperties, true));
         }
 
-        private void ShelveViewModel_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        private async void ShelveViewModel_PropertyChangedAsync(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             if (e.PropertyName == nameof(ShelveProperties))
             {
-                ShelveProperties.PropertyChanged += ShelveProperties_PropertyChanged;
+                ShelveProperties.PropertyChanged += ShelveProperties_PropertyChangedAsync;
                 UpdateOrder(ShelveProperties, CollectionViewSource);
                 UpdateSorting(ShelveProperties, CollectionViewSource);
                 UpdateGrouping(ShelveProperties, CollectionViewSource);
-                UpdateGames(ShelveProperties, true);
+                await UpdateGamesAsync(ShelveProperties, true);
             }
         }
 
-        private void ShelveProperties_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        private async void ShelveProperties_PropertyChangedAsync(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             if (sender is ShelveProperties shelveProperties)
             {
@@ -113,7 +113,7 @@ namespace LandingPage.ViewModels
                 }
                 if (e.PropertyName != nameof(ShelveProperties.Name))
                 {
-                    UpdateGames(shelveProperties, true);
+                    await UpdateGamesAsync(shelveProperties, true);
                 }
             }
         }
@@ -393,6 +393,67 @@ namespace LandingPage.ViewModels
             return enumerable.OrderBy(func);
         }
 
+        public async Task UpdateGamesAsync(ShelveProperties shelveProperties, bool manualUpdate = false)
+        {
+            var needsUpdate = manualUpdate;
+            needsUpdate |= Games.Count == 0;
+            needsUpdate |= ShelveProperties.SortBy != SortingField.Random;
+            if (Games.Any(g => playniteAPI.Database.Games.Get(g.Game.Id) == null))
+            {
+                needsUpdate |= true;
+            }
+
+            if (!needsUpdate)
+                return;
+
+            IsBusy = true;
+            var gameSelection = await GetGamesAsync(shelveProperties);
+
+            var collection = Games;
+            var changed = false;
+
+            using (var defer = CollectionViewSource.DeferRefresh())
+            {
+                foreach (var game in gameSelection)
+                {
+                    if (collection.FirstOrDefault(item => item.Game?.Id == game.Id) is GameModel model)
+                    {
+                        if (model.Game.LastActivity != game.LastActivity)
+                        {
+                            changed = true;
+                        }
+                    }
+                    else if (collection.FirstOrDefault(item => gameSelection.All(s => s.Id != item.Game?.Id)) is GameModel unusedModel)
+                    {
+                        changed = true;
+                        collection.Remove(unusedModel);
+                        unusedModel.Game = game;
+                        collection.Add(unusedModel);
+                    }
+                    else
+                    {
+                        changed = true;
+                        collection.Add(new GameModel(game));
+                    }
+                }
+                for (int j = collection.Count - 1; j >= 0; --j)
+                {
+                    if (gameSelection.All(g => g.Id != collection[j].Game?.Id))
+                    {
+                        changed = true;
+                        collection.RemoveAt(j);
+                    }
+                }
+                if (changed && collection.Count > 1)
+                {
+                    collection.Move(collection.Count - 1, 0);
+                    collection.Move(collection.Count - 1, 0);
+                    GC.Collect();
+                }
+            }
+            IsBusy = false;
+        }
+
         public void UpdateGames(ShelveProperties shelveProperties, bool manualUpdate = false)
         {
             var needsUpdate = manualUpdate;
@@ -406,11 +467,69 @@ namespace LandingPage.ViewModels
             if (!needsUpdate)
                 return;
 
+            IsBusy = true;
+            IEnumerable<Game> gameSelection = GetGames(shelveProperties);
+
+            var collection = Games;
+            var changed = false;
+
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                using (var defer = CollectionViewSource.DeferRefresh())
+                {
+                    foreach (var game in gameSelection)
+                    {
+                        if (collection.FirstOrDefault(item => item.Game?.Id == game.Id) is GameModel model)
+                        {
+                            if (model.Game.LastActivity != game.LastActivity)
+                            {
+                                changed = true;
+                            }
+                        }
+                        else if (collection.FirstOrDefault(item => gameSelection.All(s => s.Id != item.Game?.Id)) is GameModel unusedModel)
+                        {
+                            changed = true;
+                            collection.Remove(unusedModel);
+                            unusedModel.Game = game;
+                            collection.Add(unusedModel);
+                        }
+                        else
+                        {
+                            changed = true;
+                            collection.Add(new GameModel(game));
+                        }
+                    }
+                    for (int j = collection.Count - 1; j >= 0; --j)
+                    {
+                        if (gameSelection.All(g => g.Id != collection[j].Game?.Id))
+                        {
+                            changed = true;
+                            collection.RemoveAt(j);
+                        }
+                    }
+                    if (changed && collection.Count > 1)
+                    {
+                        collection.Move(collection.Count - 1, 0);
+                        collection.Move(collection.Count - 1, 0);
+                        GC.Collect();
+                    }
+                }
+            });
+            IsBusy = false;
+        }
+
+        private async Task<List<Game>> GetGamesAsync(ShelveProperties shelveProperties)
+        {
+            return await Task.Run(() => GetGames(shelveProperties));
+        }
+
+        private List<Game> GetGames(ShelveProperties shelveProperties)
+        {
             IEnumerable<Game> games = playniteAPI.Database.Games
-                        .Where(g => (!g.TagIds?.Contains(LandingPageExtension.Instance.SettingsViewModel.Settings.IgnoreTagId)) ?? true)
-                        .Where(g => g.Favorite || !shelveProperties.FavoritesOnly)
-                        .Where(g => !g.Hidden || !shelveProperties.IgnoreHidden)
-                        .Where(g => g.IsInstalled || !shelveProperties.InstalledOnly);
+                                    .Where(g => (!g.TagIds?.Contains(LandingPageExtension.Instance.SettingsViewModel.Settings.IgnoreTagId)) ?? true)
+                                    .Where(g => g.Favorite || !shelveProperties.FavoritesOnly)
+                                    .Where(g => !g.Hidden || !shelveProperties.IgnoreHidden)
+                                    .Where(g => g.IsInstalled || !shelveProperties.InstalledOnly);
             // apply filters
             if (shelveProperties.Categories?.Any() ?? false)
                 games = games.Where(g => g.CategoryIds?.Any(id => shelveProperties.Categories.Contains(id)) ?? false);
@@ -489,7 +608,7 @@ namespace LandingPage.ViewModels
                 skipped = 0;
             }
 
-            IEnumerable<Game> gameSelection = games.Skip(skipped).Take(shelveProperties.NumberOfGames).ToList();
+            List<Game> gameSelection = games.Skip(skipped).Take(shelveProperties.NumberOfGames).ToList();
             if (!gameSelection.Any())
             {
                 var dummies = new List<Game>();
@@ -497,66 +616,13 @@ namespace LandingPage.ViewModels
                 gameSelection = dummies;
             }
 
-            var collection = Games;
-            var changed = false;
-
-            Application.Current.Dispatcher.Invoke(() => {
-                //for(int i = collection.Count - 1; i >= 0; i--)
-                //{
-                //    collection.RemoveAt(i);
-                //}
-                //foreach(var game in gameSelection)
-                //{
-                //    collection.Add(new GameModel(game));
-                //}
-                //return;
-                using (var defer = CollectionViewSource.DeferRefresh())
-                {
-                    foreach (var game in gameSelection)
-                    {
-                        if (collection.FirstOrDefault(item => item.Game?.Id == game.Id) is GameModel model)
-                        {
-                            if (model.Game.LastActivity != game.LastActivity)
-                            {
-                                changed = true;
-                            }
-                        }
-                        else if (collection.FirstOrDefault(item => gameSelection.All(s => s.Id != item.Game?.Id)) is GameModel unusedModel)
-                        {
-                            changed = true;
-                            collection.Remove(unusedModel);
-                            unusedModel.Game = game;
-                            collection.Add(unusedModel);
-                        }
-                        else
-                        {
-                            changed = true;
-                            collection.Add(new GameModel(game));
-                        }
-                    }
-                    for (int j = collection.Count - 1; j >= 0; --j)
-                    {
-                        if (gameSelection.All(g => g.Id != collection[j].Game?.Id))
-                        {
-                            changed = true;
-                            collection.RemoveAt(j);
-                        }
-                    }
-                    if (changed && collection.Count > 1)
-                    {
-                        collection.Move(collection.Count - 1, 0);
-                        collection.Move(collection.Count - 1, 0);
-                        GC.Collect();
-                    }
-                }
-            });
-
+            return gameSelection;
         }
 
         public void OnViewClosed()
         {
-            ShelveProperties.PropertyChanged -= ShelveProperties_PropertyChanged;
-            PropertyChanged -= ShelveViewModel_PropertyChanged;
+            ShelveProperties.PropertyChanged -= ShelveProperties_PropertyChangedAsync;
+            PropertyChanged -= ShelveViewModel_PropertyChangedAsync;
         }
     }
 }

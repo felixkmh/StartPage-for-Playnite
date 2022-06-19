@@ -16,7 +16,7 @@ namespace LandingPage.Converters
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             UriToBitmapImageConverter uriToBitmapImageConverter = new UriToBitmapImageConverter();
-            if (value is Achivement achivement && !string.IsNullOrEmpty(achivement.UrlUnlocked))
+            if (value is Achievement achivement && !string.IsNullOrEmpty(achivement.UrlUnlocked))
             {
                 var configPath = LandingPageExtension.Instance.PlayniteApi.Paths.ConfigurationPath;
                 var iconCachePath = Path.Combine(configPath, "cache", "SuccessStory");
@@ -45,7 +45,7 @@ namespace LandingPage.Converters
         }
 
         // https://github.com/Lacro59/playnite-successstory-plugin/blob/085b836e93334bf3a283f5a5d3b7698ec99d68f1/source/Models/Achievements.cs#L298
-        private static string GetFileNameFromAchievement(Achivement achivement)
+        private static string GetFileNameFromAchievement(Achievement achivement)
         {
             string NameFromUrl = string.Empty;
             string url = achivement.UrlUnlocked;

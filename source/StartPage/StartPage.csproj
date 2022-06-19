@@ -55,6 +55,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BusyObservableObject.cs" />
     <Compile Include="Controls\GroupListBox.xaml.cs">
       <DependentUpon>GroupListBox.xaml</DependentUpon>
     </Compile>

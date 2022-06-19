@@ -45,7 +45,7 @@ namespace LandingPage
 
         public override Guid Id { get; } = Guid.Parse("a6a3dcf6-9bfe-426c-afb0-9f49409ae0c5");
 
-        internal GameActivityViewModel gameActivityViewModel;
+        internal Lazy<GameActivityViewModel> gameActivityViewModel;
 
         internal LandingPageView view = null;
         internal LandingPageView View
@@ -117,6 +117,24 @@ namespace LandingPage
             {
                 HasSettings = true
             };
+
+            gameActivityViewModel = new Lazy<GameActivityViewModel>(() =>
+            {
+                string gameActivityPath = null;
+                string path = Path.Combine(PlayniteApi.Paths.ExtensionsDataPath, "afbb1a0d-04a1-4d0c-9afa-c6e42ca855b4", "GameActivity");
+                if (Directory.Exists(path))
+                {
+                    gameActivityPath = path;
+                }
+
+                if (!string.IsNullOrEmpty(gameActivityPath))
+                {
+                    var model = new GameActivityViewModel(gameActivityPath, PlayniteApi, SettingsViewModel);
+                    model.ParseAllActivites();
+                    return model;
+                }
+                return null;
+            });
         }
 
         internal StartPageView startPageView;
@@ -474,6 +492,8 @@ namespace LandingPage
             return args;
         }
 
+        private Task gameActivityTask = Task.CompletedTask;
+
         public object GetStartPageView(string id, Guid instanceId)
         {
             if (id == "RecentAchivements")
@@ -506,10 +526,6 @@ namespace LandingPage
             {
                 var viewModel = new ShelvesViewModel(PlayniteApi, this, SettingsViewModel, instanceId);
                 shelvesViewModels.Add(instanceId, viewModel);
-                if (startPageViewModel != null)
-                {
-                    viewModel.UpdateShelves();
-                }
                 return new ShelvesView { DataContext = viewModel };
             }
             if (id == "MostPlayed")
@@ -523,14 +539,7 @@ namespace LandingPage
 
                 if (!string.IsNullOrEmpty(gameActivityPath))
                 {
-                    if (gameActivityViewModel == null)
-                    {
-                        gameActivityViewModel = new GameActivityViewModel(gameActivityPath, PlayniteApi, SettingsViewModel);
-                        gameActivityViewModel.ParseAllActivites();
-                    }
-
-                    mostPlayedViewModel = new MostPlayedViewModel(PlayniteApi, SettingsViewModel, gameActivityViewModel);
-                    mostPlayedViewModel.UpdateMostPlayedGame();
+                    mostPlayedViewModel = new MostPlayedViewModel(PlayniteApi, SettingsViewModel, gameActivityViewModel.Value);
                     var view = new MostPlayedView() { DataContext = mostPlayedViewModel };
 
                     return view;
@@ -551,13 +560,7 @@ namespace LandingPage
                 }
                 if (!string.IsNullOrEmpty(gameActivityPath))
                 {
-                    if (gameActivityViewModel == null)
-                    {
-                        gameActivityViewModel = new GameActivityViewModel(gameActivityPath, PlayniteApi, SettingsViewModel);
-                        gameActivityViewModel.ParseAllActivites();
-                    }
-                    var view = new GameActivityView() { DataContext = gameActivityViewModel };
-
+                    var view = new GameActivityView() { DataContext = gameActivityViewModel.Value };
                     return view;
                 }
             }

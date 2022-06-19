@@ -11,7 +11,7 @@ namespace LandingPage.Models.SuccessStory
 {
     public class Achievements : ObservableObject, IEqualityComparer<Achievements>
     {
-        private List<Achivement> items = new List<Achivement>();
+        private List<Achievement> items = new List<Achievement>();
         private bool haveAchivements;
         private int total;
         private int unlocked;
@@ -20,7 +20,7 @@ namespace LandingPage.Models.SuccessStory
         private Guid id;
         private string name;
 
-        public List<Achivement> Items { get => items; set { items = value; OnPropertyChanged(); } }
+        public List<Achievement> Items { get => items; set { items = value; OnPropertyChanged(); } }
         public bool HaveAchivements { get => haveAchivements; set { haveAchivements = value; OnPropertyChanged(); } }
         public int Total { get => total; set { total = value; OnPropertyChanged(); } }
         public int Unlocked { get => unlocked; set { unlocked = value; OnPropertyChanged(); } }
@@ -61,7 +61,7 @@ namespace LandingPage.Models.SuccessStory
         }
     }
 
-    public class Achivement : ObservableObject
+    public class Achievement : ObservableObject
     {
         private string name;
         private string apiName = string.Empty;
@@ -88,7 +88,7 @@ namespace LandingPage.Models.SuccessStory
         public Uri UriUnlocked {
             get
             {
-                if (this is Achivement achivement && !string.IsNullOrEmpty(achivement.UrlUnlocked))
+                if (this is Achievement achivement && !string.IsNullOrEmpty(achivement.UrlUnlocked))
                 {
                     var configPath = LandingPageExtension.Instance.PlayniteApi.Paths.ConfigurationPath;
                     var iconCachePath = Path.Combine(configPath, "cache", "SuccessStory");
@@ -136,7 +136,7 @@ namespace LandingPage.Models.SuccessStory
         }
 
         // https://github.com/Lacro59/playnite-successstory-plugin/blob/085b836e93334bf3a283f5a5d3b7698ec99d68f1/source/Models/Achievements.cs#L298
-        private static string GetFileNameFromAchievement(Achivement achivement)
+        private static string GetFileNameFromAchievement(Achievement achivement)
         {
             string NameFromUrl = string.Empty;
             string url = achivement.UrlUnlocked;
