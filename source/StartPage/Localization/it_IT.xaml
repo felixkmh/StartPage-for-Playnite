@@ -83,7 +83,7 @@
     <sys:String x:Key="LOC_SPG_BackgroundAnimationDuration">Durata dell'animazione:</sys:String>
     <sys:String x:Key="LOC_SPG_BackgroundRefreshInterval">Intervallo di aggiornamento (minuti):</sys:String>
     <sys:String x:Key="LOC_SPG_SkipGamesInPreviousShelves">Salta i giochi presenti negli scaffali precedenti</sys:String>
-    <sys:String x:Key="LOC_SPG_SkipGamesInPreviousTimeframes">Skip Games present in preceding Timeframes</sys:String>
+    <sys:String x:Key="LOC_SPG_SkipGamesInPreviousTimeframes">Saltare i giochi presenti negli intervalli di tempo precedenti</sys:String>
     <sys:String x:Key="LOC_SPG_EnableTags">Crea tag [SPG] al lancio. Usato per contrassegnare i giochi come ignorati.</sys:String>
     <sys:String x:Key="LOC_SPG_FixGridHeight">Altezza della griglia fissa:</sys:String>
     <sys:String x:Key="LOC_SPG_FixGridHeight_Tooltip" xml:space="preserve">Se abilitato, l'altezza della griglia non è più legata all'altezza della finestra.
