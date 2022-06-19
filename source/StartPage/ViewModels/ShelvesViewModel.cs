@@ -74,7 +74,7 @@ namespace LandingPage.ViewModels
 
             dispatcherTimer = new DispatcherTimer();
             dispatcherTimer.Tick += DispatcherTimer_TickAsync;
-            dispatcherTimer.Interval = TimeSpan.FromMilliseconds(250);
+            dispatcherTimer.Interval = TimeSpan.FromMilliseconds(500);
 
             Settings.Settings.PropertyChanged += Settings_PropertyChangedAsync;
             Settings.PropertyChanged += Settings_PropertyChanged1Async;

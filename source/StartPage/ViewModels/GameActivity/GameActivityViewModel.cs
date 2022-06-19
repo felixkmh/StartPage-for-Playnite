@@ -69,7 +69,7 @@ namespace LandingPage.ViewModels.GameActivity
             this.landingPageSettingsViewModel = landingPageSettings;
             PropertyChanged += GameActivityViewModel_PropertyChangedAsync;
             Activities.CollectionChanged += Activities_CollectionChanged;
-            timer = new DispatcherTimer() { Interval = TimeSpan.FromMilliseconds(500) };
+            timer = new DispatcherTimer() { Interval = TimeSpan.FromMilliseconds(1000) };
             timer.Tick += async (s, a) =>
             {
                 var t = (DispatcherTimer)s;
