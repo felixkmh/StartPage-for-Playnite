@@ -90,7 +90,7 @@ namespace LandingPage.ViewModels.SuccessStory
             var idString = Path.GetFileNameWithoutExtension(e.Name);
             if (Guid.TryParse(idString, out var id))
             {
-                if (ParseAchievements(id))
+                if (await ParseAchievementsAsync(id))
                 {
                     await UpdateLatestAchievementsAsync(landingPageSettingsViewModel.Settings.MaxNumberRecentAchievements, landingPageSettingsViewModel.Settings.MaxNumberRecentAchievementsPerGame);
                 }
@@ -114,7 +114,7 @@ namespace LandingPage.ViewModels.SuccessStory
             var idString = Path.GetFileNameWithoutExtension(e.Name);
             if (Guid.TryParse(idString, out var id))
             {
-                if (ParseAchievements(id))
+                if (await ParseAchievementsAsync(id))
                 {
                     await UpdateLatestAchievementsAsync(landingPageSettingsViewModel.Settings.MaxNumberRecentAchievements, landingPageSettingsViewModel.Settings.MaxNumberRecentAchievementsPerGame);
                 }
@@ -146,7 +146,7 @@ namespace LandingPage.ViewModels.SuccessStory
 
         public List<TempAchievement> GetLatestAchievements(int achievementsOverall = 6, int achievementsPerGame = 3)
         {
-            return achievements
+            return Achievements
                 .AsParallel()
                 .SelectMany(pair => pair.Value.Items
                     .OrderByDescending(a => a.DateUnlocked ?? default)
