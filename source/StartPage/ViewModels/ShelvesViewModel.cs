@@ -79,9 +79,9 @@ namespace LandingPage.ViewModels
             Settings.Settings.PropertyChanged += Settings_PropertyChangedAsync;
             Settings.PropertyChanged += Settings_PropertyChanged1Async;
 
-            if (!Settings.Settings.ShelveInstances.ContainsKey(InstanceId))
+            if (!Settings.Settings.ShelveInstanceSettings.ContainsKey(InstanceId))
             {
-                if (Settings.Settings.ShelveInstances.Count == 0)
+                if (Settings.Settings.ShelveInstanceSettings.Count == 0)
                 {
                     Settings.Settings.ShelveInstanceSettings.Add(InstanceId, new LandingPage.Settings.ShelvesSettings { ShelveProperties = Settings.Settings.ShelveProperties });
                 } else
@@ -264,7 +264,7 @@ namespace LandingPage.ViewModels
         {
             if (e.PropertyName == nameof(LandingPageSettingsViewModel.Settings))
             {
-                if (Settings.Settings.ShelveInstances.ContainsKey(InstanceId))
+                if (Settings.Settings.ShelveInstanceSettings.ContainsKey(InstanceId))
                 {
                     Shelves = Settings.Settings.ShelveInstanceSettings[InstanceId];
                     for (int i = 0; i < Shelves.ShelveProperties.Count; ++i)

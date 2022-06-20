@@ -585,7 +585,7 @@ namespace LandingPage
             {
                 shelvesViewModels[instanceId].OnViewClosed();
                 shelvesViewModels.Remove(instanceId);
-                Settings.ShelveInstances.Remove(instanceId);
+                Settings.ShelveInstanceSettings.Remove(instanceId);
             }
             if (viewId == "MostPlayed")
             {
