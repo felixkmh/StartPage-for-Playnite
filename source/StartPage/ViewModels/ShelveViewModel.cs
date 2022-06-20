@@ -398,7 +398,7 @@ namespace LandingPage.ViewModels
             return enumerable.OrderBy(func);
         }
 
-        private readonly SemaphoreSlim collectionSemaphore = new SemaphoreSlim(0, 1);
+        private readonly SemaphoreSlim collectionSemaphore = new SemaphoreSlim(1, 1);
 
         public async Task UpdateGamesAsync(ShelveProperties shelveProperties, bool manualUpdate = false)
         {
