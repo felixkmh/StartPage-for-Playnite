@@ -245,48 +245,57 @@ namespace LandingPage.ViewModels.GameActivity
             timer.Start();
         }
 
-        private void ActivityWatcher_Changed(object sender, FileSystemEventArgs e)
+        private async void ActivityWatcher_Changed(object sender, FileSystemEventArgs e)
         {
-            var idString = Path.GetFileNameWithoutExtension(e.Name);
-            if (Guid.TryParse(idString, out var id) && playniteAPI.Database.Games.Get(id) is Game)
+            await Application.Current.Dispatcher.InvokeAsync(async () =>
             {
-                if (DeserializeActivityFile(e.FullPath) is Activity activity)
+                var idString = Path.GetFileNameWithoutExtension(e.Name);
+                if (Guid.TryParse(idString, out var id) && playniteAPI.Database.Games.Get(id) is Game)
                 {
-                    if (Activities.FirstOrDefault(a => a.Id == activity.Id) is Activity old)
+                    if (await DeserializeActivityFileAsync(e.FullPath) is Activity activity)
                     {
-                        Activities.Remove(old);
+                        if (Activities.FirstOrDefault(a => a.Id == activity.Id) is Activity old)
+                        {
+                            Activities.Remove(old);
+                        }
+                        Activities.Add(activity);
                     }
-                    Activities.Add(activity);
                 }
-            }
+            });
         }
 
         private void ActivityWatcher_Deleted(object sender, FileSystemEventArgs e)
         {
-            var idString = Path.GetFileNameWithoutExtension(e.Name);
-            if (Guid.TryParse(idString, out var id))
+            Application.Current.Dispatcher.Invoke(() =>
             {
-                if (Activities.FirstOrDefault(a => id == a.Id) is Activity old)
+                var idString = Path.GetFileNameWithoutExtension(e.Name);
+                if (Guid.TryParse(idString, out var id))
                 {
-                    Activities.Remove(old);
+                    if (Activities.FirstOrDefault(a => id == a.Id) is Activity old)
+                    {
+                        Activities.Remove(old);
+                    }
                 }
-            }
+            });
         }
 
         private void ActivityWatcher_Created(object sender, FileSystemEventArgs e)
         {
-            var idString = Path.GetFileNameWithoutExtension(e.Name);
-            if (Guid.TryParse(idString, out var id) && playniteAPI.Database.Games.Get(id) is Game)
+            Application.Current.Dispatcher.Invoke(() =>
             {
-                if (DeserializeActivityFile(e.FullPath) is Activity activity)
+                var idString = Path.GetFileNameWithoutExtension(e.Name);
+                if (Guid.TryParse(idString, out var id) && playniteAPI.Database.Games.Get(id) is Game)
                 {
-                    if (Activities.FirstOrDefault(a => a.Id == activity.Id) is Activity old)
+                    if (DeserializeActivityFile(e.FullPath) is Activity activity)
                     {
-                        Activities.Remove(old);
+                        if (Activities.FirstOrDefault(a => a.Id == activity.Id) is Activity old)
+                        {
+                            Activities.Remove(old);
+                        }
+                        Activities.Add(activity);
                     }
-                    Activities.Add(activity);
                 }
-            }
+            });
         }
     }
 }
