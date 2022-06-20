@@ -398,8 +398,6 @@ namespace LandingPage.ViewModels
             return enumerable.OrderBy(func);
         }
 
-        private readonly SemaphoreSlim collectionSemaphore = new SemaphoreSlim(1, 1);
-
         public async Task UpdateGamesAsync(ShelveProperties shelveProperties, bool manualUpdate = false)
         {
             var needsUpdate = manualUpdate;
@@ -419,49 +417,49 @@ namespace LandingPage.ViewModels
             var collection = Games;
             var changed = false;
 
-            await collectionSemaphore.WaitAsync();
-
-            using (var defer = CollectionViewSource.DeferRefresh())
+            Application.Current.Dispatcher.Invoke(() =>
             {
-                foreach (var game in gameSelection)
+                using (var defer = CollectionViewSource.DeferRefresh())
                 {
-                    if (collection.FirstOrDefault(item => item.Game?.Id == game.Id) is GameModel model)
+                    foreach (var game in gameSelection)
                     {
-                        if (model.Game.LastActivity != game.LastActivity)
+                        if (collection.FirstOrDefault(item => item.Game?.Id == game.Id) is GameModel model)
+                        {
+                            if (model.Game.LastActivity != game.LastActivity)
+                            {
+                                changed = true;
+                            }
+                        }
+                        else if (collection.FirstOrDefault(item => gameSelection.All(s => s.Id != item.Game?.Id)) is GameModel unusedModel)
                         {
                             changed = true;
+                            collection.Remove(unusedModel);
+                            unusedModel.Game = game;
+                            collection.Add(unusedModel);
+                        }
+                        else
+                        {
+                            changed = true;
+                            collection.Add(new GameModel(game));
                         }
                     }
-                    else if (collection.FirstOrDefault(item => gameSelection.All(s => s.Id != item.Game?.Id)) is GameModel unusedModel)
+                    for (int j = collection.Count - 1; j >= 0; --j)
                     {
-                        changed = true;
-                        collection.Remove(unusedModel);
-                        unusedModel.Game = game;
-                        collection.Add(unusedModel);
+                        if (gameSelection.All(g => g.Id != collection[j].Game?.Id))
+                        {
+                            changed = true;
+                            collection.RemoveAt(j);
+                        }
                     }
-                    else
+                    if (changed && collection.Count > 1)
                     {
-                        changed = true;
-                        collection.Add(new GameModel(game));
-                    }
-                }
-                for (int j = collection.Count - 1; j >= 0; --j)
-                {
-                    if (gameSelection.All(g => g.Id != collection[j].Game?.Id))
-                    {
-                        changed = true;
-                        collection.RemoveAt(j);
+                        collection.Move(collection.Count - 1, 0);
+                        collection.Move(collection.Count - 1, 0);
+                        GC.Collect();
                     }
                 }
-                if (changed && collection.Count > 1)
-                {
-                    collection.Move(collection.Count - 1, 0);
-                    collection.Move(collection.Count - 1, 0);
-                    GC.Collect();
-                }
-            }
-            collectionSemaphore.Release();
-            IsBusy = false;
+                IsBusy = false;
+            });
         }
 
         public void UpdateGames(ShelveProperties shelveProperties, bool manualUpdate = false)
