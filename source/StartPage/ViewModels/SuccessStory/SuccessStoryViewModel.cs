@@ -87,38 +87,47 @@ namespace LandingPage.ViewModels.SuccessStory
 
         private async void AchievementWatcher_ChangedAsync(object sender, FileSystemEventArgs e)
         {
-            var idString = Path.GetFileNameWithoutExtension(e.Name);
-            if (Guid.TryParse(idString, out var id))
+            await Application.Current.Dispatcher.InvokeAsync(async () =>
             {
-                if (await ParseAchievementsAsync(id))
+                var idString = Path.GetFileNameWithoutExtension(e.Name);
+                if (Guid.TryParse(idString, out var id))
                 {
-                    await UpdateLatestAchievementsAsync(landingPageSettingsViewModel.Settings.MaxNumberRecentAchievements, landingPageSettingsViewModel.Settings.MaxNumberRecentAchievementsPerGame);
+                    if (await ParseAchievementsAsync(id))
+                    {
+                        await UpdateLatestAchievementsAsync(landingPageSettingsViewModel.Settings.MaxNumberRecentAchievements, landingPageSettingsViewModel.Settings.MaxNumberRecentAchievementsPerGame);
+                    }
                 }
-            }
+            });
         }
 
         private async void AchievementWatcher_DeletedAsync(object sender, FileSystemEventArgs e)
         {
-            var idString = Path.GetFileNameWithoutExtension(e.Name);
-            if (Guid.TryParse(idString, out var id))
+            await Application.Current.Dispatcher.InvokeAsync(async () =>
             {
-                if (achievements.Remove(id))
+                var idString = Path.GetFileNameWithoutExtension(e.Name);
+                if (Guid.TryParse(idString, out var id))
                 {
-                    await UpdateLatestAchievementsAsync(landingPageSettingsViewModel.Settings.MaxNumberRecentAchievements, landingPageSettingsViewModel.Settings.MaxNumberRecentAchievementsPerGame);
+                    if (achievements.Remove(id))
+                    {
+                        await UpdateLatestAchievementsAsync(landingPageSettingsViewModel.Settings.MaxNumberRecentAchievements, landingPageSettingsViewModel.Settings.MaxNumberRecentAchievementsPerGame);
+                    }
                 }
-            }
+            });
         }
 
         private async void AchievementWatcher_CreatedAsync(object sender, FileSystemEventArgs e)
         {
-            var idString = Path.GetFileNameWithoutExtension(e.Name);
-            if (Guid.TryParse(idString, out var id))
+            await Application.Current.Dispatcher.InvokeAsync(async () =>
             {
-                if (await ParseAchievementsAsync(id))
+                var idString = Path.GetFileNameWithoutExtension(e.Name);
+                if (Guid.TryParse(idString, out var id))
                 {
-                    await UpdateLatestAchievementsAsync(landingPageSettingsViewModel.Settings.MaxNumberRecentAchievements, landingPageSettingsViewModel.Settings.MaxNumberRecentAchievementsPerGame);
+                    if (await ParseAchievementsAsync(id))
+                    {
+                        await UpdateLatestAchievementsAsync(landingPageSettingsViewModel.Settings.MaxNumberRecentAchievements, landingPageSettingsViewModel.Settings.MaxNumberRecentAchievementsPerGame);
+                    }
                 }
-            }
+            });
         }
 
         public void Update()
