@@ -506,14 +506,17 @@ namespace LandingPage.ViewModels.Layout
                             {
                                 if (LandingPageExtension.Instance.AllAvailableViews.Values.SelectMany(v => v).Where(v => v.PluginId == viewProperties.PluginId && v.ViewId == viewProperties.ViewId).FirstOrDefault() is StartPageViewArgsBase args)
                                 {
-                                    viewProperties.StartPageViewArgs = args;
-                                    if (extension.GetStartPageView(viewProperties.ViewId, viewProperties.InstanceId) is FrameworkElement control2)
+                                    Application.Current.Dispatcher.BeginInvoke(new Action(() =>
                                     {
-                                        control2.Name = viewProperties.ViewId;
-                                        viewProperties.view = control2;
-                                        View.Children.Add(control2);
-                                        hasView = true;
-                                    }
+                                        viewProperties.StartPageViewArgs = args;
+                                        if (extension.GetStartPageView(viewProperties.ViewId, viewProperties.InstanceId) is FrameworkElement control2)
+                                        {
+                                            control2.Name = viewProperties.ViewId;
+                                            viewProperties.view = control2;
+                                            View.Children.Add(control2);
+                                            hasView = true;
+                                        }
+                                    }));
                                 }
                                 else
                                 {
