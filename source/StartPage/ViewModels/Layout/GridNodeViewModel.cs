@@ -504,10 +504,11 @@ namespace LandingPage.ViewModels.Layout
                         {
                             try
                             {
-                                if (LandingPageExtension.Instance.AllAvailableViews.Values.SelectMany(v => v).Where(v => v.PluginId == viewProperties.PluginId && v.ViewId == viewProperties.ViewId).FirstOrDefault() is StartPageViewArgsBase args)
+                                Application.Current.Dispatcher.BeginInvoke(new Action(() =>
                                 {
-                                    Application.Current.Dispatcher.BeginInvoke(new Action(() =>
+                                    if (LandingPageExtension.Instance.AllAvailableViews.Values.SelectMany(v => v).Where(v => v.PluginId == viewProperties.PluginId && v.ViewId == viewProperties.ViewId).FirstOrDefault() is StartPageViewArgsBase args)
                                     {
+
                                         viewProperties.StartPageViewArgs = args;
                                         if (extension.GetStartPageView(viewProperties.ViewId, viewProperties.InstanceId) is FrameworkElement control2)
                                         {
@@ -516,12 +517,14 @@ namespace LandingPage.ViewModels.Layout
                                             View.Children.Add(control2);
                                             hasView = true;
                                         }
-                                    }));
-                                }
-                                else
-                                {
-                                    gridNode.ViewProperties = null;
-                                }
+                                    }
+                                    else
+                                    {
+                                        gridNode.ViewProperties = null;
+                                    }
+                                    HasView = hasView;
+                                    IsLeaf = node.Children.Count == 0;
+                                }));
                             }
                             catch (Exception ex)
                             {
@@ -590,8 +593,6 @@ namespace LandingPage.ViewModels.Layout
                     }
                 }
             }
-            IsLeaf = node.Children.Count == 0;
-            HasView = hasView;
         }
 
         private static MenuItem GetAddMenuItem(GridNode node)
