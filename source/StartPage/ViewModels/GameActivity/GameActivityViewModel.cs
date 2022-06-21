@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Timers;
 using System.Windows;
@@ -24,6 +25,8 @@ namespace LandingPage.ViewModels.GameActivity
 
         private ObservableCollection<Activity> activities = new ObservableCollection<Activity>();
         public ObservableCollection<Activity> Activities { get => activities; set => SetValue(ref activities, value); }
+
+        public readonly ReaderWriterLockSlim ActivityLock = new ReaderWriterLockSlim();
 
         public Dictionary<GameSource, ulong> PlaytimePerSource => Activities
             .SelectMany(activity => activity.Items)
@@ -197,6 +200,7 @@ namespace LandingPage.ViewModels.GameActivity
                     {
                         try
                         {
+                            ActivityLock.EnterWriteLock();
                             var gameAcitivies = DeserializeActivityFile(path);
                             if (gameAcitivies is Activity && gameAcitivies.Items.Any())
                             {
@@ -209,6 +213,10 @@ namespace LandingPage.ViewModels.GameActivity
                             }
                         }
                         catch (Exception) { }
+                        finally
+                        {
+                            ActivityLock.ExitWriteLock();
+                        }
 
                     }
                 }
@@ -254,11 +262,13 @@ namespace LandingPage.ViewModels.GameActivity
                 {
                     if (await DeserializeActivityFileAsync(e.FullPath) is Activity activity)
                     {
+                        ActivityLock.EnterWriteLock();
                         if (Activities.FirstOrDefault(a => a.Id == activity.Id) is Activity old)
                         {
                             Activities.Remove(old);
                         }
                         Activities.Add(activity);
+                        ActivityLock.ExitWriteLock();
                     }
                 }
             });
@@ -271,10 +281,12 @@ namespace LandingPage.ViewModels.GameActivity
                 var idString = Path.GetFileNameWithoutExtension(e.Name);
                 if (Guid.TryParse(idString, out var id))
                 {
+                    ActivityLock.EnterWriteLock();
                     if (Activities.FirstOrDefault(a => id == a.Id) is Activity old)
                     {
                         Activities.Remove(old);
                     }
+                    ActivityLock.ExitWriteLock();
                 }
             });
         }
@@ -288,11 +300,13 @@ namespace LandingPage.ViewModels.GameActivity
                 {
                     if (DeserializeActivityFile(e.FullPath) is Activity activity)
                     {
+                        ActivityLock.EnterWriteLock();
                         if (Activities.FirstOrDefault(a => a.Id == activity.Id) is Activity old)
                         {
                             Activities.Remove(old);
                         }
                         Activities.Add(activity);
+                        ActivityLock.ExitWriteLock();
                     }
                 }
             });

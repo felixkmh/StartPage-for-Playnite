@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Timers;
 using System.Windows;
@@ -278,6 +279,8 @@ namespace LandingPage.ViewModels.GameActivity
                 }
                 else
                 {
+                    GameActivityViewModel.ActivityLock.EnterReadLock();
+
                     var thisWeek = GameActivityViewModel.Activities
                         .Select(a => new { Game = playniteAPI.Database.Games.Get(a.Id), Items = a.Items.Where(i => options.Timeframe == Timeframe.AllTime || i.DateSession.Add(options.TimeSpan) >= DateTime.Today).ToList() })
                         .Where(a => a.Game is Game && a.Items?.Count > 0)
@@ -289,6 +292,8 @@ namespace LandingPage.ViewModels.GameActivity
 
                     thisWeek = thisWeek.Where(a => !settings.Settings.SkipGamesInPreviousMostPlayed || !groups.Any(group => group.Games.Any(m => m.Game == a.Game)));
                     var mostPlayedThisWeek = thisWeek.FirstOrDefault();
+
+                    GameActivityViewModel.ActivityLock.ExitReadLock();
 
                     if (mostPlayedThisWeek?.Game is Game)
                     {
