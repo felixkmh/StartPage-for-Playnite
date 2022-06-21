@@ -593,6 +593,7 @@ namespace LandingPage.ViewModels.Layout
                     }
                 }
             }
+            IsLeaf = node.Children.Count == 0;
         }
 
         private static MenuItem GetAddMenuItem(GridNode node)
