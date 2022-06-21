@@ -108,6 +108,8 @@ namespace LandingPage
         TextBlock progressText = null;
         Button cancelButton = null;
 
+        public string PlaceholderCoverPath { get; private set; }
+
         public LandingPageExtension(IPlayniteAPI api) : base(api)
         {
             Instance = this;
@@ -296,6 +298,11 @@ namespace LandingPage
         public override void OnApplicationStarted(OnApplicationStartedEventArgs args)
         {
             Application.Current.Deactivated += OnApplicattionDeactivated;
+            // set cover path
+            var extensionPath = typeof(LandingPageExtension).Assembly.Location;
+            extensionPath = Path.GetDirectoryName(extensionPath);
+            PlaceholderCoverPath = Path.Combine(PlayniteApi.Paths.ConfigurationPath, extensionPath, "PlaceholderCover.png");
+
             // create tags
             if (Settings.EnableTagCreation)
             {

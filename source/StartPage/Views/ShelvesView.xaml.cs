@@ -180,7 +180,7 @@ namespace LandingPage.Views
 
         private void StackPanel_MouseEnter(object sender, MouseEventArgs e)
         {
-            if (sender is FrameworkElement element && element.DataContext is GameModel model)
+            if (sender is FrameworkElement element && element.DataContext is GameModel model && model.Game != ShelveViewModel.DummyGame)
             {
                 if (LandingPageExtension.Instance.Settings.ShowDetails)
                 {

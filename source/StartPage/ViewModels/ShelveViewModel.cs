@@ -41,7 +41,7 @@ namespace LandingPage.ViewModels
         public ICommand ManualUpdateCommand { get => manualUpdateCommand; set => SetValue(ref manualUpdateCommand, value); }
 
         private ObservableCollection<ShelveViewModel> viewModels;
-        private readonly Game DummyGame = new Game();
+        public static readonly Game DummyGame = new Game() { CoverImage = LandingPageExtension.Instance.PlaceholderCoverPath };
 
         public ShelveViewModel(ShelveProperties shelveProperties, LandingPage.Settings.ShelvesSettings shelveSettings, IPlayniteAPI playniteAPI, ObservableCollection<ShelveViewModel> viewModels)
         {
@@ -77,6 +77,7 @@ namespace LandingPage.ViewModels
                 OnPropertyChanged(nameof(CompletionStatus));
                 await UpdateGamesAsync(ShelveProperties, true);
             });
+            FillWithPlaceholders(shelveProperties);
             manualUpdateCommand = new RelayCommand(async () => await UpdateGamesAsync(ShelveProperties, true));
         }
 
@@ -396,6 +397,20 @@ namespace LandingPage.ViewModels
                 return enumerable.OrderByDescending(func);
             }
             return enumerable.OrderBy(func);
+        }
+
+        public void FillWithPlaceholders(ShelveProperties shelveProperties)
+        {
+            IsBusy = true;
+            using (var defer = CollectionViewSource.DeferRefresh())
+            {
+                Games.Clear();
+                for(int i = 0; i < shelveProperties.NumberOfGames; i++)
+                {
+                    Games.Add(new GameModel(DummyGame));
+                }
+            }
+            IsBusy = false;
         }
 
         public async Task UpdateGamesAsync(ShelveProperties shelveProperties, bool manualUpdate = false)
