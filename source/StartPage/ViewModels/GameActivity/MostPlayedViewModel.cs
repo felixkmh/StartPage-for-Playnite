@@ -44,7 +44,11 @@ namespace LandingPage.ViewModels.GameActivity
             }
             gameActivityViewModel.Activities.CollectionChanged += Activities_CollectionChanged;
             gameActivityViewModel.PropertyChanged += GameActivityViewModel_PropertyChangedAsync;
-            UpdateMostPlayedGame();
+            FillWithPlaceholders();
+            if (GameActivityViewModel.Activities.Count > 0)
+            {
+                UpdateMostPlayedGame();
+            }
         }
 
         private async void GameActivityViewModel_PropertyChangedAsync(object sender, System.ComponentModel.PropertyChangedEventArgs e)
@@ -306,6 +310,49 @@ namespace LandingPage.ViewModels.GameActivity
                         });
                     }
                 }
+            }
+            return groups;
+        }
+
+        public void FillWithPlaceholders()
+        {
+            var specialGames = SpecialGames;
+            var groups = GetPlaceholderGroups();
+            for (int i = 0; i < groups.Count; i++)
+            {
+                if (specialGames.Count > i)
+                {
+                    specialGames[i].Label = groups[i].Label;
+                    specialGames[i].Games[0].Game = groups[i].Games[0].Game;
+                }
+                else
+                {
+                    specialGames.Add(groups[i]);
+                }
+            }
+
+            int j = specialGames.Count - 1;
+            while (specialGames.Count > groups.Count)
+            {
+                specialGames.RemoveAt(j--);
+            }
+        }
+
+        private List<GameGroup> GetPlaceholderGroups()
+        {
+            var groups = new List<GameGroup>();
+            var tagId = LandingPageExtension.Instance.SettingsViewModel.Settings.IgnoreMostPlayedTagId;
+
+            foreach (var options in Settings.Settings.MostPlayedOptions)
+            {
+                if (options.Timeframe == Timeframe.None)
+                {
+                    continue;
+                }
+               var group = new GameGroup();
+                group.Games.Add(new GameModel(ShelveViewModel.DummyGame));
+                group.Label = converter.ConvertToString(options.Timeframe);
+                groups.Add(group);
             }
             return groups;
         }

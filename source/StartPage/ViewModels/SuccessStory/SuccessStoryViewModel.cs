@@ -15,10 +15,11 @@ using System.Windows;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using StartPage.SDK;
+using System.Windows.Threading;
 
 namespace LandingPage.ViewModels.SuccessStory
 {
-    public class SuccessStoryViewModel : IStartPageViewModel, IStartPageControl
+    public class SuccessStoryViewModel : BusyObservableObject, IStartPageViewModel, IStartPageControl
     {
         internal string achievementsPath;
         internal IPlayniteAPI playniteAPI;
@@ -64,6 +65,19 @@ namespace LandingPage.ViewModels.SuccessStory
             this.landingPageSettingsViewModel = landingPageSettings;
             landingPageSettings.PropertyChanged += LandingPageSettings_PropertyChangedAsync;
             landingPageSettings.Settings.PropertyChanged += Settings_PropertyChangedAsync;
+
+            if (Achievements.Count > 0)
+            {
+                Application.Current.Dispatcher.BeginInvoke(new Action(async () =>
+                {
+                    IsBusy = true;
+                    await UpdateLatestAchievementsAsync(
+                        landingPageSettingsViewModel.Settings.MaxNumberRecentAchievements,
+                        landingPageSettingsViewModel.Settings.MaxNumberRecentAchievementsPerGame
+                    );
+                    IsBusy = false;
+                }), DispatcherPriority.Background);
+            }
         }
 
         private async void Settings_PropertyChangedAsync(object sender, PropertyChangedEventArgs e)

@@ -527,7 +527,8 @@ namespace LandingPage.ViewModels.Layout
                         }
                     }
                 }
-            } else
+            }
+            else
             {
                 if (node.Orientation == Orientation.Horizontal)
                 {
@@ -571,67 +572,13 @@ namespace LandingPage.ViewModels.Layout
                         if (i < node.Children.Count - 1)
                         {
                             var curr = i;
-                            var sep = new GridSplitter() { HorizontalAlignment = HorizontalAlignment.Stretch, VerticalAlignment = VerticalAlignment.Stretch};
+                            var sep = new GridSplitter() { HorizontalAlignment = HorizontalAlignment.Stretch, VerticalAlignment = VerticalAlignment.Stretch };
                             WindowChrome.SetIsHitTestVisibleInChrome(sep, true);
-                            sep.ContextMenu = new ContextMenu() { DataContext = this };
-                            MenuItem mergeItem = new MenuItem
-                            {
-                                Header = ResourceProvider.GetString("LOC_SPG_Merge")
-                            };
-                            mergeItem.Items.Add(new MenuItem
-                            {
-                                Header = node.Orientation == Orientation.Horizontal ? ResourceProvider.GetString("LOC_SPG_MergeKeepLeft") : ResourceProvider.GetString("LOC_SPG_MergeKeepUpper"),
-                                Command = new RelayCommand(() =>
-                                {
-                                    var root = Root.GridNode;
-                                    var left = node.Children[curr];
-                                    var right = node.Children[curr + 1];
-                                    var newSize = left.Size.Value + right.Size.Value;
-                                    node.Children[curr].Size = new GridLength(newSize, GridUnitType.Star);
-                                    node.Children.RemoveAt(curr + 1);
-                                    GridNode.Minimize(root, null);
-                                })
-                            });
-                            mergeItem.Items.Add(new MenuItem
-                            {
-                                Header = node.Orientation == Orientation.Horizontal ? ResourceProvider.GetString("LOC_SPG_MergeKeepRight") : ResourceProvider.GetString("LOC_SPG_MergeKeepLower"),
-                                Command = new RelayCommand(() =>
-                                {
-                                    var root = Root.GridNode;
-                                    var left = node.Children[curr];
-                                    var right = node.Children[curr + 1];
-                                    var newSize = left.Size.Value + right.Size.Value;
-                                    node.Children[curr + 1].Size = new GridLength(newSize, GridUnitType.Star);
-                                    node.Children.RemoveAt(curr);
-                                    GridNode.Minimize(root, null);
-                                })
-                            });
-                            sep.ContextMenu.Items.Add(mergeItem);
 
-                            MenuItem addItem = new MenuItem
-                            {
-                                Header = ResourceProvider.GetString("LOC_SPG_AddPanel")
-                            };
-                            addItem.Items.Add(new MenuItem
-                            {
-                                Header = node.Orientation == Orientation.Horizontal ? ResourceProvider.GetString("LOC_SPG_AddPanelLeft") : ResourceProvider.GetString("LOC_SPG_AddPanelTop"),
-                                Command = new RelayCommand(() =>
-                                {
-                                    var newSize = node.Children.First().Size.Value / 2;
-                                    var newNode = new GridNode { Size = new GridLength(newSize, GridUnitType.Star) };
-                                    node.Children.Insert(0, newNode);
-                                })
-                            });
-                            addItem.Items.Add(new MenuItem
-                            {
-                                Header = node.Orientation == Orientation.Horizontal ? ResourceProvider.GetString("LOC_SPG_AddPanelRight") : ResourceProvider.GetString("LOC_SPG_AddPanelBottom"),
-                                Command = new RelayCommand(() =>
-                                {
-                                    var newSize = node.Children.Last().Size.Value / 2;
-                                    var newNode = new GridNode { Size = new GridLength(newSize, GridUnitType.Star) };
-                                    node.Children.Add(newNode);
-                                })
-                            });
+                            var mergeItem = GetMergeMenuItem(node, curr);
+                            var addItem = GetAddMenuItem(node);
+                            sep.ContextMenu = new ContextMenu() { DataContext = this };
+                            sep.ContextMenu.Items.Add(mergeItem);
                             sep.ContextMenu.Items.Add(addItem);
 
                             setGridPosition(sep, View.Children.Count);
@@ -642,6 +589,72 @@ namespace LandingPage.ViewModels.Layout
             }
             IsLeaf = node.Children.Count == 0;
             HasView = hasView;
+        }
+
+        private static MenuItem GetAddMenuItem(GridNode node)
+        {
+            MenuItem addItem = new MenuItem
+            {
+                Header = ResourceProvider.GetString("LOC_SPG_AddPanel")
+            };
+            addItem.Items.Add(new MenuItem
+            {
+                Header = node.Orientation == Orientation.Horizontal ? ResourceProvider.GetString("LOC_SPG_AddPanelLeft") : ResourceProvider.GetString("LOC_SPG_AddPanelTop"),
+                Command = new RelayCommand(() =>
+                {
+                    var newSize = node.Children.First().Size.Value / 2;
+                    var newNode = new GridNode { Size = new GridLength(newSize, GridUnitType.Star) };
+                    node.Children.Insert(0, newNode);
+                })
+            });
+            addItem.Items.Add(new MenuItem
+            {
+                Header = node.Orientation == Orientation.Horizontal ? ResourceProvider.GetString("LOC_SPG_AddPanelRight") : ResourceProvider.GetString("LOC_SPG_AddPanelBottom"),
+                Command = new RelayCommand(() =>
+                {
+                    var newSize = node.Children.Last().Size.Value / 2;
+                    var newNode = new GridNode { Size = new GridLength(newSize, GridUnitType.Star) };
+                    node.Children.Add(newNode);
+                })
+            });
+            return addItem;
+        }
+
+        private MenuItem GetMergeMenuItem(GridNode node, int curr)
+        {
+            MenuItem mergeItem = new MenuItem
+            {
+                Header = ResourceProvider.GetString("LOC_SPG_Merge")
+            };
+            mergeItem.Items.Add(new MenuItem
+            {
+                Header = node.Orientation == Orientation.Horizontal ? ResourceProvider.GetString("LOC_SPG_MergeKeepLeft") : ResourceProvider.GetString("LOC_SPG_MergeKeepUpper"),
+                Command = new RelayCommand(() =>
+                {
+                    var root = Root.GridNode;
+                    var left = node.Children[curr];
+                    var right = node.Children[curr + 1];
+                    var newSize = left.Size.Value + right.Size.Value;
+                    node.Children[curr].Size = new GridLength(newSize, GridUnitType.Star);
+                    node.Children.RemoveAt(curr + 1);
+                    GridNode.Minimize(root, null);
+                })
+            });
+            mergeItem.Items.Add(new MenuItem
+            {
+                Header = node.Orientation == Orientation.Horizontal ? ResourceProvider.GetString("LOC_SPG_MergeKeepRight") : ResourceProvider.GetString("LOC_SPG_MergeKeepLower"),
+                Command = new RelayCommand(() =>
+                {
+                    var root = Root.GridNode;
+                    var left = node.Children[curr];
+                    var right = node.Children[curr + 1];
+                    var newSize = left.Size.Value + right.Size.Value;
+                    node.Children[curr + 1].Size = new GridLength(newSize, GridUnitType.Star);
+                    node.Children.RemoveAt(curr);
+                    GridNode.Minimize(root, null);
+                })
+            });
+            return mergeItem;
         }
 
         private void Children_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
