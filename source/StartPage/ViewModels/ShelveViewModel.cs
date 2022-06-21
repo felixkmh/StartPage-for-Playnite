@@ -41,7 +41,7 @@ namespace LandingPage.ViewModels
         public ICommand ManualUpdateCommand { get => manualUpdateCommand; set => SetValue(ref manualUpdateCommand, value); }
 
         private ObservableCollection<ShelveViewModel> viewModels;
-        public static readonly Game DummyGame = new Game() { CoverImage = LandingPageExtension.Instance.PlaceholderCoverPath };
+        public static readonly Game DummyGame = new Game() { CoverImage = LandingPageExtension.Instance.PlaceholderCoverPath, Name = "" };
 
         public ShelveViewModel(ShelveProperties shelveProperties, LandingPage.Settings.ShelvesSettings shelveSettings, IPlayniteAPI playniteAPI, ObservableCollection<ShelveViewModel> viewModels)
         {
