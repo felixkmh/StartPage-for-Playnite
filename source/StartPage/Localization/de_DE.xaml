@@ -92,7 +92,7 @@ Stattdessen kann sie auf einen festen Wert gesetzt werden. Wenn dieser Wert grö
     <sys:String x:Key="LOC_SPG_DownScaleCoversTooltip" xml:space="preserve">Wenn diese Option aktiviert ist, werden Cover-Bilder mit einer maximalen Breite von (1,15 * Maximale Cover-Breite) Pixel in den Speicher geladen.
 Dies kann zu einem wesentlich geringeren Speicherbedarf für StartPage führen. Dies hat keinen Einfluss auf Cover, die bereits geladen wurden, bevor Playnite neugestartet wird.</sys:String>
     <sys:String x:Key="LOC_SPG_LockLayout">Layout außerhalb des Bearbeitungsmodus sperren</sys:String>
-    <sys:String x:Key="LOC_SPG_VideoVolume">Video volume</sys:String>
+    <sys:String x:Key="LOC_SPG_VideoVolume">Video Lautstärke</sys:String>
     <!-- Grid -->
     <sys:String x:Key="LOC_SPG_SplitHorizonatlly">Horizontal teilen</sys:String>
     <sys:String x:Key="LOC_SPG_SplitVertically">Vertikal teilen</sys:String>
