@@ -513,14 +513,7 @@ namespace LandingPage
                 if (!string.IsNullOrEmpty(successStoryPath))
                 {
                     var successStoryViewModel = new ViewModels.SuccessStory.SuccessStoryViewModel(successStoryPath, PlayniteApi, SettingsViewModel);
-                    Task.Run(() =>
-                    {
-                        successStoryViewModel.ParseAllAchievements();
-                    }).ContinueWith(t =>
-                    {
-                        t?.Dispose();
-                        successStoryViewModel.Update();
-                    });
+                    Task.Run(successStoryViewModel.ParseAllAchievements);
                     var view = new RecentAchievementsView() 
                     { 
                         DataContext = successStoryViewModel

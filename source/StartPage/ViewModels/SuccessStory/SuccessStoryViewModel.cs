@@ -26,6 +26,8 @@ namespace LandingPage.ViewModels.SuccessStory
         internal Dictionary<Guid, Achievements> achievements = new Dictionary<Guid, Achievements>();
         public Dictionary<Guid, Achievements> Achievements => achievements;
 
+        private event EventHandler<IEnumerable<Guid>> AchievementsUpdated; 
+
         internal LandingPageSettingsViewModel landingPageSettingsViewModel;
 
         internal FileSystemWatcher achievementWatcher;
@@ -78,6 +80,24 @@ namespace LandingPage.ViewModels.SuccessStory
                     IsBusy = false;
                 }), DispatcherPriority.Background);
             }
+
+            timer = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(500) };
+            timer.Tick += Timer_Tick;
+
+            AchievementsUpdated += SuccessStoryViewModel_AchievementsUpdated;
+        }
+
+        private async void Timer_Tick(object sender, EventArgs e)
+        {
+            await UpdateAsync();
+        }
+
+        private DispatcherTimer timer;
+
+        private void SuccessStoryViewModel_AchievementsUpdated(object sender, IEnumerable<Guid> e)
+        {
+            timer?.Stop();
+            timer?.Start();
         }
 
         private async void Settings_PropertyChangedAsync(object sender, PropertyChangedEventArgs e)
@@ -106,9 +126,10 @@ namespace LandingPage.ViewModels.SuccessStory
                 var idString = Path.GetFileNameWithoutExtension(e.Name);
                 if (Guid.TryParse(idString, out var id))
                 {
-                    if (await ParseAchievementsAsync(id))
+                    if (await ParseAchievementsAsync(id) is Achievements achievements)
                     {
-                        await UpdateLatestAchievementsAsync(landingPageSettingsViewModel.Settings.MaxNumberRecentAchievements, landingPageSettingsViewModel.Settings.MaxNumberRecentAchievementsPerGame);
+                        Achievements[id] = achievements;
+                        AchievementsUpdated?.Invoke(this, new[] { id });
                     }
                 }
             });
@@ -116,14 +137,14 @@ namespace LandingPage.ViewModels.SuccessStory
 
         private async void AchievementWatcher_DeletedAsync(object sender, FileSystemEventArgs e)
         {
-            await Application.Current.Dispatcher.InvokeAsync(async () =>
+            await Application.Current.Dispatcher.InvokeAsync(() =>
             {
                 var idString = Path.GetFileNameWithoutExtension(e.Name);
                 if (Guid.TryParse(idString, out var id))
                 {
                     if (achievements.Remove(id))
                     {
-                        await UpdateLatestAchievementsAsync(landingPageSettingsViewModel.Settings.MaxNumberRecentAchievements, landingPageSettingsViewModel.Settings.MaxNumberRecentAchievementsPerGame);
+                        AchievementsUpdated?.Invoke(this, new[] { id });
                     }
                 }
             });
@@ -136,9 +157,10 @@ namespace LandingPage.ViewModels.SuccessStory
                 var idString = Path.GetFileNameWithoutExtension(e.Name);
                 if (Guid.TryParse(idString, out var id))
                 {
-                    if (await ParseAchievementsAsync(id))
+                    if (await ParseAchievementsAsync(id) is Achievements achievements)
                     {
-                        await UpdateLatestAchievementsAsync(landingPageSettingsViewModel.Settings.MaxNumberRecentAchievements, landingPageSettingsViewModel.Settings.MaxNumberRecentAchievementsPerGame);
+                        Achievements[id] = achievements;
+                        AchievementsUpdated?.Invoke(this, new[] { id });
                     }
                 }
             });
@@ -154,10 +176,12 @@ namespace LandingPage.ViewModels.SuccessStory
 
         public async Task UpdateAsync()
         {
+            IsBusy = true;
             await UpdateLatestAchievementsAsync(
                 landingPageSettingsViewModel.Settings.MaxNumberRecentAchievements, 
                 landingPageSettingsViewModel.Settings.MaxNumberRecentAchievementsPerGame
             );
+            IsBusy = false;
         }
 
         public class TempAchievement
@@ -296,6 +320,7 @@ namespace LandingPage.ViewModels.SuccessStory
                             .Where(ac => (ac.Items?.Count() ?? 0) > 0);
                         // achievements = withAchievements.ToDictionary(ac => ac.Id);
                         achievements = withAchievements.ToDictionary(ac => ac.Id);
+                        AchievementsUpdated?.Invoke(this, achievements.Keys);
                     }
                 }
             }
@@ -306,12 +331,12 @@ namespace LandingPage.ViewModels.SuccessStory
             await Task.Run(ParseAllAchievements);
         }
 
-        public async Task<bool> ParseAchievementsAsync(Guid gameId)
+        public async Task<Achievements> ParseAchievementsAsync(Guid gameId)
         {
             return await Task.Run(() => ParseAchievements(gameId));
         }
 
-        public bool ParseAchievements(Guid gameId)
+        public Achievements ParseAchievements(Guid gameId)
         {
             if (playniteAPI.Database.Games.Get(gameId) is Game)
             {
@@ -325,8 +350,7 @@ namespace LandingPage.ViewModels.SuccessStory
                             var gameAchievements = DeserializeAchievementsFile(path);
                             if (gameAchievements is Achievements && gameAchievements.Items.Any(a => (!a.DateUnlocked?.Equals(default)) ?? false))
                             {
-                                achievements[gameId] = gameAchievements;
-                                return true;
+                                return gameAchievements;
                             }
                         }
                         catch (Exception) {}
@@ -334,7 +358,7 @@ namespace LandingPage.ViewModels.SuccessStory
                     }
                 }
             }
-            return false;
+            return null;
         }
 
         internal async Task<Achievements> DeserializeAchievementsFileAsync(string path)
@@ -366,9 +390,9 @@ namespace LandingPage.ViewModels.SuccessStory
             achievementWatcher.Dispose();
         }
 
-        public async void OnStartPageOpened()
+        public void OnStartPageOpened()
         {
-            await UpdateAsync();
+            //await UpdateAsync();
         }
 
         public void OnStartPageClosed()

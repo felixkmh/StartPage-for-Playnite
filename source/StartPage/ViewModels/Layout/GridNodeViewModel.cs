@@ -516,6 +516,14 @@ namespace LandingPage.ViewModels.Layout
                                             viewProperties.view = control2;
                                             View.Children.Add(control2);
                                             hasView = true;
+                                            if (control2 is IStartPageControl startPageControl)
+                                            {
+                                                startPageControl.OnStartPageOpened();
+                                            }
+                                            if (control2.DataContext is IStartPageControl startPageViewModel)
+                                            {
+                                                startPageViewModel.OnStartPageOpened();
+                                            }
                                         }
                                     }
                                     else
