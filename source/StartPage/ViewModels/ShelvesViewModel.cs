@@ -305,6 +305,10 @@ namespace LandingPage.ViewModels
         public async void OnDayChanged(DateTime newTime)
         {
             await UpdateShelvesAsync();
+            foreach(var shelve in ShelveViewModels)
+            {
+                shelve.CollectionViewSource.View.Refresh();
+            }
         }
 
         public void OnViewClosed()
