@@ -92,7 +92,7 @@
     <sys:String x:Key="LOC_SPG_DownScaleCoversTooltip" xml:space="preserve">في حالة التمكين ، يتم تحميل صور الغلاف في الذاكرة بعرض أقصى يبلغ (1.15 * أقصى عرض للغلاف) بكسل.
 يمكن أن يؤدي هذا إلى استخدام ذاكرة أصغر بكثير لـ StartPage. لن يؤثر على الأغلفة التي تم تحميلها قبل إعادة تشغيل Playnite.</sys:String>
     <sys:String x:Key="LOC_SPG_LockLayout">قفل التخطيط خارج وضع التعديل</sys:String>
-    
+    <sys:String x:Key="LOC_SPG_VideoVolume">Video volume</sys:String>
     <!-- Grid -->
     <sys:String x:Key="LOC_SPG_SplitHorizonatlly">قسم أفقياً</sys:String>
     <sys:String x:Key="LOC_SPG_SplitVertically">قسم عمودياً</sys:String>
