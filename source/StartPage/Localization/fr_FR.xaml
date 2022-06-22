@@ -91,7 +91,7 @@ Au lieu de cela, elle peut être définie sur une valeur fixe. Si cette valeur e
     <sys:String x:Key="LOC_SPG_DownScaleCovers">Réduire la résolution des images de couverture</sys:String>
     <sys:String x:Key="LOC_SPG_DownScaleCoversTooltip" xml:space="preserve">Lorsque ce paramètre est activé, les images de couverture seront chargées avec une limitation de la largeur des pixels (1.15* de la largeur de la couverture). Ce paramètre peut considérablement réduire l'utilisation mémoire de l'extension. Il n'affectera les images déjà chargées qu'après le redémarrage de Playnite.</sys:String>
     <sys:String x:Key="LOC_SPG_LockLayout">Verrouiller l'agencement en dehors du mode édition</sys:String>
-    
+    <sys:String x:Key="LOC_SPG_VideoVolume">Video volume</sys:String>
     <!-- Grid -->
     <sys:String x:Key="LOC_SPG_SplitHorizonatlly">Séparer horizontalement</sys:String>
     <sys:String x:Key="LOC_SPG_SplitVertically">Séparer verticalement</sys:String>
