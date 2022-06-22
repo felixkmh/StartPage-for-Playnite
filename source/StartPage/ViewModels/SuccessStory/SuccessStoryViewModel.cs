@@ -70,13 +70,10 @@ namespace LandingPage.ViewModels.SuccessStory
 
             if (Achievements.Count > 0)
             {
-                Application.Current.Dispatcher.BeginInvoke(new Action(() =>
+                Application.Current.Dispatcher.BeginInvoke(new Action(async () =>
                 {
                     IsBusy = true;
-                    UpdateLatestAchievements(
-                        landingPageSettingsViewModel.Settings.MaxNumberRecentAchievements,
-                        landingPageSettingsViewModel.Settings.MaxNumberRecentAchievementsPerGame
-                    );
+                    await UpdateAsync();
                     IsBusy = false;
                 }), DispatcherPriority.Background);
             }
