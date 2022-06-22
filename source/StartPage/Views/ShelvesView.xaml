@@ -54,6 +54,7 @@
         <conv:WidthToHeightMultiConverter x:Key="WidthToHeightMultiConverter"/>
         <conv:ElementToScaledRectConverter x:Key="ElementToScaledRectConverter"/>
         <conv:UriToBitmapImageConverter x:Key="UriToBitmapImageConverter"/>
+        <conv:UriToBitmapImageMultiConverter x:Key="UriToBitmapImageMultiConverter"/>
         <conv:VisibilityInverter x:Key="VisibilityInverter"/>
         <conv:DoubleToGridLengthConverter x:Key="DoubleToGridLengthConverter"/>
         <conv:IEnumerableNullOrEmptyToVisibilityConverter x:Key="IEnumerableNullOrEmptyToVisibilityConverter"/>
@@ -63,7 +64,8 @@
         <DataTemplate x:Key="GameCoverDataTemplate" DataType="{x:Type lpm:GameModel}">
             <StackPanel Orientation="Horizontal" MouseEnter="StackPanel_MouseEnter" MouseLeave="StackPanel_MouseLeave">
                 <Grid ClipToBounds="True"
-                      MaxWidth="{mu:LandingPageSettings Settings.MaxCoverWidth}" x:Name="ImageGrid">
+                      MaxWidth="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ListBox}, Path=DataContext.ShelveSettings.MaxCoverWidth}" 
+                      x:Name="ImageGrid">
                     <Grid.Width>
                         <MultiBinding Converter="{StaticResource HeightToWidthMultiConverter}">
                             <MultiBinding.Bindings>
@@ -95,11 +97,22 @@
                             </VisualBrush.Visual>
                         </VisualBrush>
                     </Grid.OpacityMask>
-                    <Image Source="{Binding Game.CoverImage, ConverterParameter={StaticResource True}, Converter={StaticResource UriToBitmapImageConverter}, 
-                        FallbackValue={StaticResource DefaultGameCover}, TargetNullValue={StaticResource DefaultGameCover}, Mode=OneWay}" Stretch="UniformToFill" 
-                                            HorizontalAlignment="Center" VerticalAlignment="Center"
-                                            RenderOptions.BitmapScalingMode="Fant"
-                           x:Name="CoverImage"/>
+                    <Image Stretch="UniformToFill" 
+                           HorizontalAlignment="Center" VerticalAlignment="Center"
+                           RenderOptions.BitmapScalingMode="Fant"
+                           x:Name="CoverImage">
+                        <Image.Source>
+                            <MultiBinding Converter="{StaticResource UriToBitmapImageMultiConverter}"
+                                          FallbackValue="{StaticResource DefaultGameCover}"
+                                          TargetNullValue="{StaticResource DefaultGameCover}"
+                                          Mode="OneWay">
+                                <MultiBinding.Bindings>
+                                    <Binding Path="Game.CoverImage"/>
+                                    <Binding RelativeSource="{RelativeSource Mode=FindAncestor, AncestorType=ListBox}" Path="DataContext.ShelveSettings"/>
+                                </MultiBinding.Bindings>
+                            </MultiBinding>
+                        </Image.Source>
+                    </Image>
                     <Image Source="{StaticResource InnerGlowBitmap}" Stretch="Fill" x:Name="GlowImage"
                                             RenderOptions.BitmapScalingMode="Fant" Opacity="0.0"/>
                     <TextBlock x:Name="NameTextBlock"
@@ -146,7 +159,7 @@
                 
             </StackPanel>
             <DataTemplate.Triggers>
-                <DataTrigger Binding="{mu:LandingPageSettings Settings.ShowTitleOnCover}" Value="{StaticResource True}">
+                <DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ListBox}, Path=DataContext.ShelveSettings.ShowTitleOnCover}" Value="{StaticResource True}">
                     <Setter Property="Visibility" Value="Visible" TargetName="NameTextBlock"/>
                 </DataTrigger>
                 <DataTrigger Binding="{Binding ElementName=CoverImage, Path=Source}" Value="{StaticResource DefaultGameCover}">

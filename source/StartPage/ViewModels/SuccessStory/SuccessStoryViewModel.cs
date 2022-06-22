@@ -70,10 +70,10 @@ namespace LandingPage.ViewModels.SuccessStory
 
             if (Achievements.Count > 0)
             {
-                Application.Current.Dispatcher.BeginInvoke(new Action(async () =>
+                Application.Current.Dispatcher.BeginInvoke(new Action(() =>
                 {
                     IsBusy = true;
-                    await UpdateLatestAchievementsAsync(
+                    UpdateLatestAchievements(
                         landingPageSettingsViewModel.Settings.MaxNumberRecentAchievements,
                         landingPageSettingsViewModel.Settings.MaxNumberRecentAchievementsPerGame
                     );
@@ -89,6 +89,7 @@ namespace LandingPage.ViewModels.SuccessStory
 
         private async void Timer_Tick(object sender, EventArgs e)
         {
+            timer.Stop();
             await UpdateAsync();
         }
 

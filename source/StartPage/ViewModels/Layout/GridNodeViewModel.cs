@@ -532,7 +532,7 @@ namespace LandingPage.ViewModels.Layout
                                     }
                                     HasView = hasView;
                                     IsLeaf = node.Children.Count == 0;
-                                }));
+                                }), System.Windows.Threading.DispatcherPriority.Normal);
                             }
                             catch (Exception ex)
                             {

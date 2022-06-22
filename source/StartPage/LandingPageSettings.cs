@@ -291,7 +291,7 @@ namespace LandingPage
 
             if (Settings.ShelveInstanceSettings == null)
             {
-                Settings.ShelveInstanceSettings = Settings.ShelveInstances.ToDictionary(s => s.Key, s => new Settings.ShelvesSettings { ShelveProperties = s.Value });
+                Settings.ShelveInstanceSettings = Settings.ShelveInstances.ToDictionary(s => s.Key, s => new Settings.ShelvesSettings(Settings) { ShelveProperties = s.Value });
             }
 
             SelectImagePathCommand = new RelayCommand(() =>

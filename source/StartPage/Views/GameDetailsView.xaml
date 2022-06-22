@@ -21,9 +21,9 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <MediaElement Grid.RowSpan="2" x:Name="VideoPlayer" Stretch="UniformToFill">
+        <!--<MediaElement Grid.RowSpan="2" x:Name="VideoPlayer" Stretch="UniformToFill">
             
-        </MediaElement>
+        </MediaElement>-->
         <Image x:Name="LogoImage"
                Stretch="Uniform" MaxHeight="50" 
                Grid.Row="0"

@@ -119,7 +119,7 @@ namespace LandingPage.ViewModels.GameActivity
         {
             if (timer == null)
             {
-                timer = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(1000) };
+                timer = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(500) };
                 timer.Tick += async (s, a) =>
                 {
                     if (s is DispatcherTimer dt)

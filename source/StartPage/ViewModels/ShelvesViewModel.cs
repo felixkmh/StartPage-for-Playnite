@@ -83,10 +83,10 @@ namespace LandingPage.ViewModels
             {
                 if (Settings.Settings.ShelveInstanceSettings.Count == 0)
                 {
-                    Settings.Settings.ShelveInstanceSettings.Add(InstanceId, new LandingPage.Settings.ShelvesSettings { ShelveProperties = Settings.Settings.ShelveProperties });
+                    Settings.Settings.ShelveInstanceSettings.Add(InstanceId, new LandingPage.Settings.ShelvesSettings(Settings.Settings) { ShelveProperties = Settings.Settings.ShelveProperties });
                 } else
                 {
-                    Settings.Settings.ShelveInstanceSettings.Add(InstanceId, new LandingPage.Settings.ShelvesSettings());
+                    Settings.Settings.ShelveInstanceSettings.Add(InstanceId, new LandingPage.Settings.ShelvesSettings(Settings.Settings));
                 }
             }
 
@@ -152,15 +152,15 @@ namespace LandingPage.ViewModels
                 await UpdateShelvesAsync();
             }, svm => ShelveViewModels.IndexOf(svm) < ShelveViewModels.Count - 1);
 
-            Application.Current.Dispatcher.BeginInvoke(new Action(() =>
-            {
-                IsBusy = true;
-                foreach (var shelve in ShelveViewModels)
-                {
-                    shelve.UpdateGames(shelve.ShelveProperties);
-                }
-                IsBusy = false;
-            }), DispatcherPriority.Background);
+            //Application.Current.Dispatcher.BeginInvoke(new Action(() =>
+            //{
+            //    IsBusy = true;
+            //    foreach (var shelve in ShelveViewModels)
+            //    {
+            //        shelve.UpdateGames(shelve.ShelveProperties);
+            //    }
+            //    IsBusy = false;
+            //}), DispatcherPriority.Background);
         }
 
         public Task UpdateShelves()

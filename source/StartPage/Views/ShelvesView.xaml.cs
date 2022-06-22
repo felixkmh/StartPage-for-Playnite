@@ -140,7 +140,7 @@ namespace LandingPage.Views
                             var newListWidth = Math.Floor(availableWidth / Math.Max(itemWidth, 1)) * itemWidth;
                             if (listBox.MaxWidth != newListWidth)
                             {
-                                listBox.MaxWidth = newListWidth;
+                                listBox.MaxWidth = Math.Max(0, newListWidth);
                             }
                         }
                     }
@@ -182,7 +182,7 @@ namespace LandingPage.Views
         {
             if (sender is FrameworkElement element && element.DataContext is GameModel model && model.Game != ShelveViewModel.DummyGame)
             {
-                if (LandingPageExtension.Instance.Settings.ShowDetails)
+                if (DataContext is ShelvesViewModel shelvesViewModel && shelvesViewModel.Shelves.ShowDetails)
                 {
                     if (Helper.UiHelper.FindVisualChildren<Grid>(element, "ImageGrid").FirstOrDefault() is Grid imageGrid)
                     {
@@ -190,6 +190,8 @@ namespace LandingPage.Views
                             infoPopup.DataContext = element.DataContext;
                             infoPopup.Description.PlacementTarget = imageGrid;
                             infoPopup.Description.IsOpen = true;
+                            infoPopup.VideoPlayer.IsMuted = shelvesViewModel.Shelves.TrailerVolume <= 0.0;
+                            infoPopup.VideoPlayer.Volume = shelvesViewModel.Shelves.TrailerVolume;
                         }, System.Windows.Threading.DispatcherPriority.Normal);
                     }
                 }
@@ -208,6 +210,7 @@ namespace LandingPage.Views
                 if (Helper.UiHelper.FindVisualChildren<Grid>(element, "ImageGrid").FirstOrDefault() is Grid imageGrid)
                 {
                     infoPopup.Dispatcher.Invoke(() => {
+                        infoPopup.VideoPlayer.Volume = 0;
                         infoPopup.Description.IsOpen = false;
                     }, System.Windows.Threading.DispatcherPriority.Normal);
                 }
