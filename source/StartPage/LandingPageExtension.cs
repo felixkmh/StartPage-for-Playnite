@@ -340,7 +340,7 @@ namespace LandingPage
                 var mainWindow = Application.Current.Windows.Cast<Window>().FirstOrDefault(w => w.Name == "WindowMain");
                 if (mainWindow is Window)
                 {
-                    mainWindow.Dispatcher.Invoke(() => 
+                    mainWindow.Dispatcher.BeginInvoke(new Action (() => 
                     {
                         if (Helper.UiHelper.FindVisualChildren<StackPanel>(mainWindow, "PART_PanelSideBarItems").FirstOrDefault() is StackPanel panel)
                         {
@@ -372,7 +372,7 @@ namespace LandingPage
 
                             }
                         }
-                    }, switchWithLowPrio ? System.Windows.Threading.DispatcherPriority.ApplicationIdle : System.Windows.Threading.DispatcherPriority.DataBind);
+                    }), switchWithLowPrio ? System.Windows.Threading.DispatcherPriority.ApplicationIdle : System.Windows.Threading.DispatcherPriority.DataBind);
                 }
             }
             foreach(var plugin in PlayniteApi.Addons.Plugins)
