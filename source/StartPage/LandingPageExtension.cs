@@ -337,40 +337,64 @@ namespace LandingPage
             //SavePluginSettings(Settings);
             if (Settings.EnableStartupOverride || Settings.MoveToTopOfList)
             {
+                logger.Debug("Trying to execute unsupported actions...");
                 var mainWindow = Application.Current.Windows.Cast<Window>().FirstOrDefault(w => w.Name == "WindowMain");
+                if (mainWindow == null) logger.Debug("MainWindow could not be found.");
                 if (mainWindow is Window)
                 {
-                    mainWindow.Dispatcher.BeginInvoke(new Action (() => 
+                    mainWindow.Dispatcher.InvokeAsync(new Action(async () => 
                     {
-                        if (Helper.UiHelper.FindVisualChildren<StackPanel>(mainWindow, "PART_PanelSideBarItems").FirstOrDefault() is StackPanel panel)
+                        try
                         {
-                            if (Helper.UiHelper.FindVisualChildren(panel).FirstOrDefault(child => child.ToolTip?.ToString() == Settings.StartPage) is Button element)
+                            if (Helper.UiHelper.FindVisualChildren<StackPanel>(mainWindow, "PART_PanelSideBarItems").FirstOrDefault() is StackPanel panel)
                             {
-                                var childIndex = -1;
-                                if (Settings.MoveToTopOfList)
+                                IEnumerable<FrameworkElement> children = Helper.UiHelper.FindVisualChildren(panel);
+                                int retries = 10;
+                                while ((children == null || children.Count() == 0) && retries > 0)
                                 {
-                                    childIndex = panel.Children.Cast<FrameworkElement>().ToList().FindIndex(c => c.ToolTip?.ToString() == "Start Page");
+                                    logger.Debug($"Could not find any side bar items. Remaining retries: {retries}");
+                                    await Task.Delay(100);
+                                    children = Helper.UiHelper.FindVisualChildren(panel);
+                                    retries--;
                                 }
-
-                                panel.Dispatcher.BeginInvoke(new Action(() =>
+                                IEnumerable<Button> sideBarButtons = panel.Children.OfType<Button>();
+                                logger.Debug($"Found side bar items:\n{string.Join("\n", sideBarButtons.Select(a => (a.ToolTip?.ToString())).OfType<string>())}");
+                                if (sideBarButtons.FirstOrDefault(child => child.ToolTip?.ToString() == Settings.StartPage) is Button element)
                                 {
-                                    if (childIndex > -1)
+                                    var childIndex = -1;
+                                    if (Settings.MoveToTopOfList)
                                     {
-                                        var child = panel.Children[childIndex];
-                                        panel.Children.RemoveAt(childIndex);
-                                        panel.Children.Insert(0, child);
+                                        childIndex = panel.Children.Cast<FrameworkElement>().ToList().FindIndex(c => c.ToolTip?.ToString() == "Start Page");
+                                        if (childIndex == -1) logger.Debug("Could not find StartPage side bar element.");
                                     }
 
-                                    if (Settings.EnableStartupOverride)
+                                    await panel.Dispatcher.BeginInvoke(new Action(() =>
                                     {
-                                        if (element.Command.CanExecute(element))
+                                        if (childIndex > -1)
                                         {
-                                            element.Command.Execute(element);
+                                            var child = panel.Children[childIndex];
+                                            panel.Children.RemoveAt(childIndex);
+                                            panel.Children.Insert(0, child);
                                         }
-                                    }
-                                }), switchWithLowPrio ? System.Windows.Threading.DispatcherPriority.ApplicationIdle : System.Windows.Threading.DispatcherPriority.DataBind);
 
+                                        if (Settings.EnableStartupOverride)
+                                        {
+                                            if (element.Command.CanExecute(element))
+                                            {
+                                                element.Command.Execute(element);
+                                            }
+                                        }
+                                    }), switchWithLowPrio ? System.Windows.Threading.DispatcherPriority.ApplicationIdle : System.Windows.Threading.DispatcherPriority.DataBind);
+                                }
+                                else
+                                {
+                                    logger.Debug("Could not find StartPage side bar button.");
+                                }
                             }
+                        }
+                        catch (Exception ex)
+                        {
+                            logger.Debug(ex, "Failed to move Start Page icon or open StartPage.");
                         }
                     }), switchWithLowPrio ? System.Windows.Threading.DispatcherPriority.ApplicationIdle : System.Windows.Threading.DispatcherPriority.DataBind);
                 }
