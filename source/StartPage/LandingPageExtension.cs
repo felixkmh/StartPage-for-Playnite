@@ -349,15 +349,16 @@ namespace LandingPage
                             if (Helper.UiHelper.FindVisualChildren<StackPanel>(mainWindow, "PART_PanelSideBarItems").FirstOrDefault() is StackPanel panel)
                             {
                                 IEnumerable<FrameworkElement> children = Helper.UiHelper.FindVisualChildren(panel);
-                                int retries = 10;
-                                while ((children == null || children.Count() == 0) && retries > 0)
+                                int retries = 20;
+                                IEnumerable<Button> sideBarButtons = panel.Children.OfType<Button>();
+                                int delay = 50;
+                                while (sideBarButtons.FirstOrDefault(child => child.ToolTip?.ToString() == Settings.StartPage) == null && retries > 0)
                                 {
-                                    logger.Debug($"Could not find any side bar items. Remaining retries: {retries}");
-                                    await Task.Delay(100);
-                                    children = Helper.UiHelper.FindVisualChildren(panel);
+                                    logger.Debug($"Could not find any side bar items. Waiting {delay}ms and retrying. Remaining retries: {retries}.");
+                                    await Task.Delay(delay);
+                                    sideBarButtons = panel.Children.OfType<Button>();
                                     retries--;
                                 }
-                                IEnumerable<Button> sideBarButtons = panel.Children.OfType<Button>();
                                 logger.Debug($"Found side bar items:\n{string.Join("\n", sideBarButtons.Select(a => (a.ToolTip?.ToString())).OfType<string>())}");
                                 if (sideBarButtons.FirstOrDefault(child => child.ToolTip?.ToString() == Settings.StartPage) is Button element)
                                 {
