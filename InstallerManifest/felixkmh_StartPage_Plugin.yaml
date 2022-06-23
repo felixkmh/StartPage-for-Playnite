@@ -1,5 +1,13 @@
 AddonId: felixkmh_StartPage_Plugin
 Packages:  
+  - Version: 2.8.1
+    RequiredApiVersion: 6.1.0
+    ReleaseDate: 2022-06-23
+    PackageUrl: https://github.com/felixkmh/StartPage-for-Playnite/releases/download/v2.8.1/felixkmh_StartPage_Plugin_2_8_1.pext
+    Changelog:
+      - Fixed StartPage not being launched automatically or moving its icon into first position
+      - Fixed settings icon in edit mode not being shown in some cases
+      - Localization updates
   - Version: 2.8.0
     RequiredApiVersion: 6.1.0
     ReleaseDate: 2022-06-23
