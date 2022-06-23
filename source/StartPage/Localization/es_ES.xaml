@@ -83,7 +83,7 @@
     <sys:String x:Key="LOC_SPG_BackgroundAnimationDuration">Duración de la Animación:</sys:String>
     <sys:String x:Key="LOC_SPG_BackgroundRefreshInterval">Intervalo de actualización (Minutos):</sys:String>
     <sys:String x:Key="LOC_SPG_SkipGamesInPreviousShelves">Saltar juegos presentes en las estanterías anteriores</sys:String>
-    <sys:String x:Key="LOC_SPG_SkipGamesInPreviousTimeframes">Skip Games present in preceding Timeframes</sys:String>
+    <sys:String x:Key="LOC_SPG_SkipGamesInPreviousTimeframes">Omitir los juegos presentes en los plazos anteriores</sys:String>
     <sys:String x:Key="LOC_SPG_EnableTags">Crear [SPG] etiquetas al lanzar. Utilizado para marcar juegos como ignorados.</sys:String>
     <sys:String x:Key="LOC_SPG_FixGridHeight">Altura de rejilla fija:</sys:String>
     <sys:String x:Key="LOC_SPG_FixGridHeight_Tooltip" xml:space="preserve">Si se activa, la altura de la rejilla ya no está vinculada a la altura de la ventana.
@@ -92,7 +92,7 @@ En su lugar, se puede establecer un valor fijo. Si ese valor es mayor que la alt
     <sys:String x:Key="LOC_SPG_DownScaleCoversTooltip" xml:space="preserve">Si se activa, las imágenes de portada se cargan en la memoria con un ancho máximo de (1.15 * Ancho máximo de portada) píxeles.
 Esto puede llevar a una huella de memoria mucho menor para StartPage. No afectará a las carátulas ya cargadas antes de reiniciar Playnite.</sys:String>
     <sys:String x:Key="LOC_SPG_LockLayout">Bloquear disposición fuera del modo edición</sys:String>
-    <sys:String x:Key="LOC_SPG_VideoVolume">Video volume</sys:String>
+    <sys:String x:Key="LOC_SPG_VideoVolume">Volumen del video</sys:String>
     <!-- Grid -->
     <sys:String x:Key="LOC_SPG_SplitHorizonatlly">Dividir horizontalmente</sys:String>
     <sys:String x:Key="LOC_SPG_SplitVertically">Dividir verticalmente</sys:String>
