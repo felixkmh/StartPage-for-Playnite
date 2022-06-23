@@ -98,6 +98,10 @@ namespace LandingPage.ViewModels
             if (sender is ShelveProperties shelveProperties)
             {
                 var cvs = CollectionViewSource;
+                if (e.PropertyName != nameof(ShelveProperties.Name))
+                {
+                    await UpdateGamesAsync(shelveProperties, true);
+                }
                 if (e.PropertyName == nameof(ShelveProperties.Order))
                 {
                     UpdateOrder(shelveProperties, cvs);
@@ -116,10 +120,6 @@ namespace LandingPage.ViewModels
                     || e.PropertyName == nameof(ShelveProperties.NumberOfGames))
                 {
 
-                }
-                if (e.PropertyName != nameof(ShelveProperties.Name))
-                {
-                    await UpdateGamesAsync(shelveProperties, true);
                 }
             }
         }
@@ -569,7 +569,7 @@ namespace LandingPage.ViewModels
             if (shelveProperties.Platforms?.Any() ?? false)
                 games = games.Where(g => g.PlatformIds?.Any(id => shelveProperties.Platforms.Contains(id)) ?? false);
 
-            if (LandingPageExtension.Instance.SettingsViewModel.Settings.SkipGamesInPreviousShelves)
+            if (ShelveSettings.SkipGamesInPreviousShelves)
             {
                 var current = viewModels.IndexOf(this);
                 if (current > -1)

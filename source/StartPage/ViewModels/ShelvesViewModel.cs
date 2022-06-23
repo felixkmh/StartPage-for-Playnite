@@ -76,7 +76,7 @@ namespace LandingPage.ViewModels
             dispatcherTimer.Tick += DispatcherTimer_TickAsync;
             dispatcherTimer.Interval = TimeSpan.FromMilliseconds(500);
 
-            Settings.Settings.PropertyChanged += Settings_PropertyChangedAsync;
+            //Settings.Settings.PropertyChanged += Settings_PropertyChangedAsync;
             Settings.PropertyChanged += Settings_PropertyChanged1Async;
 
             if (!Settings.Settings.ShelveInstanceSettings.ContainsKey(InstanceId))
@@ -91,6 +91,8 @@ namespace LandingPage.ViewModels
             }
 
             Shelves = Settings.Settings.ShelveInstanceSettings[instanceId];
+
+            Shelves.PropertyChanged += Settings_PropertyChangedAsync;
 
             foreach (var shelveProperties in Shelves.ShelveProperties)
             {
@@ -264,7 +266,7 @@ namespace LandingPage.ViewModels
 
         private async void Settings_PropertyChangedAsync(object sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == nameof(LandingPageSettings.SkipGamesInPreviousShelves))
+            if (e.PropertyName == nameof(LandingPage.Settings.ShelvesSettings.SkipGamesInPreviousShelves))
             {
                 await UpdateShelvesAsync();
             }
@@ -287,7 +289,7 @@ namespace LandingPage.ViewModels
                 {
                     Settings.Settings.ShelveInstanceSettings.Add(InstanceId, Shelves);
                 }
-                Settings.Settings.PropertyChanged += Settings_PropertyChangedAsync;
+                // Settings.Settings.PropertyChanged += Settings_PropertyChangedAsync;
             }
         }
 

@@ -17,10 +17,10 @@
         <CheckBox Margin="3" Content="{DynamicResource LOC_SPG_ShelvesHorizontalLabels}" IsChecked="{Binding ShelvesSettings.HorizontalLabels}"/>
         <CheckBox Margin="3" Content="{DynamicResource LOC_SPG_ShowGameDetails}" IsChecked="{Binding ShelvesSettings.ShowDetails}"/>
         <CheckBox Margin="3" Content="{DynamicResource LOC_SPG_ShowTitelOnCover}" IsChecked="{Binding ShelvesSettings.ShowTitleOnCover}"/>
+        <CheckBox Margin="3" Content="{DynamicResource LOC_SPG_SkipGamesInPreviousShelves}" IsChecked="{Binding ShelvesSettings.SkipGamesInPreviousShelves}"/>
         <StackPanel Margin="3">
             <TextBlock Text="{DynamicResource LOC_SPG_MaxCoverWidth}" VerticalAlignment="Center"/>
             <DockPanel>
-                <Slider Margin="0,0" VerticalAlignment="Center" Value="{Binding ShelvesSettings.MaxCoverWidth}" Minimum="0" Maximum="500" Width="200" IsSnapToTickEnabled="True" TickFrequency="1" SmallChange="1"/>
                 <numeric:DoubleBox Value="{Binding ShelvesSettings.MaxCoverWidth, UpdateSourceTrigger=Default}" 
                                                 MinValue="0"
                                                 MaxValue="500"
@@ -28,14 +28,15 @@
                                                 ValidationTrigger="PropertyChanged"
                                                 Style="{StaticResource {x:Type TextBox}}"
                                                 TextAlignment="Center"
+                                                DockPanel.Dock="Right"
                                                 >
                 </numeric:DoubleBox>
+                <Slider Margin="0,0" DockPanel.Dock="Left" VerticalAlignment="Center" Value="{Binding ShelvesSettings.MaxCoverWidth}" Minimum="0" Maximum="500" MinWidth="200" IsSnapToTickEnabled="True" TickFrequency="1" SmallChange="1"/>
             </DockPanel>
         </StackPanel>
         <StackPanel Margin="3">
             <TextBlock Text="{DynamicResource LOC_SPG_VideoVolume}" VerticalAlignment="Center"/>
             <DockPanel>
-                <Slider Margin="0,0" VerticalAlignment="Center" Value="{Binding ShelvesSettings.TrailerVolume}" Minimum="0" Maximum="1" Width="200" IsSnapToTickEnabled="True" TickFrequency="0.01" SmallChange="0.01"/>
                 <numeric:DoubleBox Value="{Binding ShelvesSettings.TrailerVolume, UpdateSourceTrigger=Default}" 
                                                 MinValue="0"
                                                 MaxValue="1"
@@ -43,8 +44,10 @@
                                                 ValidationTrigger="PropertyChanged"
                                                 Style="{StaticResource {x:Type TextBox}}"
                                                 TextAlignment="Center"
+                                                DockPanel.Dock="Right"
                                                 >
                 </numeric:DoubleBox>
+                <Slider DockPanel.Dock="Left" Margin="0,0" VerticalAlignment="Center" Value="{Binding ShelvesSettings.TrailerVolume}" Minimum="0" Maximum="1" MinWidth="200" IsSnapToTickEnabled="True" TickFrequency="0.01" SmallChange="0.01"/>
             </DockPanel>
         </StackPanel>
     </StackPanel>
