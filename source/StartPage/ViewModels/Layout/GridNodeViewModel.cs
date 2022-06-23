@@ -467,7 +467,14 @@ namespace LandingPage.ViewModels.Layout
                 GridNode.Orientation = orientation;
                 var temp = GridNode.ViewProperties;
                 GridNode.ViewProperties = null;
-                GridNode.Children.Add(new GridNode() { ViewProperties = temp, Orientation = GridNode.Orientation, Padding = GridNode.Padding });
+                GridNode.Children.Add(new GridNode() 
+                { 
+                    ViewProperties = temp, 
+                    Orientation = GridNode.Orientation, 
+                    Padding = GridNode.Padding, 
+                    HorizontalAlignment = GridNode.HorizontalAlignment, 
+                    VerticalAlignment = GridNode.VerticalAlignment 
+                });
                 GridNode.Children.Add(new GridNode());
                 return;
             }
@@ -495,7 +502,7 @@ namespace LandingPage.ViewModels.Layout
                             panel.Children.Remove(control);
                         }
                         View.Children.Add(control);
-                        hasView = true;
+                        HasView = true;
                     }
                     else
                     {
@@ -544,6 +551,7 @@ namespace LandingPage.ViewModels.Layout
             }
             else
             {
+                HasView = node?.ViewProperties?.view != null;
                 if (node.Orientation == Orientation.Horizontal)
                 {
                     for (int i = 0; i < node.Children.Count; i++)
