@@ -93,6 +93,9 @@ Invece, può essere impostata su un valore fisso. Se questo valore è più grand
 Questo può portare a un'impronta di memoria molto più piccola per StartPage. Non influenzerà le copertine già caricate prima del riavvio di Playnite.</sys:String>
     <sys:String x:Key="LOC_SPG_LockLayout">Blocca il layout al di fuori della modalità di modifica</sys:String>
     <sys:String x:Key="LOC_SPG_VideoVolume">Volume video</sys:String>
+    <sys:String x:Key="LOC_SPG_ShowInstalledIndicator">Indicate whether game is installed</sys:String>
+    <sys:String x:Key="LOC_SPG_ShowNotInstalledIndicator">Indicate whether game is not installed</sys:String>
+    
     <!-- Grid -->
     <sys:String x:Key="LOC_SPG_SplitHorizonatlly">Dividi orizzontalmente</sys:String>
     <sys:String x:Key="LOC_SPG_SplitVertically">Dividi verticalmente</sys:String>
