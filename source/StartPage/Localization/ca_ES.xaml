@@ -93,6 +93,9 @@ Instead, it can be set to a fixed value. If that value is bigger than the window
 This can lead to a much smaller memory footprint for StartPage. Will not affect covers already loaded before restarting Playnite.</sys:String>
     <sys:String x:Key="LOC_SPG_LockLayout">Lock Layout outside of Edit Mode</sys:String>
     <sys:String x:Key="LOC_SPG_VideoVolume">Video volume</sys:String>
+    <sys:String x:Key="LOC_SPG_ShowInstalledIndicator">Indicate whether game is installed</sys:String>
+    <sys:String x:Key="LOC_SPG_ShowNotInstalledIndicator">Indicate whether game is not installed</sys:String>
+    
     <!-- Grid -->
     <sys:String x:Key="LOC_SPG_SplitHorizonatlly">Split horizontally</sys:String>
     <sys:String x:Key="LOC_SPG_SplitVertically">Split vertically</sys:String>

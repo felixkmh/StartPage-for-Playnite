@@ -93,6 +93,9 @@
 这可以使 StartPage 的内存占用更小。不会影响重启 Playnite 前已加载的封面。</sys:String>
     <sys:String x:Key="LOC_SPG_LockLayout">在编辑模式之外锁定布局</sys:String>
     <sys:String x:Key="LOC_SPG_VideoVolume">视频音量</sys:String>
+    <sys:String x:Key="LOC_SPG_ShowInstalledIndicator">Indicate whether game is installed</sys:String>
+    <sys:String x:Key="LOC_SPG_ShowNotInstalledIndicator">Indicate whether game is not installed</sys:String>
+    
     <!-- Grid -->
     <sys:String x:Key="LOC_SPG_SplitHorizonatlly">水平分割</sys:String>
     <sys:String x:Key="LOC_SPG_SplitVertically">垂直分割</sys:String>
