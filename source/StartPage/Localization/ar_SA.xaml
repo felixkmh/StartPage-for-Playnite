@@ -93,6 +93,9 @@
 يمكن أن يؤدي هذا إلى استخدام ذاكرة أصغر بكثير لـ StartPage. لن يؤثر على الأغلفة التي تم تحميلها قبل إعادة تشغيل Playnite.</sys:String>
     <sys:String x:Key="LOC_SPG_LockLayout">قفل التخطيط خارج وضع التعديل</sys:String>
     <sys:String x:Key="LOC_SPG_VideoVolume">Video volume</sys:String>
+    <sys:String x:Key="LOC_SPG_ShowInstalledIndicator">Indicate whether game is installed</sys:String>
+    <sys:String x:Key="LOC_SPG_ShowNotInstalledIndicator">Indicate whether game is not installed</sys:String>
+    
     <!-- Grid -->
     <sys:String x:Key="LOC_SPG_SplitHorizonatlly">قسم أفقياً</sys:String>
     <sys:String x:Key="LOC_SPG_SplitVertically">قسم عمودياً</sys:String>
