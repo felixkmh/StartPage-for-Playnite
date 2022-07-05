@@ -253,7 +253,7 @@
                         </MenuItem>
                     </Menu>
                     <Grid HorizontalAlignment="Right" VerticalAlignment="Top"
-                          Visibility="{Binding HasView, Converter={StaticResource BooleanToVisibilityConverter}}"
+                          Visibility="Visible"
                           Grid.RowSpan="2">
                         <ToggleButton x:Name="SettingsButton"
                                       BorderBrush="Transparent"
@@ -262,7 +262,7 @@
                                       Padding="1"
                                       Cursor="Hand"
                                       Margin="5"
-                                      Visibility="{Binding GridNode.ViewProperties.StartPageViewArgs.HasSettings, TargetNullValue={x:Static Visibility.Hidden}, Converter={StaticResource BooleanToVisibilityConverter}}">
+                                      Visibility="{Binding GridNode.ViewProperties.StartPageViewArgs.HasSettings, FallbackValue={x:Static Visibility.Hidden}, TargetNullValue={x:Static Visibility.Hidden}, Converter={StaticResource BooleanToVisibilityConverter}}">
                             <ToggleButton.Content>
                                 <TextBlock Text="&#xefb0;" FontFamily="{StaticResource FontIcoFont}" FontSize="22"/>
                             </ToggleButton.Content>
