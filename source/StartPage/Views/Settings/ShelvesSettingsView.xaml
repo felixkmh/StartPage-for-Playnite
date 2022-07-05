@@ -18,6 +18,8 @@
         <CheckBox Margin="3" Content="{DynamicResource LOC_SPG_ShowGameDetails}" IsChecked="{Binding ShelvesSettings.ShowDetails}"/>
         <CheckBox Margin="3" Content="{DynamicResource LOC_SPG_ShowTitelOnCover}" IsChecked="{Binding ShelvesSettings.ShowTitleOnCover}"/>
         <CheckBox Margin="3" Content="{DynamicResource LOC_SPG_SkipGamesInPreviousShelves}" IsChecked="{Binding ShelvesSettings.SkipGamesInPreviousShelves}"/>
+        <CheckBox Margin="3" Content="{DynamicResource LOC_SPG_ShowInstalledIndicator}" IsChecked="{Binding ShelvesSettings.ShowInstalledIndicator}"/>
+        <CheckBox Margin="3" Content="{DynamicResource LOC_SPG_ShowNotInstalledIndicator}" IsChecked="{Binding ShelvesSettings.ShowNotInstalledIndicator}"/>
         <StackPanel Margin="3">
             <TextBlock Text="{DynamicResource LOC_SPG_MaxCoverWidth}" VerticalAlignment="Center"/>
             <DockPanel>

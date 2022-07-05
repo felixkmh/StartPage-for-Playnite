@@ -63,98 +63,123 @@
         <conv:DoubleToNegativeTopMarginConverter x:Key="DoubleToNegativeTopMarginConverter"/>
         <DataTemplate x:Key="GameCoverDataTemplate" DataType="{x:Type lpm:GameModel}">
             <StackPanel Orientation="Horizontal" MouseEnter="StackPanel_MouseEnter" MouseLeave="StackPanel_MouseLeave">
-                <Grid ClipToBounds="True"
-                      MaxWidth="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ListBox}, Path=DataContext.ShelveSettings.MaxCoverWidth}" 
-                      x:Name="ImageGrid">
-                    <Grid.Width>
-                        <MultiBinding Converter="{StaticResource HeightToWidthMultiConverter}">
-                            <MultiBinding.Bindings>
-                                <Binding RelativeSource="{RelativeSource Mode=Self}" 
-                                         Path="ActualHeight" 
-                                         Mode="OneWay">
-                                </Binding>
-                                <mu:LandingPageSettings Path="Settings.CoverAspectRatio"/>
-                            </MultiBinding.Bindings>
-                        </MultiBinding>
-                    </Grid.Width>
-                    <Grid.MaxHeight>
-                        <MultiBinding Converter="{StaticResource WidthToHeightMultiConverter}">
-                            <MultiBinding.Bindings>
-                                <Binding RelativeSource="{RelativeSource Mode=Self}" 
-                                         Path="MaxWidth" 
-                                         Mode="OneWay">
-                                </Binding>
-                                <mu:LandingPageSettings Path="Settings.CoverAspectRatio"/>
-                            </MultiBinding.Bindings>
-                        </MultiBinding>
-                    </Grid.MaxHeight>
-                    <Grid.OpacityMask>
-                        <VisualBrush Stretch="None" AutoLayoutContent="True">
-                            <VisualBrush.Visual>
-                                <Border Background="Black" CornerRadius="10" x:Name="Mask"
-                                                        Width="{Binding ElementName=ImageGrid, Path=ActualWidth}"
-                                                        Height="{Binding ElementName=ImageGrid, Path=ActualHeight}"/>
-                            </VisualBrush.Visual>
-                        </VisualBrush>
-                    </Grid.OpacityMask>
-                    <Image Stretch="UniformToFill" 
-                           HorizontalAlignment="Center" VerticalAlignment="Center"
-                           RenderOptions.BitmapScalingMode="Fant"
-                           x:Name="CoverImage">
-                        <Image.Source>
-                            <MultiBinding Converter="{StaticResource UriToBitmapImageMultiConverter}"
-                                          FallbackValue="{StaticResource DefaultGameCover}"
-                                          TargetNullValue="{StaticResource DefaultGameCover}"
-                                          Mode="OneWay">
+                <Grid>
+                    <Grid ClipToBounds="True"
+                          MaxWidth="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ListBox}, Path=DataContext.ShelveSettings.MaxCoverWidth}" 
+                          x:Name="ImageGrid">
+                        <Grid.Width>
+                            <MultiBinding Converter="{StaticResource HeightToWidthMultiConverter}">
                                 <MultiBinding.Bindings>
-                                    <Binding Path="Game.CoverImage"/>
-                                    <Binding RelativeSource="{RelativeSource Mode=FindAncestor, AncestorType=ListBox}" Path="DataContext.ShelveSettings"/>
+                                    <Binding RelativeSource="{RelativeSource Mode=Self}" 
+                                             Path="ActualHeight" 
+                                             Mode="OneWay">
+                                    </Binding>
+                                    <mu:LandingPageSettings Path="Settings.CoverAspectRatio"/>
                                 </MultiBinding.Bindings>
                             </MultiBinding>
-                        </Image.Source>
-                    </Image>
-                    <Image Source="{StaticResource InnerGlowBitmap}" Stretch="Fill" x:Name="GlowImage"
-                                            RenderOptions.BitmapScalingMode="Fant" Opacity="0.0"/>
-                    <TextBlock x:Name="NameTextBlock"
-                               Text="{Binding Game.Name}" 
-                               Style="{StaticResource BaseTextBlockStyle}" 
-                               VerticalAlignment="Bottom" 
-                               TextWrapping="Wrap" 
-                               TextAlignment="Center" 
-                               Padding="4" 
-                               Background="#7F000000"
-                               Visibility="Hidden"/>
-                    <Viewbox x:Name="Buttons" Visibility="Hidden">
-                        <StackPanel Orientation="Horizontal" Margin="1">
-                            <Button Background="Transparent" Padding="7,5,4,5" x:Name="PlayButton" Click="PlayButton_Click" BorderThickness="0">
-                                <TextBlock Text="" FontFamily="{StaticResource FontIcoFont}" x:Name="PlayIcon"/>
-                                <Button.Style>
-                                    <Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
-                                        <Setter Property="Foreground" Value="{DynamicResource GlyphBrush}"/>
-                                        <Style.Triggers>
-                                            <Trigger Property="IsMouseOver" Value="True">
-                                                <Setter Property="Foreground" Value="{DynamicResource TextBrush}"/>
-                                            </Trigger>
-                                        </Style.Triggers>
-                                    </Style>
-                                </Button.Style>
-                            </Button>
-                            <Button Background="Transparent"  Padding="4,5,7,5" x:Name="InfoButton" Click="InfoButton_Click" BorderThickness="0">
-                                <TextBlock Text="" FontFamily="{StaticResource FontIcoFont}"/>
-                                <Button.Style>
-                                    <Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
-                                        <Setter Property="Foreground" Value="{DynamicResource GlyphBrush}"/>
-                                        <Style.Triggers>
-                                            <Trigger Property="IsMouseOver" Value="True">
-                                                <Setter Property="Foreground" Value="{DynamicResource TextBrush}"/>
-                                            </Trigger>
-                                        </Style.Triggers>
-                                    </Style>
-                                </Button.Style>
-                            </Button>
-                        </StackPanel>
-                    </Viewbox>
-                    <ContentControl x:Name="Proxy" Visibility="{mu:LandingPageSettings Settings.ShowDetails}" Width="0" Height="0"/>
+                        </Grid.Width>
+                        <Grid.MaxHeight>
+                            <MultiBinding Converter="{StaticResource WidthToHeightMultiConverter}">
+                                <MultiBinding.Bindings>
+                                    <Binding RelativeSource="{RelativeSource Mode=Self}" 
+                                             Path="MaxWidth" 
+                                             Mode="OneWay">
+                                    </Binding>
+                                    <mu:LandingPageSettings Path="Settings.CoverAspectRatio"/>
+                                </MultiBinding.Bindings>
+                            </MultiBinding>
+                        </Grid.MaxHeight>
+                        <Grid.OpacityMask>
+                            <VisualBrush Stretch="None" AutoLayoutContent="True">
+                                <VisualBrush.Visual>
+                                    <Border Background="Black" CornerRadius="10" x:Name="Mask"
+                                                            Width="{Binding ElementName=ImageGrid, Path=ActualWidth}"
+                                                            Height="{Binding ElementName=ImageGrid, Path=ActualHeight}"/>
+                                </VisualBrush.Visual>
+                            </VisualBrush>
+                        </Grid.OpacityMask>
+                        <Image Stretch="UniformToFill" 
+                               HorizontalAlignment="Center" VerticalAlignment="Center"
+                               RenderOptions.BitmapScalingMode="Fant"
+                               x:Name="CoverImage">
+                            <Image.Source>
+                                <MultiBinding Converter="{StaticResource UriToBitmapImageMultiConverter}"
+                                              FallbackValue="{StaticResource DefaultGameCover}"
+                                              TargetNullValue="{StaticResource DefaultGameCover}"
+                                              Mode="OneWay">
+                                    <MultiBinding.Bindings>
+                                        <Binding Path="Game.CoverImage"/>
+                                        <Binding RelativeSource="{RelativeSource Mode=FindAncestor, AncestorType=ListBox}" Path="DataContext.ShelveSettings"/>
+                                    </MultiBinding.Bindings>
+                                </MultiBinding>
+                            </Image.Source>
+                        </Image>
+                        <Image Source="{StaticResource InnerGlowBitmap}" Stretch="Fill" x:Name="GlowImage"
+                                                RenderOptions.BitmapScalingMode="Fant" Opacity="0.0"/>
+                        <TextBlock x:Name="NameTextBlock"
+                                   Text="{Binding Game.Name}" 
+                                   Style="{StaticResource BaseTextBlockStyle}" 
+                                   VerticalAlignment="Bottom" 
+                                   TextWrapping="Wrap" 
+                                   TextAlignment="Center" 
+                                   Padding="4" 
+                                   Background="#7F000000"
+                                   Visibility="Hidden"/>
+                        <Viewbox x:Name="Buttons" Visibility="Hidden">
+                            <StackPanel Orientation="Horizontal" Margin="1">
+                                <Button Background="Transparent" Padding="7,5,4,5" x:Name="PlayButton" Click="PlayButton_Click" BorderThickness="0">
+                                    <TextBlock Text="" FontFamily="{StaticResource FontIcoFont}" x:Name="PlayIcon"/>
+                                    <Button.Style>
+                                        <Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
+                                            <Setter Property="Foreground" Value="{DynamicResource GlyphBrush}"/>
+                                            <Style.Triggers>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter Property="Foreground" Value="{DynamicResource TextBrush}"/>
+                                                </Trigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Button.Style>
+                                </Button>
+                                <Button Background="Transparent"  Padding="4,5,7,5" x:Name="InfoButton" Click="InfoButton_Click" BorderThickness="0">
+                                    <TextBlock Text="" FontFamily="{StaticResource FontIcoFont}"/>
+                                    <Button.Style>
+                                        <Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
+                                            <Setter Property="Foreground" Value="{DynamicResource GlyphBrush}"/>
+                                            <Style.Triggers>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter Property="Foreground" Value="{DynamicResource TextBrush}"/>
+                                                </Trigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Button.Style>
+                                </Button>
+                            </StackPanel>
+                        </Viewbox>
+                    </Grid>
+                    <Border Visibility="{Binding RelativeSource={RelativeSource AncestorType=ListBox, Mode=FindAncestor}, Path=DataContext.ShelveSettings.ShowNotInstalledIndicator, Converter={StaticResource BooleanToVisibilityConverter}}">
+                        <Border Margin="0" Padding="7" CornerRadius="10"
+                                Visibility="{Binding Game.IsInstalled, Converter={StaticResource InvertedBooleanToVisibilityConverter}}"
+                                HorizontalAlignment="Right" VerticalAlignment="Top">
+                            <Border.Background>
+                                <SolidColorBrush Color="Black" Opacity="0.4"/>
+                            </Border.Background>
+                            <TextBlock Text="" FontFamily="{DynamicResource FontIcoFont}"
+                                       Style="{DynamicResource BaseTextBlockStyle}"
+                                       Foreground="White"/>
+                        </Border>
+                    </Border>
+                    <Border Visibility="{Binding RelativeSource={RelativeSource AncestorType=ListBox, Mode=FindAncestor}, Path=DataContext.ShelveSettings.ShowInstalledIndicator, Converter={StaticResource BooleanToVisibilityConverter}}">
+                        <Border Margin="0" Padding="7" CornerRadius="10"
+                                Visibility="{Binding Game.IsInstalled, Converter={StaticResource BooleanToVisibilityConverter}}"
+                                HorizontalAlignment="Right" VerticalAlignment="Top">
+                            <Border.Background>
+                                <SolidColorBrush Color="Black" Opacity="0.4"/>
+                            </Border.Background>
+                            <TextBlock Text="" FontFamily="{DynamicResource FontIcoFont}"
+                                       Style="{DynamicResource BaseTextBlockStyle}"
+                                       Foreground="White"/>
+                        </Border>
+                    </Border>
                 </Grid>
                 
             </StackPanel>

@@ -503,6 +503,7 @@ namespace LandingPage.ViewModels.Layout
                         }
                         View.Children.Add(control);
                         HasView = true;
+                        IsLeaf = node.Children.Count == 0;
                     }
                     else
                     {

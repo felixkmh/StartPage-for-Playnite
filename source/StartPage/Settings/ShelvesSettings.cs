@@ -31,6 +31,12 @@ namespace LandingPage.Settings
         private double trailerVolume = 0;
         public double TrailerVolume { get => trailerVolume; set { SetValue(ref trailerVolume, value); } }
 
+        private bool showNotInstalledIndicator = false;
+        public bool ShowNotInstalledIndicator { get => showNotInstalledIndicator; set => SetValue(ref showNotInstalledIndicator, value); }
+
+        private bool showInstalledIndicator = false;
+        public bool ShowInstalledIndicator { get => showInstalledIndicator; set => SetValue(ref showInstalledIndicator, value); }
+
         public ShelvesSettings()
         {
 
