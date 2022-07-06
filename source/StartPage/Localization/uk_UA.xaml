@@ -93,8 +93,8 @@
 Це може призвести до значно меншого споживання пам’яті StartPage. Це не вплине на обкладинки, які вже завантажені до перезапуску Playnite.</sys:String>
     <sys:String x:Key="LOC_SPG_LockLayout">Заблокувати макет за межами режиму редагування</sys:String>
     <sys:String x:Key="LOC_SPG_VideoVolume">Гучність відео</sys:String>
-    <sys:String x:Key="LOC_SPG_ShowInstalledIndicator">Indicate whether game is installed</sys:String>
-    <sys:String x:Key="LOC_SPG_ShowNotInstalledIndicator">Indicate whether game is not installed</sys:String>
+    <sys:String x:Key="LOC_SPG_ShowInstalledIndicator">Показувати чи гру встановлено</sys:String>
+    <sys:String x:Key="LOC_SPG_ShowNotInstalledIndicator">Показувати чи гру не встановлено</sys:String>
     
     <!-- Grid -->
     <sys:String x:Key="LOC_SPG_SplitHorizonatlly">Розділити горизонтально</sys:String>
