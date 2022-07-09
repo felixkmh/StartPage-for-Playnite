@@ -1,5 +1,14 @@
 AddonId: felixkmh_StartPage_Plugin
 Packages:  
+  - Version: 2.9.0
+    RequiredApiVersion: 6.1.0
+    ReleaseDate: 2022-07-09
+    PackageUrl: https://github.com/felixkmh/StartPage-for-Playnite/releases/download/v2.9.0/felixkmh_StartPage_Plugin_2_9_0.pext
+    Changelog:
+      - Added option to Game Shelve view to show installation status indicators
+      - Use new configurable video player of the ExtraMetadataLoader extension in game details view
+      - Fixed settings icon not showing up for some views
+      - Localization updates
   - Version: 2.8.1
     RequiredApiVersion: 6.1.0
     ReleaseDate: 2022-06-23
