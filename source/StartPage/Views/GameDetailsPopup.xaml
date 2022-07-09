@@ -60,8 +60,11 @@
                     </LinearGradientBrush>
                 </Image.OpacityMask>
             </Image>
-            <controls:TrailerPlayer Source="{Binding TrailerUri}" Stretch="UniformToFill" x:Name="VideoPlayer"
-                                          Volume="0" LoadedBehavior="Play" HorizontalAlignment="Center" VerticalAlignment="Center" IsMuted="False"/>
+            <!--<controls:TrailerPlayer Source="{Binding TrailerUri}" Stretch="UniformToFill" x:Name="VideoPlayer" Visibility="Collapsed"
+                                          Volume="0" LoadedBehavior="Play" HorizontalAlignment="Center" VerticalAlignment="Center" IsMuted="False"/>-->
+            <Viewbox Stretch="UniformToFill" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <ContentControl x:Name="VideoLoaderControl_NoControls_Sound"/>
+            </Viewbox>
             <local:GameDetailsView Margin="10,5" x:Name="GameDetails"/>
         </Grid>
     </Popup>

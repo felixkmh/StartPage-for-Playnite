@@ -190,8 +190,11 @@ namespace LandingPage.Views
                             infoPopup.DataContext = element.DataContext;
                             infoPopup.Description.PlacementTarget = imageGrid;
                             infoPopup.Description.IsOpen = true;
-                            infoPopup.VideoPlayer.IsMuted = shelvesViewModel.Shelves.TrailerVolume <= 0.0;
-                            infoPopup.VideoPlayer.Volume = shelvesViewModel.Shelves.TrailerVolume;
+                            if (infoPopup.Player != null)
+                            {
+                                infoPopup.Player.IsMuted = shelvesViewModel.Shelves.TrailerVolume <= 0.0;
+                                infoPopup.Player.Volume = shelvesViewModel.Shelves.TrailerVolume;
+                            }
                         }, System.Windows.Threading.DispatcherPriority.Normal);
                     }
                 }
@@ -210,7 +213,10 @@ namespace LandingPage.Views
                 if (Helper.UiHelper.FindVisualChildren<Grid>(element, "ImageGrid").FirstOrDefault() is Grid imageGrid)
                 {
                     infoPopup.Dispatcher.Invoke(() => {
-                        infoPopup.VideoPlayer.Volume = 0;
+                        if (infoPopup.Player != null)
+                        {
+                            infoPopup.Player.Volume = 0;
+                        }
                         infoPopup.Description.IsOpen = false;
                     }, System.Windows.Threading.DispatcherPriority.Normal);
                 }
