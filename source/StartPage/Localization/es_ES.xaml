@@ -93,8 +93,8 @@ En su lugar, se puede establecer un valor fijo. Si ese valor es mayor que la alt
 Esto puede llevar a una huella de memoria mucho menor para StartPage. No afectará a las carátulas ya cargadas antes de reiniciar Playnite.</sys:String>
     <sys:String x:Key="LOC_SPG_LockLayout">Bloquear disposición fuera del modo edición</sys:String>
     <sys:String x:Key="LOC_SPG_VideoVolume">Volumen del video</sys:String>
-    <sys:String x:Key="LOC_SPG_ShowInstalledIndicator">Indicate whether game is installed</sys:String>
-    <sys:String x:Key="LOC_SPG_ShowNotInstalledIndicator">Indicate whether game is not installed</sys:String>
+    <sys:String x:Key="LOC_SPG_ShowInstalledIndicator">Indicar si el juego está instalado</sys:String>
+    <sys:String x:Key="LOC_SPG_ShowNotInstalledIndicator">Indicar si el juego no está instalado</sys:String>
     
     <!-- Grid -->
     <sys:String x:Key="LOC_SPG_SplitHorizonatlly">Dividir horizontalmente</sys:String>
