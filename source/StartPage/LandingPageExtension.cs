@@ -46,6 +46,11 @@ namespace LandingPage
 
         internal Lazy<GameActivityViewModel> gameActivityViewModel;
 
+        internal Uri lastBackgroundUri = null;
+        internal double lastBlur = 0;
+        internal double lastBackgroundScale = 1;
+        internal double lastAnimationDuration = 0;
+
         internal LandingPageView view = null;
         internal LandingPageView View
         {
@@ -60,7 +65,7 @@ namespace LandingPage
             }
         }
 
-        public HashSet<Guid> RunningGames { get; } = new HashSet<Guid>();
+        public List<Game> RunningGames { get; } = new List<Game>();
 
         internal LandingPageViewModel viewModel = null;
         internal LandingPageViewModel ViewModel
@@ -277,7 +282,27 @@ namespace LandingPage
 
         public override void OnGameStarted(OnGameStartedEventArgs args)
         {
-            RunningGames.Add(args.Game.Id);
+            if (RunningGames.Count == 0)
+            {
+                if (startPageViewModel != null)
+                {
+                    lastBackgroundUri = startPageViewModel.BackgroundImagePath;
+                    lastBlur = Settings.BlurAmount;
+                    lastBackgroundScale = Settings.RenderScale;
+                    lastAnimationDuration = Settings.AnimationDuration;
+                    Settings.AnimationDuration = 0;
+                    if (Uri.TryCreate(PlayniteApi.Database.GetFullFilePath(args.Game.BackgroundImage), UriKind.RelativeOrAbsolute, out var uri))
+                    {
+                        startPageViewModel.BackgroundImagePath = uri;
+                    }
+                    if (Settings.DisableBlurForCurrentlyPlayed)
+                    {
+                        Settings.BlurAmount = 0;
+                        Settings.RenderScale = 1;
+                    }
+                }
+            }
+            RunningGames.AddMissing(args.Game);
         }
 
         public override void OnGameStarting(OnGameStartingEventArgs args)
@@ -287,7 +312,28 @@ namespace LandingPage
 
         public override void OnGameStopped(OnGameStoppedEventArgs args)
         {
-            RunningGames.Remove(args.Game.Id);
+            RunningGames.Remove(args.Game);
+            if (startPageViewModel == null)
+            {
+                return;
+            }
+            if (RunningGames.Count == 0)
+            {
+                if (lastBackgroundUri != null)
+                {
+                    startPageViewModel.BackgroundImagePath = lastBackgroundUri;
+                    Settings.BlurAmount = lastBlur;
+                    Settings.RenderScale = lastBackgroundScale;
+                    Settings.AnimationDuration = lastAnimationDuration;
+                    lastBackgroundUri = null;
+                }
+            } else
+            {
+                if (Uri.TryCreate(PlayniteApi.Database.GetFullFilePath(RunningGames.Last().BackgroundImage), UriKind.RelativeOrAbsolute, out var uri))
+                {
+                    startPageViewModel.BackgroundImagePath = uri;
+                }
+            }
         }
 
         public override void OnGameUninstalled(OnGameUninstalledEventArgs args)
@@ -434,6 +480,13 @@ namespace LandingPage
             }
             if (startPageView?.DataContext is StartPageViewModel startPageViewModel)
             {
+                if (lastBackgroundUri != null)
+                {
+                    startPageViewModel.BackgroundImagePath = lastBackgroundUri;
+                    Settings.BlurAmount = lastBlur;
+                    Settings.RenderScale = lastBackgroundScale;
+                    Settings.AnimationDuration = lastAnimationDuration;
+                }
                 Settings.GridLayout = startPageViewModel.RootNodeViewModel.GridNode;
                 Settings.ShelveInstanceSettings = shelvesViewModels.ToDictionary(p => p.Key, p => p.Value.Shelves);
             }

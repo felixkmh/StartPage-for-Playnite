@@ -202,6 +202,12 @@ namespace LandingPage
         private bool lockLayout = false;
         public bool LockLayout { get => lockLayout; set => SetValue(ref lockLayout, value); }
 
+        private bool showCurrentlyPlayedBackground = true;
+        public bool ShowCurrentlyPlayedBackground { get => showCurrentlyPlayedBackground; set => SetValue(ref showCurrentlyPlayedBackground, value); }
+
+        private bool disableBlurForCurrentlyPlayed = true;
+        public bool DisableBlurForCurrentlyPlayed { get => disableBlurForCurrentlyPlayed; set => SetValue(ref disableBlurForCurrentlyPlayed, value); }
+
         private Guid ignoreTagId = Guid.Empty;
         public Guid IgnoreTagId
         {

@@ -72,10 +72,28 @@ namespace LandingPage.ViewModels
         }
 
         internal Game lastSelectedGame;
-        public Game LastSelectedGame { get => lastSelectedGame; set { SetValue(ref lastSelectedGame, value); UpdateBackgroundImagePath(false); } }
+        public Game LastSelectedGame 
+        { 
+            get => lastSelectedGame; 
+            set 
+            { 
+                SetValue(ref lastSelectedGame, value); 
+                if (!Settings.Settings.ShowCurrentlyPlayedBackground || plugin.RunningGames.Count == 0) 
+                    UpdateBackgroundImagePath(false); 
+            } 
+        }
 
         internal Game lastHoveredGame;
-        public Game LastHoveredGame { get => lastHoveredGame; set { SetValue(ref lastHoveredGame, value); UpdateBackgroundImagePath(false); } }
+        public Game LastHoveredGame 
+        { 
+            get => lastHoveredGame; 
+            set 
+            { 
+                SetValue(ref lastHoveredGame, value);
+                if (!Settings.Settings.ShowCurrentlyPlayedBackground || plugin.RunningGames.Count == 0)
+                    UpdateBackgroundImagePath(false);
+            }
+        }
 
         internal Game currentlyHoveredGame;
         public Game CurrentlyHoveredGame
@@ -215,6 +233,21 @@ namespace LandingPage.ViewModels
 
         private void Games_ItemUpdated(object sender, ItemUpdatedEventArgs<Game> e)
         {
+            if (plugin.RunningGames.Count > 0)
+            {
+                return;
+            }
+            if (e.UpdatedItems.Count == 1)
+            {
+                if (e.UpdatedItems[0].OldData.IsRunning != e.UpdatedItems[0].NewData.IsRunning)
+                {
+                    return;
+                }
+                if (e.UpdatedItems[0].OldData.IsLaunching != e.UpdatedItems[0].NewData.IsLaunching)
+                {
+                    return;
+                }
+            }
             if (e.UpdatedItems.Any(u => IsRelevantUpdate(u)))
             {
                 UpdateBackgroundImagePath(false);

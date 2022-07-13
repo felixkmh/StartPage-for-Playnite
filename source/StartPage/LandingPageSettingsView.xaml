@@ -375,6 +375,12 @@
                                 <Button Margin="2,0" VerticalAlignment="Center" Command="{Binding ClearImagePathCommand}" Content="{DynamicResource LOCClearLabel}"/>
                             </WrapPanel>
                         </DockPanel>
+                        <StackPanel Margin="0,3">
+                            <CheckBox x:Name="CurrentGameBackgroundCb" Content="{DynamicResource LOC_SPG_SetBackgroundToCurrentGame}" IsChecked="{Binding Settings.ShowCurrentlyPlayedBackground}" VerticalAlignment="Center" Margin="3"/>
+                            <CheckBox Content="{DynamicResource LOC_SPG_SetBackgroundToCurrentGameDisableBlur}" 
+                                      IsEnabled="{Binding Settings.ShowCurrentlyPlayedBackground}"
+                                      IsChecked="{Binding Settings.DisableBlurForCurrentlyPlayed}" VerticalAlignment="Center" Margin="25,3,3,3"/>
+                        </StackPanel>
                     </StackPanel>
                 </Grid>
             </ScrollViewer>
