@@ -95,6 +95,8 @@
     <sys:String x:Key="LOC_SPG_VideoVolume">Гучність відео</sys:String>
     <sys:String x:Key="LOC_SPG_ShowInstalledIndicator">Показувати чи гру встановлено</sys:String>
     <sys:String x:Key="LOC_SPG_ShowNotInstalledIndicator">Показувати чи гру не встановлено</sys:String>
+    <sys:String x:Key="LOC_SPG_SetBackgroundToCurrentGame">Set StartPage background to background image of the currently running game</sys:String>
+    <sys:String x:Key="LOC_SPG_SetBackgroundToCurrentGameDisableBlur">Disable blur</sys:String>
     
     <!-- Grid -->
     <sys:String x:Key="LOC_SPG_SplitHorizonatlly">Розділити горизонтально</sys:String>
