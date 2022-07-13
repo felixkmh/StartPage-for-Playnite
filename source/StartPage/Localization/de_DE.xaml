@@ -95,6 +95,8 @@ Dies kann zu einem wesentlich geringeren Speicherbedarf für StartPage führen. 
     <sys:String x:Key="LOC_SPG_VideoVolume">Video Lautstärke</sys:String>
     <sys:String x:Key="LOC_SPG_ShowInstalledIndicator">Anzeigen, ob das Spiel installiert ist</sys:String>
     <sys:String x:Key="LOC_SPG_ShowNotInstalledIndicator">Anzeigen, ob das Spiel nicht installiert ist</sys:String>
+    <sys:String x:Key="LOC_SPG_SetBackgroundToCurrentGame">StartPage-Hintergrund auf das Hintergrundbild des aktuell laufenden Spiels setzen</sys:String>
+    <sys:String x:Key="LOC_SPG_SetBackgroundToCurrentGameDisableBlur">Unschärfe deaktivieren</sys:String>
     
     <!-- Grid -->
     <sys:String x:Key="LOC_SPG_SplitHorizonatlly">Horizontal teilen</sys:String>

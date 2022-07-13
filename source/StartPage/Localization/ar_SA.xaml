@@ -95,6 +95,8 @@
     <sys:String x:Key="LOC_SPG_VideoVolume">Video volume</sys:String>
     <sys:String x:Key="LOC_SPG_ShowInstalledIndicator">Indicate whether game is installed</sys:String>
     <sys:String x:Key="LOC_SPG_ShowNotInstalledIndicator">Indicate whether game is not installed</sys:String>
+    <sys:String x:Key="LOC_SPG_SetBackgroundToCurrentGame">Set StartPage background to background image of the currently running game</sys:String>
+    <sys:String x:Key="LOC_SPG_SetBackgroundToCurrentGameDisableBlur">Disable blur</sys:String>
     
     <!-- Grid -->
     <sys:String x:Key="LOC_SPG_SplitHorizonatlly">قسم أفقياً</sys:String>
