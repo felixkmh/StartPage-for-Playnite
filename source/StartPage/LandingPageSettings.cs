@@ -208,6 +208,9 @@ namespace LandingPage
         private bool disableBlurForCurrentlyPlayed = true;
         public bool DisableBlurForCurrentlyPlayed { get => disableBlurForCurrentlyPlayed; set => SetValue(ref disableBlurForCurrentlyPlayed, value); }
 
+        private ObservableCollection<GridNodePreset> gridNodePresets = new ObservableCollection<GridNodePreset>();
+        public ObservableCollection<GridNodePreset> GridNodePresets { get => gridNodePresets; set => SetValue(ref gridNodePresets, value); }
+
         private Guid ignoreTagId = Guid.Empty;
         public Guid IgnoreTagId
         {
@@ -257,6 +260,8 @@ namespace LandingPage
                 OnPropertyChanged();
             }
         }
+
+        public ViewModels.GridNodePresetsViewModel GridNodePresetsViewModel => new ViewModels.GridNodePresetsViewModel(plugin);
 
         public ICommand SelectImagePathCommand { get; private set; }
         public ICommand SelectImageFolderPathCommand { get; private set; }

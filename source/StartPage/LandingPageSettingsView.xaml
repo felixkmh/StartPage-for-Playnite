@@ -8,6 +8,7 @@
              xmlns:system="clr-namespace:System;assembly=mscorlib"
              xmlns:conv="clr-namespace:LandingPage.Converters"
              xmlns:ext="clr-namespace:LandingPage.Extensions"
+             xmlns:views="clr-namespace:LandingPage.Views"
              mc:Ignorable="d"
              d:DesignHeight="400" d:DesignWidth="600"
              d:DataContext="{d:DesignInstance IsDesignTimeCreatable=False, Type=local:LandingPageSettingsViewModel}"
@@ -385,6 +386,8 @@
                 </Grid>
             </ScrollViewer>
         </TabItem>
-        
+        <!--<TabItem Header="Layouts">
+            <views:GridNodePresetsView DataContext="{Binding GridNodePresetsViewModel}"/>
+        </TabItem>-->
     </TabControl>
 </UserControl>

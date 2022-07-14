@@ -111,6 +111,7 @@
     <Compile Include="Models\GameGroup.cs" />
     <Compile Include="Models\GameModel.cs" />
     <Compile Include="Models\LandingPage.cs" />
+    <Compile Include="Models\Layout\GridNodePreset.cs" />
     <Compile Include="Models\Layout\ViewProperties.cs" />
     <Compile Include="Models\Layout\GridNode.cs" />
     <Compile Include="Models\ObservableObject.cs" />
@@ -123,6 +124,7 @@
     <Compile Include="UiHelper.cs" />
     <Compile Include="ViewModels\GameActivity\GameActivityViewModel.cs" />
     <Compile Include="ViewModels\GameActivity\MostPlayedViewModel.cs" />
+    <Compile Include="ViewModels\GridNodePresetsViewModel.cs" />
     <Compile Include="ViewModels\LandingPageViewModel.cs" />
     <Compile Include="ViewModels\Layout\GridNodeViewModel.cs" />
     <Compile Include="ViewModels\ShelvesSettingsViewModel.cs" />
@@ -144,6 +146,9 @@
     </Compile>
     <Compile Include="Views\GameDetailsView.xaml.cs">
       <DependentUpon>GameDetailsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\GridNodePresetsView.xaml.cs">
+      <DependentUpon>GridNodePresetsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\GridNodeView.xaml.cs">
       <DependentUpon>GridNodeView.xaml</DependentUpon>
@@ -323,6 +328,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\GameDetailsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\GridNodePresetsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
