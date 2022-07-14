@@ -1,5 +1,12 @@
 AddonId: felixkmh_StartPage_Plugin
 Packages:  
+  - Version: 2.10.0
+    RequiredApiVersion: 6.1.0
+    ReleaseDate: 2022-07-14
+    PackageUrl: https://github.com/felixkmh/StartPage-for-Playnite/releases/download/v2.10.0/felixkmh_StartPage_Plugin_2_10_0.pext
+    Changelog:
+      - Added option to set background image to the background of the currently running game temporarily
+      - Localization updates
   - Version: 2.9.0
     RequiredApiVersion: 6.1.0
     ReleaseDate: 2022-07-09
