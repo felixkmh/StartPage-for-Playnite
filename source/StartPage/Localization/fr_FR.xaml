@@ -94,7 +94,7 @@ Au lieu de cela, elle peut être définie sur une valeur fixe. Si cette valeur e
     <sys:String x:Key="LOC_SPG_VideoVolume">Volume vidéo</sys:String>
     <sys:String x:Key="LOC_SPG_ShowInstalledIndicator">Indiquer si le jeu est installé</sys:String>
     <sys:String x:Key="LOC_SPG_ShowNotInstalledIndicator">Indiquer si le jeu n'est pas installé</sys:String>
-    <sys:String x:Key="LOC_SPG_SetBackgroundToCurrentGame">Set StartPage background to background image of the currently running game</sys:String>
+    <sys:String x:Key="LOC_SPG_SetBackgroundToCurrentGame">Définir l'arrière-plan StartPage comme arrière-plan du jeu en cours d'exécution</sys:String>
     <sys:String x:Key="LOC_SPG_SetBackgroundToCurrentGameDisableBlur">Désactiver le flou</sys:String>
     
     <!-- Grid -->
