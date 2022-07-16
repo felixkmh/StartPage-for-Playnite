@@ -83,7 +83,7 @@
     <sys:String x:Key="LOC_SPG_BackgroundAnimationDuration">Durée de l'animation :</sys:String>
     <sys:String x:Key="LOC_SPG_BackgroundRefreshInterval">Intervalle d'actualisation (minutes) :</sys:String>
     <sys:String x:Key="LOC_SPG_SkipGamesInPreviousShelves">Ignorer les jeux présents dans les étagères précédentes</sys:String>
-    <sys:String x:Key="LOC_SPG_SkipGamesInPreviousTimeframes">Skip Games present in preceding Timeframes</sys:String>
+    <sys:String x:Key="LOC_SPG_SkipGamesInPreviousTimeframes">Ignorer les jeux présents dans les calendriers précédents</sys:String>
     <sys:String x:Key="LOC_SPG_EnableTags">Crée des étiquettes [SPG] au lancement. Utilisées pour marquer les jeux comme étant ignorés.</sys:String>
     <sys:String x:Key="LOC_SPG_FixGridHeight">Hauteur de la grille fixe :</sys:String>
     <sys:String x:Key="LOC_SPG_FixGridHeight_Tooltip" xml:space="preserve">Si elle est activée, la hauteur de la grille n'est plus liée à la hauteur de la fenêtre.
@@ -91,11 +91,11 @@ Au lieu de cela, elle peut être définie sur une valeur fixe. Si cette valeur e
     <sys:String x:Key="LOC_SPG_DownScaleCovers">Réduire la résolution des images de couverture</sys:String>
     <sys:String x:Key="LOC_SPG_DownScaleCoversTooltip" xml:space="preserve">Lorsque ce paramètre est activé, les images de couverture seront chargées avec une limitation de la largeur des pixels (1.15* de la largeur de la couverture). Ce paramètre peut considérablement réduire l'utilisation mémoire de l'extension. Il n'affectera les images déjà chargées qu'après le redémarrage de Playnite.</sys:String>
     <sys:String x:Key="LOC_SPG_LockLayout">Verrouiller l'agencement en dehors du mode édition</sys:String>
-    <sys:String x:Key="LOC_SPG_VideoVolume">Video volume</sys:String>
-    <sys:String x:Key="LOC_SPG_ShowInstalledIndicator">Indicate whether game is installed</sys:String>
-    <sys:String x:Key="LOC_SPG_ShowNotInstalledIndicator">Indicate whether game is not installed</sys:String>
+    <sys:String x:Key="LOC_SPG_VideoVolume">Volume vidéo</sys:String>
+    <sys:String x:Key="LOC_SPG_ShowInstalledIndicator">Indiquer si le jeu est installé</sys:String>
+    <sys:String x:Key="LOC_SPG_ShowNotInstalledIndicator">Indiquer si le jeu n'est pas installé</sys:String>
     <sys:String x:Key="LOC_SPG_SetBackgroundToCurrentGame">Set StartPage background to background image of the currently running game</sys:String>
-    <sys:String x:Key="LOC_SPG_SetBackgroundToCurrentGameDisableBlur">Disable blur</sys:String>
+    <sys:String x:Key="LOC_SPG_SetBackgroundToCurrentGameDisableBlur">Désactiver le flou</sys:String>
     
     <!-- Grid -->
     <sys:String x:Key="LOC_SPG_SplitHorizonatlly">Séparer horizontalement</sys:String>
