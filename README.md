@@ -44,7 +44,7 @@ StartPage comes with a set of built-in views.
 
 Game Shelves with customizable sorting, grouping and filters.
 
-| Shelves | Shelve Properites |
+| Shelves | Shelve Properties |
 |--------------|-----------|
 |![grafik](https://user-images.githubusercontent.com/24227002/166330058-2fb741be-d0ad-4878-858e-a3092a25eae0.png)|![grafik](https://user-images.githubusercontent.com/24227002/166330144-1d99c2c6-0e26-4721-b989-60db832eabef.png)|
 
