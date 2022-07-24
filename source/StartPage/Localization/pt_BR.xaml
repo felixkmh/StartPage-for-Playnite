@@ -79,40 +79,40 @@
     <sys:String x:Key="LOC_SPG_ShowMostPlayedGames">Mostrar jogados recentemente</sys:String>
     <sys:String x:Key="LOC_SPG_SkippedGames">Pular:</sys:String>
     <sys:String x:Key="LOC_SPG_ExtendShelve">Estender Prateleira</sys:String>
-    <sys:String x:Key="LOC_SPG_BackgroundGameInfoOpacity">Game Info Opacity:</sys:String>
+    <sys:String x:Key="LOC_SPG_BackgroundGameInfoOpacity">Opacidade do jogo:</sys:String>
     <sys:String x:Key="LOC_SPG_BackgroundAnimationDuration">Duração da animação:</sys:String>
     <sys:String x:Key="LOC_SPG_BackgroundRefreshInterval">Intervalo de Atualização(em minutos):</sys:String>
     <sys:String x:Key="LOC_SPG_SkipGamesInPreviousShelves">Pular Jogos presentes em prateleiras anteriores</sys:String>
     <sys:String x:Key="LOC_SPG_SkipGamesInPreviousTimeframes">Skip Games present in preceding Timeframes</sys:String>
     <sys:String x:Key="LOC_SPG_EnableTags">Create [SPG] tags on launch. Used to mark games as ignored.</sys:String>
-    <sys:String x:Key="LOC_SPG_FixGridHeight">Fixed Grid Height:</sys:String>
-    <sys:String x:Key="LOC_SPG_FixGridHeight_Tooltip" xml:space="preserve">If enabled, the grid height is no longer bound to the window height.
-Instead, it can be set to a fixed value. If that value is bigger than the window height, the view can be scrolled.</sys:String>
-    <sys:String x:Key="LOC_SPG_DownScaleCovers">Load cover images at a lower resolution</sys:String>
+    <sys:String x:Key="LOC_SPG_FixGridHeight">Altura da grade fixa:</sys:String>
+    <sys:String x:Key="LOC_SPG_FixGridHeight_Tooltip" xml:space="preserve">Se ativado, a altura da grade não está mais vinculada à altura da janela.
+Em vez disso, pode ser definida como um valor fixo. Se esse valor for maior do que a altura da janela, a visualização pode ser rolada.</sys:String>
+    <sys:String x:Key="LOC_SPG_DownScaleCovers">Carregar imagens de capa com uma resolução inferior</sys:String>
     <sys:String x:Key="LOC_SPG_DownScaleCoversTooltip" xml:space="preserve">If enabled, cover images are loaded into memory with a maximum width of (1.15 * Maximum Cover Width) pixels.
 This can lead to a much smaller memory footprint for StartPage. Will not affect covers already loaded before restarting Playnite.</sys:String>
-    <sys:String x:Key="LOC_SPG_LockLayout">Lock Layout outside of Edit Mode</sys:String>
-    <sys:String x:Key="LOC_SPG_VideoVolume">Video volume</sys:String>
-    <sys:String x:Key="LOC_SPG_ShowInstalledIndicator">Indicate whether game is installed</sys:String>
-    <sys:String x:Key="LOC_SPG_ShowNotInstalledIndicator">Indicate whether game is not installed</sys:String>
-    <sys:String x:Key="LOC_SPG_SetBackgroundToCurrentGame">Set StartPage background to background image of the currently running game</sys:String>
-    <sys:String x:Key="LOC_SPG_SetBackgroundToCurrentGameDisableBlur">Disable blur</sys:String>
+    <sys:String x:Key="LOC_SPG_LockLayout">Bloquear Layout fora do modo de edição</sys:String>
+    <sys:String x:Key="LOC_SPG_VideoVolume">Volume de vídeo</sys:String>
+    <sys:String x:Key="LOC_SPG_ShowInstalledIndicator">Indicar se o jogo está instalado</sys:String>
+    <sys:String x:Key="LOC_SPG_ShowNotInstalledIndicator">Indicar se o jogo não está instalado</sys:String>
+    <sys:String x:Key="LOC_SPG_SetBackgroundToCurrentGame">Definir o fundo do StartPage para imagem de fundo do jogo atualmente em execução</sys:String>
+    <sys:String x:Key="LOC_SPG_SetBackgroundToCurrentGameDisableBlur">Desativar desfoque</sys:String>
     
     <!-- Grid -->
-    <sys:String x:Key="LOC_SPG_SplitHorizonatlly">Split horizontally</sys:String>
-    <sys:String x:Key="LOC_SPG_SplitVertically">Split vertically</sys:String>
+    <sys:String x:Key="LOC_SPG_SplitHorizonatlly">Dividir horizontalmente</sys:String>
+    <sys:String x:Key="LOC_SPG_SplitVertically">Dividir verticalmente</sys:String>
     <sys:String x:Key="LOC_SPG_Merge">Mesclar</sys:String>
-    <sys:String x:Key="LOC_SPG_MergeKeepUpper">Keep upper panel</sys:String>
-    <sys:String x:Key="LOC_SPG_MergeKeepLower">Keep lower panel</sys:String>
-    <sys:String x:Key="LOC_SPG_MergeKeepLeft">Keep left panel</sys:String>
-    <sys:String x:Key="LOC_SPG_MergeKeepRight">Keep right panel</sys:String>
-    <sys:String x:Key="LOC_SPG_AddView">Add View</sys:String>
-    <sys:String x:Key="LOC_SPG_RemoveView">Remove View</sys:String>
+    <sys:String x:Key="LOC_SPG_MergeKeepUpper">Manter o painel superior</sys:String>
+    <sys:String x:Key="LOC_SPG_MergeKeepLower">Manter o painel inferior</sys:String>
+    <sys:String x:Key="LOC_SPG_MergeKeepLeft">Manter o painel esquerdo</sys:String>
+    <sys:String x:Key="LOC_SPG_MergeKeepRight">Manter o painel direito</sys:String>
+    <sys:String x:Key="LOC_SPG_AddView">Adicionar Visualização</sys:String>
+    <sys:String x:Key="LOC_SPG_RemoveView">Remover Visualização</sys:String>
     <sys:String x:Key="LOC_SPG_EditMode">Modo de Edição</sys:String>
     <sys:String x:Key="LOC_SPG_EnterEditMode">Entrar no modo de edição</sys:String>
     <sys:String x:Key="LOC_SPG_ExitEditMode">Sair do Modo de Edição</sys:String>
     <sys:String x:Key="LOC_SPG_ResetLayout">Redefinir o layout para o padrão</sys:String>
-    <sys:String x:Key="LOC_SPG_DragPanelTooltip">Drag-and-Drop panels to swap them</sys:String>
+    <sys:String x:Key="LOC_SPG_DragPanelTooltip">Arraste e solte painéis para trocá-los</sys:String>
     <sys:String x:Key="LOC_SPG_AddPanel">Adicionar painel</sys:String>
     <sys:String x:Key="LOC_SPG_RemovePanel">Remover Painel</sys:String>
     <sys:String x:Key="LOC_SPG_MergeWith">Mesclar com</sys:String>
@@ -133,18 +133,18 @@ This can lead to a much smaller memory footprint for StartPage. Will not affect 
     <sys:String x:Key="LOC_SPG_AlignmentStretch">Estender</sys:String>
     <sys:String x:Key="LOC_SPG_AlignmentCenter">Centralizar</sys:String>
     <sys:String x:Key="LOC_SPG_Padding">Preenchimento</sys:String>
-    <sys:String x:Key="LOC_SPG_ShelvesHorizontalLabels">Horizontal Labels</sys:String>
+    <sys:String x:Key="LOC_SPG_ShelvesHorizontalLabels">Etiquetas Horizontais</sys:String>
 
     <!-- Integrated Views -->
     <sys:String x:Key="LOC_SPG_ClockView">Relógio</sys:String>
     <sys:String x:Key="LOC_SPG_ClockViewDescription">Relógio digital que também mostra a data atual. Usa o formato de hora do sistema.</sys:String>
     <sys:String x:Key="LOC_SPG_ShelvesView">Prateleiras de Jogos</sys:String>
-    <sys:String x:Key="LOC_SPG_ShelvesViewDescription">Shelves showing game covers with custom filters, sorting and grouping options.</sys:String>
-    <sys:String x:Key="LOC_SPG_MostPlayedView">Most Played</sys:String>
-    <sys:String x:Key="LOC_SPG_MostPlayedDescription">Shows most played games for different time frames.</sys:String>
-    <sys:String x:Key="LOC_SPG_WeeklyActivityView">Weekly Activity</sys:String>
-    <sys:String x:Key="LOC_SPG_WeeklyActivityDescription">Shows a compact overview of the playtime in the last 7 days. Requires the GameActivity extension.</sys:String>
-    <sys:String x:Key="LOC_SPG_RecentAchievementsView">Recent Achievements</sys:String>
-    <sys:String x:Key="LOC_SPG_RecentAchievementsDescription">Shows an overview of recently unlocked achievements grouped by game. Requires the SuccessStory extension.</sys:String>
+    <sys:String x:Key="LOC_SPG_ShelvesViewDescription">Prateleiras mostrando capas de jogo com filtros personalizados, opções de ordenação e agrupamento.</sys:String>
+    <sys:String x:Key="LOC_SPG_MostPlayedView">Mais jogados</sys:String>
+    <sys:String x:Key="LOC_SPG_MostPlayedDescription">Mostra a maioria dos jogos jogados em diferentes períodos de tempo.</sys:String>
+    <sys:String x:Key="LOC_SPG_WeeklyActivityView">Atividade semanal</sys:String>
+    <sys:String x:Key="LOC_SPG_WeeklyActivityDescription">Mostra uma visão geral compacta do tempo de jogo nos últimos 7 dias. Requer a extensão GameActivity.</sys:String>
+    <sys:String x:Key="LOC_SPG_RecentAchievementsView">Conquistas recentes</sys:String>
+    <sys:String x:Key="LOC_SPG_RecentAchievementsDescription">Mostra uma visão geral de conquistas desbloqueadas recentemente agrupadas por jogo. Requer a extensão SuccessStory.</sys:String>
 
 </ResourceDictionary>
