@@ -12,23 +12,23 @@
     <sys:String x:Key="LOC_SPG_PlaytimePerSource">Tempo de jogo por fonte</sys:String>
     <sys:String x:Key="LOC_SPG_MostPlayedWeekly">Mais jogados esta semana</sys:String>
     <sys:String x:Key="LOC_SPG_TotalPlaytime" xml:space="preserve">Total: </sys:String>
-    <sys:String x:Key="LOC_SPG_LastSevenDays">Last 7 Days</sys:String>
-    <sys:String x:Key="LOC_SPG_LastThirtyDays">Last 30 Days</sys:String>
-    <sys:String x:Key="LOC_SPG_TimeframeNone">None</sys:String>
+    <sys:String x:Key="LOC_SPG_LastSevenDays">Últimos 7 dias</sys:String>
+    <sys:String x:Key="LOC_SPG_LastThirtyDays">Últimos 30 dias</sys:String>
+    <sys:String x:Key="LOC_SPG_TimeframeNone">Nenhum</sys:String>
 
-    <sys:String x:Key="LOC_SPG_SetGameAsBackground">Set as StartPage background</sys:String>
+    <sys:String x:Key="LOC_SPG_SetGameAsBackground">Definir StartPage como fundo da área de trabalho</sys:String>
 
     <!-- Timeframes -->
-    <sys:String x:Key="LOC_SPG_TimeframeLastDay">Last 24 Hours</sys:String>
-    <sys:String x:Key="LOC_SPG_TimeframeLast7Days">Last Week</sys:String>
-    <sys:String x:Key="LOC_SPG_TimeframeLast14Days">Last 2 Weeks</sys:String>
-    <sys:String x:Key="LOC_SPG_TimeframeLast21Days">Last 3 Weeks</sys:String>
-    <sys:String x:Key="LOC_SPG_TimeframeLastMonth">Last Month</sys:String>
-    <sys:String x:Key="LOC_SPG_TimeframeLast3Months">Last 3 Months</sys:String>
-    <sys:String x:Key="LOC_SPG_TimeframeLast6Months">Last 6 Months</sys:String>
-    <sys:String x:Key="LOC_SPG_TimeframeLastYear">Last Year</sys:String>
-    <sys:String x:Key="LOC_SPG_TimeframeLast5Years">Last 5 Years</sys:String>
-    <sys:String x:Key="LOC_SPG_TimeframeAllTime">All Time</sys:String>
+    <sys:String x:Key="LOC_SPG_TimeframeLastDay">Últimas 24 Horas</sys:String>
+    <sys:String x:Key="LOC_SPG_TimeframeLast7Days">Última Semana</sys:String>
+    <sys:String x:Key="LOC_SPG_TimeframeLast14Days">Últimas 2 semanas</sys:String>
+    <sys:String x:Key="LOC_SPG_TimeframeLast21Days">Últimas 3 semanas</sys:String>
+    <sys:String x:Key="LOC_SPG_TimeframeLastMonth">Último Mês</sys:String>
+    <sys:String x:Key="LOC_SPG_TimeframeLast3Months">Últimos 3 meses</sys:String>
+    <sys:String x:Key="LOC_SPG_TimeframeLast6Months">Últimos 6 meses</sys:String>
+    <sys:String x:Key="LOC_SPG_TimeframeLastYear">Último Ano</sys:String>
+    <sys:String x:Key="LOC_SPG_TimeframeLast5Years">Últimos 5 anos</sys:String>
+    <sys:String x:Key="LOC_SPG_TimeframeAllTime">Tempo total</sys:String>
 
     <!--Settings Tabs-->
     <sys:String x:Key="LOC_SPG_CommonTab">Comum</sys:String>
@@ -40,7 +40,7 @@
     <sys:String x:Key="LOC_SPG_BackgroundImageSourceMostPlayed">Mais jogados</sys:String>
     <sys:String x:Key="LOC_SPG_BackgroundImageSourceRandom">Aleatório</sys:String>
     <sys:String x:Key="LOC_SPG_BackgroundImageSourceLastSelected">Último selecionado</sys:String>
-    <sys:String x:Key="LOC_SPG_BackgroundImageSourceLastHovered">Last Hovered</sys:String>
+    <sys:String x:Key="LOC_SPG_BackgroundImageSourceLastHovered">Último pausado</sys:String>
 
     <!-- Settings -->
     <sys:String x:Key="LOC_SPG_ShowGameActivity">Mostrar as visualizações do GameActivity</sys:String>
@@ -74,15 +74,15 @@
     <sys:String x:Key="LOC_SPG_ShowGlobalProgressBar">(Não suportado) Mostrar barra de progresso global</sys:String>
     <sys:String x:Key="LOC_SPG_SwitchWithLowPrio">Baixa prioridade ao alternar a visualização (automaticamente ativado quando Playnite trava)</sys:String>
     <sys:String x:Key="LOC_SPG_UnsupportedToolTip">Use este recurso por sua própria conta e risco. Ela não é oficialmente apoiada pela PlayniteAPI e, portanto, pode levar a comportamentos inesperados.</sys:String>
-    <sys:String x:Key="LOC_SPG_IgnoreHidden">Ignore hidden games</sys:String>
-    <sys:String x:Key="LOC_SPG_AddShelve">Add Shelve</sys:String>
-    <sys:String x:Key="LOC_SPG_ShowMostPlayedGames">Show Most Played Games</sys:String>
-    <sys:String x:Key="LOC_SPG_SkippedGames">Skip:</sys:String>
-    <sys:String x:Key="LOC_SPG_ExtendShelve">Extend Shelve</sys:String>
+    <sys:String x:Key="LOC_SPG_IgnoreHidden">Ignorar jogos ocultos</sys:String>
+    <sys:String x:Key="LOC_SPG_AddShelve">Adicionar Prateleira</sys:String>
+    <sys:String x:Key="LOC_SPG_ShowMostPlayedGames">Mostrar jogados recentemente</sys:String>
+    <sys:String x:Key="LOC_SPG_SkippedGames">Pular:</sys:String>
+    <sys:String x:Key="LOC_SPG_ExtendShelve">Estender Prateleira</sys:String>
     <sys:String x:Key="LOC_SPG_BackgroundGameInfoOpacity">Game Info Opacity:</sys:String>
-    <sys:String x:Key="LOC_SPG_BackgroundAnimationDuration">Animation Duration:</sys:String>
-    <sys:String x:Key="LOC_SPG_BackgroundRefreshInterval">Refresh Interval (Minutes):</sys:String>
-    <sys:String x:Key="LOC_SPG_SkipGamesInPreviousShelves">Skip Games present in preceding Shelves</sys:String>
+    <sys:String x:Key="LOC_SPG_BackgroundAnimationDuration">Duração da animação:</sys:String>
+    <sys:String x:Key="LOC_SPG_BackgroundRefreshInterval">Intervalo de Atualização(em minutos):</sys:String>
+    <sys:String x:Key="LOC_SPG_SkipGamesInPreviousShelves">Pular Jogos presentes em prateleiras anteriores</sys:String>
     <sys:String x:Key="LOC_SPG_SkipGamesInPreviousTimeframes">Skip Games present in preceding Timeframes</sys:String>
     <sys:String x:Key="LOC_SPG_EnableTags">Create [SPG] tags on launch. Used to mark games as ignored.</sys:String>
     <sys:String x:Key="LOC_SPG_FixGridHeight">Fixed Grid Height:</sys:String>
@@ -101,7 +101,7 @@ This can lead to a much smaller memory footprint for StartPage. Will not affect 
     <!-- Grid -->
     <sys:String x:Key="LOC_SPG_SplitHorizonatlly">Split horizontally</sys:String>
     <sys:String x:Key="LOC_SPG_SplitVertically">Split vertically</sys:String>
-    <sys:String x:Key="LOC_SPG_Merge">Merge</sys:String>
+    <sys:String x:Key="LOC_SPG_Merge">Mesclar</sys:String>
     <sys:String x:Key="LOC_SPG_MergeKeepUpper">Keep upper panel</sys:String>
     <sys:String x:Key="LOC_SPG_MergeKeepLower">Keep lower panel</sys:String>
     <sys:String x:Key="LOC_SPG_MergeKeepLeft">Keep left panel</sys:String>
@@ -118,21 +118,21 @@ This can lead to a much smaller memory footprint for StartPage. Will not affect 
     <sys:String x:Key="LOC_SPG_MergeWith">Mesclar com</sys:String>
     <sys:String x:Key="LOC_SPG_MergeWithAbove">Painel superior</sys:String>
     <sys:String x:Key="LOC_SPG_MergeWithBelow">Painel inferior</sys:String>
-    <sys:String x:Key="LOC_SPG_MergeWithLeft">Left Panel</sys:String>
-    <sys:String x:Key="LOC_SPG_MergeWithRight">Right Panel</sys:String>
-    <sys:String x:Key="LOC_SPG_AddPanelTop">Top</sys:String>
-    <sys:String x:Key="LOC_SPG_AddPanelBottom">Bottom</sys:String>
-    <sys:String x:Key="LOC_SPG_AddPanelLeft">Leftmost</sys:String>
-    <sys:String x:Key="LOC_SPG_AddPanelRight">Rightmost</sys:String>
-    <sys:String x:Key="LOC_SPG_HorizontalAlignment">Horizontal Alignment</sys:String>
-    <sys:String x:Key="LOC_SPG_HorizontalAlignmentLeft">Left</sys:String>
-    <sys:String x:Key="LOC_SPG_HorizontalAlignmentRight">Right</sys:String>
+    <sys:String x:Key="LOC_SPG_MergeWithLeft">Painel esquerdo</sys:String>
+    <sys:String x:Key="LOC_SPG_MergeWithRight">Painel direito</sys:String>
+    <sys:String x:Key="LOC_SPG_AddPanelTop">Superior</sys:String>
+    <sys:String x:Key="LOC_SPG_AddPanelBottom">Inferior</sys:String>
+    <sys:String x:Key="LOC_SPG_AddPanelLeft">Mais à Esquerda</sys:String>
+    <sys:String x:Key="LOC_SPG_AddPanelRight">Mais a direita</sys:String>
+    <sys:String x:Key="LOC_SPG_HorizontalAlignment">Alinhamento Horizontal</sys:String>
+    <sys:String x:Key="LOC_SPG_HorizontalAlignmentLeft">Esquerda</sys:String>
+    <sys:String x:Key="LOC_SPG_HorizontalAlignmentRight">Direita</sys:String>
     <sys:String x:Key="LOC_SPG_VerticalAlignment">Alinhamento vertical</sys:String>
     <sys:String x:Key="LOC_SPG_VerticalAlignmentTop">Superior</sys:String>
     <sys:String x:Key="LOC_SPG_VerticalAlignmentBottom">Embaixo</sys:String>
     <sys:String x:Key="LOC_SPG_AlignmentStretch">Estender</sys:String>
     <sys:String x:Key="LOC_SPG_AlignmentCenter">Centralizar</sys:String>
-    <sys:String x:Key="LOC_SPG_Padding">Padding</sys:String>
+    <sys:String x:Key="LOC_SPG_Padding">Preenchimento</sys:String>
     <sys:String x:Key="LOC_SPG_ShelvesHorizontalLabels">Horizontal Labels</sys:String>
 
     <!-- Integrated Views -->
