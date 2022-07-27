@@ -93,10 +93,10 @@
 这可以使 StartPage 的内存占用更小。不会影响重启 Playnite 前已加载的封面。</sys:String>
     <sys:String x:Key="LOC_SPG_LockLayout">在编辑模式之外锁定布局</sys:String>
     <sys:String x:Key="LOC_SPG_VideoVolume">视频音量</sys:String>
-    <sys:String x:Key="LOC_SPG_ShowInstalledIndicator">Indicate whether game is installed</sys:String>
-    <sys:String x:Key="LOC_SPG_ShowNotInstalledIndicator">Indicate whether game is not installed</sys:String>
-    <sys:String x:Key="LOC_SPG_SetBackgroundToCurrentGame">Set StartPage background to background image of the currently running game</sys:String>
-    <sys:String x:Key="LOC_SPG_SetBackgroundToCurrentGameDisableBlur">Disable blur</sys:String>
+    <sys:String x:Key="LOC_SPG_ShowInstalledIndicator">指示游戏是否已安装</sys:String>
+    <sys:String x:Key="LOC_SPG_ShowNotInstalledIndicator">指示游戏是否未安装</sys:String>
+    <sys:String x:Key="LOC_SPG_SetBackgroundToCurrentGame">将 StartPage 的背景设置为当前运行的游戏背景图片。</sys:String>
+    <sys:String x:Key="LOC_SPG_SetBackgroundToCurrentGameDisableBlur">禁用模糊</sys:String>
     
     <!-- Grid -->
     <sys:String x:Key="LOC_SPG_SplitHorizonatlly">水平分割</sys:String>
