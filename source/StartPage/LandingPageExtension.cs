@@ -488,7 +488,17 @@ namespace LandingPage
                     Settings.AnimationDuration = lastAnimationDuration;
                 }
                 Settings.GridLayout = startPageViewModel.RootNodeViewModel.GridNode;
-                Settings.ShelveInstanceSettings = shelvesViewModels.ToDictionary(p => p.Key, p => p.Value.Shelves);
+                foreach(var vm in shelvesViewModels)
+                {
+                    Settings.ShelveInstanceSettings[vm.Key] = vm.Value.Shelves;
+                }
+                Settings.ShelveInstanceSettings = Settings.ShelveInstanceSettings
+                    .Where(item => item.Value.TTL <= 0)
+                    .ToDictionary(item => item.Key, item => item.Value);
+                foreach(var settings in Settings.ShelveInstanceSettings)
+                {
+                    settings.Value.TTL--;
+                }
             }
 
 

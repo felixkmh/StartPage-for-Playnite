@@ -10,6 +10,8 @@ namespace LandingPage.Settings
 {
     public class ShelvesSettings : ObservableObject
     {
+        public int TTL { get; set; } = 5;
+
         private ObservableCollection<ShelveProperties> shelveProperties = new ObservableCollection<ShelveProperties>();
         public ObservableCollection<ShelveProperties> ShelveProperties { get => shelveProperties; set => SetValue(ref shelveProperties, value); }
 
