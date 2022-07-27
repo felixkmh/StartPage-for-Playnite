@@ -493,7 +493,7 @@ namespace LandingPage
                     Settings.ShelveInstanceSettings[vm.Key] = vm.Value.Shelves;
                 }
                 Settings.ShelveInstanceSettings = Settings.ShelveInstanceSettings
-                    .Where(item => item.Value.TTL <= 0)
+                    .Where(item => item.Value.TTL > 0)
                     .ToDictionary(item => item.Key, item => item.Value);
                 foreach(var settings in Settings.ShelveInstanceSettings)
                 {
