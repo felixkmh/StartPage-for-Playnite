@@ -490,6 +490,7 @@ namespace LandingPage
                 Settings.GridLayout = startPageViewModel.RootNodeViewModel.GridNode;
                 foreach(var vm in shelvesViewModels)
                 {
+                    vm.Value.Shelves.TTL = 5;
                     Settings.ShelveInstanceSettings[vm.Key] = vm.Value.Shelves;
                 }
                 Settings.ShelveInstanceSettings = Settings.ShelveInstanceSettings
