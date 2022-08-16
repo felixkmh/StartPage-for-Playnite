@@ -626,7 +626,7 @@ namespace LandingPage.ViewModels
 
             var skipped = shelveProperties.SkippedGames;
 
-            if (LandingPageExtension.Instance.SettingsViewModel.Settings.SkipGamesInPreviousShelves)
+            if (ShelveSettings.SkipGamesInPreviousShelves)
             {
                 skipped = 0;
             }
