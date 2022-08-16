@@ -1,5 +1,11 @@
 AddonId: felixkmh_StartPage_Plugin
 Packages:  
+  - Version: 2.10.1
+    RequiredApiVersion: 6.1.0
+    ReleaseDate: 2022-08-16
+    PackageUrl: https://github.com/felixkmh/StartPage-for-Playnite/releases/download/v2.10.1/felixkmh_StartPage_Plugin_2_10_1.pext
+    Changelog:
+      - Fixed skip option in game shelves not working in some cases
   - Version: 2.10.0
     RequiredApiVersion: 6.1.0
     ReleaseDate: 2022-07-14
