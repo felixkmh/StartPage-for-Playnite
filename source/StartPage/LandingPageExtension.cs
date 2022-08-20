@@ -284,7 +284,7 @@ namespace LandingPage
         {
             if (RunningGames.Count == 0)
             {
-                if (startPageViewModel != null)
+                if (startPageViewModel != null && Settings.ShowCurrentlyPlayedBackground)
                 {
                     lastBackgroundUri = startPageViewModel.BackgroundImagePath;
                     lastBlur = Settings.BlurAmount;
