@@ -1,4 +1,4 @@
-﻿using LandingPage.Extensions;
+﻿using PlayniteCommon.Extensions;
 using LandingPage.Models;
 using LandingPage.Models.Layout;
 using LandingPage.ViewModels.Layout;

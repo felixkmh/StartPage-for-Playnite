@@ -11,7 +11,7 @@ using Playnite.SDK.Models;
 using LandingPage.Models;
 using System.Windows.Data;
 using System.Windows;
-using LandingPage.Extensions;
+using PlayniteCommon.Extensions;
 using System.Collections;
 using System.Globalization;
 using System.Windows.Threading;

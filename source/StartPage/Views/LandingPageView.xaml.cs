@@ -17,6 +17,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using static LandingPage.ViewModels.ShelveViewModel;
+using PlayniteCommon.UI;
 
 namespace LandingPage.Views
 {
@@ -102,7 +103,7 @@ namespace LandingPage.Views
                                 }
                                 var desiredWidth = listBox.DesiredSize.Width;
                                 var itemWidth = container.ActualWidth + container.Margin.Left + container.Margin.Right;
-                                var scrollViewer = Helper.UiHelper.FindVisualChildren<ScrollViewer>(listBox).FirstOrDefault();
+                                var scrollViewer = UiHelper.FindVisualChildren<ScrollViewer>(listBox).FirstOrDefault();
                             // itemWidth = desiredWidth / itemCount;
                                 var availableWidth = newWidth - 120;
                                 var newListWidth = Math.Floor(availableWidth / Math.Max(itemWidth, 1)) * itemWidth;

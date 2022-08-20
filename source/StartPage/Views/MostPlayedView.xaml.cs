@@ -14,7 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Helper;
+using PlayniteCommon.UI;
 using System.Windows.Threading;
 
 namespace LandingPage.Views
@@ -63,7 +63,7 @@ namespace LandingPage.Views
                             }
                             var desiredWidth = listBox.DesiredSize.Width;
                             var itemWidth = container.ActualWidth + container.Margin.Left + container.Margin.Right;
-                            var scrollViewer = Helper.UiHelper.FindVisualChildren<ScrollViewer>(listBox).FirstOrDefault();
+                            var scrollViewer = UiHelper.FindVisualChildren<ScrollViewer>(listBox).FirstOrDefault();
                             // itemWidth = desiredWidth / itemCount;
                             var availableWidth = newWidth / lists.Count();
                             FrameworkElement panel = VisualTreeHelper.GetParent(this) as FrameworkElement;

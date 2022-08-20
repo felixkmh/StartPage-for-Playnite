@@ -24,6 +24,7 @@ using LandingPage.ViewModels.Layout;
 using System.Diagnostics;
 using LandingPage.ViewModels.GameActivity;
 using Newtonsoft.Json;
+using PlayniteCommon.UI;
 
 namespace LandingPage
 {
@@ -366,15 +367,15 @@ namespace LandingPage
             var switchWithLowPrio = false;
             var parentWindow = Application.Current.Windows.Cast<Window>().FirstOrDefault(w => w.Name == "WindowMain");
             parentWindow?.Dispatcher.Invoke(() => {
-                if (Helper.UiHelper.FindVisualChildren<ProgressBar>(parentWindow, "PART_ProgressGlobal").FirstOrDefault() is ProgressBar bar)
+                if (UiHelper.FindVisualChildren<ProgressBar>(parentWindow, "PART_ProgressGlobal").FirstOrDefault() is ProgressBar bar)
                 {
                     progressBar = bar;
                 }
-                if (Helper.UiHelper.FindVisualChildren<TextBlock>(parentWindow, "PART_TextProgressText").FirstOrDefault() is TextBlock info)
+                if (UiHelper.FindVisualChildren<TextBlock>(parentWindow, "PART_TextProgressText").FirstOrDefault() is TextBlock info)
                 {
                     progressText = info;
                 }
-                if (Helper.UiHelper.FindVisualChildren<Button>(parentWindow, "PART_ButtonProgressCancel").FirstOrDefault() is Button bt)
+                if (UiHelper.FindVisualChildren<Button>(parentWindow, "PART_ButtonProgressCancel").FirstOrDefault() is Button bt)
                 {
                     cancelButton = bt;
                 }
@@ -392,9 +393,9 @@ namespace LandingPage
                     {
                         try
                         {
-                            if (Helper.UiHelper.FindVisualChildren<StackPanel>(mainWindow, "PART_PanelSideBarItems").FirstOrDefault() is StackPanel panel)
+                            if (UiHelper.FindVisualChildren<StackPanel>(mainWindow, "PART_PanelSideBarItems").FirstOrDefault() is StackPanel panel)
                             {
-                                IEnumerable<FrameworkElement> children = Helper.UiHelper.FindVisualChildren(panel);
+                                IEnumerable<FrameworkElement> children = UiHelper.FindVisualChildren(panel);
                                 int retries = 20;
                                 IEnumerable<Button> sideBarButtons = panel.Children.OfType<Button>();
                                 int delay = 50;

@@ -1,5 +1,5 @@
 ﻿using LandingPage.Converters;
-using LandingPage.Extensions;
+using PlayniteCommon.Extensions;
 using LandingPage.Models;
 using LandingPage.Models.GameActivity;
 using Playnite.SDK;
