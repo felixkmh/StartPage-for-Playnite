@@ -10,7 +10,7 @@ using Playnite.SDK;
 using Playnite.SDK.Models;
 using System.Collections.ObjectModel;
 using LandingPage.Models;
-using LandingPage.Extensions;
+using PlayniteCommon.Extensions;
 using System.Windows;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;

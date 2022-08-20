@@ -1,5 +1,6 @@
 ﻿using LandingPage.Models;
 using LandingPage.ViewModels;
+using PlayniteCommon.UI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -128,7 +129,7 @@ namespace LandingPage.Views
                             }
                             var desiredWidth = listBox.DesiredSize.Width;
                             var itemWidth = container.ActualWidth + container.Margin.Left + container.Margin.Right;
-                            var scrollViewer = Helper.UiHelper.FindVisualChildren<ScrollViewer>(listBox).FirstOrDefault();
+                            var scrollViewer = UiHelper.FindVisualChildren<ScrollViewer>(listBox).FirstOrDefault();
                             // itemWidth = desiredWidth / itemCount;
                             var availableWidth = newWidth - 60;
                             FrameworkElement panel = VisualTreeHelper.GetParent(this) as FrameworkElement;
@@ -184,7 +185,7 @@ namespace LandingPage.Views
             {
                 if (DataContext is ShelvesViewModel shelvesViewModel && shelvesViewModel.Shelves.ShowDetails)
                 {
-                    if (Helper.UiHelper.FindVisualChildren<Grid>(element, "ImageGrid").FirstOrDefault() is Grid imageGrid)
+                    if (UiHelper.FindVisualChildren<Grid>(element, "ImageGrid").FirstOrDefault() is Grid imageGrid)
                     {
                         infoPopup.Dispatcher.Invoke(() => {
                             infoPopup.DataContext = element.DataContext;
@@ -210,7 +211,7 @@ namespace LandingPage.Views
         {
             if (sender is FrameworkElement element && element.DataContext is GameModel model)
             {
-                if (Helper.UiHelper.FindVisualChildren<Grid>(element, "ImageGrid").FirstOrDefault() is Grid imageGrid)
+                if (UiHelper.FindVisualChildren<Grid>(element, "ImageGrid").FirstOrDefault() is Grid imageGrid)
                 {
                     infoPopup.Dispatcher.Invoke(() => {
                         if (infoPopup.Player != null)

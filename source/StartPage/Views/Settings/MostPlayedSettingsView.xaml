@@ -7,7 +7,7 @@
              xmlns:lp="clr-namespace:LandingPage" 
              xmlns:system="clr-namespace:System;assembly=mscorlib"
              xmlns:conv="clr-namespace:LandingPage.Converters"
-             xmlns:ext="clr-namespace:LandingPage.Extensions"
+             xmlns:ext="clr-namespace:PlayniteCommon.Extensions;assembly=felixkmh.PlayniteCommon"
              xmlns:m="clr-namespace:LandingPage.Models.GameActivity"
              xmlns:numeric="http://gu.se/NumericInput"
              mc:Ignorable="d" 
