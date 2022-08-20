@@ -1,0 +1,3 @@
+[submodule "extern/PlayniteCommon"]
+	path = extern/PlayniteCommon
+	url = https://github.com/felixkmh/PlayniteCommon
