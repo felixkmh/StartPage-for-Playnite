@@ -93,7 +93,8 @@ namespace LandingPage.ViewModels.GameActivity
                 }
                 await UpdateMostPlayedAsync();
             }
-            if (e.PropertyName == nameof(LandingPageSettings.SkipGamesInPreviousMostPlayed))
+            if (e.PropertyName == nameof(LandingPageSettings.SkipGamesInPreviousMostPlayed)
+                || e.PropertyName == nameof(LandingPageSettings.ShowHiddenInMostPlayed))
             {
                 await UpdateMostPlayedAsync();
             }
@@ -268,7 +269,7 @@ namespace LandingPage.ViewModels.GameActivity
                 if (options.Timeframe == Timeframe.AllTime)
                 {
                     var candidates = playniteAPI.Database.Games
-                        .Where(g => !g.Hidden)
+                        .Where(g => !g.Hidden || settings.Settings.ShowHiddenInMostPlayed)
                         .Where(g => !(g.TagIds?.Contains(tagId) ?? false));
                     candidates = candidates
                         .OrderByDescending(a => a.Playtime)
@@ -292,6 +293,7 @@ namespace LandingPage.ViewModels.GameActivity
                     var thisWeek = GameActivityViewModel.Activities
                         .Select(a => new { Game = playniteAPI.Database.Games.Get(a.Id), Items = a.Items.Where(i => options.Timeframe == Timeframe.AllTime || i.DateSession.Add(options.TimeSpan) >= DateTime.Today).ToList() })
                         .Where(a => a.Game is Game && a.Items?.Count > 0)
+                        .Where(a => !a.Game.Hidden || settings.Settings.ShowHiddenInMostPlayed)
                         .Where(a => !(a.Game.TagIds?.Contains(tagId) ?? false))
                         .Select(a => new { Game = a.Game, Playtime = a.Items.Sum(i => (long)i.ElapsedSeconds) });
                     thisWeek = thisWeek

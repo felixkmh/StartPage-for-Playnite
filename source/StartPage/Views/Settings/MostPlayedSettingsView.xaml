@@ -16,6 +16,8 @@
     <StackPanel>
         <CheckBox Content="{DynamicResource LOC_SPG_SkipGamesInPreviousTimeframes}" IsChecked="{Binding Settings.SkipGamesInPreviousMostPlayed}"
                   Margin="3"/>
+        <CheckBox Content="{DynamicResource LOCGameHiddenTitle}" IsChecked="{Binding Settings.ShowHiddenInMostPlayed}"
+                  Margin="3"/>
         <ItemsControl ItemsSource="{Binding Settings.MostPlayedOptions}" HorizontalAlignment="Left"
                       Margin="3" Grid.IsSharedSizeScope="True">
             <ItemsControl.ItemsPanel>

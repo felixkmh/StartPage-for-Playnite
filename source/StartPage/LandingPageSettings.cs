@@ -226,6 +226,9 @@ namespace LandingPage
             set => ignoreMostPlayedTagId = value;
         }
 
+        private bool showHiddenInMostPlayed = false;
+        public bool ShowHiddenInMostPlayed { get => showHiddenInMostPlayed; set => SetValue(ref showHiddenInMostPlayed, value); }
+
         // Playnite serializes settings object to a JSON object and saves it as text file.
         // If you want to exclude some property from being saved then use `JsonDontSerialize` ignore attribute.
         [DontSerialize]
