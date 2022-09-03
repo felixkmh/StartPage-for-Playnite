@@ -168,7 +168,11 @@ namespace LandingPage.ViewModels.GameActivity
                 if (specialGames.Count > i)
                 {
                     specialGames[i].Label = groups[i].Label;
-                    specialGames[i].Games[0].Game = groups[i].Games[0].Game;
+                    specialGames[i].Games.Clear();
+                    foreach(var game in groups[i].Games)
+                    {
+                        specialGames[i].Games.Add(game);
+                    }
                 }
                 else
                 {
@@ -301,13 +305,17 @@ namespace LandingPage.ViewModels.GameActivity
 
                     if (mostPlayedThisWeek?.Game is Game)
                     {
-                        var group = new GameGroup();
+                        var group = groups.LastOrDefault();
+                        var groupLabel = converter.ConvertToString(options.Timeframe);
+                        if (groupLabel != group?.Label)
+                        {
+                            group = new GameGroup() { Label = groupLabel };
+                        }
                         group.Games.Add(new GameModel(mostPlayedThisWeek.Game));
-                        group.Label = converter.ConvertToString(options.Timeframe);
-                        Application.Current.Dispatcher.Invoke(() =>
+                        if (!groups.Contains(group))
                         {
                             groups.Add(group);
-                        });
+                        }
                     }
                 }
             }

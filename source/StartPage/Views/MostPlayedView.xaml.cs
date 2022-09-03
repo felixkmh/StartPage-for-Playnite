@@ -45,8 +45,8 @@ namespace LandingPage.Views
                     var newWidth = ActualWidth;
                     var listBoxes = GameGroups.ItemContainerGenerator.Items;
                     var items = listBoxes.Select(item => GameGroups.ItemContainerGenerator.ContainerFromItem(item));
-                    var presenters = items.OfType<ListBoxItem>();
-                    var lists = presenters.Select(ele => UiHelper.FindVisualChildren<ListBox>(ele, "GroupList").FirstOrDefault());
+                    var presenters = items.OfType<ListBoxItem>().ToList();
+                    var lists = presenters.Select(ele => UiHelper.FindVisualChildren<ListBox>(ele, "GroupList").FirstOrDefault()).ToList();
                     foreach (var listBox in lists)
                     {
                         var itemCount = listBox.ItemsSource?.Cast<object>().Count() ?? 0;
@@ -65,16 +65,21 @@ namespace LandingPage.Views
                             var itemWidth = container.ActualWidth + container.Margin.Left + container.Margin.Right;
                             var scrollViewer = UiHelper.FindVisualChildren<ScrollViewer>(listBox).FirstOrDefault();
                             // itemWidth = desiredWidth / itemCount;
-                            var availableWidth = newWidth / lists.Count();
+                            int gameCount = lists.Sum(lb => lb.Items.Count);
+                            var availableWidth = newWidth / gameCount;
                             FrameworkElement panel = VisualTreeHelper.GetParent(this) as FrameworkElement;
                             while (!(panel is GridNodeView))
                             {
                                 panel = VisualTreeHelper.GetParent(panel) as FrameworkElement;
                             }
-                            availableWidth = (panel.ActualWidth - 14 * lists.Count()) / lists.Count();
+                            availableWidth = (panel.ActualWidth - 14 * gameCount) / gameCount;
                             var newListWidth = availableWidth;
 
-                            presenters.ForEach(p => p.MaxWidth = panel.ActualWidth / lists.Count());
+                            for(int i = 0; i < presenters.Count(); ++i)
+                            {
+                                var presenter = presenters[i];
+                                presenter.MaxWidth = panel.ActualWidth / gameCount * lists[i].Items.Count;
+                            }
 
                             foreach (var gameItem in listBox.Items.OfType<object>().Select(item => listBox.ItemContainerGenerator.ContainerFromItem(item)).OfType<FrameworkElement>())
                             {
@@ -87,7 +92,7 @@ namespace LandingPage.Views
                         }
                         
                     }
-                }), System.Windows.Threading.DispatcherPriority.Background);
+                }), DispatcherPriority.Background);
             }
         }
 
