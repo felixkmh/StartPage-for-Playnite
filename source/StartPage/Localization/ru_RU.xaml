@@ -28,10 +28,10 @@
     <sys:String x:Key="LOC_SPG_TimeframeLast6Months">Last 6 Months</sys:String>
     <sys:String x:Key="LOC_SPG_TimeframeLastYear">Last Year</sys:String>
     <sys:String x:Key="LOC_SPG_TimeframeLast5Years">Last 5 Years</sys:String>
-    <sys:String x:Key="LOC_SPG_TimeframeAllTime">All Time</sys:String>
+    <sys:String x:Key="LOC_SPG_TimeframeAllTime">За все время</sys:String>
 
     <!--Settings Tabs-->
-    <sys:String x:Key="LOC_SPG_CommonTab">Common</sys:String>
+    <sys:String x:Key="LOC_SPG_CommonTab">Общие</sys:String>
     <sys:String x:Key="LOC_SPG_BackgroundTab">Фон</sys:String>
     
     <!--BackgroundImageSource Enum-->
