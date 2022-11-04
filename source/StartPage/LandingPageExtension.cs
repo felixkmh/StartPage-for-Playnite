@@ -262,14 +262,14 @@ namespace LandingPage
         {
             if (viewModel != null)
             {
-                if (args.NewValue.FirstOrDefault() is Game last)
+                if (args.NewValue?.FirstOrDefault() is Game last)
                 {
                     viewModel.LastSelectedGame = last;
                 }
             }
             if (startPageView?.DataContext is StartPageViewModel model)
             {
-                if (args.NewValue.FirstOrDefault() is Game last)
+                if (args.NewValue?.FirstOrDefault() is Game last)
                 {
                     model.LastSelectedGame = last;
                 }
