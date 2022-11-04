@@ -19,19 +19,19 @@
     <sys:String x:Key="LOC_SPG_SetGameAsBackground">Set as StartPage background</sys:String>
 
     <!-- Timeframes -->
-    <sys:String x:Key="LOC_SPG_TimeframeLastDay">Last 24 Hours</sys:String>
-    <sys:String x:Key="LOC_SPG_TimeframeLast7Days">Last Week</sys:String>
-    <sys:String x:Key="LOC_SPG_TimeframeLast14Days">Last 2 Weeks</sys:String>
-    <sys:String x:Key="LOC_SPG_TimeframeLast21Days">Last 3 Weeks</sys:String>
+    <sys:String x:Key="LOC_SPG_TimeframeLastDay">Последние 24 часа</sys:String>
+    <sys:String x:Key="LOC_SPG_TimeframeLast7Days">За прошлую неделю</sys:String>
+    <sys:String x:Key="LOC_SPG_TimeframeLast14Days">За последние 2 недели</sys:String>
+    <sys:String x:Key="LOC_SPG_TimeframeLast21Days">За последние 3 недели</sys:String>
     <sys:String x:Key="LOC_SPG_TimeframeLastMonth">Last Month</sys:String>
     <sys:String x:Key="LOC_SPG_TimeframeLast3Months">Last 3 Months</sys:String>
     <sys:String x:Key="LOC_SPG_TimeframeLast6Months">Last 6 Months</sys:String>
     <sys:String x:Key="LOC_SPG_TimeframeLastYear">Last Year</sys:String>
     <sys:String x:Key="LOC_SPG_TimeframeLast5Years">Last 5 Years</sys:String>
-    <sys:String x:Key="LOC_SPG_TimeframeAllTime">All Time</sys:String>
+    <sys:String x:Key="LOC_SPG_TimeframeAllTime">За все время</sys:String>
 
     <!--Settings Tabs-->
-    <sys:String x:Key="LOC_SPG_CommonTab">Common</sys:String>
+    <sys:String x:Key="LOC_SPG_CommonTab">Общие</sys:String>
     <sys:String x:Key="LOC_SPG_BackgroundTab">Фон</sys:String>
     
     <!--BackgroundImageSource Enum-->
@@ -54,7 +54,7 @@
     <sys:String x:Key="LOC_SPG_StartupItem">(Unsupported) SidebarItem activated on Launch</sys:String>
     <sys:String x:Key="LOC_SPG_MaxRecentAchievements">Maximum number of recent Achievements:</sys:String>
     <sys:String x:Key="LOC_SPG_MaxRecentAchievementsPerGame">Maximum number of recent Achievements per Game:</sys:String>
-    <sys:String x:Key="LOC_SPG_ShowTitelOnCover">Show Title on Game Cover</sys:String>
+    <sys:String x:Key="LOC_SPG_ShowTitelOnCover">Показать название на обложке игры</sys:String>
     <sys:String x:Key="LOC_SPG_ShowGameDetails">Show Game Details</sys:String>
     <sys:String x:Key="LOC_SPG_EnableNotifications">Enable Notifications</sys:String>
     <sys:String x:Key="LOC_SPG_MinimizeNotification">Minimize Notifications on Launch</sys:String>
