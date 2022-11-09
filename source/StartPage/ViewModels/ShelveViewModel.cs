@@ -432,49 +432,46 @@ namespace LandingPage.ViewModels
             var collection = Games;
             var changed = false;
 
-            Application.Current.Dispatcher.Invoke(() =>
+            using (var defer = CollectionViewSource.DeferRefresh())
             {
-                using (var defer = CollectionViewSource.DeferRefresh())
+                foreach (var game in gameSelection)
                 {
-                    foreach (var game in gameSelection)
+                    if (collection.FirstOrDefault(item => item.Game?.Id == game.Id) is GameModel model)
                     {
-                        if (collection.FirstOrDefault(item => item.Game?.Id == game.Id) is GameModel model)
-                        {
-                            if (model.Game.LastActivity != game.LastActivity)
-                            {
-                                changed = true;
-                            }
-                        }
-                        else if (collection.FirstOrDefault(item => gameSelection.All(s => s.Id != item.Game?.Id)) is GameModel unusedModel)
+                        if (model.Game.LastActivity != game.LastActivity)
                         {
                             changed = true;
-                            collection.Remove(unusedModel);
-                            unusedModel.Game = game;
-                            collection.Add(unusedModel);
-                        }
-                        else
-                        {
-                            changed = true;
-                            collection.Add(new GameModel(game));
                         }
                     }
-                    for (int j = collection.Count - 1; j >= 0; --j)
+                    else if (collection.FirstOrDefault(item => gameSelection.All(s => s.Id != item.Game?.Id)) is GameModel unusedModel)
                     {
-                        if (gameSelection.All(g => g.Id != collection[j].Game?.Id))
-                        {
-                            changed = true;
-                            collection.RemoveAt(j);
-                        }
+                        changed = true;
+                        collection.Remove(unusedModel);
+                        unusedModel.Game = game;
+                        collection.Add(unusedModel);
                     }
-                    if (changed && collection.Count > 1)
+                    else
                     {
-                        collection.Move(collection.Count - 1, 0);
-                        collection.Move(collection.Count - 1, 0);
-                        GC.Collect();
+                        changed = true;
+                        collection.Add(new GameModel(game));
                     }
                 }
-                IsBusy = false;
-            });
+                for (int j = collection.Count - 1; j >= 0; --j)
+                {
+                    if (gameSelection.All(g => g.Id != collection[j].Game?.Id))
+                    {
+                        changed = true;
+                        collection.RemoveAt(j);
+                    }
+                }
+                if (changed && collection.Count > 1)
+                {
+                    collection.Move(collection.Count - 1, 0);
+                    collection.Move(collection.Count - 1, 0);
+                    GC.Collect();
+                }
+            }
+            IsBusy = false;
         }
 
         public void UpdateGames(ShelveProperties shelveProperties, bool manualUpdate = false)
@@ -541,14 +538,14 @@ namespace LandingPage.ViewModels
             IsBusy = false;
         }
 
-        private async Task<List<Game>> GetGamesAsync(ShelveProperties shelveProperties)
+        private Task<List<Game>> GetGamesAsync(ShelveProperties shelveProperties)
         {
-            return await Task.Run(() => GetGames(shelveProperties));
+            return Task.Run(() => GetGames(shelveProperties));
         }
 
         private List<Game> GetGames(ShelveProperties shelveProperties)
         {
-            IEnumerable<Game> games = playniteAPI.Database.Games
+            IEnumerable<Game> games = playniteAPI.Database.Games.AsParallel()
                                     .Where(g => (!g.TagIds?.Contains(LandingPageExtension.Instance.SettingsViewModel.Settings.IgnoreTagId)) ?? true)
                                     .Where(g => g.Favorite || !shelveProperties.FavoritesOnly)
                                     .Where(g => !g.Hidden || !shelveProperties.IgnoreHidden)
@@ -577,10 +574,7 @@ namespace LandingPage.ViewModels
                     for (var i = current - 1; i >= 0; --i)
                     {
                         ShelveViewModel shelveViewModel = viewModels[i];
-                        Application.Current.Dispatcher.Invoke(() =>
-                        {
-                            games = games.Where(g => !shelveViewModel.Games.Any(m => m.Game.Id == g.Id));
-                        });
+                        games = games.Where(g => !shelveViewModel.Games.Any(m => m.Game.Id == g.Id));
                     }
                 }
             }

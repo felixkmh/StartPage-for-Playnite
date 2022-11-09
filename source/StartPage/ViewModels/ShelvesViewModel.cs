@@ -14,10 +14,12 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Threading;
+using StartPage.SDK.Async;
+using System.Diagnostics;
 
 namespace LandingPage.ViewModels
 {
-    public class ShelvesViewModel : BusyObservableObject, IStartPageControl, IStartPageViewModel
+    public class ShelvesViewModel : BusyObservableObject, IAsyncStartPageControl, IStartPageViewModel
     {
         internal ObservableCollection<ShelveViewModel> shelveViewModels = new ObservableCollection<ShelveViewModel>();
         public ObservableCollection<ShelveViewModel> ShelveViewModels { get => shelveViewModels; set => SetValue(ref shelveViewModels, value); }
@@ -153,16 +155,6 @@ namespace LandingPage.ViewModels
                 }
                 await UpdateShelvesAsync();
             }, svm => ShelveViewModels.IndexOf(svm) < ShelveViewModels.Count - 1);
-
-            Application.Current.Dispatcher.BeginInvoke(new Action(() =>
-            {
-                IsBusy = true;
-                foreach (var shelve in ShelveViewModels)
-                {
-                    shelve.UpdateGames(shelve.ShelveProperties);
-                }
-                IsBusy = false;
-            }), DispatcherPriority.Background);
         }
 
         public Task UpdateShelves()
@@ -186,7 +178,7 @@ namespace LandingPage.ViewModels
             IsBusy = true;
             foreach (var shelve in ShelveViewModels)
             {
-                await shelve.UpdateGamesAsync(shelve.ShelveProperties);
+                 await shelve.UpdateGamesAsync(shelve.ShelveProperties);
             }
             IsBusy = false;
             GC.Collect();
@@ -293,18 +285,24 @@ namespace LandingPage.ViewModels
             }
         }
 
-        public async void OnStartPageOpened()
+        public async Task OnViewShownAsync()
         {
             await UpdateShelvesAsync();
             Subscribe();
         }
 
-        public void OnStartPageClosed()
+        public Task InitializeAsync()
         {
-            Unsubscribe();
+            return Task.CompletedTask;
         }
 
-        public async void OnDayChanged(DateTime newTime)
+        public Task OnViewHiddenAsync()
+        {
+            Unsubscribe();
+            return Task.CompletedTask;
+        }
+
+        public async Task OnDayChangedAsync(DateTime newTime)
         {
             await UpdateShelvesAsync();
             foreach(var shelve in ShelveViewModels)
@@ -321,5 +319,6 @@ namespace LandingPage.ViewModels
             ShelveViewModels.ForEach(m => m.OnViewClosed());
             ShelveViewModels.Clear();
         }
+
     }
 }

@@ -25,6 +25,7 @@ using System.Diagnostics;
 using LandingPage.ViewModels.GameActivity;
 using Newtonsoft.Json;
 using PlayniteCommon.UI;
+using StartPage.SDK.Async;
 
 namespace LandingPage
 {
@@ -137,11 +138,10 @@ namespace LandingPage
                 if (!string.IsNullOrEmpty(gameActivityPath))
                 {
                     var model = new GameActivityViewModel(gameActivityPath, PlayniteApi, SettingsViewModel);
-                    model.ParseAllActivites();
                     return model;
                 }
                 return null;
-            });
+            }, LazyThreadSafetyMode.ExecutionAndPublication);
         }
 
         internal StartPageView startPageView;
@@ -208,6 +208,7 @@ namespace LandingPage
 
         private Control ViewOpened()
         {
+            Task initTask = Task.CompletedTask;
             if (startPageView == null)
             {
                 if (Settings.GridLayout == null)
@@ -225,6 +226,15 @@ namespace LandingPage
 
                 startPageViewModel = new StartPageViewModel(PlayniteApi, this, SettingsViewModel, new GridNodeViewModel(Settings.GridLayout));
 
+                Application.Current.Dispatcher.BeginInvoke(new Action(async () =>
+                {
+                    await startPageViewModel.UpdateBackgroundImagePathAsync(Settings.BackgroundRefreshInterval != 0);
+                    await startPageViewModel.RootNodeViewModel.InititalizeGrid();
+                    await startPageViewModel.RootNodeViewModel.InitializeViews();
+                    await startPageViewModel.Opened();
+                }), System.Windows.Threading.DispatcherPriority.Background);
+
+
                 var view = new StartPageView
                 {
                     DataContext = startPageViewModel
@@ -240,20 +250,24 @@ namespace LandingPage
                 }
 
                 startPageView = view;
-            }
-            if (startPageView.DataContext is StartPageViewModel model)
+            } else
             {
-                model.Opened();
+                Application.Current.Dispatcher.BeginInvoke(new Action(async () =>
+                {
+                    await startPageViewModel.Opened();
+                }), System.Windows.Threading.DispatcherPriority.Background);
             }
+
+            
 
             return startPageView;
         }
 
-        private void ViewClosed()
+        private async void ViewClosed()
         {
             if (startPageView?.DataContext is StartPageViewModel model)
             {
-                model.Closed();
+                await model.Closed();
             }
             GC.Collect();
         }
@@ -606,7 +620,7 @@ namespace LandingPage
                 if (!string.IsNullOrEmpty(successStoryPath))
                 {
                     var successStoryViewModel = new ViewModels.SuccessStory.SuccessStoryViewModel(successStoryPath, PlayniteApi, SettingsViewModel);
-                    Task.Run(successStoryViewModel.ParseAllAchievements);
+
                     var view = new RecentAchievementsView() 
                     { 
                         DataContext = successStoryViewModel

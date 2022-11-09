@@ -385,11 +385,11 @@ namespace LandingPage.ViewModels
         {
             //UpdateRecentlyPlayedGames();
             //UpdateRecentlyAddedGames();
-            ShelveViewModels.ForEach(m => m.UpdateGames(m.ShelveProperties));
-            UpdateFavorites();
+            //ShelveViewModels.ForEach(m => m.UpdateGames(m.ShelveProperties));
+            //UpdateFavorites();
             UpdateBackgroundImagePath(updateRandomBackground);
-            UpdateMostPlayedGame();
-            successStory.Update();
+            //UpdateMostPlayedGame();
+            //successStory.Update();
 
         }
 

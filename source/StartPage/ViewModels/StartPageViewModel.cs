@@ -16,6 +16,8 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Threading;
+using StartPage.SDK.Async;
+using System.Runtime.CompilerServices;
 
 namespace LandingPage.ViewModels
 {
@@ -142,9 +144,9 @@ namespace LandingPage.ViewModels
             Notifications.CollectionChanged += (sender, args) => OnPropertyChanged(nameof(Notifications));
             DeleteNotificationCommand = new RelayCommand<NotificationMessage>(sender => playniteAPI.Notifications.Remove(sender.Id));
             ClearNotificationsCommand = new RelayCommand(() => playniteAPI.Notifications.RemoveAll());
-            NextRandomBackgroundCommand = new RelayCommand(() =>
+            NextRandomBackgroundCommand = new RelayCommand(async () =>
             {
-                UpdateBackgroundImagePath(true);
+                await UpdateBackgroundImagePathAsync(true);
             }, () => (Settings.Settings.BackgroundImageSource == BackgroundImageSource.Random && !System.IO.File.Exists(Settings.Settings.BackgroundImagePath))
             || System.IO.Directory.Exists(Settings.Settings.BackgroundImagePath));
 
@@ -164,7 +166,6 @@ namespace LandingPage.ViewModels
             Settings.PropertyChanged += Settings_PropertyChanged1;
             backgroundImageQueue.CollectionChanged += BackgroundImageQueue_CollectionChanged;
 
-            UpdateBackgroundImagePath(Settings.Settings.BackgroundRefreshInterval != 0);
             UpdateBackgroundTimer();
         }
 
@@ -262,9 +263,10 @@ namespace LandingPage.ViewModels
             }
         }
 
-        public void Opened()
+        public async Task Opened()
         {
             Subscribe();
+            var tasks = new List<(string, Task)>();
             foreach(var view in RootNodeViewModel.ActiveViews)
             {
                 if (view.view is IStartPageControl control)
@@ -289,10 +291,35 @@ namespace LandingPage.ViewModels
                         LandingPageExtension.logger.Warn(ex, "Error when calling OnStartPageOpened()");
                     }
                 }
+                if (view.view is IAsyncStartPageControl asyncControl)
+                {
+                    try
+                    {
+                         tasks.Add((view.ViewId, asyncControl.OnViewShownAsync()));
+                    }
+                    catch (Exception ex)
+                    {
+                        LandingPageExtension.logger.Warn(ex, "Error when calling OnViewShownAsync()");
+                    }
+                }
+                if (view.view is FrameworkElement asyncElement && asyncElement.DataContext is IAsyncStartPageControl asyncContext)
+                {
+                    try
+                    {
+
+                        tasks.Add((view.ViewId, asyncContext.OnViewShownAsync()));
+                    }
+                    catch (Exception ex)
+                    {
+                        LandingPageExtension.logger.Warn(ex, "Error when calling OnViewShownAsync()");
+                    }
+                }
             }
+
+            await Task.WhenAll(tasks.Select(t => t.Item2));
         }
 
-        public void Closed()
+        public async Task Closed()
         {
             RootNodeViewModel.EditModeEnabled = false;
             Unsubscribe();
@@ -318,6 +345,28 @@ namespace LandingPage.ViewModels
                     catch (Exception ex)
                     {
                         LandingPageExtension.logger.Warn(ex, "Error when calling OnStartPageClosed()");
+                    }
+                }
+                if (view.view is IAsyncStartPageControl asyncControl)
+                {
+                    try
+                    {
+                        await asyncControl.OnViewHiddenAsync();
+                    }
+                    catch (Exception ex)
+                    {
+                        LandingPageExtension.logger.Warn(ex, "Error when calling OnStartPageOpened()");
+                    }
+                }
+                if (view.view is FrameworkElement asyncElement && asyncElement.DataContext is IAsyncStartPageControl asyncContext)
+                {
+                    try
+                    {
+                        await asyncContext.OnViewHiddenAsync();
+                    }
+                    catch (Exception ex)
+                    {
+                        LandingPageExtension.logger.Warn(ex, "Error when calling OnStartPageOpened()");
                     }
                 }
             }
@@ -436,11 +485,11 @@ namespace LandingPage.ViewModels
                 if (backgroundRefreshTimer == null)
                 {
                     backgroundRefreshTimer = new DispatcherTimer(DispatcherPriority.Background, Application.Current.Dispatcher);
-                    backgroundRefreshTimer.Tick += (s, e) =>
+                    backgroundRefreshTimer.Tick += async (s, e) =>
                     {
                         if (LandingPageExtension.Instance.RunningGames.Count == 0)
                         {
-                            UpdateBackgroundImagePath(true);
+                            await UpdateBackgroundImagePathAsync(true);
                         }
                     };
                 }
@@ -459,6 +508,11 @@ namespace LandingPage.ViewModels
                 backgroundRefreshTimer?.Stop();
                 backgroundRefreshTimer = null;
             }
+        }
+
+        internal async Task UpdateBackgroundImagePathAsync(bool updateRandomBackground = true)
+        {
+            await Task.Run(() => UpdateBackgroundImagePath(updateRandomBackground));
         }
 
         private void UpdateBackgroundImagePath(bool updateRandomBackground = true)

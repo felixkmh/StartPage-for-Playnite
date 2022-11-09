@@ -14,10 +14,11 @@ using System.Threading.Tasks;
 using System.Timers;
 using System.Windows;
 using System.Windows.Threading;
+using StartPage.SDK.Async;
 
 namespace LandingPage.ViewModels.GameActivity
 {
-    public class MostPlayedViewModel : ObservableObject, IStartPageViewModel
+    public class MostPlayedViewModel : ObservableObject, IStartPageViewModel, IAsyncStartPageControl
     {
         private static readonly EnumDescriptionTypeConverter converter = new EnumDescriptionTypeConverter(typeof(Timeframe));
 
@@ -47,7 +48,7 @@ namespace LandingPage.ViewModels.GameActivity
             FillWithPlaceholders();
             if (GameActivityViewModel.Activities.Count > 0)
             {
-                UpdateMostPlayedGame();
+                // UpdateMostPlayedGame();
             }
         }
 
@@ -371,6 +372,26 @@ namespace LandingPage.ViewModels.GameActivity
         {
             GameActivityViewModel.Activities.CollectionChanged -= Activities_CollectionChanged;
             GameActivityViewModel.PropertyChanged -= GameActivityViewModel_PropertyChangedAsync;
+        }
+
+        public Task OnViewShownAsync()
+        {
+            return Task.CompletedTask;
+        }
+
+        public async Task InitializeAsync()
+        {
+            await UpdateMostPlayedAsync();
+        }
+
+        public Task OnViewHiddenAsync()
+        {
+            return Task.CompletedTask;
+        }
+
+        public async Task OnDayChangedAsync(DateTime newTime)
+        {
+            await UpdateMostPlayedAsync();
         }
     }
 }

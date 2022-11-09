@@ -15,6 +15,8 @@ using Playnite.SDK;
 using System.Windows.Shell;
 using System.Diagnostics;
 using System.Collections.ObjectModel;
+using PlayniteCommon.Models;
+using StartPage.SDK.Async;
 
 namespace LandingPage.ViewModels.Layout
 {
@@ -27,7 +29,8 @@ namespace LandingPage.ViewModels.Layout
         public bool EditModeEnabled
         {
             get => editModeEnabled;
-            set {
+            set
+            {
                 SetValue(ref editModeEnabled, value);
                 foreach (FrameworkElement child in View.Children)
                 {
@@ -63,9 +66,9 @@ namespace LandingPage.ViewModels.Layout
         public ICommand OpenWikiCommand { get; private set; }
 
         public Control ViewSettings
-        { 
-            get 
-            { 
+        {
+            get
+            {
                 if (GridNode.ViewProperties?.StartPageViewArgs?.HasSettings ?? false)
                 {
                     var plugin = LandingPageExtension.Instance.PlayniteApi.Addons.Plugins.FirstOrDefault(p => p.Id == GridNode.ViewProperties.PluginId);
@@ -75,22 +78,22 @@ namespace LandingPage.ViewModels.Layout
                     }
                 }
                 return null;
-            } 
+            }
         }
 
         public GridNodeViewModel Parent { get; internal set; } = null;
 
-        public GridNodeViewModel Root 
-        { 
+        public GridNodeViewModel Root
+        {
             get
             {
                 var current = this;
-                while(current.Parent != null)
+                while (current.Parent != null)
                 {
                     current = current.Parent;
                 }
                 return current;
-            } 
+            }
         }
 
         public IEnumerable<ViewProperties> ActiveViews
@@ -110,7 +113,7 @@ namespace LandingPage.ViewModels.Layout
                     if (current.GridNode.Children.Any())
                     {
                         var children = current.View.Children.OfType<FrameworkElement>().Select(fe => fe.DataContext).OfType<GridNodeViewModel>();
-                        foreach(var child in children)
+                        foreach (var child in children)
                         {
                             if (child != current)
                             {
@@ -128,7 +131,8 @@ namespace LandingPage.ViewModels.Layout
             public StartPageViewArgs ViewArgs { get; private set; }
 
             public static ICommand AddCommand { get; } = new RelayCommand<AvailableView>(
-                v => {
+                v =>
+                {
                     v.Model.RemoveCurrentView();
                     v.Model.GridNode.ViewProperties = new ViewProperties { PluginId = v.ViewArgs.PluginId, StartPageViewArgs = v.ViewArgs, ViewId = v.ViewArgs.ViewId };
                 },
@@ -155,10 +159,10 @@ namespace LandingPage.ViewModels.Layout
 
             AddCommand = new Playnite.SDK.RelayCommand(() =>
             {
-                if (GridNode.Children.Count == 0) 
+                if (GridNode.Children.Count == 0)
                 {
                     GridNode.Children.Add(new GridNode());
-                } 
+                }
                 GridNode.Children.Add(new GridNode());
             });
             SplitHorizontallyCommand = new Playnite.SDK.RelayCommand(() =>
@@ -175,7 +179,7 @@ namespace LandingPage.ViewModels.Layout
             RemoveViewCommand = new RelayCommand(RemoveCurrentView);
             RemovePanelCommand = new RelayCommand(RemovePanel, () => Parent != null);
 
-            MergeWithNextPanelCommand = new RelayCommand(MergeWithNextPanel, 
+            MergeWithNextPanelCommand = new RelayCommand(MergeWithNextPanel,
                 () => Parent != null && Parent.GridNode.Children.IndexOf(GridNode) < Parent.GridNode.Children.Count - 1);
 
             MergeWithPreviousPanelCommand = new RelayCommand(MergeWithPreviousPanel,
@@ -185,8 +189,65 @@ namespace LandingPage.ViewModels.Layout
             SetVerticalAlignmentCommand = new RelayCommand<VerticalAlignment>(SetVerticalAlignment);
 
             OpenWikiCommand = new RelayCommand(() => Process.Start("https://github.com/felixkmh/StartPage-for-Playnite/wiki/Integrating-with-other-Extensions"));
+        }
 
-            CreateView(node);
+        public async Task InititalizeGrid()
+        {
+            await CreateViewAsync(GridNode);
+        }
+
+        public async Task InitializeViews()
+        {
+            IEnumerable<IAsyncStartPageControl> asyncControls 
+                = ActiveViews.Select(v => v.view)
+                             .OfType<IAsyncStartPageControl>();
+
+            var tasks = new List<Task>();
+
+            foreach (var view in asyncControls)
+            {
+                try
+                {
+                    tasks.Add(view.InitializeAsync());
+                }
+                catch (Exception ex)
+                {
+                    LandingPageExtension.logger.Error(ex, $"Failed to initialize view {view}");
+                }
+            }
+
+            IEnumerable<IAsyncStartPageControl> asyncDataContext
+                = ActiveViews.Select(v => v.view)
+                             .OfType<FrameworkElement>()
+                             .Select(v => v.DataContext)
+                             .OfType<IAsyncStartPageControl>();
+
+            foreach (var view in asyncDataContext)
+            {
+                try
+                {
+                    tasks.Add(view.InitializeAsync());
+                }
+                catch (Exception ex)
+                {
+                    LandingPageExtension.logger.Error(ex, $"Failed to initialize view {view}");
+                }
+            }
+
+            try
+            {
+                await Task.WhenAll(tasks);
+            }
+            catch (Exception)
+            {
+                foreach(var task in tasks)
+                {
+                    if (task.Exception is Exception ex)
+                    {
+                        LandingPageExtension.logger.Error(ex, $"Failed to initialize view {view}");
+                    }
+                }
+            }
         }
 
         public void SetHorizontalAlignment(HorizontalAlignment align)
@@ -236,7 +297,7 @@ namespace LandingPage.ViewModels.Layout
                 var root = Root.GridNode;
                 var index = Parent.GridNode.Children.IndexOf(GridNode);
                 var siblings = new List<GridNode>();
-                if (index > 0) 
+                if (index > 0)
                     siblings.Add(Parent.GridNode.Children[index - 1]);
                 if (index < Parent.GridNode.Children.Count - 1)
                     siblings.Add(Parent.GridNode.Children[index + 1]);
@@ -255,7 +316,7 @@ namespace LandingPage.ViewModels.Layout
 
         static public void OnNodeRemoved(GridNode removed)
         {
-            foreach(var child in removed.Children)
+            foreach (var child in removed.Children)
             {
                 OnNodeRemoved(child);
             }
@@ -314,7 +375,7 @@ namespace LandingPage.ViewModels.Layout
 
         public void Border_PreviewDrop(object sender, DragEventArgs e)
         {
-            
+
         }
 
         private static void SwapViewProperties(GridNodeViewModel source, GridNodeViewModel target)
@@ -376,7 +437,7 @@ namespace LandingPage.ViewModels.Layout
             }
         }
 
-        private void Node_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        private async void Node_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             if (e.PropertyName == nameof(GridNode.Children))
             {
@@ -384,7 +445,7 @@ namespace LandingPage.ViewModels.Layout
                 {
                     oldValue.CollectionChanged -= Children_CollectionChanged;
                 }
-                CreateView(GridNode);
+                await CreateViewAsync(GridNode);
                 GridNode.Children.CollectionChanged += Children_CollectionChanged;
                 IsLeaf = GridNode.Children.Count == 0;
             }
@@ -404,7 +465,8 @@ namespace LandingPage.ViewModels.Layout
                             }
                             View.Children.Add(control);
                             hasView = true;
-                        } else
+                        }
+                        else
                         {
                             var plugin = LandingPageExtension.Instance.PlayniteApi.Addons.Plugins.Where(p => p.Id == viewProperties.PluginId).FirstOrDefault();
                             if (plugin is IStartPageExtension extension)
@@ -414,12 +476,35 @@ namespace LandingPage.ViewModels.Layout
                                     if (LandingPageExtension.Instance.AllAvailableViews.Values.SelectMany(v => v).Where(v => v.PluginId == viewProperties.PluginId && v.ViewId == viewProperties.ViewId).FirstOrDefault() is StartPageViewArgsBase args)
                                     {
                                         viewProperties.StartPageViewArgs = args;
+                                        FrameworkElement view = null;
                                         if (extension.GetStartPageView(viewProperties.ViewId, viewProperties.InstanceId) is FrameworkElement control2)
                                         {
-                                            control2.Name = viewProperties.ViewId;
-                                            viewProperties.view = control2;
-                                            View.Children.Add(control2);
+                                            view = control2;
+                                        }
+                                        if (view is FrameworkElement)
+                                        {
+                                            view.Name = viewProperties.ViewId;
+                                            viewProperties.view = view;
+                                            View.Children.Add(view);
                                             hasView = true;
+                                        }
+                                        if (view is IStartPageControl startPageControl)
+                                        {
+                                            startPageControl.OnStartPageOpened();
+                                        }
+                                        if (view?.DataContext is IStartPageControl startPageViewModel)
+                                        {
+                                            startPageViewModel.OnStartPageOpened();
+                                        }
+                                        if (view is IAsyncStartPageControl asyncStartPageControl)
+                                        {
+                                            await asyncStartPageControl.InitializeAsync();
+                                            await asyncStartPageControl.OnViewShownAsync();
+                                        }
+                                        if (view?.DataContext is IAsyncStartPageControl asyncStartPageViewModel)
+                                        {
+                                            await asyncStartPageViewModel.InitializeAsync();
+                                            await asyncStartPageViewModel.OnViewShownAsync();
                                         }
                                     }
                                     else
@@ -467,13 +552,13 @@ namespace LandingPage.ViewModels.Layout
                 GridNode.Orientation = orientation;
                 var temp = GridNode.ViewProperties;
                 GridNode.ViewProperties = null;
-                GridNode.Children.Add(new GridNode() 
-                { 
-                    ViewProperties = temp, 
-                    Orientation = GridNode.Orientation, 
-                    Padding = GridNode.Padding, 
-                    HorizontalAlignment = GridNode.HorizontalAlignment, 
-                    VerticalAlignment = GridNode.VerticalAlignment 
+                GridNode.Children.Add(new GridNode()
+                {
+                    ViewProperties = temp,
+                    Orientation = GridNode.Orientation,
+                    Padding = GridNode.Padding,
+                    HorizontalAlignment = GridNode.HorizontalAlignment,
+                    VerticalAlignment = GridNode.VerticalAlignment
                 });
                 GridNode.Children.Add(new GridNode());
                 return;
@@ -485,7 +570,7 @@ namespace LandingPage.ViewModels.Layout
             }
         }
 
-        private void CreateView(GridNode node)
+        private async Task CreateViewAsync(GridNode node)
         {
             View.Children.Clear();
             View.RowDefinitions.Clear();
@@ -512,35 +597,29 @@ namespace LandingPage.ViewModels.Layout
                         {
                             try
                             {
-                                Application.Current.Dispatcher.BeginInvoke(new Action(() =>
+                                if (LandingPageExtension.Instance.AllAvailableViews.Values.SelectMany(v => v).Where(v => v.PluginId == viewProperties.PluginId && v.ViewId == viewProperties.ViewId).FirstOrDefault() is StartPageViewArgsBase args)
                                 {
-                                    if (LandingPageExtension.Instance.AllAvailableViews.Values.SelectMany(v => v).Where(v => v.PluginId == viewProperties.PluginId && v.ViewId == viewProperties.ViewId).FirstOrDefault() is StartPageViewArgsBase args)
-                                    {
 
-                                        viewProperties.StartPageViewArgs = args;
-                                        if (extension.GetStartPageView(viewProperties.ViewId, viewProperties.InstanceId) is FrameworkElement control2)
-                                        {
-                                            control2.Name = viewProperties.ViewId;
-                                            viewProperties.view = control2;
-                                            View.Children.Add(control2);
-                                            hasView = true;
-                                            if (control2 is IStartPageControl startPageControl)
-                                            {
-                                                startPageControl.OnStartPageOpened();
-                                            }
-                                            if (control2.DataContext is IStartPageControl startPageViewModel)
-                                            {
-                                                startPageViewModel.OnStartPageOpened();
-                                            }
-                                        }
-                                    }
-                                    else
+                                    viewProperties.StartPageViewArgs = args;
+                                    FrameworkElement view = null;
+                                    if (extension.GetStartPageView(viewProperties.ViewId, viewProperties.InstanceId) is FrameworkElement control2)
                                     {
-                                        gridNode.ViewProperties = null;
+                                        view = control2;
                                     }
-                                    HasView = hasView;
-                                    IsLeaf = node.Children.Count == 0;
-                                }), System.Windows.Threading.DispatcherPriority.Normal);
+                                    if (view is FrameworkElement)
+                                    {
+                                        view.Name = viewProperties.ViewId;
+                                        viewProperties.view = view;
+                                        View.Children.Add(view);
+                                        hasView = true;
+                                    }
+                                }
+                                else
+                                {
+                                    gridNode.ViewProperties = null;
+                                }
+                                HasView = hasView;
+                                IsLeaf = node.Children.Count == 0;
                             }
                             catch (Exception ex)
                             {
@@ -589,7 +668,9 @@ namespace LandingPage.ViewModels.Layout
                     for (int i = 0; i < node.Children.Count; ++i)
                     {
                         var child = node.Children[i];
-                        var element = new GridNodeView { DataContext = new GridNodeViewModel(node.Children[i]) { Parent = this, EditModeEnabled = EditModeEnabled } };
+                        GridNodeViewModel gridNodeViewModel = new GridNodeViewModel(node.Children[i]) { Parent = this, EditModeEnabled = EditModeEnabled };
+                        await gridNodeViewModel.InititalizeGrid();
+                        var element = new GridNodeView { DataContext = gridNodeViewModel };
                         setGridPosition(element, View.Children.Count);
                         View.Children.Add(element);
                         if (i < node.Children.Count - 1)
@@ -679,11 +760,11 @@ namespace LandingPage.ViewModels.Layout
             return mergeItem;
         }
 
-        private void Children_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        private async void Children_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
             if (e.Action == NotifyCollectionChangedAction.Remove || e.Action == NotifyCollectionChangedAction.Reset)
             {
-                foreach(GridNode removed in e.OldItems)
+                foreach (GridNode removed in e.OldItems)
                 {
                     var model = View.Children.OfType<FrameworkElement>().FirstOrDefault(fe =>
                     {
@@ -708,7 +789,7 @@ namespace LandingPage.ViewModels.Layout
                     }
                 }
             }
-            CreateView(GridNode);
+            await CreateViewAsync(GridNode);
         }
     }
 }

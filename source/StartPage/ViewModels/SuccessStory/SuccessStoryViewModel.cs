@@ -16,10 +16,11 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using StartPage.SDK;
 using System.Windows.Threading;
+using StartPage.SDK.Async;
 
 namespace LandingPage.ViewModels.SuccessStory
 {
-    public class SuccessStoryViewModel : BusyObservableObject, IStartPageViewModel, IStartPageControl
+    public class SuccessStoryViewModel : BusyObservableObject, IStartPageViewModel, IAsyncStartPageControl
     {
         internal string achievementsPath;
         internal IPlayniteAPI playniteAPI;
@@ -67,16 +68,6 @@ namespace LandingPage.ViewModels.SuccessStory
             this.landingPageSettingsViewModel = landingPageSettings;
             landingPageSettings.PropertyChanged += LandingPageSettings_PropertyChangedAsync;
             landingPageSettings.Settings.PropertyChanged += Settings_PropertyChangedAsync;
-
-            if (Achievements.Count > 0)
-            {
-                Application.Current.Dispatcher.BeginInvoke(new Action(async () =>
-                {
-                    IsBusy = true;
-                    await UpdateAsync();
-                    IsBusy = false;
-                }), DispatcherPriority.Background);
-            }
 
             timer = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(500) };
             timer.Tick += Timer_Tick;
@@ -380,27 +371,38 @@ namespace LandingPage.ViewModels.SuccessStory
             return null;
         }
 
+        public Task OnViewHiddenAsync()
+        {
+            achievementWatcher.EnableRaisingEvents = false;
+            landingPageSettingsViewModel.PropertyChanged -= LandingPageSettings_PropertyChangedAsync;
+            landingPageSettingsViewModel.Settings.PropertyChanged -= Settings_PropertyChangedAsync;
+            return Task.CompletedTask;
+        }
+
+        public async Task OnViewShownAsync()
+        {
+            await UpdateAsync();
+            achievementWatcher.EnableRaisingEvents = true;
+            landingPageSettingsViewModel.PropertyChanged += LandingPageSettings_PropertyChangedAsync;
+            landingPageSettingsViewModel.Settings.PropertyChanged += Settings_PropertyChangedAsync;
+        }
+
+        public Task OnDayChangedAsync(DateTime newTime)
+        {
+            return Task.CompletedTask;
+        }
+
+        public async Task InitializeAsync()
+        {
+            await ParseAllAchievementsAsync();
+        }
+
         public void OnViewClosed()
         {
             achievementWatcher.EnableRaisingEvents = false;
             landingPageSettingsViewModel.PropertyChanged -= LandingPageSettings_PropertyChangedAsync;
             landingPageSettingsViewModel.Settings.PropertyChanged -= Settings_PropertyChangedAsync;
             achievementWatcher.Dispose();
-        }
-
-        public void OnStartPageOpened()
-        {
-            //await UpdateAsync();
-        }
-
-        public void OnStartPageClosed()
-        {
-            
-        }
-
-        public void OnDayChanged(DateTime newTime)
-        {
-            
         }
     }
 }

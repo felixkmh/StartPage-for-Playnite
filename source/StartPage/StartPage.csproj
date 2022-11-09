@@ -366,6 +366,10 @@
       <Project>{426461dc-3089-4ec5-99a2-a55733ed33fe}</Project>
       <Name>PlayniteCommon</Name>
     </ProjectReference>
+    <ProjectReference Include="..\StartPage.SDK.Async\StartPage.SDK.Async.csproj">
+      <Project>{e2689976-625b-4bff-ab23-54cb4b978c87}</Project>
+      <Name>StartPage.SDK.Async</Name>
+    </ProjectReference>
     <ProjectReference Include="..\StartPage.SDK\StartPage.SDK.csproj">
       <Project>{e5b54cc9-566f-4e3e-8829-65c2fccb7bde}</Project>
       <Name>StartPage.SDK</Name>

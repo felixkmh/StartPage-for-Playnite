@@ -14,11 +14,15 @@ using LandingPage.Models.GameActivity;
 using Newtonsoft.Json;
 using Playnite.SDK;
 using Playnite.SDK.Models;
+using StartPage.SDK.Async;
 
 namespace LandingPage.ViewModels.GameActivity
 {
-    public class GameActivityViewModel : BusyObservableObject
+    public class GameActivityViewModel : BusyObservableObject, IAsyncStartPageControl
     {
+        private SemaphoreSlim semaphore = new SemaphoreSlim(1, 1);
+        private bool isInitialized = false;
+
         internal IPlayniteAPI playniteAPI;
         internal FileSystemWatcher activityWatcher;
         internal LandingPageSettingsViewModel landingPageSettingsViewModel;
@@ -79,6 +83,23 @@ namespace LandingPage.ViewModels.GameActivity
                 t.Stop();
                 await UpdatePlaytimeLastWeekAsync();
             };
+        }
+
+        public async Task Initialize()
+        {
+            await semaphore.WaitAsync();
+            try
+            {
+                if (!isInitialized)
+                {
+                    await ParseAllActivitiesAsync();
+                    isInitialized = true;
+                }
+            }
+            finally
+            {
+                semaphore.Release();
+            }
         }
 
         private async void GameActivityViewModel_PropertyChangedAsync(object sender, System.ComponentModel.PropertyChangedEventArgs e)
@@ -310,6 +331,26 @@ namespace LandingPage.ViewModels.GameActivity
                     }
                 }
             });
+        }
+
+        public Task OnViewShownAsync()
+        {
+            return Task.CompletedTask;
+        }
+
+        public async Task InitializeAsync()
+        {
+            await Initialize();
+        }
+
+        public Task OnViewHiddenAsync()
+        {
+            return Task.CompletedTask;
+        }
+
+        public Task OnDayChangedAsync(DateTime newTime)
+        {
+            return Task.CompletedTask;
         }
     }
 }
