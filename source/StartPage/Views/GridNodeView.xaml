@@ -66,6 +66,59 @@
         </Style>
     </UserControl.Resources>
     <Grid Name="NodeGrid">
+        <Border IsHitTestVisible="False" Visibility="{Binding IsLeaf, Converter={StaticResource BooleanToVisibilityConverter}}">
+            <Border Margin="8" CornerRadius="20" Visibility="{Binding GridNode.ViewProperties, Converter={StaticResource NullToVisibilityConverter}}" IsHitTestVisible="False">
+                <Border.Style>
+                    <Style TargetType="Border">
+                        <Style.Resources>
+                            <BackEase x:Key="Ease" EasingMode="EaseIn"/>
+                        </Style.Resources>
+                        <Setter Property="Opacity" Value="0"/>
+                        <Setter Property="Background">
+                            <Setter.Value>
+                                <LinearGradientBrush StartPoint="0,0" EndPoint="1,0.75">
+                                    <GradientStop Color="#FFFFFFFF"/>
+                                    <GradientStop Color="#55FFFFFF" Offset="0.5"/>
+                                </LinearGradientBrush>
+                            </Setter.Value>
+                        </Setter>
+                        <Style.Triggers>
+                            <Trigger Property="Opacity" Value="0">
+                                <Setter Property="Visibility" Value="Collapsed"/>
+                            </Trigger>
+                            <MultiDataTrigger>
+                                <MultiDataTrigger.Conditions>
+                                    <Condition Binding="{Binding IsLeaf}" Value="{StaticResource True}"/>
+                                    <Condition Binding="{Binding IsLoading}" Value="True"/>
+                                </MultiDataTrigger.Conditions>
+                                <MultiDataTrigger.EnterActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation Storyboard.TargetProperty="Opacity" To="0.20" Duration="0:0:0.5"/>
+                                            <DoubleAnimation Storyboard.TargetProperty="Opacity" From="0.20" To="0.5" BeginTime="0:0:0.5" Duration="0:0:1.5" AutoReverse="True" RepeatBehavior="Forever"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </MultiDataTrigger.EnterActions>
+                            </MultiDataTrigger>
+                            <MultiDataTrigger>
+                                <MultiDataTrigger.Conditions>
+                                    <Condition Binding="{Binding IsLeaf}" Value="{StaticResource True}"/>
+                                    <Condition Binding="{Binding IsLoading}" Value="False"/>
+                                </MultiDataTrigger.Conditions>
+                                <MultiDataTrigger.EnterActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation Storyboard.TargetProperty="Opacity" To="0.7" Duration="0:0:0.15"/>
+                                            <DoubleAnimation Storyboard.TargetProperty="Opacity" To="0" BeginTime="0:0:0.15" Duration="0:0:0.35"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </MultiDataTrigger.EnterActions>
+                            </MultiDataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Border.Style>
+            </Border>
+        </Border>
         <ContentControl Content="{Binding View}" x:Name="ViewContentControl" SizeChanged="UserControl_SizeChanged">
             <ContentControl.Style>
                 <Style TargetType="ContentControl">
@@ -74,6 +127,7 @@
                             <Setter Property="VerticalAlignment" Value="{Binding GridNode.VerticalAlignment}"/>
                             <Setter Property="HorizontalAlignment" Value="{Binding GridNode.HorizontalAlignment}"/>
                             <Setter Property="Margin" Value="{Binding GridNode.Padding}"/>
+                            <Setter Property="Opacity" Value="0"/>
                         </DataTrigger>
                         <MultiDataTrigger>
                             <MultiDataTrigger.Conditions>
@@ -84,11 +138,24 @@
                                 <Setter Property="Opacity" Value="0.65"/>
                             </MultiDataTrigger.Setters>
                         </MultiDataTrigger>
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding IsLeaf}" Value="{StaticResource True}"/>
+                                <Condition Binding="{Binding IsLoading}" Value="False"/>
+                            </MultiDataTrigger.Conditions>
+                            <MultiDataTrigger.EnterActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetProperty="Opacity" To="1" Duration="0:0:0.5"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </MultiDataTrigger.EnterActions>
+                        </MultiDataTrigger>
                     </Style.Triggers>
                 </Style>
             </ContentControl.Style>
         </ContentControl>
-        <Border Visibility="{Binding IsLeaf, Converter={StaticResource BooleanToVisibilityConverter}}">
+        <Grid Visibility="{Binding IsLeaf, Converter={StaticResource BooleanToVisibilityConverter}}">
             <Border x:Name="EditPanel" CornerRadius="0" Margin="0" Background="Transparent" Visibility="{Binding EditModeEnabled, Converter={StaticResource BooleanToVisibilityConverter}}"
                     Opacity="1"
                     AllowDrop="True" 
@@ -288,7 +355,8 @@
                     </Grid>
                 </Grid>
             </Border>
-        </Border>
+        </Grid>
+        
     </Grid>
 
     

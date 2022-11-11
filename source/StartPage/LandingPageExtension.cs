@@ -228,10 +228,7 @@ namespace LandingPage
 
                 Application.Current.Dispatcher.BeginInvoke(new Action(async () =>
                 {
-                    await startPageViewModel.UpdateBackgroundImagePathAsync(Settings.BackgroundRefreshInterval != 0);
-                    await startPageViewModel.RootNodeViewModel.InititalizeGrid();
-                    await startPageViewModel.RootNodeViewModel.InitializeViews();
-                    await startPageViewModel.Opened();
+                    await startPageViewModel.Inititalize();
                 }), System.Windows.Threading.DispatcherPriority.Background);
 
 
@@ -254,6 +251,7 @@ namespace LandingPage
             {
                 Application.Current.Dispatcher.BeginInvoke(new Action(async () =>
                 {
+                    await Task.Delay(100);
                     await startPageViewModel.Opened();
                 }), System.Windows.Threading.DispatcherPriority.Background);
             }

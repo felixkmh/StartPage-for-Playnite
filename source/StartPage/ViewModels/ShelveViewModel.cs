@@ -77,7 +77,7 @@ namespace LandingPage.ViewModels
                 OnPropertyChanged(nameof(CompletionStatus));
                 await UpdateGamesAsync(ShelveProperties, true);
             });
-            FillWithPlaceholders(shelveProperties);
+            // FillWithPlaceholders(shelveProperties);
             manualUpdateCommand = new RelayCommand(async () => await UpdateGamesAsync(ShelveProperties, true));
         }
 

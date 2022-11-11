@@ -8,6 +8,7 @@ using System.Windows.Controls;
 using StartPage.SDK;
 using System.Windows;
 using Playnite.SDK.Data;
+using System.Collections;
 
 namespace LandingPage.Models.Layout
 {
@@ -33,7 +34,6 @@ namespace LandingPage.Models.Layout
 
         private ObservableCollection<GridNode> children = new ObservableCollection<GridNode>();
         public ObservableCollection<GridNode> Children { get => children; set => SetValue(ref children, value); }
-
 
         static public void Minimize(GridNode current, GridNode parent)
         {
@@ -62,6 +62,27 @@ namespace LandingPage.Models.Layout
             if (parent?.Children.Count > 0)
             {
                 parent.ViewProperties = null;
+            }
+        }
+
+        [DontSerialize]
+        public bool IsLeaf => (Children?.Count ?? 0) == 0;
+
+        [DontSerialize]
+        public int LeafCount => Enumerate().Count(node => node.IsLeaf);
+
+        [DontSerialize]
+        public int ViewCount => Enumerate().Count(node => node.IsLeaf && node.ViewProperties != null);
+
+        public IEnumerable<GridNode> Enumerate()
+        {
+            yield return this;
+            foreach(GridNode child in Children)
+            {
+                foreach(var node in child.Enumerate())
+                {
+                    yield return child;
+                }
             }
         }
     }

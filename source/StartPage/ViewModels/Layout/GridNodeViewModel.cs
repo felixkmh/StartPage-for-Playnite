@@ -17,6 +17,8 @@ using System.Diagnostics;
 using System.Collections.ObjectModel;
 using PlayniteCommon.Models;
 using StartPage.SDK.Async;
+using LandingPage.Models.Objects;
+using System.Xml.Linq;
 
 namespace LandingPage.ViewModels.Layout
 {
@@ -43,6 +45,20 @@ namespace LandingPage.ViewModels.Layout
                     }
                 }
             }
+        }
+
+        private bool isLoading = false;
+        public bool IsLoading
+        {
+            get => isLoading;
+            set => SetValue(ref isLoading, value);
+        }
+
+        private bool isInitializing = false;
+        public bool IsInitializing
+        {
+            get => isInitializing;
+            set => SetValue(ref isInitializing, value);
         }
 
         private bool isLeaf = false;
@@ -125,6 +141,33 @@ namespace LandingPage.ViewModels.Layout
             }
         }
 
+        public IEnumerable<GridNodeViewModel> AllNodes
+        {
+            get
+            {
+                var root = this;
+                var stack = new Stack<GridNodeViewModel>();
+                stack.Push(root);
+                while (stack.Count > 0)
+                {
+                    var current = stack.Pop();
+                    yield return current;
+
+                    if (current.GridNode.Children.Any())
+                    {
+                        var children = current.View.Children.OfType<FrameworkElement>().Select(fe => fe.DataContext).OfType<GridNodeViewModel>();
+                        foreach (var child in children)
+                        {
+                            if (child != current)
+                            {
+                                stack.Push(child);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
         public class AvailableView
         {
             public GridNodeViewModel Model { get; private set; }
@@ -191,62 +234,64 @@ namespace LandingPage.ViewModels.Layout
             OpenWikiCommand = new RelayCommand(() => Process.Start("https://github.com/felixkmh/StartPage-for-Playnite/wiki/Integrating-with-other-Extensions"));
         }
 
-        public async Task InititalizeGrid()
+        public async Task InititalizeGrid(Action<GridNode> visitor = null)
         {
-            await CreateViewAsync(GridNode);
+            await CreateViewAsync(GridNode, visitor);
         }
 
-        public async Task InitializeViews()
+        public async Task InitializeAndOpenViewAsync()
         {
-            IEnumerable<IAsyncStartPageControl> asyncControls 
-                = ActiveViews.Select(v => v.view)
-                             .OfType<IAsyncStartPageControl>();
-
-            var tasks = new List<Task>();
-
-            foreach (var view in asyncControls)
+            if (GridNode?.ViewProperties is ViewProperties viewProperties)
             {
+                // Initialize
+                IsInitializing = true;
+                IsLoading = true;
                 try
                 {
-                    tasks.Add(view.InitializeAsync());
+                    InitializeView();
+                    await InitializeViewAsync();
                 }
                 catch (Exception ex)
                 {
-                    LandingPageExtension.logger.Error(ex, $"Failed to initialize view {view}");
+                    LandingPageExtension.logger.Error(ex, $"Failed to initialize view {GridNode.ViewProperties.ViewId}");
                 }
-            }
+                IsInitializing = false;
 
-            IEnumerable<IAsyncStartPageControl> asyncDataContext
-                = ActiveViews.Select(v => v.view)
-                             .OfType<FrameworkElement>()
-                             .Select(v => v.DataContext)
-                             .OfType<IAsyncStartPageControl>();
-
-            foreach (var view in asyncDataContext)
-            {
+                // Loading
                 try
                 {
-                    tasks.Add(view.InitializeAsync());
+                    OpenView();
+                    await OpenViewAsync();
                 }
                 catch (Exception ex)
                 {
-                    LandingPageExtension.logger.Error(ex, $"Failed to initialize view {view}");
+                    LandingPageExtension.logger.Error(ex, $"Failed to open view {GridNode.ViewProperties.ViewId}");
                 }
+                IsLoading = false;
             }
+        }
 
-            try
+        public async Task OpenViewAsync()
+        {
+            if (GridNode.ViewProperties.view is IAsyncStartPageControl asyncControl)
             {
-                await Task.WhenAll(tasks);
+                await asyncControl.OnViewShownAsync();
             }
-            catch (Exception)
+            if (GridNode.ViewProperties.view is FrameworkElement asyncElement && asyncElement.DataContext is IAsyncStartPageControl asyncContext)
             {
-                foreach(var task in tasks)
-                {
-                    if (task.Exception is Exception ex)
-                    {
-                        LandingPageExtension.logger.Error(ex, $"Failed to initialize view {view}");
-                    }
-                }
+                await asyncContext.OnViewShownAsync();
+            }
+        }
+
+        public void OpenView()
+        {
+            if (GridNode.ViewProperties.view is IStartPageControl control)
+            {
+                control.OnStartPageOpened();
+            }
+            if (GridNode.ViewProperties.view is FrameworkElement element && element.DataContext is IStartPageControl context)
+            {
+                context.OnStartPageOpened();
             }
         }
 
@@ -475,6 +520,8 @@ namespace LandingPage.ViewModels.Layout
                                 {
                                     if (LandingPageExtension.Instance.AllAvailableViews.Values.SelectMany(v => v).Where(v => v.PluginId == viewProperties.PluginId && v.ViewId == viewProperties.ViewId).FirstOrDefault() is StartPageViewArgsBase args)
                                     {
+                                        IsInitializing = true;
+                                        IsLoading = true;
                                         viewProperties.StartPageViewArgs = args;
                                         FrameworkElement view = null;
                                         if (extension.GetStartPageView(viewProperties.ViewId, viewProperties.InstanceId) is FrameworkElement control2)
@@ -499,12 +546,16 @@ namespace LandingPage.ViewModels.Layout
                                         if (view is IAsyncStartPageControl asyncStartPageControl)
                                         {
                                             await asyncStartPageControl.InitializeAsync();
+                                            IsInitializing = false;
                                             await asyncStartPageControl.OnViewShownAsync();
+                                            IsLoading = false;
                                         }
                                         if (view?.DataContext is IAsyncStartPageControl asyncStartPageViewModel)
                                         {
                                             await asyncStartPageViewModel.InitializeAsync();
+                                            IsInitializing = false;
                                             await asyncStartPageViewModel.OnViewShownAsync();
+                                            IsLoading = false;
                                         }
                                     }
                                     else
@@ -515,6 +566,11 @@ namespace LandingPage.ViewModels.Layout
                                 catch (Exception ex)
                                 {
                                     LandingPageExtension.logger.Error(ex, $"Failed to load view \"{viewProperties.ViewId}\" from Plugin with ID \"{viewProperties.PluginId}\".");
+                                }
+                                finally
+                                {
+                                    IsLoading = false;
+                                    IsInitializing = false;
                                 }
                             }
                         }
@@ -570,7 +626,7 @@ namespace LandingPage.ViewModels.Layout
             }
         }
 
-        private async Task CreateViewAsync(GridNode node)
+        private async Task CreateViewAsync(GridNode node, Action<GridNode> visitor = null)
         {
             View.Children.Clear();
             View.RowDefinitions.Clear();
@@ -580,6 +636,8 @@ namespace LandingPage.ViewModels.Layout
             {
                 if (gridNode.ViewProperties is ViewProperties viewProperties)
                 {
+                    IsInitializing = true;
+                    IsLoading = true;
                     if (viewProperties.view is FrameworkElement control)
                     {
                         if (control.Parent is Panel panel)
@@ -589,43 +647,6 @@ namespace LandingPage.ViewModels.Layout
                         View.Children.Add(control);
                         HasView = true;
                         IsLeaf = node.Children.Count == 0;
-                    }
-                    else
-                    {
-                        var plugin = LandingPageExtension.Instance.PlayniteApi.Addons.Plugins.Where(p => p.Id == viewProperties.PluginId).FirstOrDefault();
-                        if (plugin is IStartPageExtension extension)
-                        {
-                            try
-                            {
-                                if (LandingPageExtension.Instance.AllAvailableViews.Values.SelectMany(v => v).Where(v => v.PluginId == viewProperties.PluginId && v.ViewId == viewProperties.ViewId).FirstOrDefault() is StartPageViewArgsBase args)
-                                {
-
-                                    viewProperties.StartPageViewArgs = args;
-                                    FrameworkElement view = null;
-                                    if (extension.GetStartPageView(viewProperties.ViewId, viewProperties.InstanceId) is FrameworkElement control2)
-                                    {
-                                        view = control2;
-                                    }
-                                    if (view is FrameworkElement)
-                                    {
-                                        view.Name = viewProperties.ViewId;
-                                        viewProperties.view = view;
-                                        View.Children.Add(view);
-                                        hasView = true;
-                                    }
-                                }
-                                else
-                                {
-                                    gridNode.ViewProperties = null;
-                                }
-                                HasView = hasView;
-                                IsLeaf = node.Children.Count == 0;
-                            }
-                            catch (Exception ex)
-                            {
-                                LandingPageExtension.logger.Error(ex, $"Failed to load view \"{viewProperties.ViewId}\" from Plugin with ID \"{viewProperties.PluginId}\".");
-                            }
-                        }
                     }
                 }
             }
@@ -669,7 +690,7 @@ namespace LandingPage.ViewModels.Layout
                     {
                         var child = node.Children[i];
                         GridNodeViewModel gridNodeViewModel = new GridNodeViewModel(node.Children[i]) { Parent = this, EditModeEnabled = EditModeEnabled };
-                        await gridNodeViewModel.InititalizeGrid();
+                        await gridNodeViewModel.InititalizeGrid(visitor);
                         var element = new GridNodeView { DataContext = gridNodeViewModel };
                         setGridPosition(element, View.Children.Count);
                         View.Children.Add(element);
@@ -692,6 +713,67 @@ namespace LandingPage.ViewModels.Layout
                 }
             }
             IsLeaf = node.Children.Count == 0;
+
+            visitor?.Invoke(node);
+        }
+
+        private async Task InitializeViewAsync()
+        {
+            var tasks = new List<Task>();
+
+            if (GridNode?.ViewProperties?.view is FrameworkElement view)
+            {
+                if (view is IAsyncStartPageControl asynControl)
+                {
+                    await asynControl.InitializeAsync();
+                }
+                if (view.DataContext is IAsyncStartPageControl asynDataContext)
+                {
+                    await asynDataContext.InitializeAsync();
+                }
+            }
+        }
+
+        private void InitializeView()
+        {
+            var node = GridNode;
+            var viewProperties = node?.ViewProperties;
+            var hasView = false;
+            var plugin = LandingPageExtension.Instance.PlayniteApi.Addons.Plugins.Where(p => p.Id == viewProperties.PluginId).FirstOrDefault();
+            if (plugin is IStartPageExtension extension)
+            {
+                try
+                {
+                    if (LandingPageExtension.Instance.AllAvailableViews.Values.SelectMany(v => v).Where(v => v.PluginId == viewProperties.PluginId && v.ViewId == viewProperties.ViewId).FirstOrDefault() is StartPageViewArgsBase args)
+                    {
+
+                        viewProperties.StartPageViewArgs = args;
+                        FrameworkElement view = null;
+                        if (extension.GetStartPageView(viewProperties.ViewId, viewProperties.InstanceId) is FrameworkElement control2)
+                        {
+                            view = control2;
+                        }
+                        if (view is FrameworkElement)
+                        {
+                            view.Name = viewProperties.ViewId;
+                            viewProperties.view = view;
+                            View.Children.Add(view);
+                            hasView = true;
+                        }
+                    }
+                    else
+                    {
+                        gridNode.ViewProperties = null;
+                    }
+                    HasView = hasView;
+                    IsLeaf = node.Children.Count == 0;
+                }
+                catch (Exception ex)
+                {
+                    LandingPageExtension.logger.Error(ex, $"Failed to load view \"{viewProperties.ViewId}\" from Plugin with ID \"{viewProperties.PluginId}\".");
+                }
+            }
+            IsInitializing = false;
         }
 
         private static MenuItem GetAddMenuItem(GridNode node)

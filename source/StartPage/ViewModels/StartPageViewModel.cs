@@ -18,6 +18,8 @@ using System.Windows.Input;
 using System.Windows.Threading;
 using StartPage.SDK.Async;
 using System.Runtime.CompilerServices;
+using LandingPage.Models.Objects;
+using System.Windows.Controls;
 
 namespace LandingPage.ViewModels
 {
@@ -54,6 +56,23 @@ namespace LandingPage.ViewModels
         public ICommand ClearNotificationsCommand { get; set; }
         public ICommand EnterEditModeCommand { get; set; }
         public ICommand ExitEditModeCommand { get; set; }
+
+
+        private bool isLoading = false;
+        public bool IsLoading
+        {
+            get => isLoading;
+            set => SetValue(ref isLoading, value);
+        }
+
+        public LoadingStatus Status { get; } = new LoadingStatus();
+
+        private bool isInitializing = false;
+        public bool IsInitializing
+        {
+            get => isInitializing;
+            set => SetValue(ref isInitializing, value);
+        }
 
         internal Uri backgroundImagePath = null;
         public Uri BackgroundImagePath
@@ -263,60 +282,44 @@ namespace LandingPage.ViewModels
             }
         }
 
-        public async Task Opened()
+        public async Task Inititalize()
         {
-            Subscribe();
-            var tasks = new List<(string, Task)>();
-            foreach(var view in RootNodeViewModel.ActiveViews)
-            {
-                if (view.view is IStartPageControl control)
-                {
-                    try
-                    {
-                        control.OnStartPageOpened();
-                    }
-                    catch (Exception ex)
-                    {
-                        LandingPageExtension.logger.Warn(ex, "Error when calling OnStartPageOpened()");
-                    }
-                }
-                if (view.view is FrameworkElement element && element.DataContext is IStartPageControl context)
-                {
-                    try
-                    {
-                        context.OnStartPageOpened();
-                    }
-                    catch (Exception ex)
-                    {
-                        LandingPageExtension.logger.Warn(ex, "Error when calling OnStartPageOpened()");
-                    }
-                }
-                if (view.view is IAsyncStartPageControl asyncControl)
-                {
-                    try
-                    {
-                         tasks.Add((view.ViewId, asyncControl.OnViewShownAsync()));
-                    }
-                    catch (Exception ex)
-                    {
-                        LandingPageExtension.logger.Warn(ex, "Error when calling OnViewShownAsync()");
-                    }
-                }
-                if (view.view is FrameworkElement asyncElement && asyncElement.DataContext is IAsyncStartPageControl asyncContext)
-                {
-                    try
-                    {
+            IsLoading = true;
+            IsInitializing = true;
+            UpdateBackgroundImagePathAsync(Settings.Settings.BackgroundRefreshInterval != 0);
+            await RootNodeViewModel.InititalizeGrid();
+            await Task.Delay(500);
+            await InitializeAndOpenViews();
+            IsInitializing = false;
+            IsLoading = false;
+        }
 
-                        tasks.Add((view.ViewId, asyncContext.OnViewShownAsync()));
-                    }
-                    catch (Exception ex)
-                    {
-                        LandingPageExtension.logger.Warn(ex, "Error when calling OnViewShownAsync()");
-                    }
-                }
+        private Task InitializeAndOpenViews()
+        {
+            var tasks = new List<Task>();
+            foreach (var node in RootNodeViewModel.AllNodes)
+            {
+                tasks.Add(node.InitializeAndOpenViewAsync());
             }
 
-            await Task.WhenAll(tasks.Select(t => t.Item2));
+            return Task.WhenAll(tasks);
+        }
+
+        public async Task Opened()
+        {
+            var tasks = new List<Task>();
+            foreach (var node in RootNodeViewModel.AllNodes.Where(n => n.HasView))
+            {
+                tasks.Add(node.OpenViewAsync());
+            }
+
+            foreach (var node in RootNodeViewModel.AllNodes.Where(n => n.HasView))
+            {
+                node.OpenView();
+            }
+            await Task.WhenAll(tasks);
+
+            Subscribe();
         }
 
         public async Task Closed()
