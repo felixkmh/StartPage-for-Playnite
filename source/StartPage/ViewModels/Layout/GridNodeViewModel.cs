@@ -631,7 +631,6 @@ namespace LandingPage.ViewModels.Layout
             View.Children.Clear();
             View.RowDefinitions.Clear();
             View.ColumnDefinitions.Clear();
-            var hasView = false;
             if (node.Children.Count == 0)
             {
                 if (gridNode.ViewProperties is ViewProperties viewProperties)

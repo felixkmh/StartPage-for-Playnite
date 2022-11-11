@@ -95,7 +95,7 @@
                                     <BeginStoryboard>
                                         <Storyboard>
                                             <DoubleAnimation Storyboard.TargetProperty="Opacity" To="0.20" Duration="0:0:0.5"/>
-                                            <DoubleAnimation Storyboard.TargetProperty="Opacity" From="0.20" To="0.5" BeginTime="0:0:0.5" Duration="0:0:1.5" AutoReverse="True" RepeatBehavior="Forever"/>
+                                            <DoubleAnimation Storyboard.TargetProperty="Opacity" From="0.20" To="0.4" BeginTime="0:0:0.5" Duration="0:0:1.5" AutoReverse="True" RepeatBehavior="Forever"/>
                                         </Storyboard>
                                     </BeginStoryboard>
                                 </MultiDataTrigger.EnterActions>
@@ -108,7 +108,7 @@
                                 <MultiDataTrigger.EnterActions>
                                     <BeginStoryboard>
                                         <Storyboard>
-                                            <DoubleAnimation Storyboard.TargetProperty="Opacity" To="0.7" Duration="0:0:0.15"/>
+                                            <DoubleAnimation Storyboard.TargetProperty="Opacity" To="0.6" Duration="0:0:0.15"/>
                                             <DoubleAnimation Storyboard.TargetProperty="Opacity" To="0" BeginTime="0:0:0.15" Duration="0:0:0.35"/>
                                         </Storyboard>
                                     </BeginStoryboard>
