@@ -379,9 +379,10 @@ namespace LandingPage.ViewModels.GameActivity
             return Task.CompletedTask;
         }
 
-        public Task InitializeAsync()
+        public async Task InitializeAsync()
         {
-            return GameActivityViewModel.Initialize();
+            await GameActivityViewModel.Initialize();
+            await UpdateMostPlayedAsync();
         }
 
         public Task OnViewHiddenAsync()
