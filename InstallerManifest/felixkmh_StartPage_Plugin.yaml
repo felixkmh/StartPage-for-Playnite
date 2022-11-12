@@ -1,5 +1,13 @@
 AddonId: felixkmh_StartPage_Plugin
 Packages:  
+  - Version: 2.11.0
+    RequiredApiVersion: 6.1.0
+    ReleaseDate: 2022-11-12
+    PackageUrl: https://github.com/felixkmh/StartPage-for-Playnite/releases/download/v2.11.0/felixkmh_StartPage_Plugin_2_11_0.pext
+    Changelog:
+      - Refactored loading logic for a more responsive user experience
+      - Added loading animation for views
+      - 'SDK: Added IAsyncStartPageControl in StartPage.SDK.Async assembly. Can be implemented by Controls/DataContext to react to events asynchronously.'
   - Version: 2.10.3
     RequiredApiVersion: 6.1.0
     ReleaseDate: 2022-11-04
