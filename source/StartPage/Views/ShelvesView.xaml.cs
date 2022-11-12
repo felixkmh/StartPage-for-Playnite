@@ -40,7 +40,7 @@ namespace LandingPage.Views
             {
                 if (dispatcherTimer == null)
                 {
-                    dispatcherTimer = new DispatcherTimer();
+                    dispatcherTimer = new DispatcherTimer(DispatcherPriority.Background, Application.Current.Dispatcher);
                     dispatcherTimer.Interval = TimeSpan.FromMilliseconds(250);
                     dispatcherTimer.Tick += DispatcherTimer_Tick;
                 }

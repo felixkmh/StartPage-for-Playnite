@@ -74,7 +74,7 @@ namespace LandingPage.ViewModels
             this.settings = settings;
             this.instanceId = instanceId;
 
-            dispatcherTimer = new DispatcherTimer();
+            dispatcherTimer = new DispatcherTimer(DispatcherPriority.Background, Application.Current.Dispatcher);
             dispatcherTimer.Tick += DispatcherTimer_TickAsync;
             dispatcherTimer.Interval = TimeSpan.FromMilliseconds(500);
 
@@ -193,7 +193,10 @@ namespace LandingPage.ViewModels
                 dispatcherTimer.Stop();
                 if(e.UpdatedItems.Any(u => u.NewData.LastActivity != u.OldData.LastActivity))
                 {
-                    await UpdateShelvesAsync();
+                    await Application.Current.Dispatcher.InvokeAsync(async () =>
+                    {
+                        await UpdateShelvesAsync();
+                    });
                 } else
                 {
                     dispatcherTimer.Start();
