@@ -15,6 +15,9 @@ namespace StartPage.SDK.Async
         /// Called whenever the view becomes visible. Happens whenever StartPage is opened and 
         /// when the view is added.
         /// </summary>
+        /// <returns>
+        /// <see cref="Task"/> that updates the view once it becomes visible. Will be awaited on the UI thread.
+        /// </returns>
         Task OnViewShownAsync();
         /// <summary>
         /// Called whenever the view is added to the grid.
@@ -23,12 +26,18 @@ namespace StartPage.SDK.Async
         /// In here, all async operations, like reading files, parsing/preparing data, should be done 
         /// on a background thread and be awaited, so that the UI isn't blocked.
         /// </summary>
+        /// <returns>
+        /// <see cref="Task"/> that initializes the view once it is added. Will be awaited on the UI thread.
+        /// </returns>
         Task InitializeAsync();
         /// <summary>
         /// Called when the view is hidden. Happens when StartPage is closed.
         /// In here, all async operations, like reading files, parsing/preparing data, should be done 
         /// on a background thread and be awaited, so that the UI isn't blocked.
         /// </summary>
+        /// <returns>
+        /// <see cref="Task"/> that initializes the view once it is added. Will be awaited on the UI thread.
+        /// </returns>
         Task OnViewHiddenAsync();
         /// <summary>
         /// Called when a day ends after 11:59 pm or 23:59.
