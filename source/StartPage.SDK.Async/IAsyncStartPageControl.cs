@@ -12,16 +12,22 @@ namespace StartPage.SDK.Async
     public interface IAsyncStartPageControl
     {
         /// <summary>
-        /// Called whenever the view becomed visible.
+        /// Called whenever the view becomes visible. Happens whenever StartPage is opened and 
+        /// when the view is added.
         /// </summary>
         Task OnViewShownAsync();
         /// <summary>
-        /// Called when either StartPage has retrieved 
-        /// all views on launch or when the view was added.
+        /// Called whenever the view is added to the grid.
+        /// Use this for one time initialization. Ideally, GetStartPageView()
+        /// only creates the Control, without populating the view model.
+        /// In here, all async operations, like reading files, parsing/preparing data, should be done 
+        /// on a background thread and be awaited, so that the UI isn't blocked.
         /// </summary>
         Task InitializeAsync();
         /// <summary>
-        /// Called when the view is hidden.
+        /// Called when the view is hidden. Happens when StartPage is closed.
+        /// In here, all async operations, like reading files, parsing/preparing data, should be done 
+        /// on a background thread and be awaited, so that the UI isn't blocked.
         /// </summary>
         Task OnViewHiddenAsync();
         /// <summary>
