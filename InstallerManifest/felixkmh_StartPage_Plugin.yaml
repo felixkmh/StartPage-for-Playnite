@@ -1,5 +1,12 @@
 AddonId: felixkmh_StartPage_Plugin
 Packages:  
+  - Version: 2.11.1
+    RequiredApiVersion: 6.1.0
+    ReleaseDate: 2022-11-12
+    PackageUrl: https://github.com/felixkmh/StartPage-for-Playnite/releases/download/v2.11.1/felixkmh_StartPage_Plugin_2_11_1.pext
+    Changelog:
+      - Fixed MostPlayed view not loading if WeeklyActivity view is not present
+      - SDK documentation
   - Version: 2.11.0
     RequiredApiVersion: 6.1.0
     ReleaseDate: 2022-11-12
