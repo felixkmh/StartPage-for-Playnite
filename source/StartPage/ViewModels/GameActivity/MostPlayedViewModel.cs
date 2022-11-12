@@ -379,9 +379,9 @@ namespace LandingPage.ViewModels.GameActivity
             return Task.CompletedTask;
         }
 
-        public async Task InitializeAsync()
+        public Task InitializeAsync()
         {
-            await UpdateMostPlayedAsync();
+            return GameActivityViewModel.Initialize();
         }
 
         public Task OnViewHiddenAsync()
@@ -389,9 +389,9 @@ namespace LandingPage.ViewModels.GameActivity
             return Task.CompletedTask;
         }
 
-        public async Task OnDayChangedAsync(DateTime newTime)
+        public Task OnDayChangedAsync(DateTime newTime)
         {
-            await UpdateMostPlayedAsync();
+            return UpdateMostPlayedAsync();
         }
     }
 }
