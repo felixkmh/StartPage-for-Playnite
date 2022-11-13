@@ -51,21 +51,21 @@ namespace LandingPage.ViewModels.Layout
         public bool IsLoading
         {
             get => isLoading;
-            set => SetValue(ref isLoading, value);
+            set { if (value != isLoading) SetValue(ref isLoading, value); }
         }
 
         private bool isInitializing = false;
         public bool IsInitializing
         {
             get => isInitializing;
-            set => SetValue(ref isInitializing, value);
+            set { if (value != isInitializing) SetValue(ref isInitializing, value); }
         }
 
         private bool isLeaf = false;
-        public bool IsLeaf { get => isLeaf; set => SetValue(ref isLeaf, value); }
+        public bool IsLeaf { get => isLeaf; set { if (value != isLeaf) SetValue(ref isLeaf, value); } }
 
         private bool hasView = false;
-        public bool HasView { get => hasView; set => SetValue(ref hasView, value); }
+        public bool HasView { get => hasView; set { if (value != hasView) SetValue(ref hasView, value); } }
 
         private Grid view = new Grid();
         public Grid View { get => view; set => SetValue(ref view, value); }
@@ -253,7 +253,7 @@ namespace LandingPage.ViewModels.Layout
                 }
                 catch (Exception ex)
                 {
-                    LandingPageExtension.logger.Error(ex, $"Failed to initialize view {GridNode.ViewProperties.ViewId}");
+                    LandingPageExtension.logger.Error(ex, $"Failed to initialize view {viewProperties.ViewId}");
                 }
                 IsInitializing = false;
 
@@ -265,7 +265,7 @@ namespace LandingPage.ViewModels.Layout
                 }
                 catch (Exception ex)
                 {
-                    LandingPageExtension.logger.Error(ex, $"Failed to open view {GridNode.ViewProperties.ViewId}");
+                    LandingPageExtension.logger.Error(ex, $"Failed to open view {viewProperties.ViewId}");
                 }
                 IsLoading = false;
             }
@@ -273,11 +273,11 @@ namespace LandingPage.ViewModels.Layout
 
         public async Task OpenViewAsync()
         {
-            if (GridNode.ViewProperties.view is IAsyncStartPageControl asyncControl)
+            if (GridNode?.ViewProperties?.view is IAsyncStartPageControl asyncControl)
             {
                 await asyncControl.OnViewShownAsync();
             }
-            if (GridNode.ViewProperties.view is FrameworkElement asyncElement && asyncElement.DataContext is IAsyncStartPageControl asyncContext)
+            if (GridNode?.ViewProperties?.view is FrameworkElement asyncElement && asyncElement.DataContext is IAsyncStartPageControl asyncContext)
             {
                 await asyncContext.OnViewShownAsync();
             }
@@ -285,11 +285,11 @@ namespace LandingPage.ViewModels.Layout
 
         public void OpenView()
         {
-            if (GridNode.ViewProperties.view is IStartPageControl control)
+            if (GridNode?.ViewProperties?.view is IStartPageControl control)
             {
                 control.OnStartPageOpened();
             }
-            if (GridNode.ViewProperties.view is FrameworkElement element && element.DataContext is IStartPageControl context)
+            if (GridNode?.ViewProperties?.view is FrameworkElement element && element.DataContext is IStartPageControl context)
             {
                 context.OnStartPageOpened();
             }
@@ -635,8 +635,6 @@ namespace LandingPage.ViewModels.Layout
             {
                 if (gridNode.ViewProperties is ViewProperties viewProperties)
                 {
-                    IsInitializing = true;
-                    IsLoading = true;
                     if (viewProperties.view is FrameworkElement control)
                     {
                         if (control.Parent is Panel panel)
@@ -646,6 +644,12 @@ namespace LandingPage.ViewModels.Layout
                         View.Children.Add(control);
                         HasView = true;
                         IsLeaf = node.Children.Count == 0;
+                        IsInitializing = false;
+                        IsLoading = false;
+                    } else
+                    {
+                        IsInitializing = true;
+                        IsLoading = true;
                     }
                 }
             }
