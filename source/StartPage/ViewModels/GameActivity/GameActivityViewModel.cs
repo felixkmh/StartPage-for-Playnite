@@ -118,7 +118,7 @@ namespace LandingPage.ViewModels.GameActivity
                 PlaytimeLastWeek = null;
             }
             var lastSevenDays = Enumerable.Range(-6, 7).Reverse().Select(i => DateTime.Today.AddDays(i).Date);
-            var summed = lastSevenDays.Select(day => new DayPlaytime { Day = day, Playtime = (ulong)Activities.SelectMany(a => a.Items).Where(item => item.DateSession.Date == day).Sum(item => (long)item.ElapsedSeconds) });
+            var summed = lastSevenDays.Select(day => new DayPlaytime { Day = day, Playtime = (ulong)Activities.SelectMany(a => a.Items).Where(item => item.DateSession.ToLocalTime().Date == day).Sum(item => (long)item.ElapsedSeconds) });
             double max = summed.Max(dpt => dpt.Playtime);
             max = (double.IsNaN(max) || max == 0) ? 1 : max;
             var withSize = summed.Select(a => { a.Filled = (float)a.Playtime / max; a.Filled = double.IsNaN(a.Filled) ? 0 : a.Filled; return a; });
@@ -137,7 +137,7 @@ namespace LandingPage.ViewModels.GameActivity
                     return null;
                 }
                 var lastSevenDays = new[] { 6, 5, 4, 3, 2, 1, 0 }.Select(i => DateTime.Today.AddDays(-i).Date);
-                var summed = lastSevenDays.Select(day => new DayPlaytime { Day = day, Playtime = (ulong)Activities.SelectMany(a => a.Items).Where(item => item.DateSession.Date == day).Sum(item => (long)item.ElapsedSeconds) });
+                var summed = lastSevenDays.Select(day => new DayPlaytime { Day = day, Playtime = (ulong)Activities.SelectMany(a => a.Items).Where(item => item.DateSession.ToLocalTime().Date == day).Sum(item => (long)item.ElapsedSeconds) });
                 double max = summed.Max(dpt => dpt.Playtime);
                 max = (double.IsNaN(max) || max == 0) ? 1 : max;
                 var withSize = summed.Select(a => { a.Filled = (float)a.Playtime / max; a.Filled = double.IsNaN(a.Filled) ? 0 : a.Filled; return a; });
