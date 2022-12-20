@@ -1,5 +1,12 @@
 AddonId: felixkmh_StartPage_Plugin
 Packages:  
+  - Version: 2.11.3
+    RequiredApiVersion: 6.1.0
+    ReleaseDate: 2022-11-13
+    PackageUrl: https://github.com/felixkmh/StartPage-for-Playnite/releases/download/v2.11.3/felixkmh_StartPage_Plugin_2_11_3.pext
+    Changelog:
+      - Fixed crash when loading views of missing extensions
+      - Fixed loading animation covering views when splitting the grid
   - Version: 2.11.2
     RequiredApiVersion: 6.1.0
     ReleaseDate: 2022-11-12
