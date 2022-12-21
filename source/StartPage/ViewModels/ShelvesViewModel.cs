@@ -33,18 +33,18 @@ namespace LandingPage.ViewModels
         public ICommand MoveShelveUpCommand { get; set; }
         public ICommand MoveShelveDownCommand { get; set;}
 
-        public Game LastSelectedGame { get => plugin.startPageViewModel.LastSelectedGame; set => plugin.startPageViewModel.LastSelectedGame = value; }
+        public Game LastSelectedGame { get => plugin.startPageViewModel.BackgroundViewModel.LastSelectedGame; set => plugin.startPageViewModel.BackgroundViewModel.LastSelectedGame = value; }
 
-        public Game LastHoveredGame { get => plugin.startPageViewModel.LastHoveredGame; set => plugin.startPageViewModel.LastHoveredGame = value; }
+        public Game LastHoveredGame { get => plugin.startPageViewModel.BackgroundViewModel.LastHoveredGame; set => plugin.startPageViewModel.BackgroundViewModel.LastHoveredGame = value; }
 
         public Game CurrentlyHoveredGame
         {
-            get => plugin.startPageViewModel.CurrentlyHoveredGame;
+            get => plugin.startPageViewModel.BackgroundViewModel.CurrentlyHoveredGame;
             set
             {
-                if (value is Game && plugin.startPageViewModel.LastHoveredGame != value)
+                if (value is Game && plugin.startPageViewModel.BackgroundViewModel.LastHoveredGame != value)
                 {
-                    plugin.startPageViewModel.LastHoveredGame = value;
+                    plugin.startPageViewModel.BackgroundViewModel.LastHoveredGame = value;
                 }
             }
         }

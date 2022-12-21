@@ -26,6 +26,8 @@ using LandingPage.ViewModels.GameActivity;
 using Newtonsoft.Json;
 using PlayniteCommon.UI;
 using StartPage.SDK.Async;
+using System.Windows.Diagnostics;
+using System.Windows.Data;
 
 namespace LandingPage
 {
@@ -47,6 +49,9 @@ namespace LandingPage
         public override Guid Id { get; } = Guid.Parse("a6a3dcf6-9bfe-426c-afb0-9f49409ae0c5");
 
         internal Lazy<GameActivityViewModel> gameActivityViewModel;
+
+        private BackgroundViewModel backgroundViewModel = null;
+        public BackgroundViewModel BackgroundViewModel { get => backgroundViewModel ?? (backgroundViewModel = new BackgroundViewModel(PlayniteApi, this)); }
 
         internal Uri lastBackgroundUri = null;
         internal double lastBlur = 0;
@@ -83,7 +88,8 @@ namespace LandingPage
                     {
                         successStory = new ViewModels.SuccessStory.SuccessStoryViewModel(successStoryPath, PlayniteApi, SettingsViewModel);
                         successStory.ParseAllAchievements();
-                    } else
+                    }
+                    else
                     {
                         successStory = new ViewModels.SuccessStory.SuccessStoryViewModel(null, PlayniteApi, SettingsViewModel);
                     }
@@ -98,12 +104,13 @@ namespace LandingPage
                         gameActivity = new ViewModels.GameActivity.GameActivityViewModel(null, PlayniteApi, SettingsViewModel);
                     }
                     viewModel = new LandingPageViewModel(PlayniteApi, this, SettingsViewModel, successStory, gameActivity);
-                    foreach(var shelve in Settings.ShelveProperties)
+                    foreach (var shelve in Settings.ShelveProperties)
                     {
                         //viewModel.ShelveViewModels.Add(new ShelveViewModel(shelve, PlayniteApi, viewModel));
                     }
                     viewModel.Update(true);
-                } else
+                }
+                else
                 {
                     viewModel.Update(false);
                 }
@@ -161,7 +168,8 @@ namespace LandingPage
                     {
                         action = a => { Settings.BackgroundImageUri = url; Settings.BackgroundImagePath = a.Games[0].Name; };
                     };
-                } else if (PlayniteApi.Database.GetFullFilePath(path) is string databasePath)
+                }
+                else if (PlayniteApi.Database.GetFullFilePath(path) is string databasePath)
                 {
                     if (Uri.TryCreate(databasePath, UriKind.RelativeOrAbsolute, out var url))
                     {
@@ -176,7 +184,7 @@ namespace LandingPage
                         Description = ResourceProvider.GetString("LOC_SPG_SetGameAsBackground")
                     };
                 }
-            }     
+            }
         }
 
 
@@ -224,7 +232,7 @@ namespace LandingPage
                     }
                 }
 
-                startPageViewModel = new StartPageViewModel(PlayniteApi, this, SettingsViewModel, new GridNodeViewModel(Settings.GridLayout));
+                startPageViewModel = new StartPageViewModel(PlayniteApi, this, SettingsViewModel, new GridNodeViewModel(Settings.GridLayout), BackgroundViewModel);
 
                 Application.Current.Dispatcher.BeginInvoke(new Action(async () =>
                 {
@@ -247,7 +255,8 @@ namespace LandingPage
                 }
 
                 startPageView = view;
-            } else
+            }
+            else
             {
                 Application.Current.Dispatcher.BeginInvoke(new Action(async () =>
                 {
@@ -256,7 +265,15 @@ namespace LandingPage
                 }), System.Windows.Threading.DispatcherPriority.Background);
             }
 
-            
+            Application.Current.Dispatcher.InvokeAsync(() =>
+            {
+                if (globalBackground is BackgroundView)
+                {
+                    globalBackground.Opacity = 1;
+                }
+            });
+
+            isViewOpen = true;
 
             return startPageView;
         }
@@ -267,6 +284,14 @@ namespace LandingPage
             {
                 await model.Closed();
             }
+
+            if (globalBackground is BackgroundView)
+            {
+                globalBackground.SetBinding(UIElement.OpacityProperty, new Binding("Settings.GlobalBackgroundOpacity") { Source = SettingsViewModel });
+            }
+
+            isViewOpen = false;
+
             GC.Collect();
         }
 
@@ -279,7 +304,7 @@ namespace LandingPage
                     viewModel.LastSelectedGame = last;
                 }
             }
-            if (startPageView?.DataContext is StartPageViewModel model)
+            if (backgroundViewModel is BackgroundViewModel model)
             {
                 if (args.NewValue?.FirstOrDefault() is Game last)
                 {
@@ -299,14 +324,14 @@ namespace LandingPage
             {
                 if (startPageViewModel != null && Settings.ShowCurrentlyPlayedBackground)
                 {
-                    lastBackgroundUri = startPageViewModel.BackgroundImagePath;
+                    lastBackgroundUri = startPageViewModel.BackgroundViewModel.BackgroundImagePath;
                     lastBlur = Settings.BlurAmount;
                     lastBackgroundScale = Settings.RenderScale;
                     lastAnimationDuration = Settings.AnimationDuration;
                     Settings.AnimationDuration = 0;
                     if (Uri.TryCreate(PlayniteApi.Database.GetFullFilePath(args.Game.BackgroundImage), UriKind.RelativeOrAbsolute, out var uri))
                     {
-                        startPageViewModel.BackgroundImagePath = uri;
+                        startPageViewModel.BackgroundViewModel.BackgroundImagePath = uri;
                     }
                     if (Settings.DisableBlurForCurrentlyPlayed)
                     {
@@ -334,17 +359,18 @@ namespace LandingPage
             {
                 if (lastBackgroundUri != null)
                 {
-                    startPageViewModel.BackgroundImagePath = lastBackgroundUri;
+                    startPageViewModel.BackgroundViewModel.BackgroundImagePath = lastBackgroundUri;
                     Settings.BlurAmount = lastBlur;
                     Settings.RenderScale = lastBackgroundScale;
                     Settings.AnimationDuration = lastAnimationDuration;
                     lastBackgroundUri = null;
                 }
-            } else
+            }
+            else
             {
                 if (Uri.TryCreate(PlayniteApi.Database.GetFullFilePath(RunningGames.Last().BackgroundImage), UriKind.RelativeOrAbsolute, out var uri))
                 {
-                    startPageViewModel.BackgroundImagePath = uri;
+                    startPageViewModel.BackgroundViewModel.BackgroundImagePath = uri;
                 }
             }
         }
@@ -378,7 +404,8 @@ namespace LandingPage
             //Settings.IgnoreMostPlayedTagId = PlayniteApi.Database.Tags.Add("[SPG] Most Played Ignored").Id;
             var switchWithLowPrio = false;
             var parentWindow = Application.Current.Windows.Cast<Window>().FirstOrDefault(w => w.Name == "WindowMain");
-            parentWindow?.Dispatcher.Invoke(() => {
+            parentWindow?.Dispatcher.Invoke(() =>
+            {
                 if (UiHelper.FindVisualChildren<ProgressBar>(parentWindow, "PART_ProgressGlobal").FirstOrDefault() is ProgressBar bar)
                 {
                     progressBar = bar;
@@ -397,11 +424,11 @@ namespace LandingPage
             if (Settings.EnableStartupOverride || Settings.MoveToTopOfList)
             {
                 logger.Debug("Trying to execute unsupported actions...");
-                var mainWindow = Application.Current.Windows.Cast<Window>().FirstOrDefault(w => w.Name == "WindowMain");
+                var mainWindow = Application.Current.Windows.OfType<Window>().FirstOrDefault(w => w.Name == "WindowMain");
                 if (mainWindow == null) logger.Debug("MainWindow could not be found.");
                 if (mainWindow is Window)
                 {
-                    mainWindow.Dispatcher.InvokeAsync(new Action(async () => 
+                    mainWindow.Dispatcher.InvokeAsync(new Action(async () =>
                     {
                         try
                         {
@@ -459,17 +486,100 @@ namespace LandingPage
                     }), switchWithLowPrio ? System.Windows.Threading.DispatcherPriority.ApplicationIdle : System.Windows.Threading.DispatcherPriority.DataBind);
                 }
             }
-            foreach(var plugin in PlayniteApi.Addons.Plugins)
+            foreach (var plugin in PlayniteApi.Addons.Plugins)
             {
                 if (plugin is IStartPageExtension extension)
                 {
-                    if (extension.GetAvailableStartPageViews() is StartPageExtensionArgs extensionArgs 
+                    if (extension.GetAvailableStartPageViews() is StartPageExtensionArgs extensionArgs
                         && extensionArgs.Views != null
                         && extensionArgs.Views.Any())
                     {
                         AllAvailableViews.Add(extensionArgs.ExtensionName, extensionArgs.Views.Select(v => new StartPageViewArgs(v, plugin.Id)).ToList());
                     }
                 }
+            }
+
+            if (Settings.EnableGlobalBackground)
+            {
+                SetGlobalBackground();
+            }
+
+            SettingsViewModel.SettingsChanged += SettingsViewModel_SettingsChanged;
+        }
+
+        private void SettingsViewModel_SettingsChanged(object sender, LandingPageSettings e)
+        {
+            if (e.EnableGlobalBackground)
+            {
+                SetGlobalBackground();
+            } else
+            {
+                UnsetGlobalBackground();
+            }
+        }
+
+        private void SetGlobalBackground()
+        {
+            logger.Debug("Trying to execute unsupported actions...");
+            var mainWindow = Application.Current.Windows.OfType<Window>().FirstOrDefault(w => w.Name == "WindowMain");
+            if (mainWindow == null) logger.Debug("MainWindow could not be found.");
+            if (mainWindow is Window)
+            {
+                mainWindow.Dispatcher.InvokeAsync(() =>
+                {
+                    try
+                    {
+                        if (UiHelper.FindVisualChildren<Grid>(mainWindow).FirstOrDefault() is Grid grid)
+                        {
+                            if (!grid.Children.OfType<BackgroundView>().Any())
+                            {
+                                globalBackground = new BackgroundView() { DataContext = BackgroundViewModel };
+                                if (!isViewOpen)
+                                {
+                                    globalBackground.SetBinding(UIElement.OpacityProperty, new Binding("Settings.GlobalBackgroundOpacity") { Source = SettingsViewModel });
+                                }
+                                globalBackground.SetBinding(UIElement.VisibilityProperty, new Binding("Settings.EnableGlobalBackground") { 
+                                    Source = SettingsViewModel, 
+                                    Converter = ResourceProvider.GetResource<IValueConverter>("BooleanToVisibilityConverter") 
+                                });
+                                grid.Children.Insert(0, globalBackground);
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        logger.Debug(ex, "Failed to find background image control.");
+                    }
+                });
+            }
+        }
+
+        private void UnsetGlobalBackground()
+        {
+            logger.Debug("Trying to execute unsupported actions...");
+            var mainWindow = Application.Current.Windows.OfType<Window>().FirstOrDefault(w => w.Name == "WindowMain");
+            if (mainWindow == null) logger.Debug("MainWindow could not be found.");
+            if (mainWindow is Window)
+            {
+                mainWindow.Dispatcher.InvokeAsync(() =>
+                {
+                    try
+                    {
+                        if (UiHelper.FindVisualChildren<Grid>(mainWindow).FirstOrDefault() is Grid grid)
+                        {
+                            if (grid.Children.OfType<BackgroundView>().FirstOrDefault() is BackgroundView view)
+                            {
+                                BindingOperations.ClearAllBindings(view);
+                                grid.Children.Remove(view);
+                                globalBackground = null;
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        logger.Debug(ex, "Failed to remove background image control.");
+                    }
+                }, System.Windows.Threading.DispatcherPriority.ApplicationIdle);
             }
         }
 
@@ -495,13 +605,13 @@ namespace LandingPage
             {
                 if (lastBackgroundUri != null)
                 {
-                    startPageViewModel.BackgroundImagePath = lastBackgroundUri;
+                    startPageViewModel.BackgroundViewModel.BackgroundImagePath = lastBackgroundUri;
                     Settings.BlurAmount = lastBlur;
                     Settings.RenderScale = lastBackgroundScale;
                     Settings.AnimationDuration = lastAnimationDuration;
                 }
                 Settings.GridLayout = startPageViewModel.RootNodeViewModel.GridNode;
-                foreach(var vm in shelvesViewModels)
+                foreach (var vm in shelvesViewModels)
                 {
                     vm.Value.Shelves.TTL = 5;
                     Settings.ShelveInstanceSettings[vm.Key] = vm.Value.Shelves;
@@ -511,7 +621,7 @@ namespace LandingPage
                     Settings.ShelveInstanceSettings = Settings.ShelveInstanceSettings
                         .Where(item => item.Value.TTL > 0)
                         .ToDictionary(item => item.Key, item => item.Value);
-                    foreach(var settings in Settings.ShelveInstanceSettings)
+                    foreach (var settings in Settings.ShelveInstanceSettings)
                     {
                         settings.Value.TTL--;
                     }
@@ -555,10 +665,10 @@ namespace LandingPage
             }
             if (!string.IsNullOrEmpty(successStoryPath))
             {
-                views.Add(new StartPageViewArgsBase 
-                { 
-                    ViewId = "RecentAchivements", 
-                    Name = ResourceProvider.GetString("LOC_SPG_RecentAchievementsView"), 
+                views.Add(new StartPageViewArgsBase
+                {
+                    ViewId = "RecentAchivements",
+                    Name = ResourceProvider.GetString("LOC_SPG_RecentAchievementsView"),
                     Description = ResourceProvider.GetString("LOC_SPG_RecentAchievementsDescription")
                 });
             }
@@ -571,39 +681,41 @@ namespace LandingPage
             }
             if (!string.IsNullOrEmpty(gameActivityPath))
             {
-                views.Add(new StartPageViewArgsBase 
-                { 
-                    ViewId = "WeeklyActivity", 
-                    Name = ResourceProvider.GetString("LOC_SPG_WeeklyActivityView"), 
+                views.Add(new StartPageViewArgsBase
+                {
+                    ViewId = "WeeklyActivity",
+                    Name = ResourceProvider.GetString("LOC_SPG_WeeklyActivityView"),
                     Description = ResourceProvider.GetString("LOC_SPG_WeeklyActivityDescription")
                 });
             }
 
-            views.Add(new StartPageViewArgsBase 
-            { 
-                ViewId = "GameShelves", 
-                Name = ResourceProvider.GetString("LOC_SPG_ShelvesView"), 
+            views.Add(new StartPageViewArgsBase
+            {
+                ViewId = "GameShelves",
+                Name = ResourceProvider.GetString("LOC_SPG_ShelvesView"),
                 Description = ResourceProvider.GetString("LOC_SPG_ShelvesViewDescription"),
                 HasSettings = true,
                 AllowMultipleInstances = true
             });
-            views.Add(new StartPageViewArgsBase 
-            { 
-                ViewId = "MostPlayed", 
-                Name = ResourceProvider.GetString("LOC_SPG_MostPlayedView"), 
+            views.Add(new StartPageViewArgsBase
+            {
+                ViewId = "MostPlayed",
+                Name = ResourceProvider.GetString("LOC_SPG_MostPlayedView"),
                 Description = ResourceProvider.GetString("LOC_SPG_MostPlayedDescription"),
                 HasSettings = true
             });
-            views.Add(new StartPageViewArgsBase 
-            { 
-                ViewId = "DigitalClock", 
-                Name = ResourceProvider.GetString("LOC_SPG_ClockView"), 
+            views.Add(new StartPageViewArgsBase
+            {
+                ViewId = "DigitalClock",
+                Name = ResourceProvider.GetString("LOC_SPG_ClockView"),
                 Description = ResourceProvider.GetString("LOC_SPG_ClockViewDescription"),
             });
             return args;
         }
 
         private Task gameActivityTask = Task.CompletedTask;
+        private BackgroundView globalBackground;
+        private bool isViewOpen;
 
         public object GetStartPageView(string id, Guid instanceId)
         {
@@ -619,8 +731,8 @@ namespace LandingPage
                 {
                     var successStoryViewModel = new ViewModels.SuccessStory.SuccessStoryViewModel(successStoryPath, PlayniteApi, SettingsViewModel);
 
-                    var view = new RecentAchievementsView() 
-                    { 
+                    var view = new RecentAchievementsView()
+                    {
                         DataContext = successStoryViewModel
                     };
                     return view;

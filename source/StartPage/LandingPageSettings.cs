@@ -209,6 +209,12 @@ namespace LandingPage
         private bool disableBlurForCurrentlyPlayed = true;
         public bool DisableBlurForCurrentlyPlayed { get => disableBlurForCurrentlyPlayed; set => SetValue(ref disableBlurForCurrentlyPlayed, value); }
 
+        private bool enableGlobalBackground = false;
+        public bool EnableGlobalBackground { get => enableGlobalBackground; set => SetValue(ref enableGlobalBackground, value); }
+
+        private double globalBackgroundOpacity = 0.8;
+        public double GlobalBackgroundOpacity { get => globalBackgroundOpacity; set => SetValue(ref globalBackgroundOpacity, value); }
+
         private ObservableCollection<GridNodePreset> gridNodePresets = new ObservableCollection<GridNodePreset>();
         public ObservableCollection<GridNodePreset> GridNodePresets { get => gridNodePresets; set => SetValue(ref gridNodePresets, value); }
 
@@ -251,6 +257,8 @@ namespace LandingPage
 
     public class LandingPageSettingsViewModel : ObservableObject, ISettings
     {
+        public event EventHandler<LandingPageSettings> SettingsChanged;
+
         private readonly LandingPageExtension plugin;
         private LandingPageSettings editingClone { get; set; }
 
@@ -361,6 +369,7 @@ namespace LandingPage
             // Code executed when user decides to confirm changes made since BeginEdit was called.
             // This method should save settings made to Option1 and Option2.
             plugin.SavePluginSettings(Settings);
+            SettingsChanged?.Invoke(this, Settings);
         }
 
         public bool VerifySettings(out List<string> errors)

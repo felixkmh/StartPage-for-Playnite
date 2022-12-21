@@ -108,6 +108,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ScrollViewerHelper.cs" />
     <Compile Include="Settings\ShelvesSettings.cs" />
+    <Compile Include="ViewModels\BackgroundViewModel.cs" />
     <Compile Include="ViewModels\GameActivity\GameActivityViewModel.cs" />
     <Compile Include="ViewModels\GameActivity\MostPlayedViewModel.cs" />
     <Compile Include="ViewModels\GridNodePresetsViewModel.cs" />
@@ -118,6 +119,9 @@
     <Compile Include="ViewModels\ShelveViewModel.cs" />
     <Compile Include="ViewModels\StartPageViewModel.cs" />
     <Compile Include="ViewModels\SuccessStory\SuccessStoryViewModel.cs" />
+    <Compile Include="Views\BackgroundView.xaml.cs">
+      <DependentUpon>BackgroundView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\ClockView.xaml.cs">
       <DependentUpon>ClockView.xaml</DependentUpon>
     </Compile>
@@ -293,6 +297,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="LandingPageSettingsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\BackgroundView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

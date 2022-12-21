@@ -207,6 +207,32 @@
                   HorizontalScrollBarVisibility="Disabled">
                 <Grid>
                     <StackPanel Grid.IsSharedSizeScope="True">
+                        <DockPanel>
+                            <DockPanel.ToolTip>
+                                <TextBlock Text="{DynamicResource LOC_SPG_UnsupportedToolTip}" TextWrapping="Wrap" MaxWidth="550"/>
+                            </DockPanel.ToolTip>
+                            <CheckBox IsChecked="{Binding Settings.EnableGlobalBackground}" VerticalAlignment="Center" Margin="3"/>
+                            <TextBlock Text="{DynamicResource LOC_SPG_EnableGlobalBackground}" Margin="3" VerticalAlignment="Center" TextWrapping="Wrap"/>
+                        </DockPanel>
+                        <DockPanel LastChildFill="False" IsEnabled="{Binding Settings.EnableGlobalBackground}">
+                            <Grid VerticalAlignment="Center">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition SharedSizeGroup="Descriptions"/>
+                                    <ColumnDefinition SharedSizeGroup="Controls"/>
+                                    <ColumnDefinition SharedSizeGroup="Value"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Column="0" Text="{DynamicResource LOC_SPG_GlobalBackgroundOpacity}" VerticalAlignment="Center"/>
+                                <Slider Grid.Column="1" Margin="10,0" VerticalAlignment="Center" Value="{Binding Settings.GlobalBackgroundOpacity}" Minimum="0" Maximum="1" Width="180" IsSnapToTickEnabled="True" TickFrequency="0.01"/>
+                                <numeric:DoubleBox Grid.Column="2" Value="{Binding Settings.GlobalBackgroundOpacity, UpdateSourceTrigger=PropertyChanged}" 
+                                        MinValue="0"
+                                        MaxValue="1"
+                                        MinWidth="30"
+                                        ValidationTrigger="PropertyChanged"
+                                        Style="{StaticResource {x:Type TextBox}}"
+                                        TextAlignment="Center">
+                                </numeric:DoubleBox>
+                            </Grid>
+                        </DockPanel>
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto"/>

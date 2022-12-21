@@ -15,9 +15,9 @@
     <UserControl.Resources>
         <sys:Boolean x:Key="True">True</sys:Boolean>
         <sys:Boolean x:Key="False">False</sys:Boolean>
-        <conv:UriToBitmapImageConverter x:Key="UriToBitmapImageConverter"/>
         <conv:IEnumerableNullOrEmptyToVisibilityConverter x:Key="IEnumerableNullOrEmptyToVisibilityConverter"/>
         <conv:VisibilityInverter x:Key="VisibilityInverter"/>
+        <conv:UriToBitmapImageConverter x:Key="UriToBitmapImageConverter"/>
         <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource BaseTextBlockStyle}" />
         <BitmapImage x:Key="InnerGlowBitmap" CreateOptions="IgnoreColorProfile" UriSource="pack://application:,,,/StartPagePlugin;component/innerglow.png" CacheOption="OnLoad"/>
         <BitmapImage x:Key="NoiseImage" CreateOptions="IgnoreColorProfile" UriSource="pack://application:,,,/StartPagePlugin;component/noise.png" CacheOption="OnLoad"/>
@@ -107,42 +107,7 @@
         </ContextMenu>
     </UserControl.ContextMenu>
     <Grid>
-        <Grid Background="Transparent">
-            <Grid.CacheMode>
-                <BitmapCache EnableClearType="False" 
-                         RenderAtScale="{Binding Settings.Settings.RenderScale}" 
-                         SnapsToDevicePixels="False" />
-            </Grid.CacheMode>
-            <ItemsControl ItemsSource="{Binding BackgroundImageQueue}">
-                <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <Grid/>
-                    </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <Image Stretch="UniformToFill" Source="{Binding Uri, Converter={StaticResource UriToBitmapImageConverter}}"
-                   Opacity="{Binding Opacity}" HorizontalAlignment="Center" VerticalAlignment="Center">
-                        </Image>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-                <ItemsControl.Effect>
-                    <BlurEffect Radius="{Binding Settings.Settings.BlurAmountScaled}" KernelType="Gaussian" RenderingBias="Quality"/>
-                </ItemsControl.Effect>
-            </ItemsControl>
-        </Grid>
-        <Border Background="{StaticResource DarkNoiseBrush}" Opacity="{Binding Settings.Settings.OverlayOpacity}" IsHitTestVisible="False">
-            <Border.OpacityMask>
-                <LinearGradientBrush StartPoint="0,1" EndPoint="0,0">
-                    <LinearGradientBrush.GradientStops>
-                        <GradientStop Color="#FFFFFFFF" Offset="0.2"/>
-                        <GradientStop Color="#5FFFFFFF" Offset="0.8"/>
-                    </LinearGradientBrush.GradientStops>
-                </LinearGradientBrush>
-            </Border.OpacityMask>
-        </Border>
-        <Border Background="{StaticResource TransparentNoiseBrush}" Opacity="{Binding Settings.Settings.NoiseOpacity}" IsHitTestVisible="False">
-        </Border>
+        <local:BackgroundView DataContext="{Binding BackgroundViewModel}" Visibility="{Binding Settings.Settings.EnableGlobalBackground, Converter={StaticResource InvertedBooleanToVisibilityConverter}}"/>
         <Border>
             <Border.Background>
                 <SolidColorBrush Color="{DynamicResource WhiteColor}"/>
@@ -469,11 +434,11 @@
                     Visibility="{Binding ElementName=ProgressbarGrid, Path=IsMouseOver, Converter={StaticResource BooleanToVisibilityConverter}}">
             </Button>
         </Grid>
-        <Button HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="4" Command="{Binding BackgroundSourceGame.OpenCommand}" Padding="0"
+        <Button HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="4" Command="{Binding BackgroundViewModel.BackgroundSourceGame.OpenCommand}" Padding="0"
                 Visibility="{Binding RootNodeViewModel.EditModeEnabled, Converter={StaticResource InvertedBooleanToVisibilityConverter}}">
             <Button.Template>
                 <ControlTemplate TargetType="Button">
-                    <Grid Visibility="{Binding BackgroundSourceGame, Converter={StaticResource NullToVisibilityConverter}}" Background="{x:Null}">
+                    <Grid Visibility="{Binding BackgroundViewModel.BackgroundSourceGame, Converter={StaticResource NullToVisibilityConverter}}" Background="{x:Null}">
                         <Border Background="Black" CornerRadius="10" IsHitTestVisible="False"
                                 Margin="0" Padding="0" Opacity="{Binding Settings.Settings.BackgroundGameInfoOpacity}" x:Name="GameNameBorder">
                         </Border>
@@ -489,7 +454,7 @@
                         <Trigger Property="IsMouseOver" Value="True">
                             <Setter Property="Opacity" Value="0.9" TargetName="BackgroundImageSourceGameTitle"/>
                             <Setter Property="Opacity" Value="0.3" TargetName="GameNameBorder"/>
-                            <Setter Property="Text" Value="{Binding BackgroundSourceGame.Game.Name, FallbackValue=''}" TargetName="BackgroundImageSourceGameTitle"/>
+                            <Setter Property="Text" Value="{Binding BackgroundViewModel.BackgroundSourceGame.Game.Name, FallbackValue=''}" TargetName="BackgroundImageSourceGameTitle"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

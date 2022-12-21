@@ -1,0 +1,64 @@
+﻿<UserControl x:Class="LandingPage.Views.BackgroundView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:LandingPage.Views" xmlns:conv="clr-namespace:LandingPage.Converters"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <conv:UriToBitmapImageConverter x:Key="UriToBitmapImageConverter"/>
+        <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource BaseTextBlockStyle}" />
+        <BitmapImage x:Key="InnerGlowBitmap" CreateOptions="IgnoreColorProfile" UriSource="pack://application:,,,/StartPagePlugin;component/innerglow.png" CacheOption="OnLoad"/>
+        <BitmapImage x:Key="NoiseImage" CreateOptions="IgnoreColorProfile" UriSource="pack://application:,,,/StartPagePlugin;component/noise.png" CacheOption="OnLoad"/>
+        <BitmapImage x:Key="DarkNoiseImage" CreateOptions="IgnoreColorProfile" UriSource="pack://application:,,,/StartPagePlugin;component/dark_noise.png" CacheOption="OnLoad"/>
+        <BitmapImage x:Key="WhiteNoiseImage" CreateOptions="IgnoreColorProfile" UriSource="pack://application:,,,/StartPagePlugin;component/white_noise.png" CacheOption="OnLoad"/>
+        <ImageBrush x:Key="NoiseBrush" ImageSource="{StaticResource NoiseImage}" TileMode="Tile" Viewport="0,0,100,100" ViewportUnits="Absolute"
+                    Opacity="1"/>
+        <ImageBrush x:Key="DarkNoiseBrush" ImageSource="{StaticResource DarkNoiseImage}" TileMode="Tile" Viewport="0,0,100,100" ViewportUnits="Absolute"
+                    Opacity="1"/>
+        <ImageBrush x:Key="WhiteNoiseBrush" ImageSource="{StaticResource WhiteNoiseImage}" TileMode="Tile" Viewport="0,0,100,100" ViewportUnits="Absolute"
+                    Opacity="0.5"/>
+        <BitmapImage x:Key="TransparentNoiseImage" CreateOptions="IgnoreColorProfile" UriSource="pack://application:,,,/StartPagePlugin;component/transparent_noise.png" CacheOption="OnLoad"/>
+        <ImageBrush x:Key="TransparentNoiseBrush" ImageSource="{StaticResource TransparentNoiseImage}" TileMode="Tile" Viewport="0,0,100,100" ViewportUnits="Absolute"  
+                    Opacity="0.15" RenderOptions.BitmapScalingMode="LowQuality"/>
+    </UserControl.Resources>
+    <Grid>
+        <Grid Background="Transparent">
+            <Grid.CacheMode>
+                <BitmapCache EnableClearType="False" 
+                         RenderAtScale="{Binding Settings.Settings.RenderScale}" 
+                         SnapsToDevicePixels="False" />
+            </Grid.CacheMode>
+            <ItemsControl ItemsSource="{Binding BackgroundImageQueue}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <Grid/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Image Stretch="UniformToFill" Source="{Binding Uri, Converter={StaticResource UriToBitmapImageConverter}}"
+                   Opacity="{Binding Opacity}" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        </Image>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+                <ItemsControl.Effect>
+                    <BlurEffect Radius="{Binding Settings.Settings.BlurAmountScaled}" KernelType="Gaussian" RenderingBias="Quality"/>
+                </ItemsControl.Effect>
+            </ItemsControl>
+        </Grid>
+        <Border Background="{StaticResource DarkNoiseBrush}" Opacity="{Binding Settings.Settings.OverlayOpacity}" IsHitTestVisible="False">
+            <Border.OpacityMask>
+                <LinearGradientBrush StartPoint="0,1" EndPoint="0,0">
+                    <LinearGradientBrush.GradientStops>
+                        <GradientStop Color="#FFFFFFFF" Offset="0.2"/>
+                        <GradientStop Color="#AFFFFFFF" Offset="0.8"/>
+                    </LinearGradientBrush.GradientStops>
+                </LinearGradientBrush>
+            </Border.OpacityMask>
+        </Border>
+        <Border Background="{StaticResource TransparentNoiseBrush}" Opacity="{Binding Settings.Settings.NoiseOpacity}" IsHitTestVisible="False">
+        </Border>
+    </Grid>
+</UserControl>
