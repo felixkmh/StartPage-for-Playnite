@@ -57,6 +57,8 @@
     <sys:String x:Key="LOC_SPG_ShowTitelOnCover">إظهار العنوان على غلاف اللعبة</sys:String>
     <sys:String x:Key="LOC_SPG_ShowGameDetails">إظهار تفاصيل اللعبة</sys:String>
     <sys:String x:Key="LOC_SPG_EnableNotifications">تفعيل الإشعارات</sys:String>
+    <sys:String x:Key="LOC_SPG_EnableGlobalBackground">Enable Global Background</sys:String>
+    <sys:String x:Key="LOC_SPG_GlobalBackgroundOpacity">Global Background Opacity</sys:String>
     <sys:String x:Key="LOC_SPG_MinimizeNotification">تصغير الإشعارات عند التشغيل</sys:String>
     <sys:String x:Key="LOC_SPG_ShowNotificationButtons">إظهار الأزرار &quot;تجاهل&quot; و &quot;تصغير&quot;</sys:String>
     <sys:String x:Key="LOC_SPG_KeepInMemory">احتفظ بـ StartPage في الذاكرة عند تبديل علامة تبويب</sys:String>
