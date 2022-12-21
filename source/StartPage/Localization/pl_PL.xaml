@@ -57,6 +57,8 @@
     <sys:String x:Key="LOC_SPG_ShowTitelOnCover">Pokaż tytuł na okładce gry</sys:String>
     <sys:String x:Key="LOC_SPG_ShowGameDetails">Pokaż szczegóły gry</sys:String>
     <sys:String x:Key="LOC_SPG_EnableNotifications">Włącz powiadomienia</sys:String>
+    <sys:String x:Key="LOC_SPG_EnableGlobalBackground">Enable Global Background</sys:String>
+    <sys:String x:Key="LOC_SPG_GlobalBackgroundOpacity">Global Background Opacity</sys:String>
     <sys:String x:Key="LOC_SPG_MinimizeNotification">Minimalizuj powiadomienia przy uruchomieniu</sys:String>
     <sys:String x:Key="LOC_SPG_ShowNotificationButtons">Pokaż przyciski &quot;Odrzuć&quot; i &quot;Minimalizuj&quot;</sys:String>
     <sys:String x:Key="LOC_SPG_KeepInMemory">Zachowaj stronę startową w pamięci podczas przełączania do innego widoku</sys:String>
