@@ -1,5 +1,14 @@
 AddonId: felixkmh_StartPage_Plugin
 Packages:  
+  - Version: 2.12.0
+    RequiredApiVersion: 6.1.0
+    ReleaseDate: 2022-12-21
+    PackageUrl: https://github.com/felixkmh/StartPage-for-Playnite/releases/download/v2.12.0/felixkmh_StartPage_Plugin_2_12_0.pext
+    Changelog:
+      - Added option to enable StartPage background application wide (result will depend on the used theme)
+      - Use local time zone for GameActivity view mkatsevVR
+      - Fix achievements not refreshing
+      - Localozation updates
   - Version: 2.11.3
     RequiredApiVersion: 6.1.0
     ReleaseDate: 2022-11-13
