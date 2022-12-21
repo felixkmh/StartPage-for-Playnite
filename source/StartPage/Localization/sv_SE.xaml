@@ -57,6 +57,8 @@
     <sys:String x:Key="LOC_SPG_ShowTitelOnCover">Visa titel på omslaget</sys:String>
     <sys:String x:Key="LOC_SPG_ShowGameDetails">Visa Spel Detaljer</sys:String>
     <sys:String x:Key="LOC_SPG_EnableNotifications">Aktivera Notifikationer</sys:String>
+    <sys:String x:Key="LOC_SPG_EnableGlobalBackground">Enable Global Background</sys:String>
+    <sys:String x:Key="LOC_SPG_GlobalBackgroundOpacity">Global Background Opacity</sys:String>
     <sys:String x:Key="LOC_SPG_MinimizeNotification">Minimera Notifikationer vid start</sys:String>
     <sys:String x:Key="LOC_SPG_ShowNotificationButtons">Show &quot;Discard&quot; and &quot;Minimize&quot; Buttons</sys:String>
     <sys:String x:Key="LOC_SPG_KeepInMemory">Behåll StartPage i minnet när du byter till en annan vy</sys:String>
