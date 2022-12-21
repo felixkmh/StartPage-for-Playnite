@@ -17,6 +17,7 @@ using System.Runtime.CompilerServices;
 using StartPage.SDK;
 using System.Windows.Threading;
 using StartPage.SDK.Async;
+using System.Windows.Data;
 
 namespace LandingPage.ViewModels.SuccessStory
 {
@@ -27,7 +28,7 @@ namespace LandingPage.ViewModels.SuccessStory
         internal Dictionary<Guid, Achievements> achievements = new Dictionary<Guid, Achievements>();
         public Dictionary<Guid, Achievements> Achievements => achievements;
 
-        private event EventHandler<IEnumerable<Guid>> AchievementsUpdated; 
+        private event EventHandler<IEnumerable<Guid>> AchievementsUpdated;
 
         internal LandingPageSettingsViewModel landingPageSettingsViewModel;
 
@@ -42,6 +43,8 @@ namespace LandingPage.ViewModels.SuccessStory
             }
         }
 
+        public ICollectionView LatestAchievementsView { get; }
+
         public class GameAchievement : ObservableObject
         {
             internal GameModel game;
@@ -54,6 +57,13 @@ namespace LandingPage.ViewModels.SuccessStory
 
         public SuccessStoryViewModel(string achievementsPath, IPlayniteAPI playniteAPI, LandingPageSettingsViewModel landingPageSettings)
         {
+            LatestAchievementsView = new ListCollectionView(LatestAchievements);
+            PropertyGroupDescription groupDescription = new PropertyGroupDescription(nameof(GameAchievement.Source));
+            groupDescription.SortDescriptions.Add(new SortDescription("Name.LastUnlocked", ListSortDirection.Descending));
+            LatestAchievementsView.GroupDescriptions.Add(groupDescription);
+
+            LatestAchievementsView.SortDescriptions.Add(new SortDescription("Achievement.DateUnlocked", ListSortDirection.Descending));
+
             this.achievementsPath = achievementsPath;
             this.playniteAPI = playniteAPI;
             if (achievementsPath is string && Directory.Exists(achievementsPath))
@@ -158,7 +168,7 @@ namespace LandingPage.ViewModels.SuccessStory
         public void Update()
         {
             Task.Run(() => UpdateLatestAchievements(
-                landingPageSettingsViewModel.Settings.MaxNumberRecentAchievements, 
+                landingPageSettingsViewModel.Settings.MaxNumberRecentAchievements,
                 landingPageSettingsViewModel.Settings.MaxNumberRecentAchievementsPerGame
             ));
         }
@@ -166,10 +176,13 @@ namespace LandingPage.ViewModels.SuccessStory
         public async Task UpdateAsync()
         {
             IsBusy = true;
+
             await UpdateLatestAchievementsAsync(
-                landingPageSettingsViewModel.Settings.MaxNumberRecentAchievements, 
+                landingPageSettingsViewModel.Settings.MaxNumberRecentAchievements,
                 landingPageSettingsViewModel.Settings.MaxNumberRecentAchievementsPerGame
             );
+
+            // LatestAchievementsView.Refresh();
             IsBusy = false;
         }
 
@@ -342,7 +355,7 @@ namespace LandingPage.ViewModels.SuccessStory
                                 return gameAchievements;
                             }
                         }
-                        catch (Exception) {}
+                        catch (Exception) { }
 
                     }
                 }
@@ -367,7 +380,7 @@ namespace LandingPage.ViewModels.SuccessStory
                     return serializer.Deserialize<Achievements>(reader);
                 }
             }
-            catch (Exception) {}
+            catch (Exception) { }
             return null;
         }
 

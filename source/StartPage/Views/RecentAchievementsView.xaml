@@ -14,24 +14,12 @@
     <UserControl.Resources>
         <conv:AchievementToImageConverter x:Key="AchievementToImageConverter"/>
         <system:Uri x:Key="DefaultAchievementUri">pack://application:,,,/StartPagePlugin;component/star.png</system:Uri>
-        <CollectionViewSource x:Key="LatestAchievementsSource" Source="{Binding LatestAchievements}" IsLiveGroupingRequested="True" IsLiveSortingRequested="True">
-            <CollectionViewSource.SortDescriptions>
-                <scm:SortDescription PropertyName="Achievement.DateUnlocked" Direction="Descending"/>
-            </CollectionViewSource.SortDescriptions>
-            <CollectionViewSource.GroupDescriptions>
-                <PropertyGroupDescription PropertyName="Source">
-                    <PropertyGroupDescription.SortDescriptions>
-                        <scm:SortDescription PropertyName="Name.LastUnlocked" Direction="Descending"/>
-                    </PropertyGroupDescription.SortDescriptions>
-                </PropertyGroupDescription>
-            </CollectionViewSource.GroupDescriptions>
-        </CollectionViewSource>
         <conv:AchievementsToProgressConverter x:Key="AchievementsToProgressConverter"/>
     </UserControl.Resources>
     <Grid ClipToBounds="False">
         <Border CornerRadius="15" Background="#4C424242" Visibility="Hidden">
         </Border>
-        <ListBox ItemsSource="{Binding Source={StaticResource LatestAchievementsSource}}" SelectionMode="Single"
+        <ListBox ItemsSource="{Binding LatestAchievementsView}" SelectionMode="Single"
                  Background="Transparent" BorderBrush="Transparent"
                  ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                  Padding="15,0"
