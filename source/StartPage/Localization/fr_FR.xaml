@@ -57,8 +57,8 @@
     <sys:String x:Key="LOC_SPG_ShowTitelOnCover">Afficher le nom des jeux sur leur couverture</sys:String>
     <sys:String x:Key="LOC_SPG_ShowGameDetails">Afficher les propriétés des jeux</sys:String>
     <sys:String x:Key="LOC_SPG_EnableNotifications">Afficher les notifications</sys:String>
-    <sys:String x:Key="LOC_SPG_EnableGlobalBackground">Enable Global Background</sys:String>
-    <sys:String x:Key="LOC_SPG_GlobalBackgroundOpacity">Global Background Opacity</sys:String>
+    <sys:String x:Key="LOC_SPG_EnableGlobalBackground">Activer l'arrière-plan global</sys:String>
+    <sys:String x:Key="LOC_SPG_GlobalBackgroundOpacity">Opacité de l'arrière-plan global</sys:String>
     <sys:String x:Key="LOC_SPG_MinimizeNotification">Réduire les notifications au lancement</sys:String>
     <sys:String x:Key="LOC_SPG_ShowNotificationButtons">Afficher les boutons &quot;ignorer&quot; et &quot;réduire&quot;</sys:String>
     <sys:String x:Key="LOC_SPG_KeepInMemory">Conserver Starpage en mémoire lorsqu'un autre onglet est affiché</sys:String>

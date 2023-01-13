@@ -57,8 +57,8 @@
     <sys:String x:Key="LOC_SPG_ShowTitelOnCover">在游戏封面上显示标题</sys:String>
     <sys:String x:Key="LOC_SPG_ShowGameDetails">显示游戏详细信息</sys:String>
     <sys:String x:Key="LOC_SPG_EnableNotifications">开启通知</sys:String>
-    <sys:String x:Key="LOC_SPG_EnableGlobalBackground">Enable Global Background</sys:String>
-    <sys:String x:Key="LOC_SPG_GlobalBackgroundOpacity">Global Background Opacity</sys:String>
+    <sys:String x:Key="LOC_SPG_EnableGlobalBackground">开启全局背景</sys:String>
+    <sys:String x:Key="LOC_SPG_GlobalBackgroundOpacity">全局背景不透明度</sys:String>
     <sys:String x:Key="LOC_SPG_MinimizeNotification">启动时最小化通知</sys:String>
     <sys:String x:Key="LOC_SPG_ShowNotificationButtons">显示“丢弃”和“最小化”按钮</sys:String>
     <sys:String x:Key="LOC_SPG_KeepInMemory">切换到另一个视图时，将 StartPage 保留在内存中</sys:String>
