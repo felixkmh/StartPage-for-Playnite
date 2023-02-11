@@ -136,7 +136,7 @@ Dies kann zu einem wesentlich geringeren Speicherbedarf für StartPage führen. 
     <sys:String x:Key="LOC_SPG_AlignmentCenter">Zentriert</sys:String>
     <sys:String x:Key="LOC_SPG_Padding">Abstand</sys:String>
     <sys:String x:Key="LOC_SPG_ShelvesHorizontalLabels">Horizontale Labels</sys:String>
-    <sys:String x:Key="LOC_SPG_ShowViewLabel">Show Label</sys:String>
+    <sys:String x:Key="LOC_SPG_ShowViewLabel">Titel anzeigen</sys:String>
 
     <!-- Integrated Views -->
     <sys:String x:Key="LOC_SPG_ClockView">Uhr</sys:String>
