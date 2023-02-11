@@ -57,8 +57,8 @@
     <sys:String x:Key="LOC_SPG_ShowTitelOnCover">Mostrar título na capa do jogo</sys:String>
     <sys:String x:Key="LOC_SPG_ShowGameDetails">Mostrar detalhes do jogo</sys:String>
     <sys:String x:Key="LOC_SPG_EnableNotifications">Ativar notificações</sys:String>
-    <sys:String x:Key="LOC_SPG_EnableGlobalBackground">Enable Global Background</sys:String>
-    <sys:String x:Key="LOC_SPG_GlobalBackgroundOpacity">Global Background Opacity</sys:String>
+    <sys:String x:Key="LOC_SPG_EnableGlobalBackground">Ativar fundo</sys:String>
+    <sys:String x:Key="LOC_SPG_GlobalBackgroundOpacity">Opacidade do fundo</sys:String>
     <sys:String x:Key="LOC_SPG_MinimizeNotification">Minimizar notificações ao iniciar</sys:String>
     <sys:String x:Key="LOC_SPG_ShowNotificationButtons">Mostrar os botões &quot;Descartar&quot; e &quot;Minimizar&quot;</sys:String>
     <sys:String x:Key="LOC_SPG_KeepInMemory">Manter o StartPage na memória ao mudar para outra exibição</sys:String>
@@ -85,14 +85,14 @@
     <sys:String x:Key="LOC_SPG_BackgroundAnimationDuration">Duração da animação:</sys:String>
     <sys:String x:Key="LOC_SPG_BackgroundRefreshInterval">Intervalo de Atualização(em minutos):</sys:String>
     <sys:String x:Key="LOC_SPG_SkipGamesInPreviousShelves">Pular Jogos presentes em prateleiras anteriores</sys:String>
-    <sys:String x:Key="LOC_SPG_SkipGamesInPreviousTimeframes">Skip Games present in preceding Timeframes</sys:String>
-    <sys:String x:Key="LOC_SPG_EnableTags">Create [SPG] tags on launch. Used to mark games as ignored.</sys:String>
+    <sys:String x:Key="LOC_SPG_SkipGamesInPreviousTimeframes">Pular Jogos presentes em prateleiras anteriores</sys:String>
+    <sys:String x:Key="LOC_SPG_EnableTags">Crie tags [SPG] ao lançar. Usado para marcar jogos como ignorados.</sys:String>
     <sys:String x:Key="LOC_SPG_FixGridHeight">Altura da grade fixa:</sys:String>
     <sys:String x:Key="LOC_SPG_FixGridHeight_Tooltip" xml:space="preserve">Se ativado, a altura da grade não está mais vinculada à altura da janela.
 Em vez disso, pode ser definida como um valor fixo. Se esse valor for maior do que a altura da janela, a visualização pode ser rolada.</sys:String>
     <sys:String x:Key="LOC_SPG_DownScaleCovers">Carregar imagens de capa com uma resolução inferior</sys:String>
-    <sys:String x:Key="LOC_SPG_DownScaleCoversTooltip" xml:space="preserve">If enabled, cover images are loaded into memory with a maximum width of (1.15 * Maximum Cover Width) pixels.
-This can lead to a much smaller memory footprint for StartPage. Will not affect covers already loaded before restarting Playnite.</sys:String>
+    <sys:String x:Key="LOC_SPG_DownScaleCoversTooltip" xml:space="preserve">Se ativado, as imagens de capa são carregadas na memória com uma largura máxima de (1,15 * largura máxima da capa) píxeis.
+Isso pode levar a um consumo de memória muito menor para o StartPage. Não afetará as capas já carregadas antes de reiniciar o Playnite.</sys:String>
     <sys:String x:Key="LOC_SPG_LockLayout">Bloquear Layout fora do modo de edição</sys:String>
     <sys:String x:Key="LOC_SPG_VideoVolume">Volume de vídeo</sys:String>
     <sys:String x:Key="LOC_SPG_ShowInstalledIndicator">Indicar se o jogo está instalado</sys:String>
@@ -136,6 +136,7 @@ This can lead to a much smaller memory footprint for StartPage. Will not affect 
     <sys:String x:Key="LOC_SPG_AlignmentCenter">Centralizar</sys:String>
     <sys:String x:Key="LOC_SPG_Padding">Preenchimento</sys:String>
     <sys:String x:Key="LOC_SPG_ShelvesHorizontalLabels">Etiquetas Horizontais</sys:String>
+    <sys:String x:Key="LOC_SPG_ShowViewLabel">Show Label</sys:String>
 
     <!-- Integrated Views -->
     <sys:String x:Key="LOC_SPG_ClockView">Relógio</sys:String>
