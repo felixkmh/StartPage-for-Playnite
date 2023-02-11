@@ -136,6 +136,7 @@
     <sys:String x:Key="LOC_SPG_AlignmentCenter">الوسط</sys:String>
     <sys:String x:Key="LOC_SPG_Padding">مساحة متروكة</sys:String>
     <sys:String x:Key="LOC_SPG_ShelvesHorizontalLabels">تسميات أفقية</sys:String>
+    <sys:String x:Key="LOC_SPG_ShowViewLabel">Show Label</sys:String>
 
     <!-- Integrated Views -->
     <sys:String x:Key="LOC_SPG_ClockView">الساعة</sys:String>
