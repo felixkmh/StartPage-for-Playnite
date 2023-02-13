@@ -16,6 +16,8 @@ namespace LandingPage.Models.Layout
         public Guid InstanceId { get => instanceId; set => SetValue(ref instanceId, value); }
         private Guid pluginId; 
         public Guid PluginId { get => pluginId ; set => SetValue(ref pluginId, value); }
+        private bool showLabel = false;
+        public bool ShowLabel { get => showLabel; set=> SetValue(ref showLabel, value); }
 
         [DontSerialize]
         internal object view = null;

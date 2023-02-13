@@ -29,8 +29,8 @@ namespace LandingPage.Models
                 {
                     if (game is Game && LandingPageExtension.Instance.PlayniteApi.Database.Games.Get(Game.Id) is Game)
                     {
-                        LandingPageExtension.Instance.PlayniteApi.MainView.SelectGame(Game.Id);
                         LandingPageExtension.Instance.PlayniteApi.MainView.SwitchToLibraryView();
+                        LandingPageExtension.Instance.PlayniteApi.MainView.SelectGame(Game.Id);
                     }
                 }
                 catch (Exception ex)

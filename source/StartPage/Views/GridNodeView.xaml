@@ -119,42 +119,52 @@
                 </Border.Style>
             </Border>
         </Border>
-        <ContentControl Content="{Binding View}" x:Name="ViewContentControl" SizeChanged="UserControl_SizeChanged">
-            <ContentControl.Style>
-                <Style TargetType="ContentControl">
-                    <Style.Triggers>
-                        <DataTrigger Binding="{Binding IsLeaf}" Value="{StaticResource True}">
-                            <Setter Property="VerticalAlignment" Value="{Binding GridNode.VerticalAlignment}"/>
-                            <Setter Property="HorizontalAlignment" Value="{Binding GridNode.HorizontalAlignment}"/>
-                            <Setter Property="Margin" Value="{Binding GridNode.Padding}"/>
-                            <Setter Property="Opacity" Value="0"/>
-                        </DataTrigger>
-                        <MultiDataTrigger>
-                            <MultiDataTrigger.Conditions>
-                                <Condition Binding="{Binding IsLeaf}" Value="{StaticResource True}"/>
-                                <Condition Binding="{Binding EditModeEnabled}" Value="{StaticResource True}"/>
-                            </MultiDataTrigger.Conditions>
-                            <MultiDataTrigger.Setters>
-                                <Setter Property="Opacity" Value="0.65"/>
-                            </MultiDataTrigger.Setters>
-                        </MultiDataTrigger>
-                        <MultiDataTrigger>
-                            <MultiDataTrigger.Conditions>
-                                <Condition Binding="{Binding IsLeaf}" Value="{StaticResource True}"/>
-                                <Condition Binding="{Binding IsLoading}" Value="False"/>
-                            </MultiDataTrigger.Conditions>
-                            <MultiDataTrigger.EnterActions>
-                                <BeginStoryboard>
-                                    <Storyboard>
-                                        <DoubleAnimation Storyboard.TargetProperty="Opacity" To="1" Duration="0:0:0.5"/>
-                                    </Storyboard>
-                                </BeginStoryboard>
-                            </MultiDataTrigger.EnterActions>
-                        </MultiDataTrigger>
-                    </Style.Triggers>
-                </Style>
-            </ContentControl.Style>
-        </ContentControl>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <TextBlock DockPanel.Dock="Top" Text="{Binding GridNode.ViewProperties.StartPageViewArgs.Name}" Margin="5 2 5 5" Style="{DynamicResource BaseTextBlockStyle}" FontWeight="Medium"
+                       Visibility="{Binding GridNode.ViewProperties.ShowLabel, Converter={StaticResource BooleanToVisibilityConverter}, FallbackValue={x:Static Visibility.Collapsed}}" Grid.Row="0"
+                       />
+            <ContentControl Content="{Binding View}" x:Name="ViewContentControl" SizeChanged="UserControl_SizeChanged" Grid.Row="1">
+                <ContentControl.Style>
+                    <Style TargetType="ContentControl">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding IsLeaf}" Value="{StaticResource True}">
+                                <Setter Property="VerticalAlignment" Value="{Binding GridNode.VerticalAlignment}"/>
+                                <Setter Property="HorizontalAlignment" Value="{Binding GridNode.HorizontalAlignment}"/>
+                                <Setter Property="Margin" Value="{Binding GridNode.Padding}"/>
+                                <Setter Property="Opacity" Value="0"/>
+                            </DataTrigger>
+                            <MultiDataTrigger>
+                                <MultiDataTrigger.Conditions>
+                                    <Condition Binding="{Binding IsLeaf}" Value="{StaticResource True}"/>
+                                    <Condition Binding="{Binding EditModeEnabled}" Value="{StaticResource True}"/>
+                                </MultiDataTrigger.Conditions>
+                                <MultiDataTrigger.Setters>
+                                    <Setter Property="Opacity" Value="0.65"/>
+                                </MultiDataTrigger.Setters>
+                            </MultiDataTrigger>
+                            <MultiDataTrigger>
+                                <MultiDataTrigger.Conditions>
+                                    <Condition Binding="{Binding IsLeaf}" Value="{StaticResource True}"/>
+                                    <Condition Binding="{Binding IsLoading}" Value="False"/>
+                                </MultiDataTrigger.Conditions>
+                                <MultiDataTrigger.EnterActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation Storyboard.TargetProperty="Opacity" To="1" Duration="0:0:0.5"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </MultiDataTrigger.EnterActions>
+                            </MultiDataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </ContentControl.Style>
+            </ContentControl>
+        </Grid>
+        
         <Grid Visibility="{Binding IsLeaf, Converter={StaticResource BooleanToVisibilityConverter}}">
             <Border x:Name="EditPanel" CornerRadius="0" Margin="0" Background="Transparent" Visibility="{Binding EditModeEnabled, Converter={StaticResource BooleanToVisibilityConverter}}"
                     Opacity="1"
@@ -165,6 +175,18 @@
                     Cursor="SizeAll">
                 <Border.ContextMenu>
                     <ContextMenu>
+                        <MenuItem>
+                            <MenuItem.Header>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Text="{DynamicResource LOC_SPG_ShowViewLabel}" Grid.Column="0"/>
+                                    <CheckBox IsChecked="{Binding GridNode.ViewProperties.ShowLabel}" Grid.Column="1" Margin="5 0"/>
+                                </Grid>
+                            </MenuItem.Header>
+                        </MenuItem>
                         <MenuItem Header="{DynamicResource LOC_SPG_SplitHorizonatlly}" Command="{Binding SplitHorizontallyCommand}"/>
                         <MenuItem Header="{DynamicResource LOC_SPG_SplitVertically}" Command="{Binding SplitVerticallyCommand}"/>
                         <Separator/>
