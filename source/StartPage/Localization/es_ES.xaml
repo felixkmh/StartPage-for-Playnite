@@ -136,7 +136,7 @@ Esto puede llevar a una huella de memoria mucho menor para StartPage. No afectar
     <sys:String x:Key="LOC_SPG_AlignmentCenter">Centro</sys:String>
     <sys:String x:Key="LOC_SPG_Padding">Margen interior</sys:String>
     <sys:String x:Key="LOC_SPG_ShelvesHorizontalLabels">Etiquetas horizontales</sys:String>
-    <sys:String x:Key="LOC_SPG_ShowViewLabel">Show Label</sys:String>
+    <sys:String x:Key="LOC_SPG_ShowViewLabel">Mostrar etiqueta</sys:String>
 
     <!-- Integrated Views -->
     <sys:String x:Key="LOC_SPG_ClockView">Reloj</sys:String>
