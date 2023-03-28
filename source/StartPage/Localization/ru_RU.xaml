@@ -9,25 +9,25 @@
     <sys:String x:Key="LOC_SPG_DailyPlaytime">Ежедневное игровое время</sys:String>
     <sys:String x:Key="LOC_SPG_WeeklyPlaytime">Еженедельное игровое время</sys:String>
     <sys:String x:Key="LOC_SPG_MonthlyPlaytime">Ежемесячное время игры</sys:String>
-    <sys:String x:Key="LOC_SPG_PlaytimePerSource">Playtime per Source</sys:String>
-    <sys:String x:Key="LOC_SPG_MostPlayedWeekly">Most Played this Week</sys:String>
+    <sys:String x:Key="LOC_SPG_PlaytimePerSource">Время игры по источнику</sys:String>
+    <sys:String x:Key="LOC_SPG_MostPlayedWeekly">Самые играемые на этой неделе</sys:String>
     <sys:String x:Key="LOC_SPG_TotalPlaytime" xml:space="preserve">Всего: </sys:String>
     <sys:String x:Key="LOC_SPG_LastSevenDays">За последние 7 дней</sys:String>
     <sys:String x:Key="LOC_SPG_LastThirtyDays">За последние 30 дней</sys:String>
-    <sys:String x:Key="LOC_SPG_TimeframeNone">None</sys:String>
+    <sys:String x:Key="LOC_SPG_TimeframeNone">Нет</sys:String>
 
-    <sys:String x:Key="LOC_SPG_SetGameAsBackground">Set as StartPage background</sys:String>
+    <sys:String x:Key="LOC_SPG_SetGameAsBackground">Установить в качестве фона стартовой страницы</sys:String>
 
     <!-- Timeframes -->
     <sys:String x:Key="LOC_SPG_TimeframeLastDay">Последние 24 часа</sys:String>
     <sys:String x:Key="LOC_SPG_TimeframeLast7Days">За прошлую неделю</sys:String>
     <sys:String x:Key="LOC_SPG_TimeframeLast14Days">За последние 2 недели</sys:String>
     <sys:String x:Key="LOC_SPG_TimeframeLast21Days">За последние 3 недели</sys:String>
-    <sys:String x:Key="LOC_SPG_TimeframeLastMonth">Last Month</sys:String>
-    <sys:String x:Key="LOC_SPG_TimeframeLast3Months">Last 3 Months</sys:String>
-    <sys:String x:Key="LOC_SPG_TimeframeLast6Months">Last 6 Months</sys:String>
-    <sys:String x:Key="LOC_SPG_TimeframeLastYear">Last Year</sys:String>
-    <sys:String x:Key="LOC_SPG_TimeframeLast5Years">Last 5 Years</sys:String>
+    <sys:String x:Key="LOC_SPG_TimeframeLastMonth">Последний месяц</sys:String>
+    <sys:String x:Key="LOC_SPG_TimeframeLast3Months">Последние 3 месяца</sys:String>
+    <sys:String x:Key="LOC_SPG_TimeframeLast6Months">Последние 6 месяца</sys:String>
+    <sys:String x:Key="LOC_SPG_TimeframeLastYear">Последний год</sys:String>
+    <sys:String x:Key="LOC_SPG_TimeframeLast5Years">Последние 5 лет</sys:String>
     <sys:String x:Key="LOC_SPG_TimeframeAllTime">За все время</sys:String>
 
     <!--Settings Tabs-->
@@ -35,12 +35,12 @@
     <sys:String x:Key="LOC_SPG_BackgroundTab">Фон</sys:String>
     
     <!--BackgroundImageSource Enum-->
-    <sys:String x:Key="LOC_SPG_BackgroundImageSourceLastPlayed">Last Played</sys:String>
-    <sys:String x:Key="LOC_SPG_BackgroundImageSourceLastAdded">Last Added</sys:String>
+    <sys:String x:Key="LOC_SPG_BackgroundImageSourceLastPlayed">Последняя игра</sys:String>
+    <sys:String x:Key="LOC_SPG_BackgroundImageSourceLastAdded">Недавно добавленные</sys:String>
     <sys:String x:Key="LOC_SPG_BackgroundImageSourceMostPlayed">Самая популярная</sys:String>
     <sys:String x:Key="LOC_SPG_BackgroundImageSourceRandom">Случайный</sys:String>
     <sys:String x:Key="LOC_SPG_BackgroundImageSourceLastSelected">Последние выбранные</sys:String>
-    <sys:String x:Key="LOC_SPG_BackgroundImageSourceLastHovered">Last Hovered</sys:String>
+    <sys:String x:Key="LOC_SPG_BackgroundImageSourceLastHovered">Последнее нажатие</sys:String>
 
     <!-- Settings -->
     <sys:String x:Key="LOC_SPG_ShowGameActivity">Показать данные GameActivity</sys:String>
@@ -48,18 +48,18 @@
     <sys:String x:Key="LOC_SPG_NextRandomBackground">Следующий случайный фон</sys:String>
     <sys:String x:Key="LOC_SPG_ShowFavorites">Показать любимые игры</sys:String>
     <sys:String x:Key="LOC_SPG_ShowClock">Показать часы</sys:String>
-    <sys:String x:Key="LOC_SPG_ShowRecentlyPlayed">Show Recently Played Games</sys:String>
-    <sys:String x:Key="LOC_SPG_ShowRecentAchievements">Show recent Achievements using SuccessStory</sys:String>
-    <sys:String x:Key="LOC_SPG_ShowRecentlyAdded">Show Recently Added Games</sys:String>
-    <sys:String x:Key="LOC_SPG_StartupItem">(Unsupported) SidebarItem activated on Launch</sys:String>
-    <sys:String x:Key="LOC_SPG_MaxRecentAchievements">Maximum number of recent Achievements:</sys:String>
-    <sys:String x:Key="LOC_SPG_MaxRecentAchievementsPerGame">Maximum number of recent Achievements per Game:</sys:String>
+    <sys:String x:Key="LOC_SPG_ShowRecentlyPlayed">Показать недавно сыгранные игры</sys:String>
+    <sys:String x:Key="LOC_SPG_ShowRecentAchievements">Показать последние достижения с помощью SuccessStory</sys:String>
+    <sys:String x:Key="LOC_SPG_ShowRecentlyAdded">Показать недавно добавленные игры</sys:String>
+    <sys:String x:Key="LOC_SPG_StartupItem">(Не поддерживается) SidebarItem активируется при запуске</sys:String>
+    <sys:String x:Key="LOC_SPG_MaxRecentAchievements">Максимальное количество последних достижений:</sys:String>
+    <sys:String x:Key="LOC_SPG_MaxRecentAchievementsPerGame">Максимальное количество недавних достижений за игру:</sys:String>
     <sys:String x:Key="LOC_SPG_ShowTitelOnCover">Показать название на обложке игры</sys:String>
-    <sys:String x:Key="LOC_SPG_ShowGameDetails">Show Game Details</sys:String>
-    <sys:String x:Key="LOC_SPG_EnableNotifications">Enable Notifications</sys:String>
-    <sys:String x:Key="LOC_SPG_EnableGlobalBackground">Enable Global Background</sys:String>
-    <sys:String x:Key="LOC_SPG_GlobalBackgroundOpacity">Global Background Opacity</sys:String>
-    <sys:String x:Key="LOC_SPG_MinimizeNotification">Minimize Notifications on Launch</sys:String>
+    <sys:String x:Key="LOC_SPG_ShowGameDetails">Показать подробности игры</sys:String>
+    <sys:String x:Key="LOC_SPG_EnableNotifications">Включить уведомления</sys:String>
+    <sys:String x:Key="LOC_SPG_EnableGlobalBackground">Включить фон</sys:String>
+    <sys:String x:Key="LOC_SPG_GlobalBackgroundOpacity">Прозрачность фона</sys:String>
+    <sys:String x:Key="LOC_SPG_MinimizeNotification">Свернуть уведомления при запуске</sys:String>
     <sys:String x:Key="LOC_SPG_ShowNotificationButtons">Show &quot;Discard&quot; and &quot;Minimize&quot; Buttons</sys:String>
     <sys:String x:Key="LOC_SPG_KeepInMemory">Keep StartPage in Memory when switching to another View</sys:String>
     <sys:String x:Key="LOC_SPG_MoveIconToTop">(Не поддерживается) Переместить элемент StartPage в верхнюю часть боковой панели при запуске</sys:String>
