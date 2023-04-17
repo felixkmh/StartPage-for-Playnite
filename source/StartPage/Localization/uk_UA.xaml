@@ -136,7 +136,7 @@
     <sys:String x:Key="LOC_SPG_AlignmentCenter">По центру</sys:String>
     <sys:String x:Key="LOC_SPG_Padding">Відступ</sys:String>
     <sys:String x:Key="LOC_SPG_ShelvesHorizontalLabels">Горизонтальні мітки</sys:String>
-    <sys:String x:Key="LOC_SPG_ShowViewLabel">Show Label</sys:String>
+    <sys:String x:Key="LOC_SPG_ShowViewLabel">Показувати підпис</sys:String>
 
     <!-- Integrated Views -->
     <sys:String x:Key="LOC_SPG_ClockView">Годинник</sys:String>
