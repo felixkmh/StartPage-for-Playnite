@@ -191,7 +191,7 @@ namespace LandingPage.ViewModels
         {
             IsLoading = true;
             IsInitializing = true;
-            await BackgroundViewModel.UpdateBackgroundImagePathAsync(Settings.Settings.BackgroundRefreshInterval != 0);
+            // await BackgroundViewModel.UpdateBackgroundImagePathAsync(Settings.Settings.BackgroundRefreshInterval != 0);
             await RootNodeViewModel.InititalizeGrid();
             await Task.Delay(500);
             await InitializeAndOpenViews();

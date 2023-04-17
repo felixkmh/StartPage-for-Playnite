@@ -41,6 +41,11 @@ namespace LandingPage.ViewModels
             Settings.Settings.PropertyChanged += Settings_PropertyChanged;
             Settings.PropertyChanged += Settings_PropertyChanged1;
 
+            if (playniteAPI.MainView.SelectedGames.FirstOrDefault() is Game last)
+            {
+                lastSelectedGame = last;
+            }
+
             UpdateBackgroundTimer();
 
             _ = UpdateBackgroundImagePathAsync(Settings.Settings.BackgroundRefreshInterval != 0);
