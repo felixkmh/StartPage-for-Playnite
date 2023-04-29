@@ -1,5 +1,13 @@
 AddonId: felixkmh_StartPage_Plugin
 Packages:  
+  - Version: 2.12.1
+    RequiredApiVersion: 6.1.0
+    ReleaseDate: 2023-04-29
+    PackageUrl: https://github.com/felixkmh/StartPage-for-Playnite/releases/download/v2.12.1/felixkmh_StartPage_Plugin_2_12_1.pext
+    Changelog:
+      - Added option to show view labels
+      - Fixed background not being set correctly on launch if set to Last Selected
+      - Localization updates
   - Version: 2.12.0
     RequiredApiVersion: 6.1.0
     ReleaseDate: 2022-12-21
