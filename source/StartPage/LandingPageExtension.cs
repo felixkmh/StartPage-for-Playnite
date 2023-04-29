@@ -7,26 +7,19 @@ using Playnite.SDK.Plugins;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Automation.Peers;
-using System.Windows.Automation.Provider;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.IO;
-using System.Runtime.CompilerServices;
 using LandingPage.Models;
 using StartPage.SDK;
 using LandingPage.Models.Layout;
 using LandingPage.ViewModels.Layout;
-using System.Diagnostics;
 using LandingPage.ViewModels.GameActivity;
 using Newtonsoft.Json;
 using PlayniteCommon.UI;
-using StartPage.SDK.Async;
-using System.Windows.Diagnostics;
 using System.Windows.Data;
 
 namespace LandingPage

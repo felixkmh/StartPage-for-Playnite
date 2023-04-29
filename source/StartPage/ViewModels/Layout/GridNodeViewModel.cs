@@ -19,6 +19,7 @@ using PlayniteCommon.Models;
 using StartPage.SDK.Async;
 using LandingPage.Models.Objects;
 using System.Xml.Linq;
+using Playnite.SDK.Models;
 
 namespace LandingPage.ViewModels.Layout
 {
@@ -524,9 +525,19 @@ namespace LandingPage.ViewModels.Layout
                                         IsLoading = true;
                                         viewProperties.StartPageViewArgs = args;
                                         FrameworkElement view = null;
-                                        if (extension.GetStartPageView(viewProperties.ViewId, viewProperties.InstanceId) is FrameworkElement control2)
+                                        if (extension.GetStartPageView(viewProperties.ViewId, viewProperties.InstanceId) is object viewObject)
                                         {
-                                            view = control2;
+                                            if (viewObject is FrameworkElement control2)
+                                            {
+                                                view = control2;
+                                            } else if (viewObject is IEnumerable<Game> gameView)
+                                            {
+                                                view = new ShelvesView()
+                                                {
+                                                    DataContext = new ShelvesViewModel(API.Instance, LandingPageExtension.Instance, LandingPageExtension.Instance.SettingsViewModel, viewProperties.InstanceId)
+                                                };
+                                            }
+                                            
                                         }
                                         if (view is FrameworkElement)
                                         {

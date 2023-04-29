@@ -33,6 +33,9 @@ namespace LandingPage.ViewModels
         public ICommand MoveShelveUpCommand { get; set; }
         public ICommand MoveShelveDownCommand { get; set;}
 
+        private bool showDetails;
+        public bool ShowDetails { get => showDetails; set => SetValue(ref showDetails, value); }
+
         public Game LastSelectedGame { get => plugin.startPageViewModel.BackgroundViewModel.LastSelectedGame; set => plugin.startPageViewModel.BackgroundViewModel.LastSelectedGame = value; }
 
         public Game LastHoveredGame { get => plugin.startPageViewModel.BackgroundViewModel.LastHoveredGame; set => plugin.startPageViewModel.BackgroundViewModel.LastHoveredGame = value; }
@@ -49,6 +52,9 @@ namespace LandingPage.ViewModels
             }
         }
 
+        private FrameworkElement popupTarget;
+        public FrameworkElement PopupTarget { get => popupTarget; set => SetValue(ref popupTarget, value); }
+
         internal IPlayniteAPI playniteAPI;
         internal LandingPageExtension plugin;
 
@@ -61,6 +67,8 @@ namespace LandingPage.ViewModels
         public Guid InstanceId { get => instanceId; set => SetValue(ref instanceId, value); }
 
         private LandingPage.Settings.ShelvesSettings shelves;
+        
+
         public LandingPage.Settings.ShelvesSettings Shelves { get => shelves; set => SetValue(ref shelves, value); }
 
         public ShelvesViewModel(
@@ -98,12 +106,12 @@ namespace LandingPage.ViewModels
 
             foreach (var shelveProperties in Shelves.ShelveProperties)
             {
-                ShelveViewModels.Add(new ShelveViewModel(shelveProperties, Shelves, playniteAPI, ShelveViewModels));
+                ShelveViewModels.Add(new ShelveViewModel(shelveProperties, Shelves, playniteAPI, ShelveViewModels) { ParentViewModel = this });
             }
 
             AddShelveCommand = new RelayCommand(async () =>
             {
-                ShelveViewModel item = new ShelveViewModel(ShelveProperties.RecentlyPlayed, Shelves, playniteAPI, ShelveViewModels);
+                ShelveViewModel item = new ShelveViewModel(ShelveProperties.RecentlyPlayed, Shelves, playniteAPI, ShelveViewModels) { ParentViewModel = this };
                 Shelves.ShelveProperties.Add(item.ShelveProperties);
                 ShelveViewModels.Add(item);
                 await UpdateShelvesAsync();
@@ -128,7 +136,7 @@ namespace LandingPage.ViewModels
                     var properties = svm.ShelveProperties.Copy();
                     properties.SkippedGames = svm.ShelveProperties.NumberOfGames + svm.ShelveProperties.SkippedGames;
                     properties.Name = string.Empty;
-                    ShelveViewModel item = new ShelveViewModel(properties, Shelves, playniteAPI, ShelveViewModels);
+                    ShelveViewModel item = new ShelveViewModel(properties, Shelves, playniteAPI, ShelveViewModels) { ParentViewModel = this };
                     Shelves.ShelveProperties.Insert(idx + 1, item.ShelveProperties);
                     ShelveViewModels.Insert(idx + 1, item);
                     await UpdateShelvesAsync();

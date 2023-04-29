@@ -34,11 +34,16 @@ namespace LandingPage.ViewModels
         private ObservableCollection<GameModel> games = new ObservableCollection<GameModel>();
         public ObservableCollection<GameModel> Games { get => games; set => SetValue(ref games, value); }
 
+        private ShelvesViewModel parentViewModel;
+        public ShelvesViewModel ParentViewModel { get => parentViewModel; set => SetValue(ref parentViewModel, value); }
+
         private ICommand resetFiltersCommand;
         public ICommand ResetFiltersCommand { get => resetFiltersCommand; set => SetValue(ref resetFiltersCommand, value); }
 
         private ICommand manualUpdateCommand;
         public ICommand ManualUpdateCommand { get => manualUpdateCommand; set => SetValue(ref manualUpdateCommand, value); }
+
+        private ICommand ToggleSortDirectionCommand { get; } 
 
         private ObservableCollection<ShelveViewModel> viewModels;
         public static readonly Game DummyGame = new Game() { CoverImage = LandingPageExtension.Instance.PlaceholderCoverPath, Name = "" };
@@ -79,6 +84,18 @@ namespace LandingPage.ViewModels
             });
             // FillWithPlaceholders(shelveProperties);
             manualUpdateCommand = new RelayCommand(async () => await UpdateGamesAsync(ShelveProperties, true));
+
+            ToggleSortDirectionCommand = new RelayCommand(() =>
+            {
+                if (ShelveProperties.Order == Order.Ascending)
+                {
+                    ShelveProperties.Order = Order.Descending;
+                }
+                else
+                {
+                    ShelveProperties.Order = Order.Ascending;
+                }
+            }, () => ShelveProperties != null);
         }
 
         private async void ShelveViewModel_PropertyChangedAsync(object sender, System.ComponentModel.PropertyChangedEventArgs e)

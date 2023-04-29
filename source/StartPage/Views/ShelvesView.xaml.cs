@@ -28,7 +28,22 @@ namespace LandingPage.Views
         public ShelvesView()
         {
             InitializeComponent();
+
+            infoPopup = new GameDetailsPopup();
+            infoPopup.SetBinding(Popup.IsOpenProperty, new Binding(nameof(ShowDetails)) { Source = this });
         }
+
+        public bool ShowDetails
+        {
+            get { return (bool)GetValue(ShowDetailsProperty); }
+            set { SetValue(ShowDetailsProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for ShowDetails.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty ShowDetailsProperty =
+            DependencyProperty.Register(nameof(ShowDetails), typeof(bool), typeof(ShelvesView), new PropertyMetadata(false));
+
+
 
         private static DispatcherTimer dispatcherTimer = null;
 
@@ -96,59 +111,6 @@ namespace LandingPage.Views
             }
         }
 
-        public void UserControl_SizeChanged(object sender, SizeChangedEventArgs e)
-        {
-            UpdateWidth(sender, e);
-        }
-
-        private void UpdateWidth(object sender, SizeChangedEventArgs e)
-        {
-            if (e.HeightChanged || e.WidthChanged)
-            {
-                _ = Dispatcher.BeginInvoke(new Action(() =>
-                {
-                    var newWidth = ActualWidth;
-                    var listBoxes = ShelvesItemsControl.ItemContainerGenerator.Items
-                    .Select(item => ShelvesItemsControl.ItemContainerGenerator.ContainerFromItem(item))
-                    .OfType<ContentPresenter>()
-                    .Select(ele => ele.ContentTemplate.FindName("GamesListBox", ele))
-                    .OfType<ListBox>();
-                    foreach (var listBox in sender is ListBox lb ? new[] { lb } : listBoxes)
-                    {
-                        var itemCount = listBox.ItemsSource?.Cast<object>().Count() ?? 0;
-                        if (listBox.IsVisible && itemCount > 0)
-                        {
-                            FrameworkElement container = null;
-                            for (int i = 0; i < itemCount; ++i)
-                            {
-                                if (listBox.ItemContainerGenerator.ContainerFromIndex(i) is FrameworkElement element)
-                                {
-                                    container = element;
-                                    break;
-                                }
-                            }
-                            var desiredWidth = listBox.DesiredSize.Width;
-                            var itemWidth = container.ActualWidth + container.Margin.Left + container.Margin.Right;
-                            var scrollViewer = UiHelper.FindVisualChildren<ScrollViewer>(listBox).FirstOrDefault();
-                            // itemWidth = desiredWidth / itemCount;
-                            var availableWidth = newWidth - 60;
-                            FrameworkElement panel = VisualTreeHelper.GetParent(this) as FrameworkElement;
-                            while (!(panel is GridNodeView))
-                            {
-                                panel = VisualTreeHelper.GetParent(panel) as FrameworkElement;
-                            }
-                            availableWidth = panel.ActualWidth - 60;
-                            var newListWidth = Math.Floor(availableWidth / Math.Max(itemWidth, 1)) * itemWidth;
-                            if (listBox.MaxWidth != newListWidth)
-                            {
-                                listBox.MaxWidth = Math.Max(0, newListWidth);
-                            }
-                        }
-                    }
-                }), System.Windows.Threading.DispatcherPriority.Background);
-            }
-        }
-
         static readonly Random rng = new Random();
 
         private void Description_Closed(object sender, EventArgs e)
@@ -177,7 +139,7 @@ namespace LandingPage.Views
             }
         }
 
-        GameDetailsPopup infoPopup = new GameDetailsPopup();
+        internal GameDetailsPopup infoPopup;
 
         private void StackPanel_MouseEnter(object sender, MouseEventArgs e)
         {

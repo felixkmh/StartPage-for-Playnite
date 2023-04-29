@@ -47,6 +47,29 @@
             <Setter Property="BorderThickness" Value="0"/>
             <Setter Property="Padding" Value="0"/>
         </Style>
+
+        <Style TargetType="Button" x:Key="CoverButtonStyle">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Margin="{TemplateBinding Padding}">
+                            <ContentPresenter
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        RecognizesAccessKey="True" />
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Foreground" Value="{DynamicResource GlyphBrush}"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Foreground" Value="{DynamicResource TextBrush}"/>
+                    <Setter Property="Background" Value="Transparent"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
         <DataTemplate x:Key="GameDataTemplate" DataType="{x:Type lpm:GameGroup}">
             <GroupBox Header="{Binding Label}" Style="{DynamicResource GameGroupBox}">
                 <ListBox ItemsSource="{Binding Games}" ItemContainerStyle="{DynamicResource GameListItem}"
@@ -163,31 +186,11 @@
                                Visibility="Hidden"/>
                     <Viewbox x:Name="Buttons" Visibility="Hidden">
                         <StackPanel Orientation="Horizontal" Margin="1">
-                            <Button Background="Transparent" Padding="7,5,4,5" x:Name="PlayButton" Click="PlayButton_Click" BorderThickness="0">
+                            <Button Background="Transparent" Padding="7,5,4,5" x:Name="PlayButton" Click="PlayButton_Click" BorderThickness="0" Style="{StaticResource CoverButtonStyle}">
                                 <TextBlock Text="" FontFamily="{StaticResource FontIcoFont}" x:Name="PlayIcon"/>
-                                <Button.Style>
-                                    <Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
-                                        <Setter Property="Foreground" Value="{DynamicResource GlyphBrush}"/>
-                                        <Style.Triggers>
-                                            <Trigger Property="IsMouseOver" Value="True">
-                                                <Setter Property="Foreground" Value="{DynamicResource TextBrush}"/>
-                                            </Trigger>
-                                        </Style.Triggers>
-                                    </Style>
-                                </Button.Style>
                             </Button>
-                            <Button Background="Transparent"  Padding="4,5,7,5" x:Name="InfoButton" Click="InfoButton_Click" BorderThickness="0">
+                            <Button Background="Transparent"  Padding="4,5,7,5" x:Name="InfoButton" Click="InfoButton_Click" BorderThickness="0" Style="{StaticResource CoverButtonStyle}">
                                 <TextBlock Text="" FontFamily="{StaticResource FontIcoFont}"/>
-                                <Button.Style>
-                                    <Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
-                                        <Setter Property="Foreground" Value="{DynamicResource GlyphBrush}"/>
-                                        <Style.Triggers>
-                                            <Trigger Property="IsMouseOver" Value="True">
-                                                <Setter Property="Foreground" Value="{DynamicResource TextBrush}"/>
-                                            </Trigger>
-                                        </Style.Triggers>
-                                    </Style>
-                                </Button.Style>
                             </Button>
                         </StackPanel>
                     </Viewbox>
