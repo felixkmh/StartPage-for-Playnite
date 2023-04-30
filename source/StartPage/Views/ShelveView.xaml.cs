@@ -144,7 +144,7 @@ namespace LandingPage.Views
 
                     viewModel.ParentViewModel.CurrentlyHoveredGame = model.Game;
                     viewModel.ParentViewModel.CurrentlyHoveredGameModel = model;
-                    viewModel.ParentViewModel.ShowDetails = true;
+                    viewModel.ParentViewModel.ShowDetails = viewModel.ShelveSettings.ShowDetails;
                 }
             }
         }

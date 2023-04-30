@@ -92,7 +92,7 @@ namespace LandingPage.Views
         {
             if (sender is Button bt && bt.DataContext is GameModel game)
             {
-                infoPopup.Dispatcher.Invoke(() => {
+                Dispatcher.Invoke(() => {
                     ShowDetails = false;
                 }, System.Windows.Threading.DispatcherPriority.Normal);
 
@@ -104,7 +104,7 @@ namespace LandingPage.Views
         {
             if (sender is Button bt && bt.DataContext is GameModel game)
             {
-                infoPopup.Dispatcher.Invoke(() => {
+                Dispatcher.Invoke(() => {
                     ShowDetails = false;
                 }, System.Windows.Threading.DispatcherPriority.Normal);
                 game.OpenCommand?.Execute(null);
@@ -138,8 +138,6 @@ namespace LandingPage.Views
                 }
             }
         }
-
-        internal GameDetailsPopup infoPopup;
 
         //private void StackPanel_MouseEnter(object sender, MouseEventArgs e)
         //{
