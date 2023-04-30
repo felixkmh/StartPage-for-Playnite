@@ -19,6 +19,7 @@
              d:DesignHeight="450" d:DesignWidth="800"
              d:DataContext="{d:DesignInstance IsDesignTimeCreatable=False, Type=lpvm:ShelvesViewModel}"
              Background="Transparent"
+             x:Name="Shelves"
              >
     <UserControl.Resources>
         <system:Boolean x:Key="False">False</system:Boolean>
@@ -85,7 +86,7 @@
         </Style>
 
         <DataTemplate x:Key="GameCoverDataTemplate" DataType="{x:Type lpm:GameModel}">
-            <StackPanel Orientation="Horizontal" MouseEnter="StackPanel_MouseEnter" MouseLeave="StackPanel_MouseLeave">
+            <StackPanel Orientation="Horizontal">
                 <Grid>
                     <Grid ClipToBounds="True"
                           MaxWidth="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ListBox}, Path=DataContext.ShelveSettings.MaxCoverWidth}" 
@@ -368,6 +369,7 @@
         </Style>
     </UserControl.Resources>
     <Grid>
+        <local:GameDetailsPopup IsOpen="{Binding ElementName=Shelves, Path=DataContext.ShowDetails}" PlacementTarget="{Binding ElementName=Shelves, Path=DataContext.PopupTarget}" DataContext="{Binding CurrentlyHoveredGameModel}"/>
         <Button HorizontalAlignment="Center" VerticalAlignment="Center" Command="{Binding AddShelveCommand}" Content="{DynamicResource LOC_SPG_AddShelve}"
                     Visibility="{Binding ElementName=ShelvesItemsControl, Path=IsVisible, Converter={StaticResource InvertedBooleanToVisibilityConverter}}"/>
         <Grid Background="Transparent" VerticalAlignment="Bottom">

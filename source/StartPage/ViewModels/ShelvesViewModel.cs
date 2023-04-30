@@ -52,6 +52,13 @@ namespace LandingPage.ViewModels
             }
         }
 
+        private GameModel _currentlyHoveredModel;
+        public GameModel CurrentlyHoveredGameModel
+        {
+            get => _currentlyHoveredModel;
+            set => SetValue(ref _currentlyHoveredModel, value);
+        }
+
         private FrameworkElement popupTarget;
         public FrameworkElement PopupTarget { get => popupTarget; set => SetValue(ref popupTarget, value); }
 

@@ -2,26 +2,17 @@
 using Playnite.SDK.Controls;
 using Playnite.SDK.Plugins;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using System.Windows.Controls.Primitives;
 
 namespace LandingPage.Views
 {
     /// <summary>
     /// Interaktionslogik für GameDetailsPopup.xaml
     /// </summary>
-    public partial class GameDetailsPopup : UserControl
+    public partial class GameDetailsPopup : Popup
     {
         public MediaElement Player { get; private set; }
 
@@ -57,7 +48,6 @@ namespace LandingPage.Views
 
         private void Description_Closed(object sender, EventArgs e)
         {
-            Description.PlacementTarget = null;
             if (rng.NextDouble() <= 0.25)
             {
                 GC.Collect();

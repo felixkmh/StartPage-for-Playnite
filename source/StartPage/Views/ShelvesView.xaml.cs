@@ -28,15 +28,15 @@ namespace LandingPage.Views
         public ShelvesView()
         {
             InitializeComponent();
-
-            infoPopup = new GameDetailsPopup();
-            infoPopup.SetBinding(Popup.IsOpenProperty, new Binding(nameof(ShowDetails)) { Source = this });
         }
 
         public bool ShowDetails
         {
             get { return (bool)GetValue(ShowDetailsProperty); }
-            set { SetValue(ShowDetailsProperty, value); }
+            set 
+            { 
+                SetValue(ShowDetailsProperty, value);
+            }
         }
 
         // Using a DependencyProperty as the backing store for ShowDetails.  This enables animation, styling, binding, etc...
@@ -93,7 +93,7 @@ namespace LandingPage.Views
             if (sender is Button bt && bt.DataContext is GameModel game)
             {
                 infoPopup.Dispatcher.Invoke(() => {
-                    infoPopup.Description.IsOpen = false;
+                    ShowDetails = false;
                 }, System.Windows.Threading.DispatcherPriority.Normal);
 
                 game.StartCommand?.Execute(null);
@@ -105,7 +105,7 @@ namespace LandingPage.Views
             if (sender is Button bt && bt.DataContext is GameModel game)
             {
                 infoPopup.Dispatcher.Invoke(() => {
-                    infoPopup.Description.IsOpen = false;
+                    ShowDetails = false;
                 }, System.Windows.Threading.DispatcherPriority.Normal);
                 game.OpenCommand?.Execute(null);
             }
@@ -141,55 +141,55 @@ namespace LandingPage.Views
 
         internal GameDetailsPopup infoPopup;
 
-        private void StackPanel_MouseEnter(object sender, MouseEventArgs e)
-        {
-            if (sender is FrameworkElement element && element.DataContext is GameModel model && model.Game != ShelveViewModel.DummyGame)
-            {
-                if (DataContext is ShelvesViewModel shelvesViewModel && shelvesViewModel.Shelves.ShowDetails)
-                {
-                    if (UiHelper.FindVisualChildren<Grid>(element, "ImageGrid").FirstOrDefault() is Grid imageGrid)
-                    {
-                        infoPopup.Dispatcher.Invoke(() => {
-                            infoPopup.DataContext = element.DataContext;
-                            infoPopup.Description.PlacementTarget = imageGrid;
-                            infoPopup.Description.IsOpen = true;
-                            if (infoPopup.Player != null)
-                            {
-                                infoPopup.Player.IsMuted = shelvesViewModel.Shelves.TrailerVolume <= 0.0;
-                                infoPopup.Player.Volume = shelvesViewModel.Shelves.TrailerVolume;
-                            }
-                        }, System.Windows.Threading.DispatcherPriority.Normal);
-                    }
-                }
+        //private void StackPanel_MouseEnter(object sender, MouseEventArgs e)
+        //{
+        //    if (sender is FrameworkElement element && element.DataContext is GameModel model && model.Game != ShelveViewModel.DummyGame)
+        //    {
+        //        if (DataContext is ShelvesViewModel shelvesViewModel && shelvesViewModel.Shelves.ShowDetails)
+        //        {
+        //            if (UiHelper.FindVisualChildren<Grid>(element, "ImageGrid").FirstOrDefault() is Grid imageGrid)
+        //            {
+        //                infoPopup.Dispatcher.Invoke(() => {
+        //                    infoPopup.DataContext = element.DataContext;
+        //                    infoPopup.Description.PlacementTarget = imageGrid;
+        //                    infoPopup.Description.IsOpen = true;
+        //                    if (infoPopup.Player != null)
+        //                    {
+        //                        infoPopup.Player.IsMuted = shelvesViewModel.Shelves.TrailerVolume <= 0.0;
+        //                        infoPopup.Player.Volume = shelvesViewModel.Shelves.TrailerVolume;
+        //                    }
+        //                }, System.Windows.Threading.DispatcherPriority.Normal);
+        //            }
+        //        }
 
-                if (DataContext is ShelvesViewModel viewModel)
-                {
-                    viewModel.CurrentlyHoveredGame = model.Game;
-                }
-            }
-        }
+        //        if (DataContext is ShelvesViewModel viewModel)
+        //        {
+        //            viewModel.CurrentlyHoveredGame = model.Game;
+        //        }
+        //    }
+        //}
 
-        private void StackPanel_MouseLeave(object sender, MouseEventArgs e)
-        {
-            if (sender is FrameworkElement element && element.DataContext is GameModel model)
-            {
-                if (UiHelper.FindVisualChildren<Grid>(element, "ImageGrid").FirstOrDefault() is Grid imageGrid)
-                {
-                    infoPopup.Dispatcher.Invoke(() => {
-                        if (infoPopup.Player != null)
-                        {
-                            infoPopup.Player.Volume = 0;
-                        }
-                        infoPopup.Description.IsOpen = false;
-                    }, System.Windows.Threading.DispatcherPriority.Normal);
-                }
+        //private void StackPanel_MouseLeave(object sender, MouseEventArgs e)
+        //{
+        //    if (sender is FrameworkElement element && element.DataContext is GameModel model)
+        //    {
+        //        if (UiHelper.FindVisualChildren<Grid>(element, "ImageGrid").FirstOrDefault() is Grid imageGrid)
+        //        {
+        //            infoPopup.Dispatcher.Invoke(() => {
+        //                if (infoPopup.Player != null)
+        //                {
+        //                    infoPopup.Player.Volume = 0;
+        //                }
+        //                infoPopup.Description.IsOpen = false;
+        //            }, System.Windows.Threading.DispatcherPriority.Normal);
+        //        }
 
-                if (DataContext is ShelvesViewModel viewModel)
-                {
-                    viewModel.CurrentlyHoveredGame = null;
-                }
-            }
-        }
+        //        if (DataContext is ShelvesViewModel viewModel)
+        //        {
+        //            viewModel.CurrentlyHoveredGame = null;
+        //        }
+        //    }
+        //}
 
         private void Description_Opened(object sender, EventArgs e)
         {

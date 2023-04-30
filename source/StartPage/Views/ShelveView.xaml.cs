@@ -138,11 +138,12 @@ namespace LandingPage.Views
                     if (UiHelper.FindVisualChildren<Grid>(element, "ImageGrid").FirstOrDefault() is Grid imageGrid)
                     {
                         Dispatcher.Invoke(() => {
-                            viewModel.ParentViewModel.PopupTarget = imageGrid;
+                            viewModel.ParentViewModel.PopupTarget = element;
                         }, System.Windows.Threading.DispatcherPriority.Normal);
                     }
 
                     viewModel.ParentViewModel.CurrentlyHoveredGame = model.Game;
+                    viewModel.ParentViewModel.CurrentlyHoveredGameModel = model;
                     viewModel.ParentViewModel.ShowDetails = true;
                 }
             }
@@ -161,8 +162,8 @@ namespace LandingPage.Views
 
                 if (DataContext is ShelveViewModel viewModel && viewModel.ParentViewModel is ShelvesViewModel)
                 {
-                    viewModel.ParentViewModel.CurrentlyHoveredGame = null;
                     viewModel.ParentViewModel.ShowDetails = false;
+                    viewModel.ParentViewModel.CurrentlyHoveredGame = null;
                 }
             }
         }
