@@ -1,5 +1,7 @@
 # StartPage-for-Playnite
 
+[Playnite Add-ons Page](https://playnite.link/addons.html#felixkmh_StartPage_Plugin)
+
 Extension for [Playnite](https://github.com/JosefNemec/Playnite) that adds a configurable start page.
 
 The layout can be customized by splitting and merging panels in a grid when in Edit Mode (can be opened by left-clicking the background).
