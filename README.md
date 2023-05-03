@@ -36,6 +36,8 @@ Known extension with StartPage support (potentially incomplete):
 |[PlayState](https://github.com/darklinkpower/PlayniteExtensionsCollection/tree/master/source/Generic/PlayState)|PlayState manager|
 |[QuickSearch](https://github.com/felixkmh/QuickSearch-for-Playnite)|Search bar|
 |[ScreenshotVisualizer](https://github.com/Lacro59/playnite-screenshotsvisualizer-plugin)|Carousel|
+|[HowLongToBeat](https://github.com/Lacro59/playnite-howlongtobeat-plugin)|Chart stats|
+|[Play Next](https://github.com/SparrowBrain/Playnite.PlayNext)|Top Recommendations|
 
 ## Built-in Views
 
