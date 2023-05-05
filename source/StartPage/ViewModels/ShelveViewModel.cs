@@ -18,9 +18,9 @@ namespace LandingPage.ViewModels
 {
     public class ShelveViewModel : BusyObservableObject, IStartPageViewModel
     {
-        private IPlayniteAPI playniteAPI;
+        protected IPlayniteAPI playniteAPI;
 
-        private static Random random = new Random();
+        protected static Random random = new Random();
 
         private ShelveProperties shelveProperties = ShelveProperties.RecentlyPlayed;
         public ShelveProperties ShelveProperties { get => shelveProperties; set => SetValue(ref shelveProperties, value); }
@@ -43,9 +43,9 @@ namespace LandingPage.ViewModels
         private ICommand manualUpdateCommand;
         public ICommand ManualUpdateCommand { get => manualUpdateCommand; set => SetValue(ref manualUpdateCommand, value); }
 
-        private ICommand ToggleSortDirectionCommand { get; } 
+        public ICommand ToggleSortDirectionCommand { get; }
 
-        private ObservableCollection<ShelveViewModel> viewModels;
+        protected ObservableCollection<ShelveViewModel> viewModels;
         public static readonly Game DummyGame = new Game() { CoverImage = LandingPageExtension.Instance.PlaceholderCoverPath, Name = "" };
 
         public ShelveViewModel(ShelveProperties shelveProperties, LandingPage.Settings.ShelvesSettings shelveSettings, IPlayniteAPI playniteAPI, ObservableCollection<ShelveViewModel> viewModels)
