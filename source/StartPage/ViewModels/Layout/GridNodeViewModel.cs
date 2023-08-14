@@ -532,9 +532,10 @@ namespace LandingPage.ViewModels.Layout
                                                 view = control2;
                                             } else if (viewObject is IEnumerable<Game> gameView)
                                             {
+                                                ShelvesViewModel shelvesViewModel = new ShelvesViewModel(API.Instance, LandingPageExtension.Instance, LandingPageExtension.Instance.SettingsViewModel, viewProperties.InstanceId);
                                                 view = new ShelvesView()
                                                 {
-                                                    DataContext = new ShelvesViewModel(API.Instance, LandingPageExtension.Instance, LandingPageExtension.Instance.SettingsViewModel, viewProperties.InstanceId)
+                                                    DataContext = shelvesViewModel
                                                 };
                                             }
                                             

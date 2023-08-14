@@ -13,7 +13,19 @@ namespace LandingPage.Views
     /// Interaktionslogik für GameDetailsPopup.xaml
     /// </summary>
     public partial class GameDetailsPopup : Popup
-    {
+    {   
+        public double Volume
+        {
+            get { return (double)GetValue(VolumeProperty); }
+            set { SetValue(VolumeProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for Volume.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty VolumeProperty =
+            DependencyProperty.Register("Volume", typeof(double), typeof(GameDetailsPopup), new PropertyMetadata(0.0));
+
+
+
         public MediaElement Player { get; private set; }
 
         public GameDetailsPopup()
@@ -48,9 +60,23 @@ namespace LandingPage.Views
 
         private void Description_Closed(object sender, EventArgs e)
         {
+            if (Player is MediaElement element)
+            {
+                element.Volume = 0;
+                element.IsMuted = element.Volume <= 0;
+            }
             if (rng.NextDouble() <= 0.25)
             {
                 GC.Collect();
+            }
+        }
+
+        private void Popup_Opened(object sender, EventArgs e)
+        {
+            if (Player is MediaElement element)
+            {
+                element.Volume = Math.Pow(Volume, 2);
+                element.IsMuted = element.Volume <= 0; 
             }
         }
     }

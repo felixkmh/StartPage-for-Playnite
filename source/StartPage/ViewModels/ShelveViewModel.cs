@@ -46,17 +46,25 @@ namespace LandingPage.ViewModels
         public ICommand ToggleSortDirectionCommand { get; }
 
         protected ObservableCollection<ShelveViewModel> viewModels;
+
         public static readonly Game DummyGame = new Game() { CoverImage = LandingPageExtension.Instance.PlaceholderCoverPath, Name = "" };
 
-        public ShelveViewModel(ShelveProperties shelveProperties, LandingPage.Settings.ShelvesSettings shelveSettings, IPlayniteAPI playniteAPI, ObservableCollection<ShelveViewModel> viewModels)
+        public ShelveViewModel(ShelveProperties shelveProperties, LandingPage.Settings.ShelvesSettings shelveSettings, IPlayniteAPI playniteAPI, ObservableCollection<ShelveViewModel> viewModels, ObservableCollection<GameModel> customSource = null)
         {
             this.viewModels = viewModels;
-            collectionViewSource.SortDescriptions.Add(new System.ComponentModel.SortDescription());
-            UpdateOrder(shelveProperties, collectionViewSource);
-            UpdateSorting(shelveProperties, collectionViewSource);
-            UpdateGrouping(shelveProperties, collectionViewSource);
-            collectionViewSource.IsLiveSortingRequested = true;
-            collectionViewSource.IsLiveGroupingRequested = true;
+            if (customSource != null)
+            {
+                games = customSource;
+            } else
+            {
+                collectionViewSource.SortDescriptions.Add(new System.ComponentModel.SortDescription());
+                UpdateOrder(shelveProperties, collectionViewSource);
+                UpdateSorting(shelveProperties, collectionViewSource);
+                UpdateGrouping(shelveProperties, collectionViewSource);
+                collectionViewSource.IsLiveSortingRequested = true;
+                collectionViewSource.IsLiveGroupingRequested = true;
+            }
+
             collectionViewSource.Source = Games;
             this.playniteAPI = playniteAPI;
             this.shelveProperties = shelveProperties;
@@ -350,6 +358,13 @@ namespace LandingPage.ViewModels
             var sortDescriptions = cvs.SortDescriptions;
             var sortDescription = sortDescriptions.FirstOrDefault();
             sortDescriptions?.Clear();
+
+            if (shelveProperties.SortBy == SortingField.Custom)
+            {
+                cvs.View.Refresh();
+                return;
+            }
+
             var newSortDescription = new SortDescription { Direction = shelveProperties.Order == Order.Ascending ? ListSortDirection.Ascending : ListSortDirection.Descending };
             switch (shelveProperties.SortBy)
             {
@@ -388,11 +403,10 @@ namespace LandingPage.ViewModels
             }
             if (shelveProperties.SortBy != SortingField.Random)
             {
-                if (sortDescription == null)
+                if (sortDescription != null)
                 {
                     sortDescriptions.Add(newSortDescription);
                 }
-                sortDescriptions.Add(newSortDescription);
             }
         }
 
@@ -585,7 +599,7 @@ namespace LandingPage.ViewModels
 
             if (ShelveSettings.SkipGamesInPreviousShelves)
             {
-                var current = viewModels.IndexOf(this);
+                var current = viewModels?.IndexOf(this) ?? -1;
                 if (current > -1)
                 {
                     for (var i = current - 1; i >= 0; --i)

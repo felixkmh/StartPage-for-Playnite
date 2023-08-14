@@ -189,5 +189,10 @@ namespace LandingPage.Views
         {
 
         }
+
+        private void Description_Opened(object sender, EventArgs e)
+        {
+
+        }
     }
 }

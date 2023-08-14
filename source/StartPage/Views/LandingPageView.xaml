@@ -134,7 +134,7 @@
                     <ContentControl x:Name="Proxy" Visibility="{mu:LandingPageSettings Settings.ShowDetails}" Width="0" Height="0"/>
                 </Grid>
                 <Popup MinHeight="204.75" Height="{Binding ElementName=ImageGrid, Path=ActualHeight, Converter={StaticResource MultiplyConverter}, ConverterParameter=1.05}" Width="462" x:Name="Description" IsOpen="False" Placement="Right" PlacementTarget="{Binding ElementName=ImageGrid}" 
-                                       ClipToBounds="True" PopupAnimation="Fade" Closed="Description_Closed">
+                                       ClipToBounds="True" PopupAnimation="Fade" Closed="Description_Closed" Opened="Description_Opened">
                     <Popup.PlacementRectangle>
                         <MultiBinding Converter="{StaticResource ElementToScaledRectConverter}">
                             <MultiBinding.ConverterParameter>
@@ -198,7 +198,7 @@
                     <Setter Property="Content" TargetName="PopupTrailerContentControl">
                         <Setter.Value>
                             <controls:TrailerPlayer Source="{Binding TrailerUri}" Stretch="UniformToFill" 
-                                          Volume="0" LoadedBehavior="Play" HorizontalAlignment="Center" VerticalAlignment="Center" IsMuted="True"/>
+                                          Volume="0.5" LoadedBehavior="Play" HorizontalAlignment="Center" VerticalAlignment="Center" IsMuted="False"/>
                         </Setter.Value>
                     </Setter>
                 </Trigger>

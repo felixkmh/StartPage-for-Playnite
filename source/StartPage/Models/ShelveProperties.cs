@@ -42,7 +42,9 @@ namespace LandingPage.Models
         [Description("LOCCompletionStatus")]
         CompletionStatus,
         [Description("LOC_SPG_BackgroundImageSourceRandom")]
-        Random
+        Random,
+        [Description("LOCCustomLabel")]
+        Custom
     }
 
     [TypeConverter(typeof(EnumDescriptionTypeConverter))]

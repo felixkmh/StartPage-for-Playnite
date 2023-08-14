@@ -101,6 +101,7 @@
     <Compile Include="Models\Layout\ViewProperties.cs" />
     <Compile Include="Models\Layout\GridNode.cs" />
     <Compile Include="Models\Objects\LoadingStatus.cs" />
+    <Compile Include="Models\Objects\ViewModelCollection.cs" />
     <Compile Include="Models\ObservableObject.cs" />
     <Compile Include="Models\ShelveProperties.cs" />
     <Compile Include="Models\SuccessStory\Achievements.cs" />

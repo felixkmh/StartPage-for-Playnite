@@ -12,6 +12,7 @@
              MinHeight="204.75"
              Width="462" Placement="Right"
              ClipToBounds="True" Closed="Description_Closed" PopupAnimation="Fade"
+            Opened="Popup_Opened"
             AllowsTransparency="True">
     <Popup.Resources>
         <conv:MultiplyConverter x:Key="MultiplyConverter"/>
