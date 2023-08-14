@@ -1,5 +1,12 @@
 AddonId: felixkmh_StartPage_Plugin
 Packages:  
+  - Version: 2.12.5
+    RequiredApiVersion: 6.1.0
+    ReleaseDate: 2023-08-14
+    PackageUrl: https://github.com/felixkmh/StartPage-for-Playnite/releases/download/v2.12.5/felixkmh_StartPage_Plugin_2_12_5.pext
+    Changelog:
+      - Fixed volume slider not working in shelves
+      - Localization updates
   - Version: 2.12.4
     RequiredApiVersion: 6.1.0
     ReleaseDate: 2023-05-06
