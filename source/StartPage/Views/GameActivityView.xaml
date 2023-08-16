@@ -12,7 +12,7 @@
         <conv:DoubleToGridLengthConverter x:Key="DoubleToGridLengthConverter"/>
     </UserControl.Resources>
     <DockPanel HorizontalAlignment="Center" VerticalAlignment="Stretch" LastChildFill="True">
-        <StackPanel Orientation="Horizontal" DockPanel.Dock="Top" HorizontalAlignment="Center"
+        <StackPanel Orientation="Horizontal" DockPanel.Dock="Top" HorizontalAlignment="Center" Margin="2,4"
                                         Visibility="{Binding PlaytimeLastWeek, Converter={StaticResource IEnumerableNullOrEmptyToVisibilityConverter}}">
             <StackPanel Margin="2" Orientation="Horizontal">
                 <TextBlock Text="{DynamicResource LOC_SPG_DailyPlaytime}"/>
