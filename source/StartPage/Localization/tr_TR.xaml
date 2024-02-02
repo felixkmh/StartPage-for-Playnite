@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0"?>
 <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:sys="clr-namespace:System;assembly=mscorlib">
 
-    <sys:String x:Key="LOC_SPG_MostPlayedGame">Most Played</sys:String>
+    <sys:String x:Key="LOC_SPG_MostPlayedGame">En Çok Oynananlar</sys:String>
     <sys:String x:Key="LOC_SPG_LatestReleaseGame">Latest Release</sys:String>
-    <sys:String x:Key="LOC_SPG_RecentAchievements">Recent Achievements</sys:String>
-    <sys:String x:Key="LOC_SPG_RecentlyAddedGames">Recently Added</sys:String>
+    <sys:String x:Key="LOC_SPG_RecentAchievements">Son Başarımlar</sys:String>
+    <sys:String x:Key="LOC_SPG_RecentlyAddedGames">Son Eklenenler</sys:String>
 
     <sys:String x:Key="LOC_SPG_DailyPlaytime">Daily Playtime</sys:String>
     <sys:String x:Key="LOC_SPG_WeeklyPlaytime">Weekly Playtime</sys:String>
