@@ -53,7 +53,7 @@
     <sys:String x:Key="LOC_SPG_ShowRecentlyAdded">Son Eklenen Oyunları Göster</sys:String>
     <sys:String x:Key="LOC_SPG_StartupItem">(Unsupported) SidebarItem activated on Launch</sys:String>
     <sys:String x:Key="LOC_SPG_MaxRecentAchievements">Son kazanılan Başarım sayısı:</sys:String>
-    <sys:String x:Key="LOC_SPG_MaxRecentAchievementsPerGame">Maximum number of recent Achievements per Game:</sys:String>
+    <sys:String x:Key="LOC_SPG_MaxRecentAchievementsPerGame">Oyun başına düşen maksimum yeni Başarım sayısı:</sys:String>
     <sys:String x:Key="LOC_SPG_ShowTitelOnCover">Oyun Kapağında Başlığı Göster</sys:String>
     <sys:String x:Key="LOC_SPG_ShowGameDetails">Oyun Detaylarını Göster</sys:String>
     <sys:String x:Key="LOC_SPG_EnableNotifications">Bildirimleri Etkinleştir</sys:String>
@@ -61,54 +61,54 @@
     <sys:String x:Key="LOC_SPG_GlobalBackgroundOpacity">Global Arka Plan Opaklığı</sys:String>
     <sys:String x:Key="LOC_SPG_MinimizeNotification">Açılışta Bildirimleri Simge Durumuna Küçült</sys:String>
     <sys:String x:Key="LOC_SPG_ShowNotificationButtons">Show &quot;Discard&quot; and &quot;Minimize&quot; Buttons</sys:String>
-    <sys:String x:Key="LOC_SPG_KeepInMemory">Keep StartPage in Memory when switching to another View</sys:String>
+    <sys:String x:Key="LOC_SPG_KeepInMemory">Başka bir görünüme geçerken StartPage'i bellekte tut</sys:String>
     <sys:String x:Key="LOC_SPG_MoveIconToTop">(Unsupported) Move StartPage Item to Top of SideBar on Launch</sys:String>
-    <sys:String x:Key="LOC_SPG_BlurAmount">Blur Radius:</sys:String>
-    <sys:String x:Key="LOC_SPG_EffectiveBlur">Effective Blur Radius:</sys:String>
-    <sys:String x:Key="LOC_SPG_EffectiveBlurToolTip">The effective blur radius is given by (Blur Radius) / (Background Render Scale). A low render scale paired with a low blur radius may lead to undesired results. Decreasing the render scale can yield better performance and can create a stronger blur effect.</sys:String>
-    <sys:String x:Key="LOC_SPG_BackgroundScale">Background Render Scale:</sys:String>
-    <sys:String x:Key="LOC_SPG_OverlayOpacity">Overlay Opacity:</sys:String>
-    <sys:String x:Key="LOC_SPG_NoiseOpacity">Noise Opacity:</sys:String>
-    <sys:String x:Key="LOC_SPG_CoverAspectRatio">Cover Aspect Ratio</sys:String>
-    <sys:String x:Key="LOC_SPG_MaxCoverWidth">Maximum Cover Width</sys:String>
-    <sys:String x:Key="LOC_SPG_BackgroundImageSource">Game Background Image Selection:</sys:String>
-    <sys:String x:Key="LOC_SPG_BackgroundImagePath">Background Image Path:</sys:String>
+    <sys:String x:Key="LOC_SPG_BlurAmount">Bulanıklaştırma Yarıçapı:</sys:String>
+    <sys:String x:Key="LOC_SPG_EffectiveBlur">Efektif Bulanıklık Yarıçapı:</sys:String>
+    <sys:String x:Key="LOC_SPG_EffectiveBlurToolTip">Etkili bulanıklaştırma yarıçapı (Bulanıklaştırma Yarıçapı) / (Arka Plan Görüntü İşleme Ölçeği) ile verilir. Düşük bir bulanıklaştırma yarıçapı ile eşleştirilmiş düşük bir görüntü işleme ölçeği istenmeyen sonuçlara yol açabilir. Görüntü işleme ölçeğini azaltmak daha iyi performans sağlayabilir ve daha güçlü bir bulanıklaştırma efekti oluşturabilir.</sys:String>
+    <sys:String x:Key="LOC_SPG_BackgroundScale">Arka Plan İşleme Ölçeği:</sys:String>
+    <sys:String x:Key="LOC_SPG_OverlayOpacity">Kaplama Opaklığı:</sys:String>
+    <sys:String x:Key="LOC_SPG_NoiseOpacity">Gürültü Opaklığı:</sys:String>
+    <sys:String x:Key="LOC_SPG_CoverAspectRatio">Kapak En Boy Oranı</sys:String>
+    <sys:String x:Key="LOC_SPG_MaxCoverWidth">Maksimum Kapak Genişliği</sys:String>
+    <sys:String x:Key="LOC_SPG_BackgroundImageSource">Oyunların Arka Plan Resmini Seç:</sys:String>
+    <sys:String x:Key="LOC_SPG_BackgroundImagePath">Arka Plan Resmi için Dosya Yolu:</sys:String>
     <sys:String x:Key="LOC_SPG_ShowGlobalProgressBar">(Unsupported) Show Global Progress Bar</sys:String>
-    <sys:String x:Key="LOC_SPG_SwitchWithLowPrio">Lower Priority when switching View (automatically enabled upon Playnite crashing)</sys:String>
-    <sys:String x:Key="LOC_SPG_UnsupportedToolTip">Use this feature at your own risk. It is not officially supported by the PlayniteAPI and can thus lead to unexpected behaviour.</sys:String>
-    <sys:String x:Key="LOC_SPG_IgnoreHidden">Ignore hidden games</sys:String>
-    <sys:String x:Key="LOC_SPG_AddShelve">Add Shelve</sys:String>
-    <sys:String x:Key="LOC_SPG_ShowMostPlayedGames">Show Most Played Games</sys:String>
-    <sys:String x:Key="LOC_SPG_SkippedGames">Skip:</sys:String>
-    <sys:String x:Key="LOC_SPG_ExtendShelve">Extend Shelve</sys:String>
-    <sys:String x:Key="LOC_SPG_BackgroundGameInfoOpacity">Game Info Opacity:</sys:String>
-    <sys:String x:Key="LOC_SPG_BackgroundAnimationDuration">Animation Duration:</sys:String>
-    <sys:String x:Key="LOC_SPG_BackgroundRefreshInterval">Refresh Interval (Minutes):</sys:String>
-    <sys:String x:Key="LOC_SPG_SkipGamesInPreviousShelves">Skip Games present in preceding Shelves</sys:String>
+    <sys:String x:Key="LOC_SPG_SwitchWithLowPrio">Görünüm değiştirirken Düşük Öncelik (Playnite çöktüğünde otomatik olarak etkinleştirilir)</sys:String>
+    <sys:String x:Key="LOC_SPG_UnsupportedToolTip">Bu özelliği kendi sorumluluğunuzda kullanın. PlayniteAPI tarafından resmi olarak desteklenmez ve bu nedenle beklenmedik davranışlara yol açabilir.</sys:String>
+    <sys:String x:Key="LOC_SPG_IgnoreHidden">Gizli oyunları görmezden gel</sys:String>
+    <sys:String x:Key="LOC_SPG_AddShelve">Raf Ekle</sys:String>
+    <sys:String x:Key="LOC_SPG_ShowMostPlayedGames">En Çok Oynanan Oyunları Göster</sys:String>
+    <sys:String x:Key="LOC_SPG_SkippedGames">Geç:</sys:String>
+    <sys:String x:Key="LOC_SPG_ExtendShelve">Rafı Uzat</sys:String>
+    <sys:String x:Key="LOC_SPG_BackgroundGameInfoOpacity">Oyun Bilgi Opaklığı:</sys:String>
+    <sys:String x:Key="LOC_SPG_BackgroundAnimationDuration">Animasyon Süresi:</sys:String>
+    <sys:String x:Key="LOC_SPG_BackgroundRefreshInterval">Yenileme Aralığı (Dakika):</sys:String>
+    <sys:String x:Key="LOC_SPG_SkipGamesInPreviousShelves">Önceki Raflarda Bulunan Oyunları Atla</sys:String>
     <sys:String x:Key="LOC_SPG_SkipGamesInPreviousTimeframes">Skip Games present in preceding Timeframes</sys:String>
     <sys:String x:Key="LOC_SPG_EnableTags">Create [SPG] tags on launch. Used to mark games as ignored.</sys:String>
-    <sys:String x:Key="LOC_SPG_FixGridHeight">Fixed Grid Height:</sys:String>
-    <sys:String x:Key="LOC_SPG_FixGridHeight_Tooltip" xml:space="preserve">If enabled, the grid height is no longer bound to the window height.
-Instead, it can be set to a fixed value. If that value is bigger than the window height, the view can be scrolled.</sys:String>
-    <sys:String x:Key="LOC_SPG_DownScaleCovers">Load cover images at a lower resolution</sys:String>
-    <sys:String x:Key="LOC_SPG_DownScaleCoversTooltip" xml:space="preserve">If enabled, cover images are loaded into memory with a maximum width of (1.15 * Maximum Cover Width) pixels.
-This can lead to a much smaller memory footprint for StartPage. Will not affect covers already loaded before restarting Playnite.</sys:String>
-    <sys:String x:Key="LOC_SPG_LockLayout">Lock Layout outside of Edit Mode</sys:String>
-    <sys:String x:Key="LOC_SPG_VideoVolume">Video volume</sys:String>
-    <sys:String x:Key="LOC_SPG_ShowInstalledIndicator">Indicate whether game is installed</sys:String>
-    <sys:String x:Key="LOC_SPG_ShowNotInstalledIndicator">Indicate whether game is not installed</sys:String>
-    <sys:String x:Key="LOC_SPG_SetBackgroundToCurrentGame">Set StartPage background to background image of the currently running game</sys:String>
-    <sys:String x:Key="LOC_SPG_SetBackgroundToCurrentGameDisableBlur">Disable blur</sys:String>
+    <sys:String x:Key="LOC_SPG_FixGridHeight">Sabit Izgara Yüksekliği:</sys:String>
+    <sys:String x:Key="LOC_SPG_FixGridHeight_Tooltip" xml:space="preserve">Etkinleştirilirse, ızgara yüksekliği artık pencere yüksekliğine bağlı kalmaz.
+Bunun yerine, sabit bir değere ayarlanabilir. Bu değer pencere yüksekliğinden büyükse, görünüm kaydırılabilir.</sys:String>
+    <sys:String x:Key="LOC_SPG_DownScaleCovers">Kapak resimlerini daha düşük çözünürlükte yükle</sys:String>
+    <sys:String x:Key="LOC_SPG_DownScaleCoversTooltip" xml:space="preserve">Etkinleştirilirse, kapak resimleri belleğe maksimum (1,15* Maksimum Kapak Genişliği) piksel genişliğinde yüklenir.
+Bu, StartPage için çok daha küçük bir bellek yeri kaplamasına yardımcı olur. Playnite'ı yeniden başlatmadan önceki yüklenmiş olan kapak resimleri bundan etkilenmez.</sys:String>
+    <sys:String x:Key="LOC_SPG_LockLayout">Düzenleme Modu Dışında Düzeni Kilitleme</sys:String>
+    <sys:String x:Key="LOC_SPG_VideoVolume">Video sesi</sys:String>
+    <sys:String x:Key="LOC_SPG_ShowInstalledIndicator">Yüklü oyunları göster</sys:String>
+    <sys:String x:Key="LOC_SPG_ShowNotInstalledIndicator">Yüklü olmayan oyunları göster</sys:String>
+    <sys:String x:Key="LOC_SPG_SetBackgroundToCurrentGame">StartPage arka planını o anda çalışan oyunun arka plan görüntüsüne ayarla</sys:String>
+    <sys:String x:Key="LOC_SPG_SetBackgroundToCurrentGameDisableBlur">Bulanıklaştırmayı devre dışı bırak</sys:String>
     
     <!-- Grid -->
-    <sys:String x:Key="LOC_SPG_SplitHorizonatlly">Split horizontally</sys:String>
-    <sys:String x:Key="LOC_SPG_SplitVertically">Split vertically</sys:String>
-    <sys:String x:Key="LOC_SPG_Merge">Merge</sys:String>
+    <sys:String x:Key="LOC_SPG_SplitHorizonatlly">Yatay olarak böl</sys:String>
+    <sys:String x:Key="LOC_SPG_SplitVertically">Dikey olarak böl</sys:String>
+    <sys:String x:Key="LOC_SPG_Merge">Birleştir</sys:String>
     <sys:String x:Key="LOC_SPG_MergeKeepUpper">Keep upper panel</sys:String>
     <sys:String x:Key="LOC_SPG_MergeKeepLower">Keep lower panel</sys:String>
     <sys:String x:Key="LOC_SPG_MergeKeepLeft">Keep left panel</sys:String>
     <sys:String x:Key="LOC_SPG_MergeKeepRight">Keep right panel</sys:String>
-    <sys:String x:Key="LOC_SPG_AddView">Add View</sys:String>
+    <sys:String x:Key="LOC_SPG_AddView">İçerik Ekle</sys:String>
     <sys:String x:Key="LOC_SPG_RemoveView">Görünümü Kaldır</sys:String>
     <sys:String x:Key="LOC_SPG_EditMode">Düzenleme Modu</sys:String>
     <sys:String x:Key="LOC_SPG_EnterEditMode">Düzenleme Modunu Aç</sys:String>
@@ -148,6 +148,6 @@ This can lead to a much smaller memory footprint for StartPage. Will not affect 
     <sys:String x:Key="LOC_SPG_WeeklyActivityView">Haftalık Aktivite</sys:String>
     <sys:String x:Key="LOC_SPG_WeeklyActivityDescription">Son 7 gündeki oynama süresine dair kompakt bir bakış sunar. GameActivity eklentisini gerektirir.</sys:String>
     <sys:String x:Key="LOC_SPG_RecentAchievementsView">Son Başarımlar</sys:String>
-    <sys:String x:Key="LOC_SPG_RecentAchievementsDescription">Shows an overview of recently unlocked achievements grouped by game. Requires the SuccessStory extension.</sys:String>
+    <sys:String x:Key="LOC_SPG_RecentAchievementsDescription">Oyunlarda son açılan başarımlara göre gruplandırılmış genel bir bakış sunar. SuccessStory eklentisini gerektirir.</sys:String>
 
 </ResourceDictionary>
