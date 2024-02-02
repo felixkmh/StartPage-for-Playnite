@@ -11,9 +11,9 @@
     <sys:String x:Key="LOC_SPG_MonthlyPlaytime">Monthly Playtime</sys:String>
     <sys:String x:Key="LOC_SPG_PlaytimePerSource">Playtime per Source</sys:String>
     <sys:String x:Key="LOC_SPG_MostPlayedWeekly">Most Played this Week</sys:String>
-    <sys:String x:Key="LOC_SPG_TotalPlaytime" xml:space="preserve">Total: </sys:String>
-    <sys:String x:Key="LOC_SPG_LastSevenDays">Last 7 Days</sys:String>
-    <sys:String x:Key="LOC_SPG_LastThirtyDays">Last 30 Days</sys:String>
+    <sys:String x:Key="LOC_SPG_TotalPlaytime" xml:space="preserve">Toplam: </sys:String>
+    <sys:String x:Key="LOC_SPG_LastSevenDays">Son 7 Gün</sys:String>
+    <sys:String x:Key="LOC_SPG_LastThirtyDays">Son 30 Gün</sys:String>
     <sys:String x:Key="LOC_SPG_TimeframeNone">None</sys:String>
 
     <sys:String x:Key="LOC_SPG_SetGameAsBackground">Set as StartPage background</sys:String>
