@@ -16,7 +16,7 @@
     <sys:String x:Key="LOC_SPG_LastThirtyDays">Letzten 30 Tage</sys:String>
     <sys:String x:Key="LOC_SPG_TimeframeNone">Nichts</sys:String>
 
-    <sys:String x:Key="LOC_SPG_SetGameAsBackground">Als StartPage-Hintergrund festlegen</sys:String>
+    <sys:String x:Key="LOC_SPG_SetGameAsBackground">Als StartPage Hintergrund festlegen</sys:String>
 
     <!-- Timeframes -->
     <sys:String x:Key="LOC_SPG_TimeframeLastDay">Letzte 24h</sys:String>
@@ -28,7 +28,7 @@
     <sys:String x:Key="LOC_SPG_TimeframeLast6Months">Letzte 6 Monate</sys:String>
     <sys:String x:Key="LOC_SPG_TimeframeLastYear">Letztes Jahr</sys:String>
     <sys:String x:Key="LOC_SPG_TimeframeLast5Years">Letzte 5 Jahre</sys:String>
-    <sys:String x:Key="LOC_SPG_TimeframeAllTime">Aller Zeiten</sys:String>
+    <sys:String x:Key="LOC_SPG_TimeframeAllTime">Alle Zeiten</sys:String>
 
     <!--Settings Tabs-->
     <sys:String x:Key="LOC_SPG_CommonTab">Allgemein</sys:String>
@@ -43,7 +43,7 @@
     <sys:String x:Key="LOC_SPG_BackgroundImageSourceLastHovered">Zuletzt überfahren</sys:String>
 
     <!-- Settings -->
-    <sys:String x:Key="LOC_SPG_ShowGameActivity">GameActivity-Ansichten anzeigen</sys:String>
+    <sys:String x:Key="LOC_SPG_ShowGameActivity">GameActivity Ansichten anzeigen</sys:String>
     <sys:String x:Key="LOC_SPG_NumberOfGames">Spielanzahl:</sys:String>
     <sys:String x:Key="LOC_SPG_NextRandomBackground">Nächster zufälliger Hintergrund</sys:String>
     <sys:String x:Key="LOC_SPG_ShowFavorites">Favoriten anzeigen</sys:String>
@@ -58,20 +58,20 @@
     <sys:String x:Key="LOC_SPG_ShowGameDetails">Spieldetails anzeigen</sys:String>
     <sys:String x:Key="LOC_SPG_EnableNotifications">Benachrichtigungen aktivieren</sys:String>
     <sys:String x:Key="LOC_SPG_EnableGlobalBackground">Globalen Hintergrund aktivieren</sys:String>
-    <sys:String x:Key="LOC_SPG_GlobalBackgroundOpacity">Globale Hintergrund-Deckkraft</sys:String>
+    <sys:String x:Key="LOC_SPG_GlobalBackgroundOpacity">Globale Hintergrund Deckkraft</sys:String>
     <sys:String x:Key="LOC_SPG_MinimizeNotification">Benachrichtigungen beim Start minimieren</sys:String>
-    <sys:String x:Key="LOC_SPG_ShowNotificationButtons">Buttons &quot;Verwerfen&quot; und &quot;Minimieren&quot; anzeigen</sys:String>
+    <sys:String x:Key="LOC_SPG_ShowNotificationButtons">Schaltflächen &quot;Verwerfen&quot; und &quot;Minimieren&quot; anzeigen</sys:String>
     <sys:String x:Key="LOC_SPG_KeepInMemory">StartPage im Speicher behalten, wenn zu einer anderen Ansicht gewechselt wird</sys:String>
     <sys:String x:Key="LOC_SPG_MoveIconToTop">(Nicht unterstützt) StartPage-Element beim Start an den oberen Rand der Seitenleiste verschieben</sys:String>
     <sys:String x:Key="LOC_SPG_BlurAmount">Unschärferadius:</sys:String>
     <sys:String x:Key="LOC_SPG_EffectiveBlur">Effektiver Unschärferadius:</sys:String>
     <sys:String x:Key="LOC_SPG_EffectiveBlurToolTip">Der effektive Unschärferadius ergibt sich aus (Unschärferadius) / (Hintergrund-Render-Skalierung). Eine niedrige Render-Skalierung in Verbindung mit einem niedrigen Unschärferadius kann zu unerwünschten Ergebnissen führen. Eine Verringerung der Render-Skalierung kann die Leistung verbessern und einen stärkeren Unschärfe-Effekt erzeugen.</sys:String>
-    <sys:String x:Key="LOC_SPG_BackgroundScale">Hintergrund-Render-Skalierung:</sys:String>
+    <sys:String x:Key="LOC_SPG_BackgroundScale">Hintergrund Render Skalierung:</sys:String>
     <sys:String x:Key="LOC_SPG_OverlayOpacity">Deckkraft der Überlagerung:</sys:String>
     <sys:String x:Key="LOC_SPG_NoiseOpacity">Deckkraft des Rauschens:</sys:String>
-    <sys:String x:Key="LOC_SPG_CoverAspectRatio">Cover-Seitenverhältnis</sys:String>
-    <sys:String x:Key="LOC_SPG_MaxCoverWidth">Maximale Cover-Breite</sys:String>
-    <sys:String x:Key="LOC_SPG_BackgroundImageSource">Auswahl des Spiel-Hintergrundbildes:</sys:String>
+    <sys:String x:Key="LOC_SPG_CoverAspectRatio">Cover Seitenverhältnis</sys:String>
+    <sys:String x:Key="LOC_SPG_MaxCoverWidth">Maximale Cover Breite</sys:String>
+    <sys:String x:Key="LOC_SPG_BackgroundImageSource">Auswahl des Spiel Hintergrundbildes:</sys:String>
     <sys:String x:Key="LOC_SPG_BackgroundImagePath">Hintergrundbild Pfad:</sys:String>
     <sys:String x:Key="LOC_SPG_ShowGlobalProgressBar">(Nicht unterstützt) Globalen Fortschrittsbalken anzeigen</sys:String>
     <sys:String x:Key="LOC_SPG_SwitchWithLowPrio">Niedrigere Priorität beim Umschalten der Ansicht (wird automatisch beim Absturz von Playnite aktiviert)</sys:String>
@@ -87,23 +87,23 @@
     <sys:String x:Key="LOC_SPG_SkipGamesInPreviousShelves">Spiele aus vorherigen Regalen überspringen</sys:String>
     <sys:String x:Key="LOC_SPG_SkipGamesInPreviousTimeframes">Spiele aus vorherigen Zeitrahmen überspringen</sys:String>
     <sys:String x:Key="LOC_SPG_EnableTags">Erstelle [SPG] Schlagwörter beim Start. Werden verwendet, um Spiele als ignoriert zu markieren.</sys:String>
-    <sys:String x:Key="LOC_SPG_FixGridHeight">Feste Grid-Höhe:</sys:String>
-    <sys:String x:Key="LOC_SPG_FixGridHeight_Tooltip" xml:space="preserve">Wenn aktiviert, ist die Grid-Höhe nicht mehr an die Fensterhöhe gebunden.
+    <sys:String x:Key="LOC_SPG_FixGridHeight">Feste Rasterhöhe:</sys:String>
+    <sys:String x:Key="LOC_SPG_FixGridHeight_Tooltip" xml:space="preserve">Wenn aktiviert, ist die Rasterhöhe nicht mehr an die Fensterhöhe gebunden.
 Stattdessen kann sie auf einen festen Wert gesetzt werden. Wenn dieser Wert größer als die Fensterhöhe ist, kann die Ansicht gescrollt werden.</sys:String>
     <sys:String x:Key="LOC_SPG_DownScaleCovers">Coverbilder in niedrigerer Auflösung laden</sys:String>
-    <sys:String x:Key="LOC_SPG_DownScaleCoversTooltip" xml:space="preserve">Wenn diese Option aktiviert ist, werden Cover-Bilder mit einer maximalen Breite von (1,15 * Maximale Cover-Breite) Pixel in den Speicher geladen.
+    <sys:String x:Key="LOC_SPG_DownScaleCoversTooltip" xml:space="preserve">Wenn diese Option aktiviert ist, werden Cover Bilder mit einer maximalen Breite von (1,15 * Maximale Cover Breite) Pixel in den Speicher geladen.
 Dies kann zu einem wesentlich geringeren Speicherbedarf für StartPage führen. Dies hat keinen Einfluss auf Cover, die bereits geladen wurden, bevor Playnite neugestartet wird.</sys:String>
     <sys:String x:Key="LOC_SPG_LockLayout">Layout außerhalb des Bearbeitungsmodus sperren</sys:String>
     <sys:String x:Key="LOC_SPG_VideoVolume">Video Lautstärke</sys:String>
     <sys:String x:Key="LOC_SPG_ShowInstalledIndicator">Anzeigen, ob das Spiel installiert ist</sys:String>
     <sys:String x:Key="LOC_SPG_ShowNotInstalledIndicator">Anzeigen, ob das Spiel nicht installiert ist</sys:String>
-    <sys:String x:Key="LOC_SPG_SetBackgroundToCurrentGame">StartPage-Hintergrund auf das Hintergrundbild des aktuell laufenden Spiels setzen</sys:String>
+    <sys:String x:Key="LOC_SPG_SetBackgroundToCurrentGame">StartPage Hintergrund auf das Hintergrundbild des aktuell laufenden Spiels setzen</sys:String>
     <sys:String x:Key="LOC_SPG_SetBackgroundToCurrentGameDisableBlur">Unschärfe deaktivieren</sys:String>
     
     <!-- Grid -->
     <sys:String x:Key="LOC_SPG_SplitHorizonatlly">Horizontal teilen</sys:String>
     <sys:String x:Key="LOC_SPG_SplitVertically">Vertikal teilen</sys:String>
-    <sys:String x:Key="LOC_SPG_Merge">Vereinen</sys:String>
+    <sys:String x:Key="LOC_SPG_Merge">Zusammenführen</sys:String>
     <sys:String x:Key="LOC_SPG_MergeKeepUpper">Oberes Panel behalten</sys:String>
     <sys:String x:Key="LOC_SPG_MergeKeepLower">Unteres Panel behalten</sys:String>
     <sys:String x:Key="LOC_SPG_MergeKeepLeft">Linkes Panel behalten</sys:String>
@@ -114,7 +114,7 @@ Dies kann zu einem wesentlich geringeren Speicherbedarf für StartPage führen. 
     <sys:String x:Key="LOC_SPG_EnterEditMode">Bearbeitungsmodus aktivieren</sys:String>
     <sys:String x:Key="LOC_SPG_ExitEditMode">Bearbeitungsmodus verlassen</sys:String>
     <sys:String x:Key="LOC_SPG_ResetLayout">Layout auf Standard zurücksetzen</sys:String>
-    <sys:String x:Key="LOC_SPG_DragPanelTooltip">Panels per Drag-and-Drop austauschen</sys:String>
+    <sys:String x:Key="LOC_SPG_DragPanelTooltip">Panels per Drag &amp; Drop austauschen</sys:String>
     <sys:String x:Key="LOC_SPG_AddPanel">Panel hinzufügen</sys:String>
     <sys:String x:Key="LOC_SPG_RemovePanel">Panel entfernen</sys:String>
     <sys:String x:Key="LOC_SPG_MergeWith">Vereinen mit</sys:String>
@@ -141,7 +141,7 @@ Dies kann zu einem wesentlich geringeren Speicherbedarf für StartPage führen. 
     <!-- Integrated Views -->
     <sys:String x:Key="LOC_SPG_ClockView">Uhr</sys:String>
     <sys:String x:Key="LOC_SPG_ClockViewDescription">Digitale Uhr, die auch das aktuelle Datum anzeigt. Verwendet das Systemzeitformat.</sys:String>
-    <sys:String x:Key="LOC_SPG_ShelvesView">Spiel-Regale</sys:String>
+    <sys:String x:Key="LOC_SPG_ShelvesView">Spiel Regale</sys:String>
     <sys:String x:Key="LOC_SPG_ShelvesViewDescription">Regale mit Spielecovern mit benutzerdefinierten Filtern, Sortier- und Gruppieroptionen.</sys:String>
     <sys:String x:Key="LOC_SPG_MostPlayedView">Meistgespielt</sys:String>
     <sys:String x:Key="LOC_SPG_MostPlayedDescription">Zeigt die meistgespielten Spiele für verschiedene Zeiträume an.</sys:String>
