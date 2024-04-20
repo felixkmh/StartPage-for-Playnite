@@ -38,7 +38,7 @@
                 </ItemsControl.ItemsPanel>
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <Image Stretch="UniformToFill" Source="{Binding Uri, Converter={StaticResource UriToBitmapImageConverter}}"
+                        <Image Stretch="UniformToFill" Source="{Binding Uri, IsAsync=True}"
                    Opacity="{Binding Opacity}" HorizontalAlignment="Center" VerticalAlignment="Center">
                         </Image>
                     </DataTemplate>
