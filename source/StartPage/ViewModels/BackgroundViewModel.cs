@@ -168,7 +168,7 @@ namespace LandingPage.ViewModels
                             var databasePath = mostRecent?.BackgroundImage;
                             if (!string.IsNullOrEmpty(databasePath))
                             {
-                                var fullPath = playniteAPI.Database.GetFullFilePath(databasePath);
+                                var fullPath = GetFullFilePath(databasePath);
                                 if (Uri.TryCreate(fullPath, UriKind.RelativeOrAbsolute, out var uri))
                                 {
                                     path = uri;
@@ -185,7 +185,7 @@ namespace LandingPage.ViewModels
                             var databasePath = mostRecent?.BackgroundImage;
                             if (!string.IsNullOrEmpty(databasePath))
                             {
-                                var fullPath = playniteAPI.Database.GetFullFilePath(databasePath);
+                                var fullPath = GetFullFilePath(databasePath);
                                 if (Uri.TryCreate(fullPath, UriKind.RelativeOrAbsolute, out var uri))
                                 {
                                     path = uri;
@@ -204,7 +204,7 @@ namespace LandingPage.ViewModels
                                 var databasePath = mostPlayed.Value?.BackgroundImage;
                                 if (!string.IsNullOrEmpty(databasePath))
                                 {
-                                    var fullPath = playniteAPI.Database.GetFullFilePath(databasePath);
+                                    var fullPath = GetFullFilePath(databasePath);
                                     if (Uri.TryCreate(fullPath, UriKind.RelativeOrAbsolute, out var uri))
                                     {
                                         path = uri;
@@ -222,7 +222,7 @@ namespace LandingPage.ViewModels
                                 var databasePath = lastGame.BackgroundImage;
                                 if (!string.IsNullOrEmpty(databasePath))
                                 {
-                                    var fullPath = playniteAPI.Database.GetFullFilePath(databasePath);
+                                    var fullPath = GetFullFilePath(databasePath);
                                     if (Uri.TryCreate(fullPath, UriKind.RelativeOrAbsolute, out var uri))
                                     {
                                         path = uri;
@@ -242,7 +242,7 @@ namespace LandingPage.ViewModels
                                     var databasePath = randomGame.BackgroundImage;
                                     if (!string.IsNullOrEmpty(databasePath))
                                     {
-                                        var fullPath = playniteAPI.Database.GetFullFilePath(databasePath);
+                                        var fullPath = GetFullFilePath(databasePath);
                                         if (Uri.TryCreate(fullPath, UriKind.RelativeOrAbsolute, out var uri))
                                         {
                                             path = uri;
@@ -265,7 +265,7 @@ namespace LandingPage.ViewModels
                                 var databasePath = LastSelectedGame.BackgroundImage;
                                 if (!string.IsNullOrEmpty(databasePath))
                                 {
-                                    var fullPath = playniteAPI.Database.GetFullFilePath(databasePath);
+                                    var fullPath = GetFullFilePath(databasePath);
                                     if (Uri.TryCreate(fullPath, UriKind.RelativeOrAbsolute, out var uri))
                                     {
                                         path = uri;
@@ -283,7 +283,7 @@ namespace LandingPage.ViewModels
                                 var databasePath = LastHoveredGame.BackgroundImage;
                                 if (!string.IsNullOrEmpty(databasePath))
                                 {
-                                    var fullPath = playniteAPI.Database.GetFullFilePath(databasePath);
+                                    var fullPath = GetFullFilePath(databasePath);
                                     if (Uri.TryCreate(fullPath, UriKind.RelativeOrAbsolute, out var uri))
                                     {
                                         path = uri;
@@ -305,7 +305,7 @@ namespace LandingPage.ViewModels
                 var databasePath = gameSource?.BackgroundImage;
                 if (!string.IsNullOrEmpty(databasePath))
                 {
-                    var fullPath = playniteAPI.Database.GetFullFilePath(databasePath);
+                    var fullPath = GetFullFilePath(databasePath);
                     if (Uri.TryCreate(fullPath, UriKind.RelativeOrAbsolute, out var uri))
                     {
                         path = uri;
@@ -362,6 +362,16 @@ namespace LandingPage.ViewModels
         internal async Task UpdateBackgroundImagePathAsync(bool updateRandomBackground = true)
         {
             await Task.Run(() => UpdateBackgroundImagePath(updateRandomBackground));
+        }
+
+        private string GetFullFilePath(string path)
+        {
+            if (path.StartsWith("http"))
+            {
+                return path;
+            }
+
+            return playniteAPI.Database.GetFullFilePath(path);
         }
 
         private static bool IsRelevantUpdate(ItemUpdateEvent<Game> update)
