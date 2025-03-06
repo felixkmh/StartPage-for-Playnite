@@ -99,6 +99,7 @@
     <sys:String x:Key="LOC_SPG_ShowNotInstalledIndicator">Указывает, что игра не установлена</sys:String>
     <sys:String x:Key="LOC_SPG_SetBackgroundToCurrentGame">Установите фон StartPage на фоновое изображение текущей запущенной игры</sys:String>
     <sys:String x:Key="LOC_SPG_SetBackgroundToCurrentGameDisableBlur">Отключить размытие</sys:String>
+    <sys:String x:Key="LOC_SPG_HideShelveScrollbar">Hide Shelve Scrollbar</sys:String>
     
     <!-- Grid -->
     <sys:String x:Key="LOC_SPG_SplitHorizonatlly">Разделить по горизонтали</sys:String>
