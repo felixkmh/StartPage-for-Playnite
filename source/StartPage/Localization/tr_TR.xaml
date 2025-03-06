@@ -99,6 +99,7 @@ Bu, StartPage için çok daha küçük bir bellek yeri kaplamasına yardımcı o
     <sys:String x:Key="LOC_SPG_ShowNotInstalledIndicator">Yüklü olmayan oyunları göster</sys:String>
     <sys:String x:Key="LOC_SPG_SetBackgroundToCurrentGame">StartPage arka planını o anda çalışan oyunun arka plan görüntüsüne ayarla</sys:String>
     <sys:String x:Key="LOC_SPG_SetBackgroundToCurrentGameDisableBlur">Bulanıklaştırmayı devre dışı bırak</sys:String>
+    <sys:String x:Key="LOC_SPG_HideShelveScrollbar">Hide Shelve Scrollbar</sys:String>
     
     <!-- Grid -->
     <sys:String x:Key="LOC_SPG_SplitHorizonatlly">Yatay olarak böl</sys:String>

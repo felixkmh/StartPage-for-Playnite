@@ -99,6 +99,7 @@ Esto puede llevar a una huella de memoria mucho menor para StartPage. No afectar
     <sys:String x:Key="LOC_SPG_ShowNotInstalledIndicator">Indicar si el juego no está instalado</sys:String>
     <sys:String x:Key="LOC_SPG_SetBackgroundToCurrentGame">Establecer la imágen de fonde de StartPage con el fondo del juego que se está ejecutando actualmente</sys:String>
     <sys:String x:Key="LOC_SPG_SetBackgroundToCurrentGameDisableBlur">Desactivar desenfoque</sys:String>
+    <sys:String x:Key="LOC_SPG_HideShelveScrollbar">Hide Shelve Scrollbar</sys:String>
     
     <!-- Grid -->
     <sys:String x:Key="LOC_SPG_SplitHorizonatlly">Dividir horizontalmente</sys:String>

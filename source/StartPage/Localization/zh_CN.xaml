@@ -99,6 +99,7 @@
     <sys:String x:Key="LOC_SPG_ShowNotInstalledIndicator">指示游戏是否未安装</sys:String>
     <sys:String x:Key="LOC_SPG_SetBackgroundToCurrentGame">将 StartPage 的背景设置为当前运行的游戏背景图片。</sys:String>
     <sys:String x:Key="LOC_SPG_SetBackgroundToCurrentGameDisableBlur">禁用模糊</sys:String>
+    <sys:String x:Key="LOC_SPG_HideShelveScrollbar">Hide Shelve Scrollbar</sys:String>
     
     <!-- Grid -->
     <sys:String x:Key="LOC_SPG_SplitHorizonatlly">水平分割</sys:String>
