@@ -58,6 +58,11 @@
             <Setter Property="BorderThickness" Value="0"/>
             <Setter Property="VirtualizingPanel.VirtualizationMode" Value="Standard"/>
             <Setter Property="Padding" Value="0"/>
+            <Style.Triggers>
+                <DataTrigger Binding="{mu:LandingPageSettings Path=Settings.HideScrollbarInShelves}" Value="{StaticResource True}">
+                    <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Hidden"/>
+                </DataTrigger>
+            </Style.Triggers>
         </Style>
         <Style TargetType="Button" x:Key="CoverButtonStyle">
             <Setter Property="Template">

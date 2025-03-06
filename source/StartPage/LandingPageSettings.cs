@@ -53,6 +53,9 @@ namespace LandingPage
         // workaround to get this module to be loaded by Playnite
         private Gu.Wpf.NumericInput.DoubleBox _ = new Gu.Wpf.NumericInput.DoubleBox();
 
+        private bool hideScrollbarInShelves = false;
+        public bool HideScrollbarInShelves { get => hideScrollbarInShelves; set => SetValue(ref hideScrollbarInShelves, value); }
+        
         private bool fixGridSize = false;
         public bool FixGridSize { get => fixGridSize; set => SetValue(ref fixGridSize, value); }
 
