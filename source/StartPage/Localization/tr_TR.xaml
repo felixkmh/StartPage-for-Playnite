@@ -51,7 +51,7 @@
     <sys:String x:Key="LOC_SPG_ShowRecentlyPlayed">Son Oynanan Oyunları Göster</sys:String>
     <sys:String x:Key="LOC_SPG_ShowRecentAchievements">SuccessStory'i kullanarak son Başarımları göster</sys:String>
     <sys:String x:Key="LOC_SPG_ShowRecentlyAdded">Son Eklenen Oyunları Göster</sys:String>
-    <sys:String x:Key="LOC_SPG_StartupItem">(Unsupported) SidebarItem activated on Launch</sys:String>
+    <sys:String x:Key="LOC_SPG_StartupItem">(Desteklenmiyor) SidebarItem Başlatma sırasında etkinleştirildi</sys:String>
     <sys:String x:Key="LOC_SPG_MaxRecentAchievements">Son kazanılan Başarım sayısı:</sys:String>
     <sys:String x:Key="LOC_SPG_MaxRecentAchievementsPerGame">Oyun başına düşen maksimum yeni Başarım sayısı:</sys:String>
     <sys:String x:Key="LOC_SPG_ShowTitelOnCover">Oyun Kapağında Başlığı Göster</sys:String>
@@ -62,7 +62,7 @@
     <sys:String x:Key="LOC_SPG_MinimizeNotification">Açılışta Bildirimleri Simge Durumuna Küçült</sys:String>
     <sys:String x:Key="LOC_SPG_ShowNotificationButtons">&quot;At&quot; ve &quot;Simge Durumuna Küçült&quot; Butonlarını Göster</sys:String>
     <sys:String x:Key="LOC_SPG_KeepInMemory">Başka bir görünüme geçerken StartPage'i bellekte tut</sys:String>
-    <sys:String x:Key="LOC_SPG_MoveIconToTop">(Unsupported) Move StartPage Item to Top of SideBar on Launch</sys:String>
+    <sys:String x:Key="LOC_SPG_MoveIconToTop">(Desteklenmiyor) Başlatıldığında StartPage Öğesini Yan Çubuğun Üstüne Taşı</sys:String>
     <sys:String x:Key="LOC_SPG_BlurAmount">Bulanıklaştırma Yarıçapı:</sys:String>
     <sys:String x:Key="LOC_SPG_EffectiveBlur">Efektif Bulanıklık Yarıçapı:</sys:String>
     <sys:String x:Key="LOC_SPG_EffectiveBlurToolTip">Etkili bulanıklaştırma yarıçapı (Bulanıklaştırma Yarıçapı) / (Arka Plan Görüntü İşleme Ölçeği) ile verilir. Düşük bir bulanıklaştırma yarıçapı ile eşleştirilmiş düşük bir görüntü işleme ölçeği istenmeyen sonuçlara yol açabilir. Görüntü işleme ölçeğini azaltmak daha iyi performans sağlayabilir ve daha güçlü bir bulanıklaştırma efekti oluşturabilir.</sys:String>
@@ -73,7 +73,7 @@
     <sys:String x:Key="LOC_SPG_MaxCoverWidth">Maksimum Kapak Genişliği</sys:String>
     <sys:String x:Key="LOC_SPG_BackgroundImageSource">Oyunların Arka Plan Resmini Seç:</sys:String>
     <sys:String x:Key="LOC_SPG_BackgroundImagePath">Arka Plan Resmi için Dosya Yolu:</sys:String>
-    <sys:String x:Key="LOC_SPG_ShowGlobalProgressBar">(Unsupported) Show Global Progress Bar</sys:String>
+    <sys:String x:Key="LOC_SPG_ShowGlobalProgressBar">(Desteklenmiyor) Global İlerleme Çubuğunu Göster</sys:String>
     <sys:String x:Key="LOC_SPG_SwitchWithLowPrio">Görünüm değiştirirken Düşük Öncelik (Playnite çöktüğünde otomatik olarak etkinleştirilir)</sys:String>
     <sys:String x:Key="LOC_SPG_UnsupportedToolTip">Bu özelliği kendi sorumluluğunuzda kullanın. PlayniteAPI tarafından resmi olarak desteklenmez ve bu nedenle beklenmedik davranışlara yol açabilir.</sys:String>
     <sys:String x:Key="LOC_SPG_IgnoreHidden">Gizli oyunları görmezden gel</sys:String>
@@ -85,8 +85,8 @@
     <sys:String x:Key="LOC_SPG_BackgroundAnimationDuration">Animasyon Süresi:</sys:String>
     <sys:String x:Key="LOC_SPG_BackgroundRefreshInterval">Yenileme Aralığı (Dakika):</sys:String>
     <sys:String x:Key="LOC_SPG_SkipGamesInPreviousShelves">Önceki Raflarda Bulunan Oyunları Atla</sys:String>
-    <sys:String x:Key="LOC_SPG_SkipGamesInPreviousTimeframes">Skip Games present in preceding Timeframes</sys:String>
-    <sys:String x:Key="LOC_SPG_EnableTags">Create [SPG] tags on launch. Used to mark games as ignored.</sys:String>
+    <sys:String x:Key="LOC_SPG_SkipGamesInPreviousTimeframes">Önceki Zaman Dilimlerinde Mevcut Olan Oyunları Atla</sys:String>
+    <sys:String x:Key="LOC_SPG_EnableTags">Lansmanda [SPG] etiketleri oluşturun. Oyunları göz ardı edilmiş olarak işaretlemek için kullanılır.</sys:String>
     <sys:String x:Key="LOC_SPG_FixGridHeight">Sabit Izgara Yüksekliği:</sys:String>
     <sys:String x:Key="LOC_SPG_FixGridHeight_Tooltip" xml:space="preserve">Etkinleştirilirse, ızgara yüksekliği artık pencere yüksekliğine bağlı kalmaz.
 Bunun yerine, sabit bir değere ayarlanabilir. Bu değer pencere yüksekliğinden büyükse, görünüm kaydırılabilir.</sys:String>
@@ -99,7 +99,7 @@ Bu, StartPage için çok daha küçük bir bellek yeri kaplamasına yardımcı o
     <sys:String x:Key="LOC_SPG_ShowNotInstalledIndicator">Yüklü olmayan oyunları göster</sys:String>
     <sys:String x:Key="LOC_SPG_SetBackgroundToCurrentGame">StartPage arka planını o anda çalışan oyunun arka plan görüntüsüne ayarla</sys:String>
     <sys:String x:Key="LOC_SPG_SetBackgroundToCurrentGameDisableBlur">Bulanıklaştırmayı devre dışı bırak</sys:String>
-    <sys:String x:Key="LOC_SPG_HideShelveScrollbar">Hide Shelve Scrollbar</sys:String>
+    <sys:String x:Key="LOC_SPG_HideShelveScrollbar">Shelve Kaydırma Çubuğunu Gizle</sys:String>
     
     <!-- Grid -->
     <sys:String x:Key="LOC_SPG_SplitHorizonatlly">Yatay olarak böl</sys:String>
