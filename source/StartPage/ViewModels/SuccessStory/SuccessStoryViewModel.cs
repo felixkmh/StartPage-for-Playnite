@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 using Newtonsoft.Json;
@@ -10,11 +9,8 @@ using Playnite.SDK;
 using Playnite.SDK.Models;
 using System.Collections.ObjectModel;
 using LandingPage.Models;
-using PlayniteCommon.Extensions;
 using System.Windows;
 using System.ComponentModel;
-using System.Runtime.CompilerServices;
-using StartPage.SDK;
 using System.Windows.Threading;
 using StartPage.SDK.Async;
 using System.Windows.Data;
@@ -25,8 +21,8 @@ namespace LandingPage.ViewModels.SuccessStory
     {
         internal string achievementsPath;
         internal IPlayniteAPI playniteAPI;
+        internal object achievementsLock = new object();
         internal Dictionary<Guid, Achievements> achievements = new Dictionary<Guid, Achievements>();
-        public Dictionary<Guid, Achievements> Achievements => achievements;
 
         private event EventHandler<IEnumerable<Guid>> AchievementsUpdated;
 
@@ -68,8 +64,10 @@ namespace LandingPage.ViewModels.SuccessStory
             this.playniteAPI = playniteAPI;
             if (achievementsPath is string && Directory.Exists(achievementsPath))
             {
-                achievementWatcher = new FileSystemWatcher(achievementsPath, "*.json");
-                achievementWatcher.NotifyFilter = NotifyFilters.LastWrite;
+                achievementWatcher = new FileSystemWatcher(achievementsPath, "*.json")
+                {
+                    NotifyFilter = NotifyFilters.LastWrite
+                };
                 achievementWatcher.Created += AchievementWatcher_CreatedAsync;
                 achievementWatcher.Deleted += AchievementWatcher_DeletedAsync;
                 achievementWatcher.Changed += AchievementWatcher_ChangedAsync;
@@ -127,7 +125,10 @@ namespace LandingPage.ViewModels.SuccessStory
                 {
                     if (await ParseAchievementsAsync(id) is Achievements achievements)
                     {
-                        Achievements[id] = achievements;
+                        lock (achievementsLock)
+                        {
+                            this.achievements[id] = achievements;
+                        }
                         AchievementsUpdated?.Invoke(this, new[] { id });
                     }
                 }
@@ -141,7 +142,12 @@ namespace LandingPage.ViewModels.SuccessStory
                 var idString = Path.GetFileNameWithoutExtension(e.Name);
                 if (Guid.TryParse(idString, out var id))
                 {
-                    if (achievements.Remove(id))
+                    bool removed = false;
+                    lock (achievementsLock)
+                    {
+                        removed = achievements.Remove(id);
+                    }
+                    if (removed)
                     {
                         AchievementsUpdated?.Invoke(this, new[] { id });
                     }
@@ -158,7 +164,11 @@ namespace LandingPage.ViewModels.SuccessStory
                 {
                     if (await ParseAchievementsAsync(id) is Achievements achievements)
                     {
-                        Achievements[id] = achievements;
+                        lock (achievementsLock)
+                        {
+                            this.achievements[id] = achievements;
+                        }
+
                         AchievementsUpdated?.Invoke(this, new[] { id });
                     }
                 }
@@ -195,16 +205,19 @@ namespace LandingPage.ViewModels.SuccessStory
 
         public List<TempAchievement> GetLatestAchievements(int achievementsOverall = 6, int achievementsPerGame = 3)
         {
-            return Achievements
-                .AsParallel()
-                .SelectMany(pair => pair.Value.Items
-                    .OrderByDescending(a => a.DateUnlocked ?? default)
-                    .Take(achievementsPerGame)
-                    .Select(a => new TempAchievement { Game = playniteAPI.Database.Games.Get(pair.Value.Id), Achievement = a, Source = pair.Value })
-                    .Where(a => a.Game is Game))
-                .Where(a => (!a.Achievement.DateUnlocked?.Equals(default)) ?? false)
-                .OrderByDescending(a => a.Achievement.DateUnlocked ?? default)
-                .Take(achievementsOverall).ToList();
+            lock (achievementsLock)
+            {
+                return achievements
+                    .AsParallel()
+                    .SelectMany(pair => pair.Value.Items
+                        .OrderByDescending(a => a.DateUnlocked ?? default)
+                        .Take(achievementsPerGame)
+                        .Select(a => new TempAchievement { Game = playniteAPI.Database.Games.Get(pair.Value.Id), Achievement = a, Source = pair.Value })
+                        .Where(a => a.Game is Game))
+                    .Where(a => (!a.Achievement.DateUnlocked?.Equals(default)) ?? false)
+                    .OrderByDescending(a => a.Achievement.DateUnlocked ?? default)
+                    .Take(achievementsOverall).ToList();
+            }
         }
 
         public async Task<List<TempAchievement>> GetLatestAchievementsAsync(int achievementsOverall = 6, int achievementsPerGame = 3)
@@ -320,9 +333,14 @@ namespace LandingPage.ViewModels.SuccessStory
                             .OfType<Achievements>();
                         var withAchievements = deserializedFiles
                             .Where(ac => (ac.Items?.Count() ?? 0) > 0);
-                        // achievements = withAchievements.ToDictionary(ac => ac.Id);
-                        achievements = withAchievements.ToDictionary(ac => ac.Id);
-                        AchievementsUpdated?.Invoke(this, achievements.Keys);
+
+                        IEnumerable<Guid> keys;
+                        lock (achievementsLock)
+                        {
+                            achievements = withAchievements.ToDictionary(ac => ac.Id);
+                            keys = achievements.Keys.ToList();
+                        }
+                        AchievementsUpdated?.Invoke(this, keys);
                     }
                 }
             }

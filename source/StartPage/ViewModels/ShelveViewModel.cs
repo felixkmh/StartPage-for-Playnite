@@ -576,7 +576,7 @@ namespace LandingPage.ViewModels
 
         private List<Game> GetGames(ShelveProperties shelveProperties)
         {
-            IEnumerable<Game> games = playniteAPI.Database.Games.AsParallel()
+            IEnumerable<Game> games = playniteAPI.Database.Games.ToList().AsParallel()
                                     .Where(g => (!g.TagIds?.Contains(LandingPageExtension.Instance.SettingsViewModel.Settings.IgnoreTagId)) ?? true)
                                     .Where(g => g.Favorite || !shelveProperties.FavoritesOnly)
                                     .Where(g => !g.Hidden || !shelveProperties.IgnoreHidden)
