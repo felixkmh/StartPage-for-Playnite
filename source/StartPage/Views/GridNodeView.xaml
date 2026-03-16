@@ -16,6 +16,27 @@
              Background="Transparent"
              SizeChanged="UserControl_SizeChanged">
     <UserControl.Resources>
+        <Style x:Key="GlyphTextBoxStyle" TargetType="TextBlock" BasedOn="{StaticResource BaseTextBlockStyle}" x:Shared="True">
+            <Setter Property="Margin" Value="-2,-2,-2,-2"/>
+            <Setter Property="TextOptions.TextFormattingMode" Value="Display"/>
+            <Setter Property="SnapsToDevicePixels" Value="True"/>
+            <Setter Property="FontFamily" Value="Segoe UI Symbol"/>
+        </Style>
+        <Viewbox x:Key="HorizontalSplitIcon" x:Shared="True" Stretch="Uniform">
+            <TextBlock Text="⎅" Style="{StaticResource GlyphTextBoxStyle}"/>
+        </Viewbox>
+        <Viewbox x:Key="VerticalAlignmentIcon" x:Shared="True" Stretch="Uniform">
+            <TextBlock Text="↕" Style="{StaticResource GlyphTextBoxStyle}"/>
+        </Viewbox>
+        <Viewbox x:Key="HorizontalAlignmentIcon" x:Shared="True" Stretch="Uniform">
+            <TextBlock Text="↔" Style="{StaticResource GlyphTextBoxStyle}"/>
+        </Viewbox>
+        <Viewbox x:Key="VerticalSplitIcon" x:Shared="True" RenderTransformOrigin="0.5,0.5" Stretch="Uniform">
+            <Viewbox.RenderTransform>
+                <RotateTransform Angle="90"/>
+            </Viewbox.RenderTransform>
+            <TextBlock Text="⎅" Style="{StaticResource GlyphTextBoxStyle}"/>
+        </Viewbox>
         <conv:ThicknessToDoubleConverter x:Key="ThicknessToDoubleConverter"/>
         <conv:DoubleToThicknessConverter x:Key="DoubleToThicknessConverter"/>
         <sys:Boolean x:Key="True">True</sys:Boolean>
@@ -164,7 +185,7 @@
                 </ContentControl.Style>
             </ContentControl>
         </Grid>
-        
+
         <Grid Visibility="{Binding IsLeaf, Converter={StaticResource BooleanToVisibilityConverter}}">
             <Border x:Name="EditPanel" CornerRadius="0" Margin="0" Background="Transparent" Visibility="{Binding EditModeEnabled, Converter={StaticResource BooleanToVisibilityConverter}}"
                     Opacity="1"
@@ -174,7 +195,7 @@
                     MouseMove="Border_PreviewMouseMove"
                     Cursor="SizeAll">
                 <Border.ContextMenu>
-                    <ContextMenu>
+                    <ContextMenu UseLayoutRounding="True">
                         <MenuItem>
                             <MenuItem.Header>
                                 <Grid>
@@ -187,8 +208,8 @@
                                 </Grid>
                             </MenuItem.Header>
                         </MenuItem>
-                        <MenuItem Header="{DynamicResource LOC_SPG_SplitHorizonatlly}" Command="{Binding SplitHorizontallyCommand}"/>
-                        <MenuItem Header="{DynamicResource LOC_SPG_SplitVertically}" Command="{Binding SplitVerticallyCommand}"/>
+                        <MenuItem Header="{DynamicResource LOC_SPG_SplitHorizonatlly}" Command="{Binding SplitHorizontallyCommand}" Icon="{StaticResource HorizontalSplitIcon}"/>
+                        <MenuItem Header="{DynamicResource LOC_SPG_SplitVertically}" Command="{Binding SplitVerticallyCommand}" Icon="{StaticResource VerticalSplitIcon}"/>
                         <Separator/>
                         <MenuItem Header="{DynamicResource LOC_SPG_MergeWith}" IsEnabled="{Binding Parent, Converter={StaticResource NullToBoolConverter}}">
                             <MenuItem Command="{Binding MergeWithPreviousPanelCommand}">
@@ -217,7 +238,7 @@
                             </MenuItem>
                         </MenuItem>
                         <Separator/>
-                        <MenuItem Header="{DynamicResource LOC_SPG_VerticalAlignment}" IsEnabled="{Binding IsLeaf}">
+                        <MenuItem Header="{DynamicResource LOC_SPG_VerticalAlignment}" IsEnabled="{Binding IsLeaf}" Icon="{StaticResource VerticalAlignmentIcon}">
                             <MenuItem Header="{DynamicResource LOC_SPG_AlignmentStretch}" Command="{Binding SetVerticalAlignmentCommand}" CommandParameter="{x:Static VerticalAlignment.Stretch}"
                                       IsEnabled="{Binding GridNode.VerticalAlignment, Converter={StaticResource InvertedObjectEqualityToBoolConverter}, ConverterParameter={x:Static VerticalAlignment.Stretch}}"/>
                             <MenuItem Header="{DynamicResource LOC_SPG_VerticalAlignmentTop}" Command="{Binding SetVerticalAlignmentCommand}" CommandParameter="{x:Static VerticalAlignment.Top}"
@@ -227,7 +248,7 @@
                             <MenuItem Header="{DynamicResource LOC_SPG_VerticalAlignmentBottom}" Command="{Binding SetVerticalAlignmentCommand}" CommandParameter="{x:Static VerticalAlignment.Bottom}"
                                       IsEnabled="{Binding GridNode.VerticalAlignment, Converter={StaticResource InvertedObjectEqualityToBoolConverter}, ConverterParameter={x:Static VerticalAlignment.Bottom}}"/>
                         </MenuItem>
-                        <MenuItem Header="{DynamicResource LOC_SPG_HorizontalAlignment}" IsEnabled="{Binding IsLeaf}">
+                        <MenuItem Header="{DynamicResource LOC_SPG_HorizontalAlignment}" IsEnabled="{Binding IsLeaf}" Icon="{StaticResource HorizontalAlignmentIcon}">
                             <MenuItem Header="{DynamicResource LOC_SPG_AlignmentStretch}" Command="{Binding SetHorizontalAlignmentCommand}" CommandParameter="{x:Static HorizontalAlignment.Stretch}"
                                       IsEnabled="{Binding GridNode.HorizontalAlignment, Converter={StaticResource InvertedObjectEqualityToBoolConverter}, ConverterParameter={x:Static HorizontalAlignment.Stretch}}"/>
                             <MenuItem Header="{DynamicResource LOC_SPG_HorizontalAlignmentLeft}" Command="{Binding SetHorizontalAlignmentCommand}" CommandParameter="{x:Static HorizontalAlignment.Left}"
@@ -378,8 +399,8 @@
                 </Grid>
             </Border>
         </Grid>
-        
+
     </Grid>
 
-    
+
 </UserControl>
