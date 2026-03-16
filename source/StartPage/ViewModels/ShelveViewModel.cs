@@ -72,6 +72,7 @@ namespace LandingPage.ViewModels
             // UpdateGames(shelveProperties);
             this.shelveProperties.PropertyChanged += ShelveProperties_PropertyChangedAsync;
             PropertyChanged += ShelveViewModel_PropertyChangedAsync;
+
             resetFiltersCommand = new RelayCommand(async () =>
             {
                 ShelveProperties.Categories.Clear();
@@ -104,6 +105,11 @@ namespace LandingPage.ViewModels
                     ShelveProperties.Order = Order.Ascending;
                 }
             }, () => ShelveProperties != null);
+        }
+
+        private ToggleFilter GetNoneToggleFilter(HashSet<Guid> source)
+        {
+            return new ToggleFilter(Guid.Empty, ResourceProvider.GetString("LOCNone"), source, this);
         }
 
         private async void ShelveViewModel_PropertyChangedAsync(object sender, System.ComponentModel.PropertyChangedEventArgs e)
@@ -188,26 +194,26 @@ namespace LandingPage.ViewModels
             public ShelveViewModel ViewModel { get; private set; }
         }
 
-        public IEnumerable<ToggleFilter> Categories => playniteAPI.Database.Categories
-                .Select(item => new ToggleFilter(item.Id, item.Name, shelveProperties.Categories, this, shelveProperties.Categories?.Contains(item.Id) ?? false)).OrderByDescending(f => f.IsChecked).ThenBy(f => f.Name);
+        public IEnumerable<ToggleFilter> Categories => new List<ToggleFilter>() { GetNoneToggleFilter(shelveProperties.Categories) }.Concat(playniteAPI.Database.Categories
+                .Select(item => new ToggleFilter(item.Id, item.Name, shelveProperties.Categories, this, shelveProperties.Categories?.Contains(item.Id) ?? false)).OrderByDescending(f => f.IsChecked).ThenBy(f => f.Name));
 
-        public IEnumerable<ToggleFilter> Tags => playniteAPI.Database.Tags
-                .Select(item => new ToggleFilter(item.Id, item.Name, shelveProperties.Tags, this, shelveProperties.Tags?.Contains(item.Id) ?? false)).OrderByDescending(f => f.IsChecked).ThenBy(f => f.Name);
+        public IEnumerable<ToggleFilter> Tags => new List<ToggleFilter>() { GetNoneToggleFilter(shelveProperties.Tags) }.Concat(playniteAPI.Database.Tags
+                .Select(item => new ToggleFilter(item.Id, item.Name, shelveProperties.Tags, this, shelveProperties.Tags?.Contains(item.Id) ?? false)).OrderByDescending(f => f.IsChecked).ThenBy(f => f.Name));
 
-        public IEnumerable<ToggleFilter> CompletionStatus => playniteAPI.Database.CompletionStatuses
-                .Select(item => new ToggleFilter(item.Id, item.Name, shelveProperties.CompletionStatus, this, shelveProperties.CompletionStatus?.Contains(item.Id) ?? false)).OrderByDescending(f => f.IsChecked).ThenBy(f => f.Name);
+        public IEnumerable<ToggleFilter> CompletionStatus => new List<ToggleFilter>() { GetNoneToggleFilter(shelveProperties.CompletionStatus) }.Concat(playniteAPI.Database.CompletionStatuses
+                .Select(item => new ToggleFilter(item.Id, item.Name, shelveProperties.CompletionStatus, this, shelveProperties.CompletionStatus?.Contains(item.Id) ?? false)).OrderByDescending(f => f.IsChecked).ThenBy(f => f.Name));
 
-        public IEnumerable<ToggleFilter> Features => playniteAPI.Database.Features
-                .Select(item => new ToggleFilter(item.Id, item.Name, shelveProperties.Features, this, shelveProperties.Features?.Contains(item.Id) ?? false)).OrderByDescending(f => f.IsChecked).ThenBy(f => f.Name);
+        public IEnumerable<ToggleFilter> Features => new List<ToggleFilter>() { GetNoneToggleFilter(shelveProperties.Features) }.Concat(playniteAPI.Database.Features
+                .Select(item => new ToggleFilter(item.Id, item.Name, shelveProperties.Features, this, shelveProperties.Features?.Contains(item.Id) ?? false)).OrderByDescending(f => f.IsChecked).ThenBy(f => f.Name));
 
-        public IEnumerable<ToggleFilter> Platforms => playniteAPI.Database.Platforms
-                .Select(item => new ToggleFilter(item.Id, item.Name, shelveProperties.Platforms, this, shelveProperties.Platforms?.Contains(item.Id) ?? false)).OrderByDescending(f => f.IsChecked).ThenBy(f => f.Name);
+        public IEnumerable<ToggleFilter> Platforms => new List<ToggleFilter>() { GetNoneToggleFilter(shelveProperties.Platforms) }.Concat(playniteAPI.Database.Platforms
+                .Select(item => new ToggleFilter(item.Id, item.Name, shelveProperties.Platforms, this, shelveProperties.Platforms?.Contains(item.Id) ?? false)).OrderByDescending(f => f.IsChecked).ThenBy(f => f.Name));
 
-        public IEnumerable<ToggleFilter> Sources => playniteAPI.Database.Sources
-                .Select(item => new ToggleFilter(item.Id, item.Name, shelveProperties.Sources, this, shelveProperties.Sources?.Contains(item.Id) ?? false)).OrderByDescending(f => f.IsChecked).ThenBy(f => f.Name);
+        public IEnumerable<ToggleFilter> Sources => new List<ToggleFilter>() { GetNoneToggleFilter(shelveProperties.Sources) }.Concat(playniteAPI.Database.Sources
+                .Select(item => new ToggleFilter(item.Id, item.Name, shelveProperties.Sources, this, shelveProperties.Sources?.Contains(item.Id) ?? false)).OrderByDescending(f => f.IsChecked).ThenBy(f => f.Name));
 
-        public IEnumerable<ToggleFilter> Genres => playniteAPI.Database.Genres
-                .Select(item => new ToggleFilter(item.Id, item.Name, shelveProperties.Genres, this, shelveProperties.Genres?.Contains(item.Id) ?? false)).OrderByDescending(f => f.IsChecked).ThenBy(f => f.Name);
+        public IEnumerable<ToggleFilter> Genres => new List<ToggleFilter>() { GetNoneToggleFilter(shelveProperties.Genres) }.Concat(playniteAPI.Database.Genres
+                .Select(item => new ToggleFilter(item.Id, item.Name, shelveProperties.Genres, this, shelveProperties.Genres?.Contains(item.Id) ?? false)).OrderByDescending(f => f.IsChecked).ThenBy(f => f.Name));
 
         internal class ScoreGroupComparer : IComparer, IComparer<ScoreGroup>
         {
@@ -436,7 +442,7 @@ namespace LandingPage.ViewModels
             using (var defer = CollectionViewSource.DeferRefresh())
             {
                 Games.Clear();
-                for(int i = 0; i < shelveProperties.NumberOfGames; i++)
+                for (int i = 0; i < shelveProperties.NumberOfGames; i++)
                 {
                     Games.Add(new GameModel(DummyGame));
                 }
@@ -583,19 +589,26 @@ namespace LandingPage.ViewModels
                                     .Where(g => g.IsInstalled || !shelveProperties.InstalledOnly);
             // apply filters
             if (shelveProperties.Categories?.Any() ?? false)
-                games = games.Where(g => g.CategoryIds?.Any(id => shelveProperties.Categories.Contains(id)) ?? false);
+                games = games.Where(g => g.CategoryIds?.Any(id => shelveProperties.Categories.Contains(id)) ?? false
+                    || (shelveProperties.Categories.FirstOrDefault(c => c == Guid.Empty) != null && !(g.CategoryIds?.Any() ?? false)));
             if (shelveProperties.Genres?.Any() ?? false)
-                games = games.Where(g => g.GenreIds?.Any(id => shelveProperties.Genres.Contains(id)) ?? false);
+                games = games.Where(g => g.GenreIds?.Any(id => shelveProperties.Genres.Contains(id)) ?? false
+                    || (shelveProperties.Genres.FirstOrDefault(c => c == Guid.Empty) != null && !(g.GenreIds?.Any() ?? false)));
             if (shelveProperties.Tags?.Any() ?? false)
-                games = games.Where(g => g.TagIds?.Any(id => shelveProperties.Tags.Contains(id)) ?? false);
+                games = games.Where(g => g.TagIds?.Any(id => shelveProperties.Tags.Contains(id)) ?? false
+                    || (shelveProperties.Tags.FirstOrDefault(c => c == Guid.Empty) != null && !(g.TagIds?.Any() ?? false)));
             if (shelveProperties.CompletionStatus?.Any() ?? false)
-                games = games.Where(g => shelveProperties.CompletionStatus.Contains(g.CompletionStatusId));
+                games = games.Where(g => shelveProperties.CompletionStatus.Contains(g.CompletionStatusId)
+                    || (shelveProperties.CompletionStatus.FirstOrDefault(c => c == Guid.Empty) != null && g.CompletionStatus == null));
             if (shelveProperties.Features?.Any() ?? false)
-                games = games.Where(g => g.FeatureIds?.Any(id => shelveProperties.Features.Contains(id)) ?? false);
+                games = games.Where(g => g.FeatureIds?.Any(id => shelveProperties.Features.Contains(id)) ?? false
+                    || (shelveProperties.Features.FirstOrDefault(c => c == Guid.Empty) != null && !(g.FeatureIds?.Any() ?? false)));
             if (shelveProperties.Sources?.Any() ?? false)
-                games = games.Where(g => shelveProperties.Sources.Contains(g.SourceId));
+                games = games.Where(g => shelveProperties.Sources.Contains(g.SourceId)
+                    || (shelveProperties.Sources.FirstOrDefault(c => c == Guid.Empty) != null && g.Source == null));
             if (shelveProperties.Platforms?.Any() ?? false)
-                games = games.Where(g => g.PlatformIds?.Any(id => shelveProperties.Platforms.Contains(id)) ?? false);
+                games = games.Where(g => g.PlatformIds?.Any(id => shelveProperties.Platforms.Contains(id)) ?? false
+                    || (shelveProperties.Platforms.FirstOrDefault(c => c == Guid.Empty) != null && !(g.PlatformIds?.Any() ?? false)));
 
             if (ShelveSettings.SkipGamesInPreviousShelves)
             {
