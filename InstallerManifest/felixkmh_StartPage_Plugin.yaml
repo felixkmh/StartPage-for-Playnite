@@ -1,5 +1,17 @@
 AddonId: felixkmh_StartPage_Plugin
-Packages:  
+Packages:
+  - Version: 2.13.0
+    RequiredApiVersion: 6.1.0
+    ReleaseDate: 2026-03-16
+    PackageUrl: https://github.com/felixkmh/StartPage-for-Playnite/releases/download/v2.13.0/felixkmh_StartPage_Plugin_2_13_0.pext
+    Changelog:
+      - Fix background images not loading from urls (thx to Kryeker)
+      - Add None filter items to shelves to filter for games with no tags, categories, etc.
+      - Prevent GameDetails from staying open after Playnite lost focus
+      - Fallback to default config when config file is corrupted instead of crashing
+      - Add icons for context menus in edit mode
+      - Fix random crash when launching/closing games with the SuccessStory view enabled
+      - Localization updates
   - Version: 2.12.6
     RequiredApiVersion: 6.1.0
     ReleaseDate: 2023-08-28
@@ -138,7 +150,7 @@ Packages:
     ReleaseDate: 2022-06-06
     PackageUrl: https://github.com/felixkmh/StartPage-for-Playnite/releases/download/v2.6.0/felixkmh_StartPage_Plugin_2_6_0.pext
     Changelog:
-      - MostPlayedView can have any number of entries (new one is added if the last entry is not None) 
+      - MostPlayedView can have any number of entries (new one is added if the last entry is not None)
   - Version: 2.5.0
     RequiredApiVersion: 6.1.0
     ReleaseDate: 2022-05-28
@@ -185,7 +197,7 @@ Packages:
     Changelog:
       - added option to load cover images at a lower resolution (enabled by default)
       - fixed shelve instances not being saved properly in some cases
-      - localization updates 
+      - localization updates
   - Version: 2.3.2
     RequiredApiVersion: 6.1.0
     ReleaseDate: 2022-05-01
@@ -356,7 +368,7 @@ Packages:
       - added option to choose the background depending on the last hovered game
       - added option to select an image folder of which random images are chosen as the background
       - added option to automatically refresh random background images (from random games or a folder) every x minutes (set to 0 (disabled) by default)
-      - added support for locally available trailers managed by ExtraMetadata extension in game details popup 
+      - added support for locally available trailers managed by ExtraMetadata extension in game details popup
       - added option to set opacity of the game background info icon
       - updated localizations
   - Version: 1.10.0
