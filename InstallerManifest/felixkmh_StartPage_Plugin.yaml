@@ -1,5 +1,11 @@
 AddonId: felixkmh_StartPage_Plugin
 Packages:
+  - Version: 2.13.1
+    RequiredApiVersion: 6.1.0
+    ReleaseDate: 2026-03-17
+    PackageUrl: https://github.com/felixkmh/StartPage-for-Playnite/releases/download/v2.13.1/felixkmh_StartPage_Plugin_2_13_1.pext
+    Changelog:
+      - Fix None filter items not being displayed correctly after restart
   - Version: 2.13.0
     RequiredApiVersion: 6.1.0
     ReleaseDate: 2026-03-16
