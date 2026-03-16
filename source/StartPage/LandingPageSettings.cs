@@ -2,22 +2,18 @@
 using LandingPage.Models;
 using LandingPage.Models.GameActivity;
 using LandingPage.Models.Layout;
-using Newtonsoft.Json;
 using Playnite.SDK;
 using Playnite.SDK.Data;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Diagnostics;
 using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using PlayniteCommon.UI;
+using System.IO;
 
 namespace LandingPage
 {
@@ -287,8 +283,28 @@ namespace LandingPage
             // Injecting your plugin instance is required for Save/Load method because Playnite saves data to a location based on what plugin requested the operation.
             this.plugin = plugin;
 
-            // Load saved settings.
-            var savedSettings = plugin.LoadPluginSettings<LandingPageSettings>();
+            // Load saved settings
+            LandingPageSettings savedSettings = null;
+            try
+            {
+                savedSettings = plugin.LoadPluginSettings<LandingPageSettings>();
+            }
+            catch (Exception ex) {
+                LandingPageExtension.logger.Error(ex, "Failed to load settings");
+                try
+                {
+                    var configPath = Path.Combine(plugin.PlayniteApi.Paths.ExtensionsDataPath, plugin.Id.ToString());
+                    var currentFilePath = Path.Combine(configPath, "config.json");
+                    var newFilePath = Path.Combine(configPath, $"config_{DateTime.Now.ToString("yyyy_MM_dd-HH_mm_ss")}.json");
+                    File.Move(currentFilePath, newFilePath);
+                    plugin.PlayniteApi.Dialogs.ShowMessage($"StartPage config could not be loaded. Falling back to default config.\n\nThe possibly corrupted config was moved to '{newFilePath}' for debugging purposes.", "StartPage Error");
+                    LandingPageExtension.logger.Info($"Moved possibly corrupted config from '{currentFilePath}' to '{newFilePath}'");
+                } catch (Exception) {
+                    plugin.PlayniteApi.Dialogs.ShowMessage($"StartPage config could not be loaded. Falling back to default config.", "StartPage Error");
+                }
+                
+            }
+             
 
             // LoadPluginSettings returns null if not saved data is available.
             if (savedSettings != null)
@@ -297,6 +313,7 @@ namespace LandingPage
             }
             else
             {
+                LandingPageExtension.logger.Info("No loaded settings found. Falling back to default");
                 Settings = new LandingPageSettings();
                 Settings.ShelveProperties = new ObservableCollection<ShelveProperties> { ShelveProperties.RecentlyPlayed, ShelveProperties.RecentlyAdded };
             }
