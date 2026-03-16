@@ -1,45 +1,45 @@
 ﻿<?xml version="1.0"?>
 <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:sys="clr-namespace:System;assembly=mscorlib">
 
-    <sys:String x:Key="LOC_SPG_MostPlayedGame">Most Played</sys:String>
-    <sys:String x:Key="LOC_SPG_LatestReleaseGame">Latest Release</sys:String>
-    <sys:String x:Key="LOC_SPG_RecentAchievements">Recent Achievements</sys:String>
-    <sys:String x:Key="LOC_SPG_RecentlyAddedGames">Recently Added</sys:String>
+    <sys:String x:Key="LOC_SPG_MostPlayedGame">最もプレイした</sys:String>
+    <sys:String x:Key="LOC_SPG_LatestReleaseGame">最新のリリース</sys:String>
+    <sys:String x:Key="LOC_SPG_RecentAchievements">最近の実績</sys:String>
+    <sys:String x:Key="LOC_SPG_RecentlyAddedGames">最近追加</sys:String>
 
-    <sys:String x:Key="LOC_SPG_DailyPlaytime">Daily Playtime</sys:String>
-    <sys:String x:Key="LOC_SPG_WeeklyPlaytime">Weekly Playtime</sys:String>
-    <sys:String x:Key="LOC_SPG_MonthlyPlaytime">Monthly Playtime</sys:String>
-    <sys:String x:Key="LOC_SPG_PlaytimePerSource">Playtime per Source</sys:String>
-    <sys:String x:Key="LOC_SPG_MostPlayedWeekly">Most Played this Week</sys:String>
-    <sys:String x:Key="LOC_SPG_TotalPlaytime" xml:space="preserve">Total: </sys:String>
-    <sys:String x:Key="LOC_SPG_LastSevenDays">Last 7 Days</sys:String>
-    <sys:String x:Key="LOC_SPG_LastThirtyDays">Last 30 Days</sys:String>
-    <sys:String x:Key="LOC_SPG_TimeframeNone">None</sys:String>
+    <sys:String x:Key="LOC_SPG_DailyPlaytime">一日のプレイ時間</sys:String>
+    <sys:String x:Key="LOC_SPG_WeeklyPlaytime">週間プレイ時間</sys:String>
+    <sys:String x:Key="LOC_SPG_MonthlyPlaytime">月間プレイ時間</sys:String>
+    <sys:String x:Key="LOC_SPG_PlaytimePerSource">ソース別プレイ時間</sys:String>
+    <sys:String x:Key="LOC_SPG_MostPlayedWeekly">今週最もプレイした</sys:String>
+    <sys:String x:Key="LOC_SPG_TotalPlaytime" xml:space="preserve">トータル： </sys:String>
+    <sys:String x:Key="LOC_SPG_LastSevenDays">直近 7 日</sys:String>
+    <sys:String x:Key="LOC_SPG_LastThirtyDays">直近 30 日</sys:String>
+    <sys:String x:Key="LOC_SPG_TimeframeNone">無</sys:String>
 
     <sys:String x:Key="LOC_SPG_SetGameAsBackground">Set as StartPage background</sys:String>
 
     <!-- Timeframes -->
-    <sys:String x:Key="LOC_SPG_TimeframeLastDay">Last 24 Hours</sys:String>
-    <sys:String x:Key="LOC_SPG_TimeframeLast7Days">Last Week</sys:String>
-    <sys:String x:Key="LOC_SPG_TimeframeLast14Days">Last 2 Weeks</sys:String>
-    <sys:String x:Key="LOC_SPG_TimeframeLast21Days">Last 3 Weeks</sys:String>
-    <sys:String x:Key="LOC_SPG_TimeframeLastMonth">Last Month</sys:String>
-    <sys:String x:Key="LOC_SPG_TimeframeLast3Months">Last 3 Months</sys:String>
-    <sys:String x:Key="LOC_SPG_TimeframeLast6Months">Last 6 Months</sys:String>
-    <sys:String x:Key="LOC_SPG_TimeframeLastYear">Last Year</sys:String>
-    <sys:String x:Key="LOC_SPG_TimeframeLast5Years">Last 5 Years</sys:String>
-    <sys:String x:Key="LOC_SPG_TimeframeAllTime">All Time</sys:String>
+    <sys:String x:Key="LOC_SPG_TimeframeLastDay">直近 24 時間</sys:String>
+    <sys:String x:Key="LOC_SPG_TimeframeLast7Days">先週</sys:String>
+    <sys:String x:Key="LOC_SPG_TimeframeLast14Days">2 週間前</sys:String>
+    <sys:String x:Key="LOC_SPG_TimeframeLast21Days">3 週間前</sys:String>
+    <sys:String x:Key="LOC_SPG_TimeframeLastMonth">先月</sys:String>
+    <sys:String x:Key="LOC_SPG_TimeframeLast3Months">3 か月前</sys:String>
+    <sys:String x:Key="LOC_SPG_TimeframeLast6Months">6 か月前</sys:String>
+    <sys:String x:Key="LOC_SPG_TimeframeLastYear">去年</sys:String>
+    <sys:String x:Key="LOC_SPG_TimeframeLast5Years">5 年前</sys:String>
+    <sys:String x:Key="LOC_SPG_TimeframeAllTime">全期間</sys:String>
 
     <!--Settings Tabs-->
-    <sys:String x:Key="LOC_SPG_CommonTab">Common</sys:String>
-    <sys:String x:Key="LOC_SPG_BackgroundTab">Background</sys:String>
+    <sys:String x:Key="LOC_SPG_CommonTab">コモン</sys:String>
+    <sys:String x:Key="LOC_SPG_BackgroundTab">バックグラウンド</sys:String>
     
     <!--BackgroundImageSource Enum-->
-    <sys:String x:Key="LOC_SPG_BackgroundImageSourceLastPlayed">Last Played</sys:String>
-    <sys:String x:Key="LOC_SPG_BackgroundImageSourceLastAdded">Last Added</sys:String>
-    <sys:String x:Key="LOC_SPG_BackgroundImageSourceMostPlayed">Most Played</sys:String>
-    <sys:String x:Key="LOC_SPG_BackgroundImageSourceRandom">Random</sys:String>
-    <sys:String x:Key="LOC_SPG_BackgroundImageSourceLastSelected">Last Selected</sys:String>
+    <sys:String x:Key="LOC_SPG_BackgroundImageSourceLastPlayed">最後にプレイ</sys:String>
+    <sys:String x:Key="LOC_SPG_BackgroundImageSourceLastAdded">最後に追加</sys:String>
+    <sys:String x:Key="LOC_SPG_BackgroundImageSourceMostPlayed">最もプレイ</sys:String>
+    <sys:String x:Key="LOC_SPG_BackgroundImageSourceRandom">ランダム</sys:String>
+    <sys:String x:Key="LOC_SPG_BackgroundImageSourceLastSelected">最後に選んだ</sys:String>
     <sys:String x:Key="LOC_SPG_BackgroundImageSourceLastHovered">Last Hovered</sys:String>
 
     <!-- Settings -->
@@ -99,6 +99,7 @@ This can lead to a much smaller memory footprint for StartPage. Will not affect 
     <sys:String x:Key="LOC_SPG_ShowNotInstalledIndicator">Indicate whether game is not installed</sys:String>
     <sys:String x:Key="LOC_SPG_SetBackgroundToCurrentGame">Set StartPage background to background image of the currently running game</sys:String>
     <sys:String x:Key="LOC_SPG_SetBackgroundToCurrentGameDisableBlur">Disable blur</sys:String>
+    <sys:String x:Key="LOC_SPG_HideShelveScrollbar">Hide Shelve Scrollbar</sys:String>
     
     <!-- Grid -->
     <sys:String x:Key="LOC_SPG_SplitHorizonatlly">Split horizontally</sys:String>
@@ -110,9 +111,9 @@ This can lead to a much smaller memory footprint for StartPage. Will not affect 
     <sys:String x:Key="LOC_SPG_MergeKeepRight">Keep right panel</sys:String>
     <sys:String x:Key="LOC_SPG_AddView">Add View</sys:String>
     <sys:String x:Key="LOC_SPG_RemoveView">Remove View</sys:String>
-    <sys:String x:Key="LOC_SPG_EditMode">Edit Mode</sys:String>
-    <sys:String x:Key="LOC_SPG_EnterEditMode">Enter Edit Mode</sys:String>
-    <sys:String x:Key="LOC_SPG_ExitEditMode">Exit Edit Mode</sys:String>
+    <sys:String x:Key="LOC_SPG_EditMode">編集モード</sys:String>
+    <sys:String x:Key="LOC_SPG_EnterEditMode">編集モードに入る</sys:String>
+    <sys:String x:Key="LOC_SPG_ExitEditMode">編集モードから出る</sys:String>
     <sys:String x:Key="LOC_SPG_ResetLayout">Reset layout to default</sys:String>
     <sys:String x:Key="LOC_SPG_DragPanelTooltip">Drag-and-Drop panels to swap them</sys:String>
     <sys:String x:Key="LOC_SPG_AddPanel">Add Panel</sys:String>

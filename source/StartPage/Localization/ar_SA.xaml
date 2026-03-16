@@ -99,6 +99,7 @@
     <sys:String x:Key="LOC_SPG_ShowNotInstalledIndicator">حدد ما إذا كانت اللعبة غير مثبتة</sys:String>
     <sys:String x:Key="LOC_SPG_SetBackgroundToCurrentGame">تعيين خلفية صفحة البداية إلى صورة الخلفية للعبة قيد التشغيل حاليا</sys:String>
     <sys:String x:Key="LOC_SPG_SetBackgroundToCurrentGameDisableBlur">تعطيل التعتيم</sys:String>
+    <sys:String x:Key="LOC_SPG_HideShelveScrollbar">Hide Shelve Scrollbar</sys:String>
     
     <!-- Grid -->
     <sys:String x:Key="LOC_SPG_SplitHorizonatlly">قسم أفقياً</sys:String>
