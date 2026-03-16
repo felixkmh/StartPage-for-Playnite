@@ -109,6 +109,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ScrollViewerHelper.cs" />
     <Compile Include="Settings\ShelvesSettings.cs" />
+    <Compile Include="Utils\PopupHelper.cs" />
     <Compile Include="ViewModels\BackgroundViewModel.cs" />
     <Compile Include="ViewModels\GameActivity\GameActivityViewModel.cs" />
     <Compile Include="ViewModels\GameActivity\MostPlayedViewModel.cs" />

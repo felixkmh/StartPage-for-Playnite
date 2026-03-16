@@ -260,18 +260,26 @@ namespace LandingPage.ViewModels
         {
             playniteAPI.Database.Games.ItemUpdated += Games_ItemUpdatedAsync;
             playniteAPI.Database.Games.ItemCollectionChanged += Games_ItemCollectionChanged;
+            Application.Current.MainWindow.Deactivated += MainWindow_Deactivated;
         }
 
         public void Unsubscribe()
         {
             playniteAPI.Database.Games.ItemUpdated -= Games_ItemUpdatedAsync;
             playniteAPI.Database.Games.ItemCollectionChanged -= Games_ItemCollectionChanged;
+            Application.Current.MainWindow.Deactivated -= MainWindow_Deactivated;
         }
 
         public void UnsubscribeSettings()
         {
             Settings.PropertyChanged -= Settings_PropertyChanged1Async;
             Settings.Settings.PropertyChanged -= Settings_PropertyChangedAsync;
+        }
+
+        private void MainWindow_Deactivated(object sender, EventArgs e)
+        {
+            ShowDetails = false;
+            CurrentlyHoveredGame = null;
         }
 
         private async void Settings_PropertyChangedAsync(object sender, PropertyChangedEventArgs e)
