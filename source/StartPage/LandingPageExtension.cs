@@ -598,7 +598,8 @@ namespace LandingPage
             {
                 if (lastBackgroundUri != null)
                 {
-                    startPageViewModel.BackgroundViewModel.BackgroundImagePath = lastBackgroundUri;
+                    if (startPageViewModel.BackgroundViewModel != null)
+                        startPageViewModel.BackgroundViewModel.BackgroundImagePath = lastBackgroundUri;
                     Settings.BlurAmount = lastBlur;
                     Settings.RenderScale = lastBackgroundScale;
                     Settings.AnimationDuration = lastAnimationDuration;
