@@ -109,7 +109,7 @@ namespace LandingPage.ViewModels
 
         private ToggleFilter GetNoneToggleFilter(HashSet<Guid> source)
         {
-            return new ToggleFilter(Guid.Empty, ResourceProvider.GetString("LOCNone"), source, this);
+            return new ToggleFilter(Guid.Empty, ResourceProvider.GetString("LOCNone"), source, this, source?.Contains(Guid.Empty) ?? false);
         }
 
         private async void ShelveViewModel_PropertyChangedAsync(object sender, System.ComponentModel.PropertyChangedEventArgs e)
