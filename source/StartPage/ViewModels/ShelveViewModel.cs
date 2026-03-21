@@ -590,25 +590,25 @@ namespace LandingPage.ViewModels
             // apply filters
             if (shelveProperties.Categories?.Any() ?? false)
                 games = games.Where(g => g.CategoryIds?.Any(id => shelveProperties.Categories.Contains(id)) ?? false
-                    || (shelveProperties.Categories.FirstOrDefault(c => c == Guid.Empty) != null && !(g.CategoryIds?.Any() ?? false)));
+                    || (shelveProperties.Categories.Contains(Guid.Empty) && !(g.CategoryIds?.Any() ?? false)));
             if (shelveProperties.Genres?.Any() ?? false)
                 games = games.Where(g => g.GenreIds?.Any(id => shelveProperties.Genres.Contains(id)) ?? false
-                    || (shelveProperties.Genres.FirstOrDefault(c => c == Guid.Empty) != null && !(g.GenreIds?.Any() ?? false)));
+                    || (shelveProperties.Genres.Contains(Guid.Empty) && !(g.GenreIds?.Any() ?? false)));
             if (shelveProperties.Tags?.Any() ?? false)
                 games = games.Where(g => g.TagIds?.Any(id => shelveProperties.Tags.Contains(id)) ?? false
-                    || (shelveProperties.Tags.FirstOrDefault(c => c == Guid.Empty) != null && !(g.TagIds?.Any() ?? false)));
+                    || (shelveProperties.Tags.Contains(Guid.Empty) && !(g.TagIds?.Any() ?? false)));
             if (shelveProperties.CompletionStatus?.Any() ?? false)
                 games = games.Where(g => shelveProperties.CompletionStatus.Contains(g.CompletionStatusId)
-                    || (shelveProperties.CompletionStatus.FirstOrDefault(c => c == Guid.Empty) != null && g.CompletionStatus == null));
+                    || (shelveProperties.CompletionStatus.Contains(Guid.Empty) && g.CompletionStatus == null));
             if (shelveProperties.Features?.Any() ?? false)
                 games = games.Where(g => g.FeatureIds?.Any(id => shelveProperties.Features.Contains(id)) ?? false
-                    || (shelveProperties.Features.FirstOrDefault(c => c == Guid.Empty) != null && !(g.FeatureIds?.Any() ?? false)));
+                    || (shelveProperties.Features.Contains(Guid.Empty) && !(g.FeatureIds?.Any() ?? false)));
             if (shelveProperties.Sources?.Any() ?? false)
                 games = games.Where(g => shelveProperties.Sources.Contains(g.SourceId)
-                    || (shelveProperties.Sources.FirstOrDefault(c => c == Guid.Empty) != null && g.Source == null));
+                    || (shelveProperties.Sources.Contains(Guid.Empty) && g.Source == null));
             if (shelveProperties.Platforms?.Any() ?? false)
                 games = games.Where(g => g.PlatformIds?.Any(id => shelveProperties.Platforms.Contains(id)) ?? false
-                    || (shelveProperties.Platforms.FirstOrDefault(c => c == Guid.Empty) != null && !(g.PlatformIds?.Any() ?? false)));
+                    || (shelveProperties.Platforms.Contains(Guid.Empty) && !(g.PlatformIds?.Any() ?? false)));
 
             if (ShelveSettings.SkipGamesInPreviousShelves)
             {
