@@ -319,7 +319,7 @@ namespace LandingPage.ViewModels.SuccessStory
                             .AsParallel()
                             .Where(path => Guid.TryParse(Path.GetFileNameWithoutExtension(path), out var id) && playniteAPI.Database.Games.Get(id) is Game);
                         var deserializedFiles = validFiles
-                            .Select(path => DeserializeAchievementsFile(path))
+                            .Select(path => { var a = DeserializeAchievementsFile(path); a.GameId = Guid.Parse(Path.GetFileNameWithoutExtension(path)); return a; })
                             .OfType<Achievements>();
                         var withAchievements = deserializedFiles
                             .Where(ac => (ac.Items?.Count() ?? 0) > 0);
@@ -360,6 +360,7 @@ namespace LandingPage.ViewModels.SuccessStory
                             var gameAchievements = DeserializeAchievementsFile(path);
                             if (gameAchievements is Achievements && gameAchievements.Items.Any(a => (!a.DateUnlocked?.Equals(default)) ?? false))
                             {
+                                gameAchievements.GameId = gameId;
                                 return gameAchievements;
                             }
                         }
