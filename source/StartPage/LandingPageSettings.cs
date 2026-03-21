@@ -14,6 +14,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using PlayniteCommon.UI;
 using System.IO;
+using LandingPage.Settings;
 
 namespace LandingPage
 {
@@ -49,9 +50,16 @@ namespace LandingPage
         // workaround to get this module to be loaded by Playnite
         private Gu.Wpf.NumericInput.DoubleBox _ = new Gu.Wpf.NumericInput.DoubleBox();
 
+        private AchievementsProvider _achievementsProvider = AchievementsProvider.SuccessStory;
+        public AchievementsProvider SelectedAchievementsProvider
+        {
+            get => _achievementsProvider;
+            set => SetValue(ref _achievementsProvider, value);
+        }
+
         private bool hideScrollbarInShelves = false;
         public bool HideScrollbarInShelves { get => hideScrollbarInShelves; set => SetValue(ref hideScrollbarInShelves, value); }
-        
+
         private bool fixGridSize = false;
         public bool FixGridSize { get => fixGridSize; set => SetValue(ref fixGridSize, value); }
 
@@ -289,7 +297,8 @@ namespace LandingPage
             {
                 savedSettings = plugin.LoadPluginSettings<LandingPageSettings>();
             }
-            catch (Exception ex) {
+            catch (Exception ex)
+            {
                 LandingPageExtension.logger.Error(ex, "Failed to load settings");
                 try
                 {
@@ -299,12 +308,14 @@ namespace LandingPage
                     File.Move(currentFilePath, newFilePath);
                     plugin.PlayniteApi.Dialogs.ShowMessage($"StartPage config could not be loaded. Falling back to default config.\n\nThe possibly corrupted config was moved to '{newFilePath}' for debugging purposes.", "StartPage Error");
                     LandingPageExtension.logger.Info($"Moved possibly corrupted config from '{currentFilePath}' to '{newFilePath}'");
-                } catch (Exception) {
+                }
+                catch (Exception)
+                {
                     plugin.PlayniteApi.Dialogs.ShowMessage($"StartPage config could not be loaded. Falling back to default config.", "StartPage Error");
                 }
-                
+
             }
-             
+
 
             // LoadPluginSettings returns null if not saved data is available.
             if (savedSettings != null)
@@ -325,7 +336,7 @@ namespace LandingPage
 
             if (Settings.MostPlayedOptions == null)
             {
-                Settings.MostPlayedOptions = new ObservableCollection<MostPlayedOptions> { 
+                Settings.MostPlayedOptions = new ObservableCollection<MostPlayedOptions> {
                     new MostPlayedOptions { Timeframe = Timeframe.Last14Days },
                     new MostPlayedOptions { Timeframe = Timeframe.Last3Month },
                     new MostPlayedOptions { Timeframe = Timeframe.AllTime    }

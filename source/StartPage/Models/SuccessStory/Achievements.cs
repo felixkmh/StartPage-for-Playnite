@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace LandingPage.Models.SuccessStory
 {
-    public class Achievements : ObservableObject, IEqualityComparer<Achievements>
+    public class Achievements : ObservableObject, IEqualityComparer<Achievements>, IGameAchievementsInfo
     {
         private List<Achievement> items = new List<Achievement>();
         private bool haveAchivements;
@@ -18,6 +18,7 @@ namespace LandingPage.Models.SuccessStory
         private int locked;
         private int progression;
         private Guid id;
+        private Guid gameId;
         private string name;
 
         public List<Achievement> Items { get => items; set { items = value; OnPropertyChanged(); } }
@@ -27,9 +28,20 @@ namespace LandingPage.Models.SuccessStory
         public int Locked { get => locked; set { locked = value; OnPropertyChanged(); } }
         public int Progression { get => progression; set { progression = value; OnPropertyChanged(); } }
         public Guid Id { get => id; set { id = value; OnPropertyChanged(); } }
+        public Guid GameId { get => gameId; set => SetValue(ref gameId, value); }
         public string Name { get => name; set { name = value; OnPropertyChanged(); } }
 
         public DateTime LastUnlocked => items.OrderByDescending(i => i.DateUnlocked).Select(i => i.DateUnlocked).FirstOrDefault() ?? default;
+
+        public int TotalAchievements => total;
+
+        public int UnlockedAchievements => unlocked;
+
+        public double Progress => total > 0 ? (double)unlocked / total : 0;
+
+        public string GameName => name;
+
+        public DateTime? LastUnlock => LastUnlocked;
 
         public override bool Equals(object obj)
         {

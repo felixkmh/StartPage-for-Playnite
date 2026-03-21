@@ -19,7 +19,7 @@
     <Grid ClipToBounds="False">
         <Border CornerRadius="15" Background="#4C424242" Visibility="Hidden">
         </Border>
-        <ListBox ItemsSource="{Binding LatestAchievementsView}" SelectionMode="Single"
+        <ListBox ItemsSource="{Binding Inner.LatestAchievementsView}" SelectionMode="Single"
                  Background="Transparent" BorderBrush="Transparent"
                  ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                  Padding="15,0"
@@ -51,7 +51,7 @@
                                                     </Setter>
                                                 </Style>
                                             </Button.Style>
-                                            <TextBlock Text="{Binding Name}"/>
+                                            <TextBlock Text="{Binding Name.GameName}"/>
                                         </Button>
                                         <ProgressBar x:Name="AchievementsProgress" Height="2" Margin="0,3,0,1" HorizontalAlignment="Stretch"
                                                         Width="Auto" 
@@ -63,7 +63,7 @@
                                                             <DoubleAnimation Storyboard.TargetProperty="Value" 
                                                                                 Duration="0:0:1"
                                                                                 From="0"
-                                                                                To="{Binding Items[0].Source, Converter={StaticResource AchievementsToProgressConverter}, Mode=OneWay}">
+                                                                                To="{Binding Name.Progress ,Mode=OneWay}">
                                                                 <DoubleAnimation.EasingFunction>
                                                                     <BounceEase EasingMode="EaseOut"/>
                                                                 </DoubleAnimation.EasingFunction>
@@ -151,7 +151,7 @@
                                        VerticalAlignment="Center" 
                                        RenderOptions.BitmapScalingMode="Fant">
                                     <Image.Source>
-                                        <BitmapImage UriSource="{Binding Achievement.UriUnlocked, FallbackValue={StaticResource DefaultAchievementUri}}" 
+                                        <BitmapImage UriSource="{Binding Icon, FallbackValue={StaticResource DefaultAchievementUri}}" 
                                                     CreateOptions="IgnoreColorProfile" 
                                                     CacheOption="OnLoad"
                                                     DecodePixelHeight="64"/>
@@ -161,9 +161,9 @@
                             <!--<TextBlock Text="{Binding Game.Game.Name, TargetNullValue='Game Name'}" VerticalAlignment="Center"
                             Margin="0,0,10,0"/>-->
                             <StackPanel x:Name="AchievementTexts" Grid.Column="1" VerticalAlignment="Center" MaxHeight="35">
-                                <TextBlock Text="{Binding Achievement.Name}" VerticalAlignment="Center" TextTrimming="CharacterEllipsis" TextWrapping="NoWrap"
+                                <TextBlock Text="{Binding Name}" VerticalAlignment="Center" TextTrimming="CharacterEllipsis" TextWrapping="NoWrap"
                                 />
-                                <TextBlock x:Name="Description" Text="{Binding Achievement.Description}" VerticalAlignment="Center" TextTrimming="CharacterEllipsis" 
+                                <TextBlock x:Name="Description" Text="{Binding Description}" VerticalAlignment="Center" TextTrimming="CharacterEllipsis" 
                                 FontSize="{DynamicResource FontSizeSmall}" Opacity="0.6"/>
                             </StackPanel>
                             <ToggleButton x:Name="Toggle" IsChecked="False" Grid.ColumnSpan="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"

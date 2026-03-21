@@ -21,6 +21,7 @@ using LandingPage.ViewModels.GameActivity;
 using Newtonsoft.Json;
 using PlayniteCommon.UI;
 using System.Windows.Data;
+using LandingPage.ViewModels.PlayniteAchievements;
 
 namespace LandingPage
 {
@@ -160,14 +161,16 @@ namespace LandingPage
                     if (Uri.TryCreate(path, UriKind.RelativeOrAbsolute, out var url))
                     {
                         action = a => { Settings.BackgroundImageUri = url; Settings.BackgroundImagePath = a.Games[0].Name; };
-                    };
+                    }
+                    ;
                 }
                 else if (PlayniteApi.Database.GetFullFilePath(path) is string databasePath)
                 {
                     if (Uri.TryCreate(databasePath, UriKind.RelativeOrAbsolute, out var url))
                     {
                         action = a => { Settings.BackgroundImageUri = url; Settings.BackgroundImagePath = a.Games[0].Name; };
-                    };
+                    }
+                    ;
                 }
                 if (action != null)
                 {
@@ -418,7 +421,8 @@ namespace LandingPage
             {
                 logger.Debug("Trying to execute unsupported actions...");
                 var mainWindow = Application.Current.Windows.OfType<Window>().FirstOrDefault(w => w.Name == "WindowMain");
-                if (mainWindow == null) logger.Debug("MainWindow could not be found.");
+                if (mainWindow == null)
+                    logger.Debug("MainWindow could not be found.");
                 if (mainWindow is Window)
                 {
                     mainWindow.Dispatcher.InvokeAsync(new Action(async () =>
@@ -445,7 +449,8 @@ namespace LandingPage
                                     if (Settings.MoveToTopOfList)
                                     {
                                         childIndex = panel.Children.Cast<FrameworkElement>().ToList().FindIndex(c => c.ToolTip?.ToString() == "Start Page");
-                                        if (childIndex == -1) logger.Debug("Could not find StartPage side bar element.");
+                                        if (childIndex == -1)
+                                            logger.Debug("Could not find StartPage side bar element.");
                                     }
 
                                     await panel.Dispatcher.BeginInvoke(new Action(() =>
@@ -505,7 +510,8 @@ namespace LandingPage
             if (e.EnableGlobalBackground)
             {
                 SetGlobalBackground();
-            } else
+            }
+            else
             {
                 UnsetGlobalBackground();
             }
@@ -515,7 +521,8 @@ namespace LandingPage
         {
             logger.Debug("Trying to execute unsupported actions...");
             var mainWindow = Application.Current.Windows.OfType<Window>().FirstOrDefault(w => w.Name == "WindowMain");
-            if (mainWindow == null) logger.Debug("MainWindow could not be found.");
+            if (mainWindow == null)
+                logger.Debug("MainWindow could not be found.");
             if (mainWindow is Window)
             {
                 mainWindow.Dispatcher.InvokeAsync(() =>
@@ -531,9 +538,10 @@ namespace LandingPage
                                 {
                                     globalBackground.SetBinding(UIElement.OpacityProperty, new Binding("Settings.GlobalBackgroundOpacity") { Source = SettingsViewModel });
                                 }
-                                globalBackground.SetBinding(UIElement.VisibilityProperty, new Binding("Settings.EnableGlobalBackground") { 
-                                    Source = SettingsViewModel, 
-                                    Converter = ResourceProvider.GetResource<IValueConverter>("BooleanToVisibilityConverter") 
+                                globalBackground.SetBinding(UIElement.VisibilityProperty, new Binding("Settings.EnableGlobalBackground")
+                                {
+                                    Source = SettingsViewModel,
+                                    Converter = ResourceProvider.GetResource<IValueConverter>("BooleanToVisibilityConverter")
                                 });
                                 grid.Children.Insert(0, globalBackground);
                             }
@@ -551,7 +559,8 @@ namespace LandingPage
         {
             logger.Debug("Trying to execute unsupported actions...");
             var mainWindow = Application.Current.Windows.OfType<Window>().FirstOrDefault(w => w.Name == "WindowMain");
-            if (mainWindow == null) logger.Debug("MainWindow could not be found.");
+            if (mainWindow == null)
+                logger.Debug("MainWindow could not be found.");
             if (mainWindow is Window)
             {
                 mainWindow.Dispatcher.InvokeAsync(() =>
@@ -651,21 +660,13 @@ namespace LandingPage
             var views = new List<StartPageViewArgsBase>();
             var args = new StartPageExtensionArgs() { ExtensionName = "StartPage", Views = views };
 
-            string successStoryPath = null;
-            string path = Path.Combine(PlayniteApi.Paths.ExtensionsDataPath, "cebe6d32-8c46-4459-b993-5a5189d60788", "SuccessStory");
-            if (Directory.Exists(path))
+            views.Add(new StartPageViewArgsBase
             {
-                successStoryPath = path;
-            }
-            if (!string.IsNullOrEmpty(successStoryPath))
-            {
-                views.Add(new StartPageViewArgsBase
-                {
-                    ViewId = "RecentAchivements",
-                    Name = ResourceProvider.GetString("LOC_SPG_RecentAchievementsView"),
-                    Description = ResourceProvider.GetString("LOC_SPG_RecentAchievementsDescription")
-                });
-            }
+                ViewId = "RecentAchivements",
+                Name = ResourceProvider.GetString("LOC_SPG_RecentAchievementsView"),
+                Description = ResourceProvider.GetString("LOC_SPG_RecentAchievementsDescription"),
+                HasSettings = true,
+            });
 
             string gameActivityPath = null;
             string path2 = Path.Combine(PlayniteApi.Paths.ExtensionsDataPath, "afbb1a0d-04a1-4d0c-9afa-c6e42ca855b4", "GameActivity");
@@ -715,22 +716,11 @@ namespace LandingPage
         {
             if (id == "RecentAchivements")
             {
-                string successStoryPath = null;
-                string path = Path.Combine(PlayniteApi.Paths.ExtensionsDataPath, "cebe6d32-8c46-4459-b993-5a5189d60788", "SuccessStory");
-                if (Directory.Exists(path))
+                var view = new RecentAchievementsView()
                 {
-                    successStoryPath = path;
-                }
-                if (!string.IsNullOrEmpty(successStoryPath))
-                {
-                    var successStoryViewModel = new ViewModels.SuccessStory.SuccessStoryViewModel(successStoryPath, PlayniteApi, SettingsViewModel);
-
-                    var view = new RecentAchievementsView()
-                    {
-                        DataContext = successStoryViewModel
-                    };
-                    return view;
-                }
+                    DataContext = new RecentAchievementsViewModel(SettingsViewModel)
+                };
+                return view;
             }
             if (id == "GameShelves")
             {
@@ -786,6 +776,10 @@ namespace LandingPage
             if (id == "GameShelves")
             {
                 return new Views.Settings.ShelvesSettingsView() { DataContext = new ViewModels.ShelvesSettingsViewModel(SettingsViewModel, Settings.ShelveInstanceSettings[instanceId]) };
+            }
+            if (id == "RecentAchivements")
+            {
+                return new Views.Settings.AchievementsSettingsView() { DataContext = new AchievementsSettingsViewModel(Settings) };
             }
             return null;
         }

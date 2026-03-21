@@ -41,16 +41,6 @@ namespace LandingPage.ViewModels.SuccessStory
 
         public ICollectionView LatestAchievementsView { get; }
 
-        public class GameAchievement : ObservableObject
-        {
-            internal GameModel game;
-            public GameModel Game { get => game; set { if (value != game) { game = value; OnPropertyChanged(); } } }
-            internal Achievement achievement;
-            public Achievement Achievement { get => achievement; set { if (value != achievement) { achievement = value; OnPropertyChanged(); } } }
-            internal Achievements source;
-            public Achievements Source { get => source; set { if (value != source) { source = value; OnPropertyChanged(); } } }
-        }
-
         public SuccessStoryViewModel(string achievementsPath, IPlayniteAPI playniteAPI, LandingPageSettingsViewModel landingPageSettings)
         {
             LatestAchievementsView = new ListCollectionView(LatestAchievements);

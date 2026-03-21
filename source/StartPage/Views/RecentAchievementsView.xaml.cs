@@ -1,4 +1,6 @@
-﻿using System;
+﻿using LandingPage.Models;
+using LandingPage.Models.SuccessStory;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -32,9 +34,10 @@ namespace LandingPage.Views
             {
                 if (bt.DataContext is CollectionViewGroup group)
                 {
-                    if (group.Items.FirstOrDefault() is GameAchievement a)
+                    if (group.Name is IGameAchievementsInfo info)
                     {
-                        a.Game?.OpenCommand?.Execute(null);
+                        Playnite.SDK.API.Instance.MainView.SwitchToLibraryView();
+                        Playnite.SDK.API.Instance.MainView.SelectGame(info.GameId);
                     }
                 }
             }
