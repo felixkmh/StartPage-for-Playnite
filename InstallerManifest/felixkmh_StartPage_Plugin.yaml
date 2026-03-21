@@ -1,5 +1,11 @@
 AddonId: felixkmh_StartPage_Plugin
 Packages:
+  - Version: 2.14.0
+    RequiredApiVersion: 6.1.0
+    ReleaseDate: 2026-03-21
+    PackageUrl: https://github.com/felixkmh/StartPage-for-Playnite/releases/download/v2.14.0/felixkmh_StartPage_Plugin_2_14_0.pext
+    Changelog:
+      - Added experimental support for recent achievements via PlayniteAchievements (accessible from settings in edit mode for Recent Achievements view)
   - Version: 2.13.1
     RequiredApiVersion: 6.1.0
     ReleaseDate: 2026-03-17
