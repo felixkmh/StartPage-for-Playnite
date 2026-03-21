@@ -1,5 +1,11 @@
 AddonId: felixkmh_StartPage_Plugin
 Packages:
+  - Version: 2.14.1
+    RequiredApiVersion: 6.1.0
+    ReleaseDate: 2026-03-21
+    PackageUrl: https://github.com/felixkmh/StartPage-for-Playnite/releases/download/v2.14.1/felixkmh_StartPage_Plugin_2_14_1.pext
+    Changelog:
+      - Fixed shelve filters always acting as if None was selected if at least one other item was selected
   - Version: 2.14.0
     RequiredApiVersion: 6.1.0
     ReleaseDate: 2026-03-21
