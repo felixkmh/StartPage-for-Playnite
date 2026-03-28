@@ -65,7 +65,9 @@ namespace LandingPage.Models
         [Description("LOCLibrary")]
         Library,
         [Description("LOCCompletionStatus")]
-        CompletionStatus
+        CompletionStatus,
+        [Description("LOCCategoriesLabel")]
+        Category
     }
 
     public class ShelveProperties : ObservableObject
