@@ -37,7 +37,7 @@
         <KeyBinding Command="{Binding ExitEditModeCommand}" Key="Esc"/>
     </UserControl.InputBindings>
     <UserControl.ContextMenu>
-        <ContextMenu Grid.IsSharedSizeScope="True">
+        <ContextMenu Grid.IsSharedSizeScope="True" Foreground="{DynamicResource TextBrush}">
             <MenuItem x:Name="NextBackgroundEntry" Command="{Binding NextRandomBackgroundCommand}" Header="{DynamicResource LOC_SPG_NextRandomBackground}" 
                                       Visibility="{Binding IsEnabled, RelativeSource={RelativeSource Mode=Self}, Converter={StaticResource BooleanToVisibilityConverter}}"/>
 
