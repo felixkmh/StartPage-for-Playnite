@@ -195,7 +195,10 @@
                     MouseMove="Border_PreviewMouseMove"
                     Cursor="SizeAll">
                 <Border.ContextMenu>
-                    <ContextMenu UseLayoutRounding="True">
+                    <ContextMenu>
+                        <ContextMenu.Foreground>
+                            <DynamicResource ResourceKey="TextBrush"/>
+                        </ContextMenu.Foreground>
                         <MenuItem>
                             <MenuItem.Header>
                                 <Grid>

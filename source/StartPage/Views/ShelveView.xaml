@@ -665,6 +665,12 @@
                                              ItemsSource="{Binding CollectionViewSource.View}"
                                              ItemContainerStyle="{StaticResource GameListItem}"
                                              ItemTemplate="{StaticResource GameCoverDataTemplate}">
+                    <ListBox.Height>
+                        <MultiBinding Converter="{StaticResource WidthToHeightMultiConverter}">
+                            <Binding Path="ShelveSettings.MaxCoverWidth"/>
+                            <mu:LandingPageSettings Path="Settings.CoverAspectRatio"/>
+                        </MultiBinding>
+                    </ListBox.Height>
                     <ListBox.GroupStyle>
                         <GroupStyle>
                             <GroupStyle.Panel>

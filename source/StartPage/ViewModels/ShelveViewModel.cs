@@ -353,6 +353,14 @@ namespace LandingPage.ViewModels
                         groupDescriptions.Add(newGroupDescription);
                         break;
                     }
+                case GroupingField.Category:
+                    {
+                        newGroupDescription.PropertyName = "CategoryGroup";
+                        var newSortDescription = new SortDescription { Direction = (ListSortDirection)shelveProperties.Order, PropertyName = "Name" };
+                        newGroupDescription.SortDescriptions.Add(newSortDescription);
+                        groupDescriptions.Add(newGroupDescription);
+                        break;
+                    }
                 default:
                     break;
             }

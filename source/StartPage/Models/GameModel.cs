@@ -109,6 +109,17 @@ namespace LandingPage.Models
         public string SortingName => string.IsNullOrEmpty(Game?.SortingName) ? Game?.Name : Game?.SortingName;
         public GameSource Source => Game?.Source ?? DefaultGameSource;
 
+        public string CategoryGroup
+        {
+            get
+            {
+                var firstId = Game?.CategoryIds?.FirstOrDefault();
+                if (firstId == null || firstId == Guid.Empty)
+                    return "[None]";
+                return LandingPageExtension.Instance.PlayniteApi.Database.Categories.Get(firstId.Value)?.Name ?? "[None]";
+            }
+        }
+
         public ICommand OpenCommand { get; private set; }
 
         public ICommand StartCommand { get; private set; }
