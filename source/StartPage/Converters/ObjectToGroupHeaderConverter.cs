@@ -23,16 +23,19 @@ namespace LandingPage.Converters
             if (value is ScoreGroup scoreGroup)
             {
                 var score = scoreGroup == ScoreGroup.None ? 0 : (int)scoreGroup + 1;
-                var text = new TextBlock() { FontFamily = new FontFamily(new Uri("pack://application:,,,/StartPagePlugin;component/StarRating.ttf"), "./#StarRating"), Margin = new System.Windows.Thickness(2) };
-                const char empty = '\uE9D7';
-                const char half = '\uE9D8';
-                const char full = '\uE9D9';
+                var text = new TextBlock() { FontFamily = new FontFamily("Segoe UI Symbol"), Margin = new System.Windows.Thickness(2) };
+                const char empty = '\u2606'; // ☆
+                const char half = '\u272E';  // ✮
+                const char full = '\u2605'; // ★
                 int nFull = (int)score / 2;
                 int nHalf = (int)score % 2 == 0 ? 0 : 1;
                 int nEmpty = 5 - nFull - nHalf;
                 var sb = new StringBuilder();
                 sb.Append(new string(full, nFull));
-                sb.Append(new string(half, nHalf));
+                if (nHalf > 0)
+                {
+                    sb.Append(half);
+                }
                 sb.Append(new string(empty, nEmpty));
                 text.Text = sb.ToString();
                 return text;

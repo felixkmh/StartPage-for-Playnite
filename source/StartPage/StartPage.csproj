@@ -195,7 +195,6 @@
     <None Include="extension.yaml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <Resource Include="StarRating.ttf" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="transparent_noise.png" />
@@ -428,6 +427,6 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>del /q $(ProjectDir)$(OutDir)*.xml
-%25LOCALAPPDATA%25\Playnite\Toolbox.exe pack  $(ProjectDir)$(OutDir) $(ProjectDir)bin</PostBuildEvent>
+E:\Programs\Playnite\Toolbox.exe pack  $(ProjectDir)$(OutDir) $(ProjectDir)bin</PostBuildEvent>
   </PropertyGroup>
 </Project>
