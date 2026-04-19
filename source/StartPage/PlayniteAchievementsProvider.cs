@@ -218,7 +218,11 @@ LIMIT @limit OFFSET @offset
                             }
                             else
                             {
-                                achievement.Icon = new Uri(Path.Combine(iconBasePath, path));
+                                var combinedPath = Path.Combine(iconBasePath, path);
+                                if (File.Exists(combinedPath))
+                                {
+                                    achievement.Icon = new Uri(combinedPath);
+                                }
                             }
                         }
 
