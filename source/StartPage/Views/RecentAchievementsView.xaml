@@ -151,10 +151,10 @@
                                        VerticalAlignment="Center" 
                                        RenderOptions.BitmapScalingMode="Fant">
                                     <Image.Source>
-                                        <BitmapImage UriSource="{Binding Icon, FallbackValue={StaticResource DefaultAchievementUri}}" 
-                                                    CreateOptions="IgnoreColorProfile" 
-                                                    CacheOption="OnLoad"
-                                                    DecodePixelHeight="64"/>
+                                        <BitmapImage UriSource="{Binding Icon, TargetNullValue={StaticResource DefaultAchievementUri}, FallbackValue={StaticResource DefaultAchievementUri}}"
+                                                     CreateOptions="IgnoreColorProfile"
+                                                     CacheOption="OnLoad"
+                                                     DecodePixelHeight="64"/>
                                     </Image.Source>
                                 </Image>
                             </Border>

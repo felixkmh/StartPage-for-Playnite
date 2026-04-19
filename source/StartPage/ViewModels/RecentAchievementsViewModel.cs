@@ -40,8 +40,8 @@ namespace LandingPage.ViewModels
             }
             if (_settings.Settings.SelectedAchievementsProvider is Settings.AchievementsProvider.PlayniteAchievements)
             {
-                string path = Path.Combine(API.Instance.Paths.ExtensionsDataPath, "e6aad2c9-6e06-4d8d-ac55-ac3b252b5f7b", "achievement_cache.db");
-                if (File.Exists(path))
+                string path = PlayniteAchievementsProvider.FindAchievementCachePath(API.Instance.Paths.ExtensionsDataPath);
+                if (!string.IsNullOrEmpty(path))
                 {
                     return new PlayniteAchievementsViewModel(API.Instance, _settings.Settings, new PlayniteAchievementsProvider(API.Instance));
                 }
