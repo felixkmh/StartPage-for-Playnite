@@ -1,65 +1,65 @@
 ﻿<?xml version="1.0"?>
 <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:sys="clr-namespace:System;assembly=mscorlib">
 
-    <sys:String x:Key="LOC_SPG_MostPlayedGame">Most Played</sys:String>
-    <sys:String x:Key="LOC_SPG_LatestReleaseGame">Latest Release</sys:String>
-    <sys:String x:Key="LOC_SPG_RecentAchievements">Recent Achievements</sys:String>
-    <sys:String x:Key="LOC_SPG_RecentlyAddedGames">Recently Added</sys:String>
+    <sys:String x:Key="LOC_SPG_MostPlayedGame">Legtöbbet játszott</sys:String>
+    <sys:String x:Key="LOC_SPG_LatestReleaseGame">Legfrissebb megjelenések</sys:String>
+    <sys:String x:Key="LOC_SPG_RecentAchievements">Legutóbbi eredmények</sys:String>
+    <sys:String x:Key="LOC_SPG_RecentlyAddedGames">Legutóbb hozzáadva</sys:String>
 
-    <sys:String x:Key="LOC_SPG_DailyPlaytime">Daily Playtime</sys:String>
-    <sys:String x:Key="LOC_SPG_WeeklyPlaytime">Weekly Playtime</sys:String>
-    <sys:String x:Key="LOC_SPG_MonthlyPlaytime">Monthly Playtime</sys:String>
-    <sys:String x:Key="LOC_SPG_PlaytimePerSource">Playtime per Source</sys:String>
-    <sys:String x:Key="LOC_SPG_MostPlayedWeekly">Most Played this Week</sys:String>
+    <sys:String x:Key="LOC_SPG_DailyPlaytime">Napi játékidő</sys:String>
+    <sys:String x:Key="LOC_SPG_WeeklyPlaytime">Heti játékidő</sys:String>
+    <sys:String x:Key="LOC_SPG_MonthlyPlaytime">Havi játékidő</sys:String>
+    <sys:String x:Key="LOC_SPG_PlaytimePerSource">Játékidő forrásonként</sys:String>
+    <sys:String x:Key="LOC_SPG_MostPlayedWeekly">Legtöbbet játszott a héten</sys:String>
     <sys:String x:Key="LOC_SPG_TotalPlaytime" xml:space="preserve">Total: </sys:String>
-    <sys:String x:Key="LOC_SPG_LastSevenDays">Last 7 Days</sys:String>
-    <sys:String x:Key="LOC_SPG_LastThirtyDays">Last 30 Days</sys:String>
+    <sys:String x:Key="LOC_SPG_LastSevenDays">Elmúlt 7 nap</sys:String>
+    <sys:String x:Key="LOC_SPG_LastThirtyDays">Elmúlt 30 nap</sys:String>
     <sys:String x:Key="LOC_SPG_TimeframeNone">None</sys:String>
 
     <sys:String x:Key="LOC_SPG_SetGameAsBackground">Set as StartPage background</sys:String>
 
     <!-- Timeframes -->
-    <sys:String x:Key="LOC_SPG_TimeframeLastDay">Last 24 Hours</sys:String>
-    <sys:String x:Key="LOC_SPG_TimeframeLast7Days">Last Week</sys:String>
-    <sys:String x:Key="LOC_SPG_TimeframeLast14Days">Last 2 Weeks</sys:String>
-    <sys:String x:Key="LOC_SPG_TimeframeLast21Days">Last 3 Weeks</sys:String>
-    <sys:String x:Key="LOC_SPG_TimeframeLastMonth">Last Month</sys:String>
-    <sys:String x:Key="LOC_SPG_TimeframeLast3Months">Last 3 Months</sys:String>
-    <sys:String x:Key="LOC_SPG_TimeframeLast6Months">Last 6 Months</sys:String>
-    <sys:String x:Key="LOC_SPG_TimeframeLastYear">Last Year</sys:String>
-    <sys:String x:Key="LOC_SPG_TimeframeLast5Years">Last 5 Years</sys:String>
+    <sys:String x:Key="LOC_SPG_TimeframeLastDay">Elmúlt 24 óra</sys:String>
+    <sys:String x:Key="LOC_SPG_TimeframeLast7Days">Múlt hét</sys:String>
+    <sys:String x:Key="LOC_SPG_TimeframeLast14Days">Elmúlt 2 hét</sys:String>
+    <sys:String x:Key="LOC_SPG_TimeframeLast21Days">Elmúlt 3 hét</sys:String>
+    <sys:String x:Key="LOC_SPG_TimeframeLastMonth">Múlt hónap</sys:String>
+    <sys:String x:Key="LOC_SPG_TimeframeLast3Months">Elmúlt 3 hónap</sys:String>
+    <sys:String x:Key="LOC_SPG_TimeframeLast6Months">Elmúlt 6 hónap</sys:String>
+    <sys:String x:Key="LOC_SPG_TimeframeLastYear">Tavaly</sys:String>
+    <sys:String x:Key="LOC_SPG_TimeframeLast5Years">Elmúlt 5 év</sys:String>
     <sys:String x:Key="LOC_SPG_TimeframeAllTime">All Time</sys:String>
 
     <!--Settings Tabs-->
     <sys:String x:Key="LOC_SPG_CommonTab">Common</sys:String>
-    <sys:String x:Key="LOC_SPG_BackgroundTab">Background</sys:String>
+    <sys:String x:Key="LOC_SPG_BackgroundTab">Háttér</sys:String>
     
     <!--BackgroundImageSource Enum-->
-    <sys:String x:Key="LOC_SPG_BackgroundImageSourceLastPlayed">Last Played</sys:String>
-    <sys:String x:Key="LOC_SPG_BackgroundImageSourceLastAdded">Last Added</sys:String>
-    <sys:String x:Key="LOC_SPG_BackgroundImageSourceMostPlayed">Most Played</sys:String>
+    <sys:String x:Key="LOC_SPG_BackgroundImageSourceLastPlayed">Utoljára játszott</sys:String>
+    <sys:String x:Key="LOC_SPG_BackgroundImageSourceLastAdded">Legutóbb hozzáadva</sys:String>
+    <sys:String x:Key="LOC_SPG_BackgroundImageSourceMostPlayed">Legtöbbet játszott</sys:String>
     <sys:String x:Key="LOC_SPG_BackgroundImageSourceRandom">Random</sys:String>
-    <sys:String x:Key="LOC_SPG_BackgroundImageSourceLastSelected">Last Selected</sys:String>
+    <sys:String x:Key="LOC_SPG_BackgroundImageSourceLastSelected">Legutóbb kiválasztott</sys:String>
     <sys:String x:Key="LOC_SPG_BackgroundImageSourceLastHovered">Last Hovered</sys:String>
 
     <!-- Settings -->
     <sys:String x:Key="LOC_SPG_ShowGameActivity">Show GameActivity Views</sys:String>
-    <sys:String x:Key="LOC_SPG_NumberOfGames">Number of Games:</sys:String>
-    <sys:String x:Key="LOC_SPG_NextRandomBackground">Next Random Background</sys:String>
-    <sys:String x:Key="LOC_SPG_ShowFavorites">Show Favorite Games</sys:String>
-    <sys:String x:Key="LOC_SPG_ShowClock">Show Clock</sys:String>
-    <sys:String x:Key="LOC_SPG_ShowRecentlyPlayed">Show Recently Played Games</sys:String>
+    <sys:String x:Key="LOC_SPG_NumberOfGames">Játékok száma:</sys:String>
+    <sys:String x:Key="LOC_SPG_NextRandomBackground">Következő random háttér</sys:String>
+    <sys:String x:Key="LOC_SPG_ShowFavorites">Kedvenc játékok megjelenítése</sys:String>
+    <sys:String x:Key="LOC_SPG_ShowClock">Óra megjelenítése</sys:String>
+    <sys:String x:Key="LOC_SPG_ShowRecentlyPlayed">A legutóbb játszott játékok megjelenítése</sys:String>
     <sys:String x:Key="LOC_SPG_ShowRecentAchievements">Show recent Achievements using SuccessStory</sys:String>
-    <sys:String x:Key="LOC_SPG_ShowRecentlyAdded">Show Recently Added Games</sys:String>
+    <sys:String x:Key="LOC_SPG_ShowRecentlyAdded">A legutóbb hozzáadott játékok megjelenítése</sys:String>
     <sys:String x:Key="LOC_SPG_StartupItem">(Unsupported) SidebarItem activated on Launch</sys:String>
-    <sys:String x:Key="LOC_SPG_MaxRecentAchievements">Maximum number of recent Achievements:</sys:String>
-    <sys:String x:Key="LOC_SPG_MaxRecentAchievementsPerGame">Maximum number of recent Achievements per Game:</sys:String>
-    <sys:String x:Key="LOC_SPG_ShowTitelOnCover">Show Title on Game Cover</sys:String>
-    <sys:String x:Key="LOC_SPG_ShowGameDetails">Show Game Details</sys:String>
-    <sys:String x:Key="LOC_SPG_EnableNotifications">Enable Notifications</sys:String>
-    <sys:String x:Key="LOC_SPG_EnableGlobalBackground">Enable Global Background</sys:String>
-    <sys:String x:Key="LOC_SPG_GlobalBackgroundOpacity">Global Background Opacity</sys:String>
-    <sys:String x:Key="LOC_SPG_MinimizeNotification">Minimize Notifications on Launch</sys:String>
+    <sys:String x:Key="LOC_SPG_MaxRecentAchievements">A legutóbbi eredmények maximális száma:</sys:String>
+    <sys:String x:Key="LOC_SPG_MaxRecentAchievementsPerGame">A legutóbbi eredmények maximális száma játékonként:</sys:String>
+    <sys:String x:Key="LOC_SPG_ShowTitelOnCover">A cím megjelenítése a játék borítóján</sys:String>
+    <sys:String x:Key="LOC_SPG_ShowGameDetails">A játék részleteinek megjelenítése</sys:String>
+    <sys:String x:Key="LOC_SPG_EnableNotifications">Értesítések engedélyezése</sys:String>
+    <sys:String x:Key="LOC_SPG_EnableGlobalBackground">Globális háttér engedélyezése</sys:String>
+    <sys:String x:Key="LOC_SPG_GlobalBackgroundOpacity">Globális háttér átlátszóság</sys:String>
+    <sys:String x:Key="LOC_SPG_MinimizeNotification">Az értesítések minimalizálása indításkor</sys:String>
     <sys:String x:Key="LOC_SPG_ShowNotificationButtons">Show &quot;Discard&quot; and &quot;Minimize&quot; Buttons</sys:String>
     <sys:String x:Key="LOC_SPG_KeepInMemory">Keep StartPage in Memory when switching to another View</sys:String>
     <sys:String x:Key="LOC_SPG_MoveIconToTop">(Unsupported) Move StartPage Item to Top of SideBar on Launch</sys:String>
@@ -69,86 +69,86 @@
     <sys:String x:Key="LOC_SPG_BackgroundScale">Background Render Scale:</sys:String>
     <sys:String x:Key="LOC_SPG_OverlayOpacity">Overlay Opacity:</sys:String>
     <sys:String x:Key="LOC_SPG_NoiseOpacity">Noise Opacity:</sys:String>
-    <sys:String x:Key="LOC_SPG_CoverAspectRatio">Cover Aspect Ratio</sys:String>
-    <sys:String x:Key="LOC_SPG_MaxCoverWidth">Maximum Cover Width</sys:String>
-    <sys:String x:Key="LOC_SPG_BackgroundImageSource">Game Background Image Selection:</sys:String>
-    <sys:String x:Key="LOC_SPG_BackgroundImagePath">Background Image Path:</sys:String>
+    <sys:String x:Key="LOC_SPG_CoverAspectRatio">A borító képaránya</sys:String>
+    <sys:String x:Key="LOC_SPG_MaxCoverWidth">Borító maximális szélessége</sys:String>
+    <sys:String x:Key="LOC_SPG_BackgroundImageSource">A játék háttérképének kiválasztása:</sys:String>
+    <sys:String x:Key="LOC_SPG_BackgroundImagePath">A háttérkép elérési útja:</sys:String>
     <sys:String x:Key="LOC_SPG_ShowGlobalProgressBar">(Unsupported) Show Global Progress Bar</sys:String>
     <sys:String x:Key="LOC_SPG_SwitchWithLowPrio">Lower Priority when switching View (automatically enabled upon Playnite crashing)</sys:String>
-    <sys:String x:Key="LOC_SPG_UnsupportedToolTip">Use this feature at your own risk. It is not officially supported by the PlayniteAPI and can thus lead to unexpected behaviour.</sys:String>
-    <sys:String x:Key="LOC_SPG_IgnoreHidden">Ignore hidden games</sys:String>
+    <sys:String x:Key="LOC_SPG_UnsupportedToolTip">Ezt a funkciót saját felelősségedre használd. A PlayniteAPI hivatalosan nem támogatja, ezért váratlan viselkedéshez vezethet.</sys:String>
+    <sys:String x:Key="LOC_SPG_IgnoreHidden">A rejtett játékok figyelmen kívül hagyása</sys:String>
     <sys:String x:Key="LOC_SPG_AddShelve">Add Shelve</sys:String>
-    <sys:String x:Key="LOC_SPG_ShowMostPlayedGames">Show Most Played Games</sys:String>
+    <sys:String x:Key="LOC_SPG_ShowMostPlayedGames">A leggyakrabban játszott játékok megjelenítése</sys:String>
     <sys:String x:Key="LOC_SPG_SkippedGames">Skip:</sys:String>
     <sys:String x:Key="LOC_SPG_ExtendShelve">Extend Shelve</sys:String>
-    <sys:String x:Key="LOC_SPG_BackgroundGameInfoOpacity">Game Info Opacity:</sys:String>
-    <sys:String x:Key="LOC_SPG_BackgroundAnimationDuration">Animation Duration:</sys:String>
-    <sys:String x:Key="LOC_SPG_BackgroundRefreshInterval">Refresh Interval (Minutes):</sys:String>
+    <sys:String x:Key="LOC_SPG_BackgroundGameInfoOpacity">A játék információinak átlátszósága:</sys:String>
+    <sys:String x:Key="LOC_SPG_BackgroundAnimationDuration">Animáció hossza:</sys:String>
+    <sys:String x:Key="LOC_SPG_BackgroundRefreshInterval">Frissítési gyakoriság (perc):</sys:String>
     <sys:String x:Key="LOC_SPG_SkipGamesInPreviousShelves">Skip Games present in preceding Shelves</sys:String>
     <sys:String x:Key="LOC_SPG_SkipGamesInPreviousTimeframes">Skip Games present in preceding Timeframes</sys:String>
     <sys:String x:Key="LOC_SPG_EnableTags">Create [SPG] tags on launch. Used to mark games as ignored.</sys:String>
     <sys:String x:Key="LOC_SPG_FixGridHeight">Fixed Grid Height:</sys:String>
     <sys:String x:Key="LOC_SPG_FixGridHeight_Tooltip" xml:space="preserve">If enabled, the grid height is no longer bound to the window height.
 Instead, it can be set to a fixed value. If that value is bigger than the window height, the view can be scrolled.</sys:String>
-    <sys:String x:Key="LOC_SPG_DownScaleCovers">Load cover images at a lower resolution</sys:String>
+    <sys:String x:Key="LOC_SPG_DownScaleCovers">A borítóképek betöltése alacsonyabb felbontásban</sys:String>
     <sys:String x:Key="LOC_SPG_DownScaleCoversTooltip" xml:space="preserve">If enabled, cover images are loaded into memory with a maximum width of (1.15 * Maximum Cover Width) pixels.
 This can lead to a much smaller memory footprint for StartPage. Will not affect covers already loaded before restarting Playnite.</sys:String>
     <sys:String x:Key="LOC_SPG_LockLayout">Lock Layout outside of Edit Mode</sys:String>
-    <sys:String x:Key="LOC_SPG_VideoVolume">Video volume</sys:String>
-    <sys:String x:Key="LOC_SPG_ShowInstalledIndicator">Indicate whether game is installed</sys:String>
+    <sys:String x:Key="LOC_SPG_VideoVolume">A videó hangereje</sys:String>
+    <sys:String x:Key="LOC_SPG_ShowInstalledIndicator">Mutassa, hogy a játék telepítve van-e</sys:String>
     <sys:String x:Key="LOC_SPG_ShowNotInstalledIndicator">Indicate whether game is not installed</sys:String>
     <sys:String x:Key="LOC_SPG_SetBackgroundToCurrentGame">Set StartPage background to background image of the currently running game</sys:String>
-    <sys:String x:Key="LOC_SPG_SetBackgroundToCurrentGameDisableBlur">Disable blur</sys:String>
+    <sys:String x:Key="LOC_SPG_SetBackgroundToCurrentGameDisableBlur">Elmosódás kikapcsolása</sys:String>
     <sys:String x:Key="LOC_SPG_HideShelveScrollbar">Hide Shelve Scrollbar</sys:String>
     
     <!-- Grid -->
-    <sys:String x:Key="LOC_SPG_SplitHorizonatlly">Split horizontally</sys:String>
-    <sys:String x:Key="LOC_SPG_SplitVertically">Split vertically</sys:String>
-    <sys:String x:Key="LOC_SPG_Merge">Merge</sys:String>
-    <sys:String x:Key="LOC_SPG_MergeKeepUpper">Keep upper panel</sys:String>
-    <sys:String x:Key="LOC_SPG_MergeKeepLower">Keep lower panel</sys:String>
-    <sys:String x:Key="LOC_SPG_MergeKeepLeft">Keep left panel</sys:String>
-    <sys:String x:Key="LOC_SPG_MergeKeepRight">Keep right panel</sys:String>
+    <sys:String x:Key="LOC_SPG_SplitHorizonatlly">Felosztás vízszintesen</sys:String>
+    <sys:String x:Key="LOC_SPG_SplitVertically">Felosztás függőlegesen</sys:String>
+    <sys:String x:Key="LOC_SPG_Merge">Összevonás</sys:String>
+    <sys:String x:Key="LOC_SPG_MergeKeepUpper">A felső panelt tartsa meg</sys:String>
+    <sys:String x:Key="LOC_SPG_MergeKeepLower">Az alsó panelt tartsa meg</sys:String>
+    <sys:String x:Key="LOC_SPG_MergeKeepLeft">A bal panelt tartsa meg</sys:String>
+    <sys:String x:Key="LOC_SPG_MergeKeepRight">A jobb panelt tartsa meg</sys:String>
     <sys:String x:Key="LOC_SPG_AddView">Add View</sys:String>
     <sys:String x:Key="LOC_SPG_RemoveView">Remove View</sys:String>
-    <sys:String x:Key="LOC_SPG_EditMode">Edit Mode</sys:String>
-    <sys:String x:Key="LOC_SPG_EnterEditMode">Enter Edit Mode</sys:String>
-    <sys:String x:Key="LOC_SPG_ExitEditMode">Exit Edit Mode</sys:String>
-    <sys:String x:Key="LOC_SPG_ResetLayout">Reset layout to default</sys:String>
+    <sys:String x:Key="LOC_SPG_EditMode">Szerkesztő Mód</sys:String>
+    <sys:String x:Key="LOC_SPG_EnterEditMode">Szerkesztési mód megnyitása</sys:String>
+    <sys:String x:Key="LOC_SPG_ExitEditMode">Kilépés a szerkesztő módból</sys:String>
+    <sys:String x:Key="LOC_SPG_ResetLayout">Az elrendezés visszaállítása alapértelmezettre</sys:String>
     <sys:String x:Key="LOC_SPG_DragPanelTooltip">Drag-and-Drop panels to swap them</sys:String>
-    <sys:String x:Key="LOC_SPG_AddPanel">Add Panel</sys:String>
-    <sys:String x:Key="LOC_SPG_RemovePanel">Remove Panel</sys:String>
-    <sys:String x:Key="LOC_SPG_MergeWith">Merge with</sys:String>
-    <sys:String x:Key="LOC_SPG_MergeWithAbove">Upper Panel</sys:String>
-    <sys:String x:Key="LOC_SPG_MergeWithBelow">Lower Panel</sys:String>
-    <sys:String x:Key="LOC_SPG_MergeWithLeft">Left Panel</sys:String>
-    <sys:String x:Key="LOC_SPG_MergeWithRight">Right Panel</sys:String>
-    <sys:String x:Key="LOC_SPG_AddPanelTop">Top</sys:String>
-    <sys:String x:Key="LOC_SPG_AddPanelBottom">Bottom</sys:String>
-    <sys:String x:Key="LOC_SPG_AddPanelLeft">Leftmost</sys:String>
-    <sys:String x:Key="LOC_SPG_AddPanelRight">Rightmost</sys:String>
-    <sys:String x:Key="LOC_SPG_HorizontalAlignment">Horizontal Alignment</sys:String>
-    <sys:String x:Key="LOC_SPG_HorizontalAlignmentLeft">Left</sys:String>
-    <sys:String x:Key="LOC_SPG_HorizontalAlignmentRight">Right</sys:String>
-    <sys:String x:Key="LOC_SPG_VerticalAlignment">Vertical Alignment</sys:String>
-    <sys:String x:Key="LOC_SPG_VerticalAlignmentTop">Top</sys:String>
-    <sys:String x:Key="LOC_SPG_VerticalAlignmentBottom">Bottom</sys:String>
-    <sys:String x:Key="LOC_SPG_AlignmentStretch">Stretch</sys:String>
-    <sys:String x:Key="LOC_SPG_AlignmentCenter">Center</sys:String>
+    <sys:String x:Key="LOC_SPG_AddPanel">Panel hozzáadása</sys:String>
+    <sys:String x:Key="LOC_SPG_RemovePanel">Panel eltávolítása</sys:String>
+    <sys:String x:Key="LOC_SPG_MergeWith">Egyesítés ezzel</sys:String>
+    <sys:String x:Key="LOC_SPG_MergeWithAbove">Felső panel</sys:String>
+    <sys:String x:Key="LOC_SPG_MergeWithBelow">Alsó panel</sys:String>
+    <sys:String x:Key="LOC_SPG_MergeWithLeft">Bal oldali panel</sys:String>
+    <sys:String x:Key="LOC_SPG_MergeWithRight">Jobb oldali panel</sys:String>
+    <sys:String x:Key="LOC_SPG_AddPanelTop">Felül</sys:String>
+    <sys:String x:Key="LOC_SPG_AddPanelBottom">Alul</sys:String>
+    <sys:String x:Key="LOC_SPG_AddPanelLeft">A legbaloldali</sys:String>
+    <sys:String x:Key="LOC_SPG_AddPanelRight">A legjobboldali</sys:String>
+    <sys:String x:Key="LOC_SPG_HorizontalAlignment">Vízszintes igazítás</sys:String>
+    <sys:String x:Key="LOC_SPG_HorizontalAlignmentLeft">Bal</sys:String>
+    <sys:String x:Key="LOC_SPG_HorizontalAlignmentRight">Jobb</sys:String>
+    <sys:String x:Key="LOC_SPG_VerticalAlignment">Függőleges igazítás</sys:String>
+    <sys:String x:Key="LOC_SPG_VerticalAlignmentTop">Felül</sys:String>
+    <sys:String x:Key="LOC_SPG_VerticalAlignmentBottom">Alul</sys:String>
+    <sys:String x:Key="LOC_SPG_AlignmentStretch">Nyújtás</sys:String>
+    <sys:String x:Key="LOC_SPG_AlignmentCenter">Közép</sys:String>
     <sys:String x:Key="LOC_SPG_Padding">Padding</sys:String>
-    <sys:String x:Key="LOC_SPG_ShelvesHorizontalLabels">Horizontal Labels</sys:String>
-    <sys:String x:Key="LOC_SPG_ShowViewLabel">Show Label</sys:String>
+    <sys:String x:Key="LOC_SPG_ShelvesHorizontalLabels">Vízszintes címkék</sys:String>
+    <sys:String x:Key="LOC_SPG_ShowViewLabel">Címke megjelenítése</sys:String>
 
     <!-- Integrated Views -->
-    <sys:String x:Key="LOC_SPG_ClockView">Clock</sys:String>
-    <sys:String x:Key="LOC_SPG_ClockViewDescription">Digital clock that also shows the current date. Uses the system time format.</sys:String>
-    <sys:String x:Key="LOC_SPG_ShelvesView">Game Shelves</sys:String>
+    <sys:String x:Key="LOC_SPG_ClockView">Óra</sys:String>
+    <sys:String x:Key="LOC_SPG_ClockViewDescription">Digitális óra, amely az aktuális dátumot is megjeleníti. A rendszeridő formátumát használja.</sys:String>
+    <sys:String x:Key="LOC_SPG_ShelvesView">Játékpolcok</sys:String>
     <sys:String x:Key="LOC_SPG_ShelvesViewDescription">Shelves showing game covers with custom filters, sorting and grouping options.</sys:String>
-    <sys:String x:Key="LOC_SPG_MostPlayedView">Most Played</sys:String>
-    <sys:String x:Key="LOC_SPG_MostPlayedDescription">Shows most played games for different time frames.</sys:String>
-    <sys:String x:Key="LOC_SPG_WeeklyActivityView">Weekly Activity</sys:String>
-    <sys:String x:Key="LOC_SPG_WeeklyActivityDescription">Shows a compact overview of the playtime in the last 7 days. Requires the GameActivity extension.</sys:String>
-    <sys:String x:Key="LOC_SPG_RecentAchievementsView">Recent Achievements</sys:String>
-    <sys:String x:Key="LOC_SPG_RecentAchievementsDescription">Shows an overview of recently unlocked achievements grouped by game. Requires the SuccessStory extension.</sys:String>
+    <sys:String x:Key="LOC_SPG_MostPlayedView">Legtöbbet játszott</sys:String>
+    <sys:String x:Key="LOC_SPG_MostPlayedDescription">Megjeleníti a leggyakrabban játszott játékokat különböző időtartamok szerint.</sys:String>
+    <sys:String x:Key="LOC_SPG_WeeklyActivityView">Heti aktivitás</sys:String>
+    <sys:String x:Key="LOC_SPG_WeeklyActivityDescription">Az elmúlt 7 nap játékidejéről nyújt rövid áttekintést. Ehhez a GameActivity bővítmény szükséges.</sys:String>
+    <sys:String x:Key="LOC_SPG_RecentAchievementsView">Legutóbbi eredmények</sys:String>
+    <sys:String x:Key="LOC_SPG_RecentAchievementsDescription">A játékok szerint csoportosítva áttekintést nyújt a legutóbb feloldott eredményekről. Ehhez a SuccessStory bővítmény szükséges.</sys:String>
 
 </ResourceDictionary>
